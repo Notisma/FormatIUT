@@ -16,3 +16,14 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 - main : branche principale
 - index+redirection+configBD : branche test pour la page de connexion
 - diagramme-ea : contient les outils nécessaires pour commencer la base de donnée
+- readme+premiersFichiers : un exemplaire test du readme+ des tests de premiers fichiers php à créer
+
+## Conventions du projet
+
+- namespace : A DEFINIR
+
+## Detail de la branche
+
+A REMPLIR dans chaque branche pour avoir une idée de l'avancement de chaque branche
+
+- readMe
