@@ -27,3 +27,4 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 A REMPLIR dans chaque branche pour avoir une idée de l'avancement de chaque branche
 
 - Modification du readMe pour rajout de détail sur le projet
+- Ajout des .htaccess pour n'avoir acces qu'aux ressources et au web
