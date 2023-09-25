@@ -32,11 +32,13 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
       - vueEntrepriseAccueil
       - vueEntrepriseProfil
       - formulaireCreationOffre
+      - vueBandeauEntreprise
     - Etudiant
       - vueEtudiantAccueil
       - vueOffreCatalogue
       - vueOffreDetail
       - vueEtudiantProfil
+      - vueBandeauEtudiant
   - Modele
     - Repository
       - Offre
