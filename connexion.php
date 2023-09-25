@@ -1,5 +1,5 @@
 <?php
-require_once 'bdConfig.php';
+require_once 'Configuration.php';
 
 // Cette ligne sert à se connecter à la base de données
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
