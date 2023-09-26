@@ -2,11 +2,47 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styleIndex.css">
+    <link rel="stylesheet" href="vueGeneraleStyle.css">
     <title>Format'IUT</title>
-    <link rel="icon" type="image/png" href="Data/UM.png"/>
+    <link rel="icon" type="image/png" href="./../ressources/images/UM.png"/>
 </head>
 <body>
+
+<nav>
+    <div class="navbar">
+        <div class="container nav-container">
+            <input class="checkbox" type="checkbox" name="" id=""/>
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+
+            <div id="search">
+                <form action=""> <!-- action à définir -->
+                    <label for="searchField"></label><input type="text" placeholder="    Recherche.." id="searchField">
+                </form>
+            </div>
+
+            <div class="logo">
+                <h1>Navbar</h1>
+            </div>
+
+            <div class="menu-items">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">about</a></li>
+                <li><a href="#">blogs</a></li>
+                <li><a href="#">portfolio</a></li>
+                <li><a href="#">contact</a></li>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div id="corpsPage">
+    <p>test</p>
+</div>
 
 </body>
 </html>
