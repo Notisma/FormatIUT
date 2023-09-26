@@ -20,15 +20,27 @@
 
             <div id="search">
                 <form action=""> <!-- action à définir -->
-                    <label for="searchField"></label><input type="text" placeholder="    Recherche.." id="searchField">
+                    <label for="searchField"></label><input type="text" placeholder="Recherche.." id="searchField">
                 </form>
             </div>
 
             <div class="logo">
-                <h1>Navbar</h1>
+                <img src="./../ressources/images/LogoIutMontpellier-removed.png" id="logoUm">
+            </div>
+
+            <div id="profilBox">
+                <img src="./../ressources/images/profil.png" id = "imageProfil">
+                <p>Se Connecter</p>
             </div>
 
             <div class="menu-items">
+                <!--
+                <?php
+                foreach($menu as $li => $href){
+                    echo "<li><a href='$href'>$li</a></li>";
+                }
+                ?>
+                -->
                 <li><a href="#">Home</a></li>
                 <li><a href="#">about</a></li>
                 <li><a href="#">blogs</a></li>
