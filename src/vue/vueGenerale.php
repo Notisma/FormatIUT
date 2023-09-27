@@ -20,7 +20,7 @@
 
             <div id="search">
                 <form action=""> <!-- action à définir -->
-                    <label for="searchField"></label><input type="text" placeholder="Recherche.." id="searchField">
+                    <label for="searchField"></label><input type="text" placeholder="Rechercher..." id="searchField">
                 </form>
             </div>
 
