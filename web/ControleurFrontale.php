@@ -18,7 +18,7 @@ if (!isset($_GET['controleur'])) {
 }
 
 $nomDeClasseControleur = "App\Covoiturage\Controleur" . $controleur;
-\App\FormatIUT\Controleur\MainControleur::afficherAccueilEtu();
+\App\FormatIUT\Controleur\MainControleur::afficherIndex();
 //$nomDeClasseControleur::$action();
 
 

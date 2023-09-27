@@ -5,8 +5,9 @@ namespace App\FormatIUT\Controleur;
 class MainControleur
 {
 
-    public static function afficherAccueilEtu(){
-        self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"vueAccueilEtudiant.php"]);
+
+    public static function afficherIndex(){
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php"]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void

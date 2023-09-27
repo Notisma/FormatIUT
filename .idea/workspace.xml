@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore un bug de git">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
+      <change afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/MainControleur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/MainControleur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/ControleurFrontale.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/ControleurFrontale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,9 +122,6 @@
       <workItem from="1695738183189" duration="146000" />
       <workItem from="1695744164155" duration="752000" />
       <workItem from="1695795610286" duration="932000" />
-      <workItem from="1695798418939" duration="440000" />
-      <workItem from="1695799457482" duration="1481000" />
-      <workItem from="1695802541482" duration="421000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -289,15 +291,7 @@
       <option name="project" value="LOCAL" />
       <updated>1695795845858</updated>
     </task>
-    <task id="LOCAL-00022" summary="Encore un bug de git">
-      <option name="closed" value="true" />
-      <created>1695798804602</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1695798804602</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,8 +327,7 @@
     <MESSAGE value="Modifications." />
     <MESSAGE value="Update" />
     <MESSAGE value="Corrections" />
-    <MESSAGE value="Encore un bug de git" />
-    <option name="LAST_COMMIT_MESSAGE" value="Encore un bug de git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
