@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Update">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3d6608c9-1bad-4452-85eb-372ffb8abcb5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3d6608c9-1bad-4452-85eb-372ffb8abcb5/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3d6608c9-1bad-4452-85eb-372ffb8abcb5/storage_v2/_src_/schema/loyet.hTImBg.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/vueGenerale.php" afterDir="false" />
     </list>
@@ -26,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="index+redirection+configBD" />
+        <entry key="$PROJECT_DIR$" value="touzer" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -117,7 +121,7 @@
       <workItem from="1695735620184" duration="2248000" />
       <workItem from="1695738183189" duration="146000" />
       <workItem from="1695744164155" duration="752000" />
-      <workItem from="1695795610286" duration="100000" />
+      <workItem from="1695795610286" duration="932000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -279,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695738322367</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Corrections">
+      <option name="closed" value="true" />
+      <created>1695795845858</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1695795845858</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +314,6 @@
     <MESSAGE value="Modifications visuelles" />
     <MESSAGE value="Modifications visuelles v2" />
     <MESSAGE value="Travaux préparatoires sur les erreurs" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Corrections de bugs" />
     <MESSAGE value="Corrections de bugs (encore)" />
@@ -315,7 +326,8 @@
     <MESSAGE value="Nettoyage. Responsive terminé." />
     <MESSAGE value="Modifications." />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -34,13 +34,11 @@
             </div>
 
             <div class="menu-items">
-                <!--
                 <?php
                 foreach($menu as $li => $href){
                     echo "<li><a href='$href'>$li</a></li>";
                 }
                 ?>
-                -->
                 <li><a href="#">Home</a></li>
                 <li><a href="#">about</a></li>
                 <li><a href="#">blogs</a></li>
@@ -54,11 +52,9 @@
 
 <div id="corpsPage">
     <p>test</p>
-    <!--
     <?php
     require __DIR__ . '/{$chemin}';
     ?>
-    -->
 </div>
 
 </body>
