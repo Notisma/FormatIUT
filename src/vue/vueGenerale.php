@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<!-- TODO: une ombre plus prononcée en bas du header -->
+
 <nav>
     <div class="navbar">
         <div class="container nav-container">
