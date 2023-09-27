@@ -54,6 +54,11 @@
 
 <div id="corpsPage">
     <p>test</p>
+    <!--
+    <?php
+    require __DIR__ . '/{$chemin}';
+    ?>
+    -->
 </div>
 
 </body>
