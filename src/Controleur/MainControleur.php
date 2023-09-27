@@ -16,6 +16,12 @@ class MainControleur
     }
 
     public static function getMenu() :array{
-        return array();
+        return array(
+            "Menu"=>"lien",
+            "About"=>"lien",
+            "Blogs"=>"lien",
+            "Portfolio"=>"lien",
+            "Contact"=>"lien"
+        );
     }
 }

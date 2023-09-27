@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="vueGeneraleStyle.css">
+    <link rel="stylesheet" href="../ressources/css/vueGeneraleStyle.css">
     <title>Format'IUT</title>
-    <link rel="icon" type="image/png" href="./../ressources/images/UM.png"/>
+    <link rel="icon" type="image/png" href="../ressources/images/UM.png"/>
 </head>
 <body>
 
@@ -25,11 +25,11 @@
             </div>
 
             <div class="logo">
-                <img src="./../ressources/images/LogoIutMontpellier-removed.png" id="logoUm">
+                <img src="../ressources/images/LogoIutMontpellier-removed.png" id="logoUm">
             </div>
 
             <div id="profilBox">
-                <img src="./../ressources/images/profil.png" id = "imageProfil">
+                <img src="../ressources/images/profil.png" id = "imageProfil">
                 <p>Se Connecter</p>
             </div>
 
@@ -39,11 +39,6 @@
                     echo "<li><a href='$href'>$li</a></li>";
                 }
                 ?>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">about</a></li>
-                <li><a href="#">blogs</a></li>
-                <li><a href="#">portfolio</a></li>
-                <li><a href="#">contact</a></li>
             </div>
         </div>
     </div>
@@ -53,7 +48,7 @@
 <div id="corpsPage">
     <p>test</p>
     <?php
-    require __DIR__ . '/{$chemin}';
+    require __DIR__ . "/{$chemin}";
     ?>
 </div>
 
