@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations visuelles">
-      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Backup avant essais">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/MainControleur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/MainControleur.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +123,8 @@
       <workItem from="1695798418939" duration="440000" />
       <workItem from="1695799457482" duration="1481000" />
       <workItem from="1695802541482" duration="421000" />
-      <workItem from="1695834445436" duration="5245000" />
+      <workItem from="1695834445436" duration="9414000" />
+      <workItem from="1695882360070" duration="2038000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -311,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695822997416</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Backup avant essais">
+      <option name="closed" value="true" />
+      <created>1695843496182</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1695843496182</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,7 +354,8 @@
     <MESSAGE value="Update" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Améliorations visuelles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles" />
+    <MESSAGE value="Backup avant essais" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backup avant essais" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

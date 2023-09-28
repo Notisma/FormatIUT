@@ -8,50 +8,21 @@
 </head>
 <body>
 
-<!-- TODO: une ombre plus prononcée en bas du header -->
+<div class="bandeau">
+    <?php
+    foreach ($menu as $item) {
+        echo "<div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div>";
+    }
+    ?>
+</div>
 
-<nav>
-    <div class="navbar">
-        <div class="container nav-container">
-            <input class="checkbox" type="checkbox" name="" id=""/>
-            <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-            </div>
 
-            <div id="search">
-                <form action=""> <!-- action à définir -->
-                    <label for="searchField"></label><input type="text" placeholder="Rechercher..." id="searchField">
-                </form>
-            </div>
-
-            <div class="logo">
-                <img src="../ressources/images/LogoIutMontpellier-removed.png" id="logoUm">
-            </div>
-
-            <div id="profilBox">
-                <img src="../ressources/images/profil.png" id = "imageProfil">
-                <p>Se Connecter</p>
-            </div>
-
-            <div class="menu-items">
-                <?php
-                foreach($menu as $li => $href){
-                    echo "<li><a href='$href'>$li</a></li>";
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-</nav>
 
 
 <div id="corpsPage">
-    <p>test</p>
     <?php
-    require __DIR__ . "/{$chemin}";
-    ?>
+require __DIR__ . "/{$chemin}";
+?>
 </div>
 
 </body>

@@ -220,11 +220,127 @@ body {
 
 
 #corpsPage {
-    /*background: linear-gradient(to right bottom, #038eff, #34ffa3);*/
     background-color: #ecf0f1;
-    margin-top: 60px;
+    margin-top: 0;
     margin-left: 0;
     margin-right: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* BANDEAU */
+
+
+.bandeau {
+    z-index: 1;
+    width: 70px;
+    margin-left: 1%;
+    margin-top: 1%;
+    background-color: #ff5660;
+    position: fixed;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s;
+    border-radius: 15px;
+}
+
+.bandeau > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 80%;
+    padding: 0;
+    margin-top: 6%;
+    border-radius: 10px;
+}
+
+.bandeau > div > img {
+    height: 30px;
+}
+
+.bandeau > div > p {
+    display: none;
+    color: white;
+    font-weight: bolder;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+
+.icone {
+    width: 5%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 20%;
+}
+
+#active {
+    background-color: #ff9095;
+}
+
+.contenu {
+    position: absolute;
+    left: 50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.3s;
+}
+
+.contenu-item {
+    display: none;
+    text-align: center;
+}
+
+.bandeau:hover {
+    width: 250px;
+}
+
+.bandeau:hover > div {
+    justify-content: flex-start;
+    margin-left: 2%;
+    width: 95%;
+    margin-top: 2%;
+}
+
+.bandeau:hover > div >* {
+    margin-left: 1%;
+}
+
+.bandeau:hover > div > p {
+    transition: transform 24s;
+    display: block;
+    margin-left: 5%;
+}
+
+.bandeau:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.bandeau > div:hover {
+    background-color: #ff9095;
+}
+
+.icone:hover + .contenu .contenu-item, .contenu:hover .contenu-item {
+    display: block;
 }
