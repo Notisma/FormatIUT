@@ -10,16 +10,19 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
 
 // On recupère l'action passée dans l'URL
-if (!isset($_POST['action'])) {
-    $action = "afficherAccueilEtu";
+if (!isset($_GET['action'])) {
+    $action = "afficherIndex";
+}else {
+    $action=$_GET["action"];
 }
 if (!isset($_GET['controleur'])) {
-    $controleur = "\MainControleur";
+    $controleur = "Main";
+}else{
+    $controleur=$_GET["controleur"];
 }
 
-$nomDeClasseControleur = "App\Covoiturage\Controleur" . $controleur;
-\App\FormatIUT\Controleur\MainControleur::afficherIndex();
-//$nomDeClasseControleur::$action();
+$nomDeClasseControleur = "App\FormatIUT\Controleur\Controleur" . ucfirst($controleur);
+$nomDeClasseControleur::$action();
 
 
 

@@ -8,21 +8,31 @@
 </head>
 <body>
 
+<header>
+    <div id="headerContent">
+        <p>test</p>
+    </div>
+</header>
+
 <div class="bandeau">
     <?php
     foreach ($menu as $item) {
-        echo "<div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div>";
+        $actuel = "";
+        if ($item['label'] == $titrePage) {
+            $actuel = "id='active'";
+        }
+        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
     }
     ?>
 </div>
 
 
-
-
 <div id="corpsPage">
-    <?php
-require __DIR__ . "/{$chemin}";
-?>
+    <div id="main">
+        <?php
+        require __DIR__ . "/{$chemin}";
+        ?>
+    </div>
 </div>
 
 </body>

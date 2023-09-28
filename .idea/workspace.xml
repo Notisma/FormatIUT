@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Grosses améliorations visuelles">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/MainControleur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/MainControleur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/MainControleur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/ControleurFrontale.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/ControleurFrontale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +126,7 @@
       <workItem from="1695799457482" duration="1481000" />
       <workItem from="1695802541482" duration="421000" />
       <workItem from="1695834445436" duration="9414000" />
-      <workItem from="1695882360070" duration="2398000" />
+      <workItem from="1695882360070" duration="11474000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -324,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695884797276</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Corrections">
+      <option name="closed" value="true" />
+      <created>1695885102243</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1695885102243</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,11 +370,11 @@
     <MESSAGE value="Nettoyage. Responsive terminé." />
     <MESSAGE value="Modifications." />
     <MESSAGE value="Update" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Grosses améliorations visuelles" />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
