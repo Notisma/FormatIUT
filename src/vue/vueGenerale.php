@@ -18,21 +18,26 @@
 
     <div id="Gestionrecherche">
         <?php
+        $liaison = "";
         if ($titrePage == "Accueil") {
+            $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
             echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
         } else {
+            $liaison = "?controleur=etuMain&action=afficherProfilEtu";
             echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
         }
-        ?>
-    </div>
-
-
+        
+    echo"</div>
+        <div id='profil'>
+        <a href='{$liaison}'><img id='petiteIcone' src='../ressources/images/profil.png'></a>
+        </div>";
+    ?>
 </div>
 
 
