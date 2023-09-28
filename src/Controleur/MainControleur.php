@@ -18,9 +18,8 @@ class MainControleur
 
     public static function getMenu() :array{
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"TestDuTableau","lien"=>"afficherAccueilEtu"),
-            array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"afficherOffresAlternance"),
-            array("image"=>"../ressources/images/stage.png","label"=>"Offres de Stage","lien"=>"afficherOffresStage")
+            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"afficherOffresAlternance"),
+            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"afficherAccueilEtu")
         );
     }
 }
