@@ -8,11 +8,34 @@
 </head>
 <body>
 
-<header>
-    <div id="headerContent">
-        <p>test</p>
+
+<div id="headerContent">
+    <div id="texteAccueil">
+        <?php
+        echo "<h1>{$titrePage}</h1>";
+        ?>
     </div>
-</header>
+
+    <div id="Gestionrecherche">
+        <?php
+        if ($titrePage == "Accueil") {
+            echo "<form action='' method='get'>            
+            <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
+        </form>";
+        } else {
+            echo "<form action='controleurFrontal.php' method='get'>
+            <input type='hidden' name='action' value='rechercher'>
+            <input type='hidden' name='controleur' value='Main''>
+            <input class='searchField' name='recherche' placeholder='Rechercher...'>
+        </form>";
+        }
+        ?>
+    </div>
+
+
+</div>
+
+
 
 <div class="bandeau">
     <?php

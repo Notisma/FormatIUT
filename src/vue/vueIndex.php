@@ -1,7 +1,7 @@
 <html>
-<header>
+<head>
     <link rel="stylesheet" href="../ressources/css/styleVueIndex.css">
-</header>
+</head>
 
 <body>
 <div id="center">

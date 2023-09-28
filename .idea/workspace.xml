@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
-      <change afterPath="$PROJECT_DIR$/ressources/images/se-deconnecter.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ControleurFrontale.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/ControleurFrontal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,6 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\MAMP\htdocs\devapplicationformatiut\ressources\images" />
       <recent name="C:\Users\farmi\Documents\COURS - 2BUTINFO\SAE_DEV\" />
     </key>
   </component>
@@ -314,7 +313,6 @@
     <MESSAGE value="Modifications visuelles" />
     <MESSAGE value="Modifications visuelles v2" />
     <MESSAGE value="Travaux préparatoires sur les erreurs" />
-    <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Corrections de bugs" />
     <MESSAGE value="Corrections de bugs (encore)" />
     <MESSAGE value="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)" />
@@ -326,6 +324,9 @@
     <MESSAGE value="Nettoyage. Responsive terminé." />
     <MESSAGE value="Modifications." />
     <MESSAGE value="Update" />
+    <MESSAGE value="Améliorations visuelles" />
+    <MESSAGE value="Backup avant essais" />
+    <MESSAGE value="Grosses améliorations visuelles" />
     <MESSAGE value="Corrections" />
     <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
