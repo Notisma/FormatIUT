@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/images/se-deconnecter.png" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/images/se-deconnecter.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +122,10 @@
       <workItem from="1695744164155" duration="752000" />
       <workItem from="1695795610286" duration="932000" />
       <workItem from="1695970190002" duration="734000" />
-      <workItem from="1695976061749" duration="428000" />
+      <workItem from="1695976061749" duration="457000" />
+      <workItem from="1695980661692" duration="759000" />
+      <workItem from="1695995809170" duration="1557000" />
+      <workItem from="1695997613350" duration="2077000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -307,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695929939150</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Corrections">
+      <option name="closed" value="true" />
+      <created>1695976510473</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1695976510474</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,10 +356,10 @@
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="Améliorations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations" />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

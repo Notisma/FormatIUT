@@ -9,59 +9,77 @@
 <body>
 
 
-<div id="headerContent">
-    <div id="texteAccueil">
-        <?php
-        echo "<h1>{$titrePage}</h1>";
-        ?>
-    </div>
+<div class="couleur">
 
-    <div id="Gestionrecherche">
-        <?php
-        $liaison = "";
-        if ($titrePage == "Accueil") {
-            $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
-            echo "<form action='' method='get'>            
+
+    <div id="headerContent">
+        <div id="texteAccueil">
+            <?php
+            echo "<h1>{$titrePage}</h1>";
+            ?>
+        </div>
+
+        <div id="Gestionrecherche">
+            <?php
+            $liaison = "";
+            if ($titrePage == "Accueil") {
+                $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
+                echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
-        } else {
-            $liaison = "?controleur=etuMain&action=afficherProfilEtu";
-            echo "<form action='controleurFrontal.php' method='get'>
+            } else {
+                $liaison = "?controleur=etuMain&action=afficherProfilEtu";
+                echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
-        }
+            }
 
-    echo"</div>
+            echo "</div>
         <div id='profil'>
         <a href='{$liaison}'><img id='petiteIcone' src='../ressources/images/profil.png'></a>
         </div>";
-    ?>
-</div>
+            ?>
+        </div>
 
 
+        <div class="bandeau">
+            <?php
+            foreach ($menu as $item) {
+                $actuel = "";
+                if ($item['label'] == $titrePage) {
+                    $actuel = "id='active'";
+                }
+                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
+            }
+            ?>
+        </div>
 
-<div class="bandeau">
-    <?php
-    foreach ($menu as $item) {
-        $actuel = "";
-        if ($item['label'] == $titrePage) {
-            $actuel = "id='active'";
-        }
-        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
-    }
-    ?>
-</div>
 
-
-<div id="corpsPage">
-    <div id="main">
-        <?php
-        require __DIR__ . "/{$chemin}";
-        ?>
+        <div id="corpsPage">
+            <div id="main">
+                <?php
+                require __DIR__ . "/{$chemin}";
+                ?>
+            </div>
+        </div>
     </div>
-</div>
-
 </body>
+<footer>
+    <div id="footerContent">
+        <div id="footerText">
+            <h2>© 2023 - Format'IUT</h2>
+            <h3>Tous droits réservés</h3>
+            <p>Romain TOUZE</p>
+            <p>Raphaël IZORET</p>
+            <p>Matteo TORDEUX</p>
+            <p>Enzo GUILHOT</p>
+            <p>Noé FUERTES-TORREDEME</p>
+            <p>Thomas LOYE</p>
+        </div>
+        <div id="footerLogo">
+            <img src="../ressources/images/UM.png">
+        </div>
+    </div>
 </html>
