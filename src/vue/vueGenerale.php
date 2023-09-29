@@ -32,7 +32,7 @@
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
         }
-        
+
     echo"</div>
         <div id='profil'>
         <a href='{$liaison}'><img id='petiteIcone' src='../ressources/images/profil.png'></a>

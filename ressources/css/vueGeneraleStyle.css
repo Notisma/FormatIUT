@@ -319,6 +319,8 @@ form {
     border-radius: 15px;
 }
 
+
+
 .bandeau > a {
     display: flex;
     flex-direction: row;
@@ -354,6 +356,11 @@ form {
     cursor: pointer;
     transition: background-color 0.3s;
     padding: 20%;
+}
+
+#logoUm {
+
+
 }
 
 #active {
