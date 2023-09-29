@@ -69,17 +69,27 @@
 <footer>
     <div id="footerContent">
         <div id="footerText">
-            <h2>© 2023 - Format'IUT</h2>
-            <h3>Tous droits réservés</h3>
-            <p>Romain TOUZE</p>
-            <p>Raphaël IZORET</p>
-            <p>Matteo TORDEUX</p>
-            <p>Enzo GUILHOT</p>
-            <p>Noé FUERTES-TORREDEME</p>
-            <p>Thomas LOYE</p>
+            <h4>Equipe de Développement :</h4>
+            <div class="UlConteneur">
+                <div>
+                    <ul>
+                        <li>Romain TOUZE</li>
+                        <li>Raphaël IZORET</li>
+                        <li>Matteo TORDEUX</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>Enzo GUILHOT</li>
+                        <li>Noé FUERTES-TORREDEME</li>
+                        <li>Thomas LOYE</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div id="footerLogo">
-            <img src="../ressources/images/UM.png">
+            <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo">
+            <h2>© 2023 - Format'IUT</h2>
         </div>
     </div>
 </html>
