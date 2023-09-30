@@ -14,6 +14,11 @@ class ControleurEntrMain extends ControleurMain
     public static function formulaireCreationOffre(){
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Entreprise/formulaireCreationOffre.php","titrePage","titrePage"=>"Créer une offre"]);
     }
+
+    public static function creerOffre(){
+        echo "Fonction en cours de création";
+        self::afficherAccueilEntr();
+    }
     public static function getMenu(): array
     {
         return array(
