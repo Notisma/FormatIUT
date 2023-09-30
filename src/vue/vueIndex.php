@@ -15,13 +15,13 @@
         </div>
     </div>
     <div id="wrapDetails">
-        <div id="1">
+        <div id="Conteneur1">
             <p>1</p>
         </div>
-        <div id="2">
+        <div id="Conteneur2">
             <p>2</p>
         </div>
-        <div id="3">
+        <div id="Conteneur3">
             <p>3</p>
         </div>
     </div>
