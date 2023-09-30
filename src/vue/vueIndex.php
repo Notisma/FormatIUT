@@ -15,14 +15,32 @@
         </div>
     </div>
     <div id="wrapDetails">
-        <div id="Conteneur1">
-            <p>1</p>
+        <div class="conteneurDetails" id="cont1">
+            <div class="imageCentree">
+                <img src="../ressources/images/recherche-de-travail.png" class="illustrations">
+            </div>
+            <div class="conteneurTexte">
+                <h2>Recherchez des offres de stage ou d'alternance</h2>
+                <p>Vous êtes étudiant ? Consultez les dernières offres et leurs détails en quelques clics.</p>
+            </div>
         </div>
-        <div id="Conteneur2">
-            <p>2</p>
+        <div class="conteneurDetails" id="cont2">
+            <div class="imageCentree">
+                <img src="../ressources/images/ecrivain.png" class="illustrations">
+            </div>
+            <div class="conteneurTexte">
+                <h2>Simplicité accrue pour les entreprises</h2>
+                <p>Vous êtes une entreprise ? Demandez la création de votre compte entreprise et postez des offres.</p>
+            </div>
         </div>
-        <div id="Conteneur3">
-            <p>3</p>
+        <div class="conteneurDetails" id="cont3">
+            <div class="imageCentree">
+                <img src="../ressources/images/education-en-ligne.png" class="illustrations">
+            </div>
+            <div class="conteneurTexte">
+                <h2>Consultez les offres et postulez en ligne</h2>
+                <p>Que vous soyez professeur, étudiant ou membre d'une entreprise, réalisez la totalité des démarches en ligne.</p>
+            </div>
         </div>
     </div>
 </div>
