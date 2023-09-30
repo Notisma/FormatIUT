@@ -43,17 +43,18 @@
             ?>
         </div>
 
-
-        <div class="bandeau">
-            <?php
-            foreach ($menu as $item) {
-                $actuel = "";
-                if ($item['label'] == $titrePage) {
-                    $actuel = "id='active'";
+        <div class="bandeauConteneur">
+            <div class="bandeau">
+                <?php
+                foreach ($menu as $item) {
+                    $actuel = "";
+                    if ($item['label'] == $titrePage) {
+                        $actuel = "id='active'";
+                    }
+                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
                 }
-                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
-            }
-            ?>
+                ?>
+            </div>
         </div>
 
 

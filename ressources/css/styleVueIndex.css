@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
+body {
+    height: 200vh;
+}
+
+
 #center {
     position: absolute;
     top: 55%;

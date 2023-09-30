@@ -239,7 +239,6 @@ body {
     width: 100%;
     margin-top: 0;
     z-index: 1;
-    /* on doit pouvoir mettre les enfants de headerContent n'importe où dans cette même div */
     position: relative;
 
 }
@@ -309,12 +308,12 @@ form {
 .bandeau {
     z-index: 2;
     width: 70px;
-    height: 92%;
+    height: 92vh;
     margin-left: 1%;
     margin-top: -5px;
     background-color: #ff5660;
     position: sticky;
-    top: 0;
+    top: 20px;
     bottom: 100px;
     display: flex;
     flex-direction: column;
@@ -505,6 +504,7 @@ form {
 
 .grandLogo {
     width: 90%;
+    height: 95%;
 }
 
 #footerContent > #footerLogo > h1 {
