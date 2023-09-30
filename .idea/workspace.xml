@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections de bugs visuels">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rajout des liens pour formulaireCreationOffre.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,15 +316,7 @@
       <option name="project" value="LOCAL" />
       <updated>1696063232005</updated>
     </task>
-    <task id="LOCAL-00025" summary="Corrections de bugs visuels">
-      <option name="closed" value="true" />
-      <created>1696094229196</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1696094229196</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,8 +357,7 @@
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
-    <MESSAGE value="Corrections de bugs visuels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections de bugs visuels" />
+    <option name="LAST_COMMIT_MESSAGE" value="rajout des liens pour formulaireCreationOffre.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
