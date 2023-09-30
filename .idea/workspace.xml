@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Mise en sticky du bandeau. Ajout d'un footer. Travail en cours">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout d'un bandeau (header). Pas encore terminé.">
+      <change afterPath="$PROJECT_DIR$/ressources/images/catalogue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ressources/images/liste.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +76,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\devapplicationformatiut\src\vue\Etudiant" />
+      <recent name="C:\MAMP\htdocs\devapplicationformatiut\ressources\images" />
       <recent name="C:\Users\farmi\Documents\COURS - 2BUTINFO\SAE_DEV\" />
     </key>
   </component>
@@ -120,11 +127,6 @@
       <workItem from="1695738183189" duration="146000" />
       <workItem from="1695744164155" duration="752000" />
       <workItem from="1695795610286" duration="932000" />
-      <workItem from="1695970190002" duration="734000" />
-      <workItem from="1695976061749" duration="457000" />
-      <workItem from="1695980661692" duration="759000" />
-      <workItem from="1695995809170" duration="1557000" />
-      <workItem from="1695997613350" duration="4403000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -302,31 +304,7 @@
       <option name="project" value="LOCAL" />
       <updated>1695921578210</updated>
     </task>
-    <task id="LOCAL-00023" summary="Améliorations">
-      <option name="closed" value="true" />
-      <created>1695929939150</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1695929939150</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Corrections">
-      <option name="closed" value="true" />
-      <created>1695976510473</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1695976510474</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Mise en sticky du bandeau. Ajout d'un footer. Travail en cours">
-      <option name="closed" value="true" />
-      <created>1696000408815</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1696000408815</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,11 +341,9 @@
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
-    <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
-    <MESSAGE value="Améliorations" />
     <MESSAGE value="Corrections" />
-    <MESSAGE value="Mise en sticky du bandeau. Ajout d'un footer. Travail en cours" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mise en sticky du bandeau. Ajout d'un footer. Travail en cours" />
+    <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'un bandeau (header). Pas encore terminé." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
