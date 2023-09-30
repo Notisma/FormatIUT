@@ -132,9 +132,24 @@ class Offre{
 
     public static function construireDepuisTableau(array $offreFormatTableau) : Offre
     {
-        return new Offre($offreFormatTableau[0], $offreFormatTableau[1], $offreFormatTableau[2], $offreFormatTableau[3]
-            , $offreFormatTableau[4], $offreFormatTableau[5], $offreFormatTableau[6], $offreFormatTableau[7]
-            , $offreFormatTableau[8], $offreFormatTableau[9]);
+        return new Offre( $offreFormatTableau['idOffre'],
+            $offreFormatTableau['nomOffre'],
+            $offreFormatTableau['dateDebut'],
+            $offreFormatTableau['dateFin'],
+            $offreFormatTableau['sujet'],
+            $offreFormatTableau['detailProjet'],
+            $offreFormatTableau['gratification'],
+            $offreFormatTableau['dureeHeures'],
+            $offreFormatTableau['joursParSemaine'],
+            $offreFormatTableau['nbHeuresHebdo']);
+    }
+
+    public static function offreFormatTableau($offreTab){
+        $offreListe = [];
+        foreach ($offreTab as $offre){
+            $offreListe[] =self::construireDepuisTableau($offre);
+        }
+        return $offreListe;
     }
 }
 
