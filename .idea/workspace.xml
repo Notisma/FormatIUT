@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rajout des liens pour formulaireCreationOffre.php">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="vueIndex.php (version 1) terminée.">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueIndex.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +123,7 @@
       <workItem from="1695795610286" duration="932000" />
       <workItem from="1696084571427" duration="9000" />
       <workItem from="1696092460238" duration="1587000" />
+      <workItem from="1696159849333" duration="533000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -317,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696063232005</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="vueIndex.php (version 1) terminée.">
+      <option name="closed" value="true" />
+      <created>1696104587311</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1696104587312</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +366,8 @@
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="rajout des liens pour formulaireCreationOffre.php" />
+    <MESSAGE value="vueIndex.php (version 1) terminée." />
+    <option name="LAST_COMMIT_MESSAGE" value="vueIndex.php (version 1) terminée." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
