@@ -4,16 +4,14 @@
 </head>
 <body>
 <div class="conteneurPrincipal">
-    <div class="flexRow">
-        <div class="conteneurBienvenue">
-            <div class="texteBienvenue">
-                <h3>Bonjour, Jérôme</h3>
-                <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
-            </div>
+    <div class="conteneurBienvenue">
+        <div class="texteBienvenue">
+            <h3>Bonjour, Jérôme</h3>
+            <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
+        </div>
 
-            <div class="imageBienvenue">
-                <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
-            </div>
+        <div class="imageBienvenue">
+            <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
         </div>
     </div>
 
@@ -24,10 +22,22 @@
 
     <div class="nouveautesWrap">
         <div class="nouveautesStages">
+            <h4>Nouveautés Stages :</h4>
+            <!-- on crée une div qui peut descendre avec un scroll -->
+            <div id="annonceStage">
+                <div id="imagesAnnonce">
 
+                </div>
+                <div id="texteAnnonce">
+                    <h4>Stage à IKEA</h4>
+                </div>
+            </div>
         </div>
         <div class="nouveautesAltern">
+            <h4>Nouveautés Alternances :</h4>
+            <div id="annonceAltern">
 
+            </div>
         </div>
     </div>
 

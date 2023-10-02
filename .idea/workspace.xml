@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="créerOffre (non fonctionnel car attente du dataObject Offre.php)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations + avancée sur vueAccueilEtudiant.php">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
@@ -319,7 +320,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696063232005</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Fix de gros bug git">
+      <option name="closed" value="true" />
+      <created>1696242437807</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1696242437807</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Améliorations + avancée sur vueAccueilEtudiant.php">
+      <option name="closed" value="true" />
+      <created>1696246712305</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1696246712305</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,11 +425,13 @@
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="rajout des liens pour formulaireCreationOffre.php" />
+    <MESSAGE value="Fix de gros bug git" />
+    <MESSAGE value="Corrections" />
+    <MESSAGE value="Améliorations + avancée sur vueAccueilEtudiant.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Améliorations + avancée sur vueAccueilEtudiant.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
