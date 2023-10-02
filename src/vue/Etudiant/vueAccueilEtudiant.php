@@ -4,16 +4,14 @@
 </head>
 <body>
 <div class="conteneurPrincipal">
-    <div class="flexRow">
-        <div class="conteneurBienvenue">
-            <div class="texteBienvenue">
-                <h3>Bonjour, Jérôme</h3>
-                <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
-            </div>
+    <div class="conteneurBienvenue">
+        <div class="texteBienvenue">
+            <h3>Bonjour, Jérôme</h3>
+            <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
+        </div>
 
-            <div class="imageBienvenue">
-                <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
-            </div>
+        <div class="imageBienvenue">
+            <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
         </div>
     </div>
 
