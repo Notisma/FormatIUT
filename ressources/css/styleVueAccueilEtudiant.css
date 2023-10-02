@@ -112,8 +112,8 @@ body {
     /* doit occuper les deux dernières lignes, dans la première colonnes */
     grid-column: 1/3;
     grid-row: 2/4;
-    height: 30%;
-    width: 90%;
+    height: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -143,4 +143,14 @@ body {
     height: 100%;
     border-radius: 10px;
     background-color: #aadcda;
+}
+
+.annonceStage {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
 }

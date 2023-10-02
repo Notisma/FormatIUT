@@ -23,12 +23,13 @@
     <div class="nouveautesWrap">
         <div class="nouveautesStages">
             <h4>Nouveautés Stages :</h4>
+            <!-- on crée une div qui peut descendre avec un scroll -->
             <div id="annonceStage">
                 <div id="imagesAnnonce">
 
                 </div>
                 <div id="texteAnnonce">
-
+                    <h4>Stage à IKEA</h4>
                 </div>
             </div>
         </div>
