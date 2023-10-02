@@ -3,8 +3,10 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Modele\Repository\AlternanceRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\Repository\StageRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -20,8 +22,16 @@ class ControleurEntrMain extends ControleurMain
     public static function creerOffre(){
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
         echo "Fonction en cours de création";
-        $offre=Offre::construireDepuisTableau($_GET);
-        (new OffreRepository())->creerOffre($offre);
+        //TODO séparer Stage et Alternance en extends de Offre ?
+        //TODO dans construireDepuisFormulaire, autoincrémenter l'idOffre...
+        $offre=Offre::construireDepuisFormulaire($_POST);
+        if ($_POST["TypeOffre"]=="Stage"){
+            (new StageRepository())->creerOffre($offre);
+        }else if ($_POST["TypeOffre"=="Alternance"]){
+            (new AlternanceRepository())->creerOffre($offre);
+        }else {
+            //TODO erreur
+        }
         self::afficherAccueilEntr();
     }
     public static function getMenu(): array
