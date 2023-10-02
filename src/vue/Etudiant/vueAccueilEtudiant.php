@@ -23,14 +23,47 @@
     <div class="nouveautesWrap">
         <div class="nouveautesStages">
             <h4>Nouveautés Stages :</h4>
-            <!-- on crée une div qui peut descendre avec un scroll -->
-            <div id="annonceStage">
-                <div id="imagesAnnonce">
+            <div class="conteneurAnnonces">
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
 
-                </div>
-                <div id="texteAnnonce">
-                    <h4>Stage à IKEA</h4>
-                </div>
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>Stage à IKEA</h4>
+                    </div>
+                </a>
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>Stage à IKEA</h4>
+                    </div>
+                </a>
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>Stage à IKEA</h4>
+                    </div>
+                </a>
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>Stage à IKEA</h4>
+                    </div>
+                </a>
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>Stage à IKEA</h4>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="nouveautesAltern">
