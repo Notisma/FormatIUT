@@ -29,7 +29,7 @@ class ControleurEntrMain extends ControleurMain
         return array(
           array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Entreprise","lien"=>"?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image"=>"../ressources/images/creer.png","label"=>"Créer une offre","lien"=>"?action=formulaireCreationOffre&controleur=EntrMain"),
-            array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
+            array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"ControleurFrontal.php")
 
         );
     }
