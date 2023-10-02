@@ -22,10 +22,21 @@
 
     <div class="nouveautesWrap">
         <div class="nouveautesStages">
+            <h4>Nouveautés Stages :</h4>
+            <div id="annonceStage">
+                <div id="imagesAnnonce">
 
+                </div>
+                <div id="texteAnnonce">
+
+                </div>
+            </div>
         </div>
         <div class="nouveautesAltern">
+            <h4>Nouveautés Alternances :</h4>
+            <div id="annonceAltern">
 
+            </div>
         </div>
     </div>
 

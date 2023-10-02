@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Fix de gros bug git">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
@@ -417,12 +418,12 @@
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
     <MESSAGE value="Fix de gros bug git" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix de gros bug git" />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
