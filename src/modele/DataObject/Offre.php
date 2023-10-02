@@ -130,20 +130,14 @@ class Offre{
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public static function construireDepuisTableau(array $offreFormatTableau) : Offre
-    {
-        return new Offre( $offreFormatTableau['idOffre'],
-            $offreFormatTableau['nomOffre'],
-            $offreFormatTableau['dateDebut'],
-            $offreFormatTableau['dateFin'],
-            $offreFormatTableau['sujet'],
-            $offreFormatTableau['detailProjet'],
-            $offreFormatTableau['gratification'],
-            $offreFormatTableau['dureeHeures'],
-            $offreFormatTableau['joursParSemaine'],
-            $offreFormatTableau['nbHeuresHebdo']);
-    }
 
+    public function formatTableau(): array {
+        return ['idOffre' => $this->idOffre, 'nomOffre' => $this->nomOffre, 'dateDebut' => $this->dateDebut,
+            'dateFin' => $this->dateFin, 'sujet' => $this->sujet, 'detailProjet' => $this->detailProjet,
+            'gratification' => $this->gratification, 'dureeHeures' => $this->dureeHeures,
+            'joursParSemaine' => $this->joursParSemaine,
+            'nbHeuresHebdo' => $this->nbHeuresHebdo,];
+    }
     public static function offreFormatTableau($offreTab){
         $offreListe = [];
         foreach ($offreTab as $offre){

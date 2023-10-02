@@ -90,13 +90,14 @@ class Entreprise{
             $entrepriseFormatTableau['tel']);
     }
 
-    public static function entrepriseFormatTableau($entrepriseTab){
-        $entrepriseListe = [];
-        foreach ($entrepriseTab as $entreprise){
-            $entrepriseListe[] =self::construireDepuisTableau($entreprise);
-        }
-        return $entrepriseListe;
+    public function formatTableau(): array{
+        return ['siret' => $this->siret, 'nomEntreprise' => $this->nomEntreprise,
+            'statutJuridique' => $this->statutJuridique, 'effectif' => $this->effectif, 'codeNAF' => $this->codeNAF,
+            'tel' => $this->tel,
+        ];
     }
+
+
 
 }
 
