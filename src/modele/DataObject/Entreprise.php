@@ -8,7 +8,7 @@ class Entreprise{
     private int $effectif;
     private string $codeNAF;
     private string $tel;
-    private int $idOffre;
+
 
 
     public function getSiret(): int
@@ -71,17 +71,8 @@ class Entreprise{
         $this->tel = $tel;
     }
 
-    public function getIdOffre(): int
-    {
-        return $this->idOffre;
-    }
 
-    public function setIdOffre(int $idOffre): void
-    {
-        $this->idOffre = $idOffre;
-    }
-
-    public function __construct(int $siret, string $nomEntreprise, string $statutJuridique, int $effectif, string $codeNAF, string $tel, int $idOffre)
+    public function __construct(int $siret, string $nomEntreprise, string $statutJuridique, int $effectif, string $codeNAF, string $tel)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -89,7 +80,7 @@ class Entreprise{
         $this->effectif = $effectif;
         $this->codeNAF = $codeNAF;
         $this->tel = $tel;
-        $this->idOffre = $idOffre;
+
     }
 
     public static function construireDepuisTableau(array $entrepriseFormatTableau) : Entreprise
@@ -99,14 +90,13 @@ class Entreprise{
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
             $entrepriseFormatTableau['codeNAF'],
-            $entrepriseFormatTableau['tel'],
-            $entrepriseFormatTableau['idOffre']);
+            $entrepriseFormatTableau['tel']);
     }
 
     public function formatTableau(): array{
         return ['siret' => $this->siret, 'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique, 'effectif' => $this->effectif, 'codeNAF' => $this->codeNAF,
-            'tel' => $this->tel, 'idOffre' => $this->idOffre];
+            'tel' => $this->tel];
     }
 
 

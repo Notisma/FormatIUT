@@ -15,7 +15,15 @@ class Offre{
     private int $joursParSemaine;
     private int $nbHeuresHebdo;
 
+    private int $siret;
 
+    public function getIdSiret(){
+        return$this->siret;
+    }
+
+    public function setIdSiret(int $siret){
+        $this->siret = $siret;
+    }
     public function getIdOffre(): int
     {
         return $this->idOffre;
@@ -116,7 +124,7 @@ class Offre{
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, Date $dateDebut, Date $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo)
+    public function __construct(int $idOffre, string $nomOffre, Date $dateDebut, Date $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -128,6 +136,7 @@ class Offre{
         $this->dureeHeures = $dureeHeures;
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
+        $this->siret = $siret;
     }
 
 
@@ -136,7 +145,7 @@ class Offre{
             'dateFin' => $this->dateFin, 'sujet' => $this->sujet, 'detailProjet' => $this->detailProjet,
             'gratification' => $this->gratification, 'dureeHeures' => $this->dureeHeures,
             'joursParSemaine' => $this->joursParSemaine,
-            'nbHeuresHebdo' => $this->nbHeuresHebdo,];
+            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'siret' => $this->siret];
     }
     public static function offreFormatTableau($offreTab){
         $offreListe = [];
