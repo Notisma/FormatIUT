@@ -4,12 +4,11 @@
 </head>
 <body>
 <div id="center">
-<form>
-    <fieldset>
-        <legend>Création d'une offre</legend>
+    <form method="post" action="../web/controleurFrontal.php">
         <p>
-            <label class="labelFormulaire" for="idOffre_id" >IdOffre</label>
-            <input class="inputFormulaire" type="text" name="idOffre" id="idOffre_id" required>
+            <label class="labelFormulaire" for="type_id" >Type d'Offre</label>
+            <input class="inputFormulaire" type="radio" name="TypeOffre" id="type_id" value="Stage" required>Stage
+            <input class="inputFormulaire" type="radio" name="TypeOffre" id="type_id" value="Alternance">Alternance
         </p>
         <p>
             <label class="labelFormulaire" for="nomOffre_id">NomOffre</label>
@@ -52,9 +51,7 @@
             <input type="hidden" name="controleur" value="EntrMain">
             <input type="hidden" name="action" value="creerOffre">
         </p>
-
-    </fieldset>
-</form>
+    </form>
 </div>
 </body>
 </html>
