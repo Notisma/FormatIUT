@@ -16,13 +16,10 @@ body {
     text-align: left;
     line-height: 2em;
     display: grid;
-    /* on veut une grille de 3 colonnes, et de 3 lignes */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    /* on veut que les colonnes et les lignes aient la même taille */
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
-    /* les éléments doivent être centrés dans les grilles */
     align-items: center;
     align-content: center;
     justify-items: center;
@@ -40,7 +37,6 @@ body {
 }
 
 .conteneurBienvenue {
-    /* doit occuper les deux première colonnes en width, et la première ligne en height */
     grid-column: 1/3;
     grid-row: 1;
     float: left;
@@ -135,7 +131,6 @@ body {
 
 
 .nouveautesWrap {
-    /* doit occuper les deux dernières lignes, dans la première colonnes */
     grid-column: 1/3;
     grid-row: 2/4;
     height: 90%;
