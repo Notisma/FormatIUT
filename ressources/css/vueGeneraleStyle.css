@@ -9,7 +9,6 @@ body {
     background-color: #ecf0f1;
     margin: 0;
     height: 100vh;
-    min-height: 100vh;
 }
 
 .container {
@@ -306,7 +305,7 @@ form {
 }
 
 .bandeau {
-    z-index: 2;
+    z-index: 90;
     width: 70px;
     height: 92vh;
     margin-left: 1%;
@@ -314,13 +313,17 @@ form {
     background-color: #ff5660;
     position: sticky;
     top: 20px;
-    bottom: 100px;
+    /* doit s'arrêter juste avant le footer */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: width 0.3s;
     border-radius: 15px;
+}
+
+.bandeauConteneur {
+    height: 97%;
 }
 
 

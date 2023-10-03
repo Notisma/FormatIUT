@@ -15,7 +15,8 @@ class ControleurEtuMain extends ControleurMain
     {
         return array(
             array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Etudiants","lien"=>"?action=afficherAccueilEtu&controleur=EtuMain"),
-            array("image"=>"../ressources/images/liste.png","label"=>"Liste des Offres","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
+            array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
+            array("image"=>"../ressources/images/stage.png","label"=>"Offres de Stage","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"ControleurFrontal.php")
         );
     }

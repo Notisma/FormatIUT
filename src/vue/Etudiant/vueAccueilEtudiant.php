@@ -17,7 +17,11 @@
 
     <div class="notifications">
         <h4>Vos Notifications :</h4>
-
+        <!-- affichage d'un erreur pour dire qu'il n'y a pas de notifications -->
+        <div class="wrapErreur">
+            <img src="../ressources/images/erreur.png" alt="image d'erreur" class="imageErreur">
+            <h4>Aucune notification pour le moment.</h4>
+        </div>
     </div>
 
     <div class="nouveautesWrap">
@@ -38,7 +42,7 @@
                                 </div>
                                 <div class="remunAnnonce">
                                     <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
-                                    <p class="petitTexte">280/m</p>
+                                    <p class="petitTexte">280/mois</p>
                                 </div>
                             </div>
                             <div class="dureeLibelle">
@@ -54,6 +58,71 @@
                         </div>
                     </div>
                 </a>
+
+
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+                        <img src="../ressources/images/haut-parleur.png" alt="image de l'annonce">
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>CREDIT AGRICOLE TECH</h4>
+                        <div class="detailsAnnonce">
+                            <div class="lieuRemun">
+                                <div class="lieuAnnonce">
+                                    <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">Montpellier, 34</p>
+                                </div>
+                                <div class="remunAnnonce">
+                                    <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">280/mois</p>
+                                </div>
+                            </div>
+                            <div class="dureeLibelle">
+                                <div class="dureeAnnonce">
+                                    <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">3 mois</p>
+                                </div>
+                                <div class="libelleAnnonce">
+                                    <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">Développeur Front-end</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a href="https://google.fr">
+                    <div class="imagesAnnonce">
+                        <img src="../ressources/images/haut-parleur.png" alt="image de l'annonce">
+                    </div>
+                    <div class="texteAnnonce">
+                        <h4>CREDIT AGRICOLE TECH</h4>
+                        <div class="detailsAnnonce">
+                            <div class="lieuRemun">
+                                <div class="lieuAnnonce">
+                                    <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">Montpellier, 34</p>
+                                </div>
+                                <div class="remunAnnonce">
+                                    <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">280/mois</p>
+                                </div>
+                            </div>
+                            <div class="dureeLibelle">
+                                <div class="dureeAnnonce">
+                                    <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">3 mois</p>
+                                </div>
+                                <div class="libelleAnnonce">
+                                    <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
+                                    <p class="petitTexte">Développeur Front-end</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
         <div class="nouveautesAltern">
@@ -73,7 +142,7 @@
                                 </div>
                                 <div class="remunAnnonce">
                                     <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
-                                    <p class="petitTexte">295/m</p>
+                                    <p class="petitTexte">295/mois</p>
                                 </div>
                             </div>
                             <div class="dureeLibelle">
