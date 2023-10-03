@@ -26,26 +26,38 @@ class ControleurEntrMain extends ControleurMain
         //TODO dans construireDepuisFormulaire, autoincrémenter l'idOffre...
         $_GET["idOffre"]=9;
         $offre=Offre::construireDepuisFormulaire($_GET);
-        /*if ($_GET["TypeOffre"]=="Stage"){
+        if ($_GET["TypeOffre"]=="Stage"){
             (new StageRepository())->creerOffre($offre);
         }else if ($_GET["TypeOffre"=="Alternance"]){
             (new AlternanceRepository())->creerOffre($offre);
         }else {
             //TODO erreur
-        }*/
-        (new OffreRepository())->creerOffre($offre);
+        }
+        //(new OffreRepository())->creerOffre($offre);
         self::afficherAccueilEntr();
     }
 
-    public static function afficherMesOffres(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Mes Offres","chemin"=>"Entreprise/vueMesOffres.php","menu"=>self::getMenu(),"listeOffres"=>(new OffreRepository())->getListeOffreParEntreprise("Dell")]);
+    public static function MesOffres(){
+        switch ($_GET["type"]){
+            case "Stage" :
+                $liste=(new StageRepository())->getListeOffreParEntreprise("Dell");
+                break;
+            case "Alternance":
+                $liste=(new AlternanceRepository())->getListeOffreParEntreprise("Dell");
+                break;
+            case "Offre":
+                $liste=(new OffreRepository())->getListeOffreParEntreprise("Dell");
+                break;
+        }
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Mes Offres","chemin"=>"Entreprise/vueMesOffres.php","menu"=>self::getMenu(),"type"=>$_GET["type"],"listeOffres"=>$liste]);
     }
+
     public static function getMenu(): array
     {
         return array(
           array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Entreprise","lien"=>"?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image"=>"../ressources/images/creer.png","label"=>"Créer une offre","lien"=>"?action=formulaireCreationOffre&controleur=EntrMain"),
-            array("image"=>"../ressources/images/catalogue.png","label"=>"Mes Offres","lien"=>"?action=afficherMesOffres&controleur=EntrMain"),
+            array("image"=>"../ressources/images/catalogue.png","label"=>"Mes Offres","lien"=>"?action=MesOffres&type=Offre&controleur=EntrMain"),
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"ControleurFrontal.php")
 
         );

@@ -7,7 +7,7 @@ use App\FormatIUT\Modele\DataObject\Offre;
 class OffreRepository
 {
     public function creerOffre(Offre $offre){
-        $sql="INSERT INTO offre values(";
+        $sql="INSERT INTO ".$this->getNomTable()." values(";
         foreach ($this->getNomsColonnes() as $formatTableau) {
             if($formatTableau!=$this->getNomsColonnes()[0]){
                 $sql.=",";
@@ -21,6 +21,10 @@ class OffreRepository
     }
     public function getNomsColonnes() : array{
         return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise"];
+    }
+
+    public function getNomTable():string{
+        return "offre";
     }
 
     public function getListeOffre():?array{
