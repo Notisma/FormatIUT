@@ -21,7 +21,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function creerOffre(){
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
-        echo "Fonction en cours de création";
+
         //TODO séparer Stage et Alternance en extends de Offre ?
         //TODO dans construireDepuisFormulaire, autoincrémenter l'idOffre...
         $_GET["idOffre"]=9;
@@ -33,7 +33,6 @@ class ControleurEntrMain extends ControleurMain
         }else {
             //TODO erreur
         }
-        //(new OffreRepository())->creerOffre($offre);
         self::afficherAccueilEntr();
     }
 
@@ -58,7 +57,7 @@ class ControleurEntrMain extends ControleurMain
           array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Entreprise","lien"=>"?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image"=>"../ressources/images/creer.png","label"=>"Créer une offre","lien"=>"?action=formulaireCreationOffre&controleur=EntrMain"),
             array("image"=>"../ressources/images/catalogue.png","label"=>"Mes Offres","lien"=>"?action=MesOffres&type=Offre&controleur=EntrMain"),
-            array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"ControleurFrontal.php")
+            array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
 
         );
     }

@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout d'une erreur pour les notification.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/AlternanceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/AlternanceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/StageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/StageRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/ControleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +133,7 @@
       <workItem from="1696316750672" duration="6105000" />
       <workItem from="1696333581954" duration="1036000" />
       <workItem from="1696338132710" duration="8723000" />
-      <workItem from="1696354258415" duration="3574000" />
+      <workItem from="1696354258415" duration="6622000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -379,7 +375,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696345287909</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
+      <option name="closed" value="true" />
+      <created>1696363175152</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1696363175152</updated>
+    </task>
+    <task id="LOCAL-00032" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
+      <option name="closed" value="true" />
+      <created>1696363214830</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1696363214830</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -430,14 +442,25 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Raphael" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifications visuelles v2" />
     <MESSAGE value="Travaux préparatoires sur les erreurs" />
     <MESSAGE value="Corrections de bugs" />
     <MESSAGE value="Corrections de bugs (encore)" />
@@ -462,7 +485,8 @@
     <MESSAGE value="Ajout des annonces en html (version 1)" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'une erreur pour les notification." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'une erreur pour les notification." />
+    <MESSAGE value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
+    <option name="LAST_COMMIT_MESSAGE" value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
