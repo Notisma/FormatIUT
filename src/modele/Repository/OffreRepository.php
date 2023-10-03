@@ -20,14 +20,14 @@ class OffreRepository
         $pdoStatement->execute($values);
     }
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise"];
     }
 
     public function getListeOffre():?array{
         $sql="SELECT * FROM offre";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $offre){
-            $listeOffre[]=Offre::construireDepuisTableau($offre);
+            $listeOffre[]=Offre::construireDepuisFormulaire($offre);
         }
         return $listeOffre;
     }
@@ -42,5 +42,14 @@ class OffreRepository
             return null;
         }
         return Offre::construireDepuisTableau($offre);
+    }
+
+    public function getListeOffreParEntreprise($idEntreprise){
+        $sql="SELECT * FROM offre WHERE idEntreprise= 'Dell'";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $offre){
+            $listeOffre[]=Offre::construireDepuisFormulaire($offre);
+        }
+        return $listeOffre;
     }
 }

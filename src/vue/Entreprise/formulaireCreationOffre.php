@@ -4,7 +4,7 @@
 </head>
 <body>
 <div id="center">
-    <form method="post" action="../web/controleurFrontal.php">
+    <form method="get" action="../web/controleurFrontal.php">
         <p>
             <label class="labelFormulaire" for="type_id" >Type d'Offre</label>
             <input class="inputFormulaire" type="radio" name="TypeOffre" id="type_id" value="Stage" required>Stage
@@ -12,19 +12,19 @@
         </p>
         <p>
             <label class="labelFormulaire" for="nomOffre_id">NomOffre</label>
-            <input class="inputFormulaire" type="text" name="NomOffre" id="nomOffre_id" required>
+            <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required>
         </p>
         <p>
             <label class="labelFormulaire" for="dateDebut_id">Date de début</label>
-            <input class="inputFormulaire" type="date" name="DateDebut" id="dateDebut_id" required>
+            <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" required>
         </p>
         <p>
             <label class="labelFormulaire" for="dateFin_id">Date de fin</label>
-            <input class="inputFormulaire" type="date" name="DateFin" id="dateFin_id" required>
+            <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id" required>
         </p>
         <p>
             <label class="labelFormulaire" for="sujet_id">Sujet</label>
-            <input class="inputFormulaire" type="text" name="suejet" id="sujet_id" required>
+            <input class="inputFormulaire" type="text" name="sujet" id="sujet_id" required>
         </p>
         <p>
             <label class="labelFormulaire" for="detailProjet_id">Détail du projet</label>
@@ -32,7 +32,7 @@
         </p>
         <p>
             <label class="labelFormulaire" for="gratification_id">Gratification</label>
-            <input class="inputFormulaire" type="text" name="gratification" id="gratification_id" required>
+            <input class="inputFormulaire" type="number" name="gratification" id="gratification_id" required>
         </p>
         <p>
             <label class="labelFormulaire" for="dureeHeures_id">Durée en heure</label>

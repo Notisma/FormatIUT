@@ -24,21 +24,28 @@ class ControleurEntrMain extends ControleurMain
         echo "Fonction en cours de création";
         //TODO séparer Stage et Alternance en extends de Offre ?
         //TODO dans construireDepuisFormulaire, autoincrémenter l'idOffre...
-        $offre=Offre::construireDepuisFormulaire($_POST);
-        if ($_POST["TypeOffre"]=="Stage"){
+        $_GET["idOffre"]=9;
+        $offre=Offre::construireDepuisFormulaire($_GET);
+        /*if ($_GET["TypeOffre"]=="Stage"){
             (new StageRepository())->creerOffre($offre);
-        }else if ($_POST["TypeOffre"=="Alternance"]){
+        }else if ($_GET["TypeOffre"=="Alternance"]){
             (new AlternanceRepository())->creerOffre($offre);
         }else {
             //TODO erreur
-        }
+        }*/
+        (new OffreRepository())->creerOffre($offre);
         self::afficherAccueilEntr();
+    }
+
+    public static function afficherMesOffres(){
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Mes Offres","chemin"=>"Entreprise/vueMesOffres.php","menu"=>self::getMenu(),"listeOffres"=>(new OffreRepository())->getListeOffreParEntreprise("Dell")]);
     }
     public static function getMenu(): array
     {
         return array(
           array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Entreprise","lien"=>"?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image"=>"../ressources/images/creer.png","label"=>"Créer une offre","lien"=>"?action=formulaireCreationOffre&controleur=EntrMain"),
+            array("image"=>"../ressources/images/catalogue.png","label"=>"Mes Offres","lien"=>"?action=afficherMesOffres&controleur=EntrMain"),
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"ControleurFrontal.php")
 
         );
