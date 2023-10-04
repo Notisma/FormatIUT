@@ -10,7 +10,7 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherCatalogue(){
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueCatalogueOffre.php","titrePage"=>"Liste des Offres"]);
     }
-    public static function afficherCompte(){
+    public static function afficherProfilEtu(){
         self::afficherVue("vueGenerale.php", ["menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
     }
 
