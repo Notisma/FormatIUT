@@ -17,7 +17,7 @@ body {
     line-height: 2em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
     align-items: center;
@@ -64,7 +64,7 @@ body {
 }
 
 .imageMoyenne {
-    width: 100%;
+    width: 90%;
 }
 
 .notifications > .uneNotif {
@@ -118,5 +118,56 @@ body {
 
 .imageErreur {
     width: 40%;
+}
+
+.conteneurAnnoncesEntr {
+    grid-column: 1/3;
+    grid-row: 2/5;
+    width: 100%;
+    height: 88%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    margin-top: 3%;
+    background-color: #aadcda;
+}
+
+.titre > h3 {
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.04em;
+    margin-bottom: 2%;
+}
+
+.wrapAnnonces {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    justify-items: center;
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+}
+
+.wrapAnnonces::-webkit-scrollbar {
+    display: none;
+}
+
+.annonceEntreprise {
+    width: 95%;
+    height: 45%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    background-color: white;
+    border-radius: 10px;
 }
 

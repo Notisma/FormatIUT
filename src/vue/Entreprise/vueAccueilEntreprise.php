@@ -9,12 +9,12 @@
 <div class="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
-            <h3>Bonjour, Jérôme</h3>
-            <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
+            <h3>Bonjour, bienvenue dans votre compte Entreprise</h3>
+            <p>Retrouvez ici vos annonces et leur statut actuel :</p>
         </div>
 
         <div class="imageBienvenue">
-            <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
+            <img src="../ressources/images/bonjourEntr.png" alt="image de bienvenue" class="imageMoyenne">
         </div>
     </div>
 
@@ -26,6 +26,23 @@
             <h4>Aucune notification pour le moment.</h4>
         </div>
     </div>
+
+    <div class="conteneurAnnoncesEntr">
+        <div class="titre">
+            <h3>Vos annonces publiées ou en attente de publication :</h3>
+        </div>
+
+        <div class="wrapAnnonces">
+
+            <div class="annonceEntreprise">
+                <h4>CREDIT AGRICOLE FRANCE</h4>
+            </div>
+
+        </div>
+
+
+    </div>
+
 </div>
 
 </body>
