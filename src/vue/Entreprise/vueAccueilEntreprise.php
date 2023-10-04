@@ -34,9 +34,123 @@
 
         <div class="wrapAnnonces">
 
-            <div class="annonceEntreprise">
+            <!-- exemple d'annonce en attente de publication -->
+            <a href="http://localhost:8080" class="annonceEntreprise">
+                <div class="imgAnnonce">
+                    <img src="../ressources/images/logo_CA.png" class="imageEntr">
+                </div>
+                <div class="wrapTexte">
                 <h4>CREDIT AGRICOLE FRANCE</h4>
-            </div>
+                    <div class="detailsAnnonce">
+                        <div class="lieuRemun">
+                            <div class="lieuAnnonce">
+                                <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Montpellier, 34</p>
+                            </div>
+                            <div class="remunAnnonce">
+                                <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">280/mois</p>
+                            </div>
+                        </div>
+                        <div class="dureeLibelle">
+                            <div class="dureeAnnonce">
+                                <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">3 mois</p>
+                            </div>
+                            <div class="libelleAnnonce">
+                                <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Développeur Front-end</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="statutAnnonceEntr">
+                    <div class="statut" id="enAttente">
+                        <img src="../ressources/images/sablier.png" alt="image" class="imagesStatut">
+                        <p class="petitTexte">En attente de vérification</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- exemple d'annonce publiée -->
+            <a href="http://localhost:8080" class="annonceEntreprise">
+                <div class="imgAnnonce">
+                    <img src="../ressources/images/logo_CA.png" class="imageEntr">
+                </div>
+                <div class="wrapTexte">
+                    <h4>CREDIT AGRICOLE FRANCE</h4>
+                    <div class="detailsAnnonce">
+                        <div class="lieuRemun">
+                            <div class="lieuAnnonce">
+                                <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Montpellier, 34</p>
+                            </div>
+                            <div class="remunAnnonce">
+                                <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">280/mois</p>
+                            </div>
+                        </div>
+                        <div class="dureeLibelle">
+                            <div class="dureeAnnonce">
+                                <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">3 mois</p>
+                            </div>
+                            <div class="libelleAnnonce">
+                                <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Développeur Front-end</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="statutAnnonceEntr">
+                    <div class="statut" id="valide">
+                        <img src="../ressources/images/verifie.png" alt="image" class="imagesStatut">
+                        <p class="petitTexte">Offre publiée.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- exemple d'annonce refusée -->
+
+            <a href="http://localhost:8080" class="annonceEntreprise">
+                <div class="imgAnnonce">
+                    <img src="../ressources/images/logo_CA.png" class="imageEntr">
+                </div>
+                <div class="wrapTexte">
+                    <h4>CREDIT AGRICOLE FRANCE</h4>
+                    <div class="detailsAnnonce">
+                        <div class="lieuRemun">
+                            <div class="lieuAnnonce">
+                                <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Montpellier, 34</p>
+                            </div>
+                            <div class="remunAnnonce">
+                                <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">280/mois</p>
+                            </div>
+                        </div>
+                        <div class="dureeLibelle">
+                            <div class="dureeAnnonce">
+                                <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">3 mois</p>
+                            </div>
+                            <div class="libelleAnnonce">
+                                <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
+                                <p class="petitTexte">Développeur Front-end</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="statutAnnonceEntr">
+                    <div class="statut" id="refuse">
+                        <img src="../ressources/images/rejete.png" alt="image" class="imagesStatut">
+                        <p class="petitTexte">Annonce refusée</p>
+                    </div>
+                </div>
+            </a>
+
+
+
 
         </div>
 

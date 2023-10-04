@@ -171,3 +171,205 @@ body {
     border-radius: 10px;
 }
 
+.wrapAnnonces > a {
+    width: 95%;
+    height: 40%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: white;
+    transition: background-color 0.3s;
+    padding: 0;
+    text-decoration: none;
+}
+
+.wrapAnnonces > a:hover {
+    background-color: #ffa7ab;
+    cursor: pointer;
+}
+
+.imgAnnonce {
+    float: left;
+    width: 15%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapTexte {
+    float: left;
+    width: 55%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.wrapTexte > h4 {
+    margin-top: 1%;
+    margin-bottom: 0;
+    font-family: "Oswald", sans-serif;
+    letter-spacing : 0.03em;
+    text-decoration: none;
+    color: #ff5660;
+    text-align: left;
+}
+
+.detailsAnnonce {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-family: "Open Sans extra", sans-serif;
+    text-align: left;
+    font-size: 0.8em;
+}
+
+.detailsAnnonce {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.lieuRemun {
+    width: 98%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.lieuAnnonce {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: left;
+    width: 60%;
+    height: 100%;
+    float: left;
+}
+
+.remunAnnonce {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: left;
+    width: 40%;
+    height: 100%;
+    float: right;
+}
+
+.dureeLibelle {
+    width: 98%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.dureeAnnonce {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: left;
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+.libelleAnnonce {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: left;
+    width: 70%;
+    height: 100%;
+    float: right;
+}
+
+.imagesPuces {
+    height: 17px;
+}
+
+.petitTexte {
+    font-size: 0.8em;
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 2%;
+    padding: 0;
+    color: black;
+    text-decoration: none;
+}
+
+.statutAnnonceEntr {
+    float: left;
+    width: 30%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.statut {
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
+
+#enAttente {
+    background-color: #ffc534;
+}
+
+.imagesStatut {
+    height: 40%;
+    margin-top: 8%;
+}
+
+.imageEntr {
+    width: 85%;
+}
+
+#valide {
+    background-color: #00cc0a;
+}
+
+#refuse {
+    background-color: #ff5660;
+}
+
+
+

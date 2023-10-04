@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancée">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/images/.gitkeep" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,6 +134,7 @@
       <workItem from="1696333581954" duration="1036000" />
       <workItem from="1696338132710" duration="8723000" />
       <workItem from="1696354258415" duration="6622000" />
+      <workItem from="1696433101644" duration="3069000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -398,7 +400,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696423930448</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Avancée">
+      <option name="closed" value="true" />
+      <created>1696431916366</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1696431916366</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,13 +495,13 @@
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
     <MESSAGE value="Fix de gros bug git" />
     <MESSAGE value="Améliorations + avancée sur vueAccueilEtudiant.php" />
-    <MESSAGE value="Avancée" />
     <MESSAGE value="Ajout des annonces en html (version 1)" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'une erreur pour les notification." />
     <MESSAGE value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
     <MESSAGE value="Correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
+    <MESSAGE value="Avancée" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avancée" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
