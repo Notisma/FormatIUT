@@ -2,10 +2,10 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\Repository\OffreRepository;
+
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\Repository\AlternanceRepository;
-use App\FormatIUT\Modele\Repository\OffreRepository;
-use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\StageRepository;
 
 class ControleurEntrMain extends ControleurMain
