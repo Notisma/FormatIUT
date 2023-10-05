@@ -7,8 +7,8 @@
     <form method="get" action="../web/controleurFrontal.php">
         <p>
             <label class="labelFormulaire" for="type_id" >Type d'Offre</label>
-            <input class="inputFormulaire" type="radio" name="TypeOffre" id="type_id" value="Stage" required>Stage
-            <input class="inputFormulaire" type="radio" name="TypeOffre" id="type_id" value="Alternance">Alternance
+            <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Stage" required>Stage
+            <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Alternance">Alternance
         </p>
         <p>
             <label class="labelFormulaire" for="nomOffre_id">NomOffre</label>
@@ -49,7 +49,7 @@
         <p>
             <input type="submit" value="Envoyer">
             <input type="hidden" name="controleur" value="EntrMain">
-            <input type="hidden" name="action" value="creerOffre">
+            <input type="hidden" name="action" value="creerOffre" >
         </p>
     </form>
 </div>

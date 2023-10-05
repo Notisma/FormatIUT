@@ -20,7 +20,7 @@ class OffreRepository
         $pdoStatement->execute($values);
     }
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeFormation"];
     }
 
     public function getNomTable():string{
@@ -31,7 +31,7 @@ class OffreRepository
         $sql="SELECT * FROM ". $this->getNomTable();
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $offre){
-            $listeOffre[]=Offre::construireDepuisFormulaire($offre);
+            $listeOffre[]=Offre::construireDepuisTableau($offre);
         }
         return $listeOffre;
     }
@@ -53,17 +53,24 @@ class OffreRepository
         $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise=:Tag";
         if ($type=="Stage" || $type=="Alternance"){
             $sql.=" AND typeFormation=:TypeTag";
+            $values["TypeTag"]=$type;
         }
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array(
-            "Tag"=>$idEntreprise,
-            "TypeTag"=>$type
-        );
+        $values["Tag"]= $idEntreprise;
         $pdoStatement->execute($values);
         $listeOffre=array();
         foreach ($pdoStatement as $offre){
             $listeOffre[]=Offre::construireDepuisTableau($offre);
         }
         return $listeOffre;
+    }
+    public function getListeIdOffres():array{
+        $sql="SELECT idOffre FROM Offre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeId=array();
+        foreach ($pdoStatement as $item=>$value) {
+            $listeId[]=$value["idOffre"];
+        }
+        return $listeId;
     }
 }

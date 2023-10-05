@@ -2,11 +2,9 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
-use App\FormatIUT\Controleur\ControleurMain;
-use App\FormatIUT\Modele\Repository\AlternanceRepository;
-use App\FormatIUT\Modele\Repository\StageRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -24,18 +22,18 @@ class ControleurEntrMain extends ControleurMain
     public static function creerOffre()
     {
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
-
-        //TODO séparer Stage et Alternance en extends de Offre ?
-        //TODO dans construireDepuisFormulaire, autoincrémenter l'idOffre...
-        $_GET["idOffre"] = 9;
-        $offre = Offre::construireDepuisFormulaire($_GET);
-        if ($_GET["TypeOffre"] == "Stage") {
-            (new StageRepository())->creerOffre($offre);
-        } else if ($_GET["TypeOffre" == "Alternance"]) {
-            (new AlternanceRepository())->creerOffre($offre);
-        } else {
-            //TODO erreur
+        $id=1;
+        $listeId=(new OffreRepository())->getListeIdOffres();
+        while (!isset($_GET["idOffre"])){
+            if (in_array($id,$listeId)){
+                $id++;
+            }else {
+                $_GET["idOffre"]=$id;
+            }
         }
+        $_GET["idEntreprise"]="76543128904567";
+        $offre = Offre::construireDepuisTableau($_GET);
+        (new OffreRepository())->creerOffre($offre);
         self::afficherAccueilEntr();
     }
 

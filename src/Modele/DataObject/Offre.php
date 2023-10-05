@@ -1,15 +1,14 @@
 <?php
 
-namespace App\FormatIUT\modele\DataObject;
+namespace App\FormatIUT\Modele\DataObject;
 
-use Cassandra\Date;
 
 class Offre
 {
     private int $idOffre;
     private string $nomOffre;
-    private Date $dateDebut;
-    private Date $dateFin;
+    private string $dateDebut;
+    private string $dateFin;
     private string $sujet;
     private string $detailProjet;
     private float $gratification;
@@ -17,11 +16,12 @@ class Offre
     private int $joursParSemaine;
     private int $nbHeuresHebdo;
 
+    private string $typeFormation;
     private int $siret;
 
     public static function construireDepuisTableau($offre): Offre
     {
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise']);
+        return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise'],$offre['typeFormation']);
     }
 
     public function getIdSiret(): int
@@ -54,22 +54,22 @@ class Offre
         $this->nomOffre = $nomOffre;
     }
 
-    public function getDateDebut(): Date
+    public function getDateDebut(): string
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(Date $dateDebut): void
+    public function setDateDebut(string $dateDebut): void
     {
         $this->dateDebut = $dateDebut;
     }
 
-    public function getDateFin(): Date
+    public function getDateFin(): string
     {
         return $this->dateFin;
     }
 
-    public function setDateFin(Date $dateFin): void
+    public function setDateFin(string $dateFin): void
     {
         $this->dateFin = $dateFin;
     }
@@ -134,7 +134,7 @@ class Offre
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, Date $dateDebut, Date $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret)
+    public function __construct(int $idOffre, string $nomOffre, string $dateDebut, string $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret,string $typeFormation)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -147,6 +147,7 @@ class Offre
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
+        $this->typeFormation=$typeFormation;
     }
 
 
@@ -156,7 +157,7 @@ class Offre
             'dateFin' => $this->dateFin, 'sujet' => $this->sujet, 'detailProjet' => $this->detailProjet,
             'gratification' => $this->gratification, 'dureeHeures' => $this->dureeHeures,
             'joursParSemaine' => $this->joursParSemaine,
-            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'siret' => $this->siret];
+            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'idEntreprise' => $this->siret,'typeFormation'=>$this->typeFormation];
     }
 
     public static function offreFormatTableau($offreTab): array
