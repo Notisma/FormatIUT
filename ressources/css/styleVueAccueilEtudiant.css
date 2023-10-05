@@ -144,6 +144,7 @@ body {
     height: 100%;
     border-radius: 10px;
     background-color: #aadcda;
+    padding: 5px;
 }
 
 .conteneurAnnonces {
@@ -160,7 +161,14 @@ body {
 }
 
 .conteneurAnnonces::-webkit-scrollbar {
-    display: none;
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.conteneurAnnonces::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
 }
 
 .conteneurAnnonces > a {
@@ -253,6 +261,7 @@ body {
     height: 100%;
     border-radius: 10px;
     background-color: #aadcda;
+    padding: 5px;
 }
 
 .nouveautesAltern > h4 {

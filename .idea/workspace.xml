@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Squelette préliminaire de la page terminé.">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="vueAccueilEntreprise terminé (version 0)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,7 +416,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696451385328</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="vueAccueilEntreprise terminé (version 0)">
+      <option name="closed" value="true" />
+      <created>1696520022392</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1696520022392</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,7 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Corrections de bugs (encore)" />
     <MESSAGE value="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)" />
     <MESSAGE value="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)" />
     <MESSAGE value="Avancée Responsive" />
@@ -508,7 +516,8 @@
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Avancée" />
     <MESSAGE value="Squelette préliminaire de la page terminé." />
-    <option name="LAST_COMMIT_MESSAGE" value="Squelette préliminaire de la page terminé." />
+    <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
+    <option name="LAST_COMMIT_MESSAGE" value="vueAccueilEntreprise terminé (version 0)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
