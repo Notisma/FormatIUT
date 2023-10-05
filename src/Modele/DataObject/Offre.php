@@ -19,7 +19,7 @@ class Offre
 
     private int $siret;
 
-    private static function construireDepuisTableau($offre): Offre
+    public static function construireDepuisTableau($offre): Offre
     {
         return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise']);
     }
