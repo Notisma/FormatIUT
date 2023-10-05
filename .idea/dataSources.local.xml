@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="PS-232.9921.55">
+  <component name="dataSourceStorageLocal" created-in="PS-232.9559.64">
     <data-source name="SAE_DEV" uuid="ec86efc8-a1c6-4f39-acb5-6f4642b793d1">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>forget</secret-storage>
       <schema-mapping />
     </data-source>
   </component>

@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Squelette préliminaire de la page terminé.">
-      <change afterPath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/DataObject/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/AlternanceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AlternanceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/ConnexionBaseDeDonnee.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionBaseDeDonnee.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modele/Repository/StageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/StageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

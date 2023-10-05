@@ -48,10 +48,18 @@ class OffreRepository
         return Offre::construireDepuisTableau($offre);
     }
 
-    public function getListeOffreParEntreprise($idEntreprise): array
+    public function getListeOffreParEntreprise($idEntreprise,$type): array
     {
-        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise= 'Dell'";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise=:Tag";
+        if ($type=="Stage" || $type=="Alternance"){
+            $sql.=" AND typeFormation=:TypeTag";
+        }
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "Tag"=>$idEntreprise,
+            "TypeTag"=>$type
+        );
+        $pdoStatement->execute($values);
         $listeOffre=array();
         foreach ($pdoStatement as $offre){
             $listeOffre[]=Offre::construireDepuisTableau($offre);

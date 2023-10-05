@@ -41,9 +41,9 @@ class ControleurEntrMain extends ControleurMain
 
     public static function MesOffres()
     {
-        switch ($_GET["type"]) {
+        /*switch ($_GET["type"]) {
             case "Stage" :
-                $liste = (new StageRepository())->getListeOffreParEntreprise("76543128904567");
+                $liste = (new StageRepository())->getListeOffreParEntreprise("76543128904567",);
                 break;
             case "Alternance":
                 $liste = (new AlternanceRepository())->getListeOffreParEntreprise("76543128904567"); //TODO changer le siret
@@ -51,7 +51,8 @@ class ControleurEntrMain extends ControleurMain
             case "Offre":
                 $liste = (new OffreRepository())->getListeOffreParEntreprise("76543128904567");
                 break;
-        }
+        }*/
+        $liste=(new OffreRepository())->getListeOffreParEntreprise("76543128904567",$_GET["type"]);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste]);
     }
 
