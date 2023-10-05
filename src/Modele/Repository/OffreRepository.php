@@ -24,11 +24,11 @@ class OffreRepository
     }
 
     public function getNomTable():string{
-        return "offre";
+        return "Offre";
     }
 
     public function getListeOffre():?array{
-        $sql="SELECT * FROM offre";
+        $sql="SELECT * FROM ". $this->getNomTable();
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $offre){
             $listeOffre[]=Offre::construireDepuisFormulaire($offre);
@@ -37,7 +37,7 @@ class OffreRepository
     }
 
     public function getOffre(int $id):?Offre{
-        $sql="SELECT * FROM offre WHERE idOffre=:Tag";
+        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idOffre=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $array=array("Tag"=>$id);
         $pdoStatement->execute($array);
@@ -48,11 +48,13 @@ class OffreRepository
         return Offre::construireDepuisTableau($offre);
     }
 
-    public function getListeOffreParEntreprise($idEntreprise){
-        $sql="SELECT * FROM offre WHERE idEntreprise= 'Dell'";
+    public function getListeOffreParEntreprise($idEntreprise): array
+    {
+        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise= 'Dell'";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeOffre=array();
         foreach ($pdoStatement as $offre){
-            $listeOffre[]=Offre::construireDepuisFormulaire($offre);
+            $listeOffre[]=Offre::construireDepuisTableau($offre);
         }
         return $listeOffre;
     }

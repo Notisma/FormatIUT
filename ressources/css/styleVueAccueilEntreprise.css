@@ -154,7 +154,13 @@ body {
 }
 
 .wrapAnnonces::-webkit-scrollbar {
-    display: none;
+    width: 10px;
+    border-radius: 10px;
+}
+
+.wrapAnnonces::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
 }
 
 .annonceEntreprise {
