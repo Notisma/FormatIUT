@@ -18,13 +18,17 @@
     </form>
 <ul>
     <?php
-foreach ($listeOffres as $offre) {
-    echo "<li>";
-    echo "L'offre ".$offre->getNomOffre()." du ".$offre->getDateDebut(). " au ".$offre->getDateFin(). " pour ".$offre->getSujet();
-    echo "<br> ".$offre->getDetailProjet();
-    echo "</li>";
-
-} ?>
+    if (!empty($listeOffres)){
+        foreach ($listeOffres as $offre) {
+        echo "<li>";
+        echo "L'offre " . $offre->getNomOffre() . " du " . $offre->getDateDebut() . " au " . $offre->getDateFin() . " pour " . $offre->getSujet();
+        echo '<a href="?controleur=Main&action=afficherVueDetailOffre&idOffre='.$offre->getIdOffre().'"><button>Voir Detail</button></a>';
+        echo "<br> " . $offre->getDetailProjet();
+        echo "</li>";
+        }
+    }else {
+        echo "Vous n'avez aucune offre";
+    } ?>
 </ul>
 </div>
 </body>

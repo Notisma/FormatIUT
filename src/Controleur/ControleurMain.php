@@ -10,6 +10,10 @@ class ControleurMain
         self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
     }
 
+    public static function afficherVueDetailOffre(){
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre"]);
+    }
+
     public static function afficherVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres
