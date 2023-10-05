@@ -20,7 +20,7 @@ class OffreRepository
         $pdoStatement->execute($values);
     }
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeFormation"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre"];
     }
 
     public function getNomTable():string{
@@ -52,7 +52,7 @@ class OffreRepository
     {
         $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise=:Tag";
         if ($type=="Stage" || $type=="Alternance"){
-            $sql.=" AND typeFormation=:TypeTag";
+            $sql.=" AND typeOffre=:TypeTag";
             $values["TypeTag"]=$type;
         }
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
