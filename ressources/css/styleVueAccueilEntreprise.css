@@ -156,6 +156,7 @@ body {
 .wrapAnnonces::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
+    background-color: #ff9095;
 }
 
 .wrapAnnonces::-webkit-scrollbar-thumb {
@@ -357,7 +358,7 @@ body {
 }
 
 #enAttente {
-    background-color: #ffc534;
+    background-color: #ffdc7d;
 }
 
 .imagesStatut {
@@ -370,11 +371,11 @@ body {
 }
 
 #valide {
-    background-color: #00cc0a;
+    background-color: #a6ffaa;
 }
 
 #refuse {
-    background-color: #ff5660;
+    background-color: #ff9ca3;
 }
 
 
