@@ -1,5 +1,5 @@
 <?php
-namespace App\Covoiturage\Modele;
+namespace App\FormatIUT\Modele\DataObject;
 
 class Entreprise{
     private int $siret;
@@ -83,9 +83,9 @@ class Entreprise{
 
     }
 
-    public static function construireDepuisTableau(array $entrepriseFormatTableau) : Entreprise
+    public static function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        return new Entreprise( $entrepriseFormatTableau['siret'],
+        return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -93,11 +93,18 @@ class Entreprise{
             $entrepriseFormatTableau['tel']);
     }
 
-    public function formatTableau(): array{
-        return ['siret' => $this->siret, 'nomEntreprise' => $this->nomEntreprise,
+    public function formatTableau(): array
+    {
+        return ['numSiret' => $this->siret, 'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique, 'effectif' => $this->effectif, 'codeNAF' => $this->codeNAF,
             'tel' => $this->tel];
     }
+
+    public function __toString(): string
+    {
+        return $this->nomEntreprise;
+    }
+
 
 
 
