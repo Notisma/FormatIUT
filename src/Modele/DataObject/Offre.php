@@ -67,6 +67,26 @@ class Offre extends AbstractDataObject
         return $this->dateFin;
     }
 
+    public function getTypeOffre(): string
+    {
+        return $this->typeOffre;
+    }
+
+    public function setTypeOffre(string $typeOffre): void
+    {
+        $this->typeOffre = $typeOffre;
+    }
+
+    public function getSiret(): int
+    {
+        return $this->siret;
+    }
+
+    public function setSiret(int $siret): void
+    {
+        $this->siret = $siret;
+    }
+
     public function setDateFin(DateTime $dateFin): void
     {
         $this->dateFin = $dateFin;

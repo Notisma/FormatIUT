@@ -25,6 +25,7 @@ class OffreRepository extends AbstractRepository
     }
 
     public function getOffre(int $id):?AbstractDataObject{
+
         return $this->getObjectParClePrimaire($id);
     }
 
@@ -58,7 +59,7 @@ class OffreRepository extends AbstractRepository
     {
         $dateDebut= new \DateTime($offre['dateDebut']);
         $dateFin= new \DateTime($offre['dateFin']);
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],intval( $offre["idEntreprise"]),$offre['typeOffre']);
+        return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],$offre["idEntreprise"],$offre['typeOffre']);
     }
 
     protected function getClePrimaire(): string

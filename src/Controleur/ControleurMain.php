@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurMain
@@ -14,7 +15,8 @@ class ControleurMain
 
     public static function afficherVueDetailOffre(){
         $offre=(new OffreRepository())->getOffre($_GET['idOffre']);
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre","offre"=>$offre]);
+        $entreprise=(new EntrepriseRepository())->getEntrepriseFromSiret($offre->getSiret());
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
