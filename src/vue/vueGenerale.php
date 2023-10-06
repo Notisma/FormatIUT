@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../ressources/css/vueGeneraleStyle.css">
-    <title>Format'IUT</title>
+    <?php
+    echo "<title>Format'IUT-{$titrePage}</title>"
+    ?>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png"/>
 </head>
 <body>
