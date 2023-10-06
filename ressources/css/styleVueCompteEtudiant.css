@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 100vh;
+}
+
+.conteneurPrincipal {
+    position: absolute;
+    top: 52%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 92%;
+    height: 87%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.conteneurBienvenue {
+    grid-column: 1/3;
+    grid-row: 1;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    margin: 0;
+    background-color: #aadcda;
+}
+
+.texteBienvenue {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.texteBienvenue > h3 {
+    margin-left: 2%;
+    letter-spacing: 0.06em;
+    font-family: "Oswald", sans-serif;
+}
+
+.texteBienvenue > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 3%;
+}
+
+.imageBienvenue {
+    float: right;
+    width: 20%;
+    height: 80%;
+}
