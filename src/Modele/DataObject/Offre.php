@@ -16,7 +16,7 @@ class Offre
     private int $joursParSemaine;
     private int $nbHeuresHebdo;
 
-    private string $typeFormation;
+    private string $typeOffre;
     private int $siret;
 
     public static function construireDepuisTableau($offre): Offre
@@ -147,7 +147,7 @@ class Offre
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
-        $this->typeFormation=$typeFormation;
+        $this->typeOffre=$typeFormation;
     }
 
 
@@ -157,7 +157,7 @@ class Offre
             'dateFin' => $this->dateFin, 'sujet' => $this->sujet, 'detailProjet' => $this->detailProjet,
             'gratification' => $this->gratification, 'dureeHeures' => $this->dureeHeures,
             'joursParSemaine' => $this->joursParSemaine,
-            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'idEntreprise' => $this->siret,'typeOffre'=>$this->typeFormation];
+            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'idEntreprise' => $this->siret,'typeOffre'=>$this->typeOffre];
     }
 
     public static function offreFormatTableau($offreTab): array

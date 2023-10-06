@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections des ascenseurs">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +135,6 @@
       <workItem from="1696354258415" duration="6622000" />
       <workItem from="1696433101644" duration="3705000" />
       <workItem from="1696487297800" duration="2766000" />
-      <workItem from="1696575330478" duration="843000" />
-      <workItem from="1696580271948" duration="115000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -434,15 +432,7 @@
       <option name="project" value="LOCAL" />
       <updated>1696522103443</updated>
     </task>
-    <task id="LOCAL-00038" summary="Avancées">
-      <option name="closed" value="true" />
-      <created>1696537492158</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1696537492159</updated>
-    </task>
-    <option name="localTasksCounter" value="39" />
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,6 +500,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)" />
     <MESSAGE value="Avancée Responsive" />
     <MESSAGE value="Avancée Responsive + Nettoyage" />
     <MESSAGE value="Passage à la charte graphique de l'UM et de L'IUT" />
@@ -534,8 +525,7 @@
     <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
-    <MESSAGE value="Avancées" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avancées" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections des ascenseurs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
