@@ -3,7 +3,7 @@
 namespace App\FormatIUT\Modele\DataObject;
 
 
-class Offre
+class Offre extends AbstractDataObject
 {
     private int $idOffre;
     private string $nomOffre;
@@ -19,10 +19,6 @@ class Offre
     private string $typeOffre;
     private int $siret;
 
-    public static function construireDepuisTableau($offre): Offre
-    {
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise'],$offre['typeOffre']);
-    }
 
     public function getIdSiret(): int
     {

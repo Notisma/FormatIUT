@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections des ascenseurs">
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="un peu de modif mais ça marche pas à cause des modifs que t'a faites">
+      <change afterPath="$PROJECT_DIR$/src/Modele/DataObject/AbstractDataObject.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AlternanceRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/StageRepository.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -499,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)" />
     <MESSAGE value="Avancée Responsive" />
     <MESSAGE value="Avancée Responsive + Nettoyage" />
     <MESSAGE value="Passage à la charte graphique de l'UM et de L'IUT" />
@@ -524,7 +531,8 @@
     <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections des ascenseurs" />
+    <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
+    <option name="LAST_COMMIT_MESSAGE" value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

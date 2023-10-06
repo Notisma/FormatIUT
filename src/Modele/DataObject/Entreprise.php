@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-class Entreprise
+use App\FormatIUT\Modele\Repository\AbstractRepository;
+
+class Entreprise extends AbstractDataObject
 {
     private int $siret;
     private string $nomEntreprise;
@@ -22,15 +24,6 @@ class Entreprise
 
     }
 
-    public static function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
-    {
-        return new Entreprise($entrepriseFormatTableau['numSiret'],
-            $entrepriseFormatTableau['nomEntreprise'],
-            $entrepriseFormatTableau['statutJuridique'],
-            $entrepriseFormatTableau['effectif'],
-            $entrepriseFormatTableau['codeNAF'],
-            $entrepriseFormatTableau['tel']);
-    }
 
     public function formatTableau(): array
     {

@@ -2,31 +2,46 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use PDO;
 
 // cette classe n'est pas encore faite, sauf deux fonctions utilisées dans Offre
-class EntrepriseRepository
+class EntrepriseRepository extends AbstractRepository
 {
     // private parce qu'on a pas besoin de mieux pour l'instant, mais on pourra mettre public si besoin
-    private static function getEntreprises(): array
+    public function getEntreprises(): array
     {
-        //aucun field taggable donc pas besoin de prepare
-        $query = "SELECT * FROM Entreprise;";
-        $statement = ConnexionBaseDeDonnee::getPdo()->query($query);
-
-        $entreprises = array();
-        foreach ($statement as $entreprise)
-            $entreprises[] = Entreprise::construireDepuisTableau($entreprise);
-
-        return $entreprises;
+        return $this->getListeObjet();
     }
 
-    public static function getEntrepriseFromSiret(int $siret): ?Entreprise
+    public function getEntrepriseFromSiret(int $siret): ?AbstractDataObject
     {
-        foreach (self::getEntreprises() as $entreprise)
-            if ($entreprise->getSiret() === $siret)
-                return $entreprise;
-        return null;
+        return $this->getObjectParClePrimaire($siret);
+    }
+
+    protected function getNomTable(): string
+    {
+        return "Entreprise";
+    }
+
+    protected function getNomsColonnes(): array
+    {
+        // TODO: Implement getNomsColonnes() method.
+    }
+
+    public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
+    {
+        return new Entreprise($entrepriseFormatTableau['numSiret'],
+            $entrepriseFormatTableau['nomEntreprise'],
+            $entrepriseFormatTableau['statutJuridique'],
+            $entrepriseFormatTableau['effectif'],
+            $entrepriseFormatTableau['codeNAF'],
+            $entrepriseFormatTableau['tel']);
+    }
+
+    protected function getClePrimaire(): string
+    {
+       return  "numSiret";
     }
 }

@@ -2,22 +2,15 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Offre;
 
-class OffreRepository
+class OffreRepository extends AbstractRepository
 {
+
+
     public function creerOffre(Offre $offre){
-        $sql="INSERT INTO ".$this->getNomTable()." values(";
-        foreach ($this->getNomsColonnes() as $formatTableau) {
-            if($formatTableau!=$this->getNomsColonnes()[0]){
-                $sql.=",";
-            }
-            $sql.=":Tag".$formatTableau;
-            $values["Tag".$formatTableau]=$offre->formatTableau()[$formatTableau];
-        }
-        $sql.=")";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute($values);
+        $this->creerObjet($offre);
     }
     public function getNomsColonnes() : array{
         return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre"];
@@ -28,24 +21,11 @@ class OffreRepository
     }
 
     public function getListeOffre():?array{
-        $sql="SELECT * FROM ". $this->getNomTable();
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
-        foreach ($pdoStatement as $offre){
-            $listeOffre[]=Offre::construireDepuisTableau($offre);
-        }
-        return $listeOffre;
+        return $this->getListeObjet();
     }
 
-    public function getOffre(int $id):?Offre{
-        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idOffre=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $array=array("Tag"=>$id);
-        $pdoStatement->execute($array);
-        $offre=$pdoStatement->fetch();
-        if (!$offre){
-            return null;
-        }
-        return Offre::construireDepuisTableau($offre);
+    public function getOffre(int $id):?AbstractDataObject{
+        return $this->getObjectParClePrimaire($id);
     }
 
     public function getListeOffreParEntreprise($idEntreprise,$type): array
@@ -72,5 +52,10 @@ class OffreRepository
             $listeId[]=$value["idOffre"];
         }
         return $listeId;
+    }
+
+    protected function construireDepuisTableau(array $offre): AbstractDataObject
+    {
+        return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise'],$offre['typeOffre']);
     }
 }
