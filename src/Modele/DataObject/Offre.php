@@ -3,12 +3,14 @@
 namespace App\FormatIUT\Modele\DataObject;
 
 
+use DateTime;
+
 class Offre extends AbstractDataObject
 {
     private int $idOffre;
     private string $nomOffre;
-    private string $dateDebut;
-    private string $dateFin;
+    private DateTime $dateDebut;
+    private DateTime $dateFin;
     private string $sujet;
     private string $detailProjet;
     private float $gratification;
@@ -50,22 +52,22 @@ class Offre extends AbstractDataObject
         $this->nomOffre = $nomOffre;
     }
 
-    public function getDateDebut(): string
+    public function getDateDebut(): DateTime
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(string $dateDebut): void
+    public function setDateDebut(DateTime $dateDebut): void
     {
         $this->dateDebut = $dateDebut;
     }
 
-    public function getDateFin(): string
+    public function getDateFin(): DateTime
     {
         return $this->dateFin;
     }
 
-    public function setDateFin(string $dateFin): void
+    public function setDateFin(DateTime $dateFin): void
     {
         $this->dateFin = $dateFin;
     }
@@ -130,7 +132,7 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, string $dateDebut, string $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret,string $typeFormation)
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret,string $typeFormation)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -156,12 +158,4 @@ class Offre extends AbstractDataObject
             'nbHeuresHebdo' => $this->nbHeuresHebdo, 'idEntreprise' => $this->siret,'typeOffre'=>$this->typeOffre];
     }
 
-    public static function offreFormatTableau($offreTab): array
-    {
-        $offreListe = [];
-        foreach ($offreTab as $offre) {
-            $offreListe[] = self::construireDepuisTableau($offre);
-        }
-        return $offreListe;
-    }
 }

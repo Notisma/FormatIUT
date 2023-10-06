@@ -40,7 +40,7 @@ class OffreRepository extends AbstractRepository
         $pdoStatement->execute($values);
         $listeOffre=array();
         foreach ($pdoStatement as $offre){
-            $listeOffre[]=Offre::construireDepuisTableau($offre);
+            $listeOffre[]=$this->construireDepuisTableau($offre);
         }
         return $listeOffre;
     }
@@ -54,8 +54,15 @@ class OffreRepository extends AbstractRepository
         return $listeId;
     }
 
-    protected function construireDepuisTableau(array $offre): AbstractDataObject
+    public function construireDepuisTableau(array $offre): Offre
     {
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $offre['dateDebut'], $offre['dateFin'], $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'], $offre['idEntreprise'],$offre['typeOffre']);
+        $dateDebut= new \DateTime($offre['dateDebut']);
+        $dateFin= new \DateTime($offre['dateFin']);
+        return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],intval( $offre["idEntreprise"]),$offre['typeOffre']);
+    }
+
+    protected function getClePrimaire(): string
+    {
+        return "idOffre";
     }
 }

@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="un peu de modif mais ça marche pas à cause des modifs que t'a faites">
-      <change afterPath="$PROJECT_DIR$/src/Modele/DataObject/AbstractDataObject.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="début de factorisation des dataObject et Repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AlternanceRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/StageRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Offre/vueDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Offre/vueDetail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +141,8 @@
       <workItem from="1696354258415" duration="6622000" />
       <workItem from="1696433101644" duration="3705000" />
       <workItem from="1696487297800" duration="2766000" />
+      <workItem from="1696600871606" duration="1216000" />
+      <workItem from="1696603564071" duration="3113000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -439,7 +440,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696522103443</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="début de factorisation des dataObject et Repository">
+      <option name="closed" value="true" />
+      <created>1696599303251</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1696599303251</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +516,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancée Responsive" />
     <MESSAGE value="Avancée Responsive + Nettoyage" />
     <MESSAGE value="Passage à la charte graphique de l'UM et de L'IUT" />
     <MESSAGE value="Beaucoup de corrections" />
@@ -532,7 +540,8 @@
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
     <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
-    <option name="LAST_COMMIT_MESSAGE" value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
+    <MESSAGE value="début de factorisation des dataObject et Repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="début de factorisation des dataObject et Repository" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

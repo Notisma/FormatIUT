@@ -2,6 +2,8 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\Repository\OffreRepository;
+
 class ControleurMain
 {
 
@@ -11,7 +13,8 @@ class ControleurMain
     }
 
     public static function afficherVueDetailOffre(){
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre"]);
+        $offre=(new OffreRepository())->getOffre($_GET['idOffre']);
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre","offre"=>$offre]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void

@@ -12,7 +12,7 @@ abstract class AbstractRepository
     protected abstract function getNomsColonnes():array;
     protected abstract function getClePrimaire():string;
 
-    protected abstract function construireDepuisTableau(array $DataObjectTableau):AbstractDataObject;
+    public abstract function construireDepuisTableau(array $DataObjectTableau):AbstractDataObject;
 
     public function getListeObjet():?array{
         $sql='SELECT * FROM '.$this->getNomTable();

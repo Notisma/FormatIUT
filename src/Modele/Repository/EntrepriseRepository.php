@@ -27,7 +27,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        // TODO: Implement getNomsColonnes() method.
+        return ["numSiret","nomEntreprise","statutJuridique","effectif","codeNAF","tel","Adresse_Entreprise","idVille"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise

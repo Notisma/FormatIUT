@@ -32,7 +32,7 @@ class ControleurEntrMain extends ControleurMain
             }
         }
         $_GET["idEntreprise"]="76543128904567";
-        $offre = Offre::construireDepuisTableau($_GET);
+        $offre = (new OffreRepository())->construireDepuisTableau($_GET);
         (new OffreRepository())->creerOffre($offre);
         self::MesOffres();
     }
