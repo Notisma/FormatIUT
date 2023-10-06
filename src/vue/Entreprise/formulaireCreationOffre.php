@@ -15,8 +15,8 @@
 
                 <div class="inputCentre">
                         <select>
-                            <option value="Stage" name="typeFormation" id="type_id">Stage</option>
-                            <option value="Alternance" name="typeFormation" id="type_id">Alternance</option>
+                            <option value="Stage" name="typeOffre" id="type_id">Stage</option>
+                            <option value="Alternance" name="typeOffre" id="type_id">Alternance</option>
                         </select>
                 </div>
                 <!--
