@@ -28,51 +28,63 @@
         <div class="nouveautesStages">
             <h4>Nouveautés Stages de la semaine :</h4>
             <div class="conteneurAnnonces">
-                <?php for ($i=0;$i<sizeof($listeStage);$i++) {
-                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeStage[$i]->getSiret());
-                    $lien="?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=".$listeStage[$i]->getIdOffre();
-                    echo '<a href ='.$lien.' >
+                <?php /**
+                 * @param $listeStage
+                 * @return array
+                 */
+                function extracted($listeStage): array
+                {
+                    for ($i = 0; $i < sizeof($listeStage); $i++) {
+                        $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeStage[$i]->getSiret());
+                        $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
+                        echo '<a href =' . $lien . ' >
                     <div class="imagesAnnonce" >
                         <img src = "../ressources/images/haut-parleur.png" alt = "image de l\'annonce" >
                     </div >
                     <div class="texteAnnonce" >
                         <h4 >';
-                    echo $entreprise->getNomEntreprise();
-    echo' </h4 >
+                        echo $entreprise->getNomEntreprise();
+                        echo ' </h4 >
                         <div class="detailsAnnonce" >
                             <div class="lieuRemun" >
                                 <div class="lieuAnnonce" >
                                     <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                    echo $entreprise->getAdresse();
-    echo ' </p >
+                        echo $entreprise->getAdresse();
+                        echo ' </p >
                                 </div >
                                 <div class="remunAnnonce" >
                                     <img src = "../ressources/images/euros.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                    echo $listeStage[$i]->getGratification();
-                    echo '/ mois</p >
+                        echo $listeStage[$i]->getGratification();
+                        echo '/ mois</p >
                                 </div >
                             </div >
                             <div class="dureeLibelle" >
                                 <div class="dureeAnnonce" >
                                     <img src = "../ressources/images/histoire.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                    echo ($listeStage[$i]->getDateDebut()->diff($listeStage[$i]->getDateFin()))->format('%m mois');
+                        echo ($listeStage[$i]->getDateDebut()->diff($listeStage[$i]->getDateFin()))->format('%m mois');
 
-                    echo '</p >
+                        echo '</p >
                                 </div >
                                 <div class="libelleAnnonce" >
                                     <img src = "../ressources/images/emploi.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                    echo $listeStage[$i]->getNomOffre();
-                    echo '</p >
+                        echo $listeStage[$i]->getNomOffre();
+                        echo '</p >
                                 </div >
                             </div >
                         </div >
                     </div >
                 </a >';
+                    }
+                    return array($i, $entreprise, $lien);
                 }
+                if(empty($listeStage)){
+                    echo "Vide";
+                }
+                else list($i, $entreprise, $lien) = extracted($listeStage);
                 ?>
 
             </div>
@@ -80,51 +92,10 @@
         <div class="nouveautesAltern">
             <h4>Nouveautés Alternances de la semaine :</h4>
             <div class="conteneurAnnonces">
-                <?php for ($i=0;$i<sizeof($listeAlternance);$i++) {
-                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeAlternance[$i]->getSiret());
-                    $lien="?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=".$listeAlternance[$i]->getIdOffre();
-                    echo '<a href ='.$lien.' >
-                    <div class="imagesAnnonce" >
-                        <img src = "../ressources/images/haut-parleur.png" alt = "image de l\'annonce" >
-                    </div >
-                    <div class="texteAnnonce" >
-                        <h4 >';
-                    echo $entreprise->getNomEntreprise();
-                    echo' </h4 >
-                        <div class="detailsAnnonce" >
-                            <div class="lieuRemun" >
-                                <div class="lieuAnnonce" >
-                                    <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
-                                    <p class="petitTexte" >';
-                    echo $entreprise->getAdresse();
-                    echo ' </p >
-                                </div >
-                                <div class="remunAnnonce" >
-                                    <img src = "../ressources/images/euros.png" alt = "image" class="imagesPuces" >
-                                    <p class="petitTexte" >';
-                    echo $listeAlternance[$i]->getGratification();
-                    echo '/ mois</p >
-                                </div >
-                            </div >
-                            <div class="dureeLibelle" >
-                                <div class="dureeAnnonce" >
-                                    <img src = "../ressources/images/histoire.png" alt = "image" class="imagesPuces" >
-                                    <p class="petitTexte" >';
-                    echo ($listeAlternance[$i]->getDateDebut()->diff($listeAlternance[$i]->getDateFin()))->format('%m mois');
+                <?php if (empty($listeAlternance)){
 
-                    echo '</p >
-                                </div >
-                                <div class="libelleAnnonce" >
-                                    <img src = "../ressources/images/emploi.png" alt = "image" class="imagesPuces" >
-                                    <p class="petitTexte" >';
-                    echo $listeAlternance[$i]->getNomOffre();
-                    echo '</p >
-                                </div >
-                            </div >
-                        </div >
-                    </div >
-                </a >';
                 }
+                else list($i, $entreprise, $lien) = extracted($listeAlternance);
                 ?>
         </div>
     </div>

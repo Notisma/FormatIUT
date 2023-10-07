@@ -9,8 +9,12 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
         $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
-        for ($i=0;$i<3;$i++){
+        $listeStage=array();
+        for ($i=0;$i<sizeof($listeIdStage);$i++){
             $listeStage[]=(new OffreRepository())->getOffre($listeIdStage[$i]);
+        }
+        $listeAlternance=array();
+        for ($i=0;$i<sizeof($listeIdAlternance);$i++){
             $listeAlternance[]=(new OffreRepository())->getOffre($listeIdAlternance[$i]);
         }
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
