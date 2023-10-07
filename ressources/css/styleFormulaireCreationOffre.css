@@ -30,6 +30,13 @@ body {
     text-align: center;
 }
 
+.wrapGauche > img {
+    width: 70%;
+}
+
+
+
+
 .antiPadding {
     padding: 5px;
     background-color: #aadcda;

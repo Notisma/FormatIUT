@@ -5,14 +5,18 @@
 <body>
 <div id="center">
     <div class="wrapGauche">
+        <img src="../ressources/images/illuEnvoyer.png" alt="illustration d'envoi">
 
+        <div class="wrapTexteGauche">
+
+        </div>
     </div>
 
     <div class="antiPadding">
         <div class="wrapDroite">
             <form method="get" action="../web/controleurFrontal.php">
 
-                <h1>MERCI D'AJOUTER UNE OFFRE SUR FORMAT'IUT !</h1>
+                <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
 
                 <label class="labelFormulaire" for="type_id">Type d'Offre </label>
 

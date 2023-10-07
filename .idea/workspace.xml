@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Le formulaire avance, et c'est une bonne nouvelle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +140,7 @@
       <workItem from="1696603564071" duration="3329000" />
       <workItem from="1696625510885" duration="1454000" />
       <workItem from="1696679068753" duration="1258000" />
-      <workItem from="1696697008291" duration="543000" />
+      <workItem from="1696697008291" duration="1059000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -462,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696626967804</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
+      <option name="closed" value="true" />
+      <created>1696697664097</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1696697664097</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Nettoyage. Responsive terminé." />
     <MESSAGE value="Modifications." />
     <MESSAGE value="Update" />
     <MESSAGE value="Améliorations visuelles" />
@@ -555,7 +562,8 @@
     <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
+    <MESSAGE value="Le formulaire avance, et c'est une bonne nouvelle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Le formulaire avance, et c'est une bonne nouvelle" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
