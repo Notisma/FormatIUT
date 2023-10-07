@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Offre;
 use Cassandra\Bigint;
@@ -54,6 +55,17 @@ class OffreRepository extends AbstractRepository
             $listeId[]=$value["idOffre"];
         }
         return $listeId;
+    }
+    public function ListeIdTypeOffre(string $type):array{
+        $sql="SELECT idOffre FROM Offre WHERE typeOffre=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$type);
+        $pdoStatement->execute($values);
+        $listeID=array();
+        foreach ($pdoStatement as $item=>$value) {
+            $listeID[]=$value["idOffre"];
+        }
+        return $listeID;
     }
 
     public function construireDepuisTableau(array $offre): Offre

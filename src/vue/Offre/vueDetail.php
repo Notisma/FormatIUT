@@ -16,7 +16,7 @@
         <?php
         $dateDebut=date_format($offre->getDateDebut(),'d F Y');
         $dateFin=date_format($offre->getDateFin(),'d F Y');
-        $duree=($offre->getDateDebut()->diff($offre->getDateFin()))->format('%m month, %d days');
+        $duree=($offre->getDateDebut()->diff($offre->getDateFin()))->format('%m mois, %d jours');
         echo "Du ".$dateDebut." au ".$dateFin. " : ". $duree;
         ?>
     </p>
