@@ -43,5 +43,10 @@
             Adresse : <?php echo $entreprise->getAdresse() ?>
         </p>
     </div>
+    <?php
+    if ($_GET["controleur"]=="EtuMain"){
+        echo "<a href=''><button>Postuler</button></a>";
+    }
+        ?>
 </div>
 </body>
