@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
 body {
-    height: 140vh;
+    height: 100vh;
 }
 
 #center {
     position: absolute;
-    top: 70%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
     margin: auto;
     width: 80%;
-    height: 100vh;
+    height: 80%;
     min-width: 300px;
     border-radius: 10px;
     text-align: left;
@@ -68,6 +68,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    font-family: "Open Sans extra", sans-serif;
 }
 
 
@@ -88,6 +89,14 @@ body {
     align-items: center;
 }
 
+.wrapDroite > form > h1 {
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.04em;
+    line-height: 1.5em;
+    color: #ff5660;
+    margin-bottom: 5%;
+}
+
 .inputCentre {
     display: flex;
     flex-direction: row;
@@ -105,5 +114,56 @@ body {
     border-radius: 10px;
     border: none;
     padding-left: 3%;
+    background-color: #ff9095;
+}
+
+.grandInputCentre {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3%;
+    padding-top: 1%;
+    width: 100%;
+    height: 20%;
+}
+
+.grandInputCentre > input {
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    padding-left: 3%;
+    background-color: #ff9095;
+    line-height: 20px;
+    text-align: left;
+    padding-bottom: 20%;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    resize: none;
+
+}
+
+.boutonsForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.boutonsForm > * {
+    border-radius: 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    width: 40%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.boutonsForm > *:hover {
     background-color: #ff9095;
 }
