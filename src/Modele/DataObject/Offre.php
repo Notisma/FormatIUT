@@ -162,11 +162,18 @@ class Offre extends AbstractDataObject
 
     public function formatTableau(): array
     {
-        return ['idOffre' => $this->idOffre, 'nomOffre' => $this->nomOffre, 'dateDebut' => $this->dateDebut,
-            'dateFin' => $this->dateFin, 'sujet' => $this->sujet, 'detailProjet' => $this->detailProjet,
-            'gratification' => $this->gratification, 'dureeHeures' => $this->dureeHeures,
+        return ['idOffre' => $this->idOffre,
+            'nomOffre' => $this->nomOffre,
+            'dateDebut' => date_format($this->dateDebut,'Y-m-d'),
+            'dateFin' => date_format($this->dateFin,'Y-m-d'),
+            'sujet' => $this->sujet,
+            'detailProjet' => $this->detailProjet,
+            'gratification' => $this->gratification,
+            'dureeHeures' => $this->dureeHeures,
             'joursParSemaine' => $this->joursParSemaine,
-            'nbHeuresHebdo' => $this->nbHeuresHebdo, 'idEntreprise' => $this->siret,'typeOffre'=>$this->typeOffre];
+            'nbHeuresHebdo' => $this->nbHeuresHebdo,
+            'idEntreprise' => $this->siret,
+            'typeOffre'=>$this->typeOffre];
     }
 
 }

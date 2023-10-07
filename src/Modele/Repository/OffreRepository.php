@@ -31,6 +31,18 @@ class OffreRepository extends AbstractRepository
         return $this->getObjectParClePrimaire($id);
     }
 
+    public function ListeParEntreprise($idEntreprise):array{
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE idEntreprise=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffre=array();
+        foreach ($pdoStatement as $item) {
+            $listeOffre[]=$this->construireDepuisTableau($item);
+        }
+        return $listeOffre;
+    }
+
     public function getListeOffreParEntreprise($idEntreprise,$type): array
     {
         $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise=:Tag";

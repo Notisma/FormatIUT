@@ -9,9 +9,11 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
+    private static float $SiretEntreprise=76543128904567;
 
     public static function afficherAccueilEntr()
     {
+        $listeOffre=self::getTroisMax((new OffreRepository())->ListeParEntreprise(self::$SiretEntreprise));
         self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise"]);
     }
 
@@ -32,7 +34,7 @@ class ControleurEntrMain extends ControleurMain
                 $_GET["idOffre"]=$id;
             }
         }
-        $_GET["idEntreprise"]="76543128904567";
+        $_GET["idEntreprise"]=self::$SiretEntreprise;
         $offre = (new OffreRepository())->construireDepuisTableau($_GET);
         (new OffreRepository())->creerOffre($offre);
         self::MesOffres();
@@ -40,17 +42,9 @@ class ControleurEntrMain extends ControleurMain
 
     public static function MesOffres()
     {
-        /*switch ($_GET["type"]) {
-            case "Stage" :
-                $liste = (new StageRepository())->getListeOffreParEntreprise("76543128904567",);
-                break;
-            case "Alternance":
-                $liste = (new AlternanceRepository())->getListeOffreParEntreprise("76543128904567"); //TODO changer le siret
-                break;
-            case "Offre":
-                $liste = (new OffreRepository())->getListeOffreParEntreprise("76543128904567");
-                break;
-        }*/
+        if (!isset($_GET["type"])){
+            $_GET["type"]="Offre";
+        }
         $liste=(new OffreRepository())->getListeOffreParEntreprise("76543128904567",$_GET["type"]);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste]);
     }

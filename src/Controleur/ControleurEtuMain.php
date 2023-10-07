@@ -7,8 +7,8 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 class ControleurEtuMain extends ControleurMain
 {
     public static function afficherAccueilEtu(){
-        $listeIdAlternance=(new OffreRepository())->ListeIdTypeOffre("Alternance");
-        $listeIdStage=(new OffreRepository())->ListeIdTypeOffre("Stage");
+        $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
+        $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
         for ($i=0;$i<3;$i++){
             $listeStage[]=(new OffreRepository())->getOffre($listeIdStage[$i]);
             $listeAlternance[]=(new OffreRepository())->getOffre($listeIdAlternance[$i]);
@@ -32,16 +32,5 @@ class ControleurEtuMain extends ControleurMain
         );
     }
 
-    private static function getTroisMax(array $liste) : array{
-        for ( $i=0;$i<3;$i++){
-            $id=max($liste);
-            foreach ($liste as $item=>$value) {
-                if ($value==$id) $key=$item;
-            }
-            unset($liste[$key]);
-            $list[]=$id;
-        }
-        return $list;
-    }
 
 }
