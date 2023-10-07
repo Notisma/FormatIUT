@@ -5,16 +5,41 @@
 <body>
 <div id="center">
     <div class="wrapGauche">
+        <img src="../ressources/images/illuEnvoyer.png" alt="illustration d'envoi">
 
+        <div class="wrapTexteGauche">
+            <h3>MERCI DE POSTER UNE OFFRE SUR FORMAT'IUT !</h3>
+        </div>
+
+        <div class="descEntr" id="desc1">
+            <div class="gauche">
+                <img src="../ressources/images/cercle-1.png" alt="numéro 1">
+            </div>
+            <div class="droite">
+                <h4>Envoyez votre annonce et consultez son statut</h4>
+            </div>
+        </div>
+
+        <div class="descEntr" id="desc2">
+            <div class="gauche">
+                <img src="../ressources/images/numero-2.png" alt="numéro 2">
+            </div>
+            <div class="droite">
+                <h4>Une fois validée, votre annonce est postée !</h4>
+            </div>
+        </div>
     </div>
 
     <div class="antiPadding">
         <div class="wrapDroite">
             <form method="get" action="../web/controleurFrontal.php">
+
+                <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
+
                 <label class="labelFormulaire" for="type_id">Type d'Offre </label>
 
                 <div class="inputCentre">
-                    <select name="typeOffre">
+                    <select>
                         <option value="Stage" name="typeOffre" id="type_id">Stage</option>
                         <option value="Alternance" name="typeOffre" id="type_id">Alternance</option>
                     </select>
@@ -27,7 +52,7 @@
                 <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
-                           placeholder="Développeur Web">
+                           placeholder="Développeur Web" maxlength="50" >
                 </div>
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
                 <div class="inputCentre">
@@ -43,42 +68,39 @@
                 <label class="labelFormulaire" for="sujet_id">Sujet bref de l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="sujet" id="sujet_id"
-                           placeholder="Développement d'application Web en full stack" required>
+                           placeholder="Développement d'application Web en full stack" required maxlength="50">
                 </div>
 
                 <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
-                <div class="inputCentre">
+                <div class="grandInputCentre">
                     <input class="inputFormulaire" type="text" name="detailProjet" id="detailProjet_id"
-                           placeholder="L'étudiant devra..." required>
+                           placeholder="L'étudiant devra..." required maxlength="255">
                 </div>
 
                 <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="gratification" id="gratification_id"
-                           placeholder="420" required>
+                           placeholder="420" required maxlength="4">
                 </div>
 
                 <label class="labelFormulaire" for="dureeHeures_id">Durée en heure</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="dureeHeures" id="dureeHeures_id"
-                           placeholder="935" required>
+                           placeholder="935" required maxlength="4">
                 </div>
 
                 <label class="labelFormulaire" for="jourParSemaine_id">Nombre de jours par Semaine</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="joursParSemaine" id="jourParSemaine_id"
-                           placeholder="5" required>
+                           placeholder="5" required maxlength="1">
                 </div>
 
                 <label class="labelFormulaire" for="nbHeureHebdo_id">Nombre d'heures Hebdomadaires</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="nbHeuresHebdo" id="nbHeureHebdo_id"
-                           placeholder="32" required>
+                           placeholder="32" required maxlength="2">
                 </div>
                 <div class="boutonsForm">
-                    <input type="button" value="Retour">
-                    <input type="hidden" name="controleur" value="EntrMain">
-                    <input type="hidden" name="action" value="afficherAccueilEtu">
                     <input type="submit" value="Envoyer">
                     <input type="hidden" name="controleur" value="EntrMain">
                     <input type="hidden" name="action" value="creerOffre">

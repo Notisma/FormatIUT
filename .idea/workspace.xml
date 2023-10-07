@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="formulaireCreationOffre.php (version 1) terminé.">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore un bug de git">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
@@ -139,7 +139,7 @@
       <workItem from="1696603564071" duration="3329000" />
       <workItem from="1696625510885" duration="1454000" />
       <workItem from="1696679068753" duration="1258000" />
-      <workItem from="1696697008291" duration="4624000" />
+      <workItem from="1696697008291" duration="4901000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -485,7 +485,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696700847363</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Encore un bug de git">
+      <option name="closed" value="true" />
+      <created>1696704451740</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704451740</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
@@ -578,7 +585,8 @@
     <MESSAGE value="Le formulaire avance, et c'est une bonne nouvelle" />
     <MESSAGE value="Ajouts d'espaces dans les titles." />
     <MESSAGE value="formulaireCreationOffre.php (version 1) terminé." />
-    <option name="LAST_COMMIT_MESSAGE" value="formulaireCreationOffre.php (version 1) terminé." />
+    <MESSAGE value="Encore un bug de git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Encore un bug de git" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
