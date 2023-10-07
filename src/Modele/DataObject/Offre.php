@@ -19,18 +19,9 @@ class Offre extends AbstractDataObject
     private int $nbHeuresHebdo;
 
     private string $typeOffre;
-    private int $siret;
+    private float $siret;
 
 
-    public function getIdSiret(): int
-    {
-        return $this->siret;
-    }
-
-    public function setIdSiret(int $siret)
-    {
-        $this->siret = $siret;
-    }
 
     public function getIdOffre(): int
     {
@@ -77,12 +68,12 @@ class Offre extends AbstractDataObject
         $this->typeOffre = $typeOffre;
     }
 
-    public function getSiret(): int
+    public function getSiret(): float
     {
         return $this->siret;
     }
 
-    public function setSiret(int $siret): void
+    public function setSiret(float $siret): void
     {
         $this->siret = $siret;
     }
@@ -152,7 +143,7 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, int $siret,string $typeFormation)
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;

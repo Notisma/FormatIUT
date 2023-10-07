@@ -3,10 +3,10 @@
 <div id="center">
     <!-- Partie concernant l'offre-->
     <div id="offre">
-    <h3><?php
+    <h1><?php
         $nomHTML=htmlspecialchars($offre->getNomOffre());
         echo $nomHTML;
-        ?></h3>
+        ?></h1>
     <h4>
         <?php
         echo $offre->getTypeOffre();
@@ -34,9 +34,14 @@
     </div>
     <!-- Partie concernant l'entreprise qui propose cet offre-->
     <div id="entreprise">
-        <h4>
+        <h3>
             <?php echo $entreprise->getNomEntreprise();?>
-        </h4>
+        </h3>
+        <p>
+            Tel : <?php echo $entreprise->getTel() ?>
+            <br>
+            Adresse : <?php echo $entreprise->getAdresse() ?>
+        </p>
     </div>
 </div>
 </body>

@@ -15,7 +15,7 @@ class EntrepriseRepository extends AbstractRepository
         return $this->getListeObjet();
     }
 
-    public function getEntrepriseFromSiret(int $siret): ?AbstractDataObject
+    public function getEntrepriseFromSiret(float $siret): ?AbstractDataObject
     {
         return $this->getObjectParClePrimaire($siret);
     }
@@ -37,7 +37,10 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
             $entrepriseFormatTableau['codeNAF'],
-            $entrepriseFormatTableau['tel']);
+            $entrepriseFormatTableau['tel'],
+            $entrepriseFormatTableau['Adresse_Entreprise'],
+            $entrepriseFormatTableau['idVille']
+        );
     }
 
     protected function getClePrimaire(): string

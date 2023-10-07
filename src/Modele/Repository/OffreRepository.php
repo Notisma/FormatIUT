@@ -4,6 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Offre;
+use Cassandra\Bigint;
 
 class OffreRepository extends AbstractRepository
 {
@@ -59,6 +60,7 @@ class OffreRepository extends AbstractRepository
     {
         $dateDebut= new \DateTime($offre['dateDebut']);
         $dateFin= new \DateTime($offre['dateFin']);
+        //echo $idEntreprise;
         return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],$offre["idEntreprise"],$offre['typeOffre']);
     }
 
