@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore un bug de git">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Fix bug git">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +139,7 @@
       <workItem from="1696603564071" duration="3329000" />
       <workItem from="1696625510885" duration="1454000" />
       <workItem from="1696679068753" duration="1258000" />
-      <workItem from="1696697008291" duration="4901000" />
+      <workItem from="1696697008291" duration="5561000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -493,7 +493,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696704451740</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Fix bug git">
+      <option name="closed" value="true" />
+      <created>1696704734990</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704734992</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +569,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Backup avant essais" />
     <MESSAGE value="Grosses améliorations visuelles" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
@@ -586,7 +593,8 @@
     <MESSAGE value="Ajouts d'espaces dans les titles." />
     <MESSAGE value="formulaireCreationOffre.php (version 1) terminé." />
     <MESSAGE value="Encore un bug de git" />
-    <option name="LAST_COMMIT_MESSAGE" value="Encore un bug de git" />
+    <MESSAGE value="Fix bug git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug git" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

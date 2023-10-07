@@ -39,7 +39,7 @@
                 <label class="labelFormulaire" for="type_id">Type d'Offre </label>
 
                 <div class="inputCentre">
-                    <select>
+                    <select name="typeOffre">
                         <option value="Stage" name="typeOffre" id="type_id">Stage</option>
                         <option value="Alternance" name="typeOffre" id="type_id">Alternance</option>
                     </select>
