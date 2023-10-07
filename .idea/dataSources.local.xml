@@ -5,6 +5,9 @@
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
       <secret-storage>forget</secret-storage>
       <schema-mapping />
+      <ssh-properties>
+        <enabled>true</enabled>
+      </ssh-properties>
     </data-source>
   </component>
 </project>
