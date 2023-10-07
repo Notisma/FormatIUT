@@ -30,7 +30,8 @@
             <div class="conteneurAnnonces">
                 <?php for ($i=0;$i<sizeof($listeStage);$i++) {
                     $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeStage[$i]->getSiret());
-                    echo '<a href = "https://google.fr" >
+                    $lien="?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=".$listeStage[$i]->getIdOffre();
+                    echo '<a href ='.$lien.' >
                     <div class="imagesAnnonce" >
                         <img src = "../ressources/images/haut-parleur.png" alt = "image de l\'annonce" >
                     </div >
@@ -81,7 +82,8 @@
             <div class="conteneurAnnonces">
                 <?php for ($i=0;$i<sizeof($listeAlternance);$i++) {
                     $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeAlternance[$i]->getSiret());
-                    echo '<a href = "https://google.fr" >
+                    $lien="?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=".$listeAlternance[$i]->getIdOffre();
+                    echo '<a href ='.$lien.' >
                     <div class="imagesAnnonce" >
                         <img src = "../ressources/images/haut-parleur.png" alt = "image de l\'annonce" >
                     </div >
