@@ -7,10 +7,14 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 class ControleurEtuMain extends ControleurMain
 {
     public static function afficherAccueilEtu(){
-        $listeIdAlternance=(new OffreRepository())->ListeIdTypeOffre("Alternance");
-        $listeIdStage=(new OffreRepository())->ListeIdTypeOffre("Stage");
-        for ($i=0;$i<3;$i++){
+        $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
+        $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
+        $listeStage=array();
+        for ($i=0;$i<sizeof($listeIdStage);$i++){
             $listeStage[]=(new OffreRepository())->getOffre($listeIdStage[$i]);
+        }
+        $listeAlternance=array();
+        for ($i=0;$i<sizeof($listeIdAlternance);$i++){
             $listeAlternance[]=(new OffreRepository())->getOffre($listeIdAlternance[$i]);
         }
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
@@ -32,16 +36,5 @@ class ControleurEtuMain extends ControleurMain
         );
     }
 
-    private static function getTroisMax(array $liste) : array{
-        for ( $i=0;$i<3;$i++){
-            $id=max($liste);
-            foreach ($liste as $item=>$value) {
-                if ($value==$id) $key=$item;
-            }
-            unset($liste[$key]);
-            $list[]=$id;
-        }
-        return $list;
-    }
 
 }

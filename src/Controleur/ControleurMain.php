@@ -34,4 +34,18 @@ class ControleurMain
             array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=entrMain&action=afficherAccueilEntr")
         );
     }
+    protected static function getTroisMax(array $liste) : ?array{
+        $list=array();
+        if (!empty($liste)) {
+            for ($i = 0; $i <= min(3, sizeof($liste)); $i++) {
+                $id = max($liste);
+                foreach ($liste as $item => $value) {
+                    if ($value == $id) $key = $item;
+                }
+                unset($liste[$key]);
+                $list[] = $id;
+            }
+        }
+        return $list;
+    }
 }
