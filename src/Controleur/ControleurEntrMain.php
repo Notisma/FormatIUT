@@ -43,7 +43,7 @@ class ControleurEntrMain extends ControleurMain
     public static function MesOffres()
     {
         if (!isset($_GET["type"])){
-            $_GET["type"]="Offre";
+            $_GET["type"]="Tous";
         }
         $liste=(new OffreRepository())->getListeOffreParEntreprise("76543128904567",$_GET["type"]);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste]);

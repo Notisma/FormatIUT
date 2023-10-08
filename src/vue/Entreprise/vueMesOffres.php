@@ -33,20 +33,20 @@
     </div>
 
     <div class="offresEntr">
-        <ul>
-            <?php
-            if (!empty($listeOffres)) {
-                foreach ($listeOffres as $offre) {
-                    echo "<li>";
-                    echo "L'offre " . $offre->getNomOffre() . " du " . date_format($offre->getDateDebut(), 'd-M-Y') . " au " . date_format($offre->getDateFin(), 'd-M-Y') . " pour " . $offre->getSujet();
-                    echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '"><button>Voir Detail</button></a>';
-                    echo "<br> " . $offre->getDetailProjet();
-                    echo "</li>";
-                }
-            } else {
-                echo "Vous n'avez aucune offre";
-            } ?>
-        </ul>
+        <div class="contenuOffresEntr">
+                <?php
+                if (!empty($listeOffres)) {
+                    foreach ($listeOffres as $offre) {
+                        echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
+                        echo "<h3>" .$offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
+                        echo "L'offre " . $offre->getNomOffre() . " du " . date_format($offre->getDateDebut(), 'd-M-Y') . " au " . date_format($offre->getDateFin(), 'd-M-Y') . " pour " . $offre->getSujet();
+                        echo "<br> " . $offre->getDetailProjet();
+                        echo "</a>";
+                    }
+                } else {
+                    echo "Vous n'avez aucune offre";
+                } ?>
+        </div>
     </div>
 </div>
 </body>

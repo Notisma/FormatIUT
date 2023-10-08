@@ -136,5 +136,56 @@ body {
     width: 93%;
     height: 90%;
     margin: 0;
+    background-color: #ff9095;
+    padding: 5px;
+}
+
+.contenuOffresEntr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    overflow-y: scroll;
+    justify-content: flex-start;
+    width: 100%;
+    height: 95%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.contenuOffresEntr::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.contenuOffresEntr::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.wrapOffres {
+    width: 90%;
+    height: 40%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 2%;
+    text-decoration: none;
+}
+
+.wrapOffres:hover {
     background-color: #aadcda;
+    cursor: pointer;
+}
+
+.wrapOffres > h3 {
+    font-family: "Oswald", sans-serif;
+    margin-left: 5%;
+    margin-bottom: 0;
+    color: #ff5660;
 }
