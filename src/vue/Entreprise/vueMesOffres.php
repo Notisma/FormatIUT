@@ -3,6 +3,7 @@
 </head>
 <body>
 <div id="center">
+
     <form >
         <?php
         echo '<input type="submit" name="type" value="Offre" ';
@@ -28,7 +29,7 @@
         }
     }else {
         echo "Vous n'avez aucune offre";
-    } ?>
+    }  ?>
 </ul>
 </div>
 </body>

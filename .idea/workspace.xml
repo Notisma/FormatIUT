@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections des ascenseurs">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Tentative de fix un bug (j'ai échoué mdr)">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Noé" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -136,6 +134,11 @@
       <workItem from="1696354258415" duration="6622000" />
       <workItem from="1696433101644" duration="3705000" />
       <workItem from="1696487297800" duration="2766000" />
+      <workItem from="1696600871606" duration="1216000" />
+      <workItem from="1696603564071" duration="3329000" />
+      <workItem from="1696625510885" duration="1454000" />
+      <workItem from="1696679068753" duration="1258000" />
+      <workItem from="1696697008291" duration="6751000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -433,7 +436,79 @@
       <option name="project" value="LOCAL" />
       <updated>1696522103443</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="début de factorisation des dataObject et Repository">
+      <option name="closed" value="true" />
+      <created>1696599303251</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1696599303251</updated>
+    </task>
+    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
+      <option name="closed" value="true" />
+      <created>1696606913582</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1696606913582</updated>
+    </task>
+    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
+      <option name="closed" value="true" />
+      <created>1696626967802</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1696626967804</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
+      <option name="closed" value="true" />
+      <created>1696697664097</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1696697664097</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
+      <option name="closed" value="true" />
+      <created>1696698095999</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1696698095999</updated>
+    </task>
+    <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
+      <option name="closed" value="true" />
+      <created>1696700847363</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1696700847363</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Encore un bug de git">
+      <option name="closed" value="true" />
+      <created>1696704451740</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704451740</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Fix bug git">
+      <option name="closed" value="true" />
+      <created>1696704734990</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704734992</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Tentative de fix un bug (j'ai échoué mdr)">
+      <option name="closed" value="true" />
+      <created>1696705439768</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1696705439769</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,17 +576,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)" />
-    <MESSAGE value="Avancée Responsive" />
-    <MESSAGE value="Avancée Responsive + Nettoyage" />
-    <MESSAGE value="Passage à la charte graphique de l'UM et de L'IUT" />
-    <MESSAGE value="Beaucoup de corrections" />
-    <MESSAGE value="Nettoyage. Responsive terminé." />
-    <MESSAGE value="Modifications." />
-    <MESSAGE value="Update" />
-    <MESSAGE value="Améliorations visuelles" />
-    <MESSAGE value="Backup avant essais" />
-    <MESSAGE value="Grosses améliorations visuelles" />
     <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
@@ -526,7 +590,18 @@
     <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections des ascenseurs" />
+    <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
+    <MESSAGE value="début de factorisation des dataObject et Repository" />
+    <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
+    <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
+    <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
+    <MESSAGE value="Le formulaire avance, et c'est une bonne nouvelle" />
+    <MESSAGE value="Ajouts d'espaces dans les titles." />
+    <MESSAGE value="formulaireCreationOffre.php (version 1) terminé." />
+    <MESSAGE value="Encore un bug de git" />
+    <MESSAGE value="Fix bug git" />
+    <MESSAGE value="Tentative de fix un bug (j'ai échoué mdr)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tentative de fix un bug (j'ai échoué mdr)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
