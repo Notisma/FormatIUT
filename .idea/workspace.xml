@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Tentative de fix un bug (j'ai échoué mdr)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Merge de branches">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Thomas (provisoire)/styleVueMesOffres.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +56,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Loyet&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/farmi/Downloads/JetBrains-Discord-Integration-1.11.0.zip&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/MAMP/htdocs/SAE_DEV&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -71,6 +75,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\src\vue\Etudiant" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\ressources\images" />
       <recent name="C:\Users\farmi\Documents\COURS - 2BUTINFO\SAE_DEV\" />
@@ -139,6 +144,8 @@
       <workItem from="1696625510885" duration="1454000" />
       <workItem from="1696679068753" duration="1258000" />
       <workItem from="1696697008291" duration="6751000" />
+      <workItem from="1696759201873" duration="1075000" />
+      <workItem from="1696769002830" duration="3343000" />
     </task>
     <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
@@ -508,7 +515,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696705439769</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Merge de branches">
+      <option name="closed" value="true" />
+      <created>1696758880659</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1696758880659</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +591,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
     <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
     <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
     <MESSAGE value="Fix de gros bug git" />
@@ -601,7 +615,8 @@
     <MESSAGE value="Encore un bug de git" />
     <MESSAGE value="Fix bug git" />
     <MESSAGE value="Tentative de fix un bug (j'ai échoué mdr)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tentative de fix un bug (j'ai échoué mdr)" />
+    <MESSAGE value="Merge de branches" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge de branches" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
