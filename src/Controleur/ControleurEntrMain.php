@@ -65,4 +65,7 @@ class ControleurEntrMain extends ControleurMain
 
         );
     }
+    public static function afficherProfilEntr(){
+        self::afficherVue("vueGenerale.php", ["menu"=>self::getMenu(), "chemin"=> "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
+    }
 }

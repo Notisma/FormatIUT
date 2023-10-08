@@ -29,7 +29,16 @@
                 echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
-            } else {
+            }
+           else if($_GET['controleur'] == "entrMain" || $_GET['controleur'] == 'EntrMain'){
+                $liaison = "?controleur=entrMain&action=afficherProfilEntr";
+                echo "<form action='controleurFrontal.php' method='get'>
+            <input type='hidden' name='action' value='rechercher'>
+            <input type='hidden' name='controleur' value='Main''>
+            <input class='searchField' name='recherche' placeholder='Rechercher...'>
+        </form>";
+            }
+            else {
                 $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
