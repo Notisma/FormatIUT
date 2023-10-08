@@ -36,6 +36,7 @@
                 {
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
                         $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeStage[$i]->getSiret());
+                        $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
                         echo '<a href =' . $lien . ' >
                     <div class="imagesAnnonce" >
@@ -50,7 +51,7 @@
                                 <div class="lieuAnnonce" >
                                     <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo $entreprise->getVille();
+                        echo $ville->getNomVille();
                         echo ' </p >
                                 </div >
                                 <div class="remunAnnonce" >
@@ -93,7 +94,7 @@
             <h4>Nouveautés Alternances de la semaine :</h4>
             <div class="conteneurAnnonces">
                 <?php if (empty($listeAlternance)){
-
+                    echo "Vide";
                 }
                 else list($i, $entreprise, $lien) = extracted($listeAlternance);
                 ?>
