@@ -50,7 +50,7 @@
                                 <div class="lieuAnnonce" >
                                     <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo $entreprise->getAdresse();
+                        echo $entreprise->getVille();
                         echo ' </p >
                                 </div >
                                 <div class="remunAnnonce" >

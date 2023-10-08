@@ -145,12 +145,12 @@ body {
     flex-direction: column;
     align-items: center;
     align-content: center;
-    overflow-y: scroll;
     justify-content: flex-start;
     width: 100%;
     height: 95%;
     margin-top: 3%;
     margin-bottom: 2%;
+    overflow-y: scroll;
 }
 
 .contenuOffresEntr::-webkit-scrollbar {
@@ -166,7 +166,7 @@ body {
 
 .wrapOffres {
     width: 90%;
-    height: 40%;
+    height: 30%;
     border-radius: 10px;
     background-color: white;
     display: flex;
@@ -174,8 +174,10 @@ body {
     align-items: flex-start;
     align-content: center;
     justify-content: center;
-    margin-bottom: 2%;
     text-decoration: none;
+    overflow-y: hidden;
+    margin: 1%;
+    flex-shrink: 0;
 }
 
 .wrapOffres:hover {
@@ -188,4 +190,11 @@ body {
     margin-left: 5%;
     margin-bottom: 0;
     color: #ff5660;
+}
+
+.wrapOffres > p {
+    margin-left: 5%;
+    color: black;
+    text-decoration: none;
+    margin-top: 0;
 }

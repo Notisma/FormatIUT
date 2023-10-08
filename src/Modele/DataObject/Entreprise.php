@@ -28,6 +28,11 @@ class Entreprise extends AbstractDataObject
 
     }
 
+    public function getVille(): string
+    {
+        return $this->idVille;
+    }
+
     public function getAdresse(): string
     {
         return $this->Adresse_Entreprise;

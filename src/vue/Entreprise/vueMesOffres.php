@@ -39,8 +39,8 @@
                     foreach ($listeOffres as $offre) {
                         echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                         echo "<h3>" .$offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
-                        echo "L'offre " . $offre->getNomOffre() . " du " . date_format($offre->getDateDebut(), 'd-M-Y') . " au " . date_format($offre->getDateFin(), 'd-M-Y') . " pour " . $offre->getSujet();
-                        echo "<br> " . $offre->getDetailProjet();
+                        echo "<p> Du " . date_format($offre->getDateDebut(), 'd-M-Y') . " au " . date_format($offre->getDateFin(), 'd-M-Y') . " pour " . $offre->getSujet() . "</p>";
+                        echo "<p>" . $offre->getDetailProjet() . "</p>" ;
                         echo "</a>";
                     }
                 } else {

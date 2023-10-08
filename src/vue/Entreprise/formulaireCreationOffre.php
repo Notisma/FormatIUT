@@ -52,7 +52,7 @@
                 <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
-                           placeholder="Développeur Web" maxlength="50" >
+                           placeholder="Développeur Web" maxlength="24" >
                 </div>
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
                 <div class="inputCentre">
