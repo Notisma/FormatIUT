@@ -58,7 +58,7 @@
                                     <img src = "../ressources/images/euros.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
                         echo $listeStage[$i]->getGratification();
-                        echo '/ mois</p >
+                        echo ' €/ mois</p >
                                 </div >
                             </div >
                             <div class="dureeLibelle" >
