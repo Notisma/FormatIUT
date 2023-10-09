@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Update">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections visuelles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,15 +143,9 @@
       <workItem from="1696679068753" duration="1258000" />
       <workItem from="1696697008291" duration="6751000" />
       <workItem from="1696759201873" duration="1075000" />
-      <workItem from="1696769002830" duration="10203000" />
-    </task>
-    <task id="LOCAL-00002" summary="Début du projet. Branche PRINCIPALE">
-      <option name="closed" value="true" />
-      <created>1695111088168</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1695111088168</updated>
+      <workItem from="1696769002830" duration="11280000" />
+      <workItem from="1696794652365" duration="714000" />
+      <workItem from="1696832634240" duration="1908000" />
     </task>
     <task id="LOCAL-00003" summary="Nettoyage">
       <option name="closed" value="true" />
@@ -536,7 +531,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696779542318</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Corrections visuelles">
+      <option name="closed" value="true" />
+      <created>1696780278781</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1696780278781</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +607,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations + avancée sur vueAccueilEtudiant.php" />
     <MESSAGE value="Ajout des annonces en html (version 1)" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'une erreur pour les notification." />
@@ -629,7 +631,8 @@
     <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées sur vueMesOffres.php" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Corrections visuelles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections visuelles" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

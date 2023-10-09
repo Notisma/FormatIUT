@@ -38,9 +38,20 @@
                 if (!empty($listeOffres)) {
                     foreach ($listeOffres as $offre) {
                         echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
+                        echo "<div class='partieGauche'>";
                         echo "<h3>" .$offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
                         echo "<p> Du " . date_format($offre->getDateDebut(), 'd-M-Y') . " au " . date_format($offre->getDateFin(), 'd-M-Y') . " pour " . $offre->getSujet() . "</p>";
                         echo "<p>" . $offre->getDetailProjet() . "</p>" ;
+                        echo "</div>";
+                        echo "<div class='partieDroite'>";
+                        echo "<div class='divInfo' id='wrapLogo'>";
+                        echo "<img src='../ressources/images/logo_CA.png' alt='logo'>";
+                        echo "</div>";
+                        echo "<div class='divInfo' id='nbPostu'>";
+                        echo "</div>";
+                        echo "<div class='divInfo' id='statutOffre'>";
+                        echo "</div>";
+                        echo "</div>";
                         echo "</a>";
                     }
                 } else {
