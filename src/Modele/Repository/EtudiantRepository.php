@@ -58,4 +58,12 @@ class EtudiantRepository extends AbstractRepository
         }
         return $tab;
     }
+
+    public function nbPostulation($idOffre){
+        $sql="SELECT COUNT(numEtudiant)as nb FROM regarder WHERE idOffre=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idOffre);
+        $pdoStatement->execute($values);
+        return ($pdoStatement->fetch())["nb"];
+    }
 }

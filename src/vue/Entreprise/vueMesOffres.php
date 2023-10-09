@@ -49,7 +49,11 @@
                     echo "</div>";
                     echo "<div class='divInfo' id='nbPostu'>";
                     echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
-                    echo "<p>1 postulation</p>";
+                    echo "<p>";
+                    $nb=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($offre->getIdOffre());
+                    echo $nb." postulation";
+                    if ($nb>1) echo "s";
+                    echo "</p>";
                     echo "</div>";
                     echo "<div class='divInfo' id='statutOffre'>";
                     echo "<img src='../ressources/images/verifier.png' alt='statut'>";
