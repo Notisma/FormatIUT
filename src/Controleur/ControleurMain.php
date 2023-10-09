@@ -60,4 +60,15 @@ class ControleurMain
             'errorstr' => $error
         ]);
     }
+    protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
+    {
+        self::afficherVue("vueGenerale.php", array_merge(
+            [
+                'pageTitle' => $titrePage,
+                'cheminVueBody' => $cheminVue,
+                'menu' => $menu
+            ],
+            $parametres
+        ));
+    }
 }
