@@ -199,7 +199,7 @@ body {
 .partieGauche > h3 {
     font-family: "Oswald", sans-serif;
     margin-left: 5%;
-    margin-bottom: 0;
+    margin-bottom: 1%;
     color: #ff5660;
 }
 
@@ -208,6 +208,7 @@ body {
     color: black;
     text-decoration: none;
     margin-top: 0;
+    line-height: 0.8em;
 }
 
 .partieDroite {
@@ -230,20 +231,16 @@ body {
     justify-content: center;
     text-align: center;
     border-radius: 10px;
-}
-
-#wrapLogo {
     border: 1px solid black;
 }
 
 .divInfo > img {
-    width: 80%;
+    width: 60%;
 }
 
-#nbPostu {
-    background-color: #9dffc8;
-}
-
-#statutOffre {
-    background-color: #e8b2ff;
+.divInfo > p {
+    margin: 0;
+    font-size: 0.8em;
+    color: black;
+    text-decoration: none;
 }
