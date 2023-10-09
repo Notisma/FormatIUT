@@ -11,6 +11,13 @@ class ControleurEntrMain extends ControleurMain
 {
     private static float $SiretEntreprise=76543128904567;
 
+    public static function getSiretEntreprise(): float
+    {
+        return self::$SiretEntreprise;
+    }
+
+
+
     public static function afficherAccueilEntr()
     {
         $listeOffre=self::getTroisMax((new OffreRepository())->ListeParEntreprise(self::$SiretEntreprise));

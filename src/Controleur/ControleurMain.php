@@ -9,7 +9,12 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 class ControleurMain
 {
 
-
+    public  static function liste(){
+        self::afficherVue("liste.php");
+    }
+    public static function afficherTest(){
+        self::afficherVue('vueTest.php');
+    }
     public static function afficherIndex(){
         self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
     }

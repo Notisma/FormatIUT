@@ -2,10 +2,13 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
+    private static  $idEtu=321444;
+
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
         $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
@@ -26,6 +29,11 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
     }
 
+    public static function postuler(){
+        (new EtudiantRepository())->EtudiantPostuler(self::$idEtu,$_GET['idOffre']);
+        self::afficherAccueilEtu();
+    }
+
     public static function getMenu(): array
     {
         return array(
@@ -35,6 +43,12 @@ class ControleurEtuMain extends ControleurMain
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
         );
     }
+
+    public static function getIdEtu(): int
+    {
+        return self::$idEtu;
+    }
+
 
 
 }
