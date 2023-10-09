@@ -11,7 +11,7 @@ class EtudiantRepository extends AbstractRepository
 
     protected function getNomTable(): string
     {
-        return "etudiants";
+        return "Etudiants";
     }
 
     protected function getNomsColonnes(): array
@@ -46,7 +46,7 @@ class EtudiantRepository extends AbstractRepository
     }
 
     public function EtudiantsParOffre($idOffre){
-        $sql=" SELECT * FROM etudiants etu JOIN regarder re ON etu.numEtudiant=re.numEtudiant WHERE idOffre=:Tag";
+        $sql=" SELECT * FROM ".$this->getNomTable()." etu JOIN regarder re ON etu.numEtudiant=re.numEtudiant WHERE idOffre=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "Tag"=>$idOffre
@@ -66,4 +66,6 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return ($pdoStatement->fetch())["nb"];
     }
+
+
 }

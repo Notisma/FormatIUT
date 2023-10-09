@@ -48,12 +48,15 @@
     if ($_GET["controleur"]=="EtuMain"){
         echo "<a href='?controleur=EtuMain&action=postuler&idOffre=".$idOffreURl."''><button>Postuler</button></a>";
     }
-    
+
+    //TODO si c'est pas une formation sinon afficher Etu
     if ($_GET["controleur"]=="EntrMain" && $entreprise->getSiret()==\App\FormatIUT\Controleur\ControleurEntrMain::getSiretEntreprise()){
         echo "<div id='listeEtu'>";
         $tabEtu=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsParOffre($offre->getIdOffre());
         foreach ($tabEtu as $item) {
             echo $item->getLogin();
+            $idURL=rawurlencode($item->getNumEtudiant());
+            echo "<a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=".$idOffreURl."&idEtudiant=".$idURL."'><button>Assigner</button></a><br>";
         }
         echo "</div>";
     }

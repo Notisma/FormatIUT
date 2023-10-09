@@ -4,6 +4,7 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
 
@@ -68,5 +69,26 @@ class ControleurEntrMain extends ControleurMain
     }
     public static function afficherProfilEntr(){
         self::afficherVue("vueGenerale.php", ["menu"=>self::getMenu(), "chemin"=> "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
+    }
+
+    public static function assignerEtudiantOffre(){
+        $id="F".self::autoIncrement((new FormationRepository())->ListeIdTypeFormation(),"idFormation");
+        $offre=(new OffreRepository())->getOffre($_GET["idOffre"]);
+        $assign=array("idFormation"=>$id,"dateDebut"=>$offre->getDateDebut(),"dateFin"=>$offre->getDateFin(),"idEtudiant"=>$_GET["idEtudiant"],"idEntreprise"=>self::$SiretEntreprise,"idOffre"=>$_GET["idOffre"]);
+        (new FormationRepository())->assigner($assign);
+        self::afficherAccueilEntr();
+    }
+
+    private static function autoIncrement($listeId,$get): int
+    {
+        $id=1;
+        while (!isset($_GET[$get])){
+            if (in_array($id,$listeId)){
+                $id++;
+            }else {
+                $_GET[$get]=$id;
+            }
+        }
+        return $id;
     }
 }

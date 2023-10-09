@@ -47,4 +47,8 @@ class EntrepriseRepository extends AbstractRepository
     {
        return  "numSiret";
     }
+
+    public function assignerEtudiantOffre($Etu,$offre){
+        $sql="INSERT INTO Formation() ";
+    }
 }
