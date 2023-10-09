@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Update">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_09_2023_21_50__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,23 +142,9 @@
       <workItem from="1696679068753" duration="1258000" />
       <workItem from="1696697008291" duration="6751000" />
       <workItem from="1696759201873" duration="1075000" />
-      <workItem from="1696769002830" duration="10203000" />
-    </task>
-    <task id="LOCAL-00002" summary="Début du projet. Branche PRINCIPALE">
-      <option name="closed" value="true" />
-      <created>1695111088168</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1695111088168</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Nettoyage">
-      <option name="closed" value="true" />
-      <created>1695111249210</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1695111249210</updated>
+      <workItem from="1696769002830" duration="11280000" />
+      <workItem from="1696794652365" duration="714000" />
+      <workItem from="1696832634240" duration="5257000" />
     </task>
     <task id="LOCAL-00004" summary="Modifications visuelles">
       <option name="closed" value="true" />
@@ -536,7 +522,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696779542318</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Corrections visuelles">
+      <option name="closed" value="true" />
+      <created>1696780278781</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1696780278781</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Avancées graphiques">
+      <option name="closed" value="true" />
+      <created>1696834602644</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1696834602644</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,8 +606,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations + avancée sur vueAccueilEtudiant.php" />
-    <MESSAGE value="Ajout des annonces en html (version 1)" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Ajout d'une erreur pour les notification." />
     <MESSAGE value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
@@ -626,10 +626,12 @@
     <MESSAGE value="Fix bug git" />
     <MESSAGE value="Tentative de fix un bug (j'ai échoué mdr)" />
     <MESSAGE value="Merge de branches" />
-    <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées sur vueMesOffres.php" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Corrections visuelles" />
+    <MESSAGE value="Avancées graphiques" />
+    <MESSAGE value="Avancées" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avancées" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
