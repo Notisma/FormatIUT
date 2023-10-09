@@ -53,4 +53,11 @@ class ControleurMain
         }
         return $list;
     }
+
+    public static function afficherErreur(string $error): void
+    {
+        self::afficherVueDansCorps("ERREUR", 'erreur.php', [], [
+            'errorstr' => $error
+        ]);
+    }
 }
