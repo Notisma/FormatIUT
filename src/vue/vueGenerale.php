@@ -30,7 +30,7 @@
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
-           else if($_GET['controleur'] == "entrMain" || $_GET['controleur'] == 'EntrMain'){
+           else if($_GET['controleur'] == 'EntrMain'){
                 $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>

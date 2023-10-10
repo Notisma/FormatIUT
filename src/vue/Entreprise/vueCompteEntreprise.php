@@ -41,15 +41,15 @@
         <div class="infosActu">
             <ul id="infosEntr">
                 <?php
-                echo "
-            <li>Siret : 10474930</li>
-            <li>Nom : Entreprise A</li>
-            <li>Statut juridique : SA</li>
-            <li>Effectif : 10</li>
-            <li>CodeNAF : 6205A</li>
-            <li>Téléphone : 01 32 79 12 43</li>
-            <li>Adresse : 32 rue des Halles</li>
-            <li>Ville : Montpellier</li>
+                $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                echo "<li>Siret : ".$entreprise->getSiret()."</li>
+            <li>Nom : ".$entreprise->getNomEntreprise()."</li>
+            <li>Statut juridique : ".$entreprise->getStatutJuridique()."</li>
+            <li>Effectif : ".$entreprise->getEffectif()."</li>
+            <li>CodeNAF : ".$entreprise->getCodeNaf()."</li>
+            <li>Téléphone : ".$entreprise->getTel()."</li>
+            <li>Adresse : ".$entreprise->getAdresse()."</li>
+            <li>Ville : ".$ville->getNomVille()."</li>
             " ?>
             </ul>
 

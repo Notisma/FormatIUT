@@ -34,7 +34,6 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function postuler(){
-        //TODO toutes les vérif
         if (isset($_GET['idOffre'])) {
             $offre=((new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']));
             $formation=((new FormationRepository())->estFormation($offre));

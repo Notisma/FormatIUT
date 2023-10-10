@@ -32,7 +32,7 @@
 
     <div class="antiPadding">
         <div class="wrapDroite">
-            <form method="get" action="../web/controleurFrontal.php">
+            <form method="post" action="../web/controleurFrontal.php">
 
                 <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
 
@@ -101,9 +101,7 @@
                            placeholder="32" required maxlength="2">
                 </div>
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer">
-                    <input type="hidden" name="controleur" value="EntrMain">
-                    <input type="hidden" name="action" value="creerOffre">
+                    <input type="submit" value="Envoyer" formaction="?action=creerOffre&controleur=EntrMain">
                 </div>
             </form>
         </div>

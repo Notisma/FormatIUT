@@ -53,7 +53,7 @@
     $idOffreURl = rawurlencode($offre->getIdOffre());
     //Vérification qu'il s'agit d'un étudiant
     // s'agit-il de l'entreprise connecté ?
-    if ($_GET["controleur"] == "EntrMain" && $entreprise->getSiret() == \App\FormatIUT\Controleur\ControleurEntrMain::getSiretEntreprise()) {
+    if ($_GET["controleur"] == "EntrMain" && $entreprise->getSiret() == \App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()) {
         //l'offre est-elle déjà assigné ?
         if (is_null($formation)) {
             echo "<div id='listeEtu'>";
