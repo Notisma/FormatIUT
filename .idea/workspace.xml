@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="assignation d'un étu">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/FormationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/FormationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Offre/vueDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Offre/vueDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,9 +151,24 @@
       <workItem from="1696832634240" duration="5257000" />
       <workItem from="1696858077192" duration="291000" />
       <workItem from="1696858388002" duration="118000" />
-      <workItem from="1696858529663" duration="1345000" />
-      <workItem from="1696869918919" duration="2876000" />
-      <workItem from="1696920601737" duration="7307000" />
+      <workItem from="1696858529663" duration="369000" />
+      <workItem from="1696923336193" duration="1498000" />
+    </task>
+    <task id="LOCAL-00006" summary="Update">
+      <option name="closed" value="true" />
+      <created>1695139164548</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1695139164548</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Travaux préparatoires sur les erreurs">
+      <option name="closed" value="true" />
+      <created>1695151264079</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1695151264079</updated>
     </task>
     <task id="LOCAL-00008" summary="Corrections">
       <option name="closed" value="true" />
@@ -535,23 +546,7 @@
       <option name="project" value="LOCAL" />
       <updated>1696858257994</updated>
     </task>
-    <task id="LOCAL-00055" summary="commit">
-      <option name="closed" value="true" />
-      <created>1696859137836</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1696859137836</updated>
-    </task>
-    <task id="LOCAL-00056" summary="assignation d'un étu">
-      <option name="closed" value="true" />
-      <created>1696872559673</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1696872559673</updated>
-    </task>
-    <option name="localTasksCounter" value="57" />
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -619,6 +614,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Corrections" />
+    <MESSAGE value="Ajout d'une erreur pour les notification." />
     <MESSAGE value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Avancée" />
@@ -642,9 +639,7 @@
     <MESSAGE value="Corrections visuelles" />
     <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées" />
-    <MESSAGE value="commit" />
-    <MESSAGE value="assignation d'un étu" />
-    <option name="LAST_COMMIT_MESSAGE" value="assignation d'un étu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avancées" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -32,6 +32,11 @@
 
     </div>
 
+    <div class="assistance">
+        <h3>ASSISTANCE - VOS OFFRES</h3>
+        <p>Cliquez sur une offre pour obtenir plus de détails, supprimer ou mettre à jour votre offre, ou encore assigner un étudiant à cette offre.</p>
+    </div>
+
     <div class="offresEntr">
         <div class="contenuOffresEntr">
             <?php
