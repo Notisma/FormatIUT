@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
 
@@ -100,6 +101,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function insertImage()
     {
+        self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         parent::insertImage();
         self::afficherProfilEntr();
     }

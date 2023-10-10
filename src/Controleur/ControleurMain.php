@@ -34,8 +34,8 @@ class ControleurMain
     public static function getMenu() :array{
         return array(
             array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=etuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=entrMain&action=afficherAccueilEntr")
+            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
         );
     }
     protected static function getTroisMax(array $liste) : ?array{

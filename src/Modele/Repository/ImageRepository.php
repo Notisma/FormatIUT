@@ -40,14 +40,22 @@ class ImageRepository extends AbstractRepository
 
     }
     public function insert(array $values){
-        $req = "INSERT INTO image(" .
-            "img_nom, img_taille, img_type, img_blob " .
-            ") VALUES (" .
+        $req = "INSERT INTO image VALUES (" .
+            "'" . $values["img_id"] . "', " .
             "'" . $values["img_nom"] . "', " .
             "'" . $values["img_taille"] . "', " .
             "'" . $values["img_type"] . "', " .
             "'" . addslashes ($values["img_blob"]) . "') ";
         $pdpoStatement=ConnexionBaseDeDonnee::getPdo()->query($req);
 
+    }
+    public function listeID(){
+        $sql="SELECT img_id FROM Image";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeID=array();
+        foreach ($pdoStatement as $item=>$value) {
+            $listeID[]=$value["img_id"];
+        }
+        return $listeID;
     }
 }

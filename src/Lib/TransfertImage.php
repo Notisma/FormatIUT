@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Lib;
 
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 
 class TransfertImage
@@ -30,7 +31,7 @@ public static function transfert(){
             $img_type = $_FILES['fic']['type'];
             $img_nom  = $_FILES['fic']['name'];
             $img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
-            (new ImageRepository())->insert(["img_nom"=>$img_nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
+            (new ImageRepository())->insert(["img_id"=>$_GET["img_id"],"img_nom"=>$img_nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
         }
     }
 }
