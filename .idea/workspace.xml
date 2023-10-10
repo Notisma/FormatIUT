@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Push dans l'attente de la séparation entre détail offre entr et etu">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout de fichiers">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailOffreEntreprise.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailOffreEtudiant.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,15 +151,7 @@
       <workItem from="1696858077192" duration="291000" />
       <workItem from="1696858388002" duration="118000" />
       <workItem from="1696858529663" duration="369000" />
-      <workItem from="1696923336193" duration="3086000" />
-    </task>
-    <task id="LOCAL-00008" summary="Corrections">
-      <option name="closed" value="true" />
-      <created>1695198543126</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1695198543126</updated>
+      <workItem from="1696923336193" duration="4421000" />
     </task>
     <task id="LOCAL-00009" summary="Améliorations visuelles">
       <option name="closed" value="true" />
@@ -540,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696929442750</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Ajout de fichiers">
+      <option name="closed" value="true" />
+      <created>1696929631516</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1696929631516</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)" />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Avancée" />
     <MESSAGE value="Squelette préliminaire de la page terminé." />
@@ -633,7 +637,8 @@
     <MESSAGE value="Avancées" />
     <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
     <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Push dans l'attente de la séparation entre détail offre entr et etu" />
+    <MESSAGE value="Ajout de fichiers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de fichiers" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

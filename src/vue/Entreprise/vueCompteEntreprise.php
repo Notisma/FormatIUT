@@ -1,19 +1,25 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../ressources/css/styleVueCompteEtudiant.css">
+    <link rel="stylesheet" href="../ressources/css/styleVueCompteEntreprise.css">
 </head>
 <body>
-<div class="conteneurPrincipal">
-    <div class="conteneurBienvenue">
+<div class="boiteMain">
+
+    <div class="entrepriseInfos">
+        <p>t</p>
+    </div>
+
+    <div class="conteneurBienvenueEntr">
         <div class="texteBienvenue">
-            <h3>Bonjour, Entreprise A</h3>
-            <p>Voici les informations sur votre compte entrprise :</p>
+            <h3>Bonjour, voici votre compte entreprise</h3>
+            <p>Voici les informations sur votre compte entreprise :</p>
         </div>
         <div class="imageBienvenue">
-            <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
         </div>
     </div>
-    <div class="informationsEtudiant">
+
+
+    <div class="informationsActuellesEntr">
         <ul id="infosEntr">
             <li>Siret : 11111111111111</li>
             <li>nom entreprise : Entreprise A</li>
@@ -25,6 +31,14 @@
             <li>Ville : Montpellier</li>
         </ul>
     </div>
+
+
+    <div class="formUpdateEntr">
+        <p>tt</p>
+    </div>
+
+
+
     </div>
 
 
