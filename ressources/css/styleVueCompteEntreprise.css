@@ -251,23 +251,12 @@ body {
     align-content: center;
     justify-content: flex-start;
     border-radius: 10px;
-    width: 95%;
+    width: 60%;
     height: 95%;
     margin: 0;
     background-color: #ff9095;
-    overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 10px;
-    background-color: #ffbfc2;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #ff5660;
-    border-radius: 10px;
-}
 
 
 .detailsDeEntreprise > h3 {
