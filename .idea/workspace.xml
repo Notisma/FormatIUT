@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout de fichiers">
-      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Refonte graphique vueCompteEntreprise.php">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailOffreEntreprise.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailOffreEtudiant.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,15 +150,7 @@
       <workItem from="1696858077192" duration="291000" />
       <workItem from="1696858388002" duration="118000" />
       <workItem from="1696858529663" duration="369000" />
-      <workItem from="1696923336193" duration="4421000" />
-    </task>
-    <task id="LOCAL-00009" summary="Améliorations visuelles">
-      <option name="closed" value="true" />
-      <created>1695214153358</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1695214153358</updated>
+      <workItem from="1696923336193" duration="6879000" />
     </task>
     <task id="LOCAL-00010" summary="Corrections de bugs">
       <option name="closed" value="true" />
@@ -545,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696929631516</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
+      <option name="closed" value="true" />
+      <created>1696936548623</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1696936548623</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +612,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction de crash" />
     <MESSAGE value="Avancée" />
     <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
@@ -638,7 +636,8 @@
     <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
     <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
     <MESSAGE value="Ajout de fichiers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de fichiers" />
+    <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refonte graphique vueCompteEntreprise.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

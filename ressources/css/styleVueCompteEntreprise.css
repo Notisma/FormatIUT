@@ -27,13 +27,14 @@ body {
 }
 
 
+
 .entrepriseInfos {
     grid-column: 1/3;
     grid-row: 1;
     float: left;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     align-content: center;
     justify-content: center;
     border-radius: 10px;
@@ -41,6 +42,106 @@ body {
     height: 95%;
     background-color: #ff9095;
     margin-right: 25%;
+}
+
+.h3centre {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.h3centre > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+.petiteDiv {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.texteAGauche {
+    float: left;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.texteAGauche > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0 0 0 3%;
+}
+
+.texteAGauche > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.texteAGauche > form > * {
+    padding: 1%;
+}
+
+.texteAGauche > form > input[type="submit"] {
+    border-radius: 50px;
+    border: none;
+    width: 30%;
+    background-color: #ff5660;
+    color: white;
+}
+
+.texteAGauche > form > input[type="submit"]:hover {
+    border-radius: 50px;
+    border: none;
+    width: 30%;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    border-radius: 50px;
+    border: none;
+    width: 50%;
+    background-color: #ff5660;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.imageEntre {
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.imageEntre > img {
+    width: 70%;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .conteneurBienvenueEntr {

@@ -6,7 +6,22 @@
 <div class="boiteMain">
 
     <div class="entrepriseInfos">
-        <p>t</p>
+        <div class="h3centre">
+            <h3>Votre Identité Visuelle</h3>
+        </div>
+        <div class="petiteDiv">
+            <div class="texteAGauche">
+                <p>Changez votre logo ici :</p>
+                <form enctype="multipart/form-data" action="#" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+                    <input type="file" name="fic" size=50 />
+                    <input type="submit" value="Envoyer" />
+                </form>
+            </div>
+            <div class="imageEntre">
+                <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">
+            </div>
+        </div>
     </div>
 
     <div class="conteneurBienvenueEntr">
@@ -38,8 +53,7 @@
     </div>
 
 
-
-    </div>
+</div>
 
 
 </body>
