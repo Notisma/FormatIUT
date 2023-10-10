@@ -59,8 +59,9 @@
     </div>
 
 
-    <div class="formUpdateEntr">
-        <p>tt</p>
+    <div class="detailsDeEntreprise">
+        <h3>Détails</h3>
+
     </div>
 
 

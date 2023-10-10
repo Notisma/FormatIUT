@@ -150,15 +150,7 @@
       <workItem from="1696858388002" duration="118000" />
       <workItem from="1696858529663" duration="369000" />
       <workItem from="1696923336193" duration="7307000" />
-      <workItem from="1696951909346" duration="2768000" />
-    </task>
-    <task id="LOCAL-00011" summary="Corrections de bugs (encore)">
-      <option name="closed" value="true" />
-      <created>1695238673959</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1695238673959</updated>
+      <workItem from="1696951909346" duration="3566000" />
     </task>
     <task id="LOCAL-00012" summary="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)">
       <option name="closed" value="true" />
@@ -544,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696942373057</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Avancées sur vueCompteEntreprise.php">
+      <option name="closed" value="true" />
+      <created>1696954724735</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1696954724747</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

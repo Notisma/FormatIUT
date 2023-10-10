@@ -221,6 +221,12 @@ body {
     background-color: #aadcda;
 }
 
+.informationsActuellesEntr > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+}
+
 .infosActu {
     width: 100%;
     height: 100%;
@@ -236,17 +242,41 @@ body {
 }
 
 
-.formUpdateEntr {
+.detailsDeEntreprise {
     grid-column: 3/5 ;
     grid-row: 2/5;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: 10px;
     width: 95%;
     height: 95%;
     margin: 0;
     background-color: #ff9095;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+
+.detailsDeEntreprise > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+}
+
+.detailsDeEntreprise > form {
+    display: flex;
+    flex-direction: column;
 }
