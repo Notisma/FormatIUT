@@ -11,9 +11,6 @@ class OffreRepository extends AbstractRepository
 {
 
 
-    public function creerOffre(Offre $offre){
-        $this->creerObjet($offre);
-    }
     public function getNomsColonnes() : array{
         return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre"];
     }
@@ -22,14 +19,6 @@ class OffreRepository extends AbstractRepository
         return "Offre";
     }
 
-    public function getListeOffre():?array{
-        return $this->getListeObjet();
-    }
-
-    public function getOffre(int $id):?AbstractDataObject{
-
-        return $this->getObjectParClePrimaire($id);
-    }
 
     public function ListeParEntreprise($idEntreprise):array{
         $sql="SELECT * FROM ".$this->getNomTable()." WHERE idEntreprise=:Tag";

@@ -15,8 +15,8 @@ class ControleurMain
     }
 
     public static function afficherVueDetailOffre(){
-        $offre=(new OffreRepository())->getOffre($_GET['idOffre']);
-        $entreprise=(new EntrepriseRepository())->getEntrepriseFromSiret($offre->getSiret());
+        $offre=(new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+        $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
         $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
         if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
         else $client="Etudiant";

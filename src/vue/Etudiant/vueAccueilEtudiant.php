@@ -39,7 +39,7 @@
                 function extracted($listeStage): array
                 {
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
-                        $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeStage[$i]->getSiret());
+                        $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
                         $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
                         echo '<a href =' . $lien . ' >

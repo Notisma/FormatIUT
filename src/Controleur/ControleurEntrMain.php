@@ -46,7 +46,7 @@ class ControleurEntrMain extends ControleurMain
         }
         $_GET["idEntreprise"]=self::$SiretEntreprise;
         $offre = (new OffreRepository())->construireDepuisTableau($_GET);
-        (new OffreRepository())->creerOffre($offre);
+        (new OffreRepository())->creerObjet($offre);
         self::MesOffres();
     }
 
@@ -75,7 +75,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function assignerEtudiantOffre(){
         $id="F".self::autoIncrement((new FormationRepository())->ListeIdTypeFormation(),"idFormation");
-        $offre=(new OffreRepository())->getOffre($_GET["idOffre"]);
+        $offre=(new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]);
         $assign=array("idFormation"=>$id,"dateDebut"=>$offre->getDateDebut(),"dateFin"=>$offre->getDateFin(),"idEtudiant"=>$_GET["idEtudiant"],"idEntreprise"=>self::$SiretEntreprise,"idOffre"=>$_GET["idOffre"]);
         (new FormationRepository())->assigner($assign);
         self::afficherAccueilEntr();

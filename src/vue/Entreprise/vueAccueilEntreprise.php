@@ -76,7 +76,7 @@
             <!-- exemple d'annonce publiée -->
             <?php
             for ($i=0;$i<sizeof($listeOffre);$i++) {
-                $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeOffre[$i]->getSiret());
+                $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getSiret());
                 $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
                 $lien="?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=".$listeOffre[$i]->getIdOffre();
                 echo '<a href="'.$lien.'" class="annonceEntreprise">
