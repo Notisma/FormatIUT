@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurEntrMain;
+use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -69,5 +70,9 @@ class ControleurMain
             ],
             $parametres
         ));
+    }
+
+    public static function insertImage(){
+        TransfertImage::transfert();
     }
 }

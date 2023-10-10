@@ -97,4 +97,11 @@ class ControleurEntrMain extends ControleurMain
         }
         return $id;
     }
+
+    public static function insertImage()
+    {
+        parent::insertImage();
+        self::afficherProfilEntr();
+    }
+
 }

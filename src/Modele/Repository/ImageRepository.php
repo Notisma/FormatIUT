@@ -39,6 +39,15 @@ class ImageRepository extends AbstractRepository
         return $pdoStatement->fetch();
 
     }
+    public function insert(array $values){
+        $req = "INSERT INTO image(" .
+            "img_nom, img_taille, img_type, img_blob " .
+            ") VALUES (" .
+            "'" . $values["img_nom"] . "', " .
+            "'" . $values["img_taille"] . "', " .
+            "'" . $values["img_type"] . "', " .
+            "'" . addslashes ($values["img_blob"]) . "') ";
+        $pdpoStatement=ConnexionBaseDeDonnee::getPdo()->query($req);
 
-
+    }
 }
