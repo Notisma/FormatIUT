@@ -17,8 +17,6 @@ class ControleurEntrMain extends ControleurMain
         return self::$SiretEntreprise;
     }
 
-
-
     public static function afficherAccueilEntr()
     {
         $listeIDOffre=self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(self::$SiretEntreprise));

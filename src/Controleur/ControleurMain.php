@@ -18,7 +18,10 @@ class ControleurMain
         $offre=(new OffreRepository())->getOffre($_GET['idOffre']);
         $entreprise=(new EntrepriseRepository())->getEntrepriseFromSiret($offre->getSiret());
         $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
-        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>"Offre/vueDetail.php","titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
+        if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
+        else $client="Etudiant";
+        $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
+        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
