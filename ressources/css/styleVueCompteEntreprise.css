@@ -53,7 +53,7 @@ body {
 .h3centre > h3 {
     font-family: "Oswald", sans-serif;
     color: black;
-    margin: 0;
+    margin-top: 3%;
     letter-spacing: 0.04em;
 }
 
@@ -71,7 +71,7 @@ body {
 .texteAGauche {
     float: left;
     width: 70%;
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -90,6 +90,11 @@ body {
     align-items: center;
     align-content: center;
     justify-content: center;
+    border-radius: 10px;
+    background-color: #ffb4b7;
+    width: 98%;
+    margin-left: 2%;
+    height: 80%;
 }
 
 .texteAGauche > form > * {
@@ -100,6 +105,7 @@ body {
     border-radius: 50px;
     border: none;
     width: 30%;
+    height: 50%;
     background-color: #ff5660;
     color: white;
 }
@@ -117,6 +123,7 @@ body {
     border-radius: 50px;
     border: none;
     width: 50%;
+    height: 100%;
     background-color: #ff5660;
     color: white;
 }
@@ -160,11 +167,50 @@ body {
     background-color: #aadcda;
 }
 
+.texteBienvenue {
+    float: left;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.texteBienvenue > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin-left: 5%;
+    letter-spacing: 0.04em;
+}
+
+.texteBienvenue > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 5%;
+    line-height: 1em;
+}
+
+.imageBienvenue {
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.imageBienvenue > img {
+    width: 90%;
+}
+
 .informationsActuellesEntr {
     grid-column: 1/3;
     grid-row: 2/5;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -173,6 +219,20 @@ body {
     height: 95%;
     margin: 0;
     background-color: #aadcda;
+}
+
+.infosActu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.infosActu > img {
+    width: 50%;
 }
 
 
@@ -188,5 +248,5 @@ body {
     width: 95%;
     height: 95%;
     margin: 0;
-    background-color: #aadcda;
+    background-color: #ff9095;
 }

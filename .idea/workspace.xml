@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Refonte graphique vueCompteEntreprise.php">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées sur vueCompteEntreprise.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
@@ -150,15 +149,8 @@
       <workItem from="1696858077192" duration="291000" />
       <workItem from="1696858388002" duration="118000" />
       <workItem from="1696858529663" duration="369000" />
-      <workItem from="1696923336193" duration="6879000" />
-    </task>
-    <task id="LOCAL-00010" summary="Corrections de bugs">
-      <option name="closed" value="true" />
-      <created>1695237564390</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1695237564390</updated>
+      <workItem from="1696923336193" duration="7307000" />
+      <workItem from="1696951909346" duration="2768000" />
     </task>
     <task id="LOCAL-00011" summary="Corrections de bugs (encore)">
       <option name="closed" value="true" />
@@ -544,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696936548623</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Avancées sur vueCompteEntreprise.php">
+      <option name="closed" value="true" />
+      <created>1696942373057</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1696942373057</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,7 +612,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancée" />
     <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
@@ -637,7 +636,8 @@
     <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refonte graphique vueCompteEntreprise.php" />
+    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avancées sur vueCompteEntreprise.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
