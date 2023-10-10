@@ -39,13 +39,24 @@ class ControleurEtuMain extends ControleurMain
             $offre=((new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']));
             $formation=((new FormationRepository())->estFormation($offre));
             if (is_null($formation)){
-
+                if (!(new EtudiantRepository())->aUneFormation(self::$idEtu)){
+                    if ((new EtudiantRepository())->aPostuler(self::getIdEtu(),$_GET['idOffre'])){
+                        //redirectionFlash "vous avez déjà postuler
+                    }else {
+                        (new EtudiantRepository())->EtudiantPostuler(self::$idEtu, $_GET['idOffre']);
+                    }
+                }else {
+                    //redirectionFlash "vous avez déjà une formation
+                }
             }else{
-
+                if ($formation->getIdEtudiant()==self::getIdEtu()){
+                    //redirectionFlash "vous y êtes en formation
+                }else {
+                    //redirectionFlash "cet offre est déjà assigné
+                }
             }
-            (new EtudiantRepository())->EtudiantPostuler(self::$idEtu, $_GET['idOffre']);
         }else {
-            //redirectionFlash
+            //redirectionFlash "l'id n'est pas renseigné"
         }
         self::afficherAccueilEtu();
     }
