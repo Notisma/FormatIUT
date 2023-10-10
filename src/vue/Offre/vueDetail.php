@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../ressources/css/styleVueIndex.css">
 <body>
-<div id="center">
+<div class="main">
     <!-- Partie concernant l'offre-->
     <div id="offre">
         <h1><?php
