@@ -37,7 +37,8 @@ class ControleurMain
     protected static function getTroisMax(array $liste) : ?array{
         $list=array();
         if (!empty($liste)) {
-            for ($i = 0; $i <= min(3, sizeof($liste)); $i++) {
+            $min=min(3, sizeof($liste));
+            for ($i = 0; $i < $min; $i++) {
                 $id = max($liste);
                 foreach ($liste as $item => $value) {
                     if ($value == $id) $key = $item;

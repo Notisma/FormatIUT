@@ -7,7 +7,7 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static  $idEtu=321444;
+    private static  $idEtu=22202117;
 
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
@@ -30,6 +30,7 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function postuler(){
+        //TODO toutes les vérif
         (new EtudiantRepository())->EtudiantPostuler(self::$idEtu,$_GET['idOffre']);
         self::afficherAccueilEtu();
     }

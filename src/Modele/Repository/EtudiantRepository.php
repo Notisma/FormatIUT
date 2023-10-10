@@ -67,5 +67,20 @@ class EtudiantRepository extends AbstractRepository
         return ($pdoStatement->fetch())["nb"];
     }
 
+    public function aUneFormation($idEtudiant){
+        $sql="SELECT * FROM Formation WHERE idEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idEtudiant);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
+    public function aPostuler($numEtudiant,$idOffre){
+        $sql="SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagEtu"=>$numEtudiant,"TagOffre"=>$idOffre);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
+
 
 }

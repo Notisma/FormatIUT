@@ -80,6 +80,18 @@ class OffreRepository extends AbstractRepository
         return $listeID;
     }
 
+    public function ListeIdOffreEntreprise($idEntreprise):array{
+        $sql="SELECT idOffre FROM Offre WHERE idEntreprise=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idEntreprise);
+        $pdoStatement->execute($values);
+        $listeID=array();
+        foreach ($pdoStatement as $item=>$value) {
+            $listeID[]=$value["idOffre"];
+        }
+        return $listeID;
+    }
+
     public function construireDepuisTableau(array $offre): Offre
     {
         $dateDebut= new \DateTime($offre['dateDebut']);
@@ -92,4 +104,6 @@ class OffreRepository extends AbstractRepository
     {
         return "idOffre";
     }
+
+
 }

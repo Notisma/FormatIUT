@@ -26,10 +26,13 @@ class FormationRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
+        $dateDebut= new \DateTime($DataObjectTableau['dateDebut']);
+        $dateFin= new \DateTime($DataObjectTableau['dateFin']);
+
         return new Formation(
             $DataObjectTableau["idFormation"],
-            $DataObjectTableau["dateDebut"],
-            $DataObjectTableau["dateFin"],
+            $dateDebut,
+            $dateFin,
             $DataObjectTableau["idEtudiant"],
             $DataObjectTableau["idEntreprise"],
             $DataObjectTableau["idOffre"]
@@ -58,6 +61,20 @@ class FormationRepository extends AbstractRepository
         $sql.=")";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
+    }
+    //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre)
+
+    public function estFormation(AbstractDataObject $offre) : ?AbstractDataObject{
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE idOffre=:Tag ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$offre->getIdOffre());
+        $pdoStatement->execute($values);
+        $formation=$pdoStatement->fetch();
+        if (!$formation){
+            return null;
+        }
+        return $this->construireDepuisTableau($formation);
+
     }
 
 }

@@ -34,7 +34,7 @@
 
         <div class="wrapAnnonces">
 
-            <!-- exemple d'annonce en attente de publication -->
+            <!-- exemple d'annonce en attente de publication
             <a href="http://localhost:8080" class="annonceEntreprise">
                 <div class="imgAnnonce">
                     <img src="../ressources/images/logo_CA.png" class="imageEntr">
@@ -71,33 +71,48 @@
                     </div>
                 </div>
             </a>
-
+            -->
             <!-- exemple d'annonce publiée -->
-            <a href="http://localhost:8080" class="annonceEntreprise">
+            <?php
+            for ($i=0;$i<sizeof($listeOffre);$i++) {
+                $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getEntrepriseFromSiret($listeOffre[$i]->getSiret());
+                $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                $lien="?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=".$listeOffre[$i]->getIdOffre();
+                echo '<a href="'.$lien.'" class="annonceEntreprise">
                 <div class="imgAnnonce">
-                    <img src="../ressources/images/logo_CA.png" class="imageEntr">
+                    <img src="../ressources/images/haut-parleur.png" class="imageEntr">
                 </div>
                 <div class="wrapTexte">
-                    <h4>CREDIT AGRICOLE FRANCE</h4>
+                    <h4>';
+                echo $entreprise->getNomEntreprise();
+                echo '</h4>
                     <div class="detailsAnnonce">
                         <div class="lieuRemun">
                             <div class="lieuAnnonce">
                                 <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
-                                <p class="petitTexte">Montpellier, 34</p>
+                                <p class="petitTexte">';
+                echo $ville->getNomVille();
+                echo '</p>
                             </div>
                             <div class="remunAnnonce">
                                 <img src="../ressources/images/euros.png" alt="image" class="imagesPuces">
-                                <p class="petitTexte">280/mois</p>
+                                <p class="petitTexte">';
+                echo $listeOffre[$i]->getGratification();
+                echo '/mois</p>
                             </div>
                         </div>
                         <div class="dureeLibelle">
                             <div class="dureeAnnonce">
                                 <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
-                                <p class="petitTexte">3 mois</p>
+                                <p class="petitTexte">';
+                echo ($listeOffre[$i]->getDateDebut()->diff($listeOffre[$i]->getDateFin()))->format('%m mois');
+                echo '</p>
                             </div>
                             <div class="libelleAnnonce">
                                 <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
-                                <p class="petitTexte">Développeur Front-end</p>
+                                <p class="petitTexte">';
+                echo $listeOffre[$i]->getNomOffre();
+                echo '</p>
                             </div>
                         </div>
                     </div>
@@ -108,9 +123,11 @@
                         <p class="petitTexte">Offre publiée.</p>
                     </div>
                 </div>
-            </a>
+            </a>';
+            }
+            ?>
 
-            <!-- exemple d'annonce refusée -->
+            <!-- exemple d'annonce refusée
 
             <a href="http://localhost:8080" class="annonceEntreprise">
                 <div class="imgAnnonce">
@@ -148,6 +165,7 @@
                     </div>
                 </div>
             </a>
+            -->
 
 
 

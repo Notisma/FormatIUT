@@ -6,7 +6,11 @@
 <div class="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
-            <h3>Bonjour, Jérôme</h3>
+            <h3>Bonjour, <?php
+                $etu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getIdEtu()));
+                echo $etu->getLogin();
+                ?></h3>
+
             <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
         </div>
 

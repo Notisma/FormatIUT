@@ -43,4 +43,65 @@ class Formation extends AbstractDataObject
         );
     }
 
+    public function getIdFormation(): string
+    {
+        return $this->idFormation;
+    }
+
+    public function setIdFormation(string $idFormation): void
+    {
+        $this->idFormation = $idFormation;
+    }
+
+    public function getDateDebut(): \DateTime
+    {
+        return $this->dateDebut;
+    }
+
+    public function setDateDebut(\DateTime $dateDebut): void
+    {
+        $this->dateDebut = $dateDebut;
+    }
+
+    public function getDateFin(): \DateTime
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(\DateTime $dateFin): void
+    {
+        $this->dateFin = $dateFin;
+    }
+
+    public function getIdEtudiant(): int
+    {
+        return $this->idEtudiant;
+    }
+
+    public function setIdEtudiant(int $idEtudiant): void
+    {
+        $this->idEtudiant = $idEtudiant;
+    }
+
+    public function getIdEntreprise(): float
+    {
+        return $this->idEntreprise;
+    }
+
+    public function setIdEntreprise(float $idEntreprise): void
+    {
+        $this->idEntreprise = $idEntreprise;
+    }
+
+    public function getIdOffre(): int
+    {
+        return $this->idOffre;
+    }
+
+    public function setIdOffre(int $idOffre): void
+    {
+        $this->idOffre = $idOffre;
+    }
+
+
 }

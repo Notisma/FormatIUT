@@ -21,8 +21,12 @@ class ControleurEntrMain extends ControleurMain
 
     public static function afficherAccueilEntr()
     {
-        $listeOffre=self::getTroisMax((new OffreRepository())->ListeParEntreprise(self::$SiretEntreprise));
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise"]);
+        $listeIDOffre=self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(self::$SiretEntreprise));
+        $listeOffre=array();
+        for($i=0;$i<sizeof($listeIDOffre);$i++){
+            $listeOffre[]=(new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
+        }
+        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise","listeOffre"=>$listeOffre]);
     }
 
     public static function formulaireCreationOffre()
