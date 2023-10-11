@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées sur vueCompteEntreprise.php">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,14 +150,6 @@
       <workItem from="1696858529663" duration="369000" />
       <workItem from="1696923336193" duration="7307000" />
       <workItem from="1696951909346" duration="3566000" />
-    </task>
-    <task id="LOCAL-00012" summary="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)">
-      <option name="closed" value="true" />
-      <created>1695242166940</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1695242166940</updated>
     </task>
     <task id="LOCAL-00013" summary="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)">
       <option name="closed" value="true" />
@@ -542,7 +535,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696954724747</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Corrections.">
+      <option name="closed" value="true" />
+      <created>1697013261981</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1697013261981</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +611,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Squelette préliminaire de la page terminé." />
     <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
     <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
@@ -635,7 +635,8 @@
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
     <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avancées sur vueCompteEntreprise.php" />
+    <MESSAGE value="Corrections." />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
