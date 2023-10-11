@@ -20,15 +20,9 @@
             </div>
             <div class="imageEntre">
                 <?php
-                //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
-                //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'"/>';
-                //on affiche le logo de l'entreprise depuis ImageRepository
                 $image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
                 echo '<img src="data:image/jpeg;base64,'.base64_encode( $image['img_blob'] ).'"/>';
                 ?>
-                <!--
-                <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">
-                -->
             </div>
         </div>
     </div>
