@@ -3,28 +3,102 @@
     <link rel="stylesheet" href="../ressources/css/styleVueCompteEtudiant.css">
 </head>
 <body>
-<div class="conteneurPrincipal">
-    <div class="conteneurBienvenue">
+<div class="boiteMain">
+
+    <div class="etudiantInfos">
+        <div class="h3centre">
+            <h3>Votre Photo de Profil</h3>
+        </div>
+        <div class="petiteDiv">
+            <div class="texteAGauche">
+                <p>Changez votre photo ici :</p>
+                <form enctype="multipart/form-data" action="?action=insertImage&controleur=EntrMain" method="post" >
+                    <input type="hidden" name="MAX_FILE_SIZE" value="250000"/>
+                    <input type="file" name="fic" size=50/>
+                    <input type="submit" value="Envoyer"/>
+                </form>
+            </div>
+            <div class="imageEtu">
+                <?php
+                //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
+                //echo '<img src="data:image/jpeg;base64,'.base64_encode( $image['img_blob'] ).'"/>';
+                echo "<img src=\"../ressources/images/profil.png\" alt=\"image de profil\">"
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
-            <h3>Bonjour, Thierry</h3>
-            <p>Voici les informations sur votre compte :</p>
+            <h3>Bonjour, bienvenue sur votre compte étudiant</h3>
+            <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
+            <br>
+        </div>
+        <div class="imageBienvenue">
+            <img src="../ressources/images/compteEtu.png" alt="image de bienvenue">
+        </div>
+    </div>
+
+
+    <div class="informationsActuellesEtu">
+        <h3>Vos Informations Actuelles</h3>
+        <div class="infosActu">
+            <ul id="infosEtu">
+                <?php
+                echo "
+            <li>Login : loyet</li>
+            <li>Numéro Etudiant : 22202117</li>
+            " ?>
+            </ul>
+
+            <img src="../ressources/images/donneesEtu.png" alt="illu">
+
+        </div>
+    </div>
+
+
+    <div class="detailsDeEntreprise">
+        <h3>Vos Statistiques</h3>
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/postulation.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 Postulations en attente d'assignation</h4>
+            </div>
+
         </div>
 
-        <div class="imageBienvenue">
-            <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue" class="imageMoyenne">
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/choix.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 assignations en attente de choix</h4>
+            </div>
+
         </div>
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/archiver.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 documents ou contrats archivés</h4>
+            </div>
+
+        </div>
+
     </div>
-    <div class="informationsEtudiant">
-        <ul id="listeInfos">   <!--tout sera à remplacer par des variables de la classe Etudiant-->
-            <li>Nom: Henry</li>
-            <li>Prénom: Thierry</li>
-            <li>Date de naissance: 17/08/1977</li>
-            <li>Département: Informatique</li>
-            <li>Adresse Mail: titi2001@yopmail.com</li>
-            <li>Téléphone portable: 06 52 87 96 78</li>
-        </ul>
-    </div>
+
 
 </div>
+
+
 </body>
 </html>

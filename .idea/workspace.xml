@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections.">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,14 +153,9 @@
       <workItem from="1696858529663" duration="369000" />
       <workItem from="1696923336193" duration="7307000" />
       <workItem from="1696951909346" duration="3566000" />
-    </task>
-    <task id="LOCAL-00013" summary="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)">
-      <option name="closed" value="true" />
-      <created>1695289955483</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1695289955484</updated>
+      <workItem from="1697026513092" duration="1779000" />
+      <workItem from="1697046317616" duration="1436000" />
+      <workItem from="1697053883483" duration="1335000" />
     </task>
     <task id="LOCAL-00014" summary="Avancée Responsive">
       <option name="closed" value="true" />
@@ -543,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697013261981</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Correction de crash">
+      <option name="closed" value="true" />
+      <created>1697019474950</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1697019474950</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
     <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
     <MESSAGE value="début de factorisation des dataObject et Repository" />
@@ -636,7 +641,8 @@
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
     <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
     <MESSAGE value="Corrections." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections." />
+    <MESSAGE value="Correction de crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

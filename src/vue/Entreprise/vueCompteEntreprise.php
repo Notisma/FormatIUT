@@ -5,7 +5,7 @@
 <body>
 <div class="boiteMain">
 
-    <div class="entrepriseInfos">
+    <div class="etudiantInfos">
         <div class="h3centre">
             <h3>Votre Identité Visuelle</h3>
         </div>
@@ -18,7 +18,7 @@
                     <input type="submit" value="Envoyer"/>
                 </form>
             </div>
-            <div class="imageEntre">
+            <div class="imageEtu">
                 <?php
                 $image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
                 echo '<img src="data:image/jpeg;base64,'.base64_encode( $image['img_blob'] ).'"/>';
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="conteneurBienvenueEntr">
+    <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
             <h3>Bonjour, bienvenue sur votre compte entreprise</h3>
             <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
@@ -39,7 +39,7 @@
     </div>
 
 
-    <div class="informationsActuellesEntr">
+    <div class="informationsActuellesEtu">
         <h3>Vos Informations Actuelles</h3>
         <div class="infosActu">
             <ul id="infosEntr">
@@ -63,7 +63,41 @@
 
 
     <div class="detailsDeEntreprise">
-        <h3>Détails</h3>
+        <h3>Vos Statistiques</h3>
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/offres.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 Offres en ligne</h4>
+            </div>
+
+        </div>
+
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/etudiant.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 étudiants postulateurs</h4>
+            </div>
+
+        </div>
+
+        <div class="statistiques">
+            <div class="illustrationStat">
+                <img src="../ressources/images/archiver.png" alt="illustration postuler">
+            </div>
+
+            <div class="descStat">
+                <h4>0 offres ou contrats archivés</h4>
+            </div>
+
+        </div>
 
     </div>
 
