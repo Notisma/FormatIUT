@@ -40,7 +40,7 @@ class ImageRepository extends AbstractRepository
 
     }
     public function insert(array $values){
-        $req = "INSERT INTO image VALUES (" .
+        $req = "INSERT INTO Image VALUES (" .
             "'" . $values["img_id"] . "', " .
             "'" . $values["img_nom"] . "', " .
             "'" . $values["img_taille"] . "', " .
