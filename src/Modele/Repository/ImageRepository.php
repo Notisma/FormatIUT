@@ -58,4 +58,12 @@ class ImageRepository extends AbstractRepository
         }
         return $listeID;
     }
+
+    public function imageParEntreprise($Siret){
+        $sql="SELECT img_id FROM Entreprise WHERE numSiret=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$Siret);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
 }

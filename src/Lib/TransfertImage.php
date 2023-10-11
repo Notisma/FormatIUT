@@ -31,7 +31,7 @@ public static function transfert($nom){
             $img_type = $_FILES['fic']['type'];
             $img_nom  = $_FILES['fic']['name'];
             $img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
-            (new ImageRepository())->insert(["img_id"=>$_GET["img_id"],"img_nom"=>$nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
+            (new ImageRepository())->insert(["img_id"=>$_POST["img_id"],"img_nom"=>$nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
         }
     }
 }

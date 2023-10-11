@@ -49,5 +49,12 @@ abstract class AbstractRepository
         return $this->construireDepuisTableau($objet);
     }
 
+    public function supprimer($clePrimaire) :void{
+        $sql="DELETE FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$clePrimaire);
+        $pdoStatement->execute($values);
+    }
+
 
 }

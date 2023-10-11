@@ -7,6 +7,7 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 class Etudiant extends AbstractDataObject
 {
 
+    //TODO finir de relier à la BD
     private float $numEtudiant;
     private string $login;
 

@@ -110,7 +110,9 @@ class ControleurEntrMain extends ControleurMain
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         //TODO drop ancienne image & vérif de doublons d'image
         parent::insertImage(self::$cleEntreprise);
+        $ancienId=(new ImageRepository())->imageParEntreprise(self::$cleEntreprise);
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
+        (new ImageRepository())->supprimer($ancienId["img_id"]);
         self::afficherProfilEntr();
     }
 
