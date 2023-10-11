@@ -99,10 +99,11 @@ class ControleurEntrMain extends ControleurMain
         return $id;
     }
 
-    public static function insertImage()
+    public static function UpdateImage()
     {
-        self::autoIncrement((new ImageRepository())->listeID(),"img_id");
+        $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         parent::insertImage();
+        (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
         self::afficherProfilEntr();
     }
 

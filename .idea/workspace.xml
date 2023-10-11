@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées sur vueCompteEntreprise.php">
-      <change afterPath="$PROJECT_DIR$/src/Lib/TransfertImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ImageRepository.php" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="liaison entreprise à image">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueAccueilEntreprise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,22 +155,8 @@
       <workItem from="1696858529663" duration="369000" />
       <workItem from="1696923336193" duration="7307000" />
       <workItem from="1696951909346" duration="3566000" />
-    </task>
-    <task id="LOCAL-00012" summary="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)">
-      <option name="closed" value="true" />
-      <created>1695242166940</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1695242166940</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)">
-      <option name="closed" value="true" />
-      <created>1695289955483</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1695289955484</updated>
+      <workItem from="1696966829528" duration="1701000" />
+      <workItem from="1697046649275" duration="1248000" />
     </task>
     <task id="LOCAL-00014" summary="Avancée Responsive">
       <option name="closed" value="true" />
@@ -544,7 +534,23 @@
       <option name="project" value="LOCAL" />
       <updated>1696954724747</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="TransfertImage.php">
+      <option name="closed" value="true" />
+      <created>1696960884513</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1696960884513</updated>
+    </task>
+    <task id="LOCAL-00062" summary="liaison entreprise à image">
+      <option name="closed" value="true" />
+      <created>1696968208012</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1696968208016</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,8 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Squelette préliminaire de la page terminé." />
-    <MESSAGE value="vueAccueilEntreprise terminé (version 0)" />
     <MESSAGE value="Corrections des ascenseurs" />
     <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
     <MESSAGE value="début de factorisation des dataObject et Repository" />
@@ -637,7 +641,9 @@
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
     <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avancées sur vueCompteEntreprise.php" />
+    <MESSAGE value="TransfertImage.php" />
+    <MESSAGE value="liaison entreprise à image" />
+    <option name="LAST_COMMIT_MESSAGE" value="liaison entreprise à image" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

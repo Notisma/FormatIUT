@@ -14,9 +14,9 @@ class Entreprise extends AbstractDataObject
     private string $tel;
     private string $Adresse_Entreprise;
     private string $idVille;
-    private int $img_id;
+    private string $img;
 
-    public function __construct(float $siret, string $nomEntreprise, string $statutJuridique, int $effectif, string $codeNAF, string $tel,string $adresse,string $idVille,int $img_id)
+    public function __construct(float $siret, string $nomEntreprise, string $statutJuridique, int $effectif, string $codeNAF, string $tel,string $adresse,string $idVille,string $img_id)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -26,18 +26,18 @@ class Entreprise extends AbstractDataObject
         $this->tel = $tel;
         $this->Adresse_Entreprise=$adresse;
         $this->idVille=$idVille;
-        $this->img_id=$img_id;
+        $this->img=$img_id;
 
     }
 
-    public function getImgId(): int
+    public function getImg(): string
     {
-        return $this->img_id;
+        return $this->img;
     }
 
-    public function setImgId(int $img_id): void
+    public function setImg(string $img): void
     {
-        $this->img_id = $img_id;
+        $this->img = $img;
     }
 
     public function getVille(): string
@@ -76,7 +76,7 @@ class Entreprise extends AbstractDataObject
             'tel' => $this->tel,
             "Adresse_Entreprise"=>$this->Adresse_Entreprise,
             "idVille"=>$this->idVille,
-            "img_id"=>$this->img_id
+            "img_id"=>$this->img
         ];
     }
 

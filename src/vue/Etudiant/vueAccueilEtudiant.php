@@ -43,8 +43,8 @@
                         $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
                         echo '<a href =' . $lien . ' >
-                    <div class="imagesAnnonce" >
-                        <img src = "../ressources/images/haut-parleur.png" alt = "image de l\'annonce" >
+                    <div class="imagesAnnonce" >';
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'"/>
                     </div >
                     <div class="texteAnnonce" >
                         <h4 >';

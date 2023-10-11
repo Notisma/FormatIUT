@@ -42,6 +42,7 @@
             <?php
             if (!empty($listeOffres)) {
                 foreach ($listeOffres as $offre) {
+                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
                     echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
@@ -50,7 +51,7 @@
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                     echo "<div class='divInfo' id='wrapLogo'>";
-                    echo "<img src='../ressources/images/logo_CA.png' alt='logo'>";
+                    echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg() ).'" alt="logo"/>';
                     echo "</div>";
                     echo "<div class='divInfo' id='nbPostu'>";
                     echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
