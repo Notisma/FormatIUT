@@ -7,7 +7,7 @@ use App\FormatIUT\Modele\Repository\ImageRepository;
 
 class TransfertImage
 {
-public static function transfert(){
+public static function transfert($nom){
         $ret        = false;
         $img_blob   = '';
         $img_taille = 0;
@@ -31,7 +31,7 @@ public static function transfert(){
             $img_type = $_FILES['fic']['type'];
             $img_nom  = $_FILES['fic']['name'];
             $img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
-            (new ImageRepository())->insert(["img_id"=>$_GET["img_id"],"img_nom"=>$img_nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
+            (new ImageRepository())->insert(["img_id"=>$_GET["img_id"],"img_nom"=>$nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
         }
     }
 }

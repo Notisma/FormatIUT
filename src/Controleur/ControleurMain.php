@@ -72,7 +72,7 @@ class ControleurMain
         ));
     }
 
-    public static function insertImage(){
-        TransfertImage::transfert();
+    public static function insertImage($nom){
+        TransfertImage::transfert($nom);
     }
 }

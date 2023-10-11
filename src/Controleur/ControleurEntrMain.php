@@ -36,19 +36,24 @@ class ControleurEntrMain extends ControleurMain
     public static function creerOffre()
     {
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
-        $id = 1;
-        $listeId = (new OffreRepository())->getListeIdOffres();
-        while (!isset($_POST["idOffre"])) {
-            if (in_array($id, $listeId)) {
-                $id++;
-            } else {
-                $_POST["idOffre"] = $id;
+        if (isset($_POST['nomOffre'],$_POST["dateDebut"],$_POST["dateFin"],$_POST["sujet"],$_POST["detailProjet"],$_POST["gratification"],$_POST['dureeHeures'],$_POST["joursParSemaine"],$_POST["nbHeuresHebdo"],$_POST["typeOffre"])){
+            if ($_POST["dateDebut"]>$_POST["dateFin"]){
+                //vérif des nbHeures ? ce serait compliqué
+                $listeId = (new OffreRepository())->getListeIdOffres();
+                self::autoIncrement($listeId,"idOffre");
+                $_POST["idEntreprise"] = self::$cleEntreprise;
+                $offre = (new OffreRepository())->construireDepuisTableau($_POST);
+                (new OffreRepository())->creerObjet($offre);
+                self::MesOffres();
+            }else {
+                //redirectionFlash "Concordance des dates
+                self::formulaireCreationOffre();
             }
+        }else {
+            //redirectionFlash "éléments manquants
+            self::formulaireCreationOffre();
         }
-        $_POST["idEntreprise"] = self::$cleEntreprise;
-        $offre = (new OffreRepository())->construireDepuisTableau($_POST);
-        (new OffreRepository())->creerObjet($offre);
-        self::MesOffres();
+
     }
 
     public static function MesOffres()
@@ -79,6 +84,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function assignerEtudiantOffre()
     {
+        //TODO vérif que l'étudiant n'a pas dèjà une offre
         $id = "F" . self::autoIncrement((new FormationRepository())->ListeIdTypeFormation(), "idFormation");
         $offre = (new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]);
         $assign = array("idFormation" => $id, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => $_GET["idEtudiant"], "idEntreprise" => self::$cleEntreprise, "idOffre" => $_GET["idOffre"]);
@@ -89,11 +95,11 @@ class ControleurEntrMain extends ControleurMain
     private static function autoIncrement($listeId, $get): int
     {
         $id = 1;
-        while (!isset($_GET[$get])) {
+        while (!isset($_POST[$get])) {
             if (in_array($id, $listeId)) {
                 $id++;
             } else {
-                $_GET[$get] = $id;
+                $_POST[$get] = $id;
             }
         }
         return $id;
@@ -102,7 +108,8 @@ class ControleurEntrMain extends ControleurMain
     public static function UpdateImage()
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
-        parent::insertImage();
+        //TODO drop ancienne image & vérif de doublons d'image
+        parent::insertImage(self::$cleEntreprise);
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
         self::afficherProfilEntr();
     }
