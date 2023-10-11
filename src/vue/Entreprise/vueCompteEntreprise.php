@@ -12,7 +12,7 @@
         <div class="petiteDiv">
             <div class="texteAGauche">
                 <p>Changez votre logo ici :</p>
-                <form enctype="multipart/form-data" action="?action=insertImage&controleur=EntrMain" method="post" >
+                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EntrMain" method="post" >
                     <input type="hidden" name="MAX_FILE_SIZE" value="250000"/>
                     <input type="file" name="fic" size=50/>
                     <input type="submit" value="Envoyer"/>
@@ -20,9 +20,14 @@
             </div>
             <div class="imageEtu">
                 <?php
-                $image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
-                echo '<img src="data:image/jpeg;base64,'.base64_encode( $image['img_blob'] ).'"/>';
+                //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
+                //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'"/>';
+                //on affiche le logo de l'entreprise depuis ImageRepository
+                echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg() ).'"/>';
                 ?>
+                <!--
+                <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">
+                -->
             </div>
         </div>
     </div>

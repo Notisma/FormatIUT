@@ -23,6 +23,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
+        $image=((new ImageRepository()))->getImage($entrepriseFormatTableau["img_id"]);
         return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
@@ -31,13 +32,20 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau['tel'],
             $entrepriseFormatTableau['Adresse_Entreprise'],
             $entrepriseFormatTableau['idVille'],
-        $entrepriseFormatTableau["img_id"]
+            $image["img_blob"]
         );
     }
 
     protected function getClePrimaire(): string
     {
        return  "numSiret";
+    }
+
+    public function updateImage($Siret,$idImage){
+        $sql="UPDATE ".$this->getNomTable()." SET img_id=:TagImage WHERE ".$this->getClePrimaire()."=:TagSiret";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagImage"=>$idImage,"TagSiret"=>$Siret);
+        $pdoStatement->execute($values);
     }
 
 }
