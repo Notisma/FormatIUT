@@ -7,7 +7,7 @@
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3>Bonjour, <?php
-                $etu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getIdEtu()));
+                $etu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                 echo $etu->getLogin();
                 ?></h3>
 

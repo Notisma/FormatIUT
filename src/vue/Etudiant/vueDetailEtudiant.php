@@ -54,16 +54,16 @@ $idOffreURl = rawurlencode($offre->getIdOffre());
 //est-ce que l'offre est déjà assigné ?
 if (!is_null($formation)) {
     //si oui, est-ce cet étudiant qui y est assigné ?
-    if ($formation->getIdEtudiant() == ControleurEtuMain::getIdEtu()) {
+    if ($formation->getIdEtudiant() == ControleurEtuMain::getCleEtudiant()) {
         echo "Vous avez été accepté pour cette formation";
     } else {
         echo "Cet Offre est déjà assigné";
     }
 } else {
     //si l'offre est disponible, l'étudiant a-t-il déjà une formation ?
-    if (!(new EtudiantRepository())->aUneFormation(ControleurEtuMain::getIdEtu())) {
+    if (!(new EtudiantRepository())->aUneFormation(ControleurEtuMain::getCleEtudiant())) {
         //si non, l'étudiant y-a-til déjà postulé ?
-        if ((new EtudiantRepository())->aPostuler(ControleurEtuMain::getIdEtu(), $offre->getIdOffre())) {
+        if ((new EtudiantRepository())->aPostuler(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre())) {
             echo "Vous avez déjà postuler";
         } else {
             echo "<a href='?controleur=EtuMain&action=postuler&idOffre=" . $idOffreURl . "''><button>Postuler</button></a>";
