@@ -225,6 +225,7 @@ body {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
+    margin-bottom: 0;
 }
 
 .infosActu {
@@ -234,11 +235,15 @@ body {
     flex-direction: row;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .infosActu > img {
     width: 50%;
+}
+
+.infosActu > li {
+    margin-top: 0;
 }
 
 

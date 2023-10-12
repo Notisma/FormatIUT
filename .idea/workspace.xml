@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations visuelles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,14 +159,6 @@
       <workItem from="1697046317616" duration="1436000" />
       <workItem from="1697053883483" duration="2398000" />
       <workItem from="1697056632796" duration="540000" />
-    </task>
-    <task id="LOCAL-00016" summary="Passage à la charte graphique de l'UM et de L'IUT">
-      <option name="closed" value="true" />
-      <created>1695407338744</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1695407338744</updated>
     </task>
     <task id="LOCAL-00017" summary="Beaucoup de corrections">
       <option name="closed" value="true" />
@@ -548,7 +544,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697056195818</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Correction">
+      <option name="closed" value="true" />
+      <created>1697126145445</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1697126145446</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,8 +620,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
-    <MESSAGE value="début de factorisation des dataObject et Repository" />
     <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
@@ -641,7 +643,9 @@
     <MESSAGE value="Corrections." />
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
+    <MESSAGE value="Correction" />
+    <MESSAGE value="Améliorations visuelles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

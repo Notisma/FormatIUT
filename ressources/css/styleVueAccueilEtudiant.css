@@ -48,14 +48,14 @@ body {
 }
 
 .texteBienvenue > h3 {
-    margin-left: 2%;
+    margin-left: 5%;
     letter-spacing: 0.06em;
     font-family: "Oswald", sans-serif;
 }
 
 .texteBienvenue > p {
     font-family: "Open Sans extra", sans-serif;
-    margin-left: 3%;
+    margin-left: 5%;
 }
 
 .imageBienvenue {
