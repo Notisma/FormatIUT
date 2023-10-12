@@ -40,6 +40,10 @@ class ControleurEtuMain extends ControleurMain
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
         self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
     }
+    public static function afficherMesOffres(){
+        $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
+        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre]);
+    }
 
     public static function postuler(){
         if (isset($_GET['idOffre'])) {
@@ -74,7 +78,9 @@ class ControleurEtuMain extends ControleurMain
             array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Etudiants","lien"=>"?action=afficherAccueilEtu&controleur=EtuMain"),
             array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
             array("image"=>"../ressources/images/stage.png","label"=>"Offres de Stage","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
+            array("image"=>"../ressources/images/stage.png","label"=>"Mes offres", "lien"=>"?action=afficherMesOffres&controleur=EtuMain"),
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
+
         );
     }
 

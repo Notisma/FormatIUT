@@ -10,11 +10,11 @@ namespace App\FormatIUT\Configuration;
 
 class Configuration{
     static private array $config= array(
-     'hostname'=>'localhost',
-     'database'=>'touzersae',
-     'login'=>'root',
-     'password'=>'root',
-     'port' =>'3306'
+        'hostname'=>'localhost',
+        'database'=>'loyet',
+        'login'=>'loyet',
+        'password'=>'26032004',
+        'port' =>'3306'
     );
 
     public static function getHostname(): string
