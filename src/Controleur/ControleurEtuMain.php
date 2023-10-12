@@ -16,8 +16,6 @@ class ControleurEtuMain extends ControleurMain
         return self::$cleEtudiant;
     }
 
-
-
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
         $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
@@ -32,8 +30,6 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
     }
     public static function afficherCatalogue(){
-       $image= (new ImageRepository())->getImage(1);
-        var_dump($image);
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueCatalogueOffre.php","titrePage"=>"Liste des Offres"]);
     }
     public static function afficherProfilEtu(){
@@ -82,11 +78,6 @@ class ControleurEtuMain extends ControleurMain
             array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
 
         );
-    }
-
-    public static function getIdEtu(): int
-    {
-        return self::$idEtu;
     }
 
 
