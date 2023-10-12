@@ -362,6 +362,8 @@ body {
     padding: 0;
     color: black;
     text-decoration: none;
+    /* on réduit l'espacement entre les lignes */
+    line-height: 1em;
 }
 
 
