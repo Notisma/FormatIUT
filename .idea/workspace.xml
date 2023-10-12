@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="avec supression d'image">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="renommage des images + complétion Etudiants">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,15 +155,7 @@
       <workItem from="1697046317616" duration="1436000" />
       <workItem from="1697053883483" duration="2398000" />
       <workItem from="1697056632796" duration="540000" />
-      <workItem from="1697109914960" duration="1458000" />
-    </task>
-    <task id="LOCAL-00016" summary="Passage à la charte graphique de l'UM et de L'IUT">
-      <option name="closed" value="true" />
-      <created>1695407338744</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1695407338744</updated>
+      <workItem from="1697109914960" duration="3273000" />
     </task>
     <task id="LOCAL-00017" summary="Beaucoup de corrections">
       <option name="closed" value="true" />
@@ -550,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697056195818</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="renommage des images + complétion Etudiants">
+      <option name="closed" value="true" />
+      <created>1697111415225</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1697111415226</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="un peu de modif mais ça marche pas à cause des modifs que t'a faites" />
     <MESSAGE value="début de factorisation des dataObject et Repository" />
     <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
@@ -643,7 +641,8 @@
     <MESSAGE value="Corrections." />
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
+    <MESSAGE value="renommage des images + complétion Etudiants" />
+    <option name="LAST_COMMIT_MESSAGE" value="renommage des images + complétion Etudiants" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

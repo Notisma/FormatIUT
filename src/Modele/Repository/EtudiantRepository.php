@@ -8,7 +8,6 @@ use App\FormatIUT\Modele\Repository\AbstractRepository;
 
 class EtudiantRepository extends AbstractRepository
 {
-    //TODO classe à remplir correctement
 
     protected function getNomTable(): string
     {

@@ -31,6 +31,22 @@ class OffreRepository extends AbstractRepository
         }
         return $listeOffre;
     }
+    public function OffresParEntrepriseDispo($idEntreprise){
+        $sql="SELECT * 
+                FROM ".$this->getNomTable()." o
+                WHERE idEntreprise=:Tag 
+                AND NOT EXISTS (
+                SELECT idOffre FROM Formation f
+                WHERE f.idOffre=o.idOffre)";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffre=array();
+        foreach ($pdoStatement as $item) {
+            $listeOffre[]=$this->construireDepuisTableau($item);
+        }
+        return $listeOffre;
+    }
 
     public function getListeOffreParEntreprise($idEntreprise,$type): array
     {
@@ -93,6 +109,7 @@ class OffreRepository extends AbstractRepository
     {
         return "idOffre";
     }
+
 
 
 }

@@ -23,6 +23,8 @@
                 //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
                 //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'"/>';
                 //on affiche le logo de l'entreprise depuis ImageRepository
+                use App\FormatIUT\Modele\Repository\OffreRepository;
+
                 echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg() ).'"/>';
                 ?>
                 <!--
@@ -76,7 +78,13 @@
             </div>
 
             <div class="descStat">
-                <h4>0 Offres en ligne</h4>
+                <h4><?php
+                    $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
+                    $nbOffresEnLigne= sizeof($OffresEnLigne);
+                    echo $nbOffresEnLigne." Offre";
+                    if ($nbOffresEnLigne>1) echo "s";
+                    ?> en ligne
+                </h4>
             </div>
 
         </div>
@@ -88,7 +96,15 @@
             </div>
 
             <div class="descStat">
-                <h4>0 étudiants postulateurs</h4>
+                <h4><?php
+                    $nbEtudiant=0;
+                    foreach ($OffresEnLigne as $item) {
+                        $nbEtudiant+=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($item->getIdOffre()));
+                    }
+                    $s="";
+                    if ($nbEtudiant>1) $s="s";
+                    echo $nbEtudiant." étudiant".$s." postulateur".$s;
+                ?> </h4>
             </div>
 
         </div>
