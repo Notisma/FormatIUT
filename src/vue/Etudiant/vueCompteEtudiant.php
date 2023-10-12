@@ -21,8 +21,7 @@
             <div class="imageEtu">
                 <?php
                 //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
-                //echo '<img src="data:image/jpeg;base64,'.base64_encode( $image['img_blob'] ).'"/>';
-                echo "<img src=\"../ressources/images/profil.png\" alt=\"image de profil\">"
+                echo '<img src="data:image/jpeg;base64,'.base64_encode( $etudiant->getImg() ).'"/>';
                 ?>
             </div>
         </div>
@@ -46,8 +45,8 @@
             <ul id="infosEtu">
                 <?php
                 echo "
-            <li>Login : loyet</li>
-            <li>Numéro Etudiant : 22202117</li>
+            <li>Login : ".$etudiant->getLogin()."</li>
+            <li>Numéro Etudiant : ".$etudiant->getNumEtudiant()."</li>
             " ?>
             </ul>
 
@@ -58,6 +57,7 @@
 
 
     <div class="detailsDeEntreprise">
+        <!-- TODO/ STats -->
         <h3>Vos Statistiques</h3>
 
         <div class="statistiques">

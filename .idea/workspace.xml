@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="renommage des images + complétion Etudiants">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="2 stats de vueCompteEntreprise.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,15 +156,7 @@
       <workItem from="1697046317616" duration="1436000" />
       <workItem from="1697053883483" duration="2398000" />
       <workItem from="1697056632796" duration="540000" />
-      <workItem from="1697109914960" duration="3273000" />
-    </task>
-    <task id="LOCAL-00017" summary="Beaucoup de corrections">
-      <option name="closed" value="true" />
-      <created>1695625306248</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1695625306248</updated>
+      <workItem from="1697109914960" duration="4725000" />
     </task>
     <task id="LOCAL-00018" summary="Nettoyage. Responsive terminé.">
       <option name="closed" value="true" />
@@ -549,7 +542,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697111415226</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="2 stats de vueCompteEntreprise.php">
+      <option name="closed" value="true" />
+      <created>1697113424056</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1697113424056</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="début de factorisation des dataObject et Repository" />
     <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
@@ -642,7 +642,8 @@
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="renommage des images + complétion Etudiants" />
-    <option name="LAST_COMMIT_MESSAGE" value="renommage des images + complétion Etudiants" />
+    <MESSAGE value="2 stats de vueCompteEntreprise.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="2 stats de vueCompteEntreprise.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

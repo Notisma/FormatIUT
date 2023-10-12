@@ -9,7 +9,14 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static  $idEtu=22202117;
+    private static int $cleEtudiant=321444;
+
+    public static function getCleEtudiant(): int
+    {
+        return self::$cleEtudiant;
+    }
+
+
 
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
@@ -30,7 +37,8 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueCatalogueOffre.php","titrePage"=>"Liste des Offres"]);
     }
     public static function afficherProfilEtu(){
-        self::afficherVue("vueGenerale.php", ["menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
+        $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
+        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
     }
 
     public static function postuler(){

@@ -39,7 +39,7 @@ class EtudiantRepository extends AbstractRepository
             $DataObjectTableau["telephone"],
             $DataObjectTableau["groupe"],
             $DataObjectTableau["parcours"],
-            $DataObjectTableau["validationPedegogique"],
+            $DataObjectTableau["validationPedagogique"],
             $DataObjectTableau["codeEtape"],
             $DataObjectTableau["idResidence"],
             $image["img_blob"]

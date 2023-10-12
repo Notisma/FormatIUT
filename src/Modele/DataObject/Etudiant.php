@@ -7,7 +7,6 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 class Etudiant extends AbstractDataObject
 {
 
-    //TODO finir de relier à la BD
     private float $numEtudiant;
     private string $prenomEtudiant;
     private string $nomEtudiant;
@@ -57,6 +56,16 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
         $this->codeEtape = $codeEtape;
         $this->idResidence = $idResidence;
+        $this->img = $img;
+    }
+
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): void
+    {
         $this->img = $img;
     }
 
