@@ -108,8 +108,19 @@ class ControleurEntrMain extends ControleurMain
     public static function UpdateImage()
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
-        //TODO drop ancienne image & vérif de doublons d'image
-        parent::insertImage(self::$cleEntreprise);
+        //TODO vérif de doublons d'image
+        $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise));
+        $nom="";
+        $nomEntreprise=$entreprise->getNomEntreprise();
+        for ($i=0;$i<strlen($entreprise->getNomEntreprise());$i++){
+            if ($nomEntreprise[$i]==' '){
+                $nom.="_";
+            }else {
+                $nom.=$nomEntreprise[$i];
+            }
+        }
+        $nom.="_logo";
+        parent::insertImage($nom);
         $ancienId=(new ImageRepository())->imageParEntreprise(self::$cleEntreprise);
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
         (new ImageRepository())->supprimer($ancienId["img_id"]);

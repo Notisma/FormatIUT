@@ -17,7 +17,7 @@ class EtudiantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array();
+        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","mdpEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
     }
 
     protected function getClePrimaire(): string
@@ -27,9 +27,24 @@ class EtudiantRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
+        $image=((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
         return new Etudiant(
             $DataObjectTableau["numEtudiant"],
-            $DataObjectTableau["loginEtudiant"]
+            $DataObjectTableau["prenomEtudiant"],
+            $DataObjectTableau["nomEtudiant"],
+            $DataObjectTableau["loginEtudiant"],
+            $DataObjectTableau["mdpEtudiant"],
+            $DataObjectTableau["sexeEtu"],
+            $DataObjectTableau["mailUniversitaire"],
+            $DataObjectTableau["mailPerso"],
+            $DataObjectTableau["telephone"],
+            $DataObjectTableau["groupe"],
+            $DataObjectTableau["parcours"],
+            $DataObjectTableau["validationPedegogique"],
+            $DataObjectTableau["codeEtape"],
+            $DataObjectTableau["idResidence"],
+            $image["img_blob"]
+
         );
     }
 
