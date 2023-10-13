@@ -52,7 +52,7 @@
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
-        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3"'>
+        <a href='?controleur=EntrMain&action=supprimerOffre&idOffre='>
             <button class="boutonAssigner">SUPPRIMER L'OFFRE</button>
         </a>
         <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3"'>

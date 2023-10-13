@@ -12,7 +12,7 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
-    private static float $cleEntreprise = 76543128904567;
+    private static float $cleEntreprise = 56473829104753;
 
     public static function getCleEntreprise(): float
     {
@@ -119,8 +119,9 @@ class ControleurEntrMain extends ControleurMain
     }
 
     public function supprimerOffre(){
-        (new OffreRepository())->supprimer($_GET['idOffre']);
+        (new OffreRepository())->supprimer($_GET["idOffre"]);
         self::afficherAccueilEntr();
     }
+
 
 }
