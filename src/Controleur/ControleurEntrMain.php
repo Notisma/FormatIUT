@@ -45,7 +45,7 @@ class ControleurEntrMain extends ControleurMain
                 $_POST["idEntreprise"] = self::$cleEntreprise;
                 $offre = (new OffreRepository())->construireDepuisTableau($_POST);
                 (new OffreRepository())->creerObjet($offre);
-                self::MesOffres();
+                self::mesOffres();
             }else {
                 //redirectionFlash "Concordance des dates
                 self::formulaireCreationOffre();
@@ -57,7 +57,7 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function MesOffres()
+    public static function mesOffres()
     {
         if (!isset($_GET["type"])) {
             $_GET["type"] = "Tous";
@@ -74,7 +74,7 @@ class ControleurEntrMain extends ControleurMain
         return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=formulaireCreationOffre&controleur=EntrMain"),
-            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=MesOffres&type=Tous&controleur=EntrMain"),
+            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=mesOffres&type=Tous&controleur=EntrMain"),
             array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php")
 
         );

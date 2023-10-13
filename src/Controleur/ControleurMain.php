@@ -38,6 +38,13 @@ class ControleurMain
             array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
         );
     }
+    public static function getMenuErreur() :array{
+        return array(
+            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?controleur=Main&action=afficherIndex"),
+            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
+        );
+    }
     protected static function getTroisMax(array $liste) : ?array{
         $list=array();
         if (!empty($liste)) {
@@ -56,16 +63,16 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        self::afficherVueDansCorps("ERREUR", 'erreur.php', [], [
-            'errorstr' => $error
+        self::afficherVueDansCorps("Erreur", 'vueErreur.php', ControleurMain::getMenuErreur(), [
+            'erreurStr' => $error
         ]);
     }
     protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         self::afficherVue("vueGenerale.php", array_merge(
             [
-                'pageTitle' => $titrePage,
-                'cheminVueBody' => $cheminVue,
+                'titrePage' => $titrePage,
+                'chemin' => $cheminVue,
                 'menu' => $menu
             ],
             $parametres

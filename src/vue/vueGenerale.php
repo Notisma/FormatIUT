@@ -21,6 +21,7 @@
             ?>
         </div>
 
+
         <div id="Gestionrecherche">
             <?php
             $liaison = "";
@@ -30,7 +31,7 @@
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
-           else if($_GET['controleur'] == 'EntrMain'){
+           else if(ucfirst($_GET['controleur']) == 'EntrMain'){
                $image=((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
                 $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                 echo "<form action='controleurFrontal.php' method='get'>
@@ -39,7 +40,7 @@
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
-            else if ($_GET['controleur']=='EtuMain') {
+            else if (ucfirst($_GET['controleur'])=='EtuMain') {
                 $image=
                 $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                 echo "<form action='controleurFrontal.php' method='get'>
@@ -48,6 +49,8 @@
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
+
+
 
             echo "</div>
         <div id='profil'>

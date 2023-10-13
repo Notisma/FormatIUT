@@ -23,7 +23,7 @@
                 echo '<input type="hidden" name="Etat" value="'.$_GET["Etat"].'">'
                 ?>
                 <input type="hidden" name="controleur" value="EntrMain">
-                <input type="hidden" name="action" value="MesOffres">
+                <input type="hidden" name="action" value="mesOffres">
             </form>
             <form>
                 <?php
@@ -37,7 +37,7 @@
                 echo '<input type="hidden" name="type" value="'.$_GET["type"].'">'
                 ?>
                 <input type="hidden" name="controleur" value="EntrMain">
-                <input type="hidden" name="action" value="MesOffres">
+                <input type="hidden" name="action" value="mesOffres">
 
             </form>
         </div>
