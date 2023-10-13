@@ -12,13 +12,13 @@ class Etudiant extends AbstractDataObject
     private string $nomEtudiant;
     private string $loginEtudiant;
     private string $mdpEtudiant;
-    private string $sexeEtu;
-    private string $mailUniersitaire;
-    private string $mailPerso;
-    private int $telephone;
-    private string $groupe;
-    private string $parcours;
-    private int $validationPedagogique;
+    private ?string $sexeEtu;
+    private ?string $mailUniersitaire;
+    private ?string $mailPerso;
+    private ?int $telephone;
+    private ?string $groupe;
+    private ?string $parcours;
+    private ?int $validationPedagogique;
     private int $codeEtape;
     private string $idResidence;
     private string $img;
@@ -29,18 +29,18 @@ class Etudiant extends AbstractDataObject
      * @param string $nomEtudiant
      * @param string $loginEtudiant
      * @param string $mdpEtudiant
-     * @param string $sexeEtu
-     * @param string $mailUniersitaire
-     * @param string $mailPerso
-     * @param int $telephone
-     * @param string $groupe
-     * @param string $parcours
-     * @param int $validationPedagogique
+     * @param string|null $sexeEtu
+     * @param string|null $mailUniersitaire
+     * @param string|null $mailPerso
+     * @param int|null $telephone
+     * @param string|null $groupe
+     * @param string|null $parcours
+     * @param int|null $validationPedagogique
      * @param int $codeEtape
      * @param string $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, string $mdpEtudiant, string $sexeEtu, string $mailUniersitaire, string $mailPerso, int $telephone, string $groupe, string $parcours, int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, string $mdpEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
@@ -58,6 +58,7 @@ class Etudiant extends AbstractDataObject
         $this->idResidence = $idResidence;
         $this->img = $img;
     }
+
 
     public function getImg(): string
     {
@@ -109,72 +110,72 @@ class Etudiant extends AbstractDataObject
         $this->mdpEtudiant = $mdpEtudiant;
     }
 
-    public function getSexeEtu(): string
+    public function getSexeEtu(): ?string
     {
         return $this->sexeEtu;
     }
 
-    public function setSexeEtu(string $sexeEtu): void
+    public function setSexeEtu(?string $sexeEtu): void
     {
         $this->sexeEtu = $sexeEtu;
     }
 
-    public function getMailUniersitaire(): string
+    public function getMailUniersitaire(): ?string
     {
         return $this->mailUniersitaire;
     }
 
-    public function setMailUniersitaire(string $mailUniersitaire): void
+    public function setMailUniersitaire(?string $mailUniersitaire): void
     {
         $this->mailUniersitaire = $mailUniersitaire;
     }
 
-    public function getMailPerso(): string
+    public function getMailPerso(): ?string
     {
         return $this->mailPerso;
     }
 
-    public function setMailPerso(string $mailPerso): void
+    public function setMailPerso(?string $mailPerso): void
     {
         $this->mailPerso = $mailPerso;
     }
 
-    public function getTelephone(): int
+    public function getTelephone(): ?int
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone): void
+    public function setTelephone(?int $telephone): void
     {
         $this->telephone = $telephone;
     }
 
-    public function getGroupe(): string
+    public function getGroupe(): ?string
     {
         return $this->groupe;
     }
 
-    public function setGroupe(string $groupe): void
+    public function setGroupe(?string $groupe): void
     {
         $this->groupe = $groupe;
     }
 
-    public function getParcours(): string
+    public function getParcours(): ?string
     {
         return $this->parcours;
     }
 
-    public function setParcours(string $parcours): void
+    public function setParcours(?string $parcours): void
     {
         $this->parcours = $parcours;
     }
 
-    public function getValidationPedagogique(): int
+    public function getValidationPedagogique(): ?int
     {
         return $this->validationPedagogique;
     }
 
-    public function setValidationPedagogique(int $validationPedagogique): void
+    public function setValidationPedagogique(?int $validationPedagogique): void
     {
         $this->validationPedagogique = $validationPedagogique;
     }

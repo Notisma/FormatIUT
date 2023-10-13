@@ -7,16 +7,27 @@ use App\FormatIUT\Modele\Repository\AbstractRepository;
 class Entreprise extends AbstractDataObject
 {
     private float $siret;
-    private string $nomEntreprise;
-    private string $statutJuridique;
-    private int $effectif;
-    private string $codeNAF;
-    private string $tel;
+    private ?string $nomEntreprise;
+    private ?string $statutJuridique;
+    private ?int $effectif;
+    private ?string $codeNAF;
+    private ?string $tel;
     private string $Adresse_Entreprise;
     private string $idVille;
     private string $img;
 
-    public function __construct(float $siret, string $nomEntreprise, string $statutJuridique, int $effectif, string $codeNAF, string $tel,string $adresse,string $idVille,string $img_id)
+    /**
+     * @param float $siret
+     * @param string|null $nomEntreprise
+     * @param string|null $statutJuridique
+     * @param int|null $effectif
+     * @param string|null $codeNAF
+     * @param string|null $tel
+     * @param string $Adresse_Entreprise
+     * @param string $idVille
+     * @param string $img
+     */
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -24,11 +35,11 @@ class Entreprise extends AbstractDataObject
         $this->effectif = $effectif;
         $this->codeNAF = $codeNAF;
         $this->tel = $tel;
-        $this->Adresse_Entreprise=$adresse;
-        $this->idVille=$idVille;
-        $this->img=$img_id;
-
+        $this->Adresse_Entreprise = $Adresse_Entreprise;
+        $this->idVille = $idVille;
+        $this->img = $img;
     }
+
 
     public function getImg(): string
     {
@@ -96,52 +107,52 @@ class Entreprise extends AbstractDataObject
         $this->siret = $siret;
     }
 
-    public function getNomEntreprise(): string
+    public function getNomEntreprise(): ?string
     {
         return $this->nomEntreprise;
     }
 
-    public function setNomEntreprise(string $nomEntreprise): void
+    public function setNomEntreprise(?string $nomEntreprise): void
     {
         $this->nomEntreprise = $nomEntreprise;
     }
 
-    public function getStatutJuridique(): string
+    public function getStatutJuridique(): ?string
     {
         return $this->statutJuridique;
     }
 
-    public function setStatutJuridique(string $statutJuridique): void
+    public function setStatutJuridique(?string $statutJuridique): void
     {
         $this->statutJuridique = $statutJuridique;
     }
 
-    public function getEffectif(): int
+    public function getEffectif(): ?int
     {
         return $this->effectif;
     }
 
-    public function setEffectif(int $effectif): void
+    public function setEffectif(?int $effectif): void
     {
         $this->effectif = $effectif;
     }
 
-    public function getCodeNAF(): string
+    public function getCodeNAF(): ?string
     {
         return $this->codeNAF;
     }
 
-    public function setCodeNAF(string $codeNAF): void
+    public function setCodeNAF(?string $codeNAF): void
     {
         $this->codeNAF = $codeNAF;
     }
 
-    public function getTel(): string
+    public function getTel(): ?string
     {
         return $this->tel;
     }
 
-    public function setTel(string $tel): void
+    public function setTel(?string $tel): void
     {
         $this->tel = $tel;
     }
