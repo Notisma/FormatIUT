@@ -25,14 +25,14 @@
             <?php
             $liaison = "";
             if ($titrePage == "Accueil") {
-                $liaison = "?controleur=EtuMain&action=afficherAccueilEtu";
+                $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
                 echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
            else if($_GET['controleur'] == 'EntrMain'){
                $image=((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
-                $liaison = "?controleur=EntrMain&action=afficherProfilEntr";
+                $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>
@@ -41,7 +41,7 @@
             }
             else if ($_GET['controleur']=='EtuMain') {
                 $image=
-                $liaison = "?controleur=EtuMain&action=afficherProfilEtu";
+                $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>

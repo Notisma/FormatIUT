@@ -1,8 +1,10 @@
+<h1>Catalogue des offres (enlever le footer pour les voir, j'ai pas compris ce que cette section fout tout en bas)</h1>
 <?php
-echo "<ul>";
-foreach ((new \App\FormatIUT\Modele\Repository\OffreRepository())->getListeObjet() as $item) {
-    echo "<li>";
-    var_dump($item);
-    echo "</li>";
+if (!$offres)
+    echo "<p>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</p>";
+else {
+    echo "<ul>";
+    foreach ($offres as $offre)
+        echo "<li>$offre</li>";
+    echo "</ul>";
 }
-echo "</ul>";
