@@ -103,7 +103,7 @@
                     }
                     $s="";
                     if ($nbEtudiant>1) $s="s";
-                    echo $nbEtudiant." étudiant".$s." postulateur".$s;
+                    echo $nbEtudiant." étudiant".$s." postultant".$s;
                 ?> </h4>
             </div>
 
