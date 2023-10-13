@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations visuelles">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction bug">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,22 +159,10 @@
       <workItem from="1697046317616" duration="1436000" />
       <workItem from="1697053883483" duration="2398000" />
       <workItem from="1697056632796" duration="540000" />
-    </task>
-    <task id="LOCAL-00018" summary="Nettoyage. Responsive terminé.">
-      <option name="closed" value="true" />
-      <created>1695642539381</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1695642539381</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Modifications.">
-      <option name="closed" value="true" />
-      <created>1695645677197</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1695645677197</updated>
+      <workItem from="1697179873476" duration="1041000" />
+      <workItem from="1697196722526" duration="797000" />
+      <workItem from="1697197555882" duration="4749000" />
+      <workItem from="1697202367306" duration="645000" />
     </task>
     <task id="LOCAL-00020" summary="Update">
       <option name="closed" value="true" />
@@ -547,7 +540,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697130478362</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Modifications de controleur">
+      <option name="closed" value="true" />
+      <created>1697131435976</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1697131435977</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Correction bug">
+      <option name="closed" value="true" />
+      <created>1697132252980</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1697132252980</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,8 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)" />
-    <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer" />
     <MESSAGE value="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php" />
     <MESSAGE value="Le formulaire avance, et c'est une bonne nouvelle" />
     <MESSAGE value="Ajouts d'espaces dans les titles." />
@@ -640,7 +647,9 @@
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles" />
+    <MESSAGE value="Modifications de controleur" />
+    <MESSAGE value="Correction bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

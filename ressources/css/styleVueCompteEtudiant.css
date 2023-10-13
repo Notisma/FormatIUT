@@ -151,7 +151,7 @@ body {
     width: 70%;
 }
 
-.conteneurBienvenueEtu {
+.conteneurBienvenueDetailEntr {
     float: right;
     grid-column: 2/5;
     grid-row: 1;
@@ -206,7 +206,7 @@ body {
     width: 90%;
 }
 
-.informationsActuellesEtu {
+.infosOffreEntr {
     grid-column: 1/3;
     grid-row: 2/5;
     display: flex;
@@ -221,14 +221,14 @@ body {
     background-color: #aadcda;
 }
 
-.informationsActuellesEtu > h3 {
+.infosOffreEntr > h3 {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
     margin-bottom: 0;
 }
 
-.infosActu {
+.petitConteneurInfosOffre {
     width: 100%;
     height: 100%;
     display: flex;
@@ -238,16 +238,16 @@ body {
     justify-content: center;
 }
 
-.infosActu > img {
+.petitConteneurInfosOffre > img {
     width: 50%;
 }
 
-.infosActu > li {
+.petitConteneurInfosOffre > li {
     margin-top: 0;
 }
 
 
-.detailsDeEntreprise {
+.listeEtudiantsPostulants {
     grid-column: 3/5 ;
     grid-row: 2/5;
     display: flex;
@@ -264,18 +264,18 @@ body {
 
 
 
-.detailsDeEntreprise > h3 {
+.listeEtudiantsPostulants > h3 {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
 }
 
-.detailsDeEntreprise > form {
+.listeEtudiantsPostulants > form {
     display: flex;
     flex-direction: column;
 }
 
-.statistiques {
+.etudiantPostulant {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -289,7 +289,7 @@ body {
     background-color: white;
 }
 
-.illustrationStat {
+.illuPostulant {
     float: left;
     width: 25%;
     height: 100%;
@@ -300,11 +300,11 @@ body {
     justify-content: center;
 }
 
-.illustrationStat > img {
+.illuPostulant > img {
     width: 70%;
 }
 
-.descStat {
+.nomEtuPostulant {
     float: right;
     width: 70%;
     height: 100%;
@@ -315,7 +315,7 @@ body {
     justify-content: center;
 }
 
-.descStat > h4 {
+.nomEtuPostulant > h4 {
     font-family: "Oswald", sans-serif;
     color: black;
     margin: 0;

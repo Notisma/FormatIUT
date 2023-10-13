@@ -27,113 +27,6 @@ body {
 }
 
 
-
-.etudiantInfos {
-    grid-column: 1/3;
-    grid-row: 1;
-    float: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 70%;
-    height: 95%;
-    background-color: #ff9095;
-    margin-right: 25%;
-}
-
-.h3centre {
-    width: 100%;
-    text-align: center;
-    margin: 0;
-}
-
-.h3centre > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    margin-top: 3%;
-    letter-spacing: 0.04em;
-}
-
-.petiteDiv {
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.texteAGauche {
-    float: left;
-    width: 70%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.texteAGauche > p {
-    font-family: "Open Sans extra", sans-serif;
-    margin: 0 0 0 3%;
-}
-
-.texteAGauche > form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    background-color: #ffb4b7;
-    width: 98%;
-    margin-left: 2%;
-    height: 80%;
-}
-
-.texteAGauche > form > * {
-    padding: 1%;
-}
-
-.texteAGauche > form > input[type="submit"] {
-    border-radius: 50px;
-    border: none;
-    width: 30%;
-    height: 50%;
-    background-color: #ff5660;
-    color: white;
-}
-
-.texteAGauche > form > input[type="submit"]:hover {
-    border-radius: 50px;
-    border: none;
-    width: 30%;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-
-::-webkit-file-upload-button {
-    border-radius: 50px;
-    border: none;
-    width: 50%;
-    height: 100%;
-    background-color: #ff5660;
-    color: white;
-}
-
-::-webkit-file-upload-button:hover {
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-
 .imageEtu {
     float: right;
     width: 30%;
@@ -153,19 +46,20 @@ body {
 
 .conteneurBienvenueDetailEntr {
     float: right;
-    grid-column: 2/5;
     grid-row: 1;
+    grid-column: 1/4;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: center;
     border-radius: 10px;
-    width: 80%;
+    width: 98%;
     height: 95%;
-    margin-left: 17%;
-    background-color: #aadcda;
+    background-color: #ff9095;
 }
+
+
 
 .texteBienvenue {
     float: left;
@@ -178,11 +72,20 @@ body {
     justify-content: center;
 }
 
-.texteBienvenue > h3 {
+.texteBienvenue > h2 {
     font-family: "Oswald", sans-serif;
     color: black;
     margin-left: 5%;
     letter-spacing: 0.04em;
+    margin-bottom: 1%;
+}
+
+.texteBienvenue > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin-left: 5%;
+    letter-spacing: 0.04em;
+    margin-bottom: 1%;
 }
 
 .texteBienvenue > p {
@@ -203,11 +106,11 @@ body {
 }
 
 .imageBienvenue > img {
-    width: 90%;
+    width: 75%;
 }
 
 .infosOffreEntr {
-    grid-column: 1/3;
+    grid-column: 1/4;
     grid-row: 2/5;
     display: flex;
     flex-direction: column;
@@ -215,7 +118,7 @@ body {
     align-content: center;
     justify-content: center;
     border-radius: 10px;
-    width: 95%;
+    width: 98%;
     height: 95%;
     margin: 0;
     background-color: #aadcda;
@@ -226,6 +129,42 @@ body {
     color: black;
     letter-spacing: 0.04em;
     margin-bottom: 0;
+}
+
+.overflowListe {
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.overflowListe2 {
+    width: 95%;
+    height: 95%;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.overflowListe2 > ul > li{
+    color: black;
+
+}
+
+.overflowListe2::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #ffd0d4;
+    width: 10px;
+}
+
+.overflowListe2::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
 }
 
 .petitConteneurInfosOffre {
@@ -247,19 +186,49 @@ body {
 }
 
 
+.actionsRapidesEntr {
+    grid-column: 4/5;
+    grid-row: 3/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    width: 95%;
+    height: 92%;
+    background-color: #ff9095;
+    border-radius: 10px;
+}
+
+.actionsRapidesEntr > h3 {
+font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.actionsRapidesEntr > a {
+    margin: 5%;
+    width: 90%;
+}
+
+
+
+
 .listeEtudiantsPostulants {
-    grid-column: 3/5 ;
-    grid-row: 2/5;
+    grid-column: 4/5 ;
+    grid-row: 1/3;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: space-around;
     border-radius: 10px;
-    width: 60%;
-    height: 95%;
     margin: 0;
+    height: 97%;
+    width: 95%;
     background-color: #ff9095;
+    padding: 2px;
 }
 
 
@@ -268,6 +237,7 @@ body {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
+    margin-bottom: 0;
 }
 
 .listeEtudiantsPostulants > form {
@@ -282,12 +252,36 @@ body {
     align-items: center;
     align-content: center;
     justify-content: space-around;
-    width: 90%;
-    height: 20%;
-    margin: 0;
+    width: 98%;
+    height: 30%;
+    margin: 1%;
     padding: 0;
     border-radius: 10px;
     background-color: white;
+    flex-shrink: 0;
+}
+
+.wrapPostulants {
+    width: 95%;
+    height: 70%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+.wrapPostulants::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #ffd0d4;
+    width: 10px;
+}
+
+.wrapPostulants::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
 }
 
 .illuPostulant {
@@ -318,7 +312,40 @@ body {
 
 .nomEtuPostulant > h4 {
     font-family: "Oswald", sans-serif;
-    color: black;
+    color: #ff5660;
     margin: 0;
     letter-spacing: 0.04em;
+}
+
+.nomEtuPostulant > a {
+    height: 50%;
+    width: 70%;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.boutonAssigner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    padding: 3%;
+}
+
+.boutonAssigner:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+#disabled:hover {
+    cursor: not-allowed;
 }

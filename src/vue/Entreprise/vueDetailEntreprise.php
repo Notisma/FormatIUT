@@ -1,79 +1,163 @@
-<link rel="stylesheet" href="../ressources/css/styleVueIndex.css">
+<html>
+<head>
+    <link rel="stylesheet" href="../ressources/css/styleVueDetailEntreprise.css">
+</head>
 <body>
-<div id="center">
-    <!-- Partie concernant l'offre-->
-    <div id="offre">
-        <h1><?php
-
-            use App\FormatIUT\Controleur\ControleurEtuMain;
-            use App\FormatIUT\Modele\Repository\EtudiantRepository;
-
-            $nomHTML = htmlspecialchars($offre->getNomOffre());
-            echo $nomHTML;
-            ?></h1>
-        <h4>
-            <?php
-            echo $offre->getTypeOffre();
-            ?>
-        </h4>
-        <p>
-            <?php
-            $dateDebut = date_format($offre->getDateDebut(), 'd F Y');
-            $dateFin = date_format($offre->getDateFin(), 'd F Y');
-            $duree = ($offre->getDateDebut()->diff($offre->getDateFin()))->format('%m mois, %d jours');
-            echo "Du " . $dateDebut . " au " . $dateFin . " : " . $duree;
-            ?>
-        </p>
-        <p>
-            <?php
-            echo "Gratification : " . $offre->getGratification();
-            echo "<br>Durée en heure : " . $offre->getDureeHeures();
-            echo "<br>Nombre de jours par semaine : " . $offre->getJoursParSemaine();
-            echo "<br>Nombre d'heure Hebdomadaire : " . $offre->getNbHeuresHebdo();
-            ?>
-        </p>
-        <p>
-            <?php echo $offre->getSujet(); ?>
-        </p>
+<div class="boiteMain">
+    <div class="conteneurBienvenueDetailEntr">
+        <div class="texteBienvenue">
+            <!-- affhichage des informations principales de l'offre -->
+            <h2>Développeur Mobile IOS/Android</h2>
+            <h4>Du 27 janvier 2024 au 16 septembre 2027</h4>
+            <p>Durée : 9 mois, 24 jours</p>
+        </div>
+        <div class="imageBienvenue">
+            <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
+        </div>
     </div>
-    <!-- Partie concernant l'entreprise qui propose cet offre-->
-    <div id="entreprise">
-        <h3>
-            <?php echo $entreprise->getNomEntreprise(); ?>
-        </h3>
-        <p>
-            Tel : <?php echo $entreprise->getTel() ?>
-            <br>
-            Adresse : <?php echo $entreprise->getAdresse() ?>
-        </p>
-    </div>
-    <?php
-    $formation = ((new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre));
 
-    $idOffreURl = rawurlencode($offre->getIdOffre());
-    //Vérification qu'il s'agit d'un étudiant
-    // s'agit-il de l'entreprise connecté ?
-    if ($_GET["controleur"] == "EntrMain" && $entreprise->getSiret() == \App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()) {
-        //l'offre est-elle déjà assigné ?
-        if (is_null($formation)) {
-            echo "<div id='listeEtu'>";
-            $tabEtu = (new EtudiantRepository())->EtudiantsParOffre($offre->getIdOffre());
-            if (empty($tabEtu)) {
-                echo "Aucun étudiant n'a postulé";
-            } else {
-                foreach ($tabEtu as $item) {
-                    echo $item->getLogin();
-                    $idURL = rawurlencode($item->getNumEtudiant());
-                    echo "<a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'><button>Assigner</button></a><br>";
-                }
-            }
-            echo "</div>";
-        } else {
-            echo "<div id='etudiant'>";
-            $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
-            echo "L'étudiant " . $etudiant->getLogin() . " est accepté en Formation";
-        }
-    }
-    ?>
+
+    <div class="infosOffreEntr">
+        <h3>Les Informations de votre Offre</h3>
+        <div class="petitConteneurInfosOffre">
+            <div class="overflowListe">
+                <div class="overflowListe2">
+                    <ul id="liseInfosOffreEntr">
+                        <li>Rémunération : 100€ par mois</li>
+                        <li>Durée en heures : 900 heures au total</li>
+                        <li>Nombre de jours par semaines : 5 jours</li>
+                        <li>Nombre d'Heures hebdomadaires : 30 heures</li>
+                        <li>Détails de l'offre : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas
+                            enim vehicula arcu facilisis facilisis. Pellentesque ipsum leo, malesuada ac odio in,
+                            scelerisque interdum nisl. Maecenas justo risus, tincidunt id erat posuere, varius gravida
+                            eros.
+                            Praesent sed lectus urna. Maecenas auctor odio tellus, vitae mattis orci consequat non.
+                            Phasellus efficitur, eros ut varius hendrerit, enim neque ullamcorper libero, sed tristique
+                            velit tortor non lectus. Phasellus tincidunt lectus est, eu auctor elit dictum id. Sed
+                            tempor
+                            dignissim felis vel laoreet. Mauris sed blandit libero, ac dictum mauris. Vestibulum semper
+                            scelerisque elit, eu mollis lorem mollis in. Pellentesque id ipsum ante. Fusce a magna
+                            tempor,
+                            aliquam risus posuere, lacinia augue.
+                        </li>
+                        <li>Nombre de refus : 0</li>
+                        <li>Nombre de candidats en attente : 0</li>
+                    </ul>
+                </div>
+            </div>
+            <img src="../ressources/images/infosEntre.png" alt="illu">
+        </div>
+    </div>
+
+
+    <div class="actionsRapidesEntr">
+        <h3>Actions Rapides</h3>
+        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3"'>
+            <button class="boutonAssigner">SUPPRIMER L'OFFRE</button>
+        </a>
+        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3"'>
+            <button class="boutonAssigner" id="disabled" disabled>MODIFIER L'OFFRE</button>
+        </a>
+    </div>
+
+
+    <div class="listeEtudiantsPostulants">
+        <h3>Etudiants Postulants</h3>
+
+        <div class="wrapPostulants">
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Raphaël IZORET</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Lorick VERGNES</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Jérôme PALAYSI</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Néo KONIKOFF-GARAIX</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Thomas LOYE</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="etudiantPostulant">
+                <div class="illuPostulant">
+                    <img src="../ressources/images/profil.png" alt="illustration">
+                </div>
+
+                <div class="nomEtuPostulant">
+                    <h4>Romain TOUZE</h4>
+                    <a href='?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=" . $idOffreURl . "&idEtudiant=" . $idURL . "'>
+                        <button class="boutonAssigner">Assigner</button>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 </div>
+
+
 </body>
+</html>
