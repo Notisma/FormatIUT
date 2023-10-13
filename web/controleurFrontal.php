@@ -10,21 +10,24 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
 use App\FormatIUT\Controleur\ControleurMain as CGlobal;
 
-
-// On recupère l'action passée dans l'URL
-if (!isset($_GET['action'])) {
-    $action = "afficherIndex";
-}else {
-    $action=$_GET["action"];
-}
-if (!isset($_GET['controleur'])) {
+if (isset($_GET['controleur'])) {
+    $controleur = ucfirst($_GET["controleur"]);
+} else {
     $controleur = "Main";
-}else{
-    $controleur=$_GET["controleur"];
 }
 
-$nomDeClasseControleur = "App\FormatIUT\Controleur\Controleur" . ucfirst($controleur);
-$nomDeClasseControleur::$action();
+if (isset($_GET['action'])) {
+    $action = lcfirst($_GET["action"]);
+} else {
+    $action = "afficherIndex";
+}
 
+$nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 
-
+if (class_exists($nomClasseControleur)) {
+    if (in_array($action, get_class_methods($nomClasseControleur))) {
+        $nomClasseControleur::$action();
+    } else
+        CGlobal::afficherErreur("L'action $action n'existe pas dans le controleur $nomClasseControleur");
+} else
+    CGlobal::afficherErreur("Le controleur $nomClasseControleur n'existe pas !");
