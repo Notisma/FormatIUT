@@ -56,16 +56,16 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        self::afficherVueDansCorps("ERREUR", 'erreur.php', [], [
-            'errorstr' => $error
+        self::afficherVueDansCorps("Erreur", 'vueErreur.php', self::getMenu(), [
+            'erreurStr' => $error
         ]);
     }
     protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         self::afficherVue("vueGenerale.php", array_merge(
             [
-                'pageTitle' => $titrePage,
-                'cheminVueBody' => $cheminVue,
+                'titrePage' => $titrePage,
+                'chemin' => $cheminVue,
                 'menu' => $menu
             ],
             $parametres
