@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Controleur;
 
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
@@ -28,18 +27,18 @@ class ControleurEtuMain extends ControleurMain
         for ($i=0;$i<sizeof($listeIdAlternance);$i++){
             $listeAlternance[]=(new OffreRepository())->getObjectParClePrimaire($listeIdAlternance[$i]);
         }
-        self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
+        self::afficherVueDansCorps("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(),["listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
     }
     public static function afficherCatalogue(){
-        self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueCatalogueOffre.php","titrePage"=>"Offres de Stage/Alternance"]);
+        self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu());
     }
     public static function afficherProfilEtu(){
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
-        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
+        self::afficherVueDansCorps("Compte étudiant", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant"=>$etudiant]);
     }
     public static function afficherMesOffres(){
         $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre]);
+        self::afficherVueDansCorps("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" =>$listOffre]);
     }
 
     public static function postuler(){
@@ -67,28 +66,6 @@ class ControleurEtuMain extends ControleurMain
             //redirectionFlash "l'id n'est pas renseigné"
         }
         self::afficherAccueilEtu();
-    }
-
-    public static function UpdateImage()
-    {
-        $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
-        //TODO vérif de doublons d'image
-        $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
-        $nom="";
-        $nomEtudiant=$etudiant->getLogin();
-        for ($i=0;$i<strlen($etudiant->getLogin());$i++){
-            if ($nomEtudiant[$i]==' '){
-                $nom.="_";
-            }else {
-                $nom.=$nomEtudiant[$i];
-            }
-        }
-        $nom.="_logo";
-        parent::insertImage($nom);
-        $ancienId=(new ImageRepository())->imageParEtudiant(self::$cleEtudiant);
-        (new EtudiantRepository())->updateImage(self::$cleEtudiant,$id);
-        (new ImageRepository())->supprimer($ancienId["img_id"]);
-        self::afficherProfilEtu();
     }
 
     public static function getMenu(): array

@@ -25,12 +25,12 @@ class ControleurEntrMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
             $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
         }
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise", "listeOffre" => $listeOffre]);
+        self::afficherVueDansCorps("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
     }
 
     public static function formulaireCreationOffre()
     {
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/formulaireCreationOffre.php", "titrePage", "titrePage" => "Créer une offre"]);
+        self::afficherVueDansCorps("Créer une offre", "Entreprise/formulaireCreationOffre.php", self::getMenu());
     }
 
     public static function creerOffre()
@@ -56,7 +56,7 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function MesOffres()
+    public static function mesOffres()
     {
         if (!isset($_GET["type"])) {
             $_GET["type"] = "Tous";
@@ -65,7 +65,7 @@ class ControleurEntrMain extends ControleurMain
             $_GET["Etat"]= "Tous";
         }
         $liste = (new OffreRepository())->getListeOffreParEntreprise("76543128904567", $_GET["type"],$_GET["Etat"]);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste,"Etat"=>$_GET["Etat"]]);
+        self::afficherVueDansCorps("Mes Offres", "Entreprise/vueMesOffres.php", self::getMenu(), ["type" => $_GET["type"], "listeOffres" => $liste,"Etat"=>$_GET["Etat"]]);
     }
 
     public static function getMenu(): array
@@ -82,7 +82,7 @@ class ControleurEntrMain extends ControleurMain
     public static function afficherProfilEntr()
     {
             $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise);
-            self::afficherVue("vueGenerale.php", ["entreprise"=>$entreprise,"menu" => self::getMenu(), "chemin" => "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
+            self::afficherVueDansCorps("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise"=>$entreprise]);
     }
 
     public static function assignerEtudiantOffre()
@@ -93,6 +93,19 @@ class ControleurEntrMain extends ControleurMain
         $assign = array("idFormation" => $id, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => $_GET["idEtudiant"], "idEntreprise" => self::$cleEntreprise, "idOffre" => $_GET["idOffre"]);
         (new FormationRepository())->assigner($assign);
         self::afficherAccueilEntr();
+    }
+
+    private static function autoIncrement($listeId, $get): int
+    {
+        $id = 1;
+        while (!isset($_POST[$get])) {
+            if (in_array($id, $listeId)) {
+                $id++;
+            } else {
+                $_POST[$get] = $id;
+            }
+        }
+        return $id;
     }
 
     public static function UpdateImage()
