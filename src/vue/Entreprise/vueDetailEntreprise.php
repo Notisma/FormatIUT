@@ -71,6 +71,7 @@
                 echo $etudiant->getPrenomEtudiant()." ".$etudiant->getNomEtudiant();
                 $idOffreURl=rawurlencode($offre->getIdOffre());
                 $idURL=rawurlencode($etudiant->getNumEtudiant());
+                echo $idOffreURl." et ".$idURL;
                     echo '</h4>
                     <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre="' . $idOffreURl . '"&idEtudiant="' . $idURL . '"">';
                     echo '<button class="boutonAssigner" ';

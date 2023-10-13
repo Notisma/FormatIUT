@@ -51,7 +51,7 @@ class EtudiantRepository extends AbstractRepository
      * @return void
      */
     public function EtudiantPostuler($numEtu,$numOffre){
-        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre)";
+        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente')";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "TagEtu"=>$numEtu,

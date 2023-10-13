@@ -16,7 +16,7 @@ class FormationRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idFormation","dateDebut","dateFin","idEtudiant","idEntreprise","idOffre");
+        return array("idFormation","dateDebut","dateFin","idEtudiant","idTuteurPro","idEntreprise",'idConvention',"idTuteurUM","idOffre");
     }
 
     protected function getClePrimaire(): string

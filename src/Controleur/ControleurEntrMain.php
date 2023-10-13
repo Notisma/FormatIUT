@@ -12,7 +12,7 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
-    private static float $cleEntreprise = 76543128904567;
+    private static float $cleEntreprise = 48921735698123;
 
     public static function getCleEntreprise(): float
     {
@@ -91,10 +91,7 @@ class ControleurEntrMain extends ControleurMain
     public static function assignerEtudiantOffre()
     {
         //TODO vérif que l'étudiant n'a pas dèjà une offre
-        $id = "F" . self::autoIncrement((new FormationRepository())->ListeIdTypeFormation(), "idFormation");
-        $offre = (new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]);
-        $assign = array("idFormation" => $id, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => $_GET["idEtudiant"], "idEntreprise" => self::$cleEntreprise, "idOffre" => $_GET["idOffre"]);
-        (new FormationRepository())->assigner($assign);
+        (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'],$_GET["idOffre"]);
         self::afficherAccueilEntr();
     }
 

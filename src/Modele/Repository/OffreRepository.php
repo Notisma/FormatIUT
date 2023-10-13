@@ -129,6 +129,13 @@ class OffreRepository extends AbstractRepository
         return "idOffre";
     }
 
+    public function mettreAChoisir($numEtudiant,$idOffre){
+        $sql="UPDATE regarder SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagEtu"=>$numEtudiant,"TagOffre"=>$idOffre);
+        $pdoStatement->execute($values);
+    }
+
 
 
 
