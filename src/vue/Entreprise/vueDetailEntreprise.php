@@ -7,16 +7,16 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
-            <h2>Développeur Mobile IOS/Android</h2>
-            <h4>Du 27 janvier 2024 au 16 septembre 2027</h4>
-            <p>Durée : 9 mois, 24 jours</p>
+            <h2><?php echo $offre->getNomOffre()?></h2>
+            <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
+            <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Duree : %m mois, %d jours'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
         </div>
     </div>
 
-
+<!-- TODO finir de lier à la BD -->
     <div class="infosOffreEntr">
         <h3>Les Informations de votre Offre</h3>
         <div class="petitConteneurInfosOffre">
@@ -52,12 +52,16 @@
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
-        <a href='?controleur=EntrMain&action=supprimerOffre&idOffre='>
-            <button class="boutonAssigner">SUPPRIMER L'OFFRE</button>
+        <?php
+        if ($entreprise->getSiret()==\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()) {
+            echo "<a href='?controleur=EntrMain&action=supprimerOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
+            <button class='boutonAssigner'>SUPPRIMER L'OFFRE</button>
         </a>
-        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3"'>
-            <button class="boutonAssigner" id="disabled" disabled>MODIFIER L'OFFRE</button>
-        </a>
+        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3'>
+            <button class='boutonAssigner' id='disabled' disabled>MODIFIER L'OFFRE</button>
+        </a>";
+        }
+        ?>
     </div>
 
 

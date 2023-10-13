@@ -12,7 +12,7 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
-    private static float $cleEntreprise = 56473829104753;
+    private static float $cleEntreprise = 76543128904567;
 
     public static function getCleEntreprise(): float
     {
@@ -65,7 +65,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_GET["Etat"])){
             $_GET["Etat"]= "Tous";
         }
-        $liste = (new OffreRepository())->getListeOffreParEntreprise("76543128904567", $_GET["type"],$_GET["Etat"]);
+        $liste = (new OffreRepository())->getListeOffreParEntreprise(self::$cleEntreprise, $_GET["type"],$_GET["Etat"]);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste,"Etat"=>$_GET["Etat"]]);
     }
 
