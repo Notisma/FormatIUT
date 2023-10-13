@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction bug">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueCompteEtudiant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/images/entrepriseOffre.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueCompteEntreprise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Raphael" />
+        <entry key="$PROJECT_DIR$" value="amelioration-catalogue" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
