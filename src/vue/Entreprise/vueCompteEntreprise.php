@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="conteneurBienvenueDetailEntr">
+    <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
             <h3>Bonjour, bienvenue sur votre compte entreprise</h3>
             <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
@@ -46,9 +46,9 @@
     </div>
 
 
-    <div class="infosOffreEntr">
+    <div class="informationsActuellesEtu">
         <h3>Vos Informations Actuelles</h3>
-        <div class="petitConteneurInfosOffre">
+        <div class="infosActu">
             <ul id="infosEntr">
                 <?php
                 $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
@@ -69,15 +69,15 @@
     </div>
 
 
-    <div class="listeEtudiantsPostulants">
+    <div class="detailsDeEntreprise">
         <h3>Vos Statistiques</h3>
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/offres.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4><?php
                     $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
                     $nbOffresEnLigne= sizeof($OffresEnLigne);
@@ -90,12 +90,12 @@
         </div>
 
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/etudiant.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4><?php
                     $nbEtudiant=0;
                     foreach ($OffresEnLigne as $item) {
@@ -109,12 +109,12 @@
 
         </div>
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/archiver.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4>0 offres ou contrats archivés</h4>
             </div>
 

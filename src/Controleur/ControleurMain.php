@@ -10,6 +10,11 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 class ControleurMain
 {
 
+
+    public static function afficherIndex(){
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
+    }
+
     public static function afficherVueDetailOffre(){
         $offre=(new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
         $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
@@ -17,25 +22,13 @@ class ControleurMain
         if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
         else $client="Etudiant";
         $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
-        self::afficherVueDansCorps("Detail de l'offre", 'vueGenerale.php', $menu::getMenu(),["offre"=>$offre,"entreprise"=>$entreprise]);
+        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres
         require __DIR__ . "/../vue/$cheminVue"; // Charge la vue
-    }
-
-    protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
-    {
-        self::afficherVue("vueGenerale.php", array_merge(
-            [
-                'titrePage' => $titrePage,
-                'chemin' => $cheminVue,
-                'menu' => $menu
-            ],
-            $parametres
-        ));
     }
 
     public static function getMenu() :array{
@@ -61,17 +54,38 @@ class ControleurMain
         return $list;
     }
 
-    public static function afficherIndex(){
-        self::afficherVueDansCorps("Accueil", 'vueIndex.php', self::getMenu());
-    }
     public static function afficherErreur(string $error): void
     {
-        self::afficherVueDansCorps("ERREUR", 'vueErreur.php', [], [
-            'erreurStr' => $error
+        self::afficherVueDansCorps("ERREUR", 'erreur.php', [], [
+            'errorstr' => $error
         ]);
+    }
+    protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
+    {
+        self::afficherVue("vueGenerale.php", array_merge(
+            [
+                'pageTitle' => $titrePage,
+                'cheminVueBody' => $cheminVue,
+                'menu' => $menu
+            ],
+            $parametres
+        ));
     }
 
     public static function insertImage($nom){
         TransfertImage::transfert($nom, $_GET["controleur"]);
+    }
+
+    protected static function autoIncrement($listeId, $get): int
+    {
+        $id = 1;
+        while (!isset($_POST[$get])) {
+            if (in_array($id, $listeId)) {
+                $id++;
+            } else {
+                $_POST[$get] = $id;
+            }
+        }
+        return $id;
     }
 }

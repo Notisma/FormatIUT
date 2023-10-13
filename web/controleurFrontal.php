@@ -1,33 +1,28 @@
 <?php
 
 require_once __DIR__ . '/../src/Lib/Psr4AutoloaderClass.php';
-
 // initialisation
 $loader = new App\FormatIUT\Lib\Psr4AutoloaderClass();
 $loader->register();
-// enregistrement d'une association "namespace" → "dossier"
+// enregistrement d'une association "espace de nom" → "dossier"
 $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
-use App\FormatIUT\Controleur\ControleurMain as CGlobal;
 
-if (isset($_GET['controleur'])) {
-    $controleur = $_GET["controleur"];
-} else {
-    $controleur = "Main";
-}
 
-if (isset($_GET['action'])) {
-    $action = $_GET["action"];
-} else {
+// On recupère l'action passée dans l'URL
+if (!isset($_GET['action'])) {
     $action = "afficherIndex";
+}else {
+    $action=$_GET["action"];
+}
+if (!isset($_GET['controleur'])) {
+    $controleur = "Main";
+}else{
+    $controleur=$_GET["controleur"];
 }
 
-$nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
+$nomDeClasseControleur = "App\FormatIUT\Controleur\Controleur" . ucfirst($controleur);
+$nomDeClasseControleur::$action();
 
-if (class_exists($nomClasseControleur)) {
-    if (in_array($action, get_class_methods($nomClasseControleur))) {
-        $nomClasseControleur::$action();
-    } else
-        CGlobal::afficherErreur("L'action $action n'existe pas dans le controleur $nomClasseControleur");
-} else
-    CGlobal::afficherErreur("Le controleur $nomClasseControleur n'existe pas !");
+
+

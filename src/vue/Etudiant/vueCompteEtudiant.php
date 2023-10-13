@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="conteneurBienvenueDetailEntr">
+    <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
             <h3>Bonjour, bienvenue sur votre compte étudiant</h3>
             <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
@@ -39,9 +39,9 @@
     </div>
 
 
-    <div class="infosOffreEntr">
+    <div class="informationsActuellesEtu">
         <h3>Vos Informations Actuelles</h3>
-        <div class="petitConteneurInfosOffre">
+        <div class="infosActu">
             <ul id="infosEtu">
                 <?php
                 echo "
@@ -62,39 +62,39 @@
     </div>
 
 
-    <div class="listeEtudiantsPostulants">
+    <div class="detailsDeEntreprise">
         <!-- TODO/ STats -->
         <h3>Vos Statistiques</h3>
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/postulation.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4>0 Postulations en attente d'assignation</h4>
             </div>
 
         </div>
 
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/choix.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4>0 assignations en attente de choix</h4>
             </div>
 
         </div>
 
-        <div class="etudiantPostulant">
-            <div class="illuPostulant">
+        <div class="statistiques">
+            <div class="illustrationStat">
                 <img src="../ressources/images/archiver.png" alt="illustration postuler">
             </div>
 
-            <div class="nomEtuPostulant">
+            <div class="descStat">
                 <h4>0 documents ou contrats archivés</h4>
             </div>
 
