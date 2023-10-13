@@ -5,13 +5,14 @@
 <div id="center">
     <div class="offresEntr">
         <div class="contenuOffresEntr">
-            <div class='partieGauche'>
+
                 <?php
                 foreach ($listOffre as $offre) {
-                    echo '<p>' . $offre->getNomOffre() . '</p>';
+                    echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre='. $offre->getIdOffre() .'  class=wrapOffres>';
+                    echo "<div class='partieGauche'>";
+                    echo '<p>' . $offre->getNomOffre() . '</p> </div> </a>';
                 }
                 ?>
-            </div>
         </div>
     </div>
 </div>
