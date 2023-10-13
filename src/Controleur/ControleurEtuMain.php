@@ -95,11 +95,11 @@ class ControleurEtuMain extends ControleurMain
     public static function getMenu(): array
     {
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil Etudiants","lien"=>"?action=afficherAccueilEtu&controleur=EtuMain"),
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Etudiants", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain"),
             //array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
-            array("image"=>"../ressources/images/stage.png","label"=>"Offres de Stage/Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
-            array("image"=>"../ressources/images/signet.png","label"=>"Mes Offres", "lien"=>"?action=afficherMesOffres&controleur=EtuMain"),
-            array("image"=>"../ressources/images/se-deconnecter.png","label"=>"Se déconnecter","lien"=>"controleurFrontal.php")
+            array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
+            array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
+            array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php")
 
         );
     }

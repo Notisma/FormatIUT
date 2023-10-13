@@ -51,20 +51,6 @@ class FormationRepository extends AbstractRepository
         return $listeID;
     }
 
-    public function assigner($formation){
-        $objet=$this->construireDepuisTableau($formation);
-        $sql = "INSERT INTO ".$this->getNomTable()."(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre) VALUES (";
-        foreach ($this->getNomsColonnes() as $nomsColonne) {
-            if ($nomsColonne!=$this->getNomsColonnes()[0]){
-                $sql.=",";
-            }
-            $sql.=":".$nomsColonne."Tag";
-            $values[$nomsColonne."Tag"]=$objet->formatTableau()[$nomsColonne];
-        }
-        $sql.=")";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute($values);
-    }
     //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre)
 
     public function estFormation(AbstractDataObject $offre) : ?AbstractDataObject{
