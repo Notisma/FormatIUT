@@ -19,7 +19,6 @@ class OffreRepository extends AbstractRepository
         return "Offre";
     }
 
-
     public function ListeParEntreprise($idEntreprise):array{
         $sql="SELECT * FROM ".$this->getNomTable()." WHERE idEntreprise=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
