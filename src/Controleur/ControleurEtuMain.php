@@ -27,18 +27,18 @@ class ControleurEtuMain extends ControleurMain
         for ($i=0;$i<sizeof($listeIdAlternance);$i++){
             $listeAlternance[]=(new OffreRepository())->getObjectParClePrimaire($listeIdAlternance[$i]);
         }
-        self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
+        self::afficherVueDansCorps("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(),["listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
     }
     public static function afficherCatalogue(){
-        self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueCatalogueOffre.php","titrePage"=>"Offres de Stage/Alternance"]);
+        self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu());
     }
     public static function afficherProfilEtu(){
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
-        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
+        self::afficherVueDansCorps("Compte étudiant", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant"=>$etudiant]);
     }
     public static function afficherMesOffres(){
         $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre]);
+        self::afficherVueDansCorps("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" =>$listOffre]);
     }
 
     public static function postuler(){

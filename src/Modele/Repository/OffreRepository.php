@@ -48,12 +48,17 @@ class OffreRepository extends AbstractRepository
         return $listeOffre;
     }
 
-    public function getListeOffreParEntreprise($idEntreprise,$type): array
+    public function getListeOffreParEntreprise($idEntreprise,$type,$etat): array
     {
-        $sql="SELECT * FROM ". $this->getNomTable() ." WHERE idEntreprise=:Tag";
+        $sql="SELECT * FROM ". $this->getNomTable() ." o WHERE idEntreprise=:Tag";
         if ($type=="Stage" || $type=="Alternance"){
             $sql.=" AND typeOffre=:TypeTag";
             $values["TypeTag"]=$type;
+        }
+        if ($etat=="Dispo") {
+            $sql .= " AND NOT EXISTS (SELECT idOffre FROM regarder r WHERE Etat!='Annulé' AND o.idOffre=r.idOffre)";
+        }else if ($etat=="Assigné"){
+            $sql.= " AND EXISTS (SELECT idOffre FROM Formation f WHERE f.idOffre=o.idOffre)";
         }
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"]= $idEntreprise;

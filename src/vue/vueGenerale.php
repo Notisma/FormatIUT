@@ -31,6 +31,7 @@
         </form>";
             }
            else if($_GET['controleur'] == 'EntrMain'){
+               $image=((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
                 $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
@@ -38,7 +39,8 @@
             <input class='searchField' name='recherche' placeholder='Rechercher...'>
         </form>";
             }
-            else {
+            else if ($_GET['controleur']=='EtuMain') {
+                $image=
                 $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                 echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
@@ -49,7 +51,8 @@
 
             echo "</div>
         <div id='profil'>
-        <a href='{$liaison}'><img id='petiteIcone' src='../ressources/images/profil.png'></a>
+        <a href='{$liaison}'>";
+            echo "<img id='petiteIcone' src='../ressources/images/profil.png'></a>
         </div>";
             ?>
         </div>

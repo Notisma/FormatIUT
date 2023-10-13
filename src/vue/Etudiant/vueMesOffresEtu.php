@@ -10,7 +10,9 @@
                 foreach ($listOffre as $offre) {
                     echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre='. $offre->getIdOffre() .'  class=wrapOffres>';
                     echo "<div class='partieGauche'>";
-                    echo '<p>' . $offre->getNomOffre() . '</p> </div> </a>';
+                    echo '<p> <h3>' . $offre->getNomOffre() . "           ". $offre->getTypeOffre() . '</h3> </p>';
+                    echo '<p>' . $offre->getSujet() . ' le ' .date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y'). '</p>';
+                    echo  '</div> </a>';
                 }
                 ?>
         </div>

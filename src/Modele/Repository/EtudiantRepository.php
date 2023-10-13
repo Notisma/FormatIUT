@@ -97,5 +97,11 @@ class EtudiantRepository extends AbstractRepository
         return $pdoStatement->fetch();
     }
 
+    public function updateImage($numEtudiant,$idImage){
+        $sql="UPDATE ".$this->getNomTable()." SET img_id=:TagImage WHERE ".$this->getClePrimaire()."=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagImage"=>$idImage,"Tag"=>$numEtudiant);
+        $pdoStatement->execute($values);
+    }
 
 }
