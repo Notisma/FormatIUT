@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
@@ -128,6 +129,11 @@ class ControleurEntrMain extends ControleurMain
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
         (new ImageRepository())->supprimer($ancienId["img_id"]);
         self::afficherProfilEntr();
+    }
+
+    public function supprimerOffre(){
+        (new OffreRepository())->supprimer($_GET['idOffre']);
+        self::afficherAccueilEntr();
     }
 
 }

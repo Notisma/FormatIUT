@@ -17,7 +17,7 @@ class ControleurMain
         if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
         else $client="Etudiant";
         $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
-        self::afficherVueDansCorps("Detail de l'offre", 'vueGenerale.php', $menu::getMenu(),["offre"=>$offre,"entreprise"=>$entreprise]);
+        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
