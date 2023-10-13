@@ -11,7 +11,7 @@ namespace App\FormatIUT\Configuration;
 class Configuration{
     static private array $config= array(
         'hostname'=>'localhost',
-        'database'=>'touzersae',
+        'database'=>'loyet',
         'login'=>'root',
         'password'=>'root',
         'port' =>'3306'
