@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 130vh;
+}
+
+#center {
+    position: absolute;
+    top: 70%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 92%;
+    height: 110vh;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.presentation {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    width: 90%;
+    height: 90%;
+    margin: 0;
+    background-color: #aadcda;
+}
+
+.texteGauche {
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+
+.texteGauche > h3 {
+    letter-spacing: 0.06em;
+    margin-bottom: 0;
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+}
+
+.texteGauche > * {
+    margin-left: 4%;
+}
+
+.texteGauche > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-bottom: 1%;
+}
+
+
+.assistance {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    width: 95%;
+    height: 90%;
+    background-color: #ff9095;
+    border-radius: 10px;
+    margin-right: 15%;
+    overflow-y: hidden;
+}
+
+.assistance > h3 {
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+
+.assistance > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0 1% 2% 5%;
+    color: black;
+}
+
+.offre {
+    border-radius: 50px 0 0 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    width: 20%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.offre:hover {
+    background-color: #ff9095;
+}
+
+.stage {
+    border-radius: 0;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    width: 20%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.stage:hover {
+    background-color: #ff9095;
+}
+
+.alternance {
+    border-radius: 0 50px 50px 0;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    width: 20%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.alternance:hover {
+    background-color: #ff9095;
+}
+
+#typeActuel {
+    background-color: white;
+    color: black;
+    cursor: not-allowed;
+}
+
+.imageDroite {
+    float: right;
+    width: 40%;
+    height: 100%;
+}
+
+.imageDroite > img {
+    width: 90%;
+}
+
+.offresEntr {
+    grid-column: 1/4;
+    grid-row: 2/5;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    width: 93%;
+    height: 90%;
+    margin: 0;
+    background-color: #ff9095;
+    padding: 5px;
+}
+
+.contenuOffresEntr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 95%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    overflow-y: scroll;
+}
+
+.contenuOffresEntr::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.contenuOffresEntr::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.wrapOffres {
+    width: 90%;
+    height: 30%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: 1%;
+    flex-shrink: 0;
+}
+
+.wrapOffres:hover {
+    background-color: #aadcda;
+    cursor: pointer;
+}
+
+.partieGauche {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow-y: hidden;
+}
+
+.partieGauche > h3 {
+    font-family: "Oswald", sans-serif;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    color: #ff5660;
+}
+
+.partieGauche > p {
+    margin-left: 5%;
+    color: black;
+    text-decoration: none;
+    margin-top: 0;
+    line-height: 0.8em;
+}
+
+.partieDroite {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.divInfo {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.divInfo > img {
+    width: 60%;
+}
+
+.divInfo > p {
+    margin: 0;
+    font-size: 0.8em;
+    color: black;
+    text-decoration: none;
+}
