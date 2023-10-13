@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
@@ -66,6 +67,28 @@ class ControleurEtuMain extends ControleurMain
             //redirectionFlash "l'id n'est pas renseigné"
         }
         self::afficherAccueilEtu();
+    }
+
+    public static function UpdateImage()
+    {
+        $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
+        //TODO vérif de doublons d'image
+        $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
+        $nom="";
+        $nomEtudiant=$etudiant->getLogin();
+        for ($i=0;$i<strlen($etudiant->getLogin());$i++){
+            if ($nomEtudiant[$i]==' '){
+                $nom.="_";
+            }else {
+                $nom.=$nomEtudiant[$i];
+            }
+        }
+        $nom.="_logo";
+        parent::insertImage($nom);
+        $ancienId=(new ImageRepository())->imageParEtudiant(self::$cleEtudiant);
+        (new EtudiantRepository())->updateImage(self::$cleEtudiant,$id);
+        (new ImageRepository())->supprimer($ancienId["img_id"]);
+        self::afficherProfilEtu();
     }
 
     public static function getMenu(): array

@@ -75,4 +75,17 @@ class ControleurMain
     public static function insertImage($nom){
         TransfertImage::transfert($nom, $_GET["controleur"]);
     }
+
+    protected static function autoIncrement($listeId, $get): int
+    {
+        $id = 1;
+        while (!isset($_POST[$get])) {
+            if (in_array($id, $listeId)) {
+                $id++;
+            } else {
+                $_POST[$get] = $id;
+            }
+        }
+        return $id;
+    }
 }

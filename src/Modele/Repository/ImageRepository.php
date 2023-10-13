@@ -66,4 +66,12 @@ class ImageRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $pdoStatement->fetch();
     }
+
+    public function imageParEtudiant($numEtudiant){
+        $sql="SELECT img_id FROM Etudiants WHERE numEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$numEtudiant);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
 }

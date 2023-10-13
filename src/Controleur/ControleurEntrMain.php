@@ -95,19 +95,6 @@ class ControleurEntrMain extends ControleurMain
         self::afficherAccueilEntr();
     }
 
-    private static function autoIncrement($listeId, $get): int
-    {
-        $id = 1;
-        while (!isset($_POST[$get])) {
-            if (in_array($id, $listeId)) {
-                $id++;
-            } else {
-                $_POST[$get] = $id;
-            }
-        }
-        return $id;
-    }
-
     public static function UpdateImage()
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");

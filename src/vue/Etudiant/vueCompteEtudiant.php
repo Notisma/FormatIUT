@@ -12,7 +12,7 @@
         <div class="petiteDiv">
             <div class="texteAGauche">
                 <p>Changez votre photo ici :</p>
-                <form enctype="multipart/form-data" action="?action=insertImage&controleur=EntrMain" method="post" >
+                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post" >
                     <input type="hidden" name="MAX_FILE_SIZE" value="250000"/>
                     <input type="file" name="fic" size=50/>
                     <input type="submit" value="Envoyer"/>
