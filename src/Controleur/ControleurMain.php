@@ -73,6 +73,6 @@ class ControleurMain
     }
 
     public static function insertImage($nom){
-        TransfertImage::transfert($nom);
+        TransfertImage::transfert($nom, $_GET["controleur"]);
     }
 }

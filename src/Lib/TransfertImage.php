@@ -7,7 +7,7 @@ use App\FormatIUT\Modele\Repository\ImageRepository;
 
 class TransfertImage
 {
-public static function transfert($nom){
+    public static function transfert($nom, string $controleur){
         $ret        = false;
         $img_blob   = '';
         $img_taille = 0;
@@ -29,10 +29,39 @@ public static function transfert($nom){
             }
 
             $img_type = $_FILES['fic']['type'];
+            $img_nom  = $_FILES['fic']['name'];
+
             $img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
+            if($controleur == "EtuMain") {
+                $img_blob = file_get_contents(self::img_ronde($img_blob));
+            }
             (new ImageRepository())->insert(["img_id"=>$_POST["img_id"],"img_nom"=>$nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
         }
     }
 
+    public static function img_ronde(string $image){
+        $image = imagecreatefromstring($image);
+        $largeur = imagesx($image);
+        $hauteur = imagesy($image);
 
+        $nouvellesdimensions = 285;
+
+        $image_ronde = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
+        imagealphablending($image_ronde, true);
+        imagecopyresampled($image_ronde, $image, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, $largeur, $hauteur);
+
+        $mask = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
+
+        $transparent = imagecolorallocate($mask, 255, 0, 0);
+        imagecolortransparent($mask, $transparent);
+
+        imagefilledellipse($mask, $nouvellesdimensions/2, $nouvellesdimensions/2, $nouvellesdimensions, $nouvellesdimensions, $transparent);
+
+        $red = imagecolorallocate($mask, 0, 0, 0);
+        imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, 100);
+        imagecolortransparent($image_ronde, $red);
+        imagefill($image_ronde, 0, 0, $red);
+
+        return $image_ronde;
+    }
 }
