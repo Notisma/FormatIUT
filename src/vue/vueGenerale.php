@@ -25,10 +25,10 @@
         <div id="Gestionrecherche">
             <?php
             $liaison = "";
-            if ($titrePage == "Accueil") {
+            if ($titrePage == "Accueil" || $titrePage == "Erreur") {
                 $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
                 echo "<form action='' method='get'>            
-            <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...'>
+            <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
             }
            else if(ucfirst($_GET['controleur']) == 'EntrMain'){
