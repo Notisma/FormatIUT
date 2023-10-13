@@ -1,0 +1,517 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans extra", sans-serif;
+    background-color: #ecf0f1;
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1050px;
+    width: 90%;
+    margin: auto;
+}
+
+.navbar {
+    width: 100%;
+    background: linear-gradient(to right, #FF5660, #4bc2bc 90%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* ANIMATIONS, NAVBAR ET MENU BURGER */
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+}
+
+.navbar .menu-items {
+    display: flex;
+}
+
+.navbar .nav-container li {
+    list-style: none;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .nav-container a {
+    text-decoration: none;
+    color: #0e2431;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+    text-align: center;
+
+}
+
+.navbar .nav-container a:hover {
+    font-weight: bolder;
+}
+
+.nav-container {
+    display: block;
+    height: 60px;
+}
+
+.nav-container .checkbox {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 32px;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.nav-container .hamburger-lines {
+    display: block;
+    height: 26px;
+    width: 32px;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-container .hamburger-lines .line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #0e2431;
+}
+
+.nav-container .hamburger-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line3 {
+    transform-origin: 0 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.navbar .menu-items {
+    background-color: #ff5660;
+    padding-top: 120px;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+    height: 100vh;
+    width: 30%;
+    margin-left: -11%;
+    margin-top: 0.4%;
+    transform: translate(-150%);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.navbar .menu-items li {
+    margin-bottom: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.logo {
+    position: absolute;
+    top: 5px;
+    left: 85%;
+    font-size: 1.2rem;
+    color: #0e2431;
+}
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+    transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+    transform: rotate(45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+    transform: scaleY(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+    transform: rotate(-45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ #search {
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* HORS ANIMATIONS */
+
+#search {
+    margin-left: 35%;
+}
+
+#searchField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    position: absolute;
+    border-radius: 50px;
+    border: none;
+    width: 25%;
+    height: 30px;
+    margin-top: 12px;
+    padding-left: 1%;
+    background-color: #9ec7c5;
+
+}
+
+#logoUm {
+    height: 50px;
+}
+
+#profilBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 120%;
+    width: 15%;
+}
+
+#profilBox > p {
+    margin-left: 2%;
+    color: black;
+}
+
+#profilBox > p:hover {
+    color: white;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#imageProfil {
+    height: 40px;
+}
+
+
+#corpsPage {
+    display: flex;
+    background-color: #ecf0f1;
+    z-index: 0;
+    margin: 0;
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* BANDEAU */
+
+#headerContent {
+    background-color: #ecf0f1;
+    height: 30px;
+    width: 100%;
+    margin-top: 0;
+    z-index: 1;
+    position: relative;
+
+}
+
+#texteAccueil {
+    *font-family: "Oswald", sans-serif;
+    margin-left: 10%;
+    color: #ff5660;
+    width: 10%;
+    text-decoration: none;
+}
+
+#texteAccueil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    width: 10%;
+    height: 20px;
+}
+
+#texteAccueil > h1 {
+    font-family: "Oswald", sans-serif;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    font-size: 1.5em;
+    margin-top: 70px;
+}
+
+#Gestionrecherche {
+    float: right;
+    margin-top: 0;
+    height: 70%;
+    width: 45%;
+}
+
+form {
+    width: 100%;
+}
+
+.searchField {
+    width: 90%;
+    height: 35px;
+    border-radius: 9px;
+    border: none;
+    padding-left: 10px;
+    background-color: #ff9095;
+}
+
+#hide {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+#profil {
+    float: right;
+    height: 36px;
+    width: 3%;
+    margin: auto;
+}
+
+#petiteIcone {
+    height: 100%;
+}
+
+.bandeau {
+    z-index: 90;
+    width: 70px;
+    height: 92vh;
+    margin-left: 1%;
+    margin-top: -5px;
+    background-color: #ff5660;
+    position: sticky;
+    top: 20px;
+    /* doit s'arrêter juste avant le footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s;
+    border-radius: 15px;
+}
+
+.bandeauConteneur {
+    height: 97%;
+}
+
+
+.bandeau > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 80%;
+    padding: 0;
+    margin-top: 6%;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.bandeau > a > div > img {
+    height: 30px;
+}
+
+.bandeau > a > div > p {
+    display: none;
+    color: black;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding-left: 5%;
+}
+
+
+.icone {
+    width: 5%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 25%;
+}
+
+#logoUm {
+
+
+}
+
+#active {
+    background-color: #ff9095;
+}
+
+.contenu {
+    position: absolute;
+    left: 50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.3s;
+}
+
+.contenu-item {
+    display: none;
+    text-align: center;
+}
+
+.bandeau:hover {
+    width: 250px;
+}
+
+.bandeau:hover > a {
+    margin-left: 2%;
+    width: 95%;
+    margin-top: 2%;
+    height: 10%;
+}
+
+.bandeau:hover > a > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    margin-left: 2%;
+}
+
+.bandeau:hover > a > div > * {
+    margin-left: 1%;
+}
+
+.bandeau:hover > a > div > p {
+    display: block;
+    margin-right: 5%;
+}
+
+.bandeau:hover {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.bandeau > a:hover {
+    background-color: #ff9095;
+}
+
+.icone:hover + .contenu .contenu-item, .contenu:hover .contenu-item {
+    display: block;
+}
+
+.couleur {
+    background-color: #ecf0f1;
+    height: 100%;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* FOOTER */
+#footerContent {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background-color: #95a5a6;
+    margin-top: 1%;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#footerContent > * {
+    color: white;
+}
+
+#footerText {
+    padding-left: 5%;
+}
+
+#footerText > h4 {
+    margin-bottom: 0;
+}
+
+.UlConteneur {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    width: 100%;
+    margin-left: 0;
+}
+
+
+#footerContent > #footerText > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+#footerContent > #footerText > h3 {
+    margin-top: 1%
+}
+
+#footerLogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    padding-right: 5%;
+    padding-top: 1%;
+}
+
+.grandLogo {
+    width: 90%;
+    height: 95%;
+}
+
+#footerContent > #footerLogo > h1 {
+    font-family: "Oswald", sans-serif;
+    margin-left: 10%;
+    margin-top: 5%;
+}
