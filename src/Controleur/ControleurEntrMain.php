@@ -38,7 +38,7 @@ class ControleurEntrMain extends ControleurMain
     {
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
         if (isset($_POST['nomOffre'],$_POST["dateDebut"],$_POST["dateFin"],$_POST["sujet"],$_POST["detailProjet"],$_POST["gratification"],$_POST['dureeHeures'],$_POST["joursParSemaine"],$_POST["nbHeuresHebdo"],$_POST["typeOffre"])){
-            if ($_POST["dateDebut"]>$_POST["dateFin"]){
+            //if (strtotime($_POST["dateDebut"]) > strtotime($_POST["dateFin"])){
                 //vérif des nbHeures ? ce serait compliqué
                 $listeId = (new OffreRepository())->getListeIdOffres();
                 self::autoIncrement($listeId,"idOffre");
@@ -46,12 +46,14 @@ class ControleurEntrMain extends ControleurMain
                 $offre = (new OffreRepository())->construireDepuisTableau($_POST);
                 (new OffreRepository())->creerObjet($offre);
                 self::mesOffres();
-            }else {
+            /*}else {
                 //redirectionFlash "Concordance des dates
+                echo "dates";
                 self::formulaireCreationOffre();
-            }
+            }*/
         }else {
             //redirectionFlash "éléments manquants
+            echo "manquants";
             self::formulaireCreationOffre();
         }
 

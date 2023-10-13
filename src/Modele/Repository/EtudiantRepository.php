@@ -104,4 +104,16 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function EtudiantsEnAttente($idOffre){
+        $sql="SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idOffre);
+        $pdoStatement->execute($values);
+        $listeEtu=array();
+        foreach ($pdoStatement as $item) {
+            $listeEtu[]=$this->getObjectParClePrimaire($item["numEtudiant"]);
+        }
+        return $listeEtu;
+    }
+
 }

@@ -34,7 +34,10 @@ class FormationRepository extends AbstractRepository
             $dateDebut,
             $dateFin,
             $DataObjectTableau["idEtudiant"],
+            $DataObjectTableau["idTuteurPro"],
             $DataObjectTableau["idEntreprise"],
+            $DataObjectTableau["idConvention"],
+            $DataObjectTableau["idTuteurUM"],
             $DataObjectTableau["idOffre"]
         );
     }

@@ -69,9 +69,7 @@ class OffreRepository extends AbstractRepository
         return $listeOffre;
     }
     public function listOffreEtu($numEtudiant){
-        $sql ="Select o.idOffre, nomOffre, dateDebut, dateFin, sujet, detailProjet, gratification, 	
-        dureeHeures, joursParSemaine, nbHeuresHebdo, idEntreprise, typeOffre 
-        FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant= :TagEtu";
+        $sql ="Select * FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant= :TagEtu";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "TagEtu"=>$numEtudiant
