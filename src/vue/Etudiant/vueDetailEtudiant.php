@@ -6,8 +6,8 @@
 <div class="boiteMain">
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
-            <!-- affhichage des informations principales de l'offre -->
-            <h2><?php echo $offre->getNomOffre()?></h2>
+            <!-- affichage des informations principales de l'offre -->
+            <h2><?php echo $offre->getNomOffre(). " - " . $offre->getTypeOffre()?></h2>
             <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
             <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>

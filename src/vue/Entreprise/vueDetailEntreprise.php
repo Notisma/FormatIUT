@@ -7,7 +7,7 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
-            <h2><?php echo $offre->getNomOffre()?></h2>
+            <h2><?php echo $offre->getNomOffre() . " - " . $offre->getTypeOffre()?></h2>
             <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
             <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
@@ -45,9 +45,14 @@
         </a>
         <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3'>
             <button class='boutonAssigner' id='disabled' disabled>MODIFIER L'OFFRE</button>
-        </a>";
+        </a>
+        ";
+
         }
         ?>
+        <a href='?action=afficherAccueilEntr&controleur=EntrMain'>
+            <button class='boutonAssigner'>RETOUR</button>
+        </a>
     </div>
 
 
