@@ -44,28 +44,29 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function postuler(){
+        //TODO vérifier les vérifs
         if (isset($_GET['idOffre'])) {
             $offre=((new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']));
             $formation=((new FormationRepository())->estFormation($offre));
             if (is_null($formation)){
                 if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)){
                     if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant,$_GET['idOffre'])){
-                        //redirectionFlash "vous avez déjà postuler
+                        self::afficherErreur("Vous avez déjà postulé");
                     }else {
                         (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_GET['idOffre']);
                     }
                 }else {
-                    //redirectionFlash "vous avez déjà une formation
+                    self::afficherErreur("Vous avez déjà une formation");
                 }
             }else{
                 if ($formation->getIdEtudiant()==self::getCleEtudiant()){
-                    //redirectionFlash "vous y êtes en formation
+                    self::afficherErreur("Vous avez déjà cette Formation");
                 }else {
-                    //redirectionFlash "cet offre est déjà assigné
+                    self::afficherErreur("Cette offre est déjà assignée");
                 }
             }
         }else {
-            //redirectionFlash "l'id n'est pas renseigné"
+            self::afficherErreur("Données Manquantes");
         }
         self::afficherAccueilEtu();
     }

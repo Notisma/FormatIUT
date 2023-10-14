@@ -60,6 +60,14 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function EtudiantAPostuler($numEtu,$idOffre){
+        $sql="SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre AND Etat='En Attente'";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagEtu"=>$numEtu,"TagOffre"=>$idOffre);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
+
     public function EtudiantsParOffre($idOffre){
         $sql=" SELECT * FROM ".$this->getNomTable()." etu JOIN regarder re ON etu.numEtudiant=re.numEtudiant WHERE idOffre=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);

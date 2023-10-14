@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
@@ -53,8 +54,7 @@ class ControleurEntrMain extends ControleurMain
             }*/
         }else {
             //redirectionFlash "éléments manquants
-            echo "manquants";
-            self::formulaireCreationOffre();
+            self::afficherErreur("Des données sont manquantes");
         }
 
     }
@@ -90,9 +90,27 @@ class ControleurEntrMain extends ControleurMain
 
     public static function assignerEtudiantOffre()
     {
-        //TODO vérif que l'étudiant n'a pas dèjà une offre
-        (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'],$_GET["idOffre"]);
-        self::afficherAccueilEntr();
+        //TODO vérifs
+        if (isset($_GET["idEtudiant"],$_GET["idOffre"])){
+            if (((new FormationRepository())->estFormation($_GET["idOffre"]))){
+                self::afficherErreur("L'offre est déjà prise");
+            }else{
+                if (((new EtudiantRepository())->aUneFormation($_GET["idOffre"]))){
+                    self::afficherErreur("L'étudiant a déjà une formation");
+                }else {
+                    if (((new EtudiantRepository())->EtudiantAPostuler($_GET["idEtudiant"],$_GET["idOffre"]))){
+                        (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'],$_GET["idOffre"]);
+                        self::afficherAccueilEntr();
+                    }else {
+                        self::afficherErreur("L'étudiant n'es pas en Attente");
+                    }
+
+                }
+            }
+        }else {
+            self::afficherErreur("Données Manquantes pour assigner un étudiant");
+        }
+
     }
 
     public static function updateImage()
@@ -118,6 +136,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
     public function supprimerOffre(){
+        //TODO vérifs
         (new OffreRepository())->supprimer($_GET["idOffre"]);
         self::afficherAccueilEntr();
     }
