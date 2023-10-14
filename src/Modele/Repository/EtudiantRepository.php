@@ -26,7 +26,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
-        $image=((new ImageRepository()))->getObjectParClePrimaire($DataObjectTableau["img_id"]);
+        $image=((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
         return new Etudiant(
             $DataObjectTableau["numEtudiant"],
             $DataObjectTableau["prenomEtudiant"],
@@ -42,7 +42,7 @@ class EtudiantRepository extends AbstractRepository
             $DataObjectTableau["validationPedagogique"],
             $DataObjectTableau["codeEtape"],
             $DataObjectTableau["idResidence"],
-            $image["img_blob"]
+            $image
 
         );
     }

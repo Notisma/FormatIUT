@@ -31,6 +31,18 @@ class ImageRepository extends AbstractRepository
         return new Ville("","","");
     }
 
+    public function getImage($img_if){
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$img_if);
+        $pdoStatement->execute($values);
+        $objet=$pdoStatement->fetch();
+        if (!$objet){
+            return null;
+        }
+        return $objet["img_blob"];
+    }
+
     /**
      * @param array $values
      * @return void
