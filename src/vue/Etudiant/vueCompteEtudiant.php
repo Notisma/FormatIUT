@@ -13,8 +13,8 @@
             <div class="texteAGauche">
                 <p>Changez votre photo ici :</p>
                 <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post" >
-                    <input type="hidden" name="MAX_FILE_SIZE" value="250000"/>
-                    <input type="file" name="fic" size=50/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="500000"/>
+                    <input type="file" name="fic" size=500/>
                     <input type="submit" value="Envoyer"/>
                 </form>
             </div>
@@ -30,7 +30,7 @@
     <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
             <h3>Bonjour, bienvenue sur votre compte étudiant</h3>
-            <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
+            <p>Visualisez les données de votre compte en un coup d'oeil</p>
             <br>
         </div>
         <div class="imageBienvenue">

@@ -34,7 +34,7 @@ class ControleurEtuMain extends ControleurMain
         $offres = (new OffreRepository())->getListeObjet();
         if (!isset($_GET["type"]))
             $_GET["type"] = "Tous";
-        self::afficherVueDansCorps("Catalogue d'Offres", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres, "type" => $_GET["type"]]);
+        self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres, "type" => $_GET["type"]]);
     }
     public static function afficherProfilEtu() {
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
