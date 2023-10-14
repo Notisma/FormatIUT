@@ -9,12 +9,21 @@ define('DB_NAME', 'loyet'); //Nom de la base de données4
 namespace App\FormatIUT\Configuration;
 
 class Configuration{
+    /*
     static private array $config = array(
         'hostname' => 'localhost',
         'database' => 'loyet',
         'port' => '3306',
         'login' => 'root',
         'password' => 'root'
+    );
+    */
+    static private array $config = array(
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
     );
 
     public static function getHostname(): string

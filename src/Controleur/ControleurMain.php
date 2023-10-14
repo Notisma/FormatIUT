@@ -11,18 +11,24 @@ class ControleurMain
 {
 
 
-    public static function afficherIndex(){
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
+    public static function afficherIndex()
+    {
+        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "vueIndex.php", "titrePage" => "Accueil"]);
     }
 
-    public static function afficherVueDetailOffre(){
-        $offre=(new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
-        $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-        $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
-        if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
-        else $client="Etudiant";
-        $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
-        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
+    public static function afficherVueDetailOffre()
+    {
+        $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+        $controleur = "App\Formatiut\Controleur\Controleur" . $_GET['controleur'];
+
+        if ($_GET["controleur"] == "EntrMain")
+            $client = "Entreprise";
+        else
+            $client = "Etudiant";
+
+        $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
+        self::afficherVue('vueGenerale.php', ["menu" => $controleur::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
@@ -31,24 +37,29 @@ class ControleurMain
         require __DIR__ . "/../vue/$cheminVue"; // Charge la vue
     }
 
-    public static function getMenu() :array{
+    public static function getMenu(): array
+    {
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => ""),
+            array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=EntrMain&action=afficherAccueilEntr")
         );
     }
-    public static function getMenuErreur() :array{
+
+    public static function getMenuErreur(): array
+    {
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?controleur=Main&action=afficherIndex"),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
+            array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=EntrMain&action=afficherAccueilEntr")
         );
     }
-    protected static function getTroisMax(array $liste) : ?array{
-        $list=array();
+
+    protected static function getTroisMax(array $liste): ?array
+    {
+        $list = array();
         if (!empty($liste)) {
-            $min=min(3, sizeof($liste));
+            $min = min(3, sizeof($liste));
             for ($i = 0; $i < $min; $i++) {
                 $id = max($liste);
                 foreach ($liste as $item => $value) {
@@ -68,6 +79,7 @@ class ControleurMain
             'erreurStr' => $error
         ]);
     }
+
     protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         self::afficherVue("vueGenerale.php", array_merge(
@@ -80,7 +92,8 @@ class ControleurMain
         ));
     }
 
-    public static function insertImage($nom){
+    public static function insertImage($nom)
+    {
         TransfertImage::transfert($nom, $_GET["controleur"]);
     }
 
