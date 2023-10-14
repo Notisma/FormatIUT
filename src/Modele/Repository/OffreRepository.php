@@ -19,17 +19,11 @@ class OffreRepository extends AbstractRepository
         return "Offre";
     }
 
-    public function ListeParEntreprise($idEntreprise):array{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE idEntreprise=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$idEntreprise);
-        $pdoStatement->execute($values);
-        $listeOffre=array();
-        foreach ($pdoStatement as $item) {
-            $listeOffre[]=$this->construireDepuisTableau($item);
-        }
-        return $listeOffre;
-    }
+    /**
+     * @param $idEntreprise
+     * @return array
+     * retourne la liste des offres disponibles pour une entreprise
+     */
     public function OffresParEntrepriseDispo($idEntreprise){
         $sql="SELECT * 
                 FROM ".$this->getNomTable()." o
@@ -46,6 +40,14 @@ class OffreRepository extends AbstractRepository
         }
         return $listeOffre;
     }
+
+    /**
+     * @param $idEntreprise
+     * @param $type
+     * @param $etat
+     * @return array
+     * retourne la liste des offres pour une entreprise avec différents filtres
+     */
 
     public function getListeOffreParEntreprise($idEntreprise,$type,$etat): array
     {
@@ -68,6 +70,13 @@ class OffreRepository extends AbstractRepository
         }
         return $listeOffre;
     }
+
+    /**
+     * @param $numEtudiant
+     * @return array
+     * retourne la liste des offres auquel à déjà postuler un étudiant
+     */
+
     public function listOffreEtu($numEtudiant){
         $sql ="Select * FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant= :TagEtu";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -83,6 +92,11 @@ class OffreRepository extends AbstractRepository
 
     }
 
+    /**
+     * @return array
+     * retourne la liste des id des offres
+     */
+
     public function getListeIdOffres():array{
         $sql="SELECT idOffre FROM Offre";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -92,6 +106,12 @@ class OffreRepository extends AbstractRepository
         }
         return $listeId;
     }
+
+    /**
+     * @param string $type
+     * @return array
+     * retourne la liste des ids pour un type donné
+     */
     public function ListeIdTypeOffre(string $type):array{
         $sql="SELECT idOffre FROM Offre WHERE typeOffre=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -103,6 +123,12 @@ class OffreRepository extends AbstractRepository
         }
         return $listeID;
     }
+
+    /**
+     * @param $idEntreprise
+     * @return array
+     * retourne la liste des id des offres pour une entreprise
+     */
 
     public function ListeIdOffreEntreprise($idEntreprise):array{
         $sql="SELECT idOffre FROM Offre WHERE idEntreprise=:Tag";
@@ -129,6 +155,12 @@ class OffreRepository extends AbstractRepository
         return "idOffre";
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idOffre
+     * @return void
+     * mettre un étudiant en état de choix
+     */
     public function mettreAChoisir($numEtudiant,$idOffre){
         $sql="UPDATE regarder SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);

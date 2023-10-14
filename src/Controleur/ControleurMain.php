@@ -10,11 +10,16 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 class ControleurMain
 {
 
-
+    /***
+     * Affiche la page d'acceuil du site sans qu'aucune connexion n'est été faite
+     */
     public static function afficherIndex(){
         self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
     }
 
+    /***
+     * Affiche la page de detail d'une offre qui varie selon le client
+    */
     public static function afficherVueDetailOffre(){
         $offre=(new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
         $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
@@ -24,6 +29,7 @@ class ControleurMain
         $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
         self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
+
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void
     {
@@ -38,13 +44,12 @@ class ControleurMain
             array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
         );
     }
-    public static function getMenuErreur() :array{
-        return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?controleur=Main&action=afficherIndex"),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
-        );
-    }
+
+    /***
+     * @param array $liste
+     * @return array|null
+     * retourne les 3 éléments avec la valeur les plus hautes
+     */
     protected static function getTroisMax(array $liste) : ?array{
         $list=array();
         if (!empty($liste)) {

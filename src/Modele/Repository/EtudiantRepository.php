@@ -26,7 +26,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
-        $image=((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
+        $image=((new ImageRepository()))->getObjectParClePrimaire($DataObjectTableau["img_id"]);
         return new Etudiant(
             $DataObjectTableau["numEtudiant"],
             $DataObjectTableau["prenomEtudiant"],
@@ -49,8 +49,9 @@ class EtudiantRepository extends AbstractRepository
 
     /**
      * @return void
+     * rajoute dans la BD un étudiant qui postule à une offre
      */
-    public function EtudiantPostuler($numEtu,$numOffre){
+    public function EtudiantPostuler( $numEtu, $numOffre){
         $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente')";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
@@ -60,6 +61,13 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtu
+     * @param $idOffre
+     * @return mixed
+     * permet de savoir si un étudiant à postuler à cet Offre mais n'a pas changé d'état depuis
+     */
+
     public function EtudiantAPostuler($numEtu,$idOffre){
         $sql="SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre AND Etat='En Attente'";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -68,19 +76,12 @@ class EtudiantRepository extends AbstractRepository
         return $pdoStatement->fetch();
     }
 
-    public function EtudiantsParOffre($idOffre){
-        $sql=" SELECT * FROM ".$this->getNomTable()." etu JOIN regarder re ON etu.numEtudiant=re.numEtudiant WHERE idOffre=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array(
-            "Tag"=>$idOffre
-        );
-        $pdoStatement->execute($values);
-        $tab=array();
-        foreach ($pdoStatement as $item) {
-            $tab[]=$this->construireDepuisTableau($item);
-        }
-        return $tab;
-    }
+
+    /**
+     * @param $idOffre
+     * @return mixed
+     * retourne le nombre de postulation faites au total pour cet offre
+     */
 
     public function nbPostulation($idOffre){
         $sql="SELECT COUNT(numEtudiant)as nb FROM regarder WHERE idOffre=:Tag";
@@ -90,6 +91,12 @@ class EtudiantRepository extends AbstractRepository
         return ($pdoStatement->fetch())["nb"];
     }
 
+    /**
+     * @param $idEtudiant
+     * @return mixed
+     * retourne si l'étudiant à déjà une formation
+     */
+
     public function aUneFormation($idEtudiant){
         $sql="SELECT * FROM Formation WHERE idEtudiant=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -97,6 +104,13 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $pdoStatement->fetch();
     }
+
+    /**
+     * @param $numEtudiant
+     * @param $idOffre
+     * @return mixed
+     * retourne si l'étudiant à déjà postuler à cette offre
+     */
     public function aPostuler($numEtudiant,$idOffre){
         $sql="SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -105,12 +119,25 @@ class EtudiantRepository extends AbstractRepository
         return $pdoStatement->fetch();
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idImage
+     * @return void
+     * permet à un étudiant d'update son image de profil
+     */
+
     public function updateImage($numEtudiant,$idImage){
         $sql="UPDATE ".$this->getNomTable()." SET img_id=:TagImage WHERE ".$this->getClePrimaire()."=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("TagImage"=>$idImage,"Tag"=>$numEtudiant);
         $pdoStatement->execute($values);
     }
+
+    /**
+     * @param $idOffre
+     * @return array
+     * retourne la liste des étudiant qui sont actuellement dans la table regarder de cette offre
+     */
 
     public function EtudiantsEnAttente($idOffre){
         $sql="SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
@@ -123,6 +150,13 @@ class EtudiantRepository extends AbstractRepository
         }
         return $listeEtu;
     }
+
+    /**
+     * @param $numEtudiant
+     * @param $etat
+     * @return mixed
+     * retourne le nombre de fois où l'étudiant est dans un certain état
+     */
 
     public function nbEnEtat($numEtudiant,$etat){
         $sql="SELECT COUNT(idOffre) as nb FROM regarder WHERE numEtudiant=:Tag AND Etat=:TagEtat";

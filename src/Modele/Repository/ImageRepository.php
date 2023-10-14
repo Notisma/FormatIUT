@@ -31,14 +31,11 @@ class ImageRepository extends AbstractRepository
         return new Ville("","","");
     }
 
-    public function getImage($idImg){
-        $sql="SELECT * FROM Image WHERE img_id=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$idImg);
-        $pdoStatement->execute($values);
-        return $pdoStatement->fetch();
-
-    }
+    /**
+     * @param array $values
+     * @return void
+     * créer une image dans la base de donnée
+     */
     public function insert(array $values){
         $req = "INSERT INTO Image VALUES (" .
             "'" . $values["img_id"] . "', " .
@@ -49,6 +46,11 @@ class ImageRepository extends AbstractRepository
         $pdpoStatement=ConnexionBaseDeDonnee::getPdo()->query($req);
 
     }
+
+    /**
+     * @return array
+     * retourne la liste des id des différentes images
+     */
     public function listeID(){
         $sql="SELECT img_id FROM Image";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -59,6 +61,12 @@ class ImageRepository extends AbstractRepository
         return $listeID;
     }
 
+    /**
+     * @param $Siret
+     * @return mixed
+     * retourne l'image de photo de profil pour une entreprise
+     */
+
     public function imageParEntreprise($Siret){
         $sql="SELECT img_id FROM Entreprise WHERE numSiret=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -66,6 +74,12 @@ class ImageRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $pdoStatement->fetch();
     }
+
+    /**
+     * @param $numEtudiant
+     * @return mixed
+     * retourne l'image de photo de profil pour un étudiant
+     */
 
     public function imageParEtudiant($numEtudiant){
         $sql="SELECT img_id FROM Etudiants WHERE numEtudiant=:Tag";

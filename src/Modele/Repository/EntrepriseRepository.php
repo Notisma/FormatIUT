@@ -23,7 +23,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        $image=((new ImageRepository()))->getImage($entrepriseFormatTableau["img_id"]);
+        $image=((new ImageRepository()))->getObjectParClePrimaire($entrepriseFormatTableau["img_id"]);
         return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
@@ -39,7 +39,15 @@ class EntrepriseRepository extends AbstractRepository
     protected function getClePrimaire(): string
     {
        return  "numSiret";
+
     }
+
+    /***
+     * @param $Siret
+     * @param $idImage
+     * @return void
+     * remplace l'image de l'entreprise avec une nouvelle donc l'id est donnée en paramètre
+     */
 
     public function updateImage($Siret,$idImage){
         $sql="UPDATE ".$this->getNomTable()." SET img_id=:TagImage WHERE ".$this->getClePrimaire()."=:TagSiret";

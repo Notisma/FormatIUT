@@ -14,6 +14,11 @@ abstract class AbstractRepository
 
     public abstract function construireDepuisTableau(array $DataObjectTableau):AbstractDataObject;
 
+    /***
+     * @return array|null
+     * retourne une liste de l'ensemble des object d'une même classe
+     * renvoie null si aucun objet n'est créer
+     */
     public function getListeObjet():?array{
         $sql='SELECT * FROM '.$this->getNomTable();
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -22,6 +27,12 @@ abstract class AbstractRepository
         }
         return $listeObjet;
     }
+
+    /***
+     * @param AbstractDataObject $objet
+     * @return void
+     * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
+     */
 
     public function creerObjet(AbstractDataObject $objet):void{
         $sql = "INSERT INTO ".$this->getNomTable()." VALUES (";
@@ -37,6 +48,13 @@ abstract class AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /***
+     * @param $clePrimaire
+     * @return AbstractDataObject|null
+     * retourne un objet correspondant à la clé primaire donnée en paramètre
+     * si l'objet n'existe pas, renvoie null
+     */
+
     public function getObjectParClePrimaire($clePrimaire):?AbstractDataObject{
         $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -48,6 +66,12 @@ abstract class AbstractRepository
         }
         return $this->construireDepuisTableau($objet);
     }
+
+    /***
+     * @param $clePrimaire
+     * @return void
+     * supprime dans la Base de donnée l'objet donc la clé primaire est en paramètre
+     */
 
     public function supprimer($clePrimaire) :void{
         $sql="DELETE FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
