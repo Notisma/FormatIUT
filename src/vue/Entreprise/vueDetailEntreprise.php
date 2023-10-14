@@ -9,7 +9,7 @@
             <!-- affhichage des informations principales de l'offre -->
             <h2><?php echo $offre->getNomOffre()?></h2>
             <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
-            <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Duree : %m mois, %d jours'); ?></p>
+            <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -22,16 +22,16 @@
         <div class="petitConteneurInfosOffre">
             <div class="overflowListe">
                 <div class="overflowListe2">
-                    <ul id="liseInfosOffreEntr">
-                        <li>Rémunération : <?php echo $offre->getGratification() ?>€ par mois</li>
-                        <li>Durée en heures : <?php echo $offre->getDureeHeures() ?> heures au total</li>
-                        <li>Nombre de jours par semaines : <?php echo $offre->getJoursParSemaine()?> jours</li>
-                        <li>Nombre d'Heures hebdomadaires : <?php echo $offre->getNbHeuresHebdo() ?> heures</li>
-                        <li>Détails de l'offre : <?php echo $offre->getDetailProjet() ?></li>
-                    </ul>
+                    <div id="liseInfosOffreEntr">
+                        <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
+                        <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
+                        <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine()?> jours</p>
+                        <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures</p>
+                        <p><span>Détails de l'offre :</span> <?php echo $offre->getDetailProjet() ?></p>
+                    </div>
                 </div>
             </div>
-            <img src="../ressources/images/infosEntre.png" alt="illu">
+            <img src="../ressources/images/entrepriseData.png" alt="illu">
         </div>
     </div>
 
@@ -58,7 +58,12 @@
             <?php
             $listeEtu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
             if (empty($listeEtu)){
-                echo "Personne n'a postulé";
+                echo "
+                <div class='erreur'>
+                <h4>Personne n'a postulé.</h4>
+                <img src='../ressources/images/erreur.png' alt='erreur'>
+                </div>
+                ";
             }else {
                 foreach ($listeEtu as $etudiant) {
                     echo '<div class="etudiantPostulant">

@@ -278,7 +278,7 @@ body {
     align-items: center;
     align-content: center;
     justify-content: left;
-    width: 60%;
+    width: 50%;
     height: 100%;
     float: left;
 }
@@ -289,7 +289,7 @@ body {
     align-items: center;
     align-content: center;
     justify-content: left;
-    width: 40%;
+    width: 50%;
     height: 100%;
     float: right;
 }
@@ -312,7 +312,7 @@ body {
     align-items: center;
     align-content: center;
     justify-content: left;
-    width: 30%;
+    width: 50%;
     height: 100%;
     float: left;
 }
@@ -323,7 +323,7 @@ body {
     align-items: center;
     align-content: center;
     justify-content: left;
-    width: 70%;
+    width: 50%;
     height: 100%;
     float: right;
 }

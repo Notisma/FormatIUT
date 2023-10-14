@@ -128,7 +128,7 @@ body {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
-    margin-bottom: 0;
+    margin-top: 10%;
 }
 
 .overflowListe {
@@ -167,14 +167,25 @@ body {
     border-radius: 10px;
 }
 
+#liseInfosOffreEntr > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 5%;
+    line-height: 1em;
+}
+
+#liseInfosOffreEntr > p > span {
+    font-weight: bold;
+}
+
 .petitConteneurInfosOffre {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     align-content: center;
     justify-content: space-around;
+    margin-bottom: 3%;
 }
 
 .petitConteneurInfosOffre > h3 {
@@ -182,7 +193,8 @@ body {
 }
 
 .petitConteneurInfosOffre > img {
-    width: 50%;
+    width: 35%;
+    margin-bottom: 30%;
 }
 
 
@@ -348,4 +360,36 @@ body {
 
 #disabled:hover {
     cursor: not-allowed;
+}
+
+.erreur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 95%;
+    height: 80%;
+}
+
+.erreur > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.erreur > img {
+    width: 50%;
+}
+
+#disabled {
+    opacity: 0.5;
+}
+
+#disabled:hover {
+    cursor: not-allowed;
+    background-color: #ff5660;
+    border: none;
+    color: white;
 }

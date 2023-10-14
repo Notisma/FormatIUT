@@ -11,35 +11,37 @@
             <h3>CONSULTEZ TOUTES VOS OFFRES</h3>
             <p>Consultez et gérez toutes vos offres en quelques clics.</p>
 
-            <form>
-                <?php
-                echo '<input type="submit" name="type" value="Tous" class="offre" ';
-                if ($type == "Tous") echo 'id="typeActuel" disabled';
-                echo '><input type="submit" name="type" value="Stage" class="stage" ';
-                if ($type == "Stage") echo 'id="typeActuel" disabled';
-                echo '><input type="submit" name="type" value="Alternance" class="alternance" ';
-                if ($type == "Alternance") echo 'id="typeActuel" disabled';
-                echo '>';
-                echo '<input type="hidden" name="Etat" value="'.$_GET["Etat"].'">'
-                ?>
-                <input type="hidden" name="controleur" value="EntrMain">
-                <input type="hidden" name="action" value="mesOffres">
-            </form>
-            <form>
-                <?php
-                echo '<input type="submit" name="Etat" value="Tous" class="offre" ';
-                if ($Etat == "Tous") echo 'id="typeActuel" disabled';
-                echo '><input type="submit" name="Etat" value="Dispo" class="stage" ';
-                if ($Etat == "Dispo") echo 'id="typeActuel" disabled';
-                echo '><input type="submit" name="Etat" value="Assigné" class="alternance" ';
-                if ($Etat == "Assigné") echo 'id="typeActuel" disabled';
-                echo '>';
-                echo '<input type="hidden" name="type" value="'.$_GET["type"].'">'
-                ?>
-                <input type="hidden" name="controleur" value="EntrMain">
-                <input type="hidden" name="action" value="mesOffres">
+            <div class="formulairesDeTri">
+                <form>
+                    <?php
+                    echo '<input type="submit" name="type" value="Tous" class="offre" ';
+                    if ($type == "Tous") echo 'id="typeActuel" disabled';
+                    echo '><input type="submit" name="type" value="Stage" class="stage" ';
+                    if ($type == "Stage") echo 'id="typeActuel" disabled';
+                    echo '><input type="submit" name="type" value="Alternance" class="alternance" ';
+                    if ($type == "Alternance") echo 'id="typeActuel" disabled';
+                    echo '>';
+                    echo '<input type="hidden" name="Etat" value="' . $_GET["Etat"] . '">'
+                    ?>
+                    <input type="hidden" name="controleur" value="EntrMain">
+                    <input type="hidden" name="action" value="mesOffres">
+                </form>
+                <form>
+                    <?php
+                    echo '<input type="submit" name="Etat" value="Tous" class="offre" ';
+                    if ($Etat == "Tous") echo 'id="typeActuel" disabled';
+                    echo '><input type="submit" name="Etat" value="Dispo" class="stage" ';
+                    if ($Etat == "Dispo") echo 'id="typeActuel" disabled';
+                    echo '><input type="submit" name="Etat" value="Assigné" class="alternance" ';
+                    if ($Etat == "Assigné") echo 'id="typeActuel" disabled';
+                    echo '>';
+                    echo '<input type="hidden" name="type" value="' . $_GET["type"] . '">'
+                    ?>
+                    <input type="hidden" name="controleur" value="EntrMain">
+                    <input type="hidden" name="action" value="mesOffres">
 
-            </form>
+                </form>
+            </div>
         </div>
 
         <div class="imageDroite">
@@ -50,7 +52,8 @@
 
     <div class="assistance">
         <h3>ASSISTANCE - VOS OFFRES</h3>
-        <p>Cliquez sur une offre pour obtenir plus de détails, supprimer ou mettre à jour votre offre, ou encore assigner un étudiant à cette offre.</p>
+        <p>Cliquez sur une offre pour obtenir plus de détails, supprimer ou mettre à jour votre offre, ou encore
+            assigner un étudiant à cette offre.</p>
     </div>
 
     <div class="offresEntr">
@@ -58,7 +61,7 @@
             <?php
             if (!empty($listeOffres)) {
                 foreach ($listeOffres as $offre) {
-                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
                     echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
@@ -67,7 +70,7 @@
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                     echo "<div class='divInfo' id='wrapLogo'>";
-                    echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg() ).'" alt="logo"/>';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
                     echo "</div>";
                     echo "<div class='divInfo' id='nbPostu'>";
                     echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
@@ -76,7 +79,7 @@
                         $nb = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($offre->getIdOffre());
                         echo $nb . " postulation";
                         if ($nb > 1) echo "s";
-                    }else {
+                    } else {
                         echo "Assignée";
                     }
                     echo "</p>";
