@@ -50,7 +50,7 @@
 
         }
         ?>
-        <a href='?action=afficherAccueilEntr&controleur=EntrMain'>
+        <a href='?action=mesOffres&controleur=EntrMain'>
             <button class='boutonAssigner'>RETOUR</button>
         </a>
     </div>

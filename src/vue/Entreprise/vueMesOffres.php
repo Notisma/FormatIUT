@@ -78,7 +78,7 @@
                     if (!(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre)) {
                         $nb = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($offre->getIdOffre());
                         echo $nb . " postulation";
-                        if ($nb > 1) echo "s";
+                        if ($nb != 1) echo "s";
                     } else {
                         echo "Assignée";
                     }

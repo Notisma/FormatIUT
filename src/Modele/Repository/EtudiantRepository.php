@@ -124,4 +124,12 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtu;
     }
 
+    public function nbEnEtat($numEtudiant,$etat){
+        $sql="SELECT COUNT(idOffre) as nb FROM regarder WHERE numEtudiant=:Tag AND Etat=:TagEtat";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$numEtudiant,"TagEtat"=>$etat);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()["nb"];
+    }
+
 }

@@ -82,7 +82,7 @@
                     $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
                     $nbOffresEnLigne= sizeof($OffresEnLigne);
                     echo $nbOffresEnLigne." Offre";
-                    if ($nbOffresEnLigne>1) echo "s";
+                    if ($nbOffresEnLigne!=1) echo "s";
                     ?> en ligne
                 </h4>
             </div>
@@ -102,7 +102,7 @@
                         $nbEtudiant+=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($item->getIdOffre()));
                     }
                     $s="";
-                    if ($nbEtudiant>1) $s="s";
+                    if ($nbEtudiant!=1) $s="s";
                     echo $nbEtudiant." étudiant".$s." postultant".$s;
                 ?> </h4>
             </div>

@@ -63,7 +63,7 @@
 
 
     <div class="detailsDeEntreprise">
-        <!-- TODO/ STats -->
+        <!-- TODO/ STats 2/3-->
         <h3>Vos Statistiques</h3>
 
         <div class="statistiques">
@@ -72,7 +72,13 @@
             </div>
 
             <div class="descStat">
-                <h4>0 Postulations en attente d'assignation</h4>
+                <h4><?php
+                    $nb=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(),"En Attente"));
+                    echo $nb." Postulation";
+                    if ($nb!=1) echo "s";
+                    ?>
+
+                    en attente d'assignation</h4>
             </div>
 
         </div>
@@ -84,7 +90,11 @@
             </div>
 
             <div class="descStat">
-                <h4>0 assignations en attente de choix</h4>
+                <h4><?php
+                    $nb=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(),"A Choisir"));
+                    echo $nb." assignation";
+                    if ($nb!=1) echo "s";
+                    ?> en attente de choix</h4>
             </div>
 
         </div>
