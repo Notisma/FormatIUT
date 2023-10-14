@@ -9,6 +9,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 
 class ControleurEntrMain extends ControleurMain
@@ -40,13 +41,18 @@ class ControleurEntrMain extends ControleurMain
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
         if (isset($_POST['nomOffre'],$_POST["dateDebut"],$_POST["dateFin"],$_POST["sujet"],$_POST["detailProjet"],$_POST["gratification"],$_POST['dureeHeures'],$_POST["joursParSemaine"],$_POST["nbHeuresHebdo"],$_POST["typeOffre"])){
             //if (strtotime($_POST["dateDebut"]) > strtotime($_POST["dateFin"])){
-                //vérif des nbHeures ? ce serait compliqué
+                //TODO vérif que début après aujourd'hui
+            if ($_POST["gratification"]>0 && $_POST["dureeHeures"]>0 && $_POST["joursParSemaine"]>0 && $_POST["nbHeuresHebdo"]>0) {
                 $listeId = (new OffreRepository())->getListeIdOffres();
-                self::autoIncrement($listeId,"idOffre");
+                self::autoIncrement($listeId, "idOffre");
                 $_POST["idEntreprise"] = self::$cleEntreprise;
                 $offre = (new OffreRepository())->construireDepuisTableau($_POST);
                 (new OffreRepository())->creerObjet($offre);
+                $_GET["action"]="mesOffres";
                 self::mesOffres();
+            }else {
+                self::afficherErreur("Des données sont érronées");
+            }
             /*}else {
                 //redirectionFlash "Concordance des dates
                 echo "dates";
@@ -90,7 +96,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function assignerEtudiantOffre()
     {
-        //TODO vérifs
+        //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_GET["idEtudiant"],$_GET["idOffre"])){
             if (((new FormationRepository())->estFormation($_GET["idOffre"]))){
                 self::afficherErreur("L'offre est déjà prise");
@@ -100,6 +106,7 @@ class ControleurEntrMain extends ControleurMain
                 }else {
                     if (((new EtudiantRepository())->EtudiantAPostuler($_GET["idEtudiant"],$_GET["idOffre"]))){
                         (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'],$_GET["idOffre"]);
+                        $_GET["action"]="afficherAccueilEntr()";
                         self::afficherAccueilEntr();
                     }else {
                         self::afficherErreur("L'étudiant n'es pas en Attente");
@@ -132,12 +139,33 @@ class ControleurEntrMain extends ControleurMain
         $ancienId=(new ImageRepository())->imageParEntreprise(self::$cleEntreprise);
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
         (new ImageRepository())->supprimer($ancienId["img_id"]);
+        $_GET["action"]="afficherProfilEntr()";
         self::afficherProfilEntr();
     }
 
     public static function supprimerOffre(){
         //TODO vérifs
-        (new OffreRepository())->supprimer($_GET["idOffre"]);
-        self::afficherAccueilEntr();
+        if (isset($_GET["idOffre"])) {
+            $listeOffre=((new OffreRepository())->getListeObjet());
+            if (in_array($_GET["idOffre"],$listeOffre)) {
+                if (((new FormationRepository())->estFormation($_GET["idOffre"]))) {
+                    $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
+                    if ($offre->getSiret()) {
+                        (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
+                        (new OffreRepository())->supprimer($_GET["idOffre"]);
+                        $_GET["action"] = "afficherAccueilEntr()";
+                        self::afficherAccueilEntr();
+                    } else {
+                        self::afficherErreur("Cette offre ne vous appartient pas");
+                    }
+                }else {
+                    self::afficherErreur("Cette offre a été admise par un étudiant");
+                }
+            }else {
+                self::afficherErreur("Cette offre n'existe pas");
+            }
+        }else {
+            self::afficherErreur("Données Manquantes");
+        }
     }
 }

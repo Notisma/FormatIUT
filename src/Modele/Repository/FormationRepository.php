@@ -53,10 +53,10 @@ class FormationRepository extends AbstractRepository
 
     //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre)
 
-    public function estFormation(AbstractDataObject $offre) : ?AbstractDataObject{
+    public function estFormation(string $offre) : ?AbstractDataObject{
         $sql="SELECT * FROM ".$this->getNomTable()." WHERE idOffre=:Tag ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$offre->getIdOffre());
+        $values=array("Tag"=>$offre);
         $pdoStatement->execute($values);
         $formation=$pdoStatement->fetch();
         if (!$formation){

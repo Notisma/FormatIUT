@@ -31,4 +31,11 @@ class RegarderRepository extends AbstractRepository {
         return ($pdoStatement->fetch())["Etat"];
 
     }
+
+    public function supprimerOffreDansRegarder($idOffre){
+        $sql="DELETE FROM regarder WHERE idOffre=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$idOffre);
+        $pdoStatement->execute($values);
+    }
 }

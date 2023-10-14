@@ -7,7 +7,10 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
-            <h2><?php echo $offre->getNomOffre() . " - " . $offre->getTypeOffre() ?></h2>
+            <h2><?php use App\FormatIUT\Modele\Repository\EtudiantRepository;
+                use App\FormatIUT\Modele\Repository\FormationRepository;
+
+                echo $offre->getNomOffre() . " - " . $offre->getTypeOffre() ?></h2>
             <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
             <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
@@ -52,9 +55,21 @@
 
 
     <div class="actionsRapidesEntr">
-        <h3>Actions Rapides</h3><a href="?controleur=EntrMain&action=supprimerOffre&idOffre=">
-            <button class='boutonAssigner'>POSTULER</button>
-        </a>
+        <h3>Actions Rapides</h3>
+        <?php
+        echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
+                <button class="boutonAssigner" ';
+        $formation=((new FormationRepository())->estFormation($_GET['idOffre']));
+        if (!is_null($formation)) {
+            if ((new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
+                if ((new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                    echo ' disabled';
+                }
+            }
+        }
+
+        ?>
+        >POSTULER</button></a>
         <a href='?action=afficherAccueilEtu&controleur=EtuMain'>
             <button class='boutonAssigner'>RETOUR</button>
         </a>

@@ -21,13 +21,18 @@ class ControleurMain
      * Affiche la page de detail d'une offre qui varie selon le client
     */
     public static function afficherVueDetailOffre(){
-        $offre=(new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
-        $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-        $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
-        if ($_GET["controleur"]=="EntrMain") $client="Entreprise";
-        else $client="Etudiant";
-        $chemin=ucfirst($client)."/vueDetail".ucfirst($client).".php";
-        self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
+        $menu = "App\Formatiut\Controleur\Controleur" . $_GET['controleur'];
+        $liste=(new OffreRepository())->getListeIdOffres();
+        if (in_array($_GET["idOffre"],$liste)) {
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+            if ($_GET["controleur"] == "EntrMain") $client = "Entreprise";
+            else $client = "Etudiant";
+            $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
+            self::afficherVue('vueGenerale.php', ["menu" => $menu::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
+        }else {
+            $menu::afficherErreur("L'offre n'existe pas");
+        }
     }
 
     public static function afficherVue(string $cheminVue, array $parametres = []): void

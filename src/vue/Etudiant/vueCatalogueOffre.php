@@ -49,7 +49,7 @@
                         echo "<div class='divInfo' id='nbPostu'>";
                             echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
                             echo "<p>";
-                            if (!(new FormationRepository())->estFormation($offre)) {
+                            if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
                                 $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
                                 echo $nb . " postulation";
                                 if ($nb > 1) echo "s";

@@ -48,29 +48,34 @@ class ControleurEtuMain extends ControleurMain
     public static function postuler(){
         //TODO vérifier les vérifs
         if (isset($_GET['idOffre'])) {
-            $offre=((new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']));
-            $formation=((new FormationRepository())->estFormation($offre));
-            if (is_null($formation)){
-                if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)){
-                    if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant,$_GET['idOffre'])){
-                        self::afficherErreur("Vous avez déjà postulé");
-                    }else {
-                        (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_GET['idOffre']);
+            $liste=((new OffreRepository())->getListeIdOffres());
+            if (in_array($_GET["idOffre"],$liste)) {
+                $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+                if (is_null($formation)) {
+                    if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
+                        if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant, $_GET['idOffre'])) {
+                            self::afficherErreur("Vous avez déjà postulé");
+                        } else {
+                            (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_GET['idOffre']);
+                            $_GET['action'] = "afficherVueDetailOffre";
+                            self::afficherVueDetailOffre();
+                        }
+                    } else {
+                        self::afficherErreur("Vous avez déjà une formation");
                     }
-                }else {
-                    self::afficherErreur("Vous avez déjà une formation");
+                } else {
+                    if ($formation->getIdEtudiant() == self::getCleEtudiant()) {
+                        self::afficherErreur("Vous avez déjà cette Formation");
+                    } else {
+                        self::afficherErreur("Cette offre est déjà assignée");
+                    }
                 }
-            }else{
-                if ($formation->getIdEtudiant()==self::getCleEtudiant()){
-                    self::afficherErreur("Vous avez déjà cette Formation");
-                }else {
-                    self::afficherErreur("Cette offre est déjà assignée");
-                }
+            }else {
+                self::afficherErreur("Offre inexistante");
             }
         }else {
             self::afficherErreur("Données Manquantes");
         }
-        self::afficherAccueilEtu();
     }
 
     public static function updateImage()

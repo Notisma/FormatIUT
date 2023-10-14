@@ -87,7 +87,7 @@
                     if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())){
                         echo ' id="disabled" disabled';
                     }
-                    $formation=(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre);
+                    $formation=(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
                     if(!is_null($formation)) {
                         echo ' id="disabled" disabled';
                         if ($formation->getIdEtudiant()==$etudiant->getNumEtudiant()){
