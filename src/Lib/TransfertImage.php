@@ -39,44 +39,29 @@ class TransfertImage
         }
     }
 
-    public static function img_ronde(string $image)
-    {
-
-        if (!getimagesize($image)) {
-            throw new Exception('L\'argument fourni n\'est pas une image.');
-        }
-
-
+    public static function img_ronde(string $image){
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
 
-        $nouvellesDimensions = 285;
+        $nouvellesdimensions = 285;
 
-        $image_ronde = imagecreatetruecolor($nouvellesDimensions, $nouvellesDimensions);
+        $image_ronde = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
         imagealphablending($image_ronde, true);
-        imagecopyresampled($image_ronde, $image, 0, 0, 0, 0, $nouvellesDimensions, $nouvellesDimensions, $largeur, $hauteur);
+        imagecopyresampled($image_ronde, $image, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, $largeur, $hauteur);
 
+        $mask = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
 
-        $mask = imagecreatetruecolor($nouvellesDimensions, $nouvellesDimensions);
-
-        $transparent = imagecolorallocate($mask, 0, 0, 0, 127);
+        $transparent = imagecolorallocate($mask, 255, 0, 0);
         imagecolortransparent($mask, $transparent);
 
-        imagefilledellipse($mask, $nouvellesDimensions / 2, $nouvellesDimensions / 2, $nouvellesDimensions, $nouvellesDimensions, $transparent);
+        imagefilledellipse($mask, $nouvellesdimensions/2, $nouvellesdimensions/2, $nouvellesdimensions, $nouvellesdimensions, $transparent);
 
-
-        imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesDimensions, $nouvellesDimensions, 100);
-
-
-        imagecolortransparent($image_ronde, $transparent);
-
-
-        imagedestroy($image);
-        imagedestroy($mask);
+        $red = imagecolorallocate($mask, 0, 0, 0);
+        imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, 100);
+        imagecolortransparent($image_ronde, $red);
+        imagefill($image_ronde, 0, 0, $red);
 
         return $image_ronde;
     }
-
-
 }
