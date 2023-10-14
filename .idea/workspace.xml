@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations et corrections visuelles">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout d'erreurs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/TransfertImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/TransfertImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,14 +162,6 @@
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
-    </task>
-    <task id="LOCAL-00028" summary="Ajout des annonces en html (version 1)">
-      <option name="closed" value="true" />
-      <created>1696326017928</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1696326017928</updated>
     </task>
     <task id="LOCAL-00029" summary="Corrections">
       <option name="closed" value="true" />
@@ -555,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697283922029</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Ajout d'erreurs">
+      <option name="closed" value="true" />
+      <created>1697287223836</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1697287223836</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge de branches" />
     <MESSAGE value="Avancées sur vueMesOffres.php" />
     <MESSAGE value="Update" />
     <MESSAGE value="Corrections visuelles" />
@@ -648,7 +647,8 @@
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci." />
     <MESSAGE value="Améliorations et corrections visuelles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations et corrections visuelles" />
+    <MESSAGE value="Ajout d'erreurs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'erreurs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
