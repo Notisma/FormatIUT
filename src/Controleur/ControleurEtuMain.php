@@ -70,7 +70,7 @@ class ControleurEtuMain extends ControleurMain
         self::afficherAccueilEtu();
     }
 
-    public static function UpdateImage()
+    public static function updateImage()
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         //TODO vérif de doublons d'image
