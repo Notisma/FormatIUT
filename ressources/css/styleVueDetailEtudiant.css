@@ -4,7 +4,7 @@ body {
     height: 100vh;
 }
 
-.conteneurPrincipal {
+.boiteMain {
     position: absolute;
     top: 57%;
     left: 54%;
@@ -16,7 +16,7 @@ body {
     text-align: left;
     line-height: 2em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
@@ -27,103 +27,366 @@ body {
 }
 
 
-.conteneurBienvenue {
-    grid-column: 1/3;
+.imageEtu {
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.imageEtu > img {
+    width: 70%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.conteneurBienvenueDetailEntr {
+    float: right;
     grid-row: 1;
-    float: left;
+    grid-column: 1/4;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
+    justify-content: center;
     border-radius: 10px;
-    margin: 0;
-    background-color: #aadcda;
+    width: 98%;
+    height: 95%;
+    background-color: #ff9095;
 }
+
+
 
 .texteBienvenue {
     float: left;
-    width: 60%;
+    width: 70%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
 }
 
-.texteBienvenue > h3 {
-    margin-left: 5%;
-    letter-spacing: 0.06em;
+.texteBienvenue > h2 {
     font-family: "Oswald", sans-serif;
+    color: black;
+    margin-left: 5%;
+    letter-spacing: 0.04em;
+    margin-bottom: 1%;
+}
+
+.texteBienvenue > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin-left: 5%;
+    letter-spacing: 0.04em;
+    margin-bottom: 1%;
 }
 
 .texteBienvenue > p {
     font-family: "Open Sans extra", sans-serif;
     margin-left: 5%;
+    line-height: 1em;
 }
 
 .imageBienvenue {
     float: right;
-    width: 40%;
+    width: 30%;
     height: 100%;
-}
-
-.imageMoyenne {
-    width: 90%;
-}
-
-.notifications > .uneNotif {
-    display: none;
-}
-
-.notifications {
-    grid-column: 3;
-    grid-row: 1/3;
-    float: right;
-    z-index: 3;
-    background-color: #ff9095;
     display: flex;
     flex-direction: column;
-    align-content: center;
     align-items: center;
-    width: 95%;
-    height: 100%;
-    margin-left: 2%;
-    margin-right: 2%;
-    border-radius: 10px;
-    transition: margin-left 0.3s;
-}
-
-.notifications > img {
-    padding: 4%;
-    height: 40px;
-}
-
-.notifications > h4 {
-    font-family: "Oswald", sans-serif;
-    letter-spacing: 0.04em;
-    margin-top: 2%;
-}
-
-.wrapErreur {
-    height: 90%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     align-content: center;
-    align-items: center;
     justify-content: center;
 }
 
-.wrapErreur > h4 {
-    font-family: "Oswald", sans-serif;
-    letter-spacing: 0.04em;
-    margin-bottom: 2%;
+.imageBienvenue > img {
+    width: 75%;
 }
 
-.imageErreur {
-    width: 40%;
+.infosOffreEntr {
+    grid-column: 1/4;
+    grid-row: 2/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 98%;
+    height: 95%;
+    margin: 0;
+    background-color: #aadcda;
+}
+
+.infosOffreEntr > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-top: 10%;
+}
+
+.overflowListe {
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.overflowListe2 {
+    width: 95%;
+    height: 95%;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.overflowListe2 > ul > li{
+    color: black;
+
+}
+
+.overflowListe2::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #ffd0d4;
+    width: 10px;
+}
+
+.overflowListe2::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+#liseInfosOffreEntr > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 5%;
+    line-height: 1em;
+}
+
+#liseInfosOffreEntr > p > span {
+    font-weight: bold;
+}
+
+.petitConteneurInfosOffre {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: space-around;
+    margin-bottom: 3%;
+}
+
+.petitConteneurInfosOffre > h3 {
+    margin-bottom: 0;
+}
+
+.petitConteneurInfosOffre > img {
+    width: 35%;
+    margin-bottom: 30%;
+}
+
+
+.actionsRapidesEntr {
+    grid-column: 4/5;
+    grid-row: 3/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    width: 95%;
+    height: 92%;
+    background-color: #ff9095;
+    border-radius: 10px;
+}
+
+.actionsRapidesEntr > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.actionsRapidesEntr > a {
+    margin: 5%;
+    width: 90%;
+}
+
+
+
+
+.listeEtudiantsPostulants {
+    grid-column: 4/5 ;
+    grid-row: 1/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin: 0;
+    height: 97%;
+    width: 95%;
+    background-color: #ff9095;
+    padding: 2px;
+}
+
+
+
+.listeEtudiantsPostulants > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.listeEtudiantsPostulants > form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.etudiantPostulant {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    width: 98%;
+    height: 30%;
+    margin: 1%;
+    padding: 0;
+    border-radius: 10px;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+.wrapPostulants {
+    width: 95%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+
+.illuPostulant {
+    float: left;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.illuPostulant > img {
+    width: 70%;
+}
+
+.nomEtuPostulant {
+    float: right;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.nomEtuPostulant > h4 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+.nomEtuPostulant > a {
+    height: 50%;
+    width: 70%;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.boutonAssigner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    padding: 3%;
+}
+
+.boutonAssigner:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+#disabled:hover {
+    cursor: not-allowed;
+}
+
+.erreur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 95%;
+    height: 80%;
+}
+
+.erreur > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.erreur > img {
+    width: 50%;
+}
+
+#disabled {
+    opacity: 0.5;
+}
+
+#disabled:hover {
+    cursor: not-allowed;
+    background-color: #ff5660;
+    border: none;
+    color: white;
 }
 
 .nbPostulants {
-    background-color: white;
     border-radius: 10px;
-    width: 90%;
+    background-color: white;
+    width: 80%;
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -132,281 +395,13 @@ body {
     justify-content: center;
 }
 
+.nbPostulants > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
 .nbPostulants > img {
     width: 50%;
 }
-
-.nbPostulants > h4 {
-    font-family: "Oswald", sans-serif;
-    letter-spacing: 0.04em;
-    margin-top: 2%;
-    color: black;
-}
-
-
-.conteneurAnnoncesEntr {
-    grid-column: 1/3;
-    grid-row: 2/5;
-    width: 100%;
-    height: 88%;
-    float: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    border-radius: 10px;
-    margin-top: 3%;
-    background-color: #aadcda;
-    padding: 5px;
-}
-
-.titre > h3 {
-    font-family: "Oswald", sans-serif;
-    letter-spacing: 0.04em;
-    margin-bottom: 2%;
-}
-
-.wrapAnnonces {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    justify-items: center;
-    width: 100%;
-    height: 90%;
-    overflow-y: scroll;
-}
-
-.wrapAnnonces::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 10px;
-    background-color: #ffbfc2;
-}
-
-.wrapAnnonces::-webkit-scrollbar-thumb {
-    background-color: #ff5660;
-    border-radius: 10px;
-}
-
-.annonceEntreprise {
-    width: 95%;
-    height: 45%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    background-color: white;
-    border-radius: 10px;
-}
-
-.wrapAnnonces > a {
-    width: 95%;
-    height: 40%;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    background-color: white;
-    transition: background-color 0.3s;
-    padding: 0;
-    text-decoration: none;
-}
-
-.wrapAnnonces > a:hover {
-    background-color: #ffa7ab;
-    cursor: pointer;
-}
-
-.imgAnnonce {
-    float: left;
-    width: 15%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.wrapTexte {
-    float: left;
-    width: 55%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: flex-start;
-}
-
-.wrapTexte > h4 {
-    margin-top: 1%;
-    margin-bottom: 0;
-    font-family: "Oswald", sans-serif;
-    letter-spacing : 0.03em;
-    text-decoration: none;
-    color: #ff5660;
-    text-align: left;
-}
-
-.detailsAnnonce {
-    margin-top: 1%;
-    margin-bottom: 1%;
-    font-family: "Open Sans extra", sans-serif;
-    text-align: left;
-    font-size: 0.8em;
-}
-
-.detailsAnnonce {
-    width: 100%;
-    height: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    margin: 0;
-    padding: 0;
-}
-
-.lieuRemun {
-    width: 98%;
-    height: 30%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: flex-start;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-}
-
-.lieuAnnonce {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: left;
-    width: 50%;
-    height: 100%;
-    float: left;
-}
-
-.remunAnnonce {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: left;
-    width: 50%;
-    height: 100%;
-    float: right;
-}
-
-.dureeLibelle {
-    width: 98%;
-    height: 40%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-}
-
-.dureeAnnonce {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: left;
-    width: 50%;
-    height: 100%;
-    float: left;
-}
-
-.libelleAnnonce {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: left;
-    width: 50%;
-    height: 100%;
-    float: right;
-}
-
-.imagesPuces {
-    height: 17px;
-}
-
-.petitTexte {
-    font-size: 0.8em;
-    font-family: "Open Sans extra", sans-serif;
-    margin-left: 2%;
-    padding: 0;
-    color: black;
-    text-decoration: none;
-}
-
-.statutAnnonceEntr {
-    float: left;
-    width: 30%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.statut {
-    width: 90%;
-    height: 90%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-
-}
-
-#enAttente {
-    background-color: #ffdc7d;
-}
-
-.imagesStatut {
-    height: 40%;
-    margin-top: 8%;
-}
-
-.imageEntr {
-    width: 65%;
-}
-
-#valide {
-    background-color: #a6ffaa;
-}
-
-#refuse {
-    background-color: #ff9ca3;
-}
-
-
-

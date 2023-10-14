@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <img src="../ressources/images/entrepriseData.png" alt="illu">
+            <img src="../ressources/images/etudiantsHeureux.png" alt="illu">
         </div>
     </div>
 
