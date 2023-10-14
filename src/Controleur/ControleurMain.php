@@ -63,7 +63,8 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        self::afficherVueDansCorps("Erreur", 'vueErreur.php', ControleurMain::getMenuErreur(), [
+        $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
+        self::afficherVueDansCorps("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
         ]);
     }
