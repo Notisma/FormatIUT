@@ -28,6 +28,19 @@
                         <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine()?> jours</p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures</p>
                         <p><span>Détails de l'offre :</span> <?php echo $offre->getDetailProjet() ?></p>
+                        <div class="infosSurEntreprise">
+                            <div class="left">
+                                <?php
+                                echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'" class="imageEntr">';
+                                ?>
+                            </div>
+
+                            <div class="right">
+                                <h3><?php echo $entreprise->getNomEntreprise(); ?></h3>
+                                <p><span>Téléphone :</span><?php $entreprise->getTel(); ?></p>
+                                <p><span>Adresse :</span><?php $entreprise->getAdresse(); ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
