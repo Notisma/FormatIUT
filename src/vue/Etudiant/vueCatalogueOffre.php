@@ -38,30 +38,26 @@
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
-                    echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
-                    echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
-                    echo "<p>" . $offre->getDetailProjet() . "</p>";
+                        echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
+                        echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
+                        echo "<p>" . $offre->getDetailProjet() . "</p>";
                     echo "</div>";
                     echo "<div class='partieDroite'>";
-                    echo "<div class='divInfo' id='wrapLogo'>";
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
-                    echo "</div>";
-                    echo "<div class='divInfo' id='nbPostu'>";
-                    echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
-                    echo "<p>";
-                    if (!(new FormationRepository())->estFormation($offre)) {
-                        $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
-                        echo $nb . " postulation";
-                        if ($nb > 1) echo "s";
-                    } else {
-                        echo "Assignée";
-                    }
-                    echo "</p>";
-                    echo "</div>";
-                    echo "<div class='divInfo' id='statutOffre'>";
-                    echo "<img src='../ressources/images/verifier.png' alt='statut'>";
-                    echo "<p>Offre validée</p>";
-                    echo "</div>";
+                        echo "<div class='divInfo' id='wrapLogo'>";
+                            echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
+                        echo "</div>";
+                        echo "<div class='divInfo' id='nbPostu'>";
+                            echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
+                            echo "<p>";
+                            if (!(new FormationRepository())->estFormation($offre)) {
+                                $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
+                                echo $nb . " postulation";
+                                if ($nb > 1) echo "s";
+                            } else {
+                                echo "Assignée";
+                            }
+                            echo "</p>";
+                        echo "</div>";
                     echo "</div>";
                     echo "</a>";
                 }

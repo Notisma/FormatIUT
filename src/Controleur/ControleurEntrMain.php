@@ -135,11 +135,9 @@ class ControleurEntrMain extends ControleurMain
         self::afficherProfilEntr();
     }
 
-    public function supprimerOffre(){
+    public static function supprimerOffre(){
         //TODO vérifs
         (new OffreRepository())->supprimer($_GET["idOffre"]);
         self::afficherAccueilEntr();
     }
-
-
 }
