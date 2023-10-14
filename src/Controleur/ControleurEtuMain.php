@@ -91,7 +91,7 @@ class ControleurEtuMain extends ControleurMain
         parent::insertImage($nom);
         $ancienId=(new ImageRepository())->imageParEtudiant(self::$cleEtudiant);
         (new EtudiantRepository())->updateImage(self::$cleEtudiant,$id);
-        (new ImageRepository())->supprimer($ancienId["img_id"]);
+        if ($ancienId["img_id"]!=1 && $ancienId["img_id"]!=0) (new ImageRepository())->supprimer($ancienId["img_id"]);
         self::afficherProfilEtu();
     }
 

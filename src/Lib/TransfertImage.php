@@ -4,17 +4,19 @@ namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
+use GdImage;
 
 class TransfertImage
 {
-    public static function transfert($nom, string $controleur){
-        $ret        = false;
-        $img_blob   = '';
+    public static function transfert($nom)
+    {
+        $ret = false;
+        $img_blob = '';
         $img_taille = 0;
-        $img_type   = '';
-        $img_nom    = '';
+        $img_type = '';
+        $img_nom = '';
         $taille_max = 250000;
-        $ret        = is_uploaded_file($_FILES['fic']['tmp_name']);
+        $ret = is_uploaded_file($_FILES['fic']['tmp_name']);
 
         if (!$ret) {
             echo "Problème de transfert";
@@ -29,22 +31,23 @@ class TransfertImage
             }
 
             $img_type = $_FILES['fic']['type'];
-            $img_nom  = $_FILES['fic']['name'];
+            $img_nom = $_FILES['fic']['name'];
 
-            $img_blob = file_get_contents ($_FILES['fic']['tmp_name']);
-            if($controleur == "EtuMain") {
-                $img_blob = file_get_contents(self::img_ronde($img_blob));
+            $img_blob = file_get_contents($_FILES['fic']['tmp_name']);
+            if ($_GET["controleur"] == "EtuMain") {
+                $image = self::img_ronde($img_blob);
+                $img_blob = self::image_data($image);
             }
-            (new ImageRepository())->insert(["img_id"=>$_POST["img_id"],"img_nom"=>$nom,"img_taille"=>$img_taille,"img_type"=>$img_type,"img_blob"=>$img_blob]);
+            (new ImageRepository())->insert(["img_id" => $_POST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
         }
     }
 
-    public static function img_ronde(string $image){
+    public static function img_ronde(string $image) : GdImage{
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
 
-        $nouvellesdimensions = 285;
+        $nouvellesdimensions = 284;
 
         $image_ronde = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
         imagealphablending($image_ronde, true);
@@ -64,4 +67,11 @@ class TransfertImage
 
         return $image_ronde;
     }
+
+    private static function image_data($gdimage){
+        ob_start();
+        imagepng($gdimage);
+        return(ob_get_clean());
+    }
+
 }

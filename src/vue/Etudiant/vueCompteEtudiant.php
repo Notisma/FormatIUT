@@ -1,4 +1,4 @@
-<html>
+ <html>
 <head>
     <link rel="stylesheet" href="../ressources/css/styleVueCompteEtudiant.css">
 </head>
