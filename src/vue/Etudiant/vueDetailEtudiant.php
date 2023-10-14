@@ -7,9 +7,9 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
-            <h2><?php echo $offre->getNomOffre(). " - " . $offre->getTypeOffre()?></h2>
-            <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
-            <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h2><?php echo $offre->getNomOffre() . " - " . $offre->getTypeOffre() ?></h2>
+            <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
+            <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -25,13 +25,15 @@
                     <div id="liseInfosOffreEntr">
                         <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
                         <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
-                        <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine()?> jours</p>
-                        <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures</p>
+                        <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?> jours
+                        </p>
+                        <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures
+                        </p>
                         <p><span>Détails de l'offre :</span> <?php echo $offre->getDetailProjet() ?></p>
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
-                                echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'" class="imageEntr">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">';
                                 ?>
                             </div>
 
@@ -64,15 +66,15 @@
 
         <div class="wrapPostulants">
             <?php
-            $listeEtu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
-            if (empty($listeEtu)){
+            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+            if (empty($listeEtu)) {
                 echo "
                 <div class='erreur'>
                 <h4>Personne n'a postulé. Faites Vite !</h4>
                 <img src='../ressources/images/erreur.png' alt='erreur'>
                 </div>
                 ";
-            }else {
+            } else {
                 echo "
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>

@@ -39,29 +39,44 @@ class TransfertImage
         }
     }
 
-    public static function img_ronde(string $image){
+    public static function img_ronde(string $image)
+    {
+
+        if (!getimagesize($image)) {
+            throw new Exception('L\'argument fourni n\'est pas une image.');
+        }
+
+
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
 
-        $nouvellesdimensions = 285;
+        $nouvellesDimensions = 285;
 
-        $image_ronde = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
+        $image_ronde = imagecreatetruecolor($nouvellesDimensions, $nouvellesDimensions);
         imagealphablending($image_ronde, true);
-        imagecopyresampled($image_ronde, $image, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, $largeur, $hauteur);
+        imagecopyresampled($image_ronde, $image, 0, 0, 0, 0, $nouvellesDimensions, $nouvellesDimensions, $largeur, $hauteur);
 
-        $mask = imagecreatetruecolor($nouvellesdimensions, $nouvellesdimensions);
 
-        $transparent = imagecolorallocate($mask, 255, 0, 0);
+        $mask = imagecreatetruecolor($nouvellesDimensions, $nouvellesDimensions);
+
+        $transparent = imagecolorallocate($mask, 0, 0, 0, 127);
         imagecolortransparent($mask, $transparent);
 
-        imagefilledellipse($mask, $nouvellesdimensions/2, $nouvellesdimensions/2, $nouvellesdimensions, $nouvellesdimensions, $transparent);
+        imagefilledellipse($mask, $nouvellesDimensions / 2, $nouvellesDimensions / 2, $nouvellesDimensions, $nouvellesDimensions, $transparent);
 
-        $red = imagecolorallocate($mask, 0, 0, 0);
-        imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, 100);
-        imagecolortransparent($image_ronde, $red);
-        imagefill($image_ronde, 0, 0, $red);
+
+        imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesDimensions, $nouvellesDimensions, 100);
+
+
+        imagecolortransparent($image_ronde, $transparent);
+
+
+        imagedestroy($image);
+        imagedestroy($mask);
 
         return $image_ronde;
     }
+
+
 }
