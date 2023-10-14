@@ -30,7 +30,6 @@ class ControleurMain
         self::afficherVue('vueGenerale.php',["menu"=>$menu::getMenu(),"chemin"=>$chemin,"titrePage"=>"Detail de l'offre","offre"=>$offre,"entreprise"=>$entreprise]);
     }
 
-
     public static function afficherVue(string $cheminVue, array $parametres = []): void
     {
         extract($parametres); // Crée des variables à partir du tableau $parametres
@@ -73,6 +72,7 @@ class ControleurMain
             'erreurStr' => $error
         ]);
     }
+
     protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         self::afficherVue("vueGenerale.php", array_merge(
