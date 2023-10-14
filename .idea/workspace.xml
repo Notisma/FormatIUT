@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="visuel vueDetailEntreprise.php (version 1) terminé.">
+      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,15 +161,7 @@
       <workItem from="1697209826637" duration="108000" />
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
-      <workItem from="1697270110676" duration="3541000" />
-    </task>
-    <task id="LOCAL-00023" summary="rajout du controleurEntrMain + vues(vide)">
-      <option name="closed" value="true" />
-      <created>1696062112558</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1696062112558</updated>
+      <workItem from="1697270110676" duration="5601000" />
     </task>
     <task id="LOCAL-00024" summary="rajout des liens pour formulaireCreationOffre.php">
       <option name="closed" value="true" />
@@ -558,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697211055206</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="visuel vueDetailEntreprise.php (version 1) terminé.">
+      <option name="closed" value="true" />
+      <created>1697273752249</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1697273752249</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajouts d'espaces dans les titles." />
     <MESSAGE value="formulaireCreationOffre.php (version 1) terminé." />
     <MESSAGE value="Encore un bug de git" />
     <MESSAGE value="Fix bug git" />
@@ -651,7 +647,8 @@
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
     <MESSAGE value="Corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
+    <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
+    <option name="LAST_COMMIT_MESSAGE" value="visuel vueDetailEntreprise.php (version 1) terminé." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
