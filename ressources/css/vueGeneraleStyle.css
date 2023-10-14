@@ -270,9 +270,9 @@ body {
 
 #Gestionrecherche {
     float: right;
+    width: 80%;
     margin-top: 0;
     height: 70%;
-    width: 45%;
 }
 
 form {
@@ -280,7 +280,7 @@ form {
 }
 
 .searchField {
-    width: 90%;
+    width: 98%;
     height: 35px;
     border-radius: 9px;
     border: none;
@@ -294,10 +294,9 @@ form {
 }
 
 #profil {
-    float: right;
+    float: left;
     height: 36px;
-    width: 3%;
-    margin: auto;
+    width: 8%;
 }
 
 #petiteIcone {
@@ -514,4 +513,14 @@ form {
     font-family: "Oswald", sans-serif;
     margin-left: 10%;
     margin-top: 5%;
+}
+
+.wrapHead {
+    display: flex;
+    /* l'ordre des éléments doit être inversé */
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    float: right;
 }
