@@ -32,7 +32,7 @@ class ControleurEtuMain extends ControleurMain
     }
     public static function afficherCatalogue() {
         $offres = (new OffreRepository())->getListeIdOffres();
-        self::afficherVueDansCorps("Liste des offres", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres]);
+        self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres]);
     }
     public static function afficherProfilEtu() {
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));

@@ -92,7 +92,11 @@
                     echo "</a>";
                 }
             } else {
-                echo "Vous n'avez aucune offre";
+                echo "
+                <div class='erreur'>
+                    <img src='../ressources/images/erreur.png' alt='erreur'>
+                    <h4>Vous n'avez aucune offre</h4>
+                </div>";
             } ?>
         </div>
     </div>

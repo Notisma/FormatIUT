@@ -284,3 +284,25 @@ body {
     align-content: center;
     justify-content: space-around;
 }
+
+.erreur {
+    background-color: white;
+    border-radius: 10px;
+    width: 30%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.erreur > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin: 0;
+}
+
+.erreur > img {
+    width: 50%;
+}
