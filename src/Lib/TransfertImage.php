@@ -40,6 +40,7 @@ class TransfertImage
             }
             (new ImageRepository())->insert(["img_id" => $_POST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
         }
+        return true;
     }
 
     public static function img_ronde(string $image) {

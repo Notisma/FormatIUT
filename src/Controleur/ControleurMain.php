@@ -95,7 +95,7 @@ class ControleurMain
     }
 
     public static function insertImage($nom){
-        TransfertImage::transfert($nom);
+        return TransfertImage::transfert($nom);
     }
 
     protected static function autoIncrement($listeId, $get): int
