@@ -19,6 +19,24 @@ class OffreRepository extends AbstractRepository
         return "Offre";
     }
 
+    public function getListeOffresParType($type): array
+    {
+        $values = array();
+        $sql="SELECT * FROM " . $this->getNomTable();
+        if ($type=="Stage" || $type=="Alternance"){
+            $sql.=" WHERE typeOffre=:TypeTag";
+            $values["TypeTag"]=$type;
+        }
+        echo $sql;
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $pdoStatement->execute($values);
+        $listeOffre=array();
+        foreach ($pdoStatement as $offre){
+            $listeOffre[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffre;
+    }
+
     /**
      * @param $idEntreprise
      * @return array
@@ -48,7 +66,6 @@ class OffreRepository extends AbstractRepository
      * @return array
      * retourne la liste des offres pour une entreprise avec différents filtres
      */
-
     public function getListeOffreParEntreprise($idEntreprise,$type,$etat): array
     {
         $sql="SELECT * FROM ". $this->getNomTable() ." o WHERE idEntreprise=:Tag";
