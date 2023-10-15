@@ -64,7 +64,8 @@
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
-                    echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
+                    $nomHTML=htmlspecialchars($offre->getNomOffre());
+                    echo "<h3>" . $nomHTML. " - " . $offre->getTypeOffre() . "</h3>";
                     echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
                     echo "<p>" . $offre->getDetailProjet() . "</p>";
                     echo "</div>";
