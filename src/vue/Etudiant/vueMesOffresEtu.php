@@ -35,37 +35,28 @@
 
                 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
-                if(empty($listOffre)) {
-                    foreach ($listOffre as $offre) {
-                        if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente") {
-                            echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
-                            echo "<div class='partieGauche'>";
-                            echo '<p>';
-                            echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
-                            echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                            echo '<div class="conteneurBouton">';
-                            echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+                foreach ($listOffre as $offre) {
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente" ){
+                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
+                        echo "<div class='partieGauche'>";
+                        echo '<p>';
+                        echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
+                        echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo '<div class="conteneurBouton">';
+                        echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
                               </form>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '<div class="partieDroite">';
-                            echo '<img src="../ressources/images/logo_CA.png" alt="imageEntreprise">';
-                            echo '</div>';
-                            echo '</a>';
-                        }
-                    }
-                } else{
-                    echo '<div class="erreur">';
-                    echo  '<img src="../ressources/images/erreur.png" alt="imageErreur">';
-                     echo '<h4>Aucune offre à afficher.</h4>';
-                echo  '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="partieDroite">';
+                        echo '<img src="../ressources/images/logo_CA.png" alt="imageEntreprise">';
+                        echo '</div>';
+                        echo '</a>';
 
-            echo  '</div>';
-        echo  '</div>';
+                    }
                 }
                 ?>
 
@@ -78,48 +69,39 @@
                 <h3>Offres en attente de Choix</h3>
                 <?php
 
-                if(!empty($listOffre)) {
-                    foreach ($listOffre as $offre) {
-                        if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Assigné" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
-                            echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
-                            echo "<div class='partieGauche'>";
-                            echo '<p>';
-                            echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
-                            echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                            echo '<div class="conteneurBouton">';
-                            if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
-                                echo '<button class="boutonOffre" id="disabled">acceptée</button>';
-                            } else {
-                                echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+
+                foreach ($listOffre as $offre) {
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Assigné" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
+                        echo "<div class='partieGauche'>";
+                        echo '<p>';
+                        echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
+                        echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo '<div class="conteneurBouton">';
+                        if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée"){
+                            echo '<button class="boutonOffre" id="disabled">acceptée</button>';
+                        }
+                        else{
+                            echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="validerOffre">
                               <button class="boutonOffre" id="accepter">ACCEPTER</button>
                               </form>';
-                                echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+                            echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
                               </form>';
-                            }
-                            echo '</div>';
-                            echo '</div>';
-                            echo '<div class="partieDroite">';
-                            echo '<img src="../ressources/images/logo_CA.png" alt="imageEntreprise">';
-                            echo '</div>';
-                            echo '</a>';
                         }
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="partieDroite">';
+                        echo '<img src="../ressources/images/logo_CA.png" alt="imageEntreprise">';
+                        echo '</div>';
+                        echo '</a>';
                     }
-                }
-                else{
-                    echo '<div class="erreur">';
-                    echo  '<img src="../ressources/images/erreur.png" alt="imageErreur">';
-                     echo '<h4>Aucune offre à afficher.</h4>';
-                echo  '</div>';
-
-            echo  '</div>';
-        echo  '</div>';
                 }
                 ?>
 
