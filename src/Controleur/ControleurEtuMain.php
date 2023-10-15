@@ -7,10 +7,11 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static int $cleEtudiant=22206782;
+    private static int $cleEtudiant=321444;
 
     public static function getCleEtudiant(): int
     {
@@ -42,6 +43,14 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherMesOffres(){
         $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
+    }
+
+    public static function validerOffre(){
+        $idOffre = $_GET['idOffre'];
+        if((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0 && (new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre)){
+            (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
+            self::afficherVue("vueGenerale.php", ["titrePage"=> "test", "chemin" => "Etudiant/vueOffreEtuValide.php", "menu" => self::getMenu(), "idOffre" => $idOffre]);
+        }
     }
 
     public static function postuler(){

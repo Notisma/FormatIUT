@@ -38,4 +38,24 @@ class RegarderRepository extends AbstractRepository {
         $values=array("Tag"=>$idOffre);
         $pdoStatement->execute($values);
     }
+
+    public function validerOffreEtudiant($numEtudiant, $idOffre){
+        $sql="UPDATE regarder SET Etat = 'Annulé'WHERE idEtudiant = :tagEtu AND idOffre <> :tagOffre;
+        UPDATE regarder SET Etat = 'Annulé'WHERE idEtudiant <> :tagEtu AND idOffre = :tagOffre
+        UPDATE regarder SET Etat = 'Validée'WHERE idEtudiant = :tagEtu AND idOffre = :tagOffre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array(
+            "tagEtu" => $numEtudiant,
+            "tagOffre" => $idOffre
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function checkOffreValide($numEtudiant){
+        $sql = "SELECT COUNT(*) FROM regarder WHERE Etat = 'Validée' AND numEtudiant = :tagEtu";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagEtu" => $numEtudiant);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
+    }
 }
