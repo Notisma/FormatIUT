@@ -15,7 +15,7 @@ class TransfertImage
         $img_taille = 0;
         $img_type = '';
         $img_nom = '';
-        $taille_max = 250000;
+        $taille_max = 1000000;
         $ret = is_uploaded_file($_FILES['fic']['tmp_name']);
 
         if (!$ret) {
