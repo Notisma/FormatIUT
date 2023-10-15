@@ -28,22 +28,22 @@ body {
 
 .conteneurErreur {
     float: right;
-    grid-row: 1;
-    grid-column: 1/4;
+    grid-row: 2;
+    grid-column: 1/5;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: center;
     border-radius: 10px;
-    width: 98%;
-    height: 95%;
+    width: 70%;
+    height: 100%;
     background-color: #ff9095;
 }
 
 .texte {
     float: left;
-    width: 70%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -76,4 +76,19 @@ body {
 
 #disabled:hover {
     cursor: not-allowed;
+}
+
+.image {
+    float: right;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.image > img {
+    width: 65%;
 }

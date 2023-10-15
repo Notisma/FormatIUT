@@ -255,7 +255,7 @@ body {
     padding-top: 2%;
 }
 
-.conteneurBouton > button {
+.conteneurBouton > form > button {
     width: 45%;
     padding: 2%;
     border: none;

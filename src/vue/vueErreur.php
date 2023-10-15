@@ -5,13 +5,16 @@
 <body>
 <div class="boiteMain">
     <div class="conteneurErreur">
+        <div class="image">
+            <img src="../ressources/images/annuler.png" alt="imageErreur">
+        </div>
         <div class="texte">
-            <p>Erreur <?php
+            <h2>Erreur <?php
             if (isset($erreurStr))
-                echo ": $erreurStr";
+                echo ": $erreurStr.";
             else
                 echo "inconnue.";
-            ?></p>
+            ?></h2>
         </div>
     </div>
 </div>
