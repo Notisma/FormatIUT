@@ -51,17 +51,21 @@ class ControleurEtuMain extends ControleurMain
             $idOffre = $_GET['idOffre'];
             if (in_array($idOffre,$listeId)) {
                 $formation=((new FormationRepository())->estFormation($idOffre));
-                if (is_null($formation)) {
-                    if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant,$idOffre)=="A Choisir") {
-                        if ((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0 ) {
-                            (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
-                            self::afficherVue("vueGenerale.php", ["titrePage" => "test", "chemin" => "Etudiant/vueOffreEtuValide.php", "menu" => self::getMenu(), "idOffre" => $idOffre]);
+                if ((new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
+                    if (is_null($formation)) {
+                        if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "A Choisir") {
+                            if ((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0) {
+                                (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
+                                self::afficherVue("vueGenerale.php", ["titrePage" => "test", "chemin" => "Etudiant/vueOffreEtuValide.php", "menu" => self::getMenu(), "idOffre" => $idOffre]);
+                            }
+                        } else {
+                            self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
                         }
-                    }else {
-                        self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
+                    } else {
+                        self::afficherErreur("Cette Offre est déjà assignée");
                     }
                 }else {
-                    self::afficherErreur("Cette Offre est déjà assignée");
+                    self::afficherErreur("Vous avez déjà une Offre assignée");
                 }
             }else {
                 self::afficherErreur("Offre non existante");
