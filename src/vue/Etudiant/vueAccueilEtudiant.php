@@ -76,7 +76,8 @@
                                 <div class="libelleAnnonce" >
                                     <img src = "../ressources/images/emploi.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo $listeStage[$i]->getNomOffre();
+                        $nomHTML=htmlspecialchars($listeStage[$i]->getNomOffre());
+                        echo $nomHTML;
                         echo '</p >
                                 </div >
                             </div >

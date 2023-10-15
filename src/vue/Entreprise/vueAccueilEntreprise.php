@@ -85,14 +85,16 @@
                 </div>
                 <div class="wrapTexte">
                     <h4>';
-                echo $entreprise->getNomEntreprise();
+                $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+                echo $nomEntrHTML;
                 echo '</h4>
                     <div class="detailsAnnonce">
                         <div class="lieuRemun">
                             <div class="lieuAnnonce">
                                 <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                echo $ville->getNomVille();
+                $nomVilleHTML=htmlspecialchars($ville->getNomVille());
+                echo $nomVilleHTML;
                 echo '</p>
                             </div>
                             <div class="remunAnnonce">
@@ -112,7 +114,8 @@
                             <div class="libelleAnnonce">
                                 <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                echo $listeOffre[$i]->getNomOffre();
+                $nomOffreHTML=htmlspecialchars($listeOffre[$i]->getNomOffre());
+                echo $nomOffreHTML;
                 echo '</p>
                             </div>
                         </div>
