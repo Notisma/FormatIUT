@@ -98,13 +98,11 @@
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
                 $nbEtudiants=((new EtudiantRepository())->nbPostulation($offre->getIdOffre()));
-                echo $nbEtudiants." Etudiant";
-                if ($nbEtudiants!=1) echo "s";
-                echo " ont déjà postulé.</h4>
-                </div>          
-                
-                
-            ";
+                echo $nbEtudiants." étudiant";
+                if ($nbEtudiants == 1) echo " a";
+                else echo "s ont";
+                echo " déjà postulé.</h4>
+                    </div>";
             }
 
             ?>
