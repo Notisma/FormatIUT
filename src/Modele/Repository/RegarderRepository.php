@@ -39,6 +39,13 @@ class RegarderRepository extends AbstractRepository {
         $pdoStatement->execute($values);
     }
 
+    public function supprimerOffreEtudiant($numEtudiant ,$idOffre){
+        $sql="DELETE FROM regarder WHERE $numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagEtu"=>$numEtudiant ,"TagOffre"=>$idOffre);
+        $pdoStatement->execute($values);
+    }
+
     public function validerOffreEtudiant($numEtudiant, $idOffre){
         $sql="UPDATE regarder SET Etat = 'Annulé' WHERE idEtudiant = :tagEtu AND idOffre <> :tagOffre;
         UPDATE regarder SET Etat = 'Annulé' WHERE idEtudiant <> :tagEtu AND idOffre = :tagOffre

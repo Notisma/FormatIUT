@@ -36,14 +36,19 @@
                 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
                 foreach ($listOffre as $offre) {
-                    if(((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente" ) || ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Refusé")){
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente" ){
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
                         echo '<div class="conteneurBouton">';
-                        echo '<button class="boutonOffre" id="refuser">ANNULER</button>';
+                        echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="action" value="annulerOffre">
+                              <button class="boutonOffre" id="refuser">ANNULER</button>
+                              </form>';
                         echo '</div>';
                         echo '</div>';
                         echo '<div class="partieDroite">';
@@ -71,15 +76,30 @@
 
 
                 foreach ($listOffre as $offre) {
-                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Assigné") {
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Assigné" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
                         echo '<div class="conteneurBouton">';
-                        echo '<button class="boutonOffre" id="accepter">ACCEPTER</button>';
-                        echo '<button class="boutonOffre" id="refuser">ANNULER</button>';
+                        if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée"){
+                            echo '<button class="boutonOffre" id="disabled">acceptée</button>';
+                        }
+                        else{
+                        echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="action" value="validerOffre">
+                              <button class="boutonOffre" id="accepter">ACCEPTER</button>
+                              </form>';
+                        echo'<form method="get">
+                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="action" value="annulerOffre">
+                              <button class="boutonOffre" id="refuser">ANNULER</button>
+                              </form>';
+                        }
                         echo '</div>';
                         echo '</div>';
                         echo '<div class="partieDroite">';
