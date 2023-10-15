@@ -43,13 +43,17 @@ class ControleurEntrMain extends ControleurMain
             //if (strtotime($_POST["dateDebut"]) > strtotime($_POST["dateFin"])){
                 //TODO vérif que début après aujourd'hui
             if ($_POST["gratification"]>0 && $_POST["dureeHeures"]>0 && $_POST["joursParSemaine"]>0 && $_POST["nbHeuresHebdo"]>0) {
-                $listeId = (new OffreRepository())->getListeIdOffres();
-                self::autoIncrement($listeId, "idOffre");
-                $_POST["idEntreprise"] = self::$cleEntreprise;
-                $offre = (new OffreRepository())->construireDepuisTableau($_POST);
-                (new OffreRepository())->creerObjet($offre);
-                $_GET["action"]="mesOffres";
-                self::mesOffres();
+                if ($_POST["joursParSemaine"]<8) {
+                    $listeId = (new OffreRepository())->getListeIdOffres();
+                    self::autoIncrement($listeId, "idOffre");
+                    $_POST["idEntreprise"] = self::$cleEntreprise;
+                    $offre = (new OffreRepository())->construireDepuisTableau($_POST);
+                    (new OffreRepository())->creerObjet($offre);
+                    $_GET["action"] = "mesOffres";
+                    self::mesOffres();
+                }else {
+                    self::afficherErreur("Des données sont erronées");
+                }
             }else {
                 self::afficherErreur("Des données sont érronées");
             }
