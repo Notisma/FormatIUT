@@ -27,7 +27,6 @@ class OffreRepository extends AbstractRepository
             $sql.=" WHERE typeOffre=:TypeTag";
             $values["TypeTag"]=$type;
         }
-        echo $sql;
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $listeOffre=array();
