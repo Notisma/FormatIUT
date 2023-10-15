@@ -13,8 +13,8 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 
 ## Liens 
 
-Diagrammes : https://docs.google.com/spreadsheets/d/1b9vRlbTwPmWqZsl5Y0qQmfdecBh8a0szK4-mDfgJhUc/edit?usp=sharing
-Tests : https://cryptpad.fr/sheet/#/2/sheet/edit/kHVtsfTj4IEdug8Neu2ZrXDh/
+- Diagrammes : https://docs.google.com/spreadsheets/d/1b9vRlbTwPmWqZsl5Y0qQmfdecBh8a0szK4-mDfgJhUc/edit?usp=sharing
+- Tests : https://cryptpad.fr/sheet/#/2/sheet/edit/kHVtsfTj4IEdug8Neu2ZrXDh/
 
 ## Branches
 
