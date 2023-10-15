@@ -138,7 +138,9 @@ class ControleurEntrMain extends ControleurMain
         parent::insertImage($nom);
         $ancienId=(new ImageRepository())->imageParEntreprise(self::$cleEntreprise);
         (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
-        (new ImageRepository())->supprimer($ancienId["img_id"]);
+        if ($ancienId["img_id"]!=0) {
+            (new ImageRepository())->supprimer($ancienId["img_id"]);
+        }
         $_GET["action"]="afficherProfilEntr()";
         self::afficherProfilEntr();
     }
@@ -150,7 +152,7 @@ class ControleurEntrMain extends ControleurMain
             if (in_array($_GET["idOffre"],$listeOffre)) {
                 if (((new FormationRepository())->estFormation($_GET["idOffre"]))) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
-                    if ($offre->getSiret()) {
+                    if ($offre->getSiret()==self::$cleEntreprise) {
                         (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
                         (new OffreRepository())->supprimer($_GET["idOffre"]);
                         $_GET["action"] = "afficherAccueilEntr()";
