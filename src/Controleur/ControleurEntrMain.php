@@ -102,21 +102,27 @@ class ControleurEntrMain extends ControleurMain
     {
         //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_GET["idEtudiant"],$_GET["idOffre"])){
-            if (((new FormationRepository())->estFormation($_GET["idOffre"]))){
-                self::afficherErreur("L'offre est déjà prise");
-            }else{
-                if (((new EtudiantRepository())->aUneFormation($_GET["idOffre"]))){
-                    self::afficherErreur("L'étudiant a déjà une formation");
-                }else {
-                    if (((new EtudiantRepository())->EtudiantAPostuler($_GET["idEtudiant"],$_GET["idOffre"]))){
-                        (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'],$_GET["idOffre"]);
-                        $_GET["action"]="afficherAccueilEntr()";
-                        self::afficherAccueilEntr();
-                    }else {
-                        self::afficherErreur("L'étudiant n'es pas en Attente");
-                    }
+            $offre=((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
+            $etudiant =((new EtudiantRepository())->getObjectParClePrimaire($_GET["idEtudiant"]));
+            if (!is_null($offre) && !is_null($etudiant)) {
+                if (((new FormationRepository())->estFormation($_GET["idOffre"]))) {
+                    self::afficherErreur("L'offre est déjà prise");
+                } else {
+                    if (((new EtudiantRepository())->aUneFormation($_GET["idOffre"]))) {
+                        self::afficherErreur("L'étudiant a déjà une formation");
+                    } else {
+                        if (((new EtudiantRepository())->EtudiantAPostuler($_GET["idEtudiant"], $_GET["idOffre"]))) {
+                            (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'], $_GET["idOffre"]);
+                            $_GET["action"] = "afficherAccueilEntr()";
+                            self::afficherAccueilEntr();
+                        } else {
+                            self::afficherErreur("L'étudiant n'es pas en Attente");
+                        }
 
+                    }
                 }
+            }else {
+                self::afficherErreur("L'étudiant ou l'offre n'existe pas");
             }
         }else {
             self::afficherErreur("Données Manquantes pour assigner un étudiant");
