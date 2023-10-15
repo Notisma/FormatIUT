@@ -24,10 +24,11 @@ if (isset($_GET['action'])) {
 
 $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 
+$guillemets = '"';
 if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         $nomClasseControleur::$action();
     } else
-        $nomClasseControleur::afficherErreur("L'action $action n'existe pas dans le controleur $nomClasseControleur");
+        $nomClasseControleur::afficherErreur("L'action :$guillemets $action $guillemets n'existe pas dans le controleur :$guillemets $nomClasseControleur $guillemets");
 } else
-    $nomClasseControleur::afficherErreur("Le controleur $nomClasseControleur n'existe pas !");
+    $nomClasseControleur::afficherErreur("Le contrôleur :$guillemets $nomClasseControleur $guillemets n'existe pas");

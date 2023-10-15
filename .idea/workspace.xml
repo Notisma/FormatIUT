@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Visuel (version 1) vueMesOffresEtu.php terminé.">
-      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueCatalogue.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_10_2023_17_41_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_10_2023_17_41__Changes_.xml" beforeDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Début des améliorations visuelles vueCatalogueOffre.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueErreur.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueErreur.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueErreur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueErreur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,15 +165,7 @@
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
-      <workItem from="1697390647553" duration="2055000" />
-    </task>
-    <task id="LOCAL-00032" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
-      <option name="closed" value="true" />
-      <created>1696363214830</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1696363214830</updated>
+      <workItem from="1697390647553" duration="5191000" />
     </task>
     <task id="LOCAL-00033" summary="Correction de crash">
       <option name="closed" value="true" />
@@ -559,7 +551,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697386537551</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Début des améliorations visuelles vueCatalogueOffre.php">
+      <option name="closed" value="true" />
+      <created>1697392919674</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1697392919674</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -627,7 +627,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées" />
     <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
     <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
@@ -652,7 +651,8 @@
     <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
-    <option name="LAST_COMMIT_MESSAGE" value="Visuel (version 1) vueMesOffresEtu.php terminé." />
+    <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Début des améliorations visuelles vueCatalogueOffre.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
