@@ -1,12 +1,12 @@
 <head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffres.css">
+    <link rel="stylesheet" href="../ressources/css/styleVueCatalogue.css">
 </head>
 <body>
 <div id="center">
     <div class="presentation">
         <div class="texteGauche">
-            <h3>CATALOGUE</h3>
-            <p>Consultez et gérez toutes vos offres en quelques clics.</p>
+            <h3>CATALOGUE DES OFFRES</h3>
+            <p>Consultez et postulez sur toutes les offres disponibles en quelques clics</p>
 
             <form>
                 <input type="hidden" name="controleur" value="EtuMain">
@@ -28,6 +28,15 @@
             </form>
         </div>
 
+        <div class="imageDroite">
+            <img src="../ressources/images/vueCatalogueEtu.png" alt="illustration">
+        </div>
+
+    </div>
+
+    <div class="assistance">
+        <h3>ASTUCES</h3>
+        <p>Visualisez en un coup d'oeil les informations d'une offre, et cliquez sur cette dernière pour en savoir plus</p>
     </div>
 
     <div class="offresEtu">

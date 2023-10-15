@@ -9,8 +9,8 @@
             <!-- affichage des informations principales de l'offre -->
             <h2><?php use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
-
-                echo $offre->getNomOffre() . " - " . $offre->getTypeOffre() ?></h2>
+                $nomHTML=htmlspecialchars($offre->getNomOffre());
+                echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
             <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
             <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
@@ -32,7 +32,7 @@
                         </p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures
                         </p>
-                        <p><span>Détails de l'offre :</span> <?php echo $offre->getDetailProjet() ?></p>
+                        <p><span>Détails de l'offre :</span> <?php $detailHTML=htmlspecialchars($offre->getDetailProjet());echo $detailHTML ?></p>
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php

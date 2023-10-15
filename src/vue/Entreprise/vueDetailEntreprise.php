@@ -7,7 +7,7 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
-            <h2><?php echo $offre->getNomOffre() . " - " . $offre->getTypeOffre()?></h2>
+            <h2><?php $nomOffreHTML=htmlspecialchars($offre->getNomOffre());echo $nomOffreHTML . " - " . $offre->getTypeOffre()?></h2>
             <h4><?php echo "Du ".date_format($offre->getDateDebut(),'d F Y'). " au ".date_format($offre->getDateFin(),'d F Y')?></h4>
             <p><?php  echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
@@ -27,7 +27,7 @@
                         <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
                         <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine()?> jours</p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures</p>
-                        <p><span>Détails de l'offre :</span> <?php echo $offre->getDetailProjet() ?></p>
+                        <p><span>Détails de l'offre :</span> <?php $detailHTML=htmlspecialchars($offre->getDetailProjet());echo $detailHTML ?></p>
                     </div>
                 </div>
             </div>
