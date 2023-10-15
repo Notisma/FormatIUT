@@ -46,10 +46,28 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function validerOffre(){
-        $idOffre = $_GET['idOffre'];
-        if((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0 && (new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre)){
-            (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
-            self::afficherVue("vueGenerale.php", ["titrePage"=> "test", "chemin" => "Etudiant/vueOffreEtuValide.php", "menu" => self::getMenu(), "idOffre" => $idOffre]);
+        if (isset($_GET['idOffre'])) {
+            $listeId=((new OffreRepository())->getListeIdOffres());
+            $idOffre = $_GET['idOffre'];
+            if (in_array($idOffre,$listeId)) {
+                $formation=((new FormationRepository())->estFormation($idOffre));
+                if (is_null($formation)) {
+                    if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant,$idOffre)=="A Choisir") {
+                        if ((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0 ) {
+                            (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
+                            self::afficherVue("vueGenerale.php", ["titrePage" => "test", "chemin" => "Etudiant/vueOffreEtuValide.php", "menu" => self::getMenu(), "idOffre" => $idOffre]);
+                        }
+                    }else {
+                        self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
+                    }
+                }else {
+                    self::afficherErreur("Cette Offre est déjà assignée");
+                }
+            }else {
+                self::afficherErreur("Offre non existante");
+            }
+        }else {
+            self::afficherErreur("Données Manquantes");
         }
     }
 
