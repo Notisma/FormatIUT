@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="corrections de bug + vérifs de supprimer + réglage de certains souci d'actions">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_10_2023_21_49_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_10_2023_21_49__Changes_.xml" beforeDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="petite correction sur l'update d'image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,15 +164,7 @@
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
       <workItem from="1697309361083" duration="930000" />
-      <workItem from="1697356870175" duration="310000" />
-    </task>
-    <task id="LOCAL-00032" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
-      <option name="closed" value="true" />
-      <created>1696363214830</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1696363214830</updated>
+      <workItem from="1697356870175" duration="1328000" />
     </task>
     <task id="LOCAL-00033" summary="Correction de crash">
       <option name="closed" value="true" />
@@ -561,7 +550,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697310294880</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="petite correction sur l'update d'image">
+      <option name="closed" value="true" />
+      <created>1697357410836</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1697357410836</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +626,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées" />
     <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
     <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
@@ -654,7 +650,8 @@
     <MESSAGE value="vérifs et TODO" />
     <MESSAGE value="stats vueCompteEtudiant.php" />
     <MESSAGE value="corrections de bug + vérifs de supprimer + réglage de certains souci d'actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrections de bug + vérifs de supprimer + réglage de certains souci d'actions" />
+    <MESSAGE value="petite correction sur l'update d'image" />
+    <option name="LAST_COMMIT_MESSAGE" value="petite correction sur l'update d'image" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
