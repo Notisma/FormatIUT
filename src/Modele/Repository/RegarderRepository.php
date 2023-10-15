@@ -47,13 +47,35 @@ class RegarderRepository extends AbstractRepository {
     }
 
     public function validerOffreEtudiant($numEtudiant, $idOffre){
-        $sql="UPDATE regarder SET Etat = 'Annulé' WHERE numEtudiant = :tagEtu AND idOffre <> :tagOffre;
-        UPDATE regarder SET Etat = 'Annulé' WHERE numEtudiant <> :tagEtu AND idOffre = :tagOffre;
-        UPDATE regarder SET Etat = 'Validée' WHERE numEtudiant = :tagEtu AND idOffre = :tagOffre;";
+        $this->annulerAutresOffre($numEtudiant,$idOffre);
+        $this->annulerAutresEtudiant($numEtudiant,$idOffre);
+        $this->validerOffre($numEtudiant,$idOffre);
+
+    }
+    public function annulerAutresOffre($numEtudiant,$idOffre){
+        $sql="UPDATE ". $this->getNomTable() ." SET Etat='Annulé' WHERE numEtudiant=:tagEtu AND idOffre!=:tagOffre ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array(
-            "tagEtu" => $numEtudiant,
-            "tagOffre" => $idOffre
+        $values=array(
+            "tagEtu"=>$numEtudiant,
+            "tagOffre"=>$idOffre
+        );
+        $pdoStatement->execute($values);
+    }
+    public function annulerAutresEtudiant($numEtudiant,$idOffre){
+        $sql="UPDATE ".$this->getNomTable()." SET Etat='Annulé' WHERE numEtudiant!=:tagEtu AND idOffre=:tagOffre ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tagEtu"=>$numEtudiant,
+            "tagOffre"=>$idOffre
+        );
+        $pdoStatement->execute($values);
+    }
+    public function validerOffre($numEtudiant,$idOffre){
+        $sql="UPDATE ".$this->getNomTable()." SET Etat='Validée' WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tagEtu"=>$numEtudiant,
+            "tagOffre"=>$idOffre
         );
         $pdoStatement->execute($values);
     }

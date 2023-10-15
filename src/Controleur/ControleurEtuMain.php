@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -11,7 +12,7 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static int $cleEtudiant=321444;
+    private static int $cleEtudiant=22206782;
 
     public static function getCleEtudiant(): int
     {
@@ -45,12 +46,6 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
     }
 
-    public static function annulerOffre(){
-        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
-        $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
-
-    }
     public static function validerOffre(){
         if (isset($_GET['idOffre'])) {
             $listeId=((new OffreRepository())->getListeIdOffres());
@@ -61,9 +56,13 @@ class ControleurEtuMain extends ControleurMain
                     if (is_null($formation)) {
                         if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "Assigné") {
                             (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
-                            $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-                            self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
-
+                            $offre=((new OffreRepository())->getObjectParClePrimaire($idOffre));
+                            $idFormation="F".self::autoIncrement(((new FormationRepository())->ListeIdTypeFormation()),"idFormation");
+                            $formation=(new FormationRepository())->construireDepuisTableau(["idFormation"=>$idFormation,"dateDebut"=>date_format($offre->getDateDebut(),"Y-m-d"),"dateFin"=>date_format($offre->getDateFin(),'Y-m-d'),"idEtudiant"=>self::$cleEtudiant,"idEntreprise"=>$offre->getSiret(),"idOffre"=>$idOffre,"idTuteurPro"=>null,"idConvention"=>null,"idTuteurUm"=>null]);
+                            (new FormationRepository())->creerObjet($formation);
+                            self::afficherMesOffres();
+                        } else {
+                            self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
                         }
                     } else {
                         self::afficherErreur("Cette Offre est déjà assignée");
