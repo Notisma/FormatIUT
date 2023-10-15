@@ -51,7 +51,13 @@ body {
     letter-spacing: 0.06em;
     margin-bottom: 0;
     font-family: "Oswald", sans-serif;
-    color: #ff5660;
+    color: black;
+}
+
+.texteGauche > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-bottom: 1%;
+    color: black;
 }
 
 .texteGauche > * {
@@ -61,6 +67,16 @@ body {
 .texteGauche > p {
     font-family: "Open Sans extra", sans-serif;
     margin-bottom: 1%;
+}
+
+.imageDroite {
+    float: right;
+    width: 40%;
+    height: 100%;
+}
+
+.imageDroite > img {
+    width: 70%;
 }
 
 
@@ -154,23 +170,34 @@ body {
     width: 90%;
 }
 
-.offresEntr {
+.wrapOffresEtu {
     grid-column: 1/4;
     grid-row: 2/5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 98%;
+    height: 90%;
+}
+
+.offresEtu {
     float: left;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
     border-radius: 10px;
-    width: 93%;
+    width: 49%;
     height: 90%;
     margin: 0;
     background-color: #ff9095;
     padding: 5px;
 }
 
-.contenuOffresEntr {
+
+.contenuOffresEtu {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,15 +210,22 @@ body {
     overflow-y: scroll;
 }
 
-.contenuOffresEntr::-webkit-scrollbar {
+.contenuOffresEtu::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
     background-color: #ffbfc2;
 }
 
-.contenuOffresEntr::-webkit-scrollbar-thumb {
+.contenuOffresEtu::-webkit-scrollbar-thumb {
     background-color: #ff5660;
     border-radius: 10px;
+}
+
+.contenuOffresEtu > h3 {
+    font-family: "Oswald", sans-serif;
+    margin-top: 1%;
+    color: black;
+    letter-spacing: 0.04em;
 }
 
 .wrapOffres {

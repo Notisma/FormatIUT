@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="vérifs de l'existence">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_10_2023_11_53_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_08_10_2023_11_53__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_10_2023_12_23_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_10_2023_12_23__Changes_.xml" beforeDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations visuelles vueGénérale">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueMesOffresEtu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueMesOffresEtu.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +45,7 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2VZoCFZxPeSgHmRtaUwUC7WUMaY" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -168,9 +167,54 @@
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
-      <workItem from="1697309361083" duration="930000" />
-      <workItem from="1697356870175" duration="1660000" />
-      <workItem from="1697365482718" duration="1002000" />
+    </task>
+    <task id="LOCAL-00030" summary="Ajout d'une erreur pour les notification.">
+      <option name="closed" value="true" />
+      <created>1696345287909</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1696345287909</updated>
+    </task>
+    <task id="LOCAL-00031" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
+      <option name="closed" value="true" />
+      <created>1696363175152</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1696363175152</updated>
+    </task>
+    <task id="LOCAL-00032" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
+      <option name="closed" value="true" />
+      <created>1696363214830</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1696363214830</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Correction de crash">
+      <option name="closed" value="true" />
+      <created>1696423930448</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1696423930448</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Avancée">
+      <option name="closed" value="true" />
+      <created>1696431916366</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1696431916366</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Squelette préliminaire de la page terminé.">
+      <option name="closed" value="true" />
+      <created>1696451385328</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1696451385328</updated>
     </task>
     <task id="LOCAL-00036" summary="vueAccueilEntreprise terminé (version 0)">
       <option name="closed" value="true" />
@@ -508,63 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697287223836</updated>
     </task>
-    <task id="LOCAL-00078" summary="vérifs et TODO">
+    <task id="LOCAL-00078" summary="Améliorations visuelles vueGénérale">
       <option name="closed" value="true" />
-      <created>1697288254477</created>
+      <created>1697295234560</created>
       <option name="number" value="00078" />
       <option name="presentableId" value="LOCAL-00078" />
       <option name="project" value="LOCAL" />
-      <updated>1697288254477</updated>
+      <updated>1697295234561</updated>
     </task>
-    <task id="LOCAL-00079" summary="stats vueCompteEtudiant.php">
-      <option name="closed" value="true" />
-      <created>1697289438769</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1697289438769</updated>
-    </task>
-    <task id="LOCAL-00080" summary="corrections de bug + vérifs de supprimer + réglage de certains souci d'actions">
-      <option name="closed" value="true" />
-      <created>1697310294880</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1697310294880</updated>
-    </task>
-    <task id="LOCAL-00081" summary="petite correction sur l'update d'image">
-      <option name="closed" value="true" />
-      <created>1697357410836</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1697357410836</updated>
-    </task>
-    <task id="LOCAL-00082" summary="disabled postuler">
-      <option name="closed" value="true" />
-      <created>1697358414832</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1697358414832</updated>
-    </task>
-    <task id="LOCAL-00083" summary="nbJoursParSemaine inférieur à 8">
-      <option name="closed" value="true" />
-      <created>1697365803748</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1697365803749</updated>
-    </task>
-    <task id="LOCAL-00084" summary="vérifs de l'existence">
-      <option name="closed" value="true" />
-      <created>1697366036556</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1697366036556</updated>
-    </task>
-    <option name="localTasksCounter" value="85" />
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,6 +628,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update" />
+    <MESSAGE value="Corrections visuelles" />
+    <MESSAGE value="Avancées graphiques" />
+    <MESSAGE value="Avancées" />
+    <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
+    <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
     <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
@@ -650,14 +652,8 @@
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci." />
     <MESSAGE value="Améliorations et corrections visuelles" />
     <MESSAGE value="Ajout d'erreurs" />
-    <MESSAGE value="vérifs et TODO" />
-    <MESSAGE value="stats vueCompteEtudiant.php" />
-    <MESSAGE value="corrections de bug + vérifs de supprimer + réglage de certains souci d'actions" />
-    <MESSAGE value="petite correction sur l'update d'image" />
-    <MESSAGE value="disabled postuler" />
-    <MESSAGE value="nbJoursParSemaine inférieur à 8" />
-    <MESSAGE value="vérifs de l'existence" />
-    <option name="LAST_COMMIT_MESSAGE" value="vérifs de l'existence" />
+    <MESSAGE value="Améliorations visuelles vueGénérale" />
+    <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles vueGénérale" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

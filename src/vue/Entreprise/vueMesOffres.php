@@ -56,8 +56,8 @@
             assigner un étudiant à cette offre.</p>
     </div>
 
-    <div class="offresEntr">
-        <div class="contenuOffresEntr">
+    <div class="offresEtu">
+        <div class="contenuOffresEtu">
             <?php
             if (!empty($listeOffres)) {
                 foreach ($listeOffres as $offre) {

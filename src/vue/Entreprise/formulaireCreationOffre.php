@@ -71,6 +71,7 @@
                            placeholder="Développement d'application Web en full stack" required maxlength="50">
                 </div>
 
+                <!-- TODO: Mettre un textarea pour le détail du projet -->
                 <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
                 <div class="grandInputCentre">
                     <input class="inputFormulaire" type="text" name="detailProjet" id="detailProjet_id"

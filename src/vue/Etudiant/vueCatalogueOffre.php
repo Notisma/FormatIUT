@@ -30,8 +30,8 @@
 
     </div>
 
-    <div class="offresEntr">
-        <div class="contenuOffresEntr">
+    <div class="offresEtu">
+        <div class="contenuOffresEtu">
             <?php
             if (!empty($offres)) {
                 foreach ($offres as $offre) {

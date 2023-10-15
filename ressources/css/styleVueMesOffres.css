@@ -155,7 +155,7 @@ body {
     width: 90%;
 }
 
-.offresEntr {
+.offresEtu {
     grid-column: 1/4;
     grid-row: 2/5;
     float: left;
@@ -171,7 +171,7 @@ body {
     padding: 5px;
 }
 
-.contenuOffresEntr {
+.contenuOffresEtu {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,13 +184,13 @@ body {
     overflow-y: scroll;
 }
 
-.contenuOffresEntr::-webkit-scrollbar {
+.contenuOffresEtu::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
     background-color: #ffbfc2;
 }
 
-.contenuOffresEntr::-webkit-scrollbar-thumb {
+.contenuOffresEtu::-webkit-scrollbar-thumb {
     background-color: #ff5660;
     border-radius: 10px;
 }
