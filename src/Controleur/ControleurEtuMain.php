@@ -60,13 +60,10 @@ class ControleurEtuMain extends ControleurMain
                 if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
                     if (is_null($formation)) {
                         if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "Assigné") {
-                            if ((new RegarderRepository())->checkOffreValide(self::$cleEtudiant) == 0) {
-                                (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
-                                $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-                                self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
-                            }
-                        } else {
-                            self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
+                            (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
+                            $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
+                            self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
+
                         }
                     } else {
                         self::afficherErreur("Cette Offre est déjà assignée");
