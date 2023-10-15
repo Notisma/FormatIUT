@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations visuelles vueGénérale">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Début des travaux sur vueMesOffresEtu.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffres.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/formulaireCreationOffre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffre.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueMesOffresEtu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueMesOffresEtu.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,14 +163,6 @@
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
-    </task>
-    <task id="LOCAL-00030" summary="Ajout d'une erreur pour les notification.">
-      <option name="closed" value="true" />
-      <created>1696345287909</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1696345287909</updated>
     </task>
     <task id="LOCAL-00031" summary="vueMesOffres.php pour différencier les stages des alternances ou les deux(Offre)">
       <option name="closed" value="true" />
@@ -560,7 +548,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697295234561</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Début des travaux sur vueMesOffresEtu.php">
+      <option name="closed" value="true" />
+      <created>1697383280864</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1697383280864</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update" />
     <MESSAGE value="Corrections visuelles" />
     <MESSAGE value="Avancées graphiques" />
     <MESSAGE value="Avancées" />
@@ -653,7 +648,8 @@
     <MESSAGE value="Améliorations et corrections visuelles" />
     <MESSAGE value="Ajout d'erreurs" />
     <MESSAGE value="Améliorations visuelles vueGénérale" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles vueGénérale" />
+    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Début des travaux sur vueMesOffresEtu.php" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

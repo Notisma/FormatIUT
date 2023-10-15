@@ -230,7 +230,7 @@ body {
 
 .wrapOffres {
     width: 90%;
-    height: 30%;
+    height: 40%;
     border-radius: 10px;
     background-color: white;
     display: flex;
@@ -242,6 +242,44 @@ body {
     margin: 1%;
     flex-shrink: 0;
 }
+
+.conteneurBouton {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    padding-bottom: 15%;
+    padding-top: 2%;
+}
+
+.conteneurBouton > button {
+    width: 45%;
+    padding: 2%;
+    border: none;
+    border-radius: 50px;
+}
+
+#refuser {
+    background-color: #ff5660;
+    color: black;
+}
+
+#accepter {
+    background-color: #29f671;
+    color: black;
+}
+
+.conteneurBouton > button:hover {
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+    color: black;
+}
+
+
 
 .wrapOffres:hover {
     background-color: #aadcda;
@@ -285,26 +323,30 @@ body {
     justify-content: space-around;
 }
 
-.divInfo {
-    width: 30%;
-    height: 80%;
+.partieDroite > img {
+    width: 60%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.erreur {
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    border: 1px solid black;
+    width: 50%;
+    height: 50%;
+    margin-top: 10%;
 }
 
-.divInfo > img {
-    width: 60%;
-}
-
-.divInfo > p {
-    margin: 0;
-    font-size: 0.8em;
+.erreur > h4 {
+    font-family: "Oswald", sans-serif;
     color: black;
-    text-decoration: none;
+    margin-bottom: 2%;
+    letter-spacing: 0.004em;
+}
+
+.erreur > img {
+    width: 50%;
 }
