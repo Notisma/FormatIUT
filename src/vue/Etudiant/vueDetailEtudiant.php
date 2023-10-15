@@ -96,7 +96,11 @@
                 echo "
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
-                <h4>5 Etudiants ont déjà postulé.</h4>
+                <h4>";
+                $nbEtudiants=((new EtudiantRepository())->nbPostulation($offre->getIdOffre()));
+                echo $nbEtudiants." Etudiant";
+                if ($nbEtudiants!=1) echo "s";
+                echo " ont déjà postulé.</h4>
                 </div>          
                 
                 
