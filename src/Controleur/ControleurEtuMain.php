@@ -144,7 +144,7 @@ class ControleurEtuMain extends ControleurMain
 
         );
         $formation=(new EtudiantRepository())->aUneFormation(self::$cleEtudiant);
-        if (!is_null($formation)){
+        if ($formation){
             $menu[]=array("image"=>"../ressources/images/mallette.png","label"=>" Mon Offre","lien"=>"?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=".$formation['idOffre']);
         }
         $menu[]=array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
