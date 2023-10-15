@@ -68,7 +68,7 @@
             }
         }
         if (!$bool){
-            echo ' disabled';
+            echo 'id="disabled" disabled';
         }
 
         ?>

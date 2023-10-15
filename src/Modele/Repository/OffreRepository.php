@@ -19,12 +19,13 @@ class OffreRepository extends AbstractRepository
         return "Offre";
     }
 
-    public function getListeOffresParType($type): array
+    public function getListeOffresDispoParType($type): array
     {
         $values = array();
-        $sql="SELECT * FROM " . $this->getNomTable();
+        $sql="SELECT * FROM " . $this->getNomTable()." o ";
+        $sql.= " WHERE NOT EXISTS (SELECT idOffre FROM Formation f WHERE f.idOffre=o.idOffre)";
         if ($type=="Stage" || $type=="Alternance"){
-            $sql.=" WHERE typeOffre=:TypeTag";
+            $sql.=" AND typeOffre=:TypeTag";
             $values["TypeTag"]=$type;
         }
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
