@@ -43,9 +43,11 @@
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
-                        echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
+                        $nomHTML=htmlspecialchars($offre->getNomOffre());
+                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                        echo "<p>Sujet de l'offre :" . $offre->getSujet() . '</p>';
+                        $sujetHTML=htmlspecialchars($offre->getSujet());
+                        echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
                         echo'<form method="get">
                              <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
@@ -89,9 +91,11 @@
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
-                        echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
+                        $nomHTML=htmlspecialchars($offre->getNomOffre());
+                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                        echo "<p>Sujet de l'offre :" . $offre->getSujet() . '</p>';
+                        $sujetHTML=htmlspecialchars($offre->getSujet());
+                        echo "<p>Sujet de l'offre :" . $sujetHTML. '</p>';
                         echo '<div class="conteneurBouton">';
                         if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée"){
                             echo '<button class="boutonOffre" id="disabled">Acceptée</button>';

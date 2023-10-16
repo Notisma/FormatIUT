@@ -46,10 +46,21 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
     }
     public static function annulerOffre(){
-        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
-        $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
-
+        if (isset($_GET["idOffre"])) {
+            $listeId=((new OffreRepository())->getListeIdOffres());
+            if (in_array($_GET["idOffre"],$listeId)) {
+                if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant,$_GET["idOffre"])) {
+                    (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+                    self::afficherMesOffres();
+                }else {
+                    self::afficherErreur("L'étudiant n'a jamais posutlé à cette offre");
+                }
+            }else {
+                self::afficherErreur("L'offre n'existe pas");
+            }
+        }else {
+            self::afficherErreur("Données manquantes");
+        }
     }
 
     public static function validerOffre(){
@@ -63,7 +74,7 @@ class ControleurEtuMain extends ControleurMain
                         if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "A Choisir") {
                             (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
                             $offre=((new OffreRepository())->getObjectParClePrimaire($idOffre));
-                            $idFormation="F".self::autoIncrement(((new FormationRepository())->ListeIdTypeFormation()),"idFormation");
+                            $idFormation="F".self::autoIncrementF(((new FormationRepository())->ListeIdTypeFormation()),"idFormation");
                             $formation=(new FormationRepository())->construireDepuisTableau(["idFormation"=>$idFormation,"dateDebut"=>date_format($offre->getDateDebut(),"Y-m-d"),"dateFin"=>date_format($offre->getDateFin(),'Y-m-d'),"idEtudiant"=>self::$cleEtudiant,"idEntreprise"=>$offre->getSiret(),"idOffre"=>$idOffre,"idTuteurPro"=>null,"idConvention"=>null,"idTuteurUM"=>null]);
                             (new FormationRepository())->creerObjet($formation);
                             self::afficherMesOffres();

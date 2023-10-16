@@ -110,4 +110,16 @@ class ControleurMain
         }
         return $id;
     }
+    protected static function autoIncrementF($listeId, $get): int
+    {
+        $id = 1;
+        while (!isset($_POST[$get])) {
+            if (in_array("F".$id, $listeId)) {
+                $id++;
+            } else {
+                $_POST[$get] = $id;
+            }
+        }
+        return $id;
+    }
 }

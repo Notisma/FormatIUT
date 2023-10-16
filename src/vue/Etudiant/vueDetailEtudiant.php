@@ -84,25 +84,36 @@
 
         <div class="wrapPostulants">
             <?php
-            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
-            if (empty($listeEtu)) {
-                echo "
+            $formation=(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+            if ($formation){
+                if ($formation->getIdEtudiant()==\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()){
+                    echo "<div class='nbPostulants'>
+                <img src='../ressources/images/equipe.png' alt='postulants'>
+                <h4>Vous avez l'offre</h4></div>";
+                }else{
+                    echo "c'est quelqun d'autre";
+                }
+            }else {
+                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+                if (empty($listeEtu)) {
+                    echo "
                 <div class='erreur'>
                 <h4>Personne n'a postulé. Faites Vite !</h4>
                 <img src='../ressources/images/erreur.png' alt='erreur'>
                 </div>
                 ";
-            } else {
-                echo "
+                } else {
+                    echo "
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                $nbEtudiants=((new EtudiantRepository())->nbPostulation($offre->getIdOffre()));
-                echo $nbEtudiants." étudiant";
-                if ($nbEtudiants == 1) echo " a";
-                else echo "s ont";
-                echo " déjà postulé.</h4>
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulation($offre->getIdOffre()));
+                    echo $nbEtudiants . " étudiant";
+                    if ($nbEtudiants == 1) echo " a";
+                    else echo "s ont";
+                    echo " déjà postulé.</h4>
                     </div>";
+                }
             }
 
             ?>

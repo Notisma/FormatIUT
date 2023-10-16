@@ -74,7 +74,7 @@ class OffreRepository extends AbstractRepository
             $values["TypeTag"]=$type;
         }
         if ($etat=="Dispo") {
-            $sql .= " AND NOT EXISTS (SELECT idOffre FROM regarder r WHERE Etat='Refusé' AND o.idOffre=r.idOffre)";
+            $sql .= " AND NOT EXISTS (SELECT idOffre FROM formation f WHERE o.idOffre=f.idOffre)";
         }else if ($etat=="Assigné"){
             $sql.= " AND EXISTS (SELECT idOffre FROM Formation f WHERE f.idOffre=o.idOffre)";
         }

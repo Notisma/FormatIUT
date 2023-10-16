@@ -44,15 +44,19 @@ class ControleurEntrMain extends ControleurMain
                 //TODO vérif que début après aujourd'hui
             if ($_POST["gratification"]>0 && $_POST["dureeHeures"]>0 && $_POST["joursParSemaine"]>0 && $_POST["nbHeuresHebdo"]>0) {
                 if ($_POST["joursParSemaine"]<8) {
-                    $listeId = (new OffreRepository())->getListeIdOffres();
-                    self::autoIncrement($listeId, "idOffre");
-                    $_POST["idEntreprise"] = self::$cleEntreprise;
-                    $offre = (new OffreRepository())->construireDepuisTableau($_POST);
-                    (new OffreRepository())->creerObjet($offre);
-                    $_GET["action"] = "mesOffres";
-                    self::mesOffres();
+                    if ($_POST["nbHeuresHebdo"]<8*7 && $_POST["dureeHeures"]>$_POST["nbHeuresHebdo"]) {
+                        $listeId = (new OffreRepository())->getListeIdOffres();
+                        self::autoIncrement($listeId, "idOffre");
+                        $_POST["idEntreprise"] = self::$cleEntreprise;
+                        $offre = (new OffreRepository())->construireDepuisTableau($_POST);
+                        (new OffreRepository())->creerObjet($offre);
+                        $_GET["action"] = "mesOffres";
+                        self::mesOffres();
+                    }else {
+                        self::afficherErreur("Concordance des heures");
+                    }
                 }else {
-                    self::afficherErreur("Des données sont erronées");
+                    self::afficherErreur("Concordance des jours");
                 }
             }else {
                 self::afficherErreur("Des données sont érronées");
