@@ -33,19 +33,13 @@
 
                 <?php
 
-                if (empty($listOffre)) {
-                    echo "
-                    <div class='erreur'>
-                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
-                       <h4>Vous n'avez aucune offre à afficher</h4>
-                    </div>
-                    ";
-                }
+
 
                 use App\FormatIUT\Modele\Repository\RegarderRepository;
-
+                $countAttente = 0;
                 foreach ($listOffre as $offre) {
                     if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En Attente" ){
+                        $countAttente++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
@@ -68,6 +62,14 @@
 
                     }
                 }
+                if ($countAttente === 0) {
+                    echo "
+                    <div class='erreur'>
+                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
+                       <h4>Vous n'avez aucune offre à afficher</h4>
+                    </div>
+                    ";
+                }
                 ?>
             </div>
         </div>
@@ -80,18 +82,10 @@
             <div class="contenuOffresEtu">
                 <h3>Offres dans lesquelles vous êtes assigné</h3>
                 <?php
-
-                if (empty($listOffre)) {
-                    echo "
-                    <div class='erreur'>
-                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
-                       <h4>Vous n'avez aucune offre à afficher</h4>
-                    </div>
-                    ";
-                }
-
+                $countChoisirValider = 0;
                 foreach ($listOffre as $offre) {
                     if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                        $countChoisirValider++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
@@ -124,6 +118,16 @@
                         echo '</a>';
                     }
                 }
+
+                if ($countChoisirValider==0) {
+                    echo "
+                    <div class='erreur'>
+                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
+                       <h4>Vous n'avez aucune offre à afficher</h4>
+                    </div>
+                    ";
+                }
+
                 ?>
 
                 <!-- code à recopier et compléter pour les offres assignées : -->
