@@ -22,11 +22,11 @@ class Configuration
 
 
     static private array $config = array(
-        'hostname' => 'localhost',
+        'hostname' => 'webinfo',
         'database' => 'loyet',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
+        'port' => '3316',
+        'login' => 'loyet',
+        'password' => '26032004'
     );
 
 
