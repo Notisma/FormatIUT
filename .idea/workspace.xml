@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Début des améliorations visuelles vueCatalogueOffre.php">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Vue mes offres fin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueErreur.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueErreur.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueMesOffresEtu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueErreur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueErreur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +39,9 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2VZoCFZxPeSgHmRtaUwUC7WUMaY" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -165,31 +163,8 @@
       <workItem from="1697209946749" duration="205000" />
       <workItem from="1697210165675" duration="1561000" />
       <workItem from="1697270110676" duration="10458000" />
-      <workItem from="1697390647553" duration="5191000" />
-    </task>
-    <task id="LOCAL-00033" summary="Correction de crash">
-      <option name="closed" value="true" />
-      <created>1696423930448</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1696423930448</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Avancée">
-      <option name="closed" value="true" />
-      <created>1696431916366</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1696431916366</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Squelette préliminaire de la page terminé.">
-      <option name="closed" value="true" />
-      <created>1696451385328</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1696451385328</updated>
+      <workItem from="1697390647553" duration="6954000" />
+      <workItem from="1697437379985" duration="4823000" />
     </task>
     <task id="LOCAL-00036" summary="vueAccueilEntreprise terminé (version 0)">
       <option name="closed" value="true" />
@@ -559,7 +534,31 @@
       <option name="project" value="LOCAL" />
       <updated>1697392919674</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)">
+      <option name="closed" value="true" />
+      <created>1697401914615</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1697401914615</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Nombreuses Corrections">
+      <option name="closed" value="true" />
+      <created>1697439901215</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1697439901215</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Vue mes offres fin">
+      <option name="closed" value="true" />
+      <created>1697445918982</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1697445918982</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -627,9 +626,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancées" />
-    <MESSAGE value="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1)." />
-    <MESSAGE value="Push dans l'attente de la séparation entre détail offre entr et etu" />
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
     <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
@@ -652,7 +648,10 @@
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="Début des améliorations visuelles vueCatalogueOffre.php" />
+    <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
+    <MESSAGE value="Nombreuses Corrections" />
+    <MESSAGE value="Vue mes offres fin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vue mes offres fin" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

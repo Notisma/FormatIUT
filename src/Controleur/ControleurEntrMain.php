@@ -158,9 +158,9 @@ class ControleurEntrMain extends ControleurMain
     public static function supprimerOffre(){
         //TODO vérifs
         if (isset($_GET["idOffre"])) {
-            $listeOffre=((new OffreRepository())->getListeObjet());
+            $listeOffre=((new OffreRepository())->getListeIdOffres());
             if (in_array($_GET["idOffre"],$listeOffre)) {
-                if (((new FormationRepository())->estFormation($_GET["idOffre"]))) {
+                if (!((new FormationRepository())->estFormation($_GET["idOffre"]))) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
                     if ($offre->getSiret()==self::$cleEntreprise) {
                         (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);

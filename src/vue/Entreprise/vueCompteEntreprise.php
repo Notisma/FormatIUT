@@ -37,8 +37,7 @@
     <div class="conteneurBienvenueEtu">
         <div class="texteBienvenue">
             <h3>Bonjour, bienvenue sur votre compte entreprise</h3>
-            <p>Visualisez les données de votre compte et modifiez-les sur la même page</p>
-            <p>Voici toutes les informations sur votre compte entreprise :</p>
+            <p>Voici toutes les informations de votre compte :</p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/parametresEntr.png" alt="image de bienvenue">

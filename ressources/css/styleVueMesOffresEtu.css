@@ -255,11 +255,30 @@ body {
     padding-top: 2%;
 }
 
-.conteneurBouton > form > button {
+.conteneurBouton > button {
     width: 45%;
     padding: 2%;
     border: none;
+    background-color: #2ecc71;
     border-radius: 50px;
+    margin-top: 10%;
+    opacity: 0.8;
+}
+
+.conteneurBouton > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.conteneurBouton > form > button {
+    width: 80%;
+    padding: 2%;
+    border: none;
+    border-radius: 50px;
+    margin-top: 10%;
 }
 
 #refuser {
@@ -268,17 +287,16 @@ body {
 }
 
 #accepter {
-    background-color: #29f671;
+    background-color: #2ecc71;
     color: black;
 }
 
-.conteneurBouton > button:hover {
+.conteneurBouton > form > button:hover {
     background-color: white;
     border: 1px solid black;
     cursor: pointer;
     color: black;
 }
-
 
 
 .wrapOffres:hover {
@@ -306,11 +324,13 @@ body {
 }
 
 .partieGauche > p {
+    margin-bottom: 1%;
     margin-left: 5%;
     color: black;
     text-decoration: none;
     margin-top: 0;
-    line-height: 0.8em;
+    /* on augmente la distance entre les lignes */
+    line-height: 1em;
 }
 
 .partieDroite {
