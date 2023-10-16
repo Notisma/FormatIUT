@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sae.iml" filepath="$PROJECT_DIR$/.idea/sae.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/devapplicationformatiut.iml" filepath="$PROJECT_DIR$/.idea/devapplicationformatiut.iml" />
     </modules>
   </component>
 </project>
