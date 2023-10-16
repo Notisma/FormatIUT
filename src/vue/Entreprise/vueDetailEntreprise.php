@@ -63,19 +63,32 @@
             <?php
             $listeEtu=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
             if (empty($listeEtu)){
-                echo "
+                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                if ($formation){
+                    if ($formation->getIdEtudiant()==\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()){
+                        $etudiant=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
+                        echo '<div class="etudiantPostulant">
+                <div class="illuPostulant">';
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $etudiant->getImg() ).'"/>';
+                        echo '</div>
+                <div class="nomEtuPostulant">
+                    <h4>';
+                        echo $etudiant->getPrenomEtudiant()." ".$etudiant->getNomEtudiant()." Assigné";
+                    }
+                }else {
+                    echo "
                 <div class='erreur'>
                 <h4>Personne n'a postulé.</h4>
                 <img src='../ressources/images/erreur.png' alt='erreur'>
                 </div>
                 ";
+                }
             }else {
                 foreach ($listeEtu as $etudiant) {
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
                     echo '<img src="data:image/jpeg;base64,'.base64_encode( $etudiant->getImg() ).'"/>';
                 echo '</div>
-
                 <div class="nomEtuPostulant">
                     <h4>';
                 echo $etudiant->getPrenomEtudiant()." ".$etudiant->getNomEtudiant();
@@ -84,19 +97,23 @@
                     echo '</h4>
                     <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre='.$idOffreURl.'&idEtudiant=' . $idURL . '">';
                     echo '<button class="boutonAssigner" ';
-                    if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())){
+                    if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                         echo ' id="disabled" disabled';
                     }
-                    $formation=(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
-                    if(!is_null($formation)) {
-                        echo ' id="disabled" disabled';
-                        if ($formation->getIdEtudiant()==$etudiant->getNumEtudiant()){
-                            echo ">Assigné";
-                        }else {
+                    if ((new \App\FormatIUT\Modele\Repository\RegarderRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(),$offre->getIdOffre())=="A Choisir"){
+                        echo 'id="disabled" disabled>Envoyée';
+                    }else {
+                        $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                        if (!is_null($formation)) {
+                            echo ' id="disabled" disabled';
+                            if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
+                                echo ">Assigné";
+                            } else {
+                                echo ">Assigner";
+                            }
+                        } else {
                             echo ">Assigner";
                         }
-                    }else {
-                        echo ">Assigner";
                     }
                     echo '</button>
                     </a>

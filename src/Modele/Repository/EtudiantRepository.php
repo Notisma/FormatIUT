@@ -140,7 +140,7 @@ class EtudiantRepository extends AbstractRepository
      */
 
     public function EtudiantsEnAttente($idOffre){
-        $sql="SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
+        $sql="SELECT numEtudiant FROM regarder r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formation f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("Tag"=>$idOffre);
         $pdoStatement->execute($values);
