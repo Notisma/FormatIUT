@@ -203,7 +203,7 @@ body {
     height: 20%;
 }
 
-.grandInputCentre > input {
+.grandInputCentre > textarea {
     width: 90%;
     height: 100%;
     border-radius: 10px;

@@ -52,7 +52,7 @@
                 <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
-                           placeholder="Développeur Web" maxlength="24" >
+                           placeholder="Développeur Web" maxlength="24">
                 </div>
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
                 <div class="inputCentre">
@@ -71,11 +71,11 @@
                            placeholder="Développement d'application Web en full stack" required maxlength="50">
                 </div>
 
-                <!-- TODO: Mettre un textarea pour le détail du projet -->
+
                 <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
                 <div class="grandInputCentre">
-                    <input class="inputFormulaire" type="text" name="detailProjet" id="detailProjet_id"
-                           placeholder="L'étudiant devra..." required maxlength="255">
+                    <textarea class="inputFormulaire" name="detailProjet" id="detailProjet_id"
+                              placeholder="L'étudiant devra..." required maxlength="255"></textarea>
                 </div>
 
                 <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>

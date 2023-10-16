@@ -12,7 +12,7 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static int $cleEtudiant=22206782;
+    private static int $cleEtudiant=22202117;
 
     public static function getCleEtudiant(): int
     {

@@ -43,7 +43,7 @@
                     echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>
-            <input class='searchField' name='recherche' placeholder='Rechercher...'>
+            <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else if (ucfirst($_GET['controleur']) == 'EtuMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
@@ -52,7 +52,7 @@
                     echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
             <input type='hidden' name='controleur' value='Main''>
-            <input class='searchField' name='recherche' placeholder='Rechercher...'>
+            <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 }
 
