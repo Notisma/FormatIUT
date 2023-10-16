@@ -9,7 +9,8 @@
             <!-- affichage des informations principales de l'offre -->
             <h2><?php use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
-                $nomHTML=htmlspecialchars($offre->getNomOffre());
+
+                $nomHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
             <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
             <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
@@ -32,7 +33,9 @@
                         </p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures
                         </p>
-                        <p><span>Détails de l'offre :</span> <?php $detailHTML=htmlspecialchars($offre->getDetailProjet());echo $detailHTML ?></p>
+                        <p>
+                            <span>Détails de l'offre :</span> <?php $detailHTML = htmlspecialchars($offre->getDetailProjet());
+                            echo $detailHTML ?></p>
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
@@ -58,16 +61,16 @@
         <?php
         echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
                 <button class="boutonAssigner" ';
-        $bool=false;
+        $bool = false;
         $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
                 if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
-                    $bool=true;
+                    $bool = true;
                 }
             }
         }
-        if (!$bool){
+        if (!$bool) {
             echo 'id="disabled" disabled';
         }
 
@@ -84,16 +87,18 @@
 
         <div class="wrapPostulants">
             <?php
-            $formation=(new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
-            if ($formation){
-                if ($formation->getIdEtudiant()==\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()){
+            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+            if ($formation) {
+                if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
                     echo "<div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>Vous avez l'offre</h4></div>";
-                }else{
-                    echo "c'est quelqun d'autre";
+                } else {
+                    echo "<div class='nbPostulants'>
+                <img src='../ressources/images/equipe.png' alt='postulants'>
+                <h4>L'offre est déjà occupée </h4></div>";
                 }
-            }else {
+            } else {
                 $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
                 if (empty($listeEtu)) {
                     echo "

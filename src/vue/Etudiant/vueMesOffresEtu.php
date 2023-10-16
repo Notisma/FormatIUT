@@ -13,13 +13,12 @@
         <div class="imageDroite">
             <img src="../ressources/images/etudiantsMesOffres.png" alt="imageEtudiant">
         </div>
-
     </div>
 
 
     <div class="assistance">
         <h3>ASTUCES</h3>
-        <p>Cliquez sur une des offres dans lesquelles vous avez postulé ou avez été assigné pour en voir les détails</p>
+        <p>Valider une offre dans laquelle vous êtes assigné annule toutes les autres.</p>
     </div>
 
     <div class="wrapOffresEtu">
@@ -34,23 +33,23 @@
                 <?php
 
 
-
                 use App\FormatIUT\Modele\Repository\RegarderRepository;
+
                 $countAttente = 0;
                 foreach ($listOffre as $offre) {
-                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En Attente" ){
+                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En Attente") {
                         $countAttente++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
-                        $nomHTML=htmlspecialchars($offre->getNomOffre());
+                        $nomHTML = htmlspecialchars($offre->getNomOffre());
                         echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                        $sujetHTML=htmlspecialchars($offre->getSujet());
+                        $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
-                        echo'<form method="get">
-                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                        echo '<form method="get">
+                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
@@ -76,7 +75,7 @@
             </div>
         </div>
 
-                <!-- code à recopier si il n'y a rien à afficher : -->
+        <!-- code à recopier si il n'y a rien à afficher : -->
 
 
         <!-- PARTIE DES OFFRES ASSIGNEES -->
@@ -86,29 +85,28 @@
                 <?php
                 $countChoisirValider = 0;
                 foreach ($listOffre as $offre) {
-                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                         $countChoisirValider++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
-                        $nomHTML=htmlspecialchars($offre->getNomOffre());
+                        $nomHTML = htmlspecialchars($offre->getNomOffre());
                         echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
-                        $sujetHTML=htmlspecialchars($offre->getSujet());
-                        echo "<p>Sujet de l'offre :" . $sujetHTML. '</p>';
+                        $sujetHTML = htmlspecialchars($offre->getSujet());
+                        echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
-                        if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée"){
+                        if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                             echo '<button class="boutonOffre" id="disabled">Acceptée</button>';
-                        }
-                        else{
-                            echo'<form method="get">
-                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                        } else {
+                            echo '<form method="get">
+                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="validerOffre">
                               <button class="boutonOffre" id="accepter">ACCEPTER</button>
                               </form>';
-                            echo'<form method="get">
-                             <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
+                            echo '<form method="get">
+                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
@@ -123,7 +121,7 @@
                     }
                 }
 
-                if ($countChoisirValider==0) {
+                if ($countChoisirValider == 0) {
                     echo "
                     <div class='erreur'>
                        <img src='../ressources/images/erreur.png' alt='imageErreur'>
@@ -136,8 +134,6 @@
 
                 <!-- code à recopier et compléter pour les offres assignées : -->
                 <!-- une fois que l'offre a été acceptée par l'étudiant, le bouton refuser disparait, et le bouton accepter devient un bouton avec un id=disabled et de texte "acceptée" -->
-
-
 
 
             </div>
