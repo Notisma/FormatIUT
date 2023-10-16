@@ -78,6 +78,11 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+   /* public static function annulerOffre(){
+        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+        self::afficherMesOffres();
+    }*/
+
     public static function postuler(){
         //TODO vérifier les vérifs
         if (isset($_GET['idOffre'])) {
