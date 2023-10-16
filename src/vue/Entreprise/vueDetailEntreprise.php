@@ -65,7 +65,6 @@
             if (empty($listeEtu)){
                 $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
                 if ($formation){
-                    if ($formation->getIdEtudiant()==\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()){
                         $etudiant=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                         echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
@@ -74,7 +73,7 @@
                 <div class="nomEtuPostulant">
                     <h4>';
                         echo $etudiant->getPrenomEtudiant()." ".$etudiant->getNomEtudiant()." Assigné";
-                    }
+
                 }else {
                     echo "
                 <div class='erreur'>
