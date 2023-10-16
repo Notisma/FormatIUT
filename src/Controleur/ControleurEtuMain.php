@@ -45,6 +45,12 @@ class ControleurEtuMain extends ControleurMain
         $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
     }
+    public static function annulerOffre(){
+        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+        $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
+        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
+
+    }
 
     public static function validerOffre(){
         if (isset($_GET['idOffre'])) {
