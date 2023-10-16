@@ -54,11 +54,11 @@ class ControleurEtuMain extends ControleurMain
                 $formation=((new FormationRepository())->estFormation($idOffre));
                 if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
                     if (is_null($formation)) {
-                        if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "Assigné") {
+                        if ((new RegarderRepository())->getEtatEtudiantOffre(self::$cleEtudiant, $idOffre) == "A Choisir") {
                             (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
                             $offre=((new OffreRepository())->getObjectParClePrimaire($idOffre));
                             $idFormation="F".self::autoIncrement(((new FormationRepository())->ListeIdTypeFormation()),"idFormation");
-                            $formation=(new FormationRepository())->construireDepuisTableau(["idFormation"=>$idFormation,"dateDebut"=>date_format($offre->getDateDebut(),"Y-m-d"),"dateFin"=>date_format($offre->getDateFin(),'Y-m-d'),"idEtudiant"=>self::$cleEtudiant,"idEntreprise"=>$offre->getSiret(),"idOffre"=>$idOffre,"idTuteurPro"=>null,"idConvention"=>null,"idTuteurUm"=>null]);
+                            $formation=(new FormationRepository())->construireDepuisTableau(["idFormation"=>$idFormation,"dateDebut"=>date_format($offre->getDateDebut(),"Y-m-d"),"dateFin"=>date_format($offre->getDateFin(),'Y-m-d'),"idEtudiant"=>self::$cleEtudiant,"idEntreprise"=>$offre->getSiret(),"idOffre"=>$idOffre,"idTuteurPro"=>null,"idConvention"=>null,"idTuteurUM"=>null]);
                             (new FormationRepository())->creerObjet($formation);
                             self::afficherMesOffres();
                         } else {

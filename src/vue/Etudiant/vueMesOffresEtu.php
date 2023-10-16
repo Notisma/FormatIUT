@@ -33,15 +33,25 @@
 
                 <?php
 
+                if (empty($listOffre)) {
+                    echo "
+                    <div class='erreur'>
+                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
+                       <h4>Vous n'avez aucune offre à afficher</h4>
+                    </div>
+                    ";
+                }
+
                 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
                 foreach ($listOffre as $offre) {
-                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente" ){
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En Attente" ){
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo "<p>Sujet de l'offre :" . $offre->getSujet() . '</p>';
                         echo '<div class="conteneurBouton">';
                         echo'<form method="get">
                              <input type="hidden" name="idOffre" value= '.$offre->getIdOffre().'>
@@ -59,6 +69,8 @@
                     }
                 }
                 ?>
+            </div>
+        </div>
 
                 <!-- code à recopier si il n'y a rien à afficher : -->
 
@@ -66,20 +78,29 @@
         <!-- PARTIE DES OFFRES ASSIGNEES -->
         <div class="offresEtu">
             <div class="contenuOffresEtu">
-                <h3>Offres en attente de Choix</h3>
+                <h3>Offres dans lesquelles vous êtes assigné</h3>
                 <?php
 
+                if (empty($listOffre)) {
+                    echo "
+                    <div class='erreur'>
+                       <img src='../ressources/images/erreur.png' alt='imageErreur'>
+                       <h4>Vous n'avez aucune offre à afficher</h4>
+                    </div>
+                    ";
+                }
 
                 foreach ($listOffre as $offre) {
-                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Assigné" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                    if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         echo '<h3>' . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo "<p>Sujet de l'offre :" . $offre->getSujet() . '</p>';
                         echo '<div class="conteneurBouton">';
                         if((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée"){
-                            echo '<button class="boutonOffre" id="disabled">acceptée</button>';
+                            echo '<button class="boutonOffre" id="disabled">Acceptée</button>';
                         }
                         else{
                             echo'<form method="get">
