@@ -169,7 +169,7 @@ class ControleurEtuMain extends ControleurMain
         if ($formation){
             $menu[]=array("image"=>"../ressources/images/mallette.png","label"=>" Mon Offre","lien"=>"?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=".$formation['idOffre']);
         }
-        $menu[]=array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
+        $menu[]=array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
         return $menu;
     }
 
