@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\Covoiturage\Lib\VerificationEmail;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -178,4 +180,13 @@ class ControleurEntrMain extends ControleurMain
             self::afficherErreur("Données Manquantes");
         }
     }
+
+    public static function creerCompteEntreprise(){
+        $entreprise=Entreprise::construireDepuisFormulaire($_REQUEST);
+        (new EntrepriseRepository())->creerObjet($entreprise);
+        VerificationEmail::envoiEmailValidation($entreprise);
+        header("Location: controleurFrontal.php");
+    }
+
+
 }

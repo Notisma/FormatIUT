@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class Entreprise extends AbstractDataObject
 {
@@ -16,6 +18,9 @@ class Entreprise extends AbstractDataObject
     private string $idVille;
     private string $img;
     private string $mdpHache;
+    private string $email;
+    private string $emailAValider;
+    private string $nonce;
 
     /**
      * @param float $siret
@@ -27,8 +32,12 @@ class Entreprise extends AbstractDataObject
      * @param string $Adresse_Entreprise
      * @param string $idVille
      * @param string $img
+     * @param string $mdpHache
+     * @param string $email
+     * @param string $emailAValider
+     * @param string $nonce
      */
-    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img,string $mdpHache)
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -39,7 +48,50 @@ class Entreprise extends AbstractDataObject
         $this->Adresse_Entreprise = $Adresse_Entreprise;
         $this->idVille = $idVille;
         $this->img = $img;
-        $this->mdpHache=$mdpHache;
+        $this->mdpHache = $mdpHache;
+        $this->email = $email;
+        $this->emailAValider = $emailAValider;
+        $this->nonce = $nonce;
+    }
+
+    public function getAdresseEntreprise(): string
+    {
+        return $this->Adresse_Entreprise;
+    }
+
+    public function setAdresseEntreprise(string $Adresse_Entreprise): void
+    {
+        $this->Adresse_Entreprise = $Adresse_Entreprise;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getEmailAValider(): string
+    {
+        return $this->emailAValider;
+    }
+
+    public function setEmailAValider(string $emailAValider): void
+    {
+        $this->emailAValider = $emailAValider;
+    }
+
+    public function getNonce(): string
+    {
+        return $this->nonce;
+    }
+
+    public function setNonce(string $nonce): void
+    {
+        $this->nonce = $nonce;
     }
 
 
@@ -90,7 +142,10 @@ class Entreprise extends AbstractDataObject
             "Adresse_Entreprise"=>$this->Adresse_Entreprise,
             "idVille"=>$this->idVille,
             "img_id"=>$this->img,
-            "mdpHache"=>$this->mdpHache
+            "mdpHache"=>$this->mdpHache,
+            "email"=>$this->email,
+            "emailAValider"=>$this->emailAValider,
+            "nonce"=>$this->nonce
         ];
     }
 
@@ -168,6 +223,25 @@ class Entreprise extends AbstractDataObject
     public function setMdpHache(string $mdpHache): void
     {
         $this->mdpHache = $mdpHache;
+    }
+
+    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
+
+        return new Entreprise(
+            $EntrepriseEnFormulaire["siret"],
+            $EntrepriseEnFormulaire["nomEntreprise"],
+            $EntrepriseEnFormulaire["statutJuridique"],
+            $EntrepriseEnFormulaire["effectif"],
+            $EntrepriseEnFormulaire["codeNAF"],
+            $EntrepriseEnFormulaire["tel"],
+            $EntrepriseEnFormulaire["Adresse_Entreprise"],
+            (new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["idVille"]),
+            0,
+            MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
+            "",
+            $EntrepriseEnFormulaire["email"],
+            MotDePasse::genererChaineAleatoire(5)
+        );
     }
 
 

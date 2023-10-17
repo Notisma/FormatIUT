@@ -55,4 +55,9 @@ class Configuration
         return self::$config['port'];
     }
 
+    public static function getAbsoluteURL()
+    {
+        return"https://webinfo.iutmontp.univ-montp2.fr/~loyet/SAE_DEV/web/controleurFrontal.php";
+    }
+
 }

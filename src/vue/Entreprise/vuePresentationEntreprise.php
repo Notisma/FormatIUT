@@ -12,15 +12,16 @@
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=EntrMain&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
-                <input type="text" name="siteWeb" placeholder="SIRET de l'entreprise" required>
+                <input type="text" name="siret" placeholder="SIRET de l'entreprise" required>
                 <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
-                <input type="text" name="adresse" placeholder="Adresse de l'entreprise" required>
+                <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise" required>
+                <input type="text" name="email" placeholder="Email de l'entreprise" required>
                 <input type="text" name="codePostal" placeholder="Code Postal" required>
-                <input type="text" name="ville" placeholder="Ville" required>
+                <input type="text" name="idVille" placeholder="Ville" required>
                 <input type="text" name="tel" placeholder="Téléphone" required>
                 <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
                 <input type="text" name="effectif" placeholder="Effectif" required>
-                <input type="text" name="codeNaf" placeholder="Code NAF" required>
+                <input type="text" name="codeNAF" placeholder="Code NAF" required>
                 <input type="text" name="mdp" placeholder="Mot de passe" required>
                 <input type="text" name="mdpConf" placeholder="Confirmer le mot de passe" required>
                 <input type="submit" class="valider" value="Créer le compte">

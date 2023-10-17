@@ -12,9 +12,6 @@ use App\FormatIUT\Controleur\ControleurMain as CGlobal;
 
 if (isset($_GET['controleur'])) {
     $controleur = ucfirst($_GET["controleur"]);
-    if ($_REQUEST["controleur"]=="EntrMain" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()){
-        $controleur="Main";
-    }
 } else {
     $controleur = "Main";
 }
