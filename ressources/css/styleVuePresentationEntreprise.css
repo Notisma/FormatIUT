@@ -2,6 +2,9 @@
 
 body {
     height: 300vh;
+    /* défilement smooth */
+    scroll-behavior: smooth;
+
 }
 
 .wrapComplet {

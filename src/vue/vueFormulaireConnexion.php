@@ -10,7 +10,6 @@
 <p></p>
 <div id="center">
 
-
     <div id="desc">
         <div id="zoneLogo">
             <img src="../ressources/images/LogoIutMontpellier-removed.png" alt="logo" id="logo">
@@ -47,7 +46,7 @@
                 <div id="wrapInput">
                     <div id="Userlogin">
                         <img src="../ressources/images/utilisateur.png" alt="user" id="user">
-                        <input type="text" name="login" id="login" required>
+                        <input type="text" name="login" id="login" required placeholder="Identifiant ou SIRET">
                     </div>
                     <div id="Usermdp">
                         <img src="../ressources/images/cadenas.png" alt="cadenas" id="cadenas">
