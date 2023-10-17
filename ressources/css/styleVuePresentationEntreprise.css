@@ -122,3 +122,14 @@ body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+.partieDroitePE > h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+    letter-spacing: 0.04em;
+    color: #ff5660;
+}
+
+.partieDroitePE > img {
+    width: 80%;
+}

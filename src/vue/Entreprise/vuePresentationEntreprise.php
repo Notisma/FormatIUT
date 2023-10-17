@@ -11,7 +11,7 @@
     <div class="wrapFormulaireCreationPE">
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=EntrMain&action=creerCompteEntreprise" method="post">
-                <h1>Créez votre compte Entreprise</h1>
+                <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
                 <input type="text" name="siteWeb" placeholder="SIRET de l'entreprise" required>
                 <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
                 <input type="text" name="adresse" placeholder="Adresse de l'entreprise" required>
@@ -28,7 +28,8 @@
         </div>
 
         <div class="partieDroitePE">
-
+            <img src="../ressources/images/formulairePE.png" alt="image formulaire">
+            <h2>MERCI DE REJOINDRE FORMAT'IUT !</h2>
         </div>
     </div>
 
