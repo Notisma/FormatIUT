@@ -27,7 +27,7 @@ class ControleurMain
         $menu = "App\FormatIUT\Controleur\Controleur" . $_GET['controleur'];
         $liste = (new OffreRepository())->getListeIdOffres();
         if ($idOffre || isset($_GET["idOffre"])) {
-            if (!$idOffre) $idOffre = $_GET['"idOffre'];
+            if (!$idOffre) $idOffre = $_GET['idOffre'];
             if (in_array($idOffre, $liste)) {
                 $offre = (new OffreRepository())->getObjectParClePrimaire($idOffre);
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());

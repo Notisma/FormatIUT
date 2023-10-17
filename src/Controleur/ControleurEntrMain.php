@@ -205,10 +205,8 @@ class ControleurEntrMain extends ControleurMain
             if ($offre) {
                 if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
                     if ($offre->getSiret() == self::$cleEntreprise) {
-                        //(new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
-                        //(new OffreRepository())->supprimer($_GET["idOffre"]);
-                        //self::afficherAccueilEntr();
-                        echo "bien modifiée !";
+                        $offre->setTypeOffre($_POST['typeOffre']);
+                        (new OffreRepository())->modifierObjet($offre);
                         self::afficherVueDetailOffre($offre->getIdOffre());
                     } else {
                         self::afficherErreur("Cette offre ne vous appartient pas");
