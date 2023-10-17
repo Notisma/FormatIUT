@@ -30,6 +30,7 @@
 
 
                 $liaison = "";
+                $src="";
                 if ($titrePage == "Accueil" || $titrePage == "Erreur") {
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=etuMain&action=afficherAccueilEtu";

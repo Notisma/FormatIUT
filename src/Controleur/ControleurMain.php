@@ -122,4 +122,7 @@ class ControleurMain
         }
         return $id;
     }
+    public static function afficherPageConnexion(){
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Page de Connexion","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+    }
 }
