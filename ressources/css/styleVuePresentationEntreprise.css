@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
 body {
-    height: 200vh;
+    height: 300vh;
 }
 
 .wrapComplet {
     position: absolute;
-    top: 105%;
+    top: 160%;
     left: 54%;
     transform: translate(-50%, -50%);
     margin: auto;
     width: 92%;
-    height: 180vh;
+    height: 280vh;
     min-width: 300px;
     text-align: left;
     line-height: 2em;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
     align-items: center;
@@ -27,12 +27,98 @@ body {
 }
 
 .wrapFormulaireCreationPE {
-    grid-row: 1;
+    grid-row: 5/7;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: space-around;
     width: 95%;
     height: 95%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.formulaireGauchePE {
+    float: left;
+    width: 60%;
+    height: 100%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #aadcda;
+}
+
+.formulaireGauchePE > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    width: 90%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.formulaireGauchePE > form::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.formulaireGauchePE > form::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.formulaireGauchePE > form > h1 {
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+    letter-spacing: 0.04em;
+    color: #ff5660;
+}
+
+.formulaireGauchePE > form > input[type='text'] {
+    width: 90%;
+    height: 10%;
+    margin-top: 5%;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff9095;
+    flex-shrink: 0;
+    padding-left: 2%;
+}
+
+.valider {
+    width: 50%;
+    height: 10%;
+    margin-top: 5%;
+    border-radius: 50px;
+    border: none;
+    flex-shrink: 0;
+    background-color: #ff5660;
+    color: white;
+}
+
+.valider:hover {
+    background-color: #ff9095;
+    cursor: pointer;
+}
+
+.partieDroitePE {
+    float: right;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

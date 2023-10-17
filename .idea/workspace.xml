@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Modifications du menu index">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout du formulaire de création de compte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVuePresentationEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVuePresentationEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vuePresentationEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vuePresentationEntreprise.php" afterDir="false" />
@@ -171,14 +171,6 @@
       <workItem from="1697390647553" duration="6954000" />
       <workItem from="1697437379985" duration="4823000" />
       <workItem from="1697547127990" duration="2219000" />
-    </task>
-    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
-      <option name="closed" value="true" />
-      <created>1696697664097</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1696697664097</updated>
     </task>
     <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
       <option name="closed" value="true" />
@@ -564,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697553428561</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Ajout du formulaire de création de compte">
+      <option name="closed" value="true" />
+      <created>1697554657000</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1697554657000</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +632,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
@@ -657,7 +656,8 @@
     <MESSAGE value="Début connexion et afficherPresentationEntreprise" />
     <MESSAGE value="Ajout de fichiers" />
     <MESSAGE value="Modifications du menu index" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifications du menu index" />
+    <MESSAGE value="Ajout du formulaire de création de compte" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout du formulaire de création de compte" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
