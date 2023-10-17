@@ -21,7 +21,7 @@ class ControleurMain
      * Affiche la page de présentations aux entreprises n'ayant pas de compte
      */
     public static function afficherVuePresentation() {
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprise"]);
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Entreprise/vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprise"]);
     }
 
     /***
@@ -54,7 +54,7 @@ class ControleurMain
 
     public static function getMenu() :array{
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
+            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?controleur=Main&action=afficherIndex"),
             array("image"=>"../ressources/images/profil.png","label"=>"(prov étudiants)","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=Main&action=afficherPageConnexion"),
             array("image"=>"../ressources/images/entreprise.png","label"=>"(prov) Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr"),
