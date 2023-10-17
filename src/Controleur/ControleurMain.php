@@ -18,6 +18,13 @@ class ControleurMain
     }
 
     /***
+     * Affiche la page de présentations aux entreprises n'ayant pas de compte
+     */
+    public static function afficherVuePresentation() {
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprises"]);
+    }
+
+    /***
      * Affiche la page de detail d'une offre qui varie selon le client
     */
     public static function afficherVueDetailOffre(){
@@ -48,8 +55,10 @@ class ControleurMain
     public static function getMenu() :array{
         return array(
             array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
+            array("image"=>"../ressources/images/profil.png","label"=>"(prov étudiants)","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=Main&action=afficherPageConnexion"),
+            array("image"=>"../ressources/images/entreprise.png","label"=>"(prov) Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr"),
+            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=Main&action=afficherVuePresentation")
         );
     }
 
@@ -123,6 +132,6 @@ class ControleurMain
         return $id;
     }
     public static function afficherPageConnexion(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Page de Connexion","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Se Connecter","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
     }
 }
