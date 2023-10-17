@@ -15,6 +15,7 @@ class Entreprise extends AbstractDataObject
     private string $Adresse_Entreprise;
     private string $idVille;
     private string $img;
+    private string $mdpHache;
 
     /**
      * @param float $siret
@@ -27,7 +28,7 @@ class Entreprise extends AbstractDataObject
      * @param string $idVille
      * @param string $img
      */
-    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img)
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img,string $mdpHache)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -38,6 +39,7 @@ class Entreprise extends AbstractDataObject
         $this->Adresse_Entreprise = $Adresse_Entreprise;
         $this->idVille = $idVille;
         $this->img = $img;
+        $this->mdpHache=$mdpHache;
     }
 
 
@@ -87,7 +89,8 @@ class Entreprise extends AbstractDataObject
             'tel' => $this->tel,
             "Adresse_Entreprise"=>$this->Adresse_Entreprise,
             "idVille"=>$this->idVille,
-            "img_id"=>$this->img
+            "img_id"=>$this->img,
+            "mdpHache"=>$this->mdpHache
         ];
     }
 
@@ -156,5 +159,16 @@ class Entreprise extends AbstractDataObject
     {
         $this->tel = $tel;
     }
+
+    public function getMdpHache(): string
+    {
+        return $this->mdpHache;
+    }
+
+    public function setMdpHache(string $mdpHache): void
+    {
+        $this->mdpHache = $mdpHache;
+    }
+
 
 }
