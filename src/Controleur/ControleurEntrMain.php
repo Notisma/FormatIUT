@@ -199,13 +199,21 @@ class ControleurEntrMain extends ControleurMain
 
     public static function modifierOffre(): void
     {
-        print_r($_POST);
         if (isset($_POST["idOffre"])) {
             $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
             if ($offre) {
                 if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
                     if ($offre->getSiret() == self::$cleEntreprise) {
                         $offre->setTypeOffre($_POST['typeOffre']);
+                        $offre->setNomOffre($_POST['nomOffre']);
+                        $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
+                        $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
+                        $offre->setSujet($_POST['sujet']);
+                        $offre->setDetailProjet($_POST['detailProjet']);
+                        $offre->setGratification($_POST['gratification']);
+                        $offre->setDureeHeures($_POST['dureeHeures']);
+                        $offre->setJoursParSemaine($_POST['joursParSemaine']);
+                        $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
                         (new OffreRepository())->modifierObjet($offre);
                         self::afficherVueDetailOffre($offre->getIdOffre());
                     } else {
