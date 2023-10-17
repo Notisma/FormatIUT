@@ -81,7 +81,8 @@
             </div>
 
             <div class="boutonsForm">
-                <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain">
+                <input type="hidden" name="idOffre" value="<?= $offre->getIdOffre() ?>"/>
+                <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain"/>
             </div>
         </form>
 

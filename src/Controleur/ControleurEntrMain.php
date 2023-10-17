@@ -21,7 +21,7 @@ class ControleurEntrMain extends ControleurMain
         return self::$cleEntreprise;
     }
 
-    public static function afficherAccueilEntr()
+    public static function afficherAccueilEntr(): void
     {
         $listeIDOffre = self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(self::$cleEntreprise));
         $listeOffre = array();
@@ -31,7 +31,7 @@ class ControleurEntrMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise", "listeOffre" => $listeOffre]);
     }
 
-    public static function mesOffres()
+    public static function mesOffres(): void
     {
         if (!isset($_GET["type"])) {
             $_GET["type"] = "Tous";
@@ -55,18 +55,18 @@ class ControleurEntrMain extends ControleurMain
     }
 
     // ---- AFFICHAGES ----
-    public static function afficherProfilEntr()
+    public static function afficherProfilEntr(): void
     {
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise);
         self::afficherVue("vueGenerale.php", ["entreprise" => $entreprise, "menu" => self::getMenu(), "chemin" => "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
     }
 
-    public static function formulaireCreationOffre()
+    public static function formulaireCreationOffre(): void
     {
         self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/formulaireCreationOffre.php", "titrePage", "titrePage" => "Créer une offre"]);
     }
 
-    public static function afficherFormulaireModificationOffre()
+    public static function afficherFormulaireModificationOffre(): void
     {
         if (isset($_GET['idOffre'])) {
             $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
@@ -75,7 +75,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
 
-    public static function assignerEtudiantOffre()
+    public static function assignerEtudiantOffre(): void
     {
         //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_GET["idEtudiant"], $_GET["idOffre"])) {
@@ -107,7 +107,7 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function updateImage()
+    public static function updateImage(): void
     {
         $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
         //TODO vérif de doublons d'image
@@ -133,7 +133,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
     // ---- CRUD de l'offre ----
-    public static function creerOffre()
+    public static function creerOffre(): void
     {
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
         if (isset($_POST['nomOffre'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
@@ -170,13 +170,13 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function supprimerOffre()
+    public static function supprimerOffre(): void
     {
         //TODO vérifs
         if (isset($_GET["idOffre"])) {
             $listeOffre = ((new OffreRepository())->getListeIdOffres());
             if (in_array($_GET["idOffre"], $listeOffre)) {
-                if (!((new FormationRepository())->estFormation($_GET["idOffre"]))) {
+                if (!(new FormationRepository())->estFormation($_GET["idOffre"])) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
                     if ($offre->getSiret() == self::$cleEntreprise) {
                         (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
@@ -197,9 +197,30 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
-    public static function modifierOffre()
+    public static function modifierOffre(): void
     {
-        echo "offre modifiée!!!";
         print_r($_POST);
+        if (isset($_POST["idOffre"])) {
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+            if ($offre) {
+                if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                    if ($offre->getSiret() == self::$cleEntreprise) {
+                        //(new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
+                        //(new OffreRepository())->supprimer($_GET["idOffre"]);
+                        //self::afficherAccueilEntr();
+                        echo "bien modifiée !";
+                        self::afficherVueDetailOffre($offre->getIdOffre());
+                    } else {
+                        self::afficherErreur("Cette offre ne vous appartient pas");
+                    }
+                } else {
+                    self::afficherErreur("Cette offre a déjà été admise par un étudiant");
+                }
+            } else {
+                self::afficherErreur("Cette offre n'existe pas");
+            }
+        } else {
+            self::afficherErreur("Données manquantes");
+        }
     }
 }
