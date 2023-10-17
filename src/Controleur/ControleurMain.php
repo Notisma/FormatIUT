@@ -4,7 +4,9 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\TransfertImage;
+use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -132,15 +134,14 @@ class ControleurMain
         return $id;
     }
     public static function afficherPageConnexion(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Se Connecter","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Page de Connexion","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
     }
-
 
     public static function seConnecter(){
         if(isset($_POST["login"],$_POST["mdp"])){
             $user=((new EntrepriseRepository())->getObjectParClePrimaire($_POST["login"]));
             if (!is_null($user)){
-                if ( hash('sha256', $_POST["mdp"])==$user->getMdpHache()){
+                if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
                     ConnexionUtilisateur::connecter($_POST["login"]);
                     ControleurEntrMain::afficherAccueilEntr();
                     exit();
@@ -148,7 +149,9 @@ class ControleurMain
             }
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
-
-        self::afficherPageConnexion();
+    }
+    public static function seDeconnecter(){
+        ConnexionUtilisateur::deconnecter();
+        header("Location: controleurFrontal.php");
     }
 }

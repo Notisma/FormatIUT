@@ -19,12 +19,14 @@ class MotDePasse
         return password_verify($mdpPoivre, $mdpHache);
     }
 
+    /*
     public static function genererChaineAleatoire(int $nbCaracteres = 22): string
     {
         $octetsAleatoires = random_bytes(ceil($nbCaracteres * 6 / 8));
         return substr(base64_encode($octetsAleatoires), 0, $nbCaracteres);
-    }
+    }*/
 
 }
+
 
 
