@@ -4,7 +4,7 @@ namespace App\FormatIUT\Lib;
 class MotDePasse
 {
 
-    private static string $poivre = "";
+    private static string $poivre="HU0ulztu0lR22QQWa7E4LX";
 
     public static function hacher(string $mdpClair): string
     {
@@ -19,14 +19,13 @@ class MotDePasse
         return password_verify($mdpPoivre, $mdpHache);
     }
 
-    /*
+
     public static function genererChaineAleatoire(int $nbCaracteres = 22): string
     {
         $octetsAleatoires = random_bytes(ceil($nbCaracteres * 6 / 8));
         return substr(base64_encode($octetsAleatoires), 0, $nbCaracteres);
-    }*/
+    }
 
 }
-
 
 
