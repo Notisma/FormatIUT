@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    min-height: 96vh;
+    /* background légèrement crême */
+    background-color: #e8e8e8;
+}
+
+
+#center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    min-width: 300px;
+    border-radius: 10px;
+    text-align: left;
+    line-height: 2em;
+    box-shadow: 0 0 10px 0 #466069;
+
+}
+
+#zoneLogo {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1%;
+}
+
+#logo {
+    margin-top: 5%;
+    width: 55%;
+}
+
+#desc > h1 {
+    font-family: "Oswald", sans-serif;
+    margin-top: 1%;
+    letter-spacing: 0.06em;
+
+}
+
+#desc > p {
+    font-size: 1.5em;
+    margin-bottom: 1%;
+    margin-top: 2%;
+}
+
+
+#center > #desc {
+    float: left;
+    height: 100%;
+    width: 60%;
+    background-color: #ff7a82;
+    border-radius: 10px 0 0 10px;
+    text-align: left;
+    line-height: 2em;
+    color: white;
+}
+
+#desc > a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+#boutonredirect {
+    width: 90%;
+    border-radius: 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    margin-right: 5%;
+    text-align: center;
+}
+
+#boutonredirect:hover {
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+#boutonCentre {
+    display: none;
+    justify-content: center;
+    text-align: center;
+}
+
+#erreur {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Open Sans extra", sans-serif;
+    width: 100%;
+}
+
+#user {
+    display: flex;
+    width: 7%;
+    height: 7%;
+    margin-top: 4%;
+}
+
+#cadenas {
+    display: flex;
+    width: 8%;
+    height: 8%;
+    margin-top: 5%;
+}
+
+#desc > h1 {
+    margin-top: 3%;
+    font-size: 2.8em;
+    text-align: center;
+    line-height: 0.9em;
+}
+
+#desc > h2 {
+    margin-left: 10%;
+    font-size: 2em;
+}
+
+#texteCentre {
+    justify-content: center;
+    text-align: center;
+    padding: 2%;
+    font-family: "Open Sans light", sans-serif;
+}
+
+#premiereLigne {
+    margin-top: 5%;
+}
+
+#center > #formulaire {
+    background-color: #ffffff;
+    float: right;
+    width: 40%;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+    text-align: left;
+    line-height: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#formulaire > #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    margin-top: 35%;
+    background-color: #ffffff;
+    border-radius: 2px;
+    margin-bottom: 30%;
+}
+
+#login {
+    width: 99%;
+}
+
+#mdp {
+    width: 99%;
+}
+
+#form > h2 {
+    color: #ff5660;
+    font-family: "Open Sans extra", sans-serif;
+    margin-bottom: 3%;
+}
+
+#imageErreur {
+    width: 10%;
+}
+
+#attention {
+    display: flex;
+    margin-top: 50%;
+    width: 100%;
+}
+
+form {
+    text-align: center;
+    line-height: 3em;
+}
+
+#Userlogin {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#Usermdp {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+input {
+    border-radius: 50px;
+    border: none;
+    background-color: #b7e7e4;
+    padding: 10px 20px;
+    margin: 10px;
+    width: 70%;
+}
+
+
+
+#bouton {
+    border-radius: 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    border: none;
+    padding: 12px 22px;
+    width: 40%;
+    cursor: pointer;
+
+}
+
+#bouton:hover {
+    color: #000000;
+    width: 45%;
+}
+
+
+#bouton:active {
+    color: #000000;
+    background: linear-gradient(to right, #ffffff, #ffffff);
+    width: 45%;
+    border: 1px solid #000000;
+}
+
+
+/* ------------------------------------------------- PARTIE RESPONSIVE ---------------------------------------------- */
+
+
+/* Ici le premier palier, on réduit juste les tailles du logo et du texte */
+@media (max-width: 1200px) {
+
+    #logo {
+        width: 60%;
+    }
+
+
+    #desc > h1 {
+        font-size: 1.5em;
+    }
+
+    #desc > h2 {
+        font-size: 1em;
+    }
+
+    #desc > p {
+        font-size: 0.8em;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    #bouton {
+        width: 60%;
+    }
+
+    #boutonCentre {
+        padding-bottom: 5%;
+    }
+}
+
+
+/* ----------------------------------------------------------------------------*/
+/* Ici le deuxième palier, on bascule #form en dessous de #desc */
+@media (max-width: 1050px) {
+    body {
+        min-height: 190vh;
+    }
+
+    #center {
+        align-content: center;
+        justify-content: center;
+        width: 90%;
+        height: 100%;
+        border-radius: 10px;
+        margin-top: 5%;
+    }
+
+    #center > #desc {
+        float: none;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+
+    #center > #formulaire {
+        float: none;
+        width: 100%;
+        height: 70%;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 0 10px #466069;
+
+    }
+
+    #form {
+        margin-top: 22%;
+    }
+
+    #form > h2 {
+        padding: 8% 0 0 0;
+        margin-bottom: 1%;
+    }
+
+    #zoneLogo {
+        margin-top: 0;
+    }
+
+    #desc > h1 {
+        font-size: 3em;
+    }
+
+    #premiereLigne {
+        margin-top: 2%;
+    }
+
+    #desc > h2 {
+        font-size: 1.5em;
+    }
+
+    #texteCentre > p {
+        font-size: 1.5em;
+        text-align: center;
+        padding: 0;
+    }
+
+    #texteCentre {
+        margin-top: 0;
+    }
+
+    #attention {
+        margin-top: 0;
+    }
+
+    #imageErreur {
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+    input {
+        width: 90%;
+    }
+
+    #bouton {
+        width: 50%;
+    }
+
+    #boutonCentre {
+        margin-top: -3%;
+    }
+}
+
+/* ----------------------------------------------------------------------------*/
+/* Ici le troisième palier, on réduit la taille du formulaire */
+@media (max-width: 700px) {
+
+    body {
+        min-height: 130vh;
+    }
+
+    #logo {
+        width: 70%;
+    }
+
+    #center {
+        height: 70%;
+        margin-top: 0;
+    }
+
+
+    #center > #formulaire {
+        float: none;
+        width: 100%;
+        height: 60%;
+    }
+
+    #center > desc {
+        float: none;
+        width: 100%;
+        height: 10%;
+    }
+
+
+    #desc > h1 {
+        font-size: 2em;
+        line-height: 1.5em;
+    }
+
+    #desc > h2 {
+        font-size: 1.5em;
+    }
+
+    #desc > p {
+        font-size: 1em;
+    }
+
+    input {
+        width: 90%;
+    }
+
+    #bouton {
+        width: 50%;
+    }
+}
+
+/* ----------------------------------------------------------------------------*/
+@media (max-device-width: 500px) {
+    /* Styles pour les smartphones */
+    body {
+        min-height: 99vh;
+    }
+
+    #center {
+        height: 92%;
+        width: 100%;
+    }
+
+    #center > #desc {
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
+
+
+    #center > #formulaire {
+        float: none;
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #form {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #form > h2 {
+        padding: 0 0 0 0;
+        margin-bottom: 1%;
+        font-size: 3em;
+    }
+
+    form {
+        margin-bottom: 5%;
+    }
+
+
+    #desc > p {
+        font-size: 10em;
+    }
+
+    #wrapInput {
+        width: 100%;
+        margin-right: 30%;
+    }
+
+    #erreur > p {
+        font-size: 2em;
+    }
+
+    #Userlogin {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    #login {
+        height: 80px;
+        width: 800px;
+        font-size: 2em;
+    }
+
+
+
+    #mdp {
+        height: 80px;
+        width: 800px;
+        font-size: 2em;
+    }
+
+    #Usermdp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    #cadenas {
+        margin-bottom: 4%;
+    }
+
+    #user {
+        margin-bottom: 5%;
+    }
+
+    #bouton {
+        width: 60%;
+        margin-top: 5%;
+        height: 80px;
+        font-size: 2em;
+    }
+
+    #boutonRedirect {
+        width: 60%;
+        margin-top: 5%;
+        height: 25%;
+    }
+}
+
+
+
+
+
