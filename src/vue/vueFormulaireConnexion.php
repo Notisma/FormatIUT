@@ -54,7 +54,7 @@
                         <input type="password" name="mdp" id="mdp" required>
                     </div>
                 </div>
-                <input id="bouton" type="submit" value="CONNEXION">
+                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
             </form>
         </div>
     </div>

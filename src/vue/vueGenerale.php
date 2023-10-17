@@ -33,12 +33,12 @@
                 $src="";
                 if ($titrePage == "Accueil" || $titrePage == "Erreur") {
                     $src = "../ressources/images/profil.png";
-                    $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
+                    $liaison = "?controleur=Main&action=afficherPageConnexion";
                     echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else if (ucfirst($_GET['controleur']) == 'EntrMain') {
-                    $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
+                    $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                     echo "<form action='controleurFrontal.php' method='get'>

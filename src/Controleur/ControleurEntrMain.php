@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -14,16 +15,9 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
-    private static float $cleEntreprise = 76543128904567;
-
-    public static function getCleEntreprise(): float
-    {
-        return self::$cleEntreprise;
-    }
-
     public static function afficherAccueilEntr()
     {
-        $listeIDOffre = self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(self::$cleEntreprise));
+        $listeIDOffre = self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
         for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
             $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
@@ -47,7 +41,7 @@ class ControleurEntrMain extends ControleurMain
                     if ($_POST["nbHeuresHebdo"]<8*7 && $_POST["dureeHeures"]>$_POST["nbHeuresHebdo"]) {
                         $listeId = (new OffreRepository())->getListeIdOffres();
                         self::autoIncrement($listeId, "idOffre");
-                        $_POST["idEntreprise"] = self::$cleEntreprise;
+                        $_POST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
                         $offre = (new OffreRepository())->construireDepuisTableau($_POST);
                         (new OffreRepository())->creerObjet($offre);
                         $_GET["action"] = "mesOffres";
@@ -81,7 +75,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_GET["Etat"])){
             $_GET["Etat"]= "Tous";
         }
-        $liste = (new OffreRepository())->getListeOffreParEntreprise(self::$cleEntreprise, $_GET["type"],$_GET["Etat"]);
+        $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_GET["type"],$_GET["Etat"]);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste,"Etat"=>$_GET["Etat"]]);
     }
 
@@ -98,7 +92,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function afficherProfilEntr()
     {
-            $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise);
+            $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
             self::afficherVue("vueGenerale.php", ["entreprise"=>$entreprise,"menu" => self::getMenu(), "chemin" => "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
     }
 
@@ -138,7 +132,7 @@ class ControleurEntrMain extends ControleurMain
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         //TODO vérif de doublons d'image
-        $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise));
+        $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom="";
         $nomEntreprise=$entreprise->getNomEntreprise();
         for ($i=0;$i<strlen($entreprise->getNomEntreprise());$i++){
@@ -150,8 +144,8 @@ class ControleurEntrMain extends ControleurMain
         }
         $nom.="_logo";
         parent::insertImage($nom);
-        $ancienId=(new ImageRepository())->imageParEntreprise(self::$cleEntreprise);
-        (new EntrepriseRepository())->updateImage(self::$cleEntreprise,$id);
+        $ancienId=(new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(),$id);
         if ($ancienId["img_id"]!=0) {
             (new ImageRepository())->supprimer($ancienId["img_id"]);
         }
@@ -166,7 +160,7 @@ class ControleurEntrMain extends ControleurMain
             if (in_array($_GET["idOffre"],$listeOffre)) {
                 if (!((new FormationRepository())->estFormation($_GET["idOffre"]))) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
-                    if ($offre->getSiret()==self::$cleEntreprise) {
+                    if ($offre->getSiret()==ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                         (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
                         (new OffreRepository())->supprimer($_GET["idOffre"]);
                         $_GET["action"] = "afficherAccueilEntr()";
