@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 100vh;
+}
+
+.boiteMain {
+    position: absolute;
+    top: 57%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 92%;
+    height: 87%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+
+
+.etudiantInfos {
+    grid-column: 1/3;
+    grid-row: 1;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 70%;
+    height: 95%;
+    background-color: #ff9095;
+    margin-right: 25%;
+}
+
+.h3centre {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.h3centre > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin-top: 3%;
+    letter-spacing: 0.04em;
+}
+
+.petiteDiv {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.texteAGauche {
+    float: left;
+    width: 70%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.texteAGauche > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0 0 0 3%;
+}
+
+.texteAGauche > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #ffb4b7;
+    width: 98%;
+    margin-left: 2%;
+    height: 90%;
+    padding: 2%;
+
+}
+
+.texteAGauche > form > * {
+    padding: 1%;
+}
+
+.texteAGauche > form > input[type="submit"] {
+    border-radius: 50px;
+    border: none;
+    width: 30%;
+    height: 50%;
+    background-color: #ff5660;
+    color: white;
+}
+
+.texteAGauche > form > input[type="submit"]:hover {
+    border-radius: 50px;
+    border: none;
+    width: 30%;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    border-radius: 50px;
+    border: none;
+    width: 50%;
+    height: 100%;
+    background-color: #ff5660;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.imageEtu {
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.imageEtu > img {
+    width: 70%;
+}
+
+.conteneurBienvenueEtu {
+    float: right;
+    grid-column: 2/5;
+    grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 80%;
+    height: 95%;
+    margin-left: 17%;
+    background-color: #aadcda;
+}
+
+.texteBienvenue {
+    float: left;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.texteBienvenue > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin-left: 5%;
+    letter-spacing: 0.04em;
+}
+
+.texteBienvenue > p {
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 5%;
+    line-height: 1em;
+}
+
+.imageBienvenue {
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.imageBienvenue > img {
+    width: 90%;
+}
+
+.informationsActuellesEtu {
+    grid-column: 1/3;
+    grid-row: 2/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 95%;
+    height: 95%;
+    margin: 0;
+    background-color: #aadcda;
+}
+
+.informationsActuellesEtu > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.infosActu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.infosActu > img {
+    width: 50%;
+}
+
+.infosActu > li {
+    margin-top: 0;
+}
+
+
+.detailsDeEntreprise {
+    grid-column: 3/5 ;
+    grid-row: 2/5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    width: 60%;
+    height: 95%;
+    margin: 0;
+    background-color: #ff9095;
+}
+
+
+
+.detailsDeEntreprise > h3 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+}
+
+.detailsDeEntreprise > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.statistiques {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    width: 90%;
+    height: 20%;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.illustrationStat {
+    float: left;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.illustrationStat > img {
+    width: 70%;
+}
+
+.descStat {
+    float: right;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.descStat > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    margin: 0;
+    letter-spacing: 0.04em;
+}
