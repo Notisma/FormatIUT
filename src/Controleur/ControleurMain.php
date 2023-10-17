@@ -21,6 +21,13 @@ class ControleurMain
     }
 
     /***
+     * Affiche la page de présentations aux entreprises n'ayant pas de compte
+     */
+    public static function afficherVuePresentation() {
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Entreprise/vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprise"]);
+    }
+
+    /***
      * Affiche la page de detail d'une offre qui varie selon le client
     */
     public static function afficherVueDetailOffre(){
@@ -50,7 +57,7 @@ class ControleurMain
 
     public static function getMenu() :array{
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?action=afficherIndex"),
+            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
             array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
         );
