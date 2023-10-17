@@ -21,7 +21,7 @@ class ControleurMain
      * Affiche la page de présentations aux entreprises n'ayant pas de compte
      */
     public static function afficherVuePresentation() {
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprises"]);
+        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprise"]);
     }
 
     /***
