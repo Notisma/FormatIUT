@@ -11,16 +11,18 @@ class ControleurMain
 {
 
     /***
-     * Affiche la page d'acceuil du site sans qu'aucune connexion n'est été faite
+     * Affiche la page d'acceuil du site sans qu'aucune connexion n'ait été faite
      */
     public static function afficherIndex(){
         self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"vueIndex.php","titrePage"=>"Accueil"]);
     }
 
+
     /***
      * Affiche la page de detail d'une offre qui varie selon le client
     */
-    public static function afficherVueDetailOffre(){
+    public static function afficherVueDetailOffre(): void
+    {
         $menu = "App\Formatiut\Controleur\Controleur" . $_GET['controleur'];
         $liste=(new OffreRepository())->getListeIdOffres();
         if (isset($_GET["idOffre"])) {
@@ -48,6 +50,7 @@ class ControleurMain
     public static function getMenu() :array{
         return array(
             array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>""),
+            array("image"=>"../ressources/images/profil.png","label"=>"OLD ETUDIANTS","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=EntrMain&action=afficherAccueilEntr")
         );
