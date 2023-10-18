@@ -18,7 +18,7 @@ class VerificationEmail
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail
-        MessageFlash::ajouter("success", $corpsEmail);
+        MessageFlash::ajouter("info", $corpsEmail);
     }
 
     public static function traiterEmailValidation($login, $nonce): bool

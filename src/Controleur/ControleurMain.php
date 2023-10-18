@@ -154,4 +154,8 @@ class ControleurMain
         ConnexionUtilisateur::deconnecter();
         header("Location: controleurFrontal.php");
     }
+    public static function validerEmail(){
+        VerificationEmail::traiterEmailValidation($_REQUEST["login"],$_REQUEST["nonce"]);
+        header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
+    }
 }
