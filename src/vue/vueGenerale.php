@@ -64,20 +64,15 @@
 
                 <div class="flash">
                     <?php
-                    //\App\FormatIUT\Lib\MessageFlash::ajouter("success", "Compte créé avec succès");
+                    //solutionTemporaire
+                    if (isset($_REQUEST["controleur"]) && $_REQUEST["controleur"]!="EtuMain"){
+                    //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
                         echo "<div class='alert alert-" . $type . "'>";
-                            if ($type == "success") {
-                                echo "<img src='../ressources/images/succes.png'>";
-                            } else if ($type == "info") {
-                                echo "<img src='../ressources/images/information.png'>";
-                            } else if ($type == "warning") {
-                                echo "<img src='../ressources/images/avertissement.png'>";
-                            } else if ($type == "danger") {
-                                echo "<img src='../ressources/images/annuler.png'>";
-                            }
+                        echo "<img src='../ressources/images/".$type.".png'>";
                             echo'<p>' . $lireMessage . '</p></div>'
                         ;
+                    }
                     }
                     ?>
                 </div>
