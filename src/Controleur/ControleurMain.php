@@ -4,8 +4,11 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\TransfertImage;
+use App\FormatIUT\Lib\VerificationEmail;
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
@@ -152,10 +155,28 @@ class ControleurMain
     }
     public static function seDeconnecter(){
         ConnexionUtilisateur::deconnecter();
+        Session::getInstance()->detruire();
         header("Location: controleurFrontal.php");
     }
+
     public static function validerEmail(){
         VerificationEmail::traiterEmailValidation($_REQUEST["login"],$_REQUEST["nonce"]);
         header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
+    }
+
+    public static function redirectionFlash(string $action,string $type,string $message){
+        MessageFlash::ajouter($type,$message);
+        self::$action();
+
+}
+    public static function creerCompteEntreprise(){
+        if ($_REQUEST["mdp"]==$_REQUEST["mdpConf"]) {
+            $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
+            (new EntrepriseRepository())->creerObjet($entreprise);
+            VerificationEmail::envoiEmailValidation($entreprise);
+            header("Location: controleurFrontal.php");
+        }else {
+            self::redirectionFlash("afficherVuePresentation","warning","Les mots de passes doivent coincider");
+        }
     }
 }

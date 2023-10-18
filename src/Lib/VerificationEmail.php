@@ -14,7 +14,7 @@ class VerificationEmail
         $siretURL = rawurlencode($entreprise->getSiret());
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
-        $lienValidationEmail = "$absoluteURL?action=validerEmail&controleur=EntrMain&login=$siretURL&nonce=$nonceURL";
+        $lienValidationEmail = "$absoluteURL?action=validerEmail&controleur=Main&login=$siretURL&nonce=$nonceURL";
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail

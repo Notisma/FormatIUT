@@ -10,7 +10,7 @@
 
     <div class="wrapFormulaireCreationPE">
         <div class="formulaireGauchePE">
-            <form action="controleurFrontal.php?controleur=EntrMain&action=creerCompteEntreprise" method="post">
+            <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
                 <input type="text" name="siret" placeholder="SIRET de l'entreprise" required>
                 <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>

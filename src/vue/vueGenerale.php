@@ -65,7 +65,7 @@
                 <div class="flash">
                     <?php
                     //solutionTemporaire
-                    if (isset($_REQUEST["controleur"]) && $_REQUEST["controleur"]!="EtuMain"){
+                    if (!isset($_REQUEST["controleur"]) || $_REQUEST["controleur"]!="EtuMain"){
                     //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
                         echo "<div class='alert alert-" . $type . "'>";

@@ -181,12 +181,7 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
-    public static function creerCompteEntreprise(){
-        $entreprise=Entreprise::construireDepuisFormulaire($_REQUEST);
-        (new EntrepriseRepository())->creerObjet($entreprise);
-        VerificationEmail::envoiEmailValidation($entreprise);
-        header("Location: controleurFrontal.php");
-    }
+
 
 
 }
