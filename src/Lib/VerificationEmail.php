@@ -1,5 +1,5 @@
 <?php
-namespace App\Covoiturage\Lib;
+namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEntrMain;

@@ -85,6 +85,7 @@
         <div id="corpsPage">
             <div id="main">
                 <?php
+                \App\FormatIUT\Lib\MessageFlash::ajouter("success","test");
                 foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
                     echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
                 }

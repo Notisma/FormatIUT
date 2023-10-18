@@ -2,8 +2,8 @@
 
 namespace App\FormatIUT\Controleur;
 
-use App\Covoiturage\Lib\VerificationEmail;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
