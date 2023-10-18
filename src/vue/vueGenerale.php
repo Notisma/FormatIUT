@@ -27,10 +27,8 @@
                 <?php
 
 
-
-
                 $liaison = "";
-                $src="";
+                $src = "";
                 if ($titrePage == "Accueil" || $titrePage == "Erreur") {
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -62,9 +60,30 @@
         <div id='profil'>
         <a href='{$liaison}'>";
                 echo '<img id="petiteIcone" src="' . $src . '"/></a>
-        </div>';
-                ?>
+        </div>'; ?>
+
+                <div class="flash">
+                    <?php
+                    //\App\FormatIUT\Lib\MessageFlash::ajouter("success", "Compte créé avec succès");
+                    foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+                        echo "<div class='alert alert-" . $type . "'>";
+                            if ($type == "success") {
+                                echo "<img src='../ressources/images/succes.png'>";
+                            } else if ($type == "info") {
+                                echo "<img src='../ressources/images/information.png'>";
+                            } else if ($type == "warning") {
+                                echo "<img src='../ressources/images/avertissement.png'>";
+                            } else if ($type == "danger") {
+                                echo "<img src='../ressources/images/annuler.png'>";
+                            }
+                            echo'<p>' . $lireMessage . '</p></div>'
+                        ;
+                    }
+                    ?>
+                </div>
             </div>
+
+
         </div>
 
         <div class="bandeauConteneur">
@@ -85,10 +104,6 @@
         <div id="corpsPage">
             <div id="main">
                 <?php
-                \App\FormatIUT\Lib\MessageFlash::ajouter("success","test");
-                foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                    echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
-                }
                 require __DIR__ . "/{$chemin}";
                 ?>
             </div>

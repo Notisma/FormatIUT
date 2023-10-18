@@ -182,7 +182,7 @@ body {
     position: absolute;
     border-radius: 50px;
     border: none;
-    width: 25%;
+    width: 20%;
     height: 30px;
     margin-top: 12px;
     padding-left: 1%;
@@ -270,7 +270,7 @@ body {
 
 #Gestionrecherche {
     float: right;
-    width: 80%;
+    width: 60%;
     margin-top: 0;
     height: 70%;
 }
@@ -296,7 +296,7 @@ form {
 #profil {
     float: left;
     height: 36px;
-    width: 8%;
+    width: 5%;
 }
 
 #petiteIcone {
@@ -521,15 +521,43 @@ form {
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 80%;
     float: right;
 }
 
+.flash {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 10%;
+    margin-right: 2%;
+}
+
+
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 2%;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.alert > p {
+    margin-left: 5%;
+    line-height: 1em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.alert > img {
+    width: 10%;
 }
 
 .alert-success {
