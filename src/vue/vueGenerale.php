@@ -85,6 +85,9 @@
         <div id="corpsPage">
             <div id="main">
                 <?php
+                foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+                    echo '<div class="alert alert-'.$type.'">'.$lireMessage.'</div>';
+                }
                 require __DIR__ . "/{$chemin}";
                 ?>
             </div>
