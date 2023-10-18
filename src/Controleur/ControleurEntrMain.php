@@ -199,31 +199,35 @@ class ControleurEntrMain extends ControleurMain
 
     public static function modifierOffre(): void
     {
-        if (isset($_POST["idOffre"])) {
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
-            if ($offre) {
-                if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                    if ($offre->getSiret() == self::$cleEntreprise) {
-                        $offre->setTypeOffre($_POST['typeOffre']);
-                        $offre->setNomOffre($_POST['nomOffre']);
-                        $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
-                        $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
-                        $offre->setSujet($_POST['sujet']);
-                        $offre->setDetailProjet($_POST['detailProjet']);
-                        $offre->setGratification($_POST['gratification']);
-                        $offre->setDureeHeures($_POST['dureeHeures']);
-                        $offre->setJoursParSemaine($_POST['joursParSemaine']);
-                        $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
-                        (new OffreRepository())->modifierObjet($offre);
-                        self::afficherVueDetailOffre($offre->getIdOffre());
+        if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
+            if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
+                $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+                if ($offre) {
+                    if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                        if ($offre->getSiret() == self::$cleEntreprise) {
+                            $offre->setTypeOffre($_POST['typeOffre']);
+                            $offre->setNomOffre($_POST['nomOffre']);
+                            $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
+                            $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
+                            $offre->setSujet($_POST['sujet']);
+                            $offre->setDetailProjet($_POST['detailProjet']);
+                            $offre->setGratification($_POST['gratification']);
+                            $offre->setDureeHeures($_POST['dureeHeures']);
+                            $offre->setJoursParSemaine($_POST['joursParSemaine']);
+                            $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
+                            (new OffreRepository())->modifierObjet($offre);
+                            self::afficherVueDetailOffre($offre->getIdOffre());
+                        } else {
+                            self::afficherErreur("Cette offre ne vous appartient pas");
+                        }
                     } else {
-                        self::afficherErreur("Cette offre ne vous appartient pas");
+                        self::afficherErreur("Cette offre a déjà été admise par un étudiant");
                     }
                 } else {
-                    self::afficherErreur("Cette offre a déjà été admise par un étudiant");
+                    self::afficherErreur("Cette offre n'existe pas");
                 }
             } else {
-                self::afficherErreur("Cette offre n'existe pas");
+                self::afficherErreur("Certaines données renseignées sont erronnées");
             }
         } else {
             self::afficherErreur("Données manquantes");
