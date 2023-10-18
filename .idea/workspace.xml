@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections.">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Ajout d'une erreur pour les notification.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Repository/AlternanceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/AlternanceRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modele/Repository/StageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modele/Repository/StageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueMesOffres.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="amelioration-catalogue" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,9 +58,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/MAMP/htdocs/SAE_DEV",
+    "last_opened_file_path": "C:/Users/farmi/Downloads/JetBrains-Discord-Integration-1.11.0.zip",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,7 +78,6 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\src\vue\Etudiant" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\ressources\images" />
       <recent name="C:\Users\farmi\Documents\COURS - 2BUTINFO\SAE_DEV\" />
@@ -133,442 +138,255 @@
       <workItem from="1696316750672" duration="6105000" />
       <workItem from="1696333581954" duration="1036000" />
       <workItem from="1696338132710" duration="8723000" />
-      <workItem from="1696354258415" duration="6622000" />
-      <workItem from="1696433101644" duration="3705000" />
-      <workItem from="1696487297800" duration="2766000" />
-      <workItem from="1696600871606" duration="1216000" />
-      <workItem from="1696603564071" duration="3329000" />
-      <workItem from="1696625510885" duration="1454000" />
-      <workItem from="1696679068753" duration="1258000" />
-      <workItem from="1696697008291" duration="6751000" />
-      <workItem from="1696759201873" duration="1075000" />
-      <workItem from="1696769002830" duration="11280000" />
-      <workItem from="1696794652365" duration="714000" />
-      <workItem from="1696832634240" duration="5257000" />
-      <workItem from="1696858077192" duration="291000" />
-      <workItem from="1696858388002" duration="118000" />
-      <workItem from="1696858529663" duration="369000" />
-      <workItem from="1696923336193" duration="7307000" />
-      <workItem from="1696951909346" duration="3566000" />
-      <workItem from="1697026513092" duration="1779000" />
-      <workItem from="1697046317616" duration="1436000" />
-      <workItem from="1697053883483" duration="2398000" />
-      <workItem from="1697056632796" duration="540000" />
-      <workItem from="1697179873476" duration="1041000" />
-      <workItem from="1697196722526" duration="797000" />
-      <workItem from="1697197555882" duration="4749000" />
-      <workItem from="1697202367306" duration="645000" />
-      <workItem from="1697209826637" duration="108000" />
-      <workItem from="1697209946749" duration="205000" />
-      <workItem from="1697210165675" duration="1561000" />
-      <workItem from="1697270110676" duration="10458000" />
-      <workItem from="1697390647553" duration="6954000" />
-      <workItem from="1697437379985" duration="4823000" />
+      <workItem from="1696354258415" duration="3574000" />
     </task>
-    <task id="LOCAL-00038" summary="début de factorisation des dataObject et Repository">
+    <task id="LOCAL-00001" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
-      <created>1696599303251</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
+      <created>1695053285573</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1696599303251</updated>
+      <updated>1695053285573</updated>
     </task>
-    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
+    <task id="LOCAL-00002" summary="Début du projet. Branche PRINCIPALE">
       <option name="closed" value="true" />
-      <created>1696606913582</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
+      <created>1695111088168</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1696606913582</updated>
+      <updated>1695111088168</updated>
     </task>
-    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
+    <task id="LOCAL-00003" summary="Nettoyage">
       <option name="closed" value="true" />
-      <created>1696626967802</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
+      <created>1695111249210</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1696626967804</updated>
+      <updated>1695111249210</updated>
     </task>
-    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
+    <task id="LOCAL-00004" summary="Modifications visuelles">
       <option name="closed" value="true" />
-      <created>1696697664097</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
+      <created>1695112651850</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1696697664097</updated>
+      <updated>1695112651850</updated>
     </task>
-    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
+    <task id="LOCAL-00005" summary="Modifications visuelles v2">
       <option name="closed" value="true" />
-      <created>1696698095999</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
+      <created>1695138345430</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1696698095999</updated>
+      <updated>1695138345430</updated>
     </task>
-    <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
+    <task id="LOCAL-00006" summary="Update">
       <option name="closed" value="true" />
-      <created>1696700847363</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
+      <created>1695139164548</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1696700847363</updated>
+      <updated>1695139164548</updated>
     </task>
-    <task id="LOCAL-00044" summary="Encore un bug de git">
+    <task id="LOCAL-00007" summary="Travaux préparatoires sur les erreurs">
       <option name="closed" value="true" />
-      <created>1696704451740</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
+      <created>1695151264079</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1696704451740</updated>
+      <updated>1695151264079</updated>
     </task>
-    <task id="LOCAL-00045" summary="Fix bug git">
+    <task id="LOCAL-00008" summary="Corrections">
       <option name="closed" value="true" />
-      <created>1696704734990</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
+      <created>1695198543126</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1696704734992</updated>
+      <updated>1695198543126</updated>
     </task>
-    <task id="LOCAL-00046" summary="Tentative de fix un bug (j'ai échoué mdr)">
+    <task id="LOCAL-00009" summary="Améliorations visuelles">
       <option name="closed" value="true" />
-      <created>1696705439768</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
+      <created>1695214153358</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1696705439769</updated>
+      <updated>1695214153358</updated>
     </task>
-    <task id="LOCAL-00047" summary="Merge de branches">
+    <task id="LOCAL-00010" summary="Corrections de bugs">
       <option name="closed" value="true" />
-      <created>1696758880659</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
+      <created>1695237564390</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1696758880659</updated>
+      <updated>1695237564390</updated>
     </task>
-    <task id="LOCAL-00048" summary="Avancées graphiques">
+    <task id="LOCAL-00011" summary="Corrections de bugs (encore)">
       <option name="closed" value="true" />
-      <created>1696773423164</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
+      <created>1695238673959</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1696773423164</updated>
+      <updated>1695238673959</updated>
     </task>
-    <task id="LOCAL-00049" summary="Avancées sur vueMesOffres.php">
+    <task id="LOCAL-00012" summary="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)">
       <option name="closed" value="true" />
-      <created>1696776872670</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
+      <created>1695242166940</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1696776872670</updated>
+      <updated>1695242166940</updated>
     </task>
-    <task id="LOCAL-00050" summary="Update">
+    <task id="LOCAL-00013" summary="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)">
       <option name="closed" value="true" />
-      <created>1696779542316</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
+      <created>1695289955483</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1696779542318</updated>
+      <updated>1695289955484</updated>
     </task>
-    <task id="LOCAL-00051" summary="Corrections visuelles">
+    <task id="LOCAL-00014" summary="Avancée Responsive">
       <option name="closed" value="true" />
-      <created>1696780278781</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
+      <created>1695329097218</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1696780278781</updated>
+      <updated>1695329097220</updated>
     </task>
-    <task id="LOCAL-00052" summary="Avancées graphiques">
+    <task id="LOCAL-00015" summary="Avancée Responsive + Nettoyage">
       <option name="closed" value="true" />
-      <created>1696834602644</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
+      <created>1695394816057</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1696834602644</updated>
+      <updated>1695394816057</updated>
     </task>
-    <task id="LOCAL-00053" summary="Avancées">
+    <task id="LOCAL-00016" summary="Passage à la charte graphique de l'UM et de L'IUT">
       <option name="closed" value="true" />
-      <created>1696858233992</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
+      <created>1695407338744</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1696858233992</updated>
+      <updated>1695407338744</updated>
     </task>
-    <task id="LOCAL-00054" summary="Avancées">
+    <task id="LOCAL-00017" summary="Beaucoup de corrections">
       <option name="closed" value="true" />
-      <created>1696858257994</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
+      <created>1695625306248</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1696858257994</updated>
+      <updated>1695625306248</updated>
     </task>
-    <task id="LOCAL-00055" summary="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1).">
+    <task id="LOCAL-00018" summary="Nettoyage. Responsive terminé.">
       <option name="closed" value="true" />
-      <created>1696924918294</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
+      <created>1695642539381</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1696924918294</updated>
+      <updated>1695642539381</updated>
     </task>
-    <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
+    <task id="LOCAL-00019" summary="Modifications.">
       <option name="closed" value="true" />
-      <created>1696929442750</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
+      <created>1695645677197</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1696929442750</updated>
+      <updated>1695645677197</updated>
     </task>
-    <task id="LOCAL-00057" summary="Ajout de fichiers">
+    <task id="LOCAL-00020" summary="Update">
       <option name="closed" value="true" />
-      <created>1696929631516</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
+      <created>1695738322367</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1696929631516</updated>
+      <updated>1695738322367</updated>
     </task>
-    <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
+    <task id="LOCAL-00021" summary="Corrections">
       <option name="closed" value="true" />
-      <created>1696936548623</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
+      <created>1695795845858</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1696936548623</updated>
+      <updated>1695795845858</updated>
     </task>
-    <task id="LOCAL-00059" summary="Avancées sur vueCompteEntreprise.php">
+    <task id="LOCAL-00022" summary="Ajout d'un bandeau (header). Pas encore terminé.">
       <option name="closed" value="true" />
-      <created>1696942373057</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
+      <created>1695921578210</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1696942373057</updated>
+      <updated>1695921578210</updated>
     </task>
-    <task id="LOCAL-00060" summary="Avancées sur vueCompteEntreprise.php">
+    <task id="LOCAL-00023" summary="rajout du controleurEntrMain + vues(vide)">
       <option name="closed" value="true" />
-      <created>1696954724735</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
+      <created>1696062112558</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1696954724747</updated>
+      <updated>1696062112558</updated>
     </task>
-    <task id="LOCAL-00061" summary="Corrections.">
+    <task id="LOCAL-00024" summary="rajout des liens pour formulaireCreationOffre.php">
       <option name="closed" value="true" />
-      <created>1697013261981</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
+      <created>1696063232005</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1697013261981</updated>
+      <updated>1696063232005</updated>
     </task>
-    <task id="LOCAL-00062" summary="Correction de crash">
+    <task id="LOCAL-00025" summary="Fix de gros bug git">
       <option name="closed" value="true" />
-      <created>1697019474950</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
+      <created>1696242437807</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1697019474950</updated>
+      <updated>1696242437807</updated>
     </task>
-    <task id="LOCAL-00063" summary="Visuel (version 1) de vueCompte Entreprise et étudiant terminés.">
+    <task id="LOCAL-00026" summary="Améliorations + avancée sur vueAccueilEtudiant.php">
       <option name="closed" value="true" />
-      <created>1697055293781</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
+      <created>1696246712305</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1697055293781</updated>
+      <updated>1696246712305</updated>
     </task>
-    <task id="LOCAL-00064" summary="Correction de crash">
+    <task id="LOCAL-00027" summary="Avancée">
       <option name="closed" value="true" />
-      <created>1697056195818</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
+      <created>1696281434158</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1697056195818</updated>
+      <updated>1696281434158</updated>
     </task>
-    <task id="LOCAL-00065" summary="Correction">
+    <task id="LOCAL-00028" summary="Ajout des annonces en html (version 1)">
       <option name="closed" value="true" />
-      <created>1697126145445</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
+      <created>1696326017928</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1697126145446</updated>
+      <updated>1696326017928</updated>
     </task>
-    <task id="LOCAL-00066" summary="Améliorations visuelles">
+    <task id="LOCAL-00029" summary="Corrections">
       <option name="closed" value="true" />
-      <created>1697130478362</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
+      <created>1696334623441</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1697130478362</updated>
+      <updated>1696334623442</updated>
     </task>
-    <task id="LOCAL-00067" summary="Modifications de controleur">
+    <task id="LOCAL-00030" summary="Ajout d'une erreur pour les notification.">
       <option name="closed" value="true" />
-      <created>1697131435976</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
+      <created>1696345287909</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
       <option name="project" value="LOCAL" />
-      <updated>1697131435977</updated>
+      <updated>1696345287909</updated>
     </task>
-    <task id="LOCAL-00068" summary="Correction bug">
-      <option name="closed" value="true" />
-      <created>1697132252980</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1697132252980</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Correction bug">
-      <option name="closed" value="true" />
-      <created>1697209865381</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1697209865381</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Je répare ce que je peux">
-      <option name="closed" value="true" />
-      <created>1697210293730</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1697210293732</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Corrections">
-      <option name="closed" value="true" />
-      <created>1697211055206</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1697211055206</updated>
-    </task>
-    <task id="LOCAL-00072" summary="visuel vueDetailEntreprise.php (version 1) terminé.">
-      <option name="closed" value="true" />
-      <created>1697273752249</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1697273752249</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Début des travaux sur vueDetailEtudiant.php">
-      <option name="closed" value="true" />
-      <created>1697276262554</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1697276262554</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Visuel vueDetailEtudiant.php (version 1) terminé.">
-      <option name="closed" value="true" />
-      <created>1697276760917</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1697276760917</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci.">
-      <option name="closed" value="true" />
-      <created>1697279490985</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1697279490985</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Améliorations et corrections visuelles">
-      <option name="closed" value="true" />
-      <created>1697283922013</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1697283922029</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Ajout d'erreurs">
-      <option name="closed" value="true" />
-      <created>1697287223836</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1697287223836</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Améliorations visuelles vueGénérale">
-      <option name="closed" value="true" />
-      <created>1697295234560</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1697295234561</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Début des travaux sur vueMesOffresEtu.php">
-      <option name="closed" value="true" />
-      <created>1697383280864</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1697383280864</updated>
-    </task>
-    <task id="LOCAL-00080" summary="Visuel (version 1) vueMesOffresEtu.php terminé.">
-      <option name="closed" value="true" />
-      <created>1697386537551</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1697386537551</updated>
-    </task>
-    <task id="LOCAL-00081" summary="Début des améliorations visuelles vueCatalogueOffre.php">
-      <option name="closed" value="true" />
-      <created>1697392919674</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1697392919674</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)">
-      <option name="closed" value="true" />
-      <created>1697401914615</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1697401914615</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Nombreuses Corrections">
-      <option name="closed" value="true" />
-      <created>1697439901215</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1697439901215</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Vue mes offres fin">
-      <option name="closed" value="true" />
-      <created>1697445918982</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1697445918982</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Corrections.">
-      <option name="closed" value="true" />
-      <created>1697466673669</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1697466673669</updated>
-    </task>
-    <task id="LOCAL-00086" summary="Corrections.">
-      <option name="closed" value="true" />
-      <created>1697540830637</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1697540830638</updated>
-    </task>
-    <option name="localTasksCounter" value="87" />
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="2d1e5fa8-8e7b-48bb-b2df-70f67e2c42db" value="TOOL_WINDOW" />
-      </map>
-    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="User">
@@ -611,11 +429,6 @@
     </option>
     <option name="TAB_STATES">
       <map>
-        <entry key="2d1e5fa8-8e7b-48bb-b2df-70f67e2c42db">
-          <value>
-            <State />
-          </value>
-        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -625,32 +438,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
-    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
-    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
-    <MESSAGE value="Correction de crash" />
-    <MESSAGE value="Correction" />
+    <MESSAGE value="Modifications visuelles v2" />
+    <MESSAGE value="Travaux préparatoires sur les erreurs" />
+    <MESSAGE value="Corrections de bugs" />
+    <MESSAGE value="Corrections de bugs (encore)" />
+    <MESSAGE value="Début des travaux sur le responsive (premier palier terminé - changement tailles polices et img)" />
+    <MESSAGE value="Début des travaux sur le responsive (deuxième palier terminé - changement disposition)" />
+    <MESSAGE value="Avancée Responsive" />
+    <MESSAGE value="Avancée Responsive + Nettoyage" />
+    <MESSAGE value="Passage à la charte graphique de l'UM et de L'IUT" />
+    <MESSAGE value="Beaucoup de corrections" />
+    <MESSAGE value="Nettoyage. Responsive terminé." />
+    <MESSAGE value="Modifications." />
+    <MESSAGE value="Update" />
     <MESSAGE value="Améliorations visuelles" />
-    <MESSAGE value="Modifications de controleur" />
-    <MESSAGE value="Correction bug" />
-    <MESSAGE value="Je répare ce que je peux" />
+    <MESSAGE value="Backup avant essais" />
+    <MESSAGE value="Grosses améliorations visuelles" />
+    <MESSAGE value="Ajout d'un bandeau (header). Pas encore terminé." />
+    <MESSAGE value="rajout du controleurEntrMain + vues(vide)" />
+    <MESSAGE value="rajout des liens pour formulaireCreationOffre.php" />
+    <MESSAGE value="Fix de gros bug git" />
+    <MESSAGE value="Améliorations + avancée sur vueAccueilEtudiant.php" />
+    <MESSAGE value="Avancée" />
+    <MESSAGE value="Ajout des annonces en html (version 1)" />
     <MESSAGE value="Corrections" />
-    <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
-    <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
-    <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
-    <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci." />
-    <MESSAGE value="Améliorations et corrections visuelles" />
-    <MESSAGE value="Ajout d'erreurs" />
-    <MESSAGE value="Améliorations visuelles vueGénérale" />
-    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
-    <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
-    <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
-    <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
-    <MESSAGE value="Nombreuses Corrections" />
-    <MESSAGE value="Vue mes offres fin" />
-    <MESSAGE value="Merge" />
-    <MESSAGE value="Corrections." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections." />
+    <MESSAGE value="Ajout d'une erreur pour les notification." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'une erreur pour les notification." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
