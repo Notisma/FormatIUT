@@ -53,6 +53,11 @@
     </div>
 
 
+    <div class="partie3">
+
+    </div>
+
+
     <div class="wrapFormulaireCreationPE">
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">

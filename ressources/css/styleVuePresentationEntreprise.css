@@ -215,7 +215,7 @@ body {
     color: #ff5660;
 }
 
-.formulaireGauchePE > form > input[type='text'] {
+.formulaireGauchePE > form > input[type='text'], input[type='password'], input[type='number'] {
     width: 90%;
     height: 10%;
     margin-top: 5%;
