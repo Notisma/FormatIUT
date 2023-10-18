@@ -37,7 +37,7 @@
                     echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
-                } else if (ucfirst($_GET['controleur']) == 'EntrMain') {
+                } else if (ucfirst($_REQUEST['controleur']) == 'EntrMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=entrMain&action=afficherProfilEntr";
@@ -46,7 +46,7 @@
             <input type='hidden' name='controleur' value='Main''>
             <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
-                } else if (ucfirst($_GET['controleur']) == 'EtuMain') {
+                } else if (ucfirst($_REQUEST['controleur']) == 'EtuMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=etuMain&action=afficherProfilEtu";

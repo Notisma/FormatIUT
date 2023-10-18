@@ -35,18 +35,18 @@ class ControleurEntrMain extends ControleurMain
     public static function creerOffre()
     {
         //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
-        if (isset($_POST['nomOffre'],$_POST["dateDebut"],$_POST["dateFin"],$_POST["sujet"],$_POST["detailProjet"],$_POST["gratification"],$_POST['dureeHeures'],$_POST["joursParSemaine"],$_POST["nbHeuresHebdo"],$_POST["typeOffre"])){
-            //if (strtotime($_POST["dateDebut"]) > strtotime($_POST["dateFin"])){
+        if (isset($_REQUEST['nomOffre'],$_REQUEST["dateDebut"],$_REQUEST["dateFin"],$_REQUEST["sujet"],$_REQUEST["detailProjet"],$_REQUEST["gratification"],$_REQUEST['dureeHeures'],$_REQUEST["joursParSemaine"],$_REQUEST["nbHeuresHebdo"],$_REQUEST["typeOffre"])){
+            //if (strtotime($_REQUEST["dateDebut"]) > strtotime($_REQUEST["dateFin"])){
                 //TODO vérif que début après aujourd'hui
-            if ($_POST["gratification"]>0 && $_POST["dureeHeures"]>0 && $_POST["joursParSemaine"]>0 && $_POST["nbHeuresHebdo"]>0) {
-                if ($_POST["joursParSemaine"]<8) {
-                    if ($_POST["nbHeuresHebdo"]<8*7 && $_POST["dureeHeures"]>$_POST["nbHeuresHebdo"]) {
+            if ($_REQUEST["gratification"]>0 && $_REQUEST["dureeHeures"]>0 && $_REQUEST["joursParSemaine"]>0 && $_REQUEST["nbHeuresHebdo"]>0) {
+                if ($_REQUEST["joursParSemaine"]<8) {
+                    if ($_REQUEST["nbHeuresHebdo"]<8*7 && $_REQUEST["dureeHeures"]>$_REQUEST["nbHeuresHebdo"]) {
                         $listeId = (new OffreRepository())->getListeIdOffres();
                         self::autoIncrement($listeId, "idOffre");
-                        $_POST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                        $offre = (new OffreRepository())->construireDepuisTableau($_POST);
+                        $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+                        $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
                         (new OffreRepository())->creerObjet($offre);
-                        $_GET["action"] = "mesOffres";
+                        $_REQUEST["action"] = "mesOffres";
                         self::mesOffres();
                     }else {
                         self::afficherErreur("Concordance des heures");
@@ -71,14 +71,14 @@ class ControleurEntrMain extends ControleurMain
 
     public static function mesOffres()
     {
-        if (!isset($_GET["type"])) {
-            $_GET["type"] = "Tous";
+        if (!isset($_REQUEST["type"])) {
+            $_REQUEST["type"] = "Tous";
         }
-        if (!isset($_GET["Etat"])){
-            $_GET["Etat"]= "Tous";
+        if (!isset($_REQUEST["Etat"])){
+            $_REQUEST["Etat"]= "Tous";
         }
-        $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_GET["type"],$_GET["Etat"]);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_GET["type"], "listeOffres" => $liste,"Etat"=>$_GET["Etat"]]);
+        $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"],$_REQUEST["Etat"]);
+        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_REQUEST["type"], "listeOffres" => $liste,"Etat"=>$_REQUEST["Etat"]]);
     }
 
     public static function getMenu(): array
@@ -101,19 +101,19 @@ class ControleurEntrMain extends ControleurMain
     public static function assignerEtudiantOffre()
     {
         //TODO vérifs que l'offre et l'étudiant existent
-        if (isset($_GET["idEtudiant"],$_GET["idOffre"])){
-            $offre=((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
-            $etudiant =((new EtudiantRepository())->getObjectParClePrimaire($_GET["idEtudiant"]));
+        if (isset($_REQUEST["idEtudiant"],$_REQUEST["idOffre"])){
+            $offre=((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+            $etudiant =((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
-                if (((new FormationRepository())->estFormation($_GET["idOffre"]))) {
+                if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
                     self::afficherErreur("L'offre est déjà prise");
                 } else {
-                    if (((new EtudiantRepository())->aUneFormation($_GET["idOffre"]))) {
+                    if (((new EtudiantRepository())->aUneFormation($_REQUEST["idOffre"]))) {
                         self::afficherErreur("L'étudiant a déjà une formation");
                     } else {
-                        if (((new EtudiantRepository())->EtudiantAPostuler($_GET["idEtudiant"], $_GET["idOffre"]))) {
-                            (new OffreRepository())->mettreAChoisir($_GET['idEtudiant'], $_GET["idOffre"]);
-                            $_GET["action"] = "afficherAccueilEntr()";
+                        if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
+                            (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
+                            $_REQUEST["action"] = "afficherAccueilEntr()";
                             self::afficherAccueilEntr();
                         } else {
                             self::afficherErreur("L'étudiant n'es pas en Attente");
@@ -151,21 +151,21 @@ class ControleurEntrMain extends ControleurMain
         if ($ancienId["img_id"]!=0) {
             (new ImageRepository())->supprimer($ancienId["img_id"]);
         }
-        $_GET["action"]="afficherProfilEntr()";
+        $_REQUEST["action"]="afficherProfilEntr()";
         self::afficherProfilEntr();
     }
 
     public static function supprimerOffre(){
         //TODO vérifs
-        if (isset($_GET["idOffre"])) {
+        if (isset($_REQUEST["idOffre"])) {
             $listeOffre=((new OffreRepository())->getListeIdOffres());
-            if (in_array($_GET["idOffre"],$listeOffre)) {
-                if (!((new FormationRepository())->estFormation($_GET["idOffre"]))) {
-                    $offre = ((new OffreRepository())->getObjectParClePrimaire($_GET["idOffre"]));
+            if (in_array($_REQUEST["idOffre"],$listeOffre)) {
+                if (!((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
+                    $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
                     if ($offre->getSiret()==ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                        (new RegarderRepository())->supprimerOffreDansRegarder($_GET["idOffre"]);
-                        (new OffreRepository())->supprimer($_GET["idOffre"]);
-                        $_GET["action"] = "afficherAccueilEntr()";
+                        (new RegarderRepository())->supprimerOffreDansRegarder($_REQUEST["idOffre"]);
+                        (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
+                        $_REQUEST["action"] = "afficherAccueilEntr()";
                         self::afficherAccueilEntr();
                     } else {
                         self::afficherErreur("Cette offre ne vous appartient pas");

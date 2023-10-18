@@ -33,7 +33,7 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
     }
     public static function afficherCatalogue() {
-        $type = $_GET["type"] ?? "Tous";
+        $type = $_REQUEST["type"] ?? "Tous";
         $offres = (new OffreRepository())->getListeOffresDispoParType($type);
         self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres, "type" => $type]);
     }
@@ -46,11 +46,11 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
     }
     public static function annulerOffre(){
-        if (isset($_GET["idOffre"])) {
+        if (isset($_REQUEST["idOffre"])) {
             $listeId=((new OffreRepository())->getListeIdOffres());
-            if (in_array($_GET["idOffre"],$listeId)) {
-                if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant,$_GET["idOffre"])) {
-                    (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+            if (in_array($_REQUEST["idOffre"],$listeId)) {
+                if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant,$_REQUEST["idOffre"])) {
+                    (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_REQUEST['idOffre']);
                     self::afficherMesOffres();
                 }else {
                     self::afficherErreur("L'étudiant n'a jamais posutlé à cette offre");
@@ -64,9 +64,9 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function validerOffre(){
-        if (isset($_GET['idOffre'])) {
+        if (isset($_REQUEST['idOffre'])) {
             $listeId=((new OffreRepository())->getListeIdOffres());
-            $idOffre = $_GET['idOffre'];
+            $idOffre = $_REQUEST['idOffre'];
             if (in_array($idOffre,$listeId)) {
                 $formation=((new FormationRepository())->estFormation($idOffre));
                 if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
@@ -96,23 +96,23 @@ class ControleurEtuMain extends ControleurMain
     }
 
    /* public static function annulerOffre(){
-        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_REQUEST['idOffre']);
         self::afficherMesOffres();
     }*/
 
     public static function postuler(){
         //TODO vérifier les vérifs
-        if (isset($_GET['idOffre'])) {
+        if (isset($_REQUEST['idOffre'])) {
             $liste=((new OffreRepository())->getListeIdOffres());
-            if (in_array($_GET["idOffre"],$liste)) {
-                $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+            if (in_array($_REQUEST["idOffre"],$liste)) {
+                $formation = ((new FormationRepository())->estFormation($_REQUEST['idOffre']));
                 if (is_null($formation)) {
                     if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
-                        if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant, $_GET['idOffre'])) {
+                        if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant, $_REQUEST['idOffre'])) {
                             self::afficherErreur("Vous avez déjà postulé");
                         } else {
-                            (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_GET['idOffre']);
-                            $_GET['action'] = "afficherVueDetailOffre";
+                            (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_REQUEST['idOffre']);
+                            $_REQUEST['action'] = "afficherVueDetailOffre";
                             self::afficherVueDetailOffre();
                         }
                     } else {

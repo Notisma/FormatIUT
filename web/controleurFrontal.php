@@ -10,14 +10,14 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
 use App\FormatIUT\Controleur\ControleurMain as CGlobal;
 
-if (isset($_GET['controleur'])) {
-    $controleur = ucfirst($_GET["controleur"]);
+if (isset($_REQUEST['controleur'])) {
+    $controleur = ucfirst($_REQUEST["controleur"]);
 } else {
     $controleur = "Main";
 }
 
-if (isset($_GET['action'])) {
-    $action = lcfirst($_GET["action"]);
+if (isset($_REQUEST['action'])) {
+    $action = lcfirst($_REQUEST["action"]);
 } else {
     $action = "afficherIndex";
 }

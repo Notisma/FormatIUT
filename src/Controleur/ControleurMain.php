@@ -31,13 +31,13 @@ class ControleurMain
      * Affiche la page de detail d'une offre qui varie selon le client
      */
     public static function afficherVueDetailOffre(){
-        $menu = "App\Formatiut\Controleur\Controleur" . $_GET['controleur'];
+        $menu = "App\Formatiut\Controleur\Controleur" . $_REQUEST['controleur'];
         $liste=(new OffreRepository())->getListeIdOffres();
-        if (isset($_GET["idOffre"])) {
-            if (in_array($_GET["idOffre"], $liste)) {
-                $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+        if (isset($_REQUEST["idOffre"])) {
+            if (in_array($_REQUEST["idOffre"], $liste)) {
+                $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                if ($_GET["controleur"] == "EntrMain") $client = "Entreprise";
+                if ($_REQUEST["controleur"] == "EntrMain") $client = "Entreprise";
                 else $client = "Etudiant";
                 $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
                 self::afficherVue('vueGenerale.php', ["menu" => $menu::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
@@ -87,7 +87,7 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        $menu="App\Formatiut\Controleur\Controleur".$_GET['controleur'];
+        $menu="App\Formatiut\Controleur\Controleur".$_REQUEST['controleur'];
         self::afficherVueDansCorps("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
         ]);
@@ -112,11 +112,11 @@ class ControleurMain
     protected static function autoIncrement($listeId, $get): int
     {
         $id = 1;
-        while (!isset($_POST[$get])) {
+        while (!isset($_REQUEST[$get])) {
             if (in_array($id, $listeId)) {
                 $id++;
             } else {
-                $_POST[$get] = $id;
+                $_REQUEST[$get] = $id;
             }
         }
         return $id;
@@ -124,11 +124,11 @@ class ControleurMain
     protected static function autoIncrementF($listeId, $get): int
     {
         $id = 1;
-        while (!isset($_POST[$get])) {
+        while (!isset($_REQUEST[$get])) {
             if (in_array("F".$id, $listeId)) {
                 $id++;
             } else {
-                $_POST[$get] = $id;
+                $_REQUEST[$get] = $id;
             }
         }
         return $id;
@@ -138,11 +138,11 @@ class ControleurMain
     }
 
     public static function seConnecter(){
-        if(isset($_POST["login"],$_POST["mdp"])){
-            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_POST["login"]));
+        if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
+            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
             if (!is_null($user)){
                 if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
-                    ConnexionUtilisateur::connecter($_POST["login"]);
+                    ConnexionUtilisateur::connecter($_REQUEST["login"]);
                     ControleurEntrMain::afficherAccueilEntr();
                     exit();
                 }

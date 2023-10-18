@@ -32,8 +32,8 @@
             <h2>CONNEXION</h2>
             <div id="erreur">
                 <?php
-                if (isset($_GET['erreur'])) {
-                    $err = $_GET['erreur'];
+                if (isset($_REQUEST['erreur'])) {
+                    $err = $_REQUEST['erreur'];
                     if ($err > 0)
                         echo "<div id='imageErreur'>";
                     echo "<img src='../ressources/images/attention.png' alt='erreur' id='attention'>";

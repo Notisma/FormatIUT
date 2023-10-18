@@ -21,7 +21,7 @@
                     echo '><input type="submit" name="type" value="Alternance" class="alternance" ';
                     if ($type == "Alternance") echo 'id="typeActuel" disabled';
                     echo '>';
-                    echo '<input type="hidden" name="Etat" value="' . $_GET["Etat"] . '">'
+                    echo '<input type="hidden" name="Etat" value="' . $_REQUEST["Etat"] . '">'
                     ?>
                     <input type="hidden" name="controleur" value="EntrMain">
                     <input type="hidden" name="action" value="mesOffres">
@@ -35,7 +35,7 @@
                     echo '><input type="submit" name="Etat" value="Assigné" class="alternance" ';
                     if ($Etat == "Assigné") echo 'id="typeActuel" disabled';
                     echo '>';
-                    echo '<input type="hidden" name="type" value="' . $_GET["type"] . '">'
+                    echo '<input type="hidden" name="type" value="' . $_REQUEST["type"] . '">'
                     ?>
                     <input type="hidden" name="controleur" value="EntrMain">
                     <input type="hidden" name="action" value="mesOffres">
