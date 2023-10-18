@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -9,6 +10,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
+use App\FormatIUT\Modele\Repository\ResidenceRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -163,6 +165,7 @@ class ControleurEtuMain extends ControleurMain
             //array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
+            array("image"=>"", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherFormulaireConvention")
 
         );
         $formation=(new EtudiantRepository())->aUneFormation(self::$cleEtudiant);
@@ -171,6 +174,12 @@ class ControleurEtuMain extends ControleurMain
         }
         $menu[]=array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
         return $menu;
+    }
+
+    public static function afficherFormulaireConvention(){
+        $etudiant =  (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+        $residence= (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+        self::afficherVueDansCorps("Convention", "Etudiant/formConvention.php", self::getMenu(),["etudiant" => $etudiant, "residence" => $residence]);
     }
 
 
