@@ -11,6 +11,7 @@ class MessageFlash
 
     // $type parmi "success", "info", "warning" ou "danger"
     //TODO si y'a plusieurs messageFlash du même type, ne fonctionne pas
+    //TODO Romain je dis ça je dis rien, mais pour pas que ce soit le bordel on va dire qu'il ne faut pas qu'il y ait plusieurs messages flash en même temps, quelque soit leur type
     public static function ajouter(string $type, string $message): void
     {
         // À compléter

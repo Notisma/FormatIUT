@@ -8,6 +8,51 @@
 
 <div class="wrapComplet">
 
+    <div class="partie1">
+        <div>
+            <h1>REJOIGNEZ FORMAT'IUT EN TANT QU'ENTREPRISE !</h1>
+            <h3>Et profitez d'une application Web innovante pour permettre à des étudiants qualifiés de faire un bond
+                vers l'avenir !</h3>
+        </div>
+        <img src="../ressources/images/bienvenueChezNous.png" alt="image entreprise">
+    </div>
+
+
+    <div class="partie2">
+        <div class="sousCategorie" id="SC1">
+            <div>
+                <img src="../ressources/images/intuitif.png" alt="icone1">
+            </div>
+            <h4>Une Application Web Intuitive</h4>
+            <p>Réalisez toutes vos démarches en toute simplicité</p>
+        </div>
+
+        <div class="sousCategorie" id="SC2">
+            <div>
+                <img src="../ressources/images/couteau-suisse.png" alt="icone1">
+            </div>
+            <h4>Un Service Polyvalent</h4>
+            <p>Gérez vos démarches, et vos offres de stage et d'alternance au même endroit</p>
+        </div>
+
+        <div class="sousCategorie" id="SC3">
+            <div>
+                <img src="../ressources/images/accessible.png" alt="icone1">
+            </div>
+            <h4>Accessible sur tous vos appareils</h4>
+            <p>Une Application Web conçue pour tous vos appareils</p>
+        </div>
+
+        <div class="sousCategorie" id="SC4">
+            <div>
+                <img src="../ressources/images/notification.png" alt="icone1">
+            </div>
+            <h4>Restez toujours au courant</h4>
+            <p>Choisissez de recevoir des mails pour vous tenir informés</p>
+        </div>
+    </div>
+
+
     <div class="wrapFormulaireCreationPE">
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
