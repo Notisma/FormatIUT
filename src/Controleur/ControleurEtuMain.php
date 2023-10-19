@@ -173,6 +173,14 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
+    public static function afficherFormulaireModification(){
+        $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
+        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueMettreAJour.php", "titrePage" => "Modifier informations"]);
+    }
 
+    public static function mettreAJour(){
+        (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
+        self::afficherProfilEtu();
+    }
 
 }
