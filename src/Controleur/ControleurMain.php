@@ -154,7 +154,7 @@ class ControleurMain
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
-    public static function seDeconnecter(){
+    public static function seDeconnecter() {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
         header("Location: controleurFrontal.php");
@@ -195,16 +195,16 @@ class ControleurMain
                             self::redirectionFlash("afficherVuePresentation","warning","Le mot de passe doit faire plus de 7 caractères");
                         }
                     } else {
-                        self::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent coincider");
+                        self::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
                     }
                 }else{
-                    self::redirectionFlash("afficherVuePresentation","warning","L'adresse mail est déjà utilisé");
+                    self::redirectionFlash("afficherVuePresentation","warning","L'adresse mail est déjà utilisée");
                 }
             }else {
-                self::redirectionFlash("afficherVuePresentation","warning","Siret déjà pris");
+                self::redirectionFlash("afficherVuePresentation","danger","Le SIRET est déjà utilisé");
             }
         } else {
-            self::redirectionFlash("afficherVuePresentation","warning","Des données sont érronées");
+            self::redirectionFlash("afficherVuePresentation","danger","Des données sont érronées");
         }
     }
 }
