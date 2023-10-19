@@ -56,4 +56,17 @@ class EntrepriseRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse){
+        $sql="UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, Adresse_Entreprise = :adTag WHERE numSiret = :siretTag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("nomTag"=>$nom,
+            "statutTag"=>$statut,
+            "effTag"=>$effectif,
+            "codeTag"=>$codeNAF,
+            "telTag"=>$tel,
+            "adTag"=>$adresse,
+            "siretTag"=>$siret);
+        $pdoStatement->execute($values);
+    }
+
 }

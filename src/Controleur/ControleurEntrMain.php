@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -184,4 +185,15 @@ class ControleurEntrMain extends ControleurMain
             self::afficherErreur("Données Manquantes");
         }
     }
+
+    public static function afficherFormulaireModification(){
+        $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise));
+        self::afficherVue("vueGenerale.php", ["entreprise"=>$entreprise,"menu"=>self::getMenu(), "chemin"=> "Entreprise/vueMettreAJour.php", "titrePage" => "Modifier vos informations"]);
+    }
+
+    public static function mettreAJour(){
+        (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
+        self::afficherProfilEntr();
+    }
+
 }

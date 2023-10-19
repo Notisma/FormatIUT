@@ -60,6 +60,7 @@
             <li>Adresse : ".$entreprise->getAdresse()."</li>
             <li>Ville : ".$ville->getNomVille()."</li>
             " ?>
+                <a href="?action=afficherFormulaireModification&controleur=EntrMain">Modifier vos informations</a>
             </ul>
 
             <img src="../ressources/images/infosEntre.png" alt="illu">

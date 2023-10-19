@@ -175,7 +175,7 @@ class ControleurEtuMain extends ControleurMain
 
     public static function afficherFormulaireModification(){
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
-        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueMettreAJour.php", "titrePage" => "Modifier informations"]);
+        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueMettreAJour.php", "titrePage" => "Modifier vos informations"]);
     }
 
     public static function mettreAJour(){
