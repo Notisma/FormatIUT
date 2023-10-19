@@ -23,8 +23,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        $image=((new ImageRepository()))->getImage($entrepriseFormatTableau["img_id"]);
-        return new Entreprise($entrepriseFormatTableau['numSiret'],
+            return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -32,7 +31,7 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau['tel'],
             $entrepriseFormatTableau['Adresse_Entreprise'],
             $entrepriseFormatTableau['idVille'],
-            $image,
+            $entrepriseFormatTableau["img_id"],
         $entrepriseFormatTableau["mdpHache"],
         $entrepriseFormatTableau["email"],
         $entrepriseFormatTableau["emailAValider"],

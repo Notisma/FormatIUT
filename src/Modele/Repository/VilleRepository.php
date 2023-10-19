@@ -16,7 +16,7 @@ class VilleRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idVille","nomVille","paysVille");
+        return array("idVille","nomVille","codePostal");
     }
 
     protected function getClePrimaire(): string
@@ -29,14 +29,17 @@ class VilleRepository extends AbstractRepository
         return new Ville(
             $DataObjectTableau["idVille"],
             $DataObjectTableau['nomVille'],
-            $DataObjectTableau['paysVille']
+            $DataObjectTableau['codePostal']
         );
     }
-    public function getVilleParNom(string $nomVille):string{
+    public function getVilleParNom(string $nomVille):?string{
         $sql="SELECT idVille FROM ".$this->getNomTable()." WHERE nomVille=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("Tag"=>$nomVille);
         $pdoStatement->execute($values);
+        if (!$pdoStatement){
+            return null;
+        }
         return ($pdoStatement->fetch())["idVille"];
     }
 }

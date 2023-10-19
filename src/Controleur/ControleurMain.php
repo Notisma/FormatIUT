@@ -162,6 +162,7 @@ class ControleurMain
 
     public static function validerEmail(){
         VerificationEmail::traiterEmailValidation($_REQUEST["login"],$_REQUEST["nonce"]);
+        self::afficherPageConnexion();
         header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
     }
 
@@ -170,14 +171,40 @@ class ControleurMain
         self::$action();
 
 }
-    public static function creerCompteEntreprise(){
-        if ($_REQUEST["mdp"]==$_REQUEST["mdpConf"]) {
-            $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
-            (new EntrepriseRepository())->creerObjet($entreprise);
-            VerificationEmail::envoiEmailValidation($entreprise);
-            header("Location: controleurFrontal.php");
-        }else {
-            self::redirectionFlash("afficherVuePresentation","warning","Les mots de passes doivent coincider");
+    public static function creerCompteEntreprise()
+    {
+        //vérification des nombres négatifs
+        if ($_REQUEST["siret"]>0 && $_REQUEST["codePostal"]>0 && $_REQUEST["tel"]>0 && $_REQUEST["effectif"]>0) {
+            $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
+            //vérification de doublon de Siret
+            if (is_null($entreprise)) {
+                $liste=((new EntrepriseRepository())->getListeObjet());
+                foreach ($liste as $entreprise) {
+                    $listeMail[]=$entreprise->getEmail();
+                }
+                //vérification de doublon de mail
+                if (!in_array($_REQUEST["email"],$listeMail)) {
+                    //concordance des mots de passe
+                    if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
+                        if (strlen($_REQUEST["mdp"])>=8) {
+                            $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
+                            (new EntrepriseRepository())->creerObjet($entreprise);
+                            VerificationEmail::envoiEmailValidation($entreprise);
+                            header("Location: controleurFrontal.php");
+                        }else {
+                            self::redirectionFlash("afficherVuePresentation","warning","Le mot de passe doit faire plus de 7 caractères");
+                        }
+                    } else {
+                        self::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent coincider");
+                    }
+                }else{
+                    self::redirectionFlash("afficherVuePresentation","warning","L'adresse mail est déjà utilisé");
+                }
+            }else {
+                self::redirectionFlash("afficherVuePresentation","warning","Siret déjà pris");
+            }
+        } else {
+            self::redirectionFlash("afficherVuePresentation","warning","Des données sont érronées");
         }
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class Entreprise extends AbstractDataObject
@@ -97,7 +99,7 @@ class Entreprise extends AbstractDataObject
 
     public function getImg(): string
     {
-        return $this->img;
+        return (new ImageRepository())->getImage($this->img)["img_blob"];
     }
 
     public function setImg(string $img): void
@@ -226,6 +228,13 @@ class Entreprise extends AbstractDataObject
     }
 
     public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
+        //TODO vérifier si ville existe dans BD sinon, en créer une avec les données de EntrepriseEnFormulaire
+        $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
+        if (!$ville){
+            $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);
+            (new VilleRepository())->creerObjet($newVille);
+            $ville=$newVille->getIdVille();
+        }
 
         return new Entreprise(
             $EntrepriseEnFormulaire["siret"],
@@ -235,13 +244,25 @@ class Entreprise extends AbstractDataObject
             $EntrepriseEnFormulaire["codeNAF"],
             $EntrepriseEnFormulaire["tel"],
             $EntrepriseEnFormulaire["Adresse_Entreprise"],
-            (new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["idVille"]),
+            $ville,
             0,
             MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
             "",
             $EntrepriseEnFormulaire["email"],
             MotDePasse::genererChaineAleatoire()
         );
+    }
+    protected static function autoIncrementVille($listeId, $get): string
+    {
+        $id = 1;
+        while (!isset($_REQUEST[$get])) {
+            if (in_array("V".$id, $listeId)) {
+                $id++;
+            } else {
+                $_REQUEST[$get] = $id;
+            }
+        }
+        return "V".$id;
     }
 
 

@@ -30,7 +30,7 @@ class VerificationEmail
                 $user->setEmail($user->getEmailAValider());
                 $user->setEmailAValider("");
                 $user->setNonce("");
-                (new EntrepriseRepository())->mettreAJour($user);
+                (new EntrepriseRepository())->modifierObjet($user);
                 return true;
             }
         }
