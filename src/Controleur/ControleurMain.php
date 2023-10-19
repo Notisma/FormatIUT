@@ -137,7 +137,7 @@ class ControleurMain
         return $id;
     }
     public static function afficherPageConnexion(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Page de Connexion","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+        self::afficherVue("vueGenerale.php",["titrePage"=>"Se Connecter","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
     }
 
     public static function seConnecter(){
@@ -146,7 +146,8 @@ class ControleurMain
             if (!is_null($user)){
                 if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
                     ConnexionUtilisateur::connecter($_REQUEST["login"]);
-                    ControleurEntrMain::afficherAccueilEntr();
+                    MessageFlash::ajouter("success", "Connexion Réussie");
+                    header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
             }

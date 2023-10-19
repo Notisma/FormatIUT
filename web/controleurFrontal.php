@@ -27,7 +27,13 @@ $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 $guillemets = '"';
 if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        $nomClasseControleur::$action();
+
+        if ($controleur=="EntrMain" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
+        }
+        else {
+            $nomClasseControleur::$action();
+        }
     } else
         $nomClasseControleur::afficherErreur("L'action :$guillemets $action $guillemets n'existe pas dans le controleur :$guillemets $nomClasseControleur $guillemets");
 } else
