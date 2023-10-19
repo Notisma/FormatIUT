@@ -55,6 +55,15 @@
         </div>
     </div>
 
+    <div class="deposerCV">
+        <h3>Déposer un CV</h3>
+        <p>Déposez votre CV ici :</p>
+        <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post" >
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+            <input type="file" name="fic" size=500/>
+            <input type="submit" value="Envoyer"/>
+        </form>
+    </div>
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
