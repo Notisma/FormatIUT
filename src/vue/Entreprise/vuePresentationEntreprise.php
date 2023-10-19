@@ -54,7 +54,27 @@
 
 
     <div class="partie3">
+        <div>
+            <img src="../ressources/images/entrepriseConnectee.png" alt="illu">
+        </div>
+        <div class="textePartie3">
+            <h1 class="titresParties">LA SOLUTION POUR FACILITER LE RECRUTEMENT DE STAGIAIRES ET ALTERNANTS</h1>
+            <h3 class="grandTexte">Sur le même site, déposez des offres de stage et d'alternance, et choisissez les
+                étudiants que vous souhaitez assigner sur vos offres</h3>
+            <h3 class="grandTexte">Choisissez vous même les étudiants qui vous intéressent pour chacune de vos offres,
+                ou laissez les enseignants tuteurs se charger de ce choix pour vous.</h3>
+        </div>
+    </div>
 
+    <div class="partie4">
+        <div class="textePartie3">
+            <h1 class="titresParties">UN GAIN DE TEMPS CONSIDERABLE</h1>
+            <h3 class="grandTexte">Dans tous les cas, gérez toutes les démarches sur une seule application. CV, Lettres
+                de motivation, démarches administratives, échanges avec les étudiants... Tout est pensé pour vous.</h3>
+        </div>
+        <div>
+            <img src="../ressources/images/gainDeTemps.png" alt="illu">
+        </div>
     </div>
 
 
@@ -62,34 +82,44 @@
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
-                <?php if (isset($_POST["siret"])){?>
-                <input type="number" name="siret" placeholder="SIRET de l'entreprise" <?php echo "value='".$_REQUEST["siret"]."'"?>required>
-                <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" <?php echo "value='".$_REQUEST["nomEntreprise"]."'"?>required>
-                <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise" <?php echo "value='".$_REQUEST["Adresse_Entreprise"]."'"?>required>
-                <input type="text" name="email" placeholder="Email de l'entreprise" <?php echo "value='".$_REQUEST["email"]."'"?>required>
-                <input type="number" name="codePostal" placeholder="Code Postal" <?php echo "value='".$_REQUEST["codePostal"]."'"?>required>
-                <input type="text" name="ville" placeholder="Ville" <?php echo "value='".$_REQUEST["ville"]."'"?>required>
-                <input type="number" name="tel" placeholder="Téléphone" <?php echo "value='".$_REQUEST["tel"]."'"?>required>
-                <input type="text" name="statutJuridique" placeholder="Statut Juridique" <?php echo "value='".$_REQUEST["statutJuridique"]."'"?>required>
-                <input type="number" name="effectif" placeholder="Effectif" <?php echo "value='".$_REQUEST["effectif"]."'"?>required>
-                <input type="text" name="codeNAF" placeholder="Code NAF" <?php echo "value='".$_REQUEST["codeNAF"]."'"?>required>
-                <input type="password" name="mdp" placeholder="Mot de passe" required>
-                <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
-                <input type="submit" class="valider" value="Créer le compte">
-                <?php }else {?>
-                <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
-                <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
-                <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise" required>
-                <input type="text" name="email" placeholder="Email de l'entreprise" required>
-                <input type="number" name="codePostal" placeholder="Code Postal" required>
-                <input type="text" name="ville" placeholder="Ville" required>
-                <input type="number" name="tel" placeholder="Téléphone" required>
-                <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
-                <input type="number" name="effectif" placeholder="Effectif" required>
-                <input type="text" name="codeNAF" placeholder="Code NAF" required>
-                <input type="password" name="mdp" placeholder="Mot de passe" required>
-                <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
-                <input type="submit" class="valider" value="Créer le compte">
+                <?php if (isset($_POST["siret"])) { ?>
+                    <input type="number" name="siret" placeholder="SIRET de l'entreprise"
+                           <?php echo "value='" . $_REQUEST["siret"] . "'" ?>required>
+                    <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise"
+                           <?php echo "value='" . $_REQUEST["nomEntreprise"] . "'" ?>required>
+                    <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise"
+                           <?php echo "value='" . $_REQUEST["Adresse_Entreprise"] . "'" ?>required>
+                    <input type="text" name="email" placeholder="Email de l'entreprise"
+                           <?php echo "value='" . $_REQUEST["email"] . "'" ?>required>
+                    <input type="number" name="codePostal" placeholder="Code Postal"
+                           <?php echo "value='" . $_REQUEST["codePostal"] . "'" ?>required>
+                    <input type="text" name="ville" placeholder="Ville"
+                           <?php echo "value='" . $_REQUEST["ville"] . "'" ?>required>
+                    <input type="number" name="tel" placeholder="Téléphone"
+                           <?php echo "value='" . $_REQUEST["tel"] . "'" ?>required>
+                    <input type="text" name="statutJuridique" placeholder="Statut Juridique"
+                           <?php echo "value='" . $_REQUEST["statutJuridique"] . "'" ?>required>
+                    <input type="number" name="effectif" placeholder="Effectif"
+                           <?php echo "value='" . $_REQUEST["effectif"] . "'" ?>required>
+                    <input type="text" name="codeNAF" placeholder="Code NAF"
+                           <?php echo "value='" . $_REQUEST["codeNAF"] . "'" ?>required>
+                    <input type="password" name="mdp" placeholder="Mot de passe" required>
+                    <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
+                    <input type="submit" class="valider" value="Créer le compte">
+                <?php } else { ?>
+                    <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
+                    <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
+                    <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise" required>
+                    <input type="text" name="email" placeholder="Email de l'entreprise" required>
+                    <input type="number" name="codePostal" placeholder="Code Postal" required>
+                    <input type="text" name="ville" placeholder="Ville" required>
+                    <input type="number" name="tel" placeholder="Téléphone" required>
+                    <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
+                    <input type="number" name="effectif" placeholder="Effectif" required>
+                    <input type="text" name="codeNAF" placeholder="Code NAF" required>
+                    <input type="password" name="mdp" placeholder="Mot de passe" required>
+                    <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
+                    <input type="submit" class="valider" value="NOUS REJOINDRE">
                 <?php } ?>
             </form>
         </div>
