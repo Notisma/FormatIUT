@@ -240,7 +240,7 @@ class Entreprise extends AbstractDataObject
             MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
             "",
             $EntrepriseEnFormulaire["email"],
-            MotDePasse::genererChaineAleatoire(5)
+            MotDePasse::genererChaineAleatoire()
         );
     }
 
