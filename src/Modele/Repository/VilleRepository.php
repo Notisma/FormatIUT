@@ -27,9 +27,18 @@ class VilleRepository extends AbstractRepository
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
         return new Ville(
-            $DataObjectTableau["idVille"],
+            $DataObjectTableau['idVille'],
             $DataObjectTableau['nomVille'],
             $DataObjectTableau['paysVille']
         );
+    }
+
+    public function getVilleParIdResidence($idResidence) : Ville{
+        $sql = "SELECT v.idVille, nomVille, paysVille FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagResidence" => $idResidence);
+        $pdoStatement->execute($values);
+        return $this->construireDepuisTableau($pdoStatement->fetch());
+
     }
 }

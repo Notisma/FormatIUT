@@ -11,6 +11,7 @@ use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -179,7 +180,12 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherFormulaireConvention(){
         $etudiant =  (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
         $residence= (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
-        self::afficherVueDansCorps("Convention", "Etudiant/formConvention.php", self::getMenu(),["etudiant" => $etudiant, "residence" => $residence]);
+        $ville=(new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+        self::afficherVueDansCorps("Convention", "Etudiant/formConvention.php", self::getMenu(),["etudiant" => $etudiant, "residence" => $residence, "ville"=> $ville]);
+    }
+
+    public static function afficherResultatFormConvention(){
+        echo $_POST['assurance'];
     }
 
 

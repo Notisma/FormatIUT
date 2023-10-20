@@ -3,12 +3,13 @@
 namespace App\FormatIUT\Modele\DataObject;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
+use DateTime;
 
 class Formation extends AbstractDataObject
 {
     private string $idFormation;
-    private \DateTime $dateDebut;
-    private \DateTime $dateFin;
+    private DateTime $dateDebut;
+    private DateTime $dateFin;
     private int $idEtudiant;
     private ?string $idTuteurPro;
     private float $idEntreprise;
@@ -16,15 +17,15 @@ class Formation extends AbstractDataObject
     private ?int $idTuteurUM;
     /**
  * @param string $idFormation
- * @param \DateTime $dateDebut
- * @param \DateTime $dateFin
+ * @param DateTime $dateDebut
+ * @param DateTime $dateFin
  * @param int $idEtudiant
  * @param string|null $idTuteurPro
  * @param float $idEntreprise
  * @param string|null $idConvention
  * @param int|null $idTuteurUM
  * @param int $idOffre
- */public function __construct(string $idFormation, \DateTime $dateDebut, \DateTime $dateFin, int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $idConvention, ?int $idTuteurUM, int $idOffre)
+ */public function __construct(string $idFormation, DateTime $dateDebut, DateTime $dateFin, int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $idConvention, ?int $idTuteurUM, int $idOffre)
 {
     $this->idFormation = $idFormation;
     $this->dateDebut = $dateDebut;
@@ -89,22 +90,22 @@ public function setIdTuteurUM(?int $idTuteurUM): void
         $this->idFormation = $idFormation;
     }
 
-    public function getDateDebut(): \DateTime
+    public function getDateDebut(): DateTime
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTime $dateDebut): void
+    public function setDateDebut(DateTime $dateDebut): void
     {
         $this->dateDebut = $dateDebut;
     }
 
-    public function getDateFin(): \DateTime
+    public function getDateFin(): DateTime
     {
         return $this->dateFin;
     }
 
-    public function setDateFin(\DateTime $dateFin): void
+    public function setDateFin(DateTime $dateFin): void
     {
         $this->dateFin = $dateFin;
     }
