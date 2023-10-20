@@ -182,7 +182,7 @@ body {
     position: absolute;
     border-radius: 50px;
     border: none;
-    width: 25%;
+    width: 20%;
     height: 30px;
     margin-top: 12px;
     padding-left: 1%;
@@ -270,7 +270,7 @@ body {
 
 #Gestionrecherche {
     float: right;
-    width: 80%;
+    width: 60%;
     margin-top: 0;
     height: 70%;
 }
@@ -296,7 +296,7 @@ form {
 #profil {
     float: left;
     height: 36px;
-    width: 8%;
+    width: 5%;
 }
 
 #petiteIcone {
@@ -521,6 +521,65 @@ form {
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 80%;
     float: right;
+}
+
+.flash {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 10%;
+    margin-right: 2%;
+}
+
+
+.alert {
+    padding: 2%;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.alert > p {
+    margin-left: 5%;
+    line-height: 1em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.alert > img {
+    width: 10%;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }

@@ -6,7 +6,7 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 
-class EtudiantRepository extends AbstractRepository
+class   EtudiantRepository extends AbstractRepository
 {
 
     protected function getNomTable(): string
@@ -42,7 +42,7 @@ class EtudiantRepository extends AbstractRepository
             $DataObjectTableau["validationPedagogique"],
             $DataObjectTableau["codeEtape"],
             $DataObjectTableau["idResidence"],
-            $image
+            $image["img_blob"]
 
         );
     }

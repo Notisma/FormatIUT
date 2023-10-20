@@ -18,13 +18,12 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["numSiret","nomEntreprise","statutJuridique","effectif","codeNAF","tel","Adresse_Entreprise","idVille","img_id"];
+        return ["numSiret","nomEntreprise","statutJuridique","effectif","codeNAF","tel","Adresse_Entreprise","idVille","img_id","mdpHache","email","emailAValider","nonce"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        $image=((new ImageRepository()))->getImage($entrepriseFormatTableau["img_id"]);
-        return new Entreprise($entrepriseFormatTableau['numSiret'],
+            return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -32,7 +31,11 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau['tel'],
             $entrepriseFormatTableau['Adresse_Entreprise'],
             $entrepriseFormatTableau['idVille'],
-            $image
+            $entrepriseFormatTableau["img_id"],
+        $entrepriseFormatTableau["mdpHache"],
+        $entrepriseFormatTableau["email"],
+        $entrepriseFormatTableau["emailAValider"],
+        $entrepriseFormatTableau["nonce"]
         );
     }
 

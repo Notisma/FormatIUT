@@ -10,14 +10,14 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
 use App\FormatIUT\Controleur\ControleurMain as CGlobal;
 
-if (isset($_GET['controleur'])) {
-    $controleur = ucfirst($_GET["controleur"]);
+if (isset($_REQUEST['controleur'])) {
+    $controleur = ucfirst($_REQUEST["controleur"]);
 } else {
     $controleur = "Main";
 }
 
-if (isset($_GET['action'])) {
-    $action = lcfirst($_GET["action"]);
+if (isset($_REQUEST['action'])) {
+    $action = lcfirst($_REQUEST["action"]);
 } else {
     $action = "afficherIndex";
 }
@@ -27,7 +27,13 @@ $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 $guillemets = '"';
 if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        $nomClasseControleur::$action();
+
+        if ($controleur=="EntrMain" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
+        }
+        else {
+            $nomClasseControleur::$action();
+        }
     } else
         $nomClasseControleur::afficherErreur("L'action :$guillemets $action $guillemets n'existe pas dans le controleur :$guillemets $nomClasseControleur $guillemets");
 } else

@@ -34,11 +34,11 @@ class TransfertImage
             $img_nom = $_FILES['fic']['name'];
 
             $img_blob = file_get_contents($_FILES['fic']['tmp_name']);
-            if ($_GET["controleur"] == "EtuMain") {
+            if ($_REQUEST["controleur"] == "EtuMain") {
                 $image = self::img_ronde($img_blob);
                 $img_blob = self::image_data($image);
             }
-            (new ImageRepository())->insert(["img_id" => $_POST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
+            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
         }
         return true;
     }

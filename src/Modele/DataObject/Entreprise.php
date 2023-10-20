@@ -2,7 +2,11 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class Entreprise extends AbstractDataObject
 {
@@ -15,6 +19,10 @@ class Entreprise extends AbstractDataObject
     private string $Adresse_Entreprise;
     private string $idVille;
     private string $img;
+    private string $mdpHache;
+    private string $email;
+    private string $emailAValider;
+    private string $nonce;
 
     /**
      * @param float $siret
@@ -26,8 +34,12 @@ class Entreprise extends AbstractDataObject
      * @param string $Adresse_Entreprise
      * @param string $idVille
      * @param string $img
+     * @param string $mdpHache
+     * @param string $email
+     * @param string $emailAValider
+     * @param string $nonce
      */
-    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img)
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -38,12 +50,56 @@ class Entreprise extends AbstractDataObject
         $this->Adresse_Entreprise = $Adresse_Entreprise;
         $this->idVille = $idVille;
         $this->img = $img;
+        $this->mdpHache = $mdpHache;
+        $this->email = $email;
+        $this->emailAValider = $emailAValider;
+        $this->nonce = $nonce;
+    }
+
+    public function getAdresseEntreprise(): string
+    {
+        return $this->Adresse_Entreprise;
+    }
+
+    public function setAdresseEntreprise(string $Adresse_Entreprise): void
+    {
+        $this->Adresse_Entreprise = $Adresse_Entreprise;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getEmailAValider(): string
+    {
+        return $this->emailAValider;
+    }
+
+    public function setEmailAValider(string $emailAValider): void
+    {
+        $this->emailAValider = $emailAValider;
+    }
+
+    public function getNonce(): string
+    {
+        return $this->nonce;
+    }
+
+    public function setNonce(string $nonce): void
+    {
+        $this->nonce = $nonce;
     }
 
 
     public function getImg(): string
     {
-        return $this->img;
+        return (new ImageRepository())->getImage($this->img)["img_blob"];
     }
 
     public function setImg(string $img): void
@@ -87,7 +143,11 @@ class Entreprise extends AbstractDataObject
             'tel' => $this->tel,
             "Adresse_Entreprise"=>$this->Adresse_Entreprise,
             "idVille"=>$this->idVille,
-            "img_id"=>$this->img
+            "img_id"=>$this->img,
+            "mdpHache"=>$this->mdpHache,
+            "email"=>$this->email,
+            "emailAValider"=>$this->emailAValider,
+            "nonce"=>$this->nonce
         ];
     }
 
@@ -156,5 +216,55 @@ class Entreprise extends AbstractDataObject
     {
         $this->tel = $tel;
     }
+
+    public function getMdpHache(): string
+    {
+        return $this->mdpHache;
+    }
+
+    public function setMdpHache(string $mdpHache): void
+    {
+        $this->mdpHache = $mdpHache;
+    }
+
+    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
+        //TODO vérifier si ville existe dans BD sinon, en créer une avec les données de EntrepriseEnFormulaire
+        $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
+        if (!$ville){
+            $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);
+            (new VilleRepository())->creerObjet($newVille);
+            $ville=$newVille->getIdVille();
+        }
+
+        return new Entreprise(
+            $EntrepriseEnFormulaire["siret"],
+            $EntrepriseEnFormulaire["nomEntreprise"],
+            $EntrepriseEnFormulaire["statutJuridique"],
+            $EntrepriseEnFormulaire["effectif"],
+            $EntrepriseEnFormulaire["codeNAF"],
+            $EntrepriseEnFormulaire["tel"],
+            $EntrepriseEnFormulaire["Adresse_Entreprise"],
+            $ville,
+            0,
+            MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
+            "",
+            $EntrepriseEnFormulaire["email"],
+            MotDePasse::genererChaineAleatoire()
+        );
+    }
+    protected static function autoIncrementVille($listeId, $get): string
+    {
+        $id = 1;
+        while (!isset($_REQUEST[$get])) {
+            if (in_array("V".$id, $listeId)) {
+                $id++;
+            } else {
+                $_REQUEST[$get] = $id;
+            }
+        }
+        return "V".$id;
+    }
+
+
 
 }

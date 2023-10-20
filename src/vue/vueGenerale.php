@@ -27,17 +27,16 @@
                 <?php
 
 
-
-
                 $liaison = "";
+                $src = "";
                 if ($titrePage == "Accueil" || $titrePage == "Erreur") {
                     $src = "../ressources/images/profil.png";
-                    $liaison = "?controleur=etuMain&action=afficherAccueilEtu";
+                    $liaison = "?controleur=Main&action=afficherPageConnexion";
                     echo "<form action='' method='get'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
-                } else if (ucfirst($_GET['controleur']) == 'EntrMain') {
-                    $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
+                } else if (ucfirst($_REQUEST['controleur']) == 'EntrMain') {
+                    $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                     echo "<form action='controleurFrontal.php' method='get'>
@@ -45,7 +44,7 @@
             <input type='hidden' name='controleur' value='Main''>
             <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
-                } else if (ucfirst($_GET['controleur']) == 'EtuMain') {
+                } else if (ucfirst($_REQUEST['controleur']) == 'EtuMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=etuMain&action=afficherProfilEtu";
@@ -61,9 +60,25 @@
         <div id='profil'>
         <a href='{$liaison}'>";
                 echo '<img id="petiteIcone" src="' . $src . '"/></a>
-        </div>';
-                ?>
+        </div>'; ?>
+
+                <div class="flash">
+                    <?php
+                    //solutionTemporaire
+                    if (!isset($_REQUEST["controleur"]) || $_REQUEST["controleur"]!="EtuMain"){
+                    //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
+                    foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+                        echo "<div class='alert alert-" . $type . "'>";
+                        echo "<img src='../ressources/images/".$type.".png'>";
+                            echo'<p>' . $lireMessage . '</p></div>'
+                        ;
+                    }
+                    }
+                    ?>
+                </div>
             </div>
+
+
         </div>
 
         <div class="bandeauConteneur">
