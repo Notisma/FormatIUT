@@ -79,7 +79,8 @@
                     <h4>';
                     echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h4>";
                     echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button>
-                    </a>";
+                    </a>
+                    </div> </div>";
 
                 } else {
                     echo "
