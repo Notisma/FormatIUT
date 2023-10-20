@@ -48,8 +48,8 @@
             echo "<a href='?controleur=EntrMain&action=supprimerOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
             <button class='boutonAssigner'>SUPPRIMER L'OFFRE</button>
         </a>
-        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3'>
-            <button class='boutonAssigner' id='disabled' disabled>MODIFIER L'OFFRE</button>
+        <a href='?controleur=EntrMain&action=afficherFormulaireModificationOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
+            <button class='boutonAssigner'>MODIFIER L'OFFRE</button>
         </a>
         ";
 
