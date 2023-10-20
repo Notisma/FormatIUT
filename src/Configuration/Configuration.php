@@ -63,9 +63,4 @@ class Configuration
         return self::$config['port'];
     }
 
-    public static function getAbsoluteURL()
-    {
-        return"http://localhost/SAE_DEV/web/controleurFrontal.php";
-    }
-
 }

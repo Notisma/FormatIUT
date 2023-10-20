@@ -78,7 +78,7 @@
 
             <div class="descStat">
                 <h4><?php
-                    $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                    $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
                     $nbOffresEnLigne= sizeof($OffresEnLigne);
                     echo $nbOffresEnLigne." Offre";
                     if ($nbOffresEnLigne!=1) echo "s";

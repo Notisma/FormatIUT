@@ -40,7 +40,7 @@ class ImageRepository extends AbstractRepository
         if (!$objet){
             return null;
         }
-        return $objet;
+        return $objet["img_blob"];
     }
 
     /**

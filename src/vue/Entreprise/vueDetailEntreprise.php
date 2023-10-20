@@ -44,7 +44,7 @@
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
         <?php
-        if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
+        if ($entreprise->getSiret() == \App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()) {
             echo "<a href='?controleur=EntrMain&action=supprimerOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
             <button class='boutonAssigner'>SUPPRIMER L'OFFRE</button>
         </a>

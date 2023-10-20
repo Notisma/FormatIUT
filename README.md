@@ -25,7 +25,7 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 ## Conventions du projet
 
 - namespace : App\FormatIUT
-- Méthode : $_REQUEST
+- Méthode : $_POST
 
 ## Organisation
 

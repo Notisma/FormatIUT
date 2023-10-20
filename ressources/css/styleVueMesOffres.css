@@ -181,7 +181,7 @@ body {
     height: 95%;
     margin-top: 3%;
     margin-bottom: 2%;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .contenuOffresEtu::-webkit-scrollbar {

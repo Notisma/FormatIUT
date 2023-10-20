@@ -62,10 +62,10 @@
         echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
                 <button class="boutonAssigner" ';
         $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_REQUEST['idOffre']));
+        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_REQUEST['idOffre'])) {
+                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
                     $bool = true;
                 }
             }

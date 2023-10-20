@@ -29,14 +29,6 @@ abstract class AbstractRepository
         }
         return $listeObjet;
     }
-    public function getListeID(){
-        $sql='SELECT * FROM '.$this->getNomTable();
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
-        foreach ($pdoStatement as $item) {
-            $listeObjet[]=$item[$this->getClePrimaire()];
-        }
-        return $listeObjet;
-    }
 
 
     /***
@@ -110,21 +102,6 @@ abstract class AbstractRepository
         $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
     }
-    public function modifierObjet(AbstractDataObject $objet): void
-    {
-        $sql = "UPDATE " . $this->getNomTable() . " SET ";
-        foreach ($this->getNomsColonnes() as $nomColonne) {
-            if ($nomColonne != $this->getNomsColonnes()[0])
-                $sql .= ",";
-            $sql .= "$nomColonne = :$nomColonne" . "Tag";
-            $values[$nomColonne . "Tag"] = $objet->formatTableau()[$nomColonne];
-        }
-        $clePrim = $this->getClePrimaire();
-        $sql .= " WHERE $clePrim = :$clePrim" . "Tag;";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute($values);
-    }
-
 
 
 }
