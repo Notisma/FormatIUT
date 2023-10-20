@@ -42,7 +42,7 @@ class   EtudiantRepository extends AbstractRepository
             $DataObjectTableau["validationPedagogique"],
             $DataObjectTableau["codeEtape"],
             $DataObjectTableau["idResidence"],
-            $image
+            $image["img_blob"]
 
         );
     }
