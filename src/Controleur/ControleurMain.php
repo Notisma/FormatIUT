@@ -17,7 +17,7 @@ class ControleurMain
 {
 
     /***
-     * Affiche la page d'acceuil du site sans qu'aucune connexion n'est été faite
+     * Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
      */
     public static function afficherIndex()
     {
@@ -27,22 +27,23 @@ class ControleurMain
     /***
      * Affiche la page de présentations aux entreprises n'ayant pas de compte
      */
-    public static function afficherVuePresentation() {
-        self::afficherVue('vueGenerale.php',["menu"=>self::getMenu(),"chemin"=>"Entreprise/vuePresentationEntreprise.php","titrePage"=>"Accueil Entreprise"]);
+    public static function afficherVuePresentation()
+    {
+        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vuePresentationEntreprise.php", "titrePage" => "Accueil Entreprise"]);
     }
-
 
     /***
      * Affiche la page de detail d'une offre qui varie selon le client
      */
+
     public static function afficherVueDetailOffre(string $idOffre = null): void
     {
-        $menu = "App\FormatIUT\Controleur\Controleur" . $_GET['controleur'];
+        $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
         $liste = (new OffreRepository())->getListeIdOffres();
         if ($idOffre || isset($_REQUEST["idOffre"])) {
             if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
             if (in_array($idOffre, $liste)) {
-                $offre = (new OffreRepository())->getObjectParClePrimaire($idOffre);
+                $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                 if ($_REQUEST["controleur"] == "EntrMain") $client = "Entreprise";
                 else $client = "Etudiant";
@@ -65,10 +66,10 @@ class ControleurMain
     public static function getMenu(): array
     {
         return array(
-            array("image"=>"../ressources/images/accueil.png","label"=>"Accueil","lien"=>"?controleur=Main&action=afficherIndex"),
-            array("image"=>"../ressources/images/profil.png","label"=>"(prov étudiants)","lien"=>"?controleur=EtuMain&action=afficherAccueilEtu"),
-            array("image"=>"../ressources/images/profil.png","label"=>"Se Connecter","lien"=>"?controleur=Main&action=afficherPageConnexion"),
-            array("image"=>"../ressources/images/entreprise.png","label"=>"Accueil Entreprise","lien"=>"?controleur=Main&action=afficherVuePresentation")
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
+            array("image" => "../ressources/images/profil.png", "label" => "(prov étudiants)", "lien" => "?controleur=EtuMain&action=afficherAccueilEtu"),
+            array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
+            array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
     }
 
@@ -96,7 +97,7 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        $menu="App\Formatiut\Controleur\Controleur".$_REQUEST['controleur'];
+        $menu = "App\Formatiut\Controleur\Controleur" . $_REQUEST['controleur'];
         self::afficherVueDansCorps("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
         ]);

@@ -110,7 +110,4 @@ abstract class AbstractRepository
         $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
     }
-
-
-
 }
