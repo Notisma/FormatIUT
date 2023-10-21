@@ -20,7 +20,15 @@ class Configuration
         'port' =>'3306'
     );*/
 
-
+/*
+    static private array $config = array(
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
+    );
+  */
     static private array $config = array(
         'hostname' => 'localhost',
         'database' => 'loyet',

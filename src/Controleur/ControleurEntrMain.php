@@ -27,10 +27,6 @@ class ControleurEntrMain extends ControleurMain
         self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise", "listeOffre" => $listeOffre]);
     }
 
-    public static function formulaireCreationOffre()
-    {
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/formulaireCreationOffre.php", "titrePage", "titrePage" => "Créer une offre"]);
-    }
 
     public static function creerOffre()
     {
@@ -69,7 +65,7 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function mesOffres()
+    public static function mesOffres(): void
     {
         if (!isset($_REQUEST["type"])) {
             $_REQUEST["type"] = "Tous";
@@ -92,13 +88,28 @@ class ControleurEntrMain extends ControleurMain
         );
     }
 
-    public static function afficherProfilEntr()
+    // ---- AFFICHAGES ----
+    public static function afficherProfilEntr(): void
     {
             $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
             self::afficherVue("vueGenerale.php", ["entreprise"=>$entreprise,"menu" => self::getMenu(), "chemin" => "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
     }
 
-    public static function assignerEtudiantOffre()
+    public static function formulaireCreationOffre(): void
+    {
+        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/formulaireCreationOffre.php", "titrePage", "titrePage" => "Créer une offre"]);
+    }
+
+    public static function afficherFormulaireModificationOffre(): void
+    {
+        if (isset($_GET['idOffre'])) {
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+            self::afficherVueDansCorps("Modifier l'offre", "Entreprise/formulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
+        }
+    }
+
+
+    public static function assignerEtudiantOffre(): void
     {
         //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_REQUEST["idEtudiant"],$_REQUEST["idOffre"])){
@@ -121,18 +132,18 @@ class ControleurEntrMain extends ControleurMain
 
                     }
                 }
-            }else {
+            } else {
                 self::afficherErreur("L'étudiant ou l'offre n'existe pas");
             }
-        }else {
+        } else {
             self::afficherErreur("Données Manquantes pour assigner un étudiant");
         }
 
     }
 
-    public static function updateImage()
+    public static function updateImage(): void
     {
-        $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
+        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
         //TODO vérif de doublons d'image
         $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom="";
@@ -144,7 +155,7 @@ class ControleurEntrMain extends ControleurMain
                 $nom.=$nomEntreprise[$i];
             }
         }
-        $nom.="_logo";
+        $nom .= "_logo";
         parent::insertImage($nom);
         $ancienId=(new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(),$id);
@@ -155,7 +166,46 @@ class ControleurEntrMain extends ControleurMain
         self::afficherProfilEntr();
     }
 
-    public static function supprimerOffre(){
+    // ---- CRUD de l'offre ----
+    public static function creerOffre(): void
+    {
+        //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
+        if (isset($_POST['nomOffre'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
+            //if (strtotime($_POST["dateDebut"]) > strtotime($_POST["dateFin"])){
+            //TODO vérif que début après aujourd'hui
+            if ($_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0) {
+                if ($_POST["joursParSemaine"] < 8) {
+                    if ($_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
+                        $listeId = (new OffreRepository())->getListeIdOffres();
+                        self::autoIncrement($listeId, "idOffre");
+                        $_POST["idEntreprise"] = self::$cleEntreprise;
+                        $offre = (new OffreRepository())->construireDepuisTableau($_POST);
+                        (new OffreRepository())->creerObjet($offre);
+                        $_GET["action"] = "mesOffres";
+                        self::mesOffres();
+                    } else {
+                        self::afficherErreur("Concordance des heures");
+                    }
+                } else {
+                    self::afficherErreur("Concordance des jours");
+                }
+            } else {
+                self::afficherErreur("Des données sont érronées");
+            }
+            /*}else {
+                //redirectionFlash "Concordance des dates
+                echo "dates";
+                self::formulaireCreationOffre();
+            }*/
+        } else {
+            //redirectionFlash "éléments manquants
+            self::afficherErreur("Des données sont manquantes");
+        }
+
+    }
+
+    public static function supprimerOffre(): void
+    {
         //TODO vérifs
         if (isset($_REQUEST["idOffre"])) {
             $listeOffre=((new OffreRepository())->getListeIdOffres());
@@ -170,14 +220,51 @@ class ControleurEntrMain extends ControleurMain
                     } else {
                         self::afficherErreur("Cette offre ne vous appartient pas");
                     }
-                }else {
+                } else {
                     self::afficherErreur("Cette offre a été admise par un étudiant");
                 }
-            }else {
+            } else {
                 self::afficherErreur("Cette offre n'existe pas");
             }
-        }else {
+        } else {
             self::afficherErreur("Données Manquantes");
+        }
+    }
+
+    public static function modifierOffre(): void
+    {
+        if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
+            if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
+                $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+                if ($offre) {
+                    if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                        if ($offre->getSiret() == self::$cleEntreprise) {
+                            $offre->setTypeOffre($_POST['typeOffre']);
+                            $offre->setNomOffre($_POST['nomOffre']);
+                            $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
+                            $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
+                            $offre->setSujet($_POST['sujet']);
+                            $offre->setDetailProjet($_POST['detailProjet']);
+                            $offre->setGratification($_POST['gratification']);
+                            $offre->setDureeHeures($_POST['dureeHeures']);
+                            $offre->setJoursParSemaine($_POST['joursParSemaine']);
+                            $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
+                            (new OffreRepository())->modifierObjet($offre);
+                            self::afficherVueDetailOffre($offre->getIdOffre());
+                        } else {
+                            self::afficherErreur("Cette offre ne vous appartient pas");
+                        }
+                    } else {
+                        self::afficherErreur("Cette offre a déjà été admise par un étudiant");
+                    }
+                } else {
+                    self::afficherErreur("Cette offre n'existe pas");
+                }
+            } else {
+                self::afficherErreur("Certaines données renseignées sont erronnées");
+            }
+        } else {
+            self::afficherErreur("Données manquantes");
         }
     }
 
