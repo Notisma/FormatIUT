@@ -29,7 +29,6 @@ class VilleRepository extends AbstractRepository
         return new Ville(
             $DataObjectTableau["idVille"],
             $DataObjectTableau['nomVille'],
-            $DataObjectTableau['paysVille']
         );
     }
 }
