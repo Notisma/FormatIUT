@@ -1,6 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="../ressources/css/styleVueDetailEtudiant.css">
+    <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
 <div class="boiteMain">
