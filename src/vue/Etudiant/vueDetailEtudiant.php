@@ -6,10 +6,6 @@
 <body>
 <div class="boiteMain">
 
-    <div id="popup">
-        <p>test</p>
-    </div>
-
 
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
@@ -60,16 +56,6 @@
             </div>
             <img src="../ressources/images/etudiantsHeureux.png" alt="illu">
         </div>
-    </div>
-
-    <div class="deposerCV">
-        <h3>Déposer un CV</h3>
-        <p>Déposez votre CV ici :</p>
-        <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post" >
-            <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-            <input type="file" name="fic" size=500/>
-            <input type="submit" value="Envoyer"/>
-        </form>
     </div>
 
     <div class="actionsRapidesEntr">
@@ -147,6 +133,53 @@
 
         </div>
 
+    </div>
+
+
+    <div id="popup">
+        <div class="mainPopup">
+            <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
+
+            <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post">
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                <input type="file" name="fic" size=500/>
+                <input type="submit" value="Envoyer"/>
+            </form>
+
+            <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain" method="post">
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                <input type="file" name="fic" size=500/>
+                <input type="submit" value="Envoyer"/>
+            </form>
+
+            <div class="conteneurBoutonPopup">
+                <a onclick="fermerDiv()">
+                    <button class="boutonAssignerPopup">RETOUR</button>
+                </a>
+
+                <?php
+                echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
+                <button class="boutonAssignerPopup" ';
+                $bool = false;
+                $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+                if (is_null($formation)) {
+                    if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
+                        if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                            $bool = true;
+                        }
+                    }
+                }
+                if (!$bool) {
+                    echo 'id="disabled" disabled';
+                }
+                echo ">POSTULER</button></a>";
+                ?>
+            </div>
+        </div>
+
+        <div class="descPopup">
+
+        </div>
     </div>
 
 

@@ -471,16 +471,83 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 90%;
     min-width: 300px;
     text-align: left;
     line-height: 2em;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: center;
     border-radius: 10px;
-    background-color: #ff9095;
+    background-color: white;
+    border: 1px solid black;
     z-index: 100;
+}
+
+.mainPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.mainPopup > h2 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.conteneurBoutonPopup {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.conteneurBoutonPopup > a {
+    width: 40%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.boutonAssignerPopup {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    padding: 3%;
+}
+
+.boutonAssignerPopup:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+.descPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: space-around;
 }
