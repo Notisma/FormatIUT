@@ -61,6 +61,7 @@
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
         <?php
+        /*
         echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
                 <button class="boutonAssigner" ';
         $bool = false;
@@ -75,12 +76,14 @@
         if (!$bool) {
             echo 'id="disabled" disabled';
         }
-
+        */
         ?>
+        <!--
         >POSTULER</button></a>
+        -->
 
         <a id="my-button">
-            <button class="boutonAssigner" onclick="afficherDiv()">TEST</button>
+            <button class="boutonAssigner" onclick="afficherDiv()">POSTULER</button>
         </a>
 
 
@@ -95,6 +98,7 @@
 
         <div class="wrapPostulants">
             <?php
+
             $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
             if ($formation) {
                 if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
@@ -141,12 +145,14 @@
             <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
 
             <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post">
+                <label>Déposez votre CV :</label>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                 <input type="file" name="fic" size=500/>
                 <input type="submit" value="Envoyer"/>
             </form>
 
             <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain" method="post">
+                <label>Déposez votre Lettre de Motivation :</label>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                 <input type="file" name="fic" size=500/>
                 <input type="submit" value="Envoyer"/>
@@ -158,6 +164,7 @@
                 </a>
 
                 <?php
+
                 echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
                 <button class="boutonAssignerPopup" ';
                 $bool = false;
