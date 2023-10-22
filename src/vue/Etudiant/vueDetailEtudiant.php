@@ -5,6 +5,12 @@
 </head>
 <body>
 <div class="boiteMain">
+
+    <div id="popup">
+        <p>test</p>
+    </div>
+
+
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
@@ -86,6 +92,12 @@
 
         ?>
         >POSTULER</button></a>
+
+        <a id="my-button">
+            <button class="boutonAssigner" onclick="afficherDiv()">TEST</button>
+        </a>
+
+
         <a href='?action=afficherAccueilEtu&controleur=EtuMain'>
             <button class='boutonAssigner'>RETOUR</button>
         </a>

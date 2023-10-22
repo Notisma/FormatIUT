@@ -1,3 +1,7 @@
+const myButton = document.getElementById("my-button");
+
+myButton.addEventListener("click", afficherDiv);
+
 function afficherDiv() {
-    document.getElementById("my-div").style.display = "block";
+    document.getElementById("popup").style.display = "flex";
 }

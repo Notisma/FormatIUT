@@ -463,3 +463,24 @@ body {
 .nbPostulants > img {
     width: 50%;
 }
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #ff9095;
+    z-index: 100;
+}
