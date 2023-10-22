@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -173,6 +174,17 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-
+    public static function deposerCV(){
+        if (isset($_POST["submit"])) {
+            $fileName = $_FILES["fileToUpload"]["name"];
+            $fileData = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
+            $pdoStatement1 = ConnexionBaseDeDonnee::getPdo()->prepare("INSERT INTO cv (idCV, contenuCV) VALUES (:fileNameTag, :fileDataTag)");
+            $pdoStatement2 = ConnexionBaseDeDonnee::getPdo()->prepare("INSERT INTO regarder (idCV) VALUES (:fileNameTag)");
+            $values = array("fileNameTag"=>$fileName, "fileDataTag"=>$fileData);
+            $pdoStatement1->execute($values);
+            $pdoStatement2->execute($values);
+            self::afficherVueDetailOffre();
+        }
+    }
 
 }
