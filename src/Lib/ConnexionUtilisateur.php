@@ -7,12 +7,14 @@ class ConnexionUtilisateur
 {
     // L'utilisateur connecté sera enregistré en session associé à la clé suivante
     private static string $cleConnexion = "_utilisateurConnecte";
+    private static string $cleTypeConnexion ="_typeUtilisateurConnecte";
 
-    public static function connecter(string $loginUtilisateur): void
+    public static function connecter(string $loginUtilisateur,string $typeUtilisateur): void
     {
         // À compléter
         $session=Session::getInstance();
         $session->enregistrer(self::$cleConnexion,$loginUtilisateur);
+        $session->enregistrer(self::$cleTypeConnexion,$typeUtilisateur);
     }
 
     public static function estConnecte(): bool
@@ -38,17 +40,12 @@ class ConnexionUtilisateur
         }
         return null;
     }
-    public static function estUtilisateur($login): bool{
-        return (self::getLoginUtilisateurConnecte()==$login);
-    }
 
-    public static function estAdministrateur():bool{
-        if (self::estConnecte())
-        return (new UtilisateurRepository())->estAdmin(self::getLoginUtilisateurConnecte());
-        return false;
+    /**
+     * @return string
+     */
+    public static function getCleTypeConnexion(): string
+    {
+        return self::$cleTypeConnexion;
     }
-    public static function utilisateurEstAdmin($login):bool{
-        return (new UtilisateurRepository())->estAdmin($login);
-    }
-
 }

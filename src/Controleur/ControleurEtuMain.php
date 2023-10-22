@@ -2,7 +2,10 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\ConfigurationLdap;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -19,6 +22,7 @@ class ControleurEtuMain extends ControleurMain
         return self::$cleEtudiant;
     }
 
+    //TODO Se déconnecter, connecter à la BD
     public static function afficherAccueilEtu(){
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
         $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));

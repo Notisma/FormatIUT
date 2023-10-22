@@ -10,6 +10,7 @@ use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
+use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -151,17 +152,22 @@ class ControleurMain
 
     public static function seConnecter(){
         if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
-            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
-            if (!is_null($user)){
-                if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
-                    ConnexionUtilisateur::connecter($_REQUEST["login"]);
+            $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            if (!is_null($entreprise)){
+                if ( MotDePasse::verifier($_REQUEST["mdp"],$entreprise->getMdpHache())){
+                    ConnexionUtilisateur::connecter($_REQUEST["login"],"Entreprise");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
+            }else if (ConnexionLdap::verifLDap($_REQUEST["login"],$_REQUEST["mdp"])){
+                ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
+                MessageFlash::ajouter("success","Connexion Réussie");
+                ControleurEtuMain::afficherAccueilEtu();
+                exit();
             }
         }
-        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
     public static function seDeconnecter() {
         ConnexionUtilisateur::deconnecter();
@@ -215,5 +221,9 @@ class ControleurMain
         } else {
             self::redirectionFlash("afficherVuePresentation","danger","Des données sont érronées");
         }
+    }
+
+    public static function afficherListe(){
+        ConnexionLdap::listePersonnes();
     }
 }
