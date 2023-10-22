@@ -4,7 +4,7 @@
     <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
-<div class="boiteMain">
+<div class="boiteMain" id="aGriser">
 
 
     <div class="conteneurBienvenueDetailEntr">
@@ -83,7 +83,7 @@
         -->
 
         <a id="my-button">
-            <button class="boutonAssigner" onclick="afficherDiv()">POSTULER</button>
+            <button class="boutonAssigner" onclick="afficherPopupDepotCV_LM()">POSTULER</button>
         </a>
 
 
@@ -140,56 +140,55 @@
     </div>
 
 
-    <div id="popup">
-        <div class="mainPopup">
-            <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
+</div>
 
-            <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post">
-                <label>Déposez votre CV :</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                <input type="file" name="fic" size=500/>
-                <input type="submit" value="Envoyer"/>
-            </form>
+<div id="popup">
+    <div class="mainPopup">
+        <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
 
-            <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain" method="post">
-                <label>Déposez votre Lettre de Motivation :</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                <input type="file" name="fic" size=500/>
-                <input type="submit" value="Envoyer"/>
-            </form>
+        <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post">
+            <label>Déposez votre CV :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+            <input type="file" name="fic" size=500/>
+            <input type="submit" value="Envoyer"/>
+        </form>
 
-            <div class="conteneurBoutonPopup">
-                <a onclick="fermerDiv()">
-                    <button class="boutonAssignerPopup">RETOUR</button>
-                </a>
+        <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain" method="post">
+            <label>Déposez votre Lettre de Motivation :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+            <input type="file" name="fic" size=500/>
+            <input type="submit" value="Envoyer"/>
+        </form>
 
-                <?php
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupDepotCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
 
-                echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
+            <?php
+
+            echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
                 <button class="boutonAssignerPopup" ';
-                $bool = false;
-                $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
-                if (is_null($formation)) {
-                    if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                        if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
-                            $bool = true;
-                        }
+            $bool = false;
+            $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+            if (is_null($formation)) {
+                if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
+                    if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                        $bool = true;
                     }
                 }
-                if (!$bool) {
-                    echo 'id="disabled" disabled';
-                }
-                echo ">POSTULER</button></a>";
-                ?>
-            </div>
-        </div>
-
-        <div class="descPopup">
-
+            }
+            if (!$bool) {
+                echo 'id="disabled" disabled';
+            }
+            echo ">POSTULER</button></a>";
+            ?>
         </div>
     </div>
 
+    <div class="descPopup">
 
+    </div>
 </div>
 
 

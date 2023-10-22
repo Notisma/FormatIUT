@@ -471,8 +471,8 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
-    width: 80%;
-    height: 90%;
+    width: 70%;
+    height: 70%;
     min-width: 300px;
     text-align: left;
     line-height: 2em;
@@ -514,6 +514,15 @@ body {
     justify-content: space-around;
     border-radius: 10px;
     background-color: #ff9095;
+}
+
+.mainPopup > form > label {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
 }
 
 .conteneurBoutonPopup {
@@ -562,4 +571,6 @@ body {
     align-items: flex-start;
     align-content: center;
     justify-content: space-around;
+    border-radius: 0 10px 10px 0;
+    background-color: #aadcda;
 }
