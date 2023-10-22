@@ -16,7 +16,7 @@ class RegarderRepository extends AbstractRepository {
     }
     public function construireDepuisTableau(array $regarder): AbstractDataObject
     {
-        return new Regarder($regarder['numEtudiant'], $regarder['idOffre'], $regarder['Etat']);
+        return new Regarder($regarder['numEtudiant'], $regarder['idOffre'], $regarder['Etat'], $regarder['cv']);
     }
     public function getClePrimaire(): string
     {
@@ -79,4 +79,5 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
+
 }

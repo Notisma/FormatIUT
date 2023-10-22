@@ -16,7 +16,7 @@ class VilleRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idVille","nomVille","paysVille");
+        return array("idVille","nomVille","codePostal");
     }
 
     protected function getClePrimaire(): string
@@ -29,16 +29,23 @@ class VilleRepository extends AbstractRepository
         return new Ville(
             $DataObjectTableau['idVille'],
             $DataObjectTableau['nomVille'],
-            $DataObjectTableau['paysVille']
+            $DataObjectTableau['codePostal']
         );
     }
 
     public function getVilleParIdResidence($idResidence) : Ville{
-        $sql = "SELECT v.idVille, nomVille, paysVille FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";
+        $sql = "SELECT v.idVille, nomVille,codePostal FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagResidence" => $idResidence);
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
 
+    }
+    public function getVilleParIdVilleEntr($siret) : Ville{
+        $sql = "Select v.idVille, nomVille, codePostal From Ville v JOIN Entreprise e ON v.idVille = e.idVille WHERE numSiret =:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag"=>$siret);
+        $pdoStatement->execute($values);
+        return $this->construireDepuisTableau($pdoStatement->fetch());
     }
 }

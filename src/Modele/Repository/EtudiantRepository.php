@@ -52,7 +52,7 @@ class EtudiantRepository extends AbstractRepository
      * rajoute dans la BD un étudiant qui postule à une offre
      */
     public function EtudiantPostuler( $numEtu, $numOffre){
-        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente')";
+        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente', '1')";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "TagEtu"=>$numEtu,
@@ -164,6 +164,14 @@ class EtudiantRepository extends AbstractRepository
         $values=array("Tag"=>$numEtudiant,"TagEtat"=>$etat);
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["nb"];
+    }
+
+    public function getOffreValidee($numEtu, $typeOffre){
+        $sql="Select * FROM regarder r JOIN Offre o ON o.idOffre = r.idOffre WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND Etat = 'Validée'";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("tagType"=>$typeOffre, "tagEtu"=>$numEtu);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
     }
 
 }

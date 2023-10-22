@@ -7,8 +7,8 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Offre;
 use Cassandra\Bigint;
 
-class OffreRepository extends AbstractRepository
-{
+    class OffreRepository extends AbstractRepository
+    {
 
 
     public function getNomsColonnes() : array{
@@ -185,7 +185,16 @@ class OffreRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+        public function trouverOffreDepuisForm($numEtu) : Offre
+        {
+            $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre
+            FROM Formation f JOIN Offre o ON f.idOffre = o.idOffre WHERE idEtudiant = :tagEtu";
+            $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+            $values = array("tagEtu" => $numEtu);
+            $pdoStatement->execute($values);
+            return $this->construireDepuisTableau($pdoStatement->fetch());
 
+        }
 
 
 

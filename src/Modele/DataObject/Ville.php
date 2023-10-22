@@ -9,18 +9,18 @@ class Ville extends AbstractDataObject
 
     private string $idVille;
     private string $nomVille;
-    private string $paysVille;
+    private string $codePostal;
 
     /**
      * @param string $idVille
      * @param string $nomVille
      * @param string $paysVille
      */
-    public function __construct(string $idVille, string $nomVille, string $paysVille)
+    public function __construct(string $idVille, string $nomVille, string $codePostal)
     {
         $this->idVille = $idVille;
         $this->nomVille = $nomVille;
-        $this->paysVille = $paysVille;
+        $this->codePostal = $codePostal;
     }
 
     public function getIdVille(): string
@@ -43,14 +43,14 @@ class Ville extends AbstractDataObject
         $this->nomVille = $nomVille;
     }
 
-    public function getPaysVille(): string
+    public function getCodePostal(): string
     {
-        return $this->paysVille;
+        return $this->codePostal;
     }
 
-    public function setPaysVille(string $paysVille): void
+    public function setCodePostal(string $codePostal): void
     {
-        $this->paysVille = $paysVille;
+        $this->codePostal = $codePostal;
     }
 
 
@@ -58,8 +58,8 @@ class Ville extends AbstractDataObject
     {
         return array(
             "idVille"=>$this->idVille,
-            "nomVIlle"=>$this->nomVille,
-            "paysVille"=>$this->paysVille
+            "nomVille"=>$this->nomVille,
+            "codePostal"=>$this->codePostal
         );
     }
 }
