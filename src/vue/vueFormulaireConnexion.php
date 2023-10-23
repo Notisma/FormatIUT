@@ -46,7 +46,7 @@
                 <div id="wrapInput">
                     <div id="Userlogin">
                         <img src="../ressources/images/utilisateur.png" alt="user" id="user">
-                        <input type="text" name="login" id="login" required placeholder="Identifiant ou SIRET" value="Test">
+                        <input type="text" name="login" id="login" required placeholder="Identifiant ou SIRET" >
                     </div>
                     <div id="Usermdp">
                         <img src="../ressources/images/cadenas.png" alt="cadenas" id="cadenas">

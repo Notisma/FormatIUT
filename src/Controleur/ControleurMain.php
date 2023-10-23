@@ -160,9 +160,11 @@ class ControleurMain
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
+
             }else if (ConnexionLdap::verifLDap($_REQUEST["login"],$_REQUEST["mdp"])){
                 ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
                 MessageFlash::ajouter("success","Connexion Réussie");
+                ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
                 ControleurEtuMain::afficherAccueilEtu();
                 exit();
             }

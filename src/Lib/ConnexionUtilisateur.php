@@ -1,7 +1,9 @@
 <?php
 namespace App\FormatIUT\Lib;
 
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\HTTP\Session;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
 class ConnexionUtilisateur
 {
@@ -47,5 +49,11 @@ class ConnexionUtilisateur
     public static function getCleTypeConnexion(): string
     {
         return self::$cleTypeConnexion;
+    }
+
+    public static function premiereConnexion(string $login) : void{
+        if (!(new EtudiantRepository())->estEtudiant($login)){
+            //(new EtudiantRepository())->creerObjet();
+        }
     }
 }

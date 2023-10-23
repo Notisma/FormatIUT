@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
@@ -164,6 +165,16 @@ class   EtudiantRepository extends AbstractRepository
         $values=array("Tag"=>$numEtudiant,"TagEtat"=>$etat);
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["nb"];
+    }
+
+    public function estEtudiant(string $login) : bool{
+        $sql="SELECT COUNT(*) FROM ".$this->getNomTable()." WHERE loginEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        $count=$pdoStatement->fetch();
+        if ($count==1) return true;
+        return false;
     }
 
 }
