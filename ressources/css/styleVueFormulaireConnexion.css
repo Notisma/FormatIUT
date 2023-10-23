@@ -184,6 +184,26 @@ body {
     margin-bottom: 3%;
 }
 
+#form > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.oublié {
+    font-family: "Open Sans extra", sans-serif;
+    font-size: 1em;
+    color: black;
+    margin: 0;
+}
+
+.oublié:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 #imageErreur {
     width: 10%;
 }
@@ -253,6 +273,23 @@ input {
     width: 45%;
     border: 1px solid #000000;
 }
+
+.popupOublié {
+    display: none;
+    position: fixed;
+    z-index: 90;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+
+
 
 
 /* ------------------------------------------------- PARTIE RESPONSIVE ---------------------------------------------- */

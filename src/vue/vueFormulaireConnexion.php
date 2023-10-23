@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../ressources/css/styleVueFormulaireConnexion.css">
     <title>Format'IUT</title>
     <link rel="icon" type="image/png" href="Data/UM.png"/>
+    <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
 <p></p>
@@ -54,10 +55,21 @@
                     </div>
                 </div>
                 <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
+                <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>
     </div>
 
+</div>
+
+
+<div class="popupOublié" id="popupMdp">
+    <h3>MOT DE PASSE OUBLIE</h3>
+    <form action="" method="post">
+        <label for="mail">Saisissez votre adresse mail :</label>
+        <input type="email" name="mail" id="mail" required>
+        <input type="submit" value="ENVOYER" onclick="fermerPopupMdp()">
+    </form>
 </div>
 
 </body>
