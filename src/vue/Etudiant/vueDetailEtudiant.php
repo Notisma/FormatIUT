@@ -187,7 +187,8 @@
     </div>
 
     <div class="descPopup">
-
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
     </div>
 </div>
 

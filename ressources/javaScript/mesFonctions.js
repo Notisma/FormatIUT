@@ -8,6 +8,6 @@ function afficherPopupDepotCV_LM() {
 }
 
 function fermerPopupDepotCV_LM() {
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("aGriser").style.opacity = "1";
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("aGriser").style.opacity = "1";
 }

@@ -525,6 +525,39 @@ body {
     font-weight: bold;
 }
 
+.mainPopup > form > input[type="submit"] {
+    border-radius: 50px;
+    border: none;
+    width: 80px;
+    height: 20px;
+    background-color: #ff5660;
+    color: white;
+}
+
+.mainPopup > form > input[type="submit"]:hover {
+    border-radius: 50px;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    border-radius: 50px;
+    border: none;
+    width: 120px;
+    height: 20px;
+    background-color: #ff5660;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
 .conteneurBoutonPopup {
     width: 100%;
     height: 15%;
@@ -568,9 +601,22 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     align-content: center;
-    justify-content: space-around;
+    justify-content: center;
     border-radius: 0 10px 10px 0;
     background-color: #aadcda;
 }
+
+.descPopup > img {
+    width: 80%;
+}
+
+.descPopup > h2 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin: 0 2%;
+    text-align: center;
+}
+
