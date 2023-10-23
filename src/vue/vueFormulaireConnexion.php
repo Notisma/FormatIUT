@@ -64,12 +64,25 @@
 
 
 <div class="popupOublié" id="popupMdp">
-    <h3>MOT DE PASSE OUBLIE</h3>
-    <form action="" method="post">
-        <label for="mail">Saisissez votre adresse mail :</label>
-        <input type="email" name="mail" id="mail" required>
-        <input type="submit" value="ENVOYER" onclick="fermerPopupMdp()">
-    </form>
+    <div class="mainForget">
+        <div class="closeForget">
+            <a onclick="fermerPopupMdp()" id="fermer">
+                <img src="../ressources/images/fermer.png" alt="fermer" id="fermer">
+            </a>
+        </div>
+        <div class="conteneurForget">
+            <h2>MOT DE PASSE OUBLIÉ ?</h2>
+            <form action="" method="post">
+                <label for="mail">Saisissez votre adresse mail :</label>
+                <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
+                <input type="submit" value="ENVOYER" onclick="fermerPopupMdp()">
+                <p>Un mail vous sera envoyé à cette adresse pour réinitialiser votre mot de passe.</p>
+            </form>
+        </div>
+    </div>
+    <div class="imgForget">
+        <img src="../ressources/images/oublié.png" alt="oublié" id="oublié">
+    </div>
 </div>
 
 </body>
