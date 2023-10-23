@@ -75,7 +75,7 @@
             <form action="" method="post">
                 <label for="mail">Saisissez votre adresse mail :</label>
                 <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
-                <input type="submit" value="ENVOYER" onclick="fermerPopupMdp()">
+                <input type="submit" value="ENVOYER">
                 <p>Un mail vous sera envoyé à cette adresse pour réinitialiser votre mot de passe.</p>
             </form>
         </div>

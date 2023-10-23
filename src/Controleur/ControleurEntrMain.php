@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -73,30 +74,31 @@ class ControleurEntrMain extends ControleurMain
     {
         //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
+            $idOffre = $_REQUEST["idOffre"];
             $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
                 if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
-                    self::afficherErreur("L'offre est déjà prise");
+                    MessageFlash::ajouter("danger", "L'offre est déjà assignée à un étudiant");
                 } else {
                     if (((new EtudiantRepository())->aUneFormation($_REQUEST["idOffre"]))) {
-                        self::afficherErreur("L'étudiant a déjà une formation");
+                        MessageFlash::ajouter("danger", "L'étudiant a déjà une formation");
                     } else {
                         if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
                             (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
-                            self::afficherAccueilEntr();
+                            self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné");
                         } else {
-                            self::afficherErreur("L'étudiant n'es pas en Attente");
+                            self::redirectionFlash("afficherVueDetailOffre&idOffre=" . $idOffre, "danger", "L'étudiant n'a pas postulé à cette offre");
                         }
 
                     }
                 }
             } else {
-                self::afficherErreur("L'étudiant ou l'offre n'existe pas");
+                self::redirectionFlash("afficherVueDetailOffre&idOffre=" . $idOffre, "danger", "L'étudiant n'existe pas");
             }
         } else {
-            self::afficherErreur("Données Manquantes pour assigner un étudiant");
+            self::redirectionFlash("afficherVueAccueilEntr","danger", "Des données sont manquantes");
         }
 
     }
