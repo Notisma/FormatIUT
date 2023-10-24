@@ -152,10 +152,10 @@ class ControleurMain
 
     public static function seConnecter(){
         if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
-            $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            $entreprise=((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
             if (!is_null($entreprise)){
                 if ( MotDePasse::verifier($_REQUEST["mdp"],$entreprise->getMdpHache())){
-                    ConnexionUtilisateur::connecter($_REQUEST["login"],"Entreprise");
+                    ConnexionUtilisateur::connecter($entreprise->getSiret(),"Entreprise");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
@@ -164,6 +164,7 @@ class ControleurMain
             }else if (ConnexionLdap::verifLDap($_REQUEST["login"],$_REQUEST["mdp"])){
                 ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
                 MessageFlash::ajouter("success","Connexion Réussie");
+
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
                 ControleurEtuMain::afficherAccueilEtu();
                 exit();
