@@ -16,7 +16,9 @@ class ConnexionLdap
         }
         else {
             //on se connecte à une page web sur internet, et on lit ce qui est écrit en json
-            $url = "http://localhost/SAE_DEV/web/controleurFrontal.php?controleur=ConnexionLdap&action=trouverUser&login=loyet&password=26032004";
+            //on apelle une fonction dans ce même fichier
+            self::trouverUser("loyet", "26032004");
+            $url = "https://webinfo.iutmontp.univ-montp2.fr/~loyet/index.php";
             $json = file_get_contents($url);
             $obj = json_decode($json);
             var_dump($obj);
