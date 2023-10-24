@@ -1,8 +1,10 @@
 <?php
 namespace App\FormatIUT\Lib;
 
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\HTTP\Session;
+use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
 class ConnexionUtilisateur
@@ -42,6 +44,14 @@ class ConnexionUtilisateur
         }
         return null;
     }
+    public static function getNumEtudiantConnecte():?int{
+        if (self::estConnecte()){
+            $session=Session::getInstance();
+            $Loginetu=$session->lire(self::$cleConnexion);
+            return (new EtudiantRepository())->getNumEtudiantParLogin($Loginetu);
+        }
+        return null;
+    }
 
     /**
      * @return string
@@ -53,7 +63,11 @@ class ConnexionUtilisateur
 
     public static function premiereConnexion(string $login) : void{
         if (!(new EtudiantRepository())->estEtudiant($login)){
-            //(new EtudiantRepository())->creerObjet();
+            //afficherPopUp pour informations
+            // en attendant :
+            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login,"nomEtudiant"=>ConnexionLdap::getInfoPersonne($login)[0][0],"prenomEtudiant"=>ConnexionLdap::getInfoPersonne($login)[0][1]);
+            (new EtudiantRepository())->premiereConnexion($value);
+
         }
     }
 }

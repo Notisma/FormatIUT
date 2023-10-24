@@ -11,7 +11,6 @@ class Etudiant extends AbstractDataObject
     private string $prenomEtudiant;
     private string $nomEtudiant;
     private string $loginEtudiant;
-    private string $mdpEtudiant;
     private ?string $sexeEtu;
     private ?string $mailUniersitaire;
     private ?string $mailPerso;
@@ -19,8 +18,8 @@ class Etudiant extends AbstractDataObject
     private ?string $groupe;
     private ?string $parcours;
     private ?int $validationPedagogique;
-    private int $codeEtape;
-    private string $idResidence;
+    private ?int $codeEtape;
+    private ?string $idResidence;
     private string $img;
 
     /**
@@ -40,13 +39,12 @@ class Etudiant extends AbstractDataObject
      * @param string $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, string $mdpEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
         $this->nomEtudiant = $nomEtudiant;
         $this->loginEtudiant = $loginEtudiant;
-        $this->mdpEtudiant = $mdpEtudiant;
         $this->sexeEtu = $sexeEtu;
         $this->mailUniersitaire = $mailUniersitaire;
         $this->mailPerso = $mailPerso;
@@ -100,15 +98,6 @@ class Etudiant extends AbstractDataObject
         $this->loginEtudiant = $loginEtudiant;
     }
 
-    public function getMdpEtudiant(): string
-    {
-        return $this->mdpEtudiant;
-    }
-
-    public function setMdpEtudiant(string $mdpEtudiant): void
-    {
-        $this->mdpEtudiant = $mdpEtudiant;
-    }
 
     public function getSexeEtu(): ?string
     {
@@ -180,22 +169,22 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
     }
 
-    public function getCodeEtape(): int
+    public function getCodeEtape(): ?int
     {
         return $this->codeEtape;
     }
 
-    public function setCodeEtape(int $codeEtape): void
+    public function setCodeEtape(?int $codeEtape): void
     {
         $this->codeEtape = $codeEtape;
     }
 
-    public function getIdResidence(): string
+    public function getIdResidence(): ?string
     {
         return $this->idResidence;
     }
 
-    public function setIdResidence(string $idResidence): void
+    public function setIdResidence(?string $idResidence): void
     {
         $this->idResidence = $idResidence;
     }
@@ -230,7 +219,6 @@ class Etudiant extends AbstractDataObject
             "prenomEtudiant",$this->prenomEtudiant,
             "nomEtudiant"=>$this->nomEtudiant,
             "loginEtudiant"=>$this->loginEtudiant,
-            "mdpEtudiant"=>$this->mdpEtudiant,
             "sexeEtu"=>$this->sexeEtu,
             "mailUniversitaire"=>$this->mailUniersitaire,
             "mailPerso"=>$this->mailPerso,

@@ -21,7 +21,7 @@
             <div class="imageEtu">
                 <?php
                 //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
-                echo '<img src="data:image/jpeg;base64,'.base64_encode( $etudiant->getImg() ).'"/>';
+                echo '<img src"data:image/jpeg;base64,' . base64_encode($image->getImg()).'"/>';
                 ?>
             </div>
         </div>

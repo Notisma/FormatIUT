@@ -33,7 +33,6 @@ class   EtudiantRepository extends AbstractRepository
             $DataObjectTableau["prenomEtudiant"],
             $DataObjectTableau["nomEtudiant"],
             $DataObjectTableau["loginEtudiant"],
-            $DataObjectTableau["mdpEtudiant"],
             $DataObjectTableau["sexeEtu"],
             $DataObjectTableau["mailUniversitaire"],
             $DataObjectTableau["mailPerso"],
@@ -173,8 +172,28 @@ class   EtudiantRepository extends AbstractRepository
         $values=array("Tag"=>$login);
         $pdoStatement->execute($values);
         $count=$pdoStatement->fetch();
-        if ($count==1) return true;
+        if ($count[0]==1) return true;
         return false;
+    }
+
+    public function premiereConnexion(array $etudiant){
+        $sql="INSERT INTO ".$this->getNomTable()." (numEtudiant,prenomEtudiant,nomEtudiant,loginEtudiant) VALUES (:numTag,:prenomTag,:nomTag,:loginTag)";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "numTag"=>$etudiant["numEtudiant"],
+            "prenomTag"=>$etudiant["prenomEtudiant"],
+            "nomTag"=>$etudiant["nomEtudiant"],
+            "loginTag"=>$etudiant["loginEtudiant"],
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function getNumEtudiantParLogin(string $login):int{
+        $sql="SELECT numEtudiant FROM ".$this->getNomTable(). " WHERE loginEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()[0];
     }
 
 }

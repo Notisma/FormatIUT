@@ -52,6 +52,7 @@ class ConnexionLdap
         }
     }
     public static function getInfoPersonne(string $login){
+        self::connexion();
         $search = ldap_search(ConfigurationLdap::getConn(), ConfigurationLdap::getBasedn(), "(uid=$login)");
         $resultats = ldap_get_entries(ConfigurationLdap::getConn(), $search);
         $infos=array(
