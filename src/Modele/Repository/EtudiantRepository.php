@@ -177,12 +177,12 @@ class   EtudiantRepository extends AbstractRepository
     }
 
     public function premiereConnexion(array $etudiant){
-        $sql="INSERT INTO ".$this->getNomTable()." (numEtudiant,prenomEtudiant,nomEtudiant,loginEtudiant) VALUES (:numTag,:prenomTag,:nomTag,:loginTag)";
+        $sql="INSERT INTO ".$this->getNomTable()." (numEtudiant,loginEtudiant) VALUES (:numTag,:loginTag)";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "numTag"=>$etudiant["numEtudiant"],
-            "prenomTag"=>$etudiant["prenomEtudiant"],
-            "nomTag"=>$etudiant["nomEtudiant"],
+            //"prenomTag"=>$etudiant["prenomEtudiant"],
+            //"nomTag"=>$etudiant["nomEtudiant"],
             "loginTag"=>$etudiant["loginEtudiant"],
         );
         $pdoStatement->execute($values);

@@ -65,7 +65,7 @@ class ConnexionUtilisateur
         if (!(new EtudiantRepository())->estEtudiant($login)){
             //afficherPopUp pour informations
             // en attendant :
-            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login,"nomEtudiant"=>ConnexionLdap::getInfoPersonne($login)[0][0],"prenomEtudiant"=>ConnexionLdap::getInfoPersonne($login)[0][1]);
+            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login);
             (new EtudiantRepository())->premiereConnexion($value);
 
         }

@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\index;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
@@ -160,9 +161,15 @@ class ControleurMain
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
+            }else if (ConnexionLdap::connexion($_REQUEST["login"],$_REQUEST["mdp"])){
+                ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
+                MessageFlash::ajouter("success","Connexion Réussie");
+                ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
+                ControleurEtuMain::afficherAccueilEtu();
+                exit();
             }
         }
-        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
     public static function seDeconnecter() {
         ConnexionUtilisateur::deconnecter();
@@ -235,5 +242,8 @@ class ControleurMain
     }
     public static function motDePasseARemplir(){
         self::afficherVue("vueGenerale.php");
+    }
+    public static function test(){
+        index::trouverUser("touzer","08032004");
     }
 }

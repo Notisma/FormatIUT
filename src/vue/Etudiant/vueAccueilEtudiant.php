@@ -7,8 +7,8 @@
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3>Bonjour, <?php
-                $etu=\App\FormatIUT\Modele\Repository\ConnexionLdap::getInfoPersonne(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
-                echo $etu[0][1];
+                $etudiant=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+                echo $etudiant->getLogin();
                 ?></h3>
 
             <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
