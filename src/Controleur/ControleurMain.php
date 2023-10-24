@@ -218,4 +218,21 @@ class ControleurMain
             self::redirectionFlash("afficherVuePresentation","danger","Des données sont érronées");
         }
     }
+
+    public static function mdpOublie(){
+        if (isset($_REQUEST["mail"])){
+            $liste=((new EntrepriseRepository())->getListeObjet());
+            foreach ($liste as $entreprise) {
+                $listeMail[]=$entreprise->getEmail();
+            }
+            //vérification de doublon de mail
+            if (in_array($_REQUEST["mail"],$listeMail)) {
+                $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["email"]);
+                VerificationEmail::EnvoyerMailMdpOublie($entreprise);
+            }
+        }
+    }
+    public static function motDePasseARemplir(){
+        self::afficherVue("vueGenerale.php");
+    }
 }

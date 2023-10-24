@@ -36,6 +36,29 @@ class VerificationEmail
         }
         return false;
     }
+    public static function EnvoyerMailMdpOublie(Entreprise $entreprise){
+        $siretURL = rawurlencode($entreprise->getEmail());
+        $nonceURL = rawurlencode($entreprise->getNonce());
+        $absoluteURL = Configuration::getAbsoluteURL();
+        $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&controleur=Main&login=$siretURL&nonce=$nonceURL";
+        $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
+
+        // Temporairement avant d'envoyer un vrai mail
+        MessageFlash::ajouter("info", $corpsEmail);
+    }
+    public static function traiterEmailMdpOublie($login, $nonce): bool
+    {
+        // À compléter
+        $user =(new EntrepriseRepository())->getObjectParClePrimaire($login);
+        if (!is_null($user)){
+            if ($user->formatTableau()["nonce"]==$nonce){
+
+                (new EntrepriseRepository())->modifierObjet($user);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static function aValideEmail(Entreprise $entreprise) : bool
     {
