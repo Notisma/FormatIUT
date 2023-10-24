@@ -11,31 +11,6 @@ namespace App\FormatIUT\Configuration;
 
 class Configuration
 {
-    /*
-    static private array $config = array(
-        'hostname'=>'localhost',
-        'database'=>'loyet',
-        'login'=>'loyet',
-        'password'=>'26032004',
-        'port' =>'3306'
-    );*/
-
-/*
-    static private array $config = array(
-        'hostname' => 'localhost',
-        'database' => 'sae',
-        'port' => '3306',
-        'login' => 'notisma',
-        'password' => ''
-    );
-  */
-    /*static private array $config = array(
-        'hostname' => 'localhost',
-        'database' => 'loyet',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
-    );*/
 
     static private array $config = array(
         'hostname' => 'localhost',
@@ -74,5 +49,4 @@ class Configuration
     {
         return"http://localhost/SAE_DEV/web/controleurFrontal.php";
     }
-
 }

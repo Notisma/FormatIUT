@@ -46,7 +46,7 @@
                 <div id="wrapInput">
                     <div id="Userlogin">
                         <img src="../ressources/images/utilisateur.png" alt="user" id="user">
-                        <input type="text" name="login" id="login" required placeholder="Identifiant ou SIRET" >
+                        <input type="text" name="login" id="login" required placeholder="Identifiant ou SIRET">
                     </div>
                     <div id="Usermdp">
                         <img src="../ressources/images/cadenas.png" alt="cadenas" id="cadenas">
@@ -54,10 +54,34 @@
                     </div>
                 </div>
                 <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
+                <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>
     </div>
 
+</div>
+
+
+<div class="popupOublié" id="popupMdp">
+    <div class="mainForget">
+        <div class="closeForget">
+            <a onclick="fermerPopupMdp()" id="fermer">
+                <img src="../ressources/images/fermer.png" alt="fermer" id="fermer">
+            </a>
+        </div>
+        <div class="conteneurForget">
+            <h2>MOT DE PASSE OUBLIÉ ?</h2>
+            <form action="" method="post">
+                <label for="mail">Saisissez votre adresse mail :</label>
+                <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
+                <input type="submit" value="ENVOYER">
+                <p>Un mail vous sera envoyé à cette adresse pour réinitialiser votre mot de passe.</p>
+            </form>
+        </div>
+    </div>
+    <div class="imgForget">
+        <img src="../ressources/images/oublié.png" alt="oublié" id="oublié">
+    </div>
 </div>
 
 </body>

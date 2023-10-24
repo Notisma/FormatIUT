@@ -152,30 +152,24 @@ class ControleurMain
 
     public static function seConnecter(){
         if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
-            $entreprise=((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
-            if (!is_null($entreprise)){
-                if ( MotDePasse::verifier($_REQUEST["mdp"],$entreprise->getMdpHache())){
-                    ConnexionUtilisateur::connecter($entreprise->getSiret(),"Entreprise");
+            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            if (!is_null($user)){
+                if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
+                    ConnexionUtilisateur::connecter($_REQUEST["login"]);
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
-
-            }else if (ConnexionLdap::verifLDap($_REQUEST["login"],$_REQUEST["mdp"])){
-                ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
-                MessageFlash::ajouter("success","Connexion Réussie");
-
-                ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
-                ControleurEtuMain::afficherAccueilEtu();
-                exit();
             }
         }
-        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
     public static function seDeconnecter() {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
-        header("Location: controleurFrontal.php");
+        //header("Location: controleurFrontal.php");
+        MessageFlash::ajouter("info", "Vous êtes déconnecté");
+        self::afficherIndex();
     }
 
     public static function validerEmail(){
@@ -226,7 +220,20 @@ class ControleurMain
         }
     }
 
-    public static function afficherListe(){
-        ConnexionLdap::listePersonnes();
+    public static function mdpOublie(){
+        if (isset($_REQUEST["mail"])){
+            $liste=((new EntrepriseRepository())->getListeObjet());
+            foreach ($liste as $entreprise) {
+                $listeMail[]=$entreprise->getEmail();
+            }
+            //vérification de doublon de mail
+            if (in_array($_REQUEST["mail"],$listeMail)) {
+                $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["email"]);
+                VerificationEmail::EnvoyerMailMdpOublie($entreprise);
+            }
+        }
+    }
+    public static function motDePasseARemplir(){
+        self::afficherVue("vueGenerale.php");
     }
 }

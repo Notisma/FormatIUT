@@ -9,8 +9,18 @@ class ConnexionLdap
 
 
     public static function connexion(){
-        ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(),ConfigurationLdap::getPort()));
-        ldap_set_option(ConfigurationLdap::getConn(),LDAP_OPT_PROTOCOL_VERSION, 3);
+        //on essaie de se connecter, et si ça crash on affiche une erreur
+        if (!ConfigurationLdap::getConn()) {
+            ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(), ConfigurationLdap::getPort()));
+            ldap_set_option(ConfigurationLdap::getConn(), LDAP_OPT_PROTOCOL_VERSION, 3);
+        }
+        else {
+            //on se connecte à une page web sur internet, et on lit ce qui est écrit en json
+            $url = "http://localhost/SAE_DEV/web/controleurFrontal.php?controleur=ConnexionLdap&action=trouverUser&login=loyet&password=26032004";
+            $json = file_get_contents($url);
+            $obj = json_decode($json);
+            var_dump($obj);
+        }
     }
     public static function userExist(string $login) :bool{
         self::connexion();
