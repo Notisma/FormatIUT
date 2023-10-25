@@ -175,16 +175,13 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function deposerCV(){
-        if (isset($_POST["submit"])) {
-            $fileName = $_FILES["fileToUpload"]["name"];
-            $fileData = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
-            $pdoStatement1 = ConnexionBaseDeDonnee::getPdo()->prepare("INSERT INTO cv (idCV, contenuCV) VALUES (:fileNameTag, :fileDataTag)");
-            $pdoStatement2 = ConnexionBaseDeDonnee::getPdo()->prepare("INSERT INTO regarder (idCV) VALUES (:fileNameTag)");
-            $values = array("fileNameTag"=>$fileName, "fileDataTag"=>$fileData);
-            $pdoStatement1->execute($values);
-            $pdoStatement2->execute($values);
-            self::afficherVueDetailOffre();
-        }
+        var_dump($_POST);
+        var_dump($_GET);
+        var_dump($_FILES);
+        $fileName = $_FILES["fic"]["name"];
+        $fileData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        (new RegarderRepository())->deposerCV(self::$cleEtudiant, $_GET["idOffre"], $fileName);
+        self::afficherVueDetailOffre();
     }
 
 }

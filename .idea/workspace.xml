@@ -13,8 +13,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_09_2023_08_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_09_2023_08_36__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_10_2023_15_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_10_2023_15_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2023_08_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2023_08_37__Changes_.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="bouton déposer cv">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +180,47 @@
       <workItem from="1697437379985" duration="4823000" />
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698049528960" duration="6383000" />
+      <workItem from="1697704415446" duration="3652000" />
+    </task>
+    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
+      <option name="closed" value="true" />
+      <created>1696606913582</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1696606913582</updated>
+    </task>
+    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
+      <option name="closed" value="true" />
+      <created>1696626967802</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1696626967804</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
+      <option name="closed" value="true" />
+      <created>1696697664097</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1696697664097</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
+      <option name="closed" value="true" />
+      <created>1696698095999</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1696698095999</updated>
+    </task>
+    <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
+      <option name="closed" value="true" />
+      <created>1696700847363</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1696700847363</updated>
     </task>
     <task id="LOCAL-00044" summary="Encore un bug de git">
       <option name="closed" value="true" />
@@ -570,6 +615,15 @@
       <updated>1698062106299</updated>
     </task>
     <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00087" summary="bouton déposer cv">
+      <option name="closed" value="true" />
+      <created>1697705075723</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1697705075723</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,6 +691,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
+    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
+    <MESSAGE value="Correction de crash" />
+    <MESSAGE value="Correction" />
+    <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
@@ -663,6 +722,8 @@
     <MESSAGE value="Squelette de la fenêtre popup terminé. Reste CSS approfondi et ajout de contenu." />
     <MESSAGE value="Améliorations visuelles popup" />
     <option name="LAST_COMMIT_MESSAGE" value="Améliorations visuelles popup" />
+    <MESSAGE value="bouton déposer cv" />
+    <option name="LAST_COMMIT_MESSAGE" value="bouton déposer cv" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

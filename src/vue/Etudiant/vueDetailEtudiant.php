@@ -1,6 +1,6 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../ressources/css/styleVueDetailEtudiant.css">
+    <link rel="stylesheet" href="./../ressources/css/styleVueDetailEtudiant.css">
     <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
@@ -57,6 +57,7 @@
             <img src="../ressources/images/etudiantsHeureux.png" alt="illu">
         </div>
     </div>
+
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
@@ -146,7 +147,7 @@
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
 
-        <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain" method="post">
+        <form enctype="multipart/form-data" action="?action=deposerCV&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre()?>" method="post">
             <label>Déposez votre CV :</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
             <input type="file" name="fic" size=500/>

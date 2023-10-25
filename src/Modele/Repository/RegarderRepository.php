@@ -79,4 +79,11 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
+
+    public function deposerCV($numEtudiant, $idOffre, $cv){
+        $sql='UPDATE '.$this->getNomTable().' SET cv_id='.$cv.' WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre);
+        $pdoStatement->execute($values);
+    }
 }
