@@ -2,9 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
-use App\FormatIUT\Modele\DataObject\Formation;
-use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\CVRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
@@ -20,7 +18,7 @@ class ControleurEtuMain extends ControleurMain
         return self::$cleEtudiant;
     }
 
-    public static function afficherAccueilEtu(){
+    public static function afficherAccueilEtu() : void{
         $listeIdAlternance=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
         $listeIdStage=self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Stage"));
         $listeStage=array();
@@ -33,20 +31,20 @@ class ControleurEtuMain extends ControleurMain
         }
         self::afficherVue("vueGenerale.php",["menu"=>self::getMenu(),"chemin"=>"Etudiant/vueAccueilEtudiant.php","titrePage"=>"Accueil Etudiants","listeStage"=>$listeStage,"listeAlternance"=>$listeAlternance]);
     }
-    public static function afficherCatalogue() {
+    public static function afficherCatalogue(): void {
         $type = $_GET["type"] ?? "Tous";
         $offres = (new OffreRepository())->getListeOffresDispoParType($type);
         self::afficherVueDansCorps("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffre.php", self::getMenu(), ["offres" => $offres, "type" => $type]);
     }
-    public static function afficherProfilEtu() {
+    public static function afficherProfilEtu(): void {
         $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
         self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueCompteEtudiant.php", "titrePage" => "Compte étudiant"]);
     }
-    public static function afficherMesOffres(){
+    public static function afficherMesOffres(): void{
         $listOffre = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
         self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Etudiant/vueMesOffresEtu.php", "menu" => self::getMenu(), "listOffre" =>$listOffre, "numEtu"=>self::$cleEtudiant]);
     }
-    public static function annulerOffre(){
+    public static function annulerOffre(): void{
         if (isset($_GET["idOffre"])) {
             $listeId=((new OffreRepository())->getListeIdOffres());
             if (in_array($_GET["idOffre"],$listeId)) {
@@ -64,7 +62,8 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function validerOffre(){
+    public static function validerOffre(): void
+    {
         if (isset($_GET['idOffre'])) {
             $listeId=((new OffreRepository())->getListeIdOffres());
             $idOffre = $_GET['idOffre'];
@@ -101,7 +100,7 @@ class ControleurEtuMain extends ControleurMain
         self::afficherMesOffres();
     }*/
 
-    public static function postuler(){
+    public static function postuler(): void{
         //TODO vérifier les vérifs
         if (isset($_GET['idOffre'])) {
             $liste=((new OffreRepository())->getListeIdOffres());
@@ -134,7 +133,7 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function updateImage()
+    public static function updateImage(): void
     {
         $id=self::autoIncrement((new ImageRepository())->listeID(),"img_id");
         //TODO vérif de doublons d'image
@@ -174,14 +173,16 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-    public static function deposerCV(){
-        var_dump($_POST);
-        var_dump($_GET);
-        var_dump($_FILES);
+    public static function deposerCV(): void{
         $fileName = $_FILES["fic"]["name"];
         $fileData = file_get_contents($_FILES["fic"]["tmp_name"]);
         (new RegarderRepository())->deposerCV(self::$cleEtudiant, $_GET["idOffre"], $fileName);
+        (new CVRepository())->deposerCV($fileName, $fileData);
         self::afficherVueDetailOffre();
+    }
+
+    public static function deposerLM(): void{
+        $fileName = $_FILES[""]
     }
 
 }

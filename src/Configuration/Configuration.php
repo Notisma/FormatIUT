@@ -26,7 +26,7 @@ class Configuration
         'database' => 'loyet',
         'port' => '3306',
         'login' => 'loyet',
-        'password' => '26032004'
+        'password' => 'sae2023'
     );
 
 

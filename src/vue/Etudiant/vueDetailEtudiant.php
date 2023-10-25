@@ -154,10 +154,10 @@
             <input type="submit" value="Envoyer"/>
         </form>
 
-        <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain" method="post">
+        <form enctype="multipart/form-data" action="?action=deposerLM&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre()?>" method="post">
             <label>Déposez votre Lettre de Motivation :</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-            <input type="file" name="fic" size=500/>
+            <input type="file" name="ficLM" size=500/>
             <input type="submit" value="Envoyer"/>
         </form>
 

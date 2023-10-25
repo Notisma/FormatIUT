@@ -12,11 +12,11 @@ class RegarderRepository extends AbstractRepository {
 
     public function getNomsColonnes(): array
     {
-        return ["numEtudiant", "idOffre", "Etat"];
+        return ["numEtudiant", "idOffre", "Etat", "cv_id"];
     }
-    public function construireDepuisTableau(array $regarder): AbstractDataObject
+    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
-        return new Regarder($regarder['numEtudiant'], $regarder['idOffre'], $regarder['Etat']);
+        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat']);
     }
     public function getClePrimaire(): string
     {
@@ -32,27 +32,31 @@ class RegarderRepository extends AbstractRepository {
 
     }
 
-    public function supprimerOffreDansRegarder($idOffre){
+    public function supprimerOffreDansRegarder($idOffre): void
+    {
         $sql="DELETE FROM regarder WHERE idOffre=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("Tag"=>$idOffre);
         $pdoStatement->execute($values);
     }
 
-    public function supprimerOffreEtudiant($numEtudiant ,$idOffre){
+    public function supprimerOffreEtudiant($numEtudiant ,$idOffre): void
+    {
         $sql="DELETE FROM regarder WHERE $numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("TagEtu"=>$numEtudiant ,"TagOffre"=>$idOffre);
         $pdoStatement->execute($values);
     }
 
-    public function validerOffreEtudiant($numEtudiant, $idOffre){
+    public function validerOffreEtudiant($numEtudiant, $idOffre): void
+    {
         $this->annulerAutresOffre($numEtudiant,$idOffre);
         $this->annulerAutresEtudiant($numEtudiant,$idOffre);
         $this->validerOffre($numEtudiant,$idOffre);
 
     }
-    public function annulerAutresOffre($numEtudiant,$idOffre){
+    public function annulerAutresOffre($numEtudiant,$idOffre): void
+    {
         $sql="UPDATE ". $this->getNomTable() ." SET Etat='Annulé' WHERE numEtudiant=:tagEtu AND idOffre!=:tagOffre ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
@@ -61,7 +65,8 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
-    public function annulerAutresEtudiant($numEtudiant,$idOffre){
+    public function annulerAutresEtudiant($numEtudiant,$idOffre): void
+    {
         $sql="UPDATE ".$this->getNomTable()." SET Etat='Annulé' WHERE numEtudiant!=:tagEtu AND idOffre=:tagOffre ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
@@ -70,7 +75,8 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
-    public function validerOffre($numEtudiant,$idOffre){
+    public function validerOffre($numEtudiant,$idOffre): void
+    {
         $sql="UPDATE ".$this->getNomTable()." SET Etat='Validée' WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
@@ -80,10 +86,11 @@ class RegarderRepository extends AbstractRepository {
         $pdoStatement->execute($values);
     }
 
-    public function deposerCV($numEtudiant, $idOffre, $cv){
-        $sql='UPDATE '.$this->getNomTable().' SET cv_id='.$cv.' WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
+    public function deposerCV($numEtudiant, $idOffre, $cv): void
+    {
+        $sql='UPDATE '.$this->getNomTable().' SET cv_id=:cvTag WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre);
+        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre, "cvTag"=>$cv);
         $pdoStatement->execute($values);
     }
 }

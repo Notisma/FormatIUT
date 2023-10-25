@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository

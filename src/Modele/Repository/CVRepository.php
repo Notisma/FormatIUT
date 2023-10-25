@@ -21,13 +21,13 @@ class CVRepository extends AbstractRepository
         return ["idCV", "contenuCV"];
     }
 
-    public function construireDepuisTableau(array $cv): CV
+    public function construireDepuisTableau(array $DataObjectTableau): CV
     {
-        return new CV($cv['idCV'], $cv['contenuCV']);
+        return new CV($DataObjectTableau['idCV'], $DataObjectTableau['contenuCV']);
     }
 
-    public function deposerCV($idCV, $contenuCV){
-        $sql='INSERT INTO '.$this->getNomTable().' VALUES idCV=:idCVTag , contenuCV=:contenuCVTag';
+    public function deposerCV($idCV, $contenuCV): void{
+        $sql='INSERT INTO '.$this->getNomTable().' VALUES (idCV=:idCVTag , contenuCV=:contenuCVTag)';
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("idCVTag"=>$idCV, "contenuCVTag"=>$contenuCV);
         $pdoStatement->execute($values);
