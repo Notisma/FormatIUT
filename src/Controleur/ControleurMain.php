@@ -69,7 +69,6 @@ class ControleurMain
     {
         return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
-            array("image" => "../ressources/images/profil.png", "label" => "(prov étudiants)", "lien" => "?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
@@ -139,7 +138,7 @@ class ControleurMain
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
-            if (in_array("F".$id, $listeId)) {
+            if (in_array("F" . $id, $listeId)) {
                 $id++;
             } else {
                 $_REQUEST[$get] = $id;
@@ -147,23 +146,26 @@ class ControleurMain
         }
         return $id;
     }
-    public static function afficherPageConnexion(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Se Connecter","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+
+    public static function afficherPageConnexion(): void
+    {
+        self::afficherVue("vueGenerale.php", ["titrePage" => "Se Connecter", "menu" => self::getMenu(), "chemin" => "vueFormulaireConnexion.php"]);
     }
 
-    public static function seConnecter(){
-        if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
-            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
-            if (!is_null($user)){
-                if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
+    public static function seConnecter(): void
+    {
+        if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
+            $user = ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            if (!is_null($user)) {
+                if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
                     ConnexionUtilisateur::connecter($_REQUEST["login"], "Entreprise");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
                 }
-            }else if (ConnexionLdap::connexion($_REQUEST["login"],$_REQUEST["mdp"])){
-                ConnexionUtilisateur::connecter($_REQUEST['login'],"Etudiant");
-                MessageFlash::ajouter("success","Connexion Réussie");
+            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"])) {
+                ConnexionUtilisateur::connecter($_REQUEST['login'], "Etudiant");
+                MessageFlash::ajouter("success", "Connexion Réussie");
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
                 ControleurEtuMain::afficherAccueilEtu();
                 exit();
@@ -171,7 +173,9 @@ class ControleurMain
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
-    public static function seDeconnecter() {
+
+    public static function seDeconnecter(): void
+    {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
         //header("Location: controleurFrontal.php");
@@ -179,71 +183,79 @@ class ControleurMain
         self::afficherIndex();
     }
 
-    public static function validerEmail(){
-        VerificationEmail::traiterEmailValidation($_REQUEST["login"],$_REQUEST["nonce"]);
+    public static function validerEmail(): void
+    {
+        VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
         self::afficherPageConnexion();
         header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
     }
 
-    public static function redirectionFlash(string $action,string $type,string $message){
-        MessageFlash::ajouter($type,$message);
+    public static function redirectionFlash(string $action, string $type, string $message): void
+    {
+        MessageFlash::ajouter($type, $message);
         self::$action();
 
-}
-    public static function creerCompteEntreprise()
+    }
+
+    public static function creerCompteEntreprise(): void
     {
         //vérification des nombres négatifs
-        if ($_REQUEST["siret"]>0 && $_REQUEST["codePostal"]>0 && $_REQUEST["tel"]>0 && $_REQUEST["effectif"]>0) {
-            $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
+        if ($_REQUEST["siret"] > 0 && $_REQUEST["codePostal"] > 0 && $_REQUEST["tel"] > 0 && $_REQUEST["effectif"] > 0) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
             //vérification de doublon de Siret
             if (is_null($entreprise)) {
-                $liste=((new EntrepriseRepository())->getListeObjet());
+                $liste = ((new EntrepriseRepository())->getListeObjet());
                 foreach ($liste as $entreprise) {
-                    $listeMail[]=$entreprise->getEmail();
+                    $listeMail[] = $entreprise->getEmail();
                 }
                 //vérification de doublon de mail
-                if (!in_array($_REQUEST["email"],$listeMail)) {
+                if (!in_array($_REQUEST["email"], $listeMail)) {
                     //concordance des mots de passe
                     if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
-                        if (strlen($_REQUEST["mdp"])>=8) {
+                        if (strlen($_REQUEST["mdp"]) >= 8) {
                             $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
                             (new EntrepriseRepository())->creerObjet($entreprise);
                             VerificationEmail::envoiEmailValidation($entreprise);
                             header("Location: controleurFrontal.php");
-                        }else {
-                            self::redirectionFlash("afficherVuePresentation","warning","Le mot de passe doit faire plus de 7 caractères");
+                        } else {
+                            self::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                         }
                     } else {
                         self::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
                     }
-                }else{
-                    self::redirectionFlash("afficherVuePresentation","warning","L'adresse mail est déjà utilisée");
+                } else {
+                    self::redirectionFlash("afficherVuePresentation", "warning", "L'adresse mail est déjà utilisée");
                 }
-            }else {
-                self::redirectionFlash("afficherVuePresentation","danger","Le SIRET est déjà utilisé");
+            } else {
+                self::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
             }
         } else {
-            self::redirectionFlash("afficherVuePresentation","danger","Des données sont érronées");
+            self::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
         }
     }
 
-    public static function mdpOublie(){
-        if (isset($_REQUEST["mail"])){
-            $liste=((new EntrepriseRepository())->getListeObjet());
+    public static function mdpOublie(): void
+    {
+        if (isset($_REQUEST["mail"])) {
+            $liste = ((new EntrepriseRepository())->getListeObjet());
             foreach ($liste as $entreprise) {
-                $listeMail[]=$entreprise->getEmail();
+                $listeMail[] = $entreprise->getEmail();
             }
             //vérification de doublon de mail
-            if (in_array($_REQUEST["mail"],$listeMail)) {
-                $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["email"]);
+            if (in_array($_REQUEST["mail"], $listeMail)) {
+                $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["email"]);
                 VerificationEmail::EnvoyerMailMdpOublie($entreprise);
             }
         }
     }
-    public static function motDePasseARemplir(){
+
+    public static function motDePasseARemplir(): void
+    {
         self::afficherVue("vueGenerale.php");
     }
-    public static function test(){
-        index::trouverUser("touzer","08032004");
+
+    public static function test(): void
+    {
+        index::trouverUser("touzer", "08032004");
     }
 }

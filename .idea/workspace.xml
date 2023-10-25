@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix problème de git (encore)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,15 +167,7 @@
       <workItem from="1697437379985" duration="4823000" />
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698165307716" duration="4265000" />
-      <workItem from="1698213151700" duration="274000" />
-    </task>
-    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
-      <option name="closed" value="true" />
-      <created>1696626967802</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1696626967804</updated>
+      <workItem from="1698213151700" duration="459000" />
     </task>
     <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
       <option name="closed" value="true" />
@@ -563,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698178534582</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Correction de crash">
+      <option name="closed" value="true" />
+      <created>1698213500864</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1698213500864</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +630,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
-    <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
@@ -656,7 +653,8 @@
     <MESSAGE value="Corrections." />
     <MESSAGE value="essais de connexion ldab depuis local" />
     <MESSAGE value="fix problème de git (encore)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix problème de git (encore)" />
+    <MESSAGE value="Correction de crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
