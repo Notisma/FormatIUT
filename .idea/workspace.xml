@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="repush">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix problème de git (encore)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,14 +169,7 @@
       <workItem from="1697437379985" duration="4823000" />
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698165307716" duration="4265000" />
-    </task>
-    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
-      <option name="closed" value="true" />
-      <created>1696606913582</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1696606913582</updated>
+      <workItem from="1698213151700" duration="274000" />
     </task>
     <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
       <option name="closed" value="true" />
@@ -563,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698163360877</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="fix problème de git (encore)">
+      <option name="closed" value="true" />
+      <created>1698178534582</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1698178534582</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,7 +631,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
@@ -656,7 +655,8 @@
     <MESSAGE value="Merge" />
     <MESSAGE value="Corrections." />
     <MESSAGE value="essais de connexion ldab depuis local" />
-    <option name="LAST_COMMIT_MESSAGE" value="essais de connexion ldab depuis local" />
+    <MESSAGE value="fix problème de git (encore)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix problème de git (encore)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

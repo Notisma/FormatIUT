@@ -54,7 +54,6 @@
                     </div>
                 </div>
                 <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
-                <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>
     </div>

@@ -15,7 +15,6 @@ class ConnexionUtilisateur
 
     public static function connecter(string $loginUtilisateur,string $typeUtilisateur): void
     {
-        // À compléter
         $session=Session::getInstance();
         $session->enregistrer(self::$cleConnexion,$loginUtilisateur);
         $session->enregistrer(self::$cleTypeConnexion,$typeUtilisateur);

@@ -156,7 +156,7 @@ class ControleurMain
             $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
             if (!is_null($user)){
                 if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
-                    ConnexionUtilisateur::connecter($_REQUEST["login"]);
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Entreprise");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                     exit();
@@ -169,7 +169,7 @@ class ControleurMain
                 exit();
             }
         }
-        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
     public static function seDeconnecter() {
         ConnexionUtilisateur::deconnecter();
