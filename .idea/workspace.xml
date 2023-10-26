@@ -4,21 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations de code et corrections">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_10_2023_10_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_10_2023_10_58__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_10_2023_13_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_10_2023_13_04__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_10_2023_16_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_10_2023_16_02__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_10_2023_09_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_10_2023_09_57__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_09_2023_18_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_09_2023_18_42__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_09_2023_08_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_09_2023_08_36__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_10_2023_15_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_10_2023_15_20__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2023_08_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_09_2023_08_37__Changes_.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations popup dépôt CV et LM">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEtudiant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,14 +171,6 @@
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698165307716" duration="4265000" />
       <workItem from="1698213151700" duration="632000" />
-    </task>
-    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
-      <option name="closed" value="true" />
-      <created>1696698095999</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1696698095999</updated>
     </task>
     <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
       <option name="closed" value="true" />
@@ -573,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698213681233</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Améliorations popup dépôt CV et LM">
+      <option name="closed" value="true" />
+      <created>1698349939364</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1698349939364</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,7 +632,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
@@ -666,7 +656,8 @@
     <MESSAGE value="fix problème de git (encore)" />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Améliorations de code et corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations de code et corrections" />
+    <MESSAGE value="Améliorations popup dépôt CV et LM" />
+    <option name="LAST_COMMIT_MESSAGE" value="Améliorations popup dépôt CV et LM" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

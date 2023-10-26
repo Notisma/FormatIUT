@@ -1,9 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="../ressources/css/styleVueDetailEntreprise.css">
+    <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
-<div class="boiteMain">
+<div class="boiteMain" id="aGriser">
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
@@ -71,15 +72,14 @@
                 $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
                 if ($formation) {
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                    echo '<div class="etudiantPostulant">
-                <div class="illuPostulant">';
+                    echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
+                        <div class="illuPostulant">';
                     echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
                     echo '</div>
-                <div class="nomEtuPostulant">
-                    <h4>';
+                        <div class="nomEtuPostulant">
+                            <h4>';
                     echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h4>";
-                    echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button>
-                    </a>";
+                    echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button></a>";
 
                 } else {
                     echo "
@@ -91,17 +91,17 @@
                 }
             } else {
                 foreach ($listeEtu as $etudiant) {
-                    echo '<div class="etudiantPostulant">
-                <div class="illuPostulant">';
+                    echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
+                        <div class="illuPostulant">';
                     echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
                     echo '</div>
-                <div class="nomEtuPostulant">
-                    <h4>';
+                        <div class="nomEtuPostulant">
+                            <h4>';
                     echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant();
                     $idOffreURl = rawurlencode($offre->getIdOffre());
                     $idURL = rawurlencode($etudiant->getNumEtudiant());
                     echo '</h4>
-                    <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
+                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
                     echo '<button class="boutonAssigner" ';
                     if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                         echo ' id="disabled" disabled';
@@ -121,23 +121,24 @@
                             echo ">Assigner";
                         }
                     }
-                    echo '</button>
-                    </a>
-                </div>
-
-            </div>';
+                    echo '</button></a></div>;
+                </div>';
                 }
             }
-
             ?>
-
         </div>
 
     </div>
 
+</div>
+
 
 </div>
 
+
+<div id="infosEtuCandidat">
+    <p>test</p>
+</div>
 
 </body>
 </html>

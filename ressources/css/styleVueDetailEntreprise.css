@@ -148,7 +148,7 @@ body {
     width: 95%;
     height: 95%;
     border-radius: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .overflowListe2 > ul > li{
@@ -273,10 +273,15 @@ body {
     flex-shrink: 0;
 }
 
+.etudiantPostulant:hover {
+    background-color: #aadcda;
+    cursor: pointer;
+}
+
 .wrapPostulants {
     width: 95%;
     height: 70%;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -392,4 +397,23 @@ body {
     background-color: #ff5660;
     border: none;
     color: white;
+}
+
+#infosEtuCandidat {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    z-index: 100;
+    border: 1px solid black;
 }
