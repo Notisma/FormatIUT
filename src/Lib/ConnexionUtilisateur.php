@@ -52,12 +52,12 @@ class ConnexionUtilisateur
         return null;
     }
 
-    /**
-     * @return string
-     */
-    public static function getCleTypeConnexion(): string
-    {
-        return self::$cleTypeConnexion;
+    public static function getTypeConnecte():?string{
+        if (self::estConnecte()){
+            $session=Session::getInstance();
+            return $session->lire(self::$cleTypeConnexion);
+        }
+        return null;
     }
 
     public static function premiereConnexion(string $login) : void{

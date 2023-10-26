@@ -4,7 +4,7 @@
 </head>
 <body>
 <div class="boiteMain">
-
+    <!-- TODO fixé cette vue -->
     <div class="etudiantInfos">
         <div class="h3centre">
             <h3>Votre Photo de Profil</h3>
