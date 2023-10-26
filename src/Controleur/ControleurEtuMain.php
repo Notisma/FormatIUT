@@ -189,5 +189,6 @@ class ControleurEtuMain extends ControleurMain
         (new LMRepository())->creerObjet($lm);
         (new RegarderRepository())->creerObjet($regarder);
         self::afficherVueDetailOffre();
+        self::postuler();
     }
 }
