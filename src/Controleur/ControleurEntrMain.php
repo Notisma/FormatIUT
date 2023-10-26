@@ -22,7 +22,7 @@ class ControleurEntrMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
             $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
         }
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/vueAccueilEntreprise.php", "titrePage" => "Accueil Entreprise", "listeOffre" => $listeOffre]);
+        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
     }
 
     public static function mesOffres(): void
@@ -34,7 +34,7 @@ class ControleurEntrMain extends ControleurMain
             $_REQUEST["Etat"] = "Tous";
         }
         $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["Etat"]);
-        self::afficherVue("vueGenerale.php", ["titrePage" => "Mes Offres", "chemin" => "Entreprise/vueMesOffres.php", "menu" => self::getMenu(), "type" => $_REQUEST["type"], "listeOffres" => $liste, "Etat" => $_REQUEST["Etat"]]);
+        self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "Etat" => $_REQUEST["Etat"]]);
     }
 
     public static function getMenu(): array
@@ -52,19 +52,19 @@ class ControleurEntrMain extends ControleurMain
     public static function afficherProfilEntr(): void
     {
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        self::afficherVue("vueGenerale.php", ["entreprise" => $entreprise, "menu" => self::getMenu(), "chemin" => "Entreprise/vueCompteEntreprise.php", "titrePage" => "Compte Entreprise"]);
+        self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
     public static function formulaireCreationOffre(): void
     {
-        self::afficherVue("vueGenerale.php", ["menu" => self::getMenu(), "chemin" => "Entreprise/formulaireCreationOffre.php", "titrePage", "titrePage" => "Créer une offre"]);
+        self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php", self::getMenu());
     }
 
     public static function afficherFormulaireModificationOffre(): void
     {
         if (isset($_GET['idOffre'])) {
             $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
-            self::afficherVueDansCorps("Modifier l'offre", "Entreprise/formulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
+            self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
         }
     }
 

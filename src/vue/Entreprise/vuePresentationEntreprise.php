@@ -1,11 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVuePresentationEntreprise.css">
-</head>
-
-<body>
-
-
 <div class="wrapComplet">
 
     <div class="partie1">
@@ -129,10 +121,4 @@
             <h2>MERCI DE REJOINDRE FORMAT'IUT !</h2>
         </div>
     </div>
-
-
 </div>
-</body>
-
-
-</html>

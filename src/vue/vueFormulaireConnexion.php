@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../ressources/css/styleVueFormulaireConnexion.css">
-    <title>Format'IUT</title>
-    <link rel="icon" type="image/png" href="Data/UM.png"/>
-</head>
-<body>
-<p></p>
 <div id="center">
 
     <div id="desc">
@@ -59,7 +49,3 @@
     </div>
 
 </div>
-
-</body>
-</html>
-

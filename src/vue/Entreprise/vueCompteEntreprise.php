@@ -1,10 +1,4 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueCompteEntreprise.css">
-</head>
-<body>
 <div class="boiteMain">
-
     <div class="etudiantInfos">
         <div class="h3centre">
             <h3>Votre Identité Visuelle</h3>
@@ -12,7 +6,7 @@
         <div class="petiteDiv">
             <div class="texteAGauche">
                 <p>Changez votre logo ici :</p>
-                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EntrMain" method="post" >
+                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EntrMain" method="post">
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" name="fic" size=50/>
                     <input type="submit" value="Envoyer"/>
@@ -25,7 +19,7 @@
                 //on affiche le logo de l'entreprise depuis ImageRepository
                 use App\FormatIUT\Modele\Repository\OffreRepository;
 
-                echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg() ).'"/>';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"/>';
                 ?>
                 <!--
                 <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">
@@ -50,15 +44,15 @@
         <div class="infosActu">
             <ul id="infosEntr">
                 <?php
-                $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                echo "<li>Siret : ".$entreprise->getSiret()."</li>
-            <li>Nom : ".$entreprise->getNomEntreprise()."</li>
-            <li>Statut juridique : ".$entreprise->getStatutJuridique()."</li>
-            <li>Effectif : ".$entreprise->getEffectif()."</li>
-            <li>CodeNAF : ".$entreprise->getCodeNaf()."</li>
-            <li>Téléphone : ".$entreprise->getTel()."</li>
-            <li>Adresse : ".$entreprise->getAdresse()."</li>
-            <li>Ville : ".$ville->getNomVille()."</li>
+                $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                echo "<li>Siret : " . $entreprise->getSiret() . "</li>
+            <li>Nom : " . $entreprise->getNomEntreprise() . "</li>
+            <li>Statut juridique : " . $entreprise->getStatutJuridique() . "</li>
+            <li>Effectif : " . $entreprise->getEffectif() . "</li>
+            <li>CodeNAF : " . $entreprise->getCodeNaf() . "</li>
+            <li>Téléphone : " . $entreprise->getTel() . "</li>
+            <li>Adresse : " . $entreprise->getAdresse() . "</li>
+            <li>Ville : " . $ville->getNomVille() . "</li>
             " ?>
             </ul>
 
@@ -78,10 +72,10 @@
 
             <div class="descStat">
                 <h4><?php
-                    $OffresEnLigne=((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                    $nbOffresEnLigne= sizeof($OffresEnLigne);
-                    echo $nbOffresEnLigne." Offre";
-                    if ($nbOffresEnLigne!=1) echo "s";
+                    $OffresEnLigne = ((new OffreRepository())->OffresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                    $nbOffresEnLigne = sizeof($OffresEnLigne);
+                    echo $nbOffresEnLigne . " Offre";
+                    if ($nbOffresEnLigne != 1) echo "s";
                     ?> en ligne
                 </h4>
             </div>
@@ -96,14 +90,14 @@
 
             <div class="descStat">
                 <h4><?php
-                    $nbEtudiant=0;
+                    $nbEtudiant = 0;
                     foreach ($OffresEnLigne as $item) {
-                        $nbEtudiant+=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($item->getIdOffre()));
+                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($item->getIdOffre()));
                     }
-                    $s="";
-                    if ($nbEtudiant!=1) $s="s";
-                    echo $nbEtudiant." étudiant".$s." postultant".$s;
-                ?> </h4>
+                    $s = "";
+                    if ($nbEtudiant != 1) $s = "s";
+                    echo $nbEtudiant . " étudiant" . $s . " postultant" . $s;
+                    ?> </h4>
             </div>
 
         </div>
@@ -120,10 +114,4 @@
         </div>
 
     </div>
-
-
 </div>
-
-
-</body>
-</html>

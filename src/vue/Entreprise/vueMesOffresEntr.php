@@ -1,11 +1,5 @@
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffres.css">
-</head>
-<body>
 <div id="center">
-
     <div class="presentation">
-
         <div class="texteGauche">
 
             <h3>CONSULTEZ TOUTES VOS OFFRES</h3>
@@ -64,8 +58,8 @@
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
-                    $nomHTML=htmlspecialchars($offre->getNomOffre());
-                    echo "<h3>" . $nomHTML. " - " . $offre->getTypeOffre() . "</h3>";
+                    $nomHTML = htmlspecialchars($offre->getNomOffre());
+                    echo "<h3>" . $nomHTML . " - " . $offre->getTypeOffre() . "</h3>";
                     echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
                     echo "<p>" . $offre->getDetailProjet() . "</p>";
                     echo "</div>";
@@ -102,4 +96,3 @@
         </div>
     </div>
 </div>
-</body>

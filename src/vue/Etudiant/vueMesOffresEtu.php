@@ -1,7 +1,3 @@
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffresEtu.css">
-</head>
-<body>
 <div id="center">
 
     <div class="presentation">
@@ -15,14 +11,12 @@
         </div>
     </div>
 
-
     <div class="assistance">
         <h3>ASTUCES</h3>
         <p>Valider une offre dans laquelle vous êtes assigné annule toutes les autres.</p>
     </div>
 
     <div class="wrapOffresEtu">
-
 
         <!-- PARTIE DES OFFRES POSTULEES -->
         <div class="offresEtu">
@@ -135,12 +129,7 @@
                 <!-- code à recopier et compléter pour les offres assignées : -->
                 <!-- une fois que l'offre a été acceptée par l'étudiant, le bouton refuser disparait, et le bouton accepter devient un bouton avec un id=disabled et de texte "acceptée" -->
 
-
             </div>
         </div>
-
     </div>
-
-
 </div>
-</body>

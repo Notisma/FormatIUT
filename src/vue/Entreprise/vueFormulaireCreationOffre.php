@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleFormulaireCreationOffre.css">
-</head>
-<body>
 <div id="center">
     <div class="wrapGauche">
         <img src="../ressources/images/illuEnvoyer.png" alt="illustration d'envoi">
@@ -108,5 +103,3 @@
         </div>
     </div>
 </div>
-</body>
-</html>

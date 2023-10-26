@@ -21,7 +21,7 @@ class ControleurMain
      */
     public static function afficherIndex()
     {
-        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "vueIndex.php", "titrePage" => "Accueil"]);
+        self::afficherVue("Accueil", "vueIndex.php", self::getMenu());
     }
 
     /***
@@ -29,7 +29,7 @@ class ControleurMain
      */
     public static function afficherVuePresentation()
     {
-        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vuePresentationEntreprise.php", "titrePage" => "Accueil Entreprise"]);
+        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
     /***
@@ -47,8 +47,8 @@ class ControleurMain
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                 if ($_REQUEST["controleur"] == "EntrMain") $client = "Entreprise";
                 else $client = "Etudiant";
-                $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
-                self::afficherVue('vueGenerale.php', ["menu" => $menu::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
+                $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
                 $menu::afficherErreur("L'offre n'existe pas");
             }
@@ -57,10 +57,20 @@ class ControleurMain
         }
     }
 
-    public static function afficherVue(string $cheminVue, array $parametres = []): void
+    public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
-        extract($parametres); // Crée des variables à partir du tableau $parametres
-        require __DIR__ . "/../vue/$cheminVue"; // Charge la vue
+        $cssPath = str_replace('vue', 'styleVue', $cheminVue);
+        $cssPath = str_replace('.php', '.css', $cssPath);
+        extract(array_merge(
+            [
+                'titrePage' => $titrePage,
+                'chemin' => $cheminVue,
+                'menu' => $menu,
+                'css' => $cssPath
+            ],
+            $parametres
+        ));
+        require __DIR__ . "/../vue/vueGenerale.php"; // Charge la vue
     }
 
     public static function getMenu(): array
@@ -98,21 +108,9 @@ class ControleurMain
     public static function afficherErreur(string $error): void
     {
         $menu = "App\Formatiut\Controleur\Controleur" . $_REQUEST['controleur'];
-        self::afficherVueDansCorps("Erreur", 'vueErreur.php', $menu::getMenu(), [
+        self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
         ]);
-    }
-
-    protected static function afficherVueDansCorps(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
-    {
-        self::afficherVue("vueGenerale.php", array_merge(
-            [
-                'titrePage' => $titrePage,
-                'chemin' => $cheminVue,
-                'menu' => $menu
-            ],
-            $parametres
-        ));
     }
 
     public static function insertImage($nom)
@@ -137,7 +135,7 @@ class ControleurMain
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
-            if (in_array("F".$id, $listeId)) {
+            if (in_array("F" . $id, $listeId)) {
                 $id++;
             } else {
                 $_REQUEST[$get] = $id;
@@ -145,15 +143,18 @@ class ControleurMain
         }
         return $id;
     }
-    public static function afficherPageConnexion(){
-        self::afficherVue("vueGenerale.php",["titrePage"=>"Se Connecter","menu"=>self::getMenu(),"chemin"=>"vueFormulaireConnexion.php"]);
+
+    public static function afficherPageConnexion()
+    {
+        self::afficherVue("Se Connecter", "vueFormulaireConnexion.php", self::getMenu());
     }
 
-    public static function seConnecter(){
-        if(isset($_REQUEST["login"],$_REQUEST["mdp"])){
-            $user=((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
-            if (!is_null($user)){
-                if ( MotDePasse::verifier($_REQUEST["mdp"],$user->getMdpHache())){
+    public static function seConnecter()
+    {
+        if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
+            $user = ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            if (!is_null($user)) {
+                if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
                     ConnexionUtilisateur::connecter($_REQUEST["login"]);
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
@@ -163,57 +164,62 @@ class ControleurMain
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
-    public static function seDeconnecter() {
+
+    public static function seDeconnecter()
+    {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
         header("Location: controleurFrontal.php");
     }
 
-    public static function validerEmail(){
-        VerificationEmail::traiterEmailValidation($_REQUEST["login"],$_REQUEST["nonce"]);
+    public static function validerEmail()
+    {
+        VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
         self::afficherPageConnexion();
         header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
     }
 
-    public static function redirectionFlash(string $action,string $type,string $message){
-        MessageFlash::ajouter($type,$message);
+    public static function redirectionFlash(string $action, string $type, string $message)
+    {
+        MessageFlash::ajouter($type, $message);
         self::$action();
 
-}
+    }
+
     public static function creerCompteEntreprise()
     {
         //vérification des nombres négatifs
-        if ($_REQUEST["siret"]>0 && $_REQUEST["codePostal"]>0 && $_REQUEST["tel"]>0 && $_REQUEST["effectif"]>0) {
-            $entreprise=(new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
+        if ($_REQUEST["siret"] > 0 && $_REQUEST["codePostal"] > 0 && $_REQUEST["tel"] > 0 && $_REQUEST["effectif"] > 0) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
             //vérification de doublon de Siret
             if (is_null($entreprise)) {
-                $liste=((new EntrepriseRepository())->getListeObjet());
+                $liste = ((new EntrepriseRepository())->getListeObjet());
                 foreach ($liste as $entreprise) {
-                    $listeMail[]=$entreprise->getEmail();
+                    $listeMail[] = $entreprise->getEmail();
                 }
                 //vérification de doublon de mail
-                if (!in_array($_REQUEST["email"],$listeMail)) {
+                if (!in_array($_REQUEST["email"], $listeMail)) {
                     //concordance des mots de passe
                     if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
-                        if (strlen($_REQUEST["mdp"])>=8) {
+                        if (strlen($_REQUEST["mdp"]) >= 8) {
                             $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
                             (new EntrepriseRepository())->creerObjet($entreprise);
                             VerificationEmail::envoiEmailValidation($entreprise);
                             header("Location: controleurFrontal.php");
-                        }else {
-                            self::redirectionFlash("afficherVuePresentation","warning","Le mot de passe doit faire plus de 7 caractères");
+                        } else {
+                            self::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                         }
                     } else {
                         self::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
                     }
-                }else{
-                    self::redirectionFlash("afficherVuePresentation","warning","L'adresse mail est déjà utilisée");
+                } else {
+                    self::redirectionFlash("afficherVuePresentation", "warning", "L'adresse mail est déjà utilisée");
                 }
-            }else {
-                self::redirectionFlash("afficherVuePresentation","danger","Le SIRET est déjà utilisé");
+            } else {
+                self::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
             }
         } else {
-            self::redirectionFlash("afficherVuePresentation","danger","Des données sont érronées");
+            self::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
         }
     }
 }

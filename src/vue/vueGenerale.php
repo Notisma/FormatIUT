@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../ressources/css/vueGeneraleStyle.css">
-    <?php
-    echo "<title>Format'IUT - {$titrePage}</title>"
-    ?>
+    <link rel="stylesheet" href="../ressources/css/<?=$css?>">
+    <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png"/>
 </head>
 <body>
 
-
 <div class="couleur">
-
 
     <div id="headerContent">
         <div id="texteAccueil">
@@ -20,7 +17,6 @@
             echo "<h1>{$titrePage}</h1>";
             ?>
         </div>
-
 
         <div class="wrapHead">
             <div id="Gestionrecherche">
@@ -59,25 +55,23 @@
                 echo "</div>
         <div id='profil'>
         <a href='{$liaison}'>";
-                echo '<img id="petiteIcone" src="' . $src . '"/></a>
+                echo '<img id="petiteIcone" src="' . $src . '" alt="petite icone"/></a>
         </div>'; ?>
 
                 <div class="flash">
                     <?php
                     //solutionTemporaire
-                    if (!isset($_REQUEST["controleur"]) || $_REQUEST["controleur"]!="EtuMain"){
+                    if (!isset($_REQUEST["controleur"]) || $_REQUEST["controleur"] != "EtuMain") {
                         //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
                         foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
                             echo "<div class='alert alert-" . $type . "'>";
-                            echo "<img src='../ressources/images/".$type.".png'>";
-                            echo'<p>' . $lireMessage . '</p></div>'
-                            ;
+                            echo "<img src='../ressources/images/" . $type . ".png'>";
+                            echo '<p>' . $lireMessage . '</p></div>';
                         }
                     }
                     ?>
                 </div>
             </div>
-
 
         </div>
 
@@ -89,7 +83,7 @@
                     if ($item['label'] == $titrePage) {
                         $actuel = "id='active'";
                     }
-                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
+                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                 }
                 ?>
             </div>
@@ -127,7 +121,7 @@
             </div>
         </div>
         <div id="footerLogo">
-            <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo">
+            <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo" alt="grand logo footer">
             <h2>© 2023 - Format'IUT</h2>
         </div>
     </div>

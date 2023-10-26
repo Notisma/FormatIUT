@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueDetailEtudiant.css">
-</head>
-<body>
 <div class="boiteMain">
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
@@ -129,7 +124,3 @@
 
 
 </div>
-
-
-</body>
-</html>

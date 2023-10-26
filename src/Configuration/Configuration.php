@@ -14,10 +14,10 @@ class Configuration
 
     static private array $config = array(
         'hostname' => 'localhost',
-        'database' => 'loyet',
+        'database' => 'sae',
         'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
+        'login' => 'notisma',
+        'password' => ''
     );
 
     public static function getHostname(): string
@@ -47,7 +47,7 @@ class Configuration
 
     public static function getAbsoluteURL()
     {
-        return"http://localhost/SAE_DEV/web/controleurFrontal.php";
+        return "http://localhost/SAE_DEV/web/controleurFrontal.php";
     }
 
 }

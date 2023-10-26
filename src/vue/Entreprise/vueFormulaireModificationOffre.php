@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueFormulaireModificationOffre.css">
-</head>
-<body>
 <div id="center">
     <div class="wrapDroite">
         <form method="post" action="../web/controleurFrontal.php">
@@ -87,5 +82,3 @@
 
     </div>
 </div>
-</body>
-</html>
