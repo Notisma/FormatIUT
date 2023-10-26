@@ -6,6 +6,7 @@ use App\FormatIUT\Modele\Repository\CVRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\LMRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
@@ -182,7 +183,12 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function deposerLM(): void{
-        $fileName = $_FILES[""]
+        $fileName = $_FILES["ficLM"]["name"];
+        var_dump($fileName);
+        $fileData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        (new RegarderRepository())->deposerLM(self::$cleEtudiant, $_GET["idOffre"], $fileName);
+        (new LMRepository())->deposerLM($fileName, $fileData);
+        self::afficherVueDetailOffre();
     }
 
 }

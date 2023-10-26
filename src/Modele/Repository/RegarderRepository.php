@@ -93,4 +93,12 @@ class RegarderRepository extends AbstractRepository {
         $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre, "cvTag"=>$cv);
         $pdoStatement->execute($values);
     }
+
+    public function deposerLM($numEtudiant, $idOffre, $lm): void
+    {
+        $sql='UPDATE '.$this->getNomTable().' SET lm_id=:lmTag WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre, "lmTag"=>$lm);
+        $pdoStatement->execute($values);
+    }
 }
