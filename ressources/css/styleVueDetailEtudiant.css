@@ -506,17 +506,65 @@ body {
 
 .mainPopup > form {
     width: 90%;
-    height: 25%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 3%;
+    border: #ff5660 1px solid;
+
+}
+
+.mainPopup > form > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ff9095;
+    padding: 5%;
+}
+
+.contenuDepot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.imagesDepot {
+    width: 20%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: space-around;
+    background-color: white;
     border-radius: 10px;
-    background-color: #ff9095;
 }
 
-.mainPopup > form > label {
+.imagesDepot > img {
+    width: 50%;
+}
+
+.imagesDepot > p {
+    font-size: 0.5em;
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
+}
+
+
+
+.mainPopup > form > div > label {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
