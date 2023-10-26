@@ -4,21 +4,21 @@ namespace App\FormatIUT\Modele\DataObject;
 
 class LM extends AbstractDataObject
 {
-    private int $idLM;
+    private string $idLM;
     private string $contenuLM;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdLM(): int
+    public function getIdLM(): string
     {
         return $this->idLM;
     }
 
     /**
-     * @param int $idLM
+     * @param string $idLM
      */
-    public function setIdLM(int $idLM): void
+    public function setIdLM(string $idLM): void
     {
         $this->idLM = $idLM;
     }
@@ -39,7 +39,7 @@ class LM extends AbstractDataObject
         $this->contenuLM = $contenuLM;
     }
 
-    public function __construct(int $idLM, string $contenuLM)
+    public function __construct(string $idLM, string $contenuLM)
     {
         $this->idLM = $idLM;
         $this->contenuLM = $contenuLM;

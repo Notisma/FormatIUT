@@ -27,11 +27,5 @@ class LMRepository extends AbstractRepository
         return new LM($DataObjectTableau['idLM'], $DataObjectTableau['contenuLM']);
     }
 
-    public function deposerLM($idLM, $contenuLM): void{
-        $sql='INSERT INTO '.$this->getNomTable().' VALUES (idLM=:idLMTag , contenuLM=:contenuLMTag)';
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("idLMTag"=>$idLM, "contenuLMTag"=>$contenuLM);
-        $pdoStatement->execute($values);
-    }
 
 }

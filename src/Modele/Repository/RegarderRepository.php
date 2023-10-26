@@ -12,11 +12,11 @@ class RegarderRepository extends AbstractRepository {
 
     public function getNomsColonnes(): array
     {
-        return ["numEtudiant", "idOffre", "Etat", "cv_id"];
+        return ["numEtudiant", "idOffre", "Etat", "cv_id", "lm_id"];
     }
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
-        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat']);
+        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat'], $DataObjectTableau['cv_id'], $DataObjectTableau['lm_id']);
     }
     public function getClePrimaire(): string
     {
@@ -83,22 +83,6 @@ class RegarderRepository extends AbstractRepository {
             "tagEtu"=>$numEtudiant,
             "tagOffre"=>$idOffre
         );
-        $pdoStatement->execute($values);
-    }
-
-    public function deposerCV($numEtudiant, $idOffre, $cv): void
-    {
-        $sql='UPDATE '.$this->getNomTable().' SET cv_id=:cvTag WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre, "cvTag"=>$cv);
-        $pdoStatement->execute($values);
-    }
-
-    public function deposerLM($numEtudiant, $idOffre, $lm): void
-    {
-        $sql='UPDATE '.$this->getNomTable().' SET lm_id=:lmTag WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ';
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("tagEtu"=>$numEtudiant, "tagOffre"=>$idOffre, "lmTag"=>$lm);
         $pdoStatement->execute($values);
     }
 }

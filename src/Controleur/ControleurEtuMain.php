@@ -2,6 +2,9 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\CV;
+use App\FormatIUT\Modele\DataObject\LM;
+use App\FormatIUT\Modele\DataObject\Regarder;
 use App\FormatIUT\Modele\Repository\CVRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -174,21 +177,17 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-    public static function deposerCV(): void{
-        $fileName = $_FILES["fic"]["name"];
-        $fileData = file_get_contents($_FILES["fic"]["tmp_name"]);
-        (new RegarderRepository())->deposerCV(self::$cleEtudiant, $_GET["idOffre"], $fileName);
-        (new CVRepository())->deposerCV($fileName, $fileData);
+    public static function deposerFichiers(): void{
+        $cvName = $_FILES["fic"]["name"];
+        $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        $lmName = $_FILES["ficLM"]["name"];
+        $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        $regarder = new Regarder(self::$cleEtudiant, $_GET["idOffre"], "En attente", $cvName,  $lmName);
+        $cv = new CV($cvName, $cvData);
+        $lm = new LM($lmName, $lmData);
+        (new CVRepository())->creerObjet($cv);
+        (new LMRepository())->creerObjet($lm);
+        (new RegarderRepository())->creerObjet($regarder);
         self::afficherVueDetailOffre();
     }
-
-    public static function deposerLM(): void{
-        $fileName = $_FILES["ficLM"]["name"];
-        var_dump($fileName);
-        $fileData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-        (new RegarderRepository())->deposerLM(self::$cleEtudiant, $_GET["idOffre"], $fileName);
-        (new LMRepository())->deposerLM($fileName, $fileData);
-        self::afficherVueDetailOffre();
-    }
-
 }

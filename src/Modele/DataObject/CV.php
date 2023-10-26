@@ -4,21 +4,21 @@ namespace App\FormatIUT\Modele\DataObject;
 
 class CV extends AbstractDataObject
 {
-    private int $idCV;
+    private string $idCV;
     private string $contenuCV;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getIdCV(): int
+    public function getIdCV(): string
     {
         return $this->idCV;
     }
 
     /**
-     * @param int $idCV
+     * @param string $idCV
      */
-    public function setIdCV(int $idCV): void
+    public function setIdCV(string $idCV): void
     {
         $this->idCV = $idCV;
     }
@@ -39,7 +39,7 @@ class CV extends AbstractDataObject
         $this->contenuCV = $contenuCV;
     }
 
-    public function __construct(int $idCV, string $contenuCV)
+    public function __construct(string $idCV, string $contenuCV)
     {
         $this->idCV = $idCV;
         $this->contenuCV = $contenuCV;
