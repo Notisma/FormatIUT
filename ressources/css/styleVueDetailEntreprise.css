@@ -406,14 +406,156 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 80%;
     background-color: white;
     border-radius: 10px;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     z-index: 100;
     border: 1px solid black;
+}
+
+#infosEtuCandidat > h1 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+#infosEtuCandidat > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    text-align: center;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.detailsEtu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    width: 95%;
+    height: 40%;
+    background-color: #ff9095;
+    border-radius: 10px;
+    margin-top: 2%;
+}
+
+.PPEtu {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.PPEtu > img {
+    width: 70%;
+}
+
+.infosEtu {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    justify-content: center;
+}
+
+.infosEtu > h2 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin : 0;
+}
+
+.infosEtu > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+}
+
+.infosEtu > p {
+    font-family: "Open Sans extra", sans-serif;
+    line-height: 1.5em;
+    margin: 0;
+}
+
+.infosEtu > p > span {
+    font-weight: bold;
+}
+
+.wrapBoutonsDoc {
+    width: 95%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.wrapBoutonsDoc > a {
+    width: 60%;
+    height: 30%;
+    text-decoration: none;
+}
+
+.boutonDoc {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #4bc2bc;
+    color: white;
+    padding: 3%;
+}
+
+.boutonDoc:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+.wrapActions {
+    width: 95%;
+    height: 9%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.wrapActions > a {
+    width: 40%;
+    height: 80%;
+    text-decoration: none;
+}
+
+.boutonAction {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    padding: 3%;
+}
+
+.boutonAction:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
 }
