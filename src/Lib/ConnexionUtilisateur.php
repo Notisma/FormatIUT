@@ -31,7 +31,11 @@ class ConnexionUtilisateur
     {
         // À compléter
         $session=Session::getInstance();
+        if (self::getTypeConnecte()=="Etudiant"){
+            ConnexionLdap::deconnexion();
+        }
         $session->supprimer(self::$cleConnexion);
+
     }
 
     public static function getLoginUtilisateurConnecte(): ?string
@@ -63,8 +67,8 @@ class ConnexionUtilisateur
     public static function premiereConnexion(string $login) : void{
         if (!(new EtudiantRepository())->estEtudiant($login)){
             //afficherPopUp pour informations
-            // en attendant :
-            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login);
+            $infos=ConnexionLdap::getInfoPersonne();
+            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login,"nomEtudiant"=>$infos["nom"],"prenomEtudiant"=>$infos["prenom"],"mailUniversitaire"=>$infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
 
         }
