@@ -4,17 +4,18 @@
 // récupère en paramètre un login et un mot de passse, se connecte à ldap et vérifie que le mot de passe est correct pour ce login, puis écrit en json sur la page toutes les informations
 if (isset($_REQUEST["login"],$_REQUEST["mdp"],$_REQUEST["action"],$_REQUEST["cle"])) {
     if (rawurldecode($_REQUEST["cle"])==ControleurConnexionLdap::getCleIndex()) {
-        ControleurConnexionLdap::connexion();
-        if (ControleurConnexionLdap::userExist($_REQUEST["login"])) {
-            if (ControleurConnexionLdap::verifLDap($_REQUEST["login"], $_REQUEST["mdp"])) {
-                $infos = ControleurConnexionLdap::getInfoPersonne($_REQUEST["login"]);
-                echo json_encode($infos);
+            ControleurConnexionLdap::connexion();
+            if (ControleurConnexionLdap::userExist($_REQUEST["login"])) {
+                if (ControleurConnexionLdap::verifLDap($_REQUEST["login"], $_REQUEST["mdp"])) {
+                    $infos = ControleurConnexionLdap::getInfoPersonne($_REQUEST["login"]);
+                    echo json_encode($infos);
+                } else {
+                    echo json_encode("Mot de passe incorrect");
+                }
             } else {
-                echo json_encode("Mot de passe incorrect");
+                echo json_encode("Utilisateur inconnu");
             }
-        } else {
-            echo json_encode("Utilisateur inconnu");
-        }
+            ldap_close(\App\FormatIUT\Configuration\ConfigurationLdap::getConn());
     }
 }
 class ControleurConnexionLdap
