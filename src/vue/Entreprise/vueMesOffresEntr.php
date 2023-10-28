@@ -23,11 +23,11 @@
                 <form>
                     <?php
                     echo '<input type="submit" name="Etat" value="Tous" class="offre" ';
-                    if ($Etat == "Tous") echo 'id="typeActuel" disabled';
+                    if ($Etat == "Tous") echo 'id="etatActuel" disabled';
                     echo '><input type="submit" name="Etat" value="Dispo" class="stage" ';
-                    if ($Etat == "Dispo") echo 'id="typeActuel" disabled';
+                    if ($Etat == "Dispo") echo 'id="etatActuel" disabled';
                     echo '><input type="submit" name="Etat" value="Assigné" class="alternance" ';
-                    if ($Etat == "Assigné") echo 'id="typeActuel" disabled';
+                    if ($Etat == "Assigné") echo 'id="etatActuel" disabled';
                     echo '>';
                     echo '<input type="hidden" name="type" value="' . $_REQUEST["type"] . '">'
                     ?>
@@ -65,7 +65,7 @@
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                     echo "<div class='divInfo' id='wrapLogo'>";
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo">';
                     echo "</div>";
                     echo "<div class='divInfo' id='nbPostu'>";
                     echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";

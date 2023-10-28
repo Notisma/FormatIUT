@@ -354,7 +354,7 @@ body {
     justify-content: center;
 }
 
-.statut {
+.statut, .valide {
     width: 90%;
     height: 90%;
     border-radius: 10px;
@@ -379,7 +379,7 @@ body {
     width: 65%;
 }
 
-#valide {
+.valide {
     background-color: #a6ffaa;
 }
 

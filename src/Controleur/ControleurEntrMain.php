@@ -62,9 +62,11 @@ class ControleurEntrMain extends ControleurMain
 
     public static function afficherFormulaireModificationOffre(): void
     {
-        if (isset($_GET['idOffre'])) {
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_GET['idOffre']);
+        if (isset($_REQUEST['idOffre'])) {
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
             self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
+        } else {
+            self::afficherErreur("Une offre devrait être renseignée");
         }
     }
 

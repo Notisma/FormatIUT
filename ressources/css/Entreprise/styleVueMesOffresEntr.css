@@ -139,7 +139,7 @@ body {
     background-color: #ff9095;
 }
 
-#typeActuel {
+#typeActuel, #etatActuel {
     background-color: white;
     color: black;
     cursor: not-allowed;

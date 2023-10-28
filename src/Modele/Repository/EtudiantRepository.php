@@ -32,7 +32,6 @@ class   EtudiantRepository extends AbstractRepository
             $DataObjectTableau["prenomEtudiant"],
             $DataObjectTableau["nomEtudiant"],
             $DataObjectTableau["loginEtudiant"],
-            $DataObjectTableau["mdpEtudiant"],
             $DataObjectTableau["sexeEtu"],
             $DataObjectTableau["mailUniversitaire"],
             $DataObjectTableau["mailPerso"],
@@ -43,7 +42,6 @@ class   EtudiantRepository extends AbstractRepository
             $DataObjectTableau["codeEtape"],
             $DataObjectTableau["idResidence"],
             $image["img_blob"]
-
         );
     }
 

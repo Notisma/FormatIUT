@@ -277,12 +277,13 @@ body {
     margin-bottom: 0;
 }
 
-.actionsRapidesEntr > a {
-    margin: 5%;
+.actionsRapidesEntr > form {
     width: 90%;
 }
 
-
+.actionsRapidesEntr > form > button {
+    margin: 5% 0;
+}
 
 
 .listeEtudiantsPostulants {
@@ -390,7 +391,7 @@ body {
 
 .boutonAssigner {
     width: 100%;
-    height: 100%;
+    height: 25%;
     border-radius: 50px;
     border: none;
     background-color: #ff5660;

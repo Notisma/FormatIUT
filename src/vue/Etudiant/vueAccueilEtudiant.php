@@ -16,7 +16,7 @@
 
     <div class="notifications">
         <h4>Vos Notifications :</h4>
-        <!-- affichage d'un erreur pour dire qu'il n'y a pas de notifications -->
+        <!-- affichage d'une erreur pour dire qu'il n'y a pas de notifications -->
         <div class="wrapErreur">
             <img src="../ressources/images/erreur.png" alt="image d'erreur" class="imageErreur">
             <h4>Aucune notification pour le moment.</h4>
@@ -37,10 +37,10 @@
                         $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
                         $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
-                        echo '<a href =' . $lien . ' >
+                        echo '<a href ="' . $lien . '">
                     <div class="imagesAnnonce" >';
-                        echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"/>
-                    </div >
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="pp entreprise">
+                    </div>
                     <div class="texteAnnonce" >
                         <h4 >';
                         echo $entreprise->getNomEntreprise();

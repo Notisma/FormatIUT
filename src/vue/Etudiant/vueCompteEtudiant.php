@@ -7,16 +7,13 @@
             <div class="texteAGauche">
                 <p>Changez votre photo ici :</p>
                 <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" name="fic" size=500/>
-                    <input type="submit" value="Envoyer"/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                    <input type="file" name="fic" size="500">
+                    <input type="submit" value="Envoyer">
                 </form>
             </div>
             <div class="imageEtu">
-                <?php
-                //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
-                ?>
+                <?= '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '" alt="profile_pic etudiant">'; ?>
             </div>
         </div>
     </div>
@@ -96,10 +93,6 @@
             <div class="descStat">
                 <h4>0 documents ou contrats archivés</h4>
             </div>
-
         </div>
-
     </div>
-
-
 </div>

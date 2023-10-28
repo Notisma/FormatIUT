@@ -63,7 +63,7 @@
                         //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
                         foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
                             echo "<div class='alert alert-" . $type . "'>";
-                            echo "<img src='../ressources/images/" . $type . ".png'>";
+                            echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
                             echo '<p>' . $lireMessage . '</p></div>';
                         }
                     }

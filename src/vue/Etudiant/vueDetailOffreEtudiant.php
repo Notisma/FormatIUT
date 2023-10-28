@@ -34,7 +34,7 @@
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="pp entreprise">';
                                 ?>
                             </div>
                             <div class="right">
@@ -53,27 +53,27 @@
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
-        <?php
-        echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
-                <button class="boutonAssigner" ';
-        $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_REQUEST['idOffre']));
-        if (is_null($formation)) {
-            if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_REQUEST['idOffre'])) {
-                    $bool = true;
-                }
-            }
-        }
-        if (!$bool) {
-            echo 'id="disabled" disabled';
-        }
 
-        ?>
-        >POSTULER</button></a>
-        <a href='?action=afficherAccueilEtu&controleur=EtuMain'>
-            <button class='boutonAssigner'>RETOUR</button>
-        </a>
+        <form method="post">
+            <button type="submit" class="boutonAssigner"
+                    formaction="?controleur=EtuMain&action=postuler&idOffre=<?= rawurlencode($offre->getIdOffre()) ?>" <?php
+            $peutPostuler = false;
+            if (is_null((new FormationRepository())->estFormation($_REQUEST['idOffre']))
+                && !(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())
+                && !(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_REQUEST['idOffre'])) {
+                $peutPostuler = true;
+            }
+            if (!$peutPostuler) {
+                echo 'id="disabled" disabled';
+            }
+            ?>
+            >POSTULER
+            </button>
+
+            <button type="submit" class="boutonAssigner" formaction="?action=afficherMesOffres&controleur=EtuMain">
+                RETOUR
+            </button>
+        </form>
     </div>
 
 

@@ -35,31 +35,21 @@
         </div>
     </div>
 
-
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
-        <?php
-        if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-            echo '
-        <form>
-            <button type="submit" class="boutonAssigner">SUPPRIMER L\'OFFRE</button>
-            <input type="hidden" name="controleur" value="EntrMain">
-            <input type="hidden" name="action" value="supprimerOffre">
+        <form method="post">
+            <?php
+            if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
+                echo '
             <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
-        </form>
-        <form>
-            <button type="submit" class="boutonAssigner">MODIFIER L\'OFFRE</button>
-            <input type="hidden" name="controleur" value="EntrMain">
-            <input type="hidden" name="action" value="afficherFormulaireModificationOffre">
-            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
-        </form>
+        
+            <button type="submit" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
+            
+            <button type="submit" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
         ';
-        }
-        ?>
-        <form>
-            <button type="submit" class="boutonAssigner">RETOUR</button>
-            <input type="hidden" name="controleur" value="EntrMain">
-            <input type="hidden" name="action" value="mesOffres">
+            }
+            ?>
+            <button type="submit" class="boutonAssigner" formaction="?action=mesOffres&controleur=EntrMain">RETOUR</button>
         </form>
     </div>
 

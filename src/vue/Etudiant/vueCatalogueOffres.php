@@ -44,17 +44,17 @@
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
-                    echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
+                    echo "<h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>";
                     echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
-                    echo "<p>" . $offre->getDetailProjet() . "</p>";
-                    echo "</div>";
-                    echo "<div class='partieDroite'>";
-                    echo "<div class='divInfo' id='wrapLogo'>";
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
-                    echo "</div>";
-                    echo "<div class='divInfo' id='nbPostu'>";
-                    echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
-                    echo "<p>";
+                    echo "<p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
+                        </div>
+                        <div class='partieDroite'>
+                        <div class='divInfo'>
+                        <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                        </div>
+                        <div class='divInfo'>
+                        <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
+                        <p>";
                     if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
                         $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
                         echo $nb . " postulation";
@@ -62,10 +62,10 @@
                     } else {
                         echo "Assignée";
                     }
-                    echo "</p>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
+                    echo "</p>
+                    </div>
+                    </div>
+                    </a>";
                 }
             } else {
                 echo "<p>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</p>";

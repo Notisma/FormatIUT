@@ -31,7 +31,6 @@
 
                 <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
 
-
                 <label class="labelFormulaire" for="typeOffre">Type d'Offre</label>
                 <div class="inputCentre">
                     <select name="typeOffre" id="typeOffre">
@@ -40,11 +39,6 @@
                     </select>
                 </div>
 
-                <!--
-                <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Stage"
-                       required>Stage
-                <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Alternance">Alternance
-                -->
                 <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required

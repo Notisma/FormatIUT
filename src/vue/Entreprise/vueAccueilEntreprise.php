@@ -73,7 +73,7 @@
                 $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $listeOffre[$i]->getIdOffre();
                 echo '<a href="' . $lien . '" class="annonceEntreprise">
                 <div class="imgAnnonce">
-                    <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">
+                    <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">
                 </div>
                 <div class="wrapTexte">
                     <h4>';
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="statutAnnonceEntr">
-                    <div class="statut" id="valide">
+                    <div class="valide">
                         <img src="../ressources/images/verifie.png" alt="image" class="imagesStatut">
                         <p class="petitTexte">Offre publiée.</p>
                     </div>
