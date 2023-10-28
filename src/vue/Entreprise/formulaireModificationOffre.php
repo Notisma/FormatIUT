@@ -1,14 +1,10 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../ressources/css/styleFormulaireCreationOffre.css">
+    <link rel="stylesheet" href="../ressources/css/styleVueFormulaireModificationOffre.css">
 </head>
 <body>
 <div id="center">
     <div class="wrapDroite">
-        <a href="?controleur=EntrMain&action=afficherFormulaireModificationOffre&idOffre=<?= $offre->getIdOffre() ?>">
-            <button>Revenir sur les changements</button>
-        </a>
-
         <form method="post" action="../web/controleurFrontal.php">
             <h1>MODIFIEZ VOTRE OFFRE ICI</h1>
 
@@ -81,6 +77,9 @@
             </div>
 
             <div class="boutonsForm">
+                <a href="?controleur=EntrMain&action=afficherFormulaireModificationOffre&idOffre=<?= $offre->getIdOffre() ?>">
+                    <button>Réinitialiser</button>
+                </a>
                 <input type="hidden" name="idOffre" value="<?= $offre->getIdOffre() ?>"/>
                 <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain"/>
             </div>
