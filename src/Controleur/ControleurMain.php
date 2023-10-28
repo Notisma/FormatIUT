@@ -243,8 +243,11 @@ class ControleurMain
             }
             //vérification de doublon de mail
             if (in_array($_REQUEST["mail"], $listeMail)) {
-                $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["email"]);
+                $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["mail"]);
+                $entreprise->setNonce(MotDePasse::genererChaineAleatoire());
+                (new EntrepriseRepository())->modifierObjet($entreprise);
                 VerificationEmail::EnvoyerMailMdpOublie($entreprise);
+                self::afficherIndex();
             }
         }
     }

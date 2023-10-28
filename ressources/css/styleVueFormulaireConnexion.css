@@ -676,6 +676,25 @@ input {
         margin-top: 5%;
         height: 25%;
     }
+    #form > form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .oublié {
+        font-family: "Open Sans extra", sans-serif;
+        font-size: 1em;
+        color: black;
+        margin: 0;
+    }
+
+    .oublié:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }
 
 

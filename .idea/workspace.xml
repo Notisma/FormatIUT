@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEntrMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueFormulaireConnexion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "mdpOubliés__premièresConnexions",
+    "git-widget-placeholder": "Connexion__via__ldap",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/MAMP/htdocs/SAE_DEV",
     "list.type.of.created.stylesheet": "CSS",

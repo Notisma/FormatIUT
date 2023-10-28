@@ -70,16 +70,4 @@ class EntrepriseRepository extends AbstractRepository
         return $this->construireDepuisTableau($objet);
     }
 
-    public function getEntrepriseParMail(string $mail){
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE  email=:Tag ";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $mail);
-        $pdoStatement->execute($values);
-        $objet = $pdoStatement->fetch();
-        if (!$objet) {
-            return null;
-        }
-        return $this->construireDepuisTableau($objet);
-    }
-
 }
