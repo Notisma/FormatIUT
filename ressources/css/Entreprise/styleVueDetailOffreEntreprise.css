@@ -219,7 +219,7 @@ body {
     margin-bottom: 0;
 }
 
-.actionsRapidesEntr > a {
+.actionsRapidesEntr > form {
     margin: 5%;
     width: 90%;
 }

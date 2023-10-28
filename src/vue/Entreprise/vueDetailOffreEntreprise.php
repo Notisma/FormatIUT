@@ -40,19 +40,27 @@
         <h3>Actions Rapides</h3>
         <?php
         if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-            echo "<a href='?controleur=EntrMain&action=supprimerOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
-            <button class='boutonAssigner'>SUPPRIMER L'OFFRE</button>
-        </a>
-        <a href='?controleur=EntrMain&action=afficherFormulaireModificationOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
-            <button class='boutonAssigner'>MODIFIER L'OFFRE</button>
-        </a>
-        ";
-
+            echo '
+        <form>
+            <button type="submit" class="boutonAssigner">SUPPRIMER L\'OFFRE</button>
+            <input type="hidden" name="controleur" value="EntrMain">
+            <input type="hidden" name="action" value="supprimerOffre">
+            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
+        </form>
+        <form>
+            <button type="submit" class="boutonAssigner">MODIFIER L\'OFFRE</button>
+            <input type="hidden" name="controleur" value="EntrMain">
+            <input type="hidden" name="action" value="afficherFormulaireModificationOffre">
+            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
+        </form>
+        ';
         }
         ?>
-        <a href='?action=mesOffres&controleur=EntrMain'>
-            <button class='boutonAssigner'>RETOUR</button>
-        </a>
+        <form>
+            <button type="submit" class="boutonAssigner">RETOUR</button>
+            <input type="hidden" name="controleur" value="EntrMain">
+            <input type="hidden" name="action" value="mesOffres">
+        </form>
     </div>
 
 

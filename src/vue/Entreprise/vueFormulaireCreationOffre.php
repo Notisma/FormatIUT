@@ -31,14 +31,15 @@
 
                 <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
 
-                <label class="labelFormulaire" for="type_id">Type d'Offre </label>
 
+                <label class="labelFormulaire" for="typeOffre">Type d'Offre</label>
                 <div class="inputCentre">
-                    <select name="typeOffre">
-                        <option value="Stage" name="typeOffre" id="type_id">Stage</option>
-                        <option value="Alternance" name="typeOffre" id="type_id">Alternance</option>
+                    <select name="typeOffre" id="typeOffre">
+                        <option value="Stage">Stage</option>
+                        <option value="Alternance">Alternance</option>
                     </select>
                 </div>
+
                 <!--
                 <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Stage"
                        required>Stage
@@ -76,25 +77,25 @@
                 <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="gratification" id="gratification_id"
-                           placeholder="420" required maxlength="4">
+                           placeholder="420" required min="1" max="9999">
                 </div>
 
                 <label class="labelFormulaire" for="dureeHeures_id">Durée en heure</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="dureeHeures" id="dureeHeures_id"
-                           placeholder="935" required maxlength="4">
+                           placeholder="935" required min="1" max="9999">
                 </div>
 
                 <label class="labelFormulaire" for="jourParSemaine_id">Nombre de jours par Semaine</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="joursParSemaine" id="jourParSemaine_id"
-                           placeholder="5" required maxlength="1">
+                           placeholder="5" required min="1" max="6">
                 </div>
 
                 <label class="labelFormulaire" for="nbHeureHebdo_id">Nombre d'heures Hebdomadaires</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="nbHeuresHebdo" id="nbHeureHebdo_id"
-                           placeholder="32" required maxlength="2">
+                           placeholder="32" required min="1" max="99">
                 </div>
                 <div class="boutonsForm">
                     <input type="submit" value="Envoyer" formaction="?action=creerOffre&controleur=EntrMain">

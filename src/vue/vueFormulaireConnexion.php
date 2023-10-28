@@ -11,11 +11,7 @@
                 MONTPELLIER-SETE</p>
             <!-- <p>Vous êtes une entreprise et voulez faire une proposition de stage ou d'alternance ?</p> -->
         </div>
-        <div id="boutonCentre">
-            <a href="proposition.html"><input id="boutonredirect" type="button" value="CONSULTER"></a>
-        </div>
     </div>
-
 
     <div id="formulaire">
         <div id="form">

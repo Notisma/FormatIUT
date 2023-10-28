@@ -9,7 +9,6 @@
         <img src="../ressources/images/bienvenueChezNous.png" alt="image entreprise">
     </div>
 
-
     <div class="partie2">
         <div class="sousCategorie" id="SC1">
             <div>

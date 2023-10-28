@@ -1,7 +1,7 @@
 <div class="boiteMain">
     <div class="conteneurErreur">
         <div class="image">
-            <img src="../ressources/images/annuler.png" alt="imageErreur">
+            <img src="../ressources/images/erreur.png" alt="imageErreur">
         </div>
         <div class="texte">
             <h2>Erreur <?php
