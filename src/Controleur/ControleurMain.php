@@ -155,11 +155,12 @@ class ControleurMain
     public static function seConnecter(): void
     {
         if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
-            $user = ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            $user = ((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
+            var_dump($user);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
                     if (VerificationEmail::aValideEmail($user)) {
-                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Entreprise");
+                        ConnexionUtilisateur::connecter($user->getSiret(), "Entreprise");
                         MessageFlash::ajouter("success", "Connexion Réussie");
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                         exit();
