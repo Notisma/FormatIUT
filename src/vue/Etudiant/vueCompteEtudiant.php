@@ -1,4 +1,3 @@
- <html>
 <head>
     <link rel="stylesheet" href="../ressources/css/styleVueCompteEtudiant.css">
 </head>
@@ -12,7 +11,7 @@
         <div class="petiteDiv">
             <div class="texteAGauche">
                 <p>Changez votre photo ici :</p>
-                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post" >
+                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post">
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" name="fic" size=500/>
                     <input type="submit" value="Envoyer"/>
@@ -20,8 +19,8 @@
             </div>
             <div class="imageEtu">
                 <?php
-                //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($entreprise->getImgId());
-                echo '<img src"data:image/jpeg;base64,' . base64_encode($image->getImg()).'"/>';
+                //$image=(new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage($etudiant->getImgId());
+                //echo '<img src"data:image/jpeg;base64,' . base64_encode($image->getImg()) . '"/>';
                 ?>
             </div>
         </div>
@@ -45,14 +44,14 @@
             <ul id="infosEtu">
                 <?php
                 echo "
-            <li>Prénom : ".$etudiant->getPrenomEtudiant()."</li>
-            <li>Nom : ".$etudiant->getNomEtudiant()."</li>
-            <li>Login : ".$etudiant->getLogin()."</li>
-            <li>Numéro Etudiant : ".$etudiant->getNumEtudiant()."</li>
-            <li>Mail universitaire : ".$etudiant->getMailUniersitaire()."</li>
-            <li>Téléphone : ".$etudiant->getTelephone()."</li>
-            <li>Groupe : ".$etudiant->getGroupe()."</li>
-            <li>Parcours : ".$etudiant->getParcours()."</li>
+            <li>Prénom : " . $etudiant->getPrenomEtudiant() . "</li>
+            <li>Nom : " . $etudiant->getNomEtudiant() . "</li>
+            <li>Login : " . $etudiant->getLogin() . "</li>
+            <li>Numéro Etudiant : " . $etudiant->getNumEtudiant() . "</li>
+            <li>Mail universitaire : " . $etudiant->getMailUniersitaire() . "</li>
+            <li>Téléphone : " . $etudiant->getTelephone() . "</li>
+            <li>Groupe : " . $etudiant->getGroupe() . "</li>
+            <li>Parcours : " . $etudiant->getParcours() . "</li>
             " ?>
             </ul>
 
@@ -73,9 +72,9 @@
 
             <div class="descStat">
                 <h4><?php
-                    $nb=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(),"En Attente"));
-                    echo $nb." Postulation";
-                    if ($nb!=1) echo "s";
+                    $nb = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(), "En Attente"));
+                    echo $nb . " Postulation";
+                    if ($nb != 1) echo "s";
                     ?>
 
                     en attente d'assignation</h4>
@@ -91,9 +90,9 @@
 
             <div class="descStat">
                 <h4><?php
-                    $nb=((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(),"A Choisir"));
-                    echo $nb." assignation";
-                    if ($nb!=1) echo "s";
+                    $nb = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(), "A Choisir"));
+                    echo $nb . " assignation";
+                    if ($nb != 1) echo "s";
                     ?> en attente de choix</h4>
             </div>
 
@@ -115,6 +114,4 @@
 
 </div>
 
-
 </body>
-</html>
