@@ -16,9 +16,9 @@ class Configuration
         'hostname' => 'localhost',
         'database' => 'loyet',
         'port' => '3306',
-        'login' => 'root',
-        //'password' => 'gfsGnT!!hSSfE88.'
-        'password'=>'root'
+        'login' => 'loyet',
+        'password' => 'gfsGnT!!hSSfE88.'
+        //'password'=>'root'
     );
 
     public static function getHostname(): string

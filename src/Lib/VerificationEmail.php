@@ -42,10 +42,13 @@ class VerificationEmail
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
         $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&controleur=Main&login=$siretURL&nonce=$nonceURL";
-        $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
+        $corpsEmail = "<p>Ceci est un test !</p><a href=\"$lienValidationEmail\">MODIFIER LE MOT DE PASSE</a> <p>J'aime la saé !</p>";
 
         // Temporairement avant d'envoyer un vrai mail
-        mail($entreprise->getEmail(),"Validation Mot de Passe",$corpsEmail,"From: FormatIUT");
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+        mail($entreprise->getEmail(),"Réinitialisation de mot de passe",self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail),"From: formatiut@gmail.com", implode("\r\n", $headers));
 
         MessageFlash::ajouter("info", $corpsEmail);
     }
@@ -68,5 +71,36 @@ class VerificationEmail
         // À compléter
         if ($entreprise->getEmail()!="") return true;
         return false;
+    }
+
+
+    public static function squeletteCorpsMail(String $titre, String $message) : String {
+        return '
+        <html lang="fr">
+            <head>
+                <link rel="stylesheet" href="../ressources/css/styleMail.css">
+            </head>
+            <body>
+               <div class="wrapHeadMail">
+                   <div>
+                      <img src="../ressources/images/logo_IUT.png" alt="logo IUT" class="logoIUT">
+                        <h1>FormatIUT</h1>        
+                   </div>
+                   <div>
+                      <h1>' . $titre . ' - FormatIUT</h1>
+                   </div>
+               </div>           
+                  
+</div>
+            
+            
+     
+                <div class="corpsMessage">
+                    ' . $message . '
+                    <h3>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</h3>
+                </div>
+            </body>
+        </html>
+        ';
     }
 }
