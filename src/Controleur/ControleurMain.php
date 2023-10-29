@@ -171,7 +171,7 @@ class ControleurMain
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
-                ControleurEtuMain::afficherAccueilEtu();
+                header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
                 exit();
             }
         }
