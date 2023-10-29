@@ -168,7 +168,7 @@ class ControleurMain
                     }
                 }
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"],"connexion")) {
-                ConnexionUtilisateur::connecter($_REQUEST['login'], "Etudiant");
+                ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
                 ControleurEtuMain::afficherAccueilEtu();

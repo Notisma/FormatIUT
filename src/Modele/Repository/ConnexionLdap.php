@@ -62,8 +62,10 @@ class ConnexionLdap
         return array(
             "nom" => self::$infosUser[1],
             "prenom" => self::$infosUser[3],
-            "Annee" => self::$infosUser[5],
-            "mail" => self::$infosUser[7]
+            "mail" => self::$infosUser[5],
+            "type" =>self::$infosUser[7],
+            "Annee" => self::$infosUser[9],
+
         );
 
     }

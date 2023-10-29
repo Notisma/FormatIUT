@@ -103,10 +103,13 @@ class ControleurConnexionLdap
         self::connexion();
         $search = ldap_search(self::getConn(), self::getBasedn(), "(uid=$login)");
         $resultats = ldap_get_entries(self::getConn(), $search);
+        $dn=explode(",",$resultats[0]["dn"]);
         $infos=array(
             $nomprenom = explode(" ", $resultats[0]["displayname"][0]),
+            $resultats[0]["mail"][0],
+            explode("=",$dn[sizeof($dn)-6])[1],
             $promotion = explode("=", explode(",", $resultats[0]["dn"])[1])[1],
-            $resultats[0]["mail"][0]
+
         );
         return $infos;
     }
