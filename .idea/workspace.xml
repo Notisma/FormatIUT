@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Améliorations de code et corrections">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Merge OK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vuePresentationEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vuePresentationEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +168,7 @@
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698165307716" duration="4265000" />
       <workItem from="1698213151700" duration="632000" />
-    </task>
-    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
-      <option name="closed" value="true" />
-      <created>1696698095999</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1696698095999</updated>
+      <workItem from="1698601161221" duration="886000" />
     </task>
     <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
       <option name="closed" value="true" />
@@ -566,7 +554,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698213681233</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Merge OK">
+      <option name="closed" value="true" />
+      <created>1698503838598</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1698503838598</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,7 +630,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
@@ -659,7 +654,8 @@
     <MESSAGE value="fix problème de git (encore)" />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Améliorations de code et corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Améliorations de code et corrections" />
+    <MESSAGE value="Merge OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge OK" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
