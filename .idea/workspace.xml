@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Merge OK">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées de corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,15 +169,7 @@
       <workItem from="1697704415446" duration="313000" />
       <workItem from="1698165307716" duration="4265000" />
       <workItem from="1698213151700" duration="632000" />
-      <workItem from="1698601161221" duration="886000" />
-    </task>
-    <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
-      <option name="closed" value="true" />
-      <created>1696700847363</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1696700847363</updated>
+      <workItem from="1698601161221" duration="1864000" />
     </task>
     <task id="LOCAL-00044" summary="Encore un bug de git">
       <option name="closed" value="true" />
@@ -562,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698503838598</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Avancées de corrections">
+      <option name="closed" value="true" />
+      <created>1698610989063</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1698610989064</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +631,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
@@ -655,7 +655,8 @@
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Améliorations de code et corrections" />
     <MESSAGE value="Merge OK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge OK" />
+    <MESSAGE value="Avancées de corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avancées de corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
