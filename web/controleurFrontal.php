@@ -29,7 +29,7 @@ if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
             \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
-        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiant") {
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
             \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","veuillez vous connecter");
         } else {
             $nomClasseControleur::$action();
