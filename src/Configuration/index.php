@@ -9,13 +9,14 @@ if (isset($_REQUEST["login"],$_REQUEST["mdp"],$_REQUEST["action"],$_REQUEST["cle
                 if (ControleurConnexionLdap::verifLDap($_REQUEST["login"], $_REQUEST["mdp"])) {
                     $infos = ControleurConnexionLdap::getInfoPersonne($_REQUEST["login"]);
                     echo json_encode($infos);
+                    echo json_encode("Valider");
                 } else {
                     echo json_encode("Mot de passe incorrect");
                 }
             } else {
                 echo json_encode("Utilisateur inconnu");
             }
-            ldap_close(\App\FormatIUT\Configuration\ConfigurationLdap::getConn());
+            ldap_close(ControleurConnexionLdap::getConn());
     }
 }
 class ControleurConnexionLdap
@@ -36,6 +37,7 @@ class ControleurConnexionLdap
         if (self::userExist($login)) {
             if (self::verifLDap($login, $password)) {
                 $infos = self::getInfoPersonne($login);
+                echo "Valider";
                 echo json_encode($infos);
             } else {
                 echo json_encode("Mot de passe incorrect");
@@ -65,9 +67,18 @@ class ControleurConnexionLdap
         $user_exist = $user_result["count"] == 1;
         $passwd_ok=false;
 // si l’utilisateur existe bien,
+        foreach (explode(",",$user_result[0]["dn"]) as $item) {
+            if (strstr($item,"ou=")){
+                $ou[]=$item;
+            }
+        }
         //que pour Ann2 pour l'instant
         if ($user_exist) {
-            $dn = "uid=".$login.",ou=Ann2,ou=Etudiants,ou=people,dc=info,dc=iutmontp,dc=univ-montp2,dc=fr";
+            $dn = "uid=".$login.",";
+            foreach ($ou as $item) {
+                $dn.=$item.",";
+            }
+            $dn.="dc=info,dc=iutmontp,dc=univ-montp2,dc=fr";
             $passwd_ok = ldap_bind(self::getConn(), $dn, $password);
         }
         return $passwd_ok;

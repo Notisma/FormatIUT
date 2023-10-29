@@ -158,12 +158,16 @@ class ControleurMain
             $user = ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Entreprise");
-                    MessageFlash::ajouter("success", "Connexion Réussie");
-                    header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
-                    exit();
+                    if (VerificationEmail::aValideEmail($user)) {
+                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Entreprise");
+                        MessageFlash::ajouter("success", "Connexion Réussie");
+                        header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
+                        exit();
+                    }else {
+                        echo "HAHAH";
+                    }
                 }
-            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"])) {
+            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"],"connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], "Etudiant");
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);

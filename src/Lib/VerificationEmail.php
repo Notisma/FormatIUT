@@ -18,6 +18,7 @@ class VerificationEmail
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail
+        mail($entreprise->getEmail(),"Validation Mot de Passe",$corpsEmail,"From: FormatIUT");
         MessageFlash::ajouter("info", $corpsEmail);
     }
 
@@ -44,6 +45,8 @@ class VerificationEmail
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail
+        mail($entreprise->getEmail(),"Validation Mot de Passe",$corpsEmail,"From: FormatIUT");
+
         MessageFlash::ajouter("info", $corpsEmail);
     }
     public static function traiterEmailMdpOublie($login, $nonce): bool
