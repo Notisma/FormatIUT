@@ -37,20 +37,19 @@ class VerificationEmail
         }
         return false;
     }
-    public static function EnvoyerMailMdpOublie(Entreprise $entreprise){
-        $siretURL = rawurlencode($entreprise->getEmail());
+    public static function EnvoyerMailMdpOublie(Entreprise $entreprise): void
+    {
+        $mailURL = rawurlencode($entreprise->getEmail());
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
-        $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&controleur=Main&login=$siretURL&nonce=$nonceURL";
-        $corpsEmail = "<p>Ceci est un test !</p><a href=\"$lienValidationEmail\">MODIFIER LE MOT DE PASSE</a> <p>J'aime la saé !</p>";
-
-        // Temporairement avant d'envoyer un vrai mail
+        $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&controleur=Main&login=$mailURL&nonce=$nonceURL";
+        $corpsEmail = "<h2>Vous avez demandé la réinitialisation de votre mot de passe de l'application Format'IUT.</h2><p>Cliquez sur le lien ci-dessous pour réinitialisez votre mot de passe.</p><a href=\"$lienValidationEmail\">MODIFIER LE MOT DE PASSE</a> <p>L'équipe de Format'IUT vous souhaite une bonne journée !</p>";
         $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+        $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
-        mail($entreprise->getEmail(),"Réinitialisation de mot de passe",self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail),"From: formatiut@gmail.com", implode("\r\n", $headers));
+        mail($entreprise->getEmail(),"Reinitialisation de mot de passe",self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
 
-        MessageFlash::ajouter("info", $corpsEmail);
+        MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
     public static function traiterEmailMdpOublie($login, $nonce): bool
     {
@@ -78,12 +77,12 @@ class VerificationEmail
         return '
         <html lang="fr">
             <head>
-                <link rel="stylesheet" href="../ressources/css/styleMail.css">
+                <link rel="stylesheet" href="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/css/styleMail.css">
             </head>
             <body>
                <div class="wrapHeadMail">
                    <div>
-                      <img src="../ressources/images/logo_IUT.png" alt="logo IUT" class="logoIUT">
+                      <img src="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/LogoIutMontpellier-removed.png">
                         <h1>FormatIUT</h1>        
                    </div>
                    <div>
