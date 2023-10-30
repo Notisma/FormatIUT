@@ -48,6 +48,7 @@ class VerificationEmail
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
         mail($entreprise->getEmail(),"Reinitialisation de mot de passe",self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
+        mail("formatiut@gmail.com", "reset mdp", "l'entreprise ".$mailURL." a demandé un reset de mdp", implode("\r\n", $headers));
 
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
@@ -74,19 +75,39 @@ class VerificationEmail
 
 
     public static function squeletteCorpsMail(String $titre, String $message) : String {
+        $police = "'Oswald'";
         return '
         <html lang="fr">
             <head>
                 <link rel="stylesheet" href="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/css/styleMail.css">
             </head>
-            <body>
-               <div class="wrapHeadMail">
-                   <div>
-                      <img src="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/LogoIutMontpellier-removed.png">
+            <body style="height: 100%;
+    width: 100%;">
+               <div class="wrapHeadMail" style="display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    width: 100%;">
+                   <div style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;">
+                      <img src="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/LogoIutMontpellier-removed.png" style="width: 70%;">
                         <h1>FormatIUT</h1>        
                    </div>
-                   <div>
-                      <h1>' . $titre . ' - FormatIUT</h1>
+                   <div style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;">
+                      <h1 style="font-family: '. $police .', sans-serif;
+    color: #ff5660;
+    margin-top: 3%;
+    letter-spacing: 0.04em;">' . $titre . ' - FormatIUT</h1>
                    </div>
                </div>           
                   
@@ -94,9 +115,17 @@ class VerificationEmail
             
             
      
-                <div class="corpsMessage">
+                <div class="corpsMessage" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 100%;">
                     ' . $message . '
-                    <h3>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</h3>
+                    <h3 style="font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    margin-top: 3%;
+    letter-spacing: 0.04em;">Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</h3>
                 </div>
             </body>
         </html>

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Avancées sur les mails">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Affichage des mails réussi, quelques erreurs persistent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleMail.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleMail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,15 +170,7 @@
       <workItem from="1698165307716" duration="4265000" />
       <workItem from="1698213151700" duration="632000" />
       <workItem from="1698601161221" duration="4436000" />
-      <workItem from="1698658465851" duration="2497000" />
-    </task>
-    <task id="LOCAL-00046" summary="Tentative de fix un bug (j'ai échoué mdr)">
-      <option name="closed" value="true" />
-      <created>1696705439768</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1696705439769</updated>
+      <workItem from="1698658465851" duration="4862000" />
     </task>
     <task id="LOCAL-00047" summary="Merge de branches">
       <option name="closed" value="true" />
@@ -563,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698614484787</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Affichage des mails réussi, quelques erreurs persistent">
+      <option name="closed" value="true" />
+      <created>1698661888517</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1698661888517</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,7 +632,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Je répare ce que je peux" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
     <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
@@ -656,7 +656,8 @@
     <MESSAGE value="Avancées de corrections" />
     <MESSAGE value="Corrections de crash" />
     <MESSAGE value="Avancées sur les mails" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avancées sur les mails" />
+    <MESSAGE value="Affichage des mails réussi, quelques erreurs persistent" />
+    <option name="LAST_COMMIT_MESSAGE" value="Affichage des mails réussi, quelques erreurs persistent" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
