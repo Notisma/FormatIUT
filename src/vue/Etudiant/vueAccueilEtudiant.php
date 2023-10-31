@@ -3,12 +3,12 @@
     <link rel="stylesheet" href="../ressources/css/styleVueAccueilEtudiant.css">
 </head>
 <body>
-<div class="conteneurPrincipal">
+<div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3>Bonjour, <?php
-                $etudiant=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
-                echo $etudiant->getLogin();
+                $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+                echo $etudiant->getPrenomEtudiant();
                 ?></h3>
 
             <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
@@ -40,11 +40,11 @@
                 {
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
                         $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
-                        $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
+                        $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
                         echo '<a href =' . $lien . ' >
                     <div class="imagesAnnonce" >';
-                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'"/>
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"/>
                     </div >
                     <div class="texteAnnonce" >
                         <h4 >';
@@ -76,7 +76,7 @@
                                 <div class="libelleAnnonce" >
                                     <img src = "../ressources/images/emploi.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        $nomHTML=htmlspecialchars($listeStage[$i]->getNomOffre());
+                        $nomHTML = htmlspecialchars($listeStage[$i]->getNomOffre());
                         echo $nomHTML;
                         echo '</p >
                                 </div >
@@ -87,10 +87,10 @@
                     }
                     return array($i, $entreprise, $lien);
                 }
-                if(empty($listeStage)){
+
+                if (empty($listeStage)) {
                     echo "Vide";
-                }
-                else list($i, $entreprise, $lien) = extracted($listeStage);
+                } else list($i, $entreprise, $lien) = extracted($listeStage);
                 ?>
 
             </div>
@@ -98,14 +98,22 @@
         <div class="nouveautesAltern">
             <h4>Nouveautés Alternances de la semaine :</h4>
             <div class="conteneurAnnonces">
-                <?php if (empty($listeAlternance)){
+                <?php if (empty($listeAlternance)) {
                     echo "Vide";
-                }
-                else list($i, $entreprise, $lien) = extracted($listeAlternance);
+                } else list($i, $entreprise, $lien) = extracted($listeAlternance);
                 ?>
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
+
+
+<div class="premiereCo" id="popupPremiereCo">
+<p></p>
+</div>
+
+
+
 </body>
 </html>

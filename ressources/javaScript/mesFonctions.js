@@ -14,7 +14,6 @@ function fermerPopupDepotCV_LM() {
 }
 
 
-
 const monHref = document.getElementById("ouvrir");
 monHref.addEventListener("click", afficherPopupMdp);
 
@@ -27,4 +26,17 @@ function afficherPopupMdp() {
 function fermerPopupMdp() {
     document.getElementById("popupMdp").style.display = "none";
     document.getElementById("center").style.opacity = "1";
+}
+
+
+function afficherPopupPremiereCo(indice) {
+    document.getElementById("popupPremiereCo").style.display = "flex";
+    document.getElementById("conteneurPrincipal").style.opacity = "0.3";
+    for (let i = 0; i < document.getElementById("popupPremiereCo").children.length; i++) {
+        if (i === indice) {
+            document.getElementById("popupPremiereCo").children[i].style.display = "flex";
+        } else {
+            document.getElementById("popupPremiereCo").children[i].style.display = "none";
+        }
+    }
 }
