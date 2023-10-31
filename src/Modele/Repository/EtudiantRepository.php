@@ -16,7 +16,7 @@ class EtudiantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","mdpEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
+        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
     }
 
     protected function getClePrimaire(): string
@@ -32,7 +32,6 @@ class EtudiantRepository extends AbstractRepository
             $DataObjectTableau["prenomEtudiant"],
             $DataObjectTableau["nomEtudiant"],
             $DataObjectTableau["loginEtudiant"],
-            $DataObjectTableau["mdpEtudiant"],
             $DataObjectTableau["sexeEtu"],
             $DataObjectTableau["mailUniversitaire"],
             $DataObjectTableau["mailPerso"],
@@ -52,7 +51,7 @@ class EtudiantRepository extends AbstractRepository
      * rajoute dans la BD un étudiant qui postule à une offre
      */
     public function EtudiantPostuler( $numEtu, $numOffre){
-        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente', '1')";
+        $sql="INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente', '1', '1')";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array(
             "TagEtu"=>$numEtu,

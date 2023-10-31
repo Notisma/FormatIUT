@@ -76,7 +76,7 @@
                 <p>
                     <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
                 <div class="grandInputCentre">
-                    <textarea class="inputFormulaire" name="objectifOffre" id="objStage_id"
+                    <textarea class="inputFormulaire" name="objfOffre" id="objStage_id"
                               required maxlength="255"></textarea>
                 </div>
                 </p>

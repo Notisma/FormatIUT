@@ -40,13 +40,12 @@ class Etudiant extends AbstractDataObject
      * @param string $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, string $mdpEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
         $this->nomEtudiant = $nomEtudiant;
         $this->loginEtudiant = $loginEtudiant;
-        $this->mdpEtudiant = $mdpEtudiant;
         $this->sexeEtu = $sexeEtu;
         $this->mailUniersitaire = $mailUniersitaire;
         $this->mailPerso = $mailPerso;
@@ -230,7 +229,6 @@ class Etudiant extends AbstractDataObject
             "prenomEtudiant",$this->prenomEtudiant,
             "nomEtudiant"=>$this->nomEtudiant,
             "loginEtudiant"=>$this->loginEtudiant,
-            "mdpEtudiant"=>$this->mdpEtudiant,
             "sexeEtu"=>$this->sexeEtu,
             "mailUniversitaire"=>$this->mailUniersitaire,
             "mailPerso"=>$this->mailPerso,

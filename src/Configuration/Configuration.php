@@ -16,7 +16,7 @@ class Configuration
         'hostname'=>'localhost',
         'database'=>'loyet',
         'login'=>'loyet',
-        'password'=>'26032004',
+        'password'=>'gfsGnT!!hSSfE88.',
         'port' =>'3306'
     );
 

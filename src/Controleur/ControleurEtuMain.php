@@ -4,6 +4,7 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -89,7 +90,7 @@ class ControleurEtuMain extends ControleurMain
                             (new RegarderRepository())->validerOffreEtudiant(self::$cleEtudiant, $idOffre);
                             $offre = ((new OffreRepository())->getObjectParClePrimaire($idOffre));
                             $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->ListeIdTypeFormation()), "idFormation");
-                            $formation = (new FormationRepository())->construireDepuisTableau(["idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateCreation(), "Y-m-d"), "dateFin" => date_format($offre->getDateTransmission(), 'Y-m-d'), "idEtudiant" => self::$cleEtudiant, "idEntreprise" => $offre->getSiret(), "idOffre" => $idOffre, "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
+                            $formation = (new FormationRepository())->construireDepuisTableau(["idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateDebut(), "Y-m-d"), "dateFin" => date_format($offre->getDateFin(), 'Y-m-d'), "idEtudiant" => self::$cleEtudiant, "idEntreprise" => $offre->getSiret(), "idOffre" => $idOffre, "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
                             (new FormationRepository())->creerObjet($formation);
                             self::afficherMesOffres();
                         } else {
@@ -183,8 +184,15 @@ class ControleurEtuMain extends ControleurMain
         );
         $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
         if (!$convention) {
-            $menu[] = array("image" => "", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
-            $menu[] = array("image" => "", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
+            $offreValidee = (new RegarderRepository())->getOffreValider(self::$cleEtudiant);
+            var_dump($offreValidee);
+            if ($offreValidee) {
+                $offre = (new OffreRepository())->getObjectParClePrimaire($offreValidee->getIdOffre());
+                if ($offre->getTypeOffre() == "Stage")
+                    $menu[] = array("image" => "", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
+                else if ($offre->getTypeOffre() == "Alternance")
+                    $menu[] = array("image" => "", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
+            }
         } else {
             $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
