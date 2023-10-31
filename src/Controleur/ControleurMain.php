@@ -253,6 +253,8 @@ class ControleurMain
                 (new EntrepriseRepository())->modifierObjet($entreprise);
                 VerificationEmail::EnvoyerMailMdpOublie($entreprise);
                 self::afficherIndex();
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "warning", "Cette adresse mail n'existe pas");
             }
         }
     }

@@ -29,7 +29,7 @@
 
                 $liaison = "";
                 $src = "";
-                if ($titrePage == "Accueil" || $titrePage == "Erreur") {
+                if ($titrePage == "Accueil" || $titrePage == "Erreur" || !isset($_REQUEST['controleur'])) {
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
                 } else if (ucfirst($_REQUEST['controleur']) == 'EntrMain') {
