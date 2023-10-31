@@ -59,11 +59,6 @@ class Regarder extends AbstractDataObject{
         $this->Etat = $Etat;
     }
 
-    /**
-     * @return string
-     */
-
-
 
     public function __construct(float $numEtudiant, int $idOffre, string $Etat, string $cv, string $lettre)
     {
