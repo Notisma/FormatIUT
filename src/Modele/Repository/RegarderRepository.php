@@ -12,11 +12,11 @@ class RegarderRepository extends AbstractRepository {
 
     public function getNomsColonnes(): array
     {
-        return ["numEtudiant", "idOffre", "Etat", "cv_id", "lm_id"];
+        return ["numEtudiant", "idOffre", "Etat", "cv", "lettre"];
     }
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
-        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat'], $DataObjectTableau['cv_id'], $DataObjectTableau['lm_id']);
+        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat'], $DataObjectTableau['cv'], $DataObjectTableau['lettre']);
     }
     public function getClePrimaire(): string
     {

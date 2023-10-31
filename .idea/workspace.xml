@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="j'essaye de déposer un cv ça tourne mal (explications)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="correction du dépot des cv et des lettres">
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +168,7 @@
       <workItem from="1698165307716" duration="4265000" />
       <workItem from="1698213151700" duration="632000" />
       <workItem from="1698437688291" duration="2272000" />
+      <workItem from="1698759456400" duration="499000" />
     </task>
     <task id="LOCAL-00044" summary="Encore un bug de git">
       <option name="closed" value="true" />
@@ -531,13 +530,13 @@
       <option name="project" value="LOCAL" />
       <updated>1697982173161</updated>
     </task>
-    <task id="LOCAL-00089" summary="Correction de crash">
+    <task id="LOCAL-00089" summary="correction du dépot des cv et des lettres">
       <option name="closed" value="true" />
-      <created>1698213500864</created>
+      <created>1698759599465</created>
       <option name="number" value="00089" />
       <option name="presentableId" value="LOCAL-00089" />
       <option name="project" value="LOCAL" />
-      <updated>1698213500864</updated>
+      <updated>1698759599465</updated>
     </task>
     <task id="LOCAL-00090" summary="Améliorations de code et corrections">
       <option name="closed" value="true" />
@@ -563,7 +562,7 @@
       <option name="project" value="LOCAL" />
       <updated>1698351503605</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,8 +630,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
-    <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
@@ -662,7 +659,8 @@
     <MESSAGE value="Début des travaux sur popup infos étudiants (controleurEntrMain)" />
     <MESSAGE value="je peux enfin me connecter sur mon pc" />
     <MESSAGE value="j'essaye de déposer un cv ça tourne mal (explications)" />
-    <option name="LAST_COMMIT_MESSAGE" value="j'essaye de déposer un cv ça tourne mal (explications)" />
+    <MESSAGE value="correction du dépot des cv et des lettres" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction du dépot des cv et des lettres" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
