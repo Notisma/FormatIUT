@@ -189,15 +189,9 @@ class ControleurEtuMain extends ControleurMain
 
     public static function deposerFichiers(): void
     {
-        $cvName = $_FILES["fic"]["name"];
         $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
-        $lmName = $_FILES["ficLM"]["name"];
         $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-        $regarder = new Regarder(self::$cleEtudiant, $_GET["idOffre"], "En attente", $cvName, $lmName);
-        $cv = new CV($cvName, $cvData);
-        $lm = new LM($lmName, $lmData);
-        (new CVRepository())->creerObjet($cv);
-        (new LMRepository())->creerObjet($lm);
+        $regarder = new Regarder(self::$cleEtudiant, $_GET["idOffre"], "En attente", $cvData, $lmData);
         (new RegarderRepository())->creerObjet($regarder);
         self::afficherVueDetailOffre();
         self::postuler();

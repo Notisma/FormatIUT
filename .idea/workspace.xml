@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Début des travaux sur popup infos étudiants (controleurEntrMain)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="j'essaye de déposer un cv ça tourne mal (explications)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueDetailEntreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -516,7 +515,7 @@
       <option name="project" value="LOCAL" />
       <updated>1697540830638</updated>
     </task>
-    <task id="LOCAL-00087" summary="essais de connexion ldab depuis local">
+    <task id="LOCAL-00087" summary="je peux enfin me connecter sur mon pc">
       <option name="closed" value="true" />
       <created>1698163360877</created>
       <option name="number" value="00087" />
@@ -524,13 +523,13 @@
       <option name="project" value="LOCAL" />
       <updated>1698163360877</updated>
     </task>
-    <task id="LOCAL-00088" summary="fix problème de git (encore)">
+    <task id="LOCAL-00088" summary="j'essaye de déposer un cv ça tourne mal (explications)">
       <option name="closed" value="true" />
-      <created>1698178534582</created>
+      <created>1697982173160</created>
       <option name="number" value="00088" />
       <option name="presentableId" value="LOCAL-00088" />
       <option name="project" value="LOCAL" />
-      <updated>1698178534582</updated>
+      <updated>1697982173161</updated>
     </task>
     <task id="LOCAL-00089" summary="Correction de crash">
       <option name="closed" value="true" />
@@ -564,7 +563,7 @@
       <option name="project" value="LOCAL" />
       <updated>1698351503605</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,6 +631,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
+    <MESSAGE value="Correction de crash" />
+    <MESSAGE value="Correction" />
+    <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
@@ -657,7 +660,9 @@
     <MESSAGE value="Améliorations de code et corrections" />
     <MESSAGE value="Améliorations popup dépôt CV et LM" />
     <MESSAGE value="Début des travaux sur popup infos étudiants (controleurEntrMain)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Début des travaux sur popup infos étudiants (controleurEntrMain)" />
+    <MESSAGE value="je peux enfin me connecter sur mon pc" />
+    <MESSAGE value="j'essaye de déposer un cv ça tourne mal (explications)" />
+    <option name="LAST_COMMIT_MESSAGE" value="j'essaye de déposer un cv ça tourne mal (explications)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

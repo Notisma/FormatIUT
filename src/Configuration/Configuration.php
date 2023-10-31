@@ -16,7 +16,7 @@ class Configuration
 
     static private array $config = array(
         'hostname' => 'localhost',
-        'database' => 'loyet',
+        'database' => 'devapplicationformatiut',
         'port' => '3306',
         'login' => 'root',
         'password' => 'root'
