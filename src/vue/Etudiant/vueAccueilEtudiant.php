@@ -1,6 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="../ressources/css/styleVueAccueilEtudiant.css">
+    <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body>
 <div class="conteneurPrincipal" id="conteneurPrincipal">
@@ -108,11 +109,35 @@
     </div>
 </div>
 
+<!-- apeller cette fonction pour afficher le popup : afficherPopupPremiereCo(0) -->
+<div class="premiereCo" id="popupPremiereCo" onclick="afficherPopupPremiereCo(0)">
 
-<div class="premiereCo" id="popupPremiereCo">
-<p></p>
-</div>
+    <div id="0" class="enfant">
+        <div class="imagePremiereCo">
+            <img src="../ressources/images/0.png" alt="image">
+            <h2>COMPLETEZ VOTRE PROFIL AVANT DE COMMENCER</h2>
+        </div>
+        <div class="contenuPremiereCo">
+            <h3>Pour avoir plus de visibilité pour les entreprises</h3>
+            <p>En quelques clics, complétez votre profil, puis démarrez l'aventure Format'IUT !</p>
 
+            <div class="wrapBoutons">
+                <a href="?action=seDeconnecter&controleur=EtuMain">RETOUR</a>
+                <a onclick="afficherPopupPremiereCo(1)">SUIVANT</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="1" class="enfant">
+        <div class="imagePremiereCo">
+
+        </div>
+        <div class="contenuePremiereCo">
+            <p>blabla</p>
+        </div>
+    </div>
+
+    </div>
 
 
 </body>
