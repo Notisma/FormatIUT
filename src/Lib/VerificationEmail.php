@@ -1,4 +1,5 @@
 <?php
+
 namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Configuration\Configuration;
@@ -18,16 +19,16 @@ class VerificationEmail
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail
-        mail($entreprise->getEmail(),"Validation Mot de Passe",$corpsEmail,"From: FormatIUT");
+        mail($entreprise->getEmail(), "Validation Mot de Passe", $corpsEmail, "From: FormatIUT");
         MessageFlash::ajouter("info", $corpsEmail);
     }
 
     public static function traiterEmailValidation($login, $nonce): bool
     {
         // À compléter
-        $user =(new EntrepriseRepository())->getObjectParClePrimaire($login);
-        if (!is_null($user)){
-            if ($user->formatTableau()["nonce"]==$nonce){
+        $user = (new EntrepriseRepository())->getObjectParClePrimaire($login);
+        if (!is_null($user)) {
+            if ($user->formatTableau()["nonce"] == $nonce) {
                 $user->setEmail($user->getEmailAValider());
                 $user->setEmailAValider("");
                 $user->setNonce("");
@@ -37,6 +38,7 @@ class VerificationEmail
         }
         return false;
     }
+
     public static function EnvoyerMailMdpOublie(Entreprise $entreprise): void
     {
         $mailURL = rawurlencode($entreprise->getEmail());
@@ -47,17 +49,18 @@ class VerificationEmail
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
-        mail($entreprise->getEmail(),"Reinitialisation de mot de passe",self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
-        mail("formatiut@gmail.com", "reset mdp", "l'entreprise ".$mailURL." a demandé un reset de mdp", implode("\r\n", $headers));
+        mail($entreprise->getEmail(), "Reinitialisation de mot de passe", self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
+        mail("formatiut@gmail.com", "reset mdp", "l'entreprise " . $mailURL . " a demandé un reset de mdp", implode("\r\n", $headers));
 
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
+
     public static function traiterEmailMdpOublie($login, $nonce): bool
     {
         // À compléter
-        $user =(new EntrepriseRepository())->getObjectParClePrimaire($login);
-        if (!is_null($user)){
-            if ($user->formatTableau()["nonce"]==$nonce){
+        $user = (new EntrepriseRepository())->getObjectParClePrimaire($login);
+        if (!is_null($user)) {
+            if ($user->formatTableau()["nonce"] == $nonce) {
 
                 (new EntrepriseRepository())->modifierObjet($user);
                 return true;
@@ -66,20 +69,28 @@ class VerificationEmail
         return false;
     }
 
-    public static function aValideEmail(Entreprise $entreprise) : bool
+    public static function aValideEmail(Entreprise $entreprise): bool
     {
         // À compléter
-        if ($entreprise->getEmail()!="") return true;
+        if ($entreprise->getEmail() != "") return true;
         return false;
     }
 
 
-    public static function squeletteCorpsMail(String $titre, String $message) : String {
+    public static function squeletteCorpsMail(string $titre, string $message): string
+    {
         $police = "'Oswald'";
+        $apostrophe = "'";
         return '
         <html lang="fr">
             <head>
                 <link rel="stylesheet" href="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/css/styleMail.css">
+                <style>
+                @font-face {
+                    font-family: "Oswald";
+                    src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");                
+                }
+            </style>
             </head>
             <body style="height: 100%;
     width: 100%;">
@@ -104,7 +115,7 @@ class VerificationEmail
     align-items: center;
     height: 100%;
     width: 50%;">
-                      <h1 style="font-family: '. $police .', sans-serif;
+                      <h1 style="font-family: ' . $police . ', sans-serif;
     color: #ff5660;
     margin-top: 3%;
     letter-spacing: 0.04em;">' . $titre . ' - FormatIUT</h1>
@@ -122,10 +133,7 @@ class VerificationEmail
     height: 70%;
     width: 100%;">
                     ' . $message . '
-                    <h3 style="font-family: "Oswald", sans-serif;
-    color: #ff5660;
-    margin-top: 3%;
-    letter-spacing: 0.04em;">Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</h3>
+                    <h3>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</h3>
                 </div>
             </body>
         </html>
