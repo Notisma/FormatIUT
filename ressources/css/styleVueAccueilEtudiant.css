@@ -197,13 +197,13 @@ body {
     margin-top: 2%;
     margin-bottom: 2%;
     font-family: "Oswald", sans-serif;
-    letter-spacing : 0.03em;
+    letter-spacing: 0.03em;
 }
 
 .nouveautesAltern > h4 {
     margin-top: 2%;
     font-family: "Oswald", sans-serif;
-    letter-spacing : 0.03em;
+    letter-spacing: 0.03em;
 }
 
 .imagesAnnonce {
@@ -268,7 +268,7 @@ body {
     margin-top: 2%;
     margin-bottom: 2%;
     font-family: "Oswald", sans-serif;
-    letter-spacing : 0.03em;
+    letter-spacing: 0.03em;
 }
 
 .detailsAnnonce {
@@ -450,6 +450,15 @@ body {
     justify-content: space-between;
 }
 
+.contenuPremiereCo > form > h4 {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
 .contenuPremiereCo > form > label {
     width: 90%;
     height: 45%;
@@ -469,6 +478,21 @@ body {
     background-color: #ff9095;
 }
 
+.contenuPremiereCo > form > label >input[type="file"]::-webkit-file-upload-button {
+    background-color: #ff5660;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.contenuPremiereCo > form > label > input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
 .wrapBoutons {
     width: 100%;
     height: 20%;
@@ -482,7 +506,7 @@ body {
 
 .wrapBoutons > * {
     width: 40%;
-    height : 90%;
+    height: 90%;
     color: white;
     background-color: #ff5660;
     border-radius: 50px;

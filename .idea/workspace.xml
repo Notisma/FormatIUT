@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="popup première co etu en cours">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Grosses avancées première connexion (visuel)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +171,8 @@
       <workItem from="1698213151700" duration="632000" />
       <workItem from="1698437688291" duration="2272000" />
       <workItem from="1698759456400" duration="499000" />
-      <workItem from="1698844556806" duration="3810000" />
+      <workItem from="1698844556806" duration="3851000" />
+      <workItem from="1698871896358" duration="2166000" />
     </task>
     <task id="LOCAL-00044" summary="Encore un bug de git">
       <option name="closed" value="true" />
@@ -559,15 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698789413557</updated>
     </task>
-    <task id="LOCAL-00092" summary="Début des travaux sur popup infos étudiants (controleurEntrMain)">
+    <task id="LOCAL-00092" summary="Grosses avancées première connexion (visuel)">
       <option name="closed" value="true" />
-      <created>1698351503604</created>
+      <created>1698850755105</created>
       <option name="number" value="00092" />
       <option name="presentableId" value="LOCAL-00092" />
       <option name="project" value="LOCAL" />
-      <updated>1698351503605</updated>
+      <updated>1698850755105</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,8 +634,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Je répare ce que je peux" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
     <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
@@ -663,7 +660,9 @@
     <MESSAGE value="correction du dépot des cv et des lettres" />
     <MESSAGE value="Début des travaux sur popup première connexion etu" />
     <MESSAGE value="popup première co etu en cours" />
-    <option name="LAST_COMMIT_MESSAGE" value="popup première co etu en cours" />
+    <MESSAGE value="Grosse avancées première connexion (visuel)" />
+    <MESSAGE value="Grosses avancées première connexion (visuel)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Grosses avancées première connexion (visuel)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

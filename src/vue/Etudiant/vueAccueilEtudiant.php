@@ -134,14 +134,14 @@
             <h2>MES INFORMATIONS</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="">
+            <form method="post" action="" onsubmit="afficherPopupPremiereCo(2)">
                 <label for="numEtu">Numéro étudiant :
-                    <input type="number" name="numEtu" placeholder="11102117">
+                    <input type="number" name="numEtu" placeholder="11102117" required>
                 </label>
 
 
                 <label for="sexe">Sexe :
-                    <select name="sexe">
+                    <select name="sexe" required>
                         <option value="M">Homme</option>
                         <option value="F">Femme</option>
                         <option value="X">Je préfère ne pas répondre</option>
@@ -149,7 +149,7 @@
                 </label>
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
-                    <input onclick="afficherPopupPremiereCo(2)" type="submit" value="SUIVANT">
+                    <input type="submit" value="SUIVANT">
                 </div>
             </form>
         </div>
@@ -157,22 +157,22 @@
 
     <div id="2" class="enfant">
         <div class="imagePremiereCo">
-            <img src="../ressources/images/mesInfos.jpg" alt="image">
+            <img src="../ressources/images/mesContacts.jpg" alt="image">
             <h2>MES CONTACTS</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="">
+            <form method="post" action="" onsubmit="afficherPopupPremiereCo(3)">
                 <label for="telephone">Téléphone :
-                    <input type="number" name="telephone" placeholder="0670809010">
+                    <input type="number" name="telephone" placeholder="0670809010" required>
                 </label>
 
                 <label for="telephone">Mail personnel :
-                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex">
+                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex" required>
                 </label>
 
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(1)">RETOUR</a>
-                    <input onclick="afficherPopupPremiereCo(3)" type="submit" value="SUIVANT">
+                    <input type="submit" value="SUIVANT">
                 </div>
             </form>
         </div>
@@ -180,22 +180,43 @@
 
     <div class="enfant" id="3">
         <div class="imagePremiereCo">
-            <img src="../ressources/images/mesInfos.jpg" alt="image">
+            <img src="../ressources/images/maFormation.jpg" alt="image">
             <h2>MA FORMATION</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="">
+            <form method="post" action="" onsubmit="afficherPopupPremiereCo(4)">
                 <label for="groupe">Téléphone :
-                    <input type="text" name="groupe" placeholder="Q1">
+                    <input type="text" name="groupe" placeholder="Q1" required>
                 </label>
 
                 <label for="parcours">Mail personnel :
-                    <input type="text" name="parcours" placeholder="RACDV">
+                    <input type="text" name="parcours" placeholder="RACDV" required>
                 </label>
 
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(2)">RETOUR</a>
-                    <input onclick="afficherPopupPremiereCo(4)" type="submit" value="SUIVANT">
+                    <input type="submit" value="SUIVANT">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="enfant" id="4">
+        <div class="imagePremiereCo">
+            <img src="../ressources/images/maFormation.jpg" alt="image">
+            <h2>MA PHOTO DE PROFIL (FACULTATIF)</h2>
+        </div>
+        <div class="contenuPremiereCo">
+            <form method="post" action="" onsubmit="fermerPopupPremiereCo()">
+                <label for="photo">Ajoutez votre photo de profil :
+                    <input type="file" name="photo">
+                </label>
+
+                <h4>Cliquez sur "Terminer" pour enregistrer vos informations et commencer l'aventure Format'IUT !</h4>
+
+                <div class="wrapBoutons">
+                    <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
+                    <input type="submit" value="TERMINER">
                 </div>
             </form>
         </div>
