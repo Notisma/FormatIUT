@@ -7,7 +7,7 @@
 <div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
-            <h3>Bonjour, <?php
+            <h3 onclick="afficherPopupPremiereCo(0)">Bonjour, <?php
                 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
                 echo $etudiant->getPrenomEtudiant();
                 ?></h3>
@@ -110,7 +110,7 @@
 </div>
 
 <!-- apeller cette fonction pour afficher le popup : afficherPopupPremiereCo(0) -->
-<div class="premiereCo" id="popupPremiereCo" onclick="afficherPopupPremiereCo(0)">
+<div class="premiereCo" id="popupPremiereCo">
 
     <div id="0" class="enfant">
         <div class="imagePremiereCo">
@@ -130,12 +130,77 @@
 
     <div id="1" class="enfant">
         <div class="imagePremiereCo">
-
+            <img src="../ressources/images/mesInfos.jpg" alt="image">
+            <h2>MES INFORMATIONS</h2>
         </div>
-        <div class="contenuePremiereCo">
-            <p>blabla</p>
+        <div class="contenuPremiereCo">
+            <form method="post" action="">
+                <label for="numEtu">Numéro étudiant :
+                    <input type="number" name="numEtu" placeholder="11102117">
+                </label>
+
+
+                <label for="sexe">Sexe :
+                    <select name="sexe">
+                        <option value="M">Homme</option>
+                        <option value="F">Femme</option>
+                        <option value="X">Je préfère ne pas répondre</option>
+                    </select>
+                </label>
+                <div class="wrapBoutons">
+                    <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
+                    <input onclick="afficherPopupPremiereCo(2)" type="submit" value="SUIVANT">
+                </div>
+            </form>
         </div>
     </div>
+
+    <div id="2" class="enfant">
+        <div class="imagePremiereCo">
+            <img src="../ressources/images/mesInfos.jpg" alt="image">
+            <h2>MES CONTACTS</h2>
+        </div>
+        <div class="contenuPremiereCo">
+            <form method="post" action="">
+                <label for="telephone">Téléphone :
+                    <input type="number" name="telephone" placeholder="0670809010">
+                </label>
+
+                <label for="telephone">Mail personnel :
+                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex">
+                </label>
+
+                <div class="wrapBoutons">
+                    <a onclick="afficherPopupPremiereCo(1)">RETOUR</a>
+                    <input onclick="afficherPopupPremiereCo(3)" type="submit" value="SUIVANT">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="enfant" id="3">
+        <div class="imagePremiereCo">
+            <img src="../ressources/images/mesInfos.jpg" alt="image">
+            <h2>MA FORMATION</h2>
+        </div>
+        <div class="contenuPremiereCo">
+            <form method="post" action="">
+                <label for="groupe">Téléphone :
+                    <input type="text" name="groupe" placeholder="Q1">
+                </label>
+
+                <label for="parcours">Mail personnel :
+                    <input type="text" name="parcours" placeholder="RACDV">
+                </label>
+
+                <div class="wrapBoutons">
+                    <a onclick="afficherPopupPremiereCo(2)">RETOUR</a>
+                    <input onclick="afficherPopupPremiereCo(4)" type="submit" value="SUIVANT">
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     </div>
 

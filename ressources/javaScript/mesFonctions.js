@@ -20,13 +20,22 @@ function fermerPopupMdp() {
 
 
 function afficherPopupPremiereCo(indice) {
+    let enfants = document.getElementById("popupPremiereCo").children;
+    if (indice < 0 || indice >= enfants.length) {
+        return;
+    }
+
     document.getElementById("popupPremiereCo").style.display = "flex";
     document.getElementById("conteneurPrincipal").style.opacity = "0.3";
 
-    // pour tous les enfants de popupPremiereCo, on affiche celui dont l'indice est passé en paramètre
-    var enfants = document.getElementById("popupPremiereCo").children;
     for (var i = 0; i < enfants.length; i++) {
         enfants[i].style.display = "none";
     }
+
     enfants[indice].style.display = "flex";
+}
+
+function fermerPopupPremiereCo() {
+    document.getElementById("popupPremiereCo").style.display = "none";
+    document.getElementById("conteneurPrincipal").style.opacity = "1";
 }

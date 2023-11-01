@@ -66,7 +66,9 @@ class ConnexionUtilisateur
 
     public static function premiereConnexion(string $login) : void{
         if (!(new EtudiantRepository())->estEtudiant($login)){
-            //afficherPopUp pour informations
+            //on appelle une fonction JavaScript qui est dans ../ressources/javaScript/mesFonctions.js
+            echo "<script>afficherPopupPremiereCo(0)</script>";
+            //c'est censé fonctionné, mais j'en suis pas sûr
             $infos=ConnexionLdap::getInfoPersonne();
             $value=array("numEtudiant"=>"2","loginEtudiant"=>$login,"nomEtudiant"=>$infos["nom"],"prenomEtudiant"=>$infos["prenom"],"mailUniversitaire"=>$infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
