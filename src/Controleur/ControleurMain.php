@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
@@ -45,8 +46,12 @@ class ControleurMain
             if (in_array($idOffre, $liste)) {
                 $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                if ($_REQUEST["controleur"] == "EntrMain") $client = "Entreprise";
-                else $client = "Etudiant";
+
+                if (Configuration::controleurIs("EntrMain"))
+                    $client = "Entreprise";
+                else
+                    $client = "Etudiant";
+
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                 self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
@@ -107,10 +112,7 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        if (isset($_REQUEST['controleur']))
-            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-        else
-            $menu = "App\FormatIUT\Controleur\ControleurMain";
+        $menu = "App\FormatIUT\Controleur\Controleur" . Configuration::getControleur();
 
         self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error

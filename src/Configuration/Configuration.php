@@ -50,4 +50,19 @@ class Configuration
         return "http://localhost/SAE_DEV/web/controleurFrontal.php";
     }
 
+
+    private static string $controleur;
+
+    public static function getControleur(): string
+    {
+        return self::$controleur;
+    }
+    public static function controleurIs(string $contr): bool {
+        return self::$controleur == $contr;
+    }
+
+    public static function setControleur(string $controleur): void
+    {
+        self::$controleur = $controleur;
+    }
 }

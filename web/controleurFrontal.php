@@ -8,7 +8,8 @@ $loader->register();
 // enregistrement d'une association "namespace" → "dossier"
 $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
-use App\FormatIUT\Controleur\ControleurMain as CGlobal;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Configuration\Configuration;
 
 if (isset($_REQUEST['controleur'])) {
     $controleur = ucfirst($_REQUEST["controleur"]);
@@ -26,14 +27,16 @@ $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 
 $guillemets = '"';
 if (class_exists($nomClasseControleur)) {
+    Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-
         if ($controleur == "EntrMain" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
+            ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
         } else {
             $nomClasseControleur::$action();
         }
     } else
-        $nomClasseControleur::afficherErreur("L'action : {$guillemets}{$action}{$guillemets} n'existe pas dans le controleur : {$guillemets}{$nomClasseControleur}{$guillemets}");
-} else
-    $nomClasseControleur::afficherErreur("Le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets} n'existe pas");
+        $nomClasseControleur::afficherErreur("L'action : {$guillemets}{$action}{$guillemets} n'existe pas dans le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets}");
+} else {
+    Configuration::setControleur("Main");
+    ControleurMain::afficherErreur("Le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets} n'existe pas");
+}
