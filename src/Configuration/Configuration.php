@@ -65,4 +65,8 @@ class Configuration
     {
         self::$controleur = $controleur;
     }
+
+    public static function getCheminControleur(): string {
+        return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
+    }
 }

@@ -112,7 +112,7 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        $menu = "App\FormatIUT\Controleur\Controleur" . Configuration::getControleur();
+        $menu = Configuration::getCheminControleur();
 
         self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
@@ -228,4 +228,5 @@ class ControleurMain
             self::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
         }
     }
+
 }
