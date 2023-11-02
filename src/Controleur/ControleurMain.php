@@ -107,7 +107,11 @@ class ControleurMain
 
     public static function afficherErreur(string $error): void
     {
-        $menu = "App\Formatiut\Controleur\Controleur" . $_REQUEST['controleur'];
+        if (isset($_REQUEST['controleur']))
+            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+        else
+            $menu = "App\FormatIUT\Controleur\ControleurMain";
+
         self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
             'erreurStr' => $error
         ]);
