@@ -12,11 +12,16 @@
 
     <div class="resetDroit">
         <div class="wrapReset">
-            <h3 class="titres" id="noir">Réinitialisez votre mot de passe entreprise</h3>
+            <h2 class="titres" id="noir">Réinitialisez votre mot de passe entreprise</h2>
             <p class="paragraphes">Vous avez reçu un mail renvoyant sur cette page pour réinitialiser votre mot de
                 passe</p>
 
             <form method="post" action="../web/controleurFrontal.php">
+
+                <?php
+                $login = $_REQUEST["login"];
+                $nonce = $_REQUEST["nonce"];
+                ?>
 
                 <label class="labelFormulaire" for="mdp">Nouveau mot de passe :
                     <input type="password" name="mdp" required>
@@ -26,7 +31,9 @@
                     <input type="password" name="confirmerMdp" required>
                 </label>
 
-                <input type="submit" value="Enregistrer" formaction="?action=resetMdp&controleur=Main">
+                <input type="submit" value="Enregistrer"
+                       formaction= <?php echo '"?action=resetMdp&controleur=Main&login=' . $login . '&nonce=' . $nonce . '"' ?>
+                >
 
             </form>
         </div>

@@ -164,11 +164,11 @@ class ControleurMain
                         MessageFlash::ajouter("success", "Connexion Réussie");
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                         exit();
-                    }else {
+                    } else {
                         echo "HAHAH";
                     }
                 }
-            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"],"connexion")) {
+            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 ConnexionUtilisateur::premiereConnexion($_REQUEST["login"]);
@@ -265,19 +265,25 @@ class ControleurMain
     }
 
 
-    public static function resetMdp() : void {
-        if (isset($_REQUEST["mdp"],$_REQUEST["confirmerMdp"])){
-            if ($_REQUEST["mdp"]==$_REQUEST["confirmerMdp"]){
-                if (strlen($_REQUEST["mdp"])>=8){
-                    $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]);
-                    $entreprise->setMdpHache(MotDePasse::hacher($_REQUEST["mdp"]));
-                    (new EntrepriseRepository())->modifierObjet($entreprise);
-                    self::redirectionFlash("afficherPageConnexion","success","Mot de passe modifié");
+    public static function resetMdp(): void
+    {
+        if (isset($_REQUEST["mdp"], $_REQUEST["confirmerMdp"])) {
+            $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]);
+            if ($_REQUEST["nonce"] == $entreprise->getNonce()) {
+                if ($_REQUEST["mdp"] == $_REQUEST["confirmerMdp"]) {
+                    if (strlen($_REQUEST["mdp"]) >= 8) {
+                        $entreprise->setMdpHache(MotDePasse::hacher($_REQUEST["mdp"]));
+                        $entreprise->setNonce(MotDePasse::genererChaineAleatoire(22));
+                        (new EntrepriseRepository())->modifierObjet($entreprise);
+                        self::redirectionFlash("afficherPageConnexion", "success", "Mot de passe modifié");
+                    } else {
+                        self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
+                    }
                 } else {
-                    self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
+                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passes doivent corréler");
                 }
             } else {
-                self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passes doivent corréler");
+                self::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
             }
         }
     }
