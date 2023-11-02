@@ -3,7 +3,11 @@
     <link rel="stylesheet" href="../ressources/css/styleVueAccueilEtudiant.css">
     <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
-<body>
+<body <?php
+if ($_REQUEST["premiereConnexion"]) {
+    echo "onload='afficherPopupPremiereCo(0)'";
+} ?>
+>
 <div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
@@ -234,7 +238,7 @@
     </div>
 
 
-    </div>
+</div>
 
 
 </body>

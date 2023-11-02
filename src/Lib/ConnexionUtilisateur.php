@@ -73,13 +73,13 @@ class ConnexionUtilisateur
         return $chiffres;
     }
 
-    public static function premiereConnexion(string $login) : void{
+    public static function premiereConnexion(string $login) : bool{
         if (!(new EtudiantRepository())->estEtudiant($login)){
-            echo "<script src='../../ressources/javaScript/mesFonctions.js'>afficherPopupPremiereCo(0)</script>";
             $infos=ConnexionLdap::getInfoPersonne();
             $value=array("numEtudiant"=>self::genererChiffresAleatoires(),"prenomEtudiant"=>$infos["prenom"],"nomEtudiant"=>$infos["nom"],"loginEtudiant"=>$login,"mailUniversitaire"=>$infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
-
+            return true;
         }
+        return false;
     }
 }
