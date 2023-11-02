@@ -176,15 +176,41 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" name="fic" size=500/>
+                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" size=500/>
                 </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose1" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
             </div>
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre Lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" name="ficLM" size=500/>
+                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" size=500/>
                 </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose2" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+                <script>
+                    function updateImage(inputNumber) {
+                        const fileInput = document.getElementById("fd" + inputNumber);
+                        const noFileImage = document.getElementById("imageNonDepose" + inputNumber);
+                        const fileSelectedImage = document.getElementById("imageDepose" + inputNumber);
+
+                        if (fileInput.files.length > 0) {
+                            noFileImage.style.display = "none";
+                            fileSelectedImage.style.display = "inline-block";
+                        } else {
+                            noFileImage.style.display = "inline-block";
+                            fileSelectedImage.style.display = "none";
+                        }
+                    }
+                </script>
+
             </div>
             <input type="submit" value="Postuler">
         </form>
