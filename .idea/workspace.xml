@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="correction du dépot des cv et des lettres">
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" afterDir="false" />
-    </list>
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="correction du dépot des cv et des lettres" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -630,7 +628,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />

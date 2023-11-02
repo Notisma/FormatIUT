@@ -63,7 +63,6 @@ abstract class AbstractRepository
         if (!$objet){
             return null;
         }
-        print_r( $this->construireDepuisTableau($objet));
         return $this->construireDepuisTableau($objet);
     }
 
