@@ -261,11 +261,24 @@ class ControleurMain
 
     public static function motDePasseARemplir(): void
     {
-        self::afficherVue("vueGenerale.php");
+        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vueResetMdp.php", "titrePage" => "Mot de Passe oublié"]);
     }
 
-    public static function test(): void
-    {
-        index::trouverUser("touzer", "08032004");
+
+    public static function resetMdp() : void {
+        if (isset($_REQUEST["mdp"],$_REQUEST["confirmerMdp"])){
+            if ($_REQUEST["mdp"]==$_REQUEST["confirmerMdp"]){
+                if (strlen($_REQUEST["mdp"])>=8){
+                    $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]);
+                    $entreprise->setMdpHache(MotDePasse::hacher($_REQUEST["mdp"]));
+                    (new EntrepriseRepository())->modifierObjet($entreprise);
+                    self::redirectionFlash("afficherPageConnexion","success","Mot de passe modifié");
+                } else {
+                    self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
+                }
+            } else {
+                self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passes doivent corréler");
+            }
+        }
     }
 }
