@@ -15,7 +15,7 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
-    private static int $cleEtudiant = 22202117;
+    private static int $cleEtudiant = 23562045;
 
     public static function getCleEtudiant(): int
     {
@@ -115,6 +115,14 @@ class ControleurEtuMain extends ControleurMain
 
     public static function postuler(): void
     {
+        $cvData = null;
+        $lmData = null;
+        if($_FILES["fic"]["tmp_name"] != null){
+            $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        }
+        if($_FILES["ficLM"]["tmp_name"] != null){
+            $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        }
         //TODO vérifier les vérifs
         if (isset($_GET['idOffre'])) {
             $liste = ((new OffreRepository())->getListeIdOffres());
@@ -125,9 +133,10 @@ class ControleurEtuMain extends ControleurMain
                         if ((new EtudiantRepository())->aPostuler(self::$cleEtudiant, $_GET['idOffre'])) {
                             self::afficherErreur("Vous avez déjà postulé");
                         } else {
-                            (new EtudiantRepository())->EtudiantPostuler(self::$cleEtudiant, $_GET['idOffre']);
-                            $_GET['action'] = "afficherVueDetailOffre";
-                            self::afficherVueDetailOffre();
+                            $regarder = new Regarder(self::$cleEtudiant, $_GET["idOffre"], "En attente", $cvData, $lmData);
+                            (new RegarderRepository())->creerObjet($regarder);
+                            $_GET['action'] = "afficherMesOffres";
+                            self::afficherMesOffres();
                         }
                     } else {
                         self::afficherErreur("Vous avez déjà une formation");
@@ -185,16 +194,6 @@ class ControleurEtuMain extends ControleurMain
         }
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
         return $menu;
-    }
-
-    public static function deposerFichiers(): void
-    {
-        $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
-        $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-        $regarder = new Regarder(self::$cleEtudiant, $_GET["idOffre"], "En attente", $cvData, $lmData);
-        (new RegarderRepository())->creerObjet($regarder);
-        self::afficherVueDetailOffre();
-        self::postuler();
     }
 
     public static function aDeposeCv(): bool

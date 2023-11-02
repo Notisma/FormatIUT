@@ -18,8 +18,8 @@ class Etudiant extends AbstractDataObject
     private ?string $groupe;
     private ?string $parcours;
     private ?int $validationPedagogique;
-    private int $codeEtape;
-    private string $idResidence;
+    private ?int $codeEtape;
+    private ?string $idResidence;
     private string $img;
 
     /**
@@ -34,11 +34,11 @@ class Etudiant extends AbstractDataObject
      * @param string|null $groupe
      * @param string|null $parcours
      * @param int|null $validationPedagogique
-     * @param int $codeEtape
-     * @param string $idResidence
+     * @param int|null $codeEtape
+     * @param string|null $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;

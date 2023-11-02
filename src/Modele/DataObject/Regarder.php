@@ -6,9 +6,9 @@ class Regarder extends AbstractDataObject{
     private int $idOffre;
     private string $Etat;
 
-    private string $cv;
+    private ?string $cv;
 
-    private string $lettre;
+    private ?string $lettre;
 
 
     /**
@@ -60,7 +60,7 @@ class Regarder extends AbstractDataObject{
     }
 
 
-    public function __construct(float $numEtudiant, int $idOffre, string $Etat, string $cv, string $lettre)
+    public function __construct(float $numEtudiant, int $idOffre, string $Etat, ?string $cv, ?string $lettre)
     {
         $this->numEtudiant = $numEtudiant;
         $this->idOffre = $idOffre;
@@ -75,8 +75,8 @@ class Regarder extends AbstractDataObject{
             "numEtudiant"=> $this->numEtudiant,
             "idOffre"=> $this->idOffre,
             "Etat" => $this->Etat,
-            "cv_id"=> $this->cv,
-            "lm_id"=> $this->lettre
+            "cv"=> $this->cv,
+            "lettre"=> $this->lettre
         );
     }
 }

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../ressources/css/vueGeneraleStyle.css">
     <?php
+
+    use App\FormatIUT\Controleur\ControleurEtuMain;
+    use App\FormatIUT\Modele\Repository\EtudiantRepository;
+
     echo "<title>Format'IUT - {$titrePage}</title>"
     ?>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png"/>
@@ -46,7 +50,7 @@
             <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else if (ucfirst($_GET['controleur']) == 'EtuMain') {
-                    $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
+                    $image = ((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
                     $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                     $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                     echo "<form action='controleurFrontal.php' method='get'>
