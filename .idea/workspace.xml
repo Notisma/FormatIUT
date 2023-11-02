@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Back premièreConnexion bien avancé">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -176,15 +175,8 @@
       <workItem from="1698844556806" duration="3851000" />
       <workItem from="1698871896358" duration="3119000" />
       <workItem from="1698917285758" duration="7363000" />
-      <workItem from="1698927422292" duration="6643000" />
-    </task>
-    <task id="LOCAL-00048" summary="Avancées graphiques">
-      <option name="closed" value="true" />
-      <created>1696773423164</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1696773423164</updated>
+      <workItem from="1698927422292" duration="6676000" />
+      <workItem from="1698942446173" duration="1912000" />
     </task>
     <task id="LOCAL-00049" summary="Avancées sur vueMesOffres.php">
       <option name="closed" value="true" />
@@ -570,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698934645285</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Back premièreConnexion bien avancé">
+      <option name="closed" value="true" />
+      <created>1698936214659</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1698936214659</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,6 +584,17 @@
     </option>
     <option name="RECENT_FILTERS">
       <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
         <entry key="User">
           <value>
             <list>
@@ -638,7 +649,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
@@ -663,7 +673,8 @@
     <MESSAGE value="vueResetMdp terminée. Début du back-end" />
     <MESSAGE value="Réinitialisation mots de passes terminé (front &amp; back)" />
     <MESSAGE value="Correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction de crash" />
+    <MESSAGE value="Back premièreConnexion bien avancé" />
+    <option name="LAST_COMMIT_MESSAGE" value="Back premièreConnexion bien avancé" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

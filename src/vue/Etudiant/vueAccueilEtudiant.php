@@ -158,6 +158,7 @@ if ($_REQUEST["premiereConnexion"]) {
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
                     <input type="hidden" name="oldNumEtu" value="<?php echo $ancienNumEtu ?>">
+                    <input type="hidden" name="controleur" value="EtuMain">
                     <input type="submit" value="SUIVANT" formaction="?action=setnumEtuSexe">
                 </div>
             </form>
@@ -186,6 +187,7 @@ if ($_REQUEST["premiereConnexion"]) {
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(1)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
+                    <input type="hidden" name="controleur" value="EtuMain">
                     <input type="submit" value="SUIVANT" formaction="?action=setTelMailPerso">
                 </div>
             </form>
@@ -210,7 +212,8 @@ if ($_REQUEST["premiereConnexion"]) {
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(2)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
-                    <input type="submit" value="SUIVANT">
+                    <input type="hidden" name="controleur" value="EtuMain">
+                    <input type="submit" value="SUIVANT" formaction="?action=setGroupeParcours">
                 </div>
             </form>
         </div>
@@ -231,7 +234,10 @@ if ($_REQUEST["premiereConnexion"]) {
 
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
-                    <input type="submit" value="TERMINER">
+                    <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
+                    <input type="hidden" name="controleur" value="EtuMain">
+                    <!--<input type="submit" value="TERMINER" formaction="?action=photoInitiale">-->
+                    <a onclick="fermerPopupPremiereCo()">Test</a>
                 </div>
             </form>
         </div>

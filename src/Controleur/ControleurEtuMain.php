@@ -197,6 +197,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($ancienNumEtu);
         $etudiant->setNumEtudiant($numEtu);
         $etudiant->setSexeEtu($sexe);
+        self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(2)</script>";
     }
 
@@ -209,6 +210,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setTelephone($tel);
         $etudiant->setMailPerso($mailPerso);
+        self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(3)</script>";
     }
 
@@ -221,6 +223,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setGroupe($groupe);
         $etudiant->setParcours($parcours);
+        self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
 
@@ -228,7 +231,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $numEtu = $_REQUEST['numEtu'];
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
-        $etudiant->setImgId(1);
+        self::updateImage();
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");
     }
 
