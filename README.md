@@ -25,36 +25,11 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 ## Conventions du projet
 
 - namespace : App\FormatIUT
-- Méthode : $_REQUEST
+- Méthode : $_REQUEST$
 
 ## Organisation
 
-- Premier Sprint
-  - Vues
-    - vueGenerale
-    - vueIndex
-    - Entreprises
-      - vueEntrepriseAccueil
-      - vueEntrepriseProfil
-      - formulaireCreationOffre
-      - vueBandeauEntreprise
-    - Etudiant
-      - vueEtudiantAccueil
-      - vueOffreCatalogue
-      - vueOffreDetail
-      - vueEtudiantProfil
-      - vueBandeauEtudiant
-  - Modele
-    - Repository
-      - Offre
-    - DataObject
-      - Offre
-  - Controleur
-    - Offre
-    - ControleurFrontal
-  - Lib
-    - AutoLoader
 
 ## Detail de la branche
 
-- MAIN
+Travail sur la barre de recherche et la vue appelée
