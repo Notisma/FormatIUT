@@ -226,4 +226,20 @@ class ControleurMain
             self::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
         }
     }
+
+    public static function rechercher(): void
+    {
+        $controleur = Configuration::getCheminControleur();
+
+        if (is_null($_REQUEST['recherche'])) {
+            $controleur::afficherErreur("Il faut renseigner une recherche.");
+            return;
+        }
+        $recherche = $_REQUEST['recherche'];
+
+        $resIdOffres = array();
+        $resIdEntreprises = array();
+
+        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), ["recherche" => $recherche, "offres" => $resIdOffres, "entreprises" => $resIdEntreprises]);
+    }
 }
