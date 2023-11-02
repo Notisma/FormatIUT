@@ -134,7 +134,7 @@
             <h2>MES INFORMATIONS</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="" onsubmit="afficherPopupPremiereCo(2)">
+            <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(2)">
                 <label for="numEtu">Numéro étudiant :
                     <input type="number" name="numEtu" placeholder="11102117" required>
                 </label>
@@ -147,9 +147,14 @@
                         <option value="X">Je préfère ne pas répondre</option>
                     </select>
                 </label>
+                <?php
+                $ancienNumEtu = $etudiant->getNumEtudiant();
+                ?>
+
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
-                    <input type="submit" value="SUIVANT">
+                    <input type="hidden" name="oldNumEtu" value="<?php echo $ancienNumEtu ?>">
+                    <input type="submit" value="SUIVANT" formaction="?action=setnumEtuSexe">
                 </div>
             </form>
         </div>
@@ -161,7 +166,7 @@
             <h2>MES CONTACTS</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="" onsubmit="afficherPopupPremiereCo(3)">
+            <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(3)">
                 <label for="telephone">Téléphone :
                     <input type="number" name="telephone" placeholder="0670809010" required>
                 </label>
@@ -170,9 +175,14 @@
                     <input type="email" name="mailPerso" placeholder="exemple@exemple.ex" required>
                 </label>
 
+                <?php
+                $numEtu = $etudiant->getNumEtudiant();
+                ?>
+
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(1)">RETOUR</a>
-                    <input type="submit" value="SUIVANT">
+                    <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
+                    <input type="submit" value="SUIVANT" formaction="?action=setTelMailPerso">
                 </div>
             </form>
         </div>
@@ -184,17 +194,18 @@
             <h2>MA FORMATION</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="" onsubmit="afficherPopupPremiereCo(4)">
-                <label for="groupe">Téléphone :
+            <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(4)">
+                <label for="groupe">Groupe de TD :
                     <input type="text" name="groupe" placeholder="Q1" required>
                 </label>
 
-                <label for="parcours">Mail personnel :
+                <label for="parcours">Parcours :
                     <input type="text" name="parcours" placeholder="RACDV" required>
                 </label>
 
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(2)">RETOUR</a>
+                    <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
                     <input type="submit" value="SUIVANT">
                 </div>
             </form>
@@ -207,7 +218,7 @@
             <h2>MA PHOTO DE PROFIL (FACULTATIF)</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form method="post" action="" onsubmit="fermerPopupPremiereCo()">
+            <form method="post" action="../web/controleurEtuMain.php" onsubmit="fermerPopupPremiereCo()">
                 <label for="photo">Ajoutez votre photo de profil :
                     <input type="file" name="photo">
                 </label>

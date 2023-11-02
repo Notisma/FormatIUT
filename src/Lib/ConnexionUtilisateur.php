@@ -64,13 +64,20 @@ class ConnexionUtilisateur
         return null;
     }
 
+    public static function genererChiffresAleatoires(int $nbChiffres = 8): string
+    {
+        $chiffres = "";
+        for ($i = 0; $i < $nbChiffres; $i++) {
+            $chiffres .= rand(0, 9);
+        }
+        return $chiffres;
+    }
+
     public static function premiereConnexion(string $login) : void{
         if (!(new EtudiantRepository())->estEtudiant($login)){
-            //on appelle une fonction JavaScript qui est dans ../ressources/javaScript/mesFonctions.js
-            echo "<script>afficherPopupPremiereCo(0)</script>";
-            //c'est censé fonctionné, mais j'en suis pas sûr
+            echo "<script src='../../ressources/javaScript/mesFonctions.js'>afficherPopupPremiereCo(0)</script>";
             $infos=ConnexionLdap::getInfoPersonne();
-            $value=array("numEtudiant"=>"2","loginEtudiant"=>$login,"nomEtudiant"=>$infos["nom"],"prenomEtudiant"=>$infos["prenom"],"mailUniversitaire"=>$infos["mail"]);
+            $value=array("numEtudiant"=>self::genererChiffresAleatoires(),"prenomEtudiant"=>$infos["prenom"],"nomEtudiant"=>$infos["nom"],"loginEtudiant"=>$login,"mailUniversitaire"=>$infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
 
         }
