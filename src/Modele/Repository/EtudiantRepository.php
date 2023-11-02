@@ -17,7 +17,7 @@ class   EtudiantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","mdpEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
+        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
     }
 
     protected function getClePrimaire(): string

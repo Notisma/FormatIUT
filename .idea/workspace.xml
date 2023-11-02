@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Back premièreConnexion bien avancé">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore des corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,15 +176,7 @@
       <workItem from="1698871896358" duration="3119000" />
       <workItem from="1698917285758" duration="7363000" />
       <workItem from="1698927422292" duration="6676000" />
-      <workItem from="1698942446173" duration="1912000" />
-    </task>
-    <task id="LOCAL-00049" summary="Avancées sur vueMesOffres.php">
-      <option name="closed" value="true" />
-      <created>1696776872670</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1696776872670</updated>
+      <workItem from="1698942446173" duration="3636000" />
     </task>
     <task id="LOCAL-00050" summary="Update">
       <option name="closed" value="true" />
@@ -570,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698936214659</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Encore des corrections">
+      <option name="closed" value="true" />
+      <created>1698944587560</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1698944587560</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +649,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
@@ -674,7 +673,8 @@
     <MESSAGE value="Réinitialisation mots de passes terminé (front &amp; back)" />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Back premièreConnexion bien avancé" />
-    <option name="LAST_COMMIT_MESSAGE" value="Back premièreConnexion bien avancé" />
+    <MESSAGE value="Encore des corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Encore des corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
