@@ -11,6 +11,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\pstageRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
@@ -149,6 +150,31 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+    public static function afficherCSV()
+    {
+        self::afficherVueDansCorps("import CSV", "Etudiant/vueTestCSV.php", self::getMenu());
+    }
+
+    public static function ajouterCSV()
+    {
+        echo $_FILES['file']['name'];
+        echo "\n";
+        echo $_FILES['file']['type'];
+        echo "\n";
+        echo $_FILES['file']['tmp_name'];
+        echo "\n";
+        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+
+        fgetcsv($csvFile);
+
+        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
+            echo $ligne[0];
+            echo "\n";
+            (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
+        }
+        fclose($csvFile);
+    }
+
     public static function updateImage()
     {
         $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
@@ -180,7 +206,6 @@ class ControleurEtuMain extends ControleurMain
             array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
 
-
         );
         $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
         if (!$convention) {
@@ -201,6 +226,7 @@ class ControleurEtuMain extends ControleurMain
         if ($formation) {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=" . $formation['idOffre']);
         }
+        $menu[] = array("image" => "", "label" => "CSV", "lien" => "?controleur=EtuMain&action=afficherCSV");
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
         return $menu;
     }
