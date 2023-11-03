@@ -1,3 +1,8 @@
+<?php
+
+use App\FormatIUT\Configuration\Configuration;
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,36 +28,33 @@
                 <?php
                 $liaison = "";
                 $src = "";
-
-                if (!isset($_REQUEST['controleur']) || ucfirst($_REQUEST['controleur']) == 'Main') {
+                if (Configuration::controleurIs('Main')) {
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
-                    echo "<form action='?action=placeholder' method='post'>            
+                    echo "<form action='?action=nothing' method='post'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else {
-                    if (ucfirst($_REQUEST['controleur']) == 'EntrMain') {
+                    if (Configuration::controleurIs('EntrMain')) {
                         $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                         $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                         $liaison = "?controleur=entrMain&action=afficherProfilEntr";
-                    } else if (ucfirst($_REQUEST['controleur']) == 'EtuMain') {
+                    } else if (Configuration::controleurIs('EtuMain')) {
                         $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                         $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                         $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                     }
-                    echo "<form action='controleurFrontal.php' method='post'>
-                <input type='hidden' name='action' value='rechercher'>
-                <input type='hidden' name='controleur' value='Main'>
-                <input class='searchField' name='recherche' placeholder='Rechercher...' disabled>
+                    echo "<form action='?controleur=" . Configuration::getControleur() . "&action=rechercher' method='post'>
+                <input class='searchField' name='recherche' placeholder='Rechercher...' required>
             </form>";
                 }
 
                 echo "</div>
-                    <div id='profil'>
-                        <a href='{$liaison}'>
-                        <img id='petiteIcone' src=\"$src\" alt='petite icone'></a>
-                    </div>";
-                ?>
+        <div id='profil'>
+        <a href='{$liaison}'>";
+
+                echo '<img id="petiteIcone" src="' . $src . '" alt="petite icone"></a>
+        </div>'; ?>
 
                 <div class="flash">
                     <?php
