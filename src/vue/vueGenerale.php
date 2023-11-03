@@ -45,8 +45,10 @@ use App\FormatIUT\Configuration\Configuration;
                         $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                     }
                     echo "<form action='?controleur=" . Configuration::getControleur() . "&action=rechercher' method='post'>
-                <input class='searchField' name='recherche' placeholder='Rechercher...' required>
-            </form>";
+                <input class='searchField' name='recherche' placeholder='Rechercher...' required";
+                    if (isset($recherche)) echo " value=\"$recherche\"";
+                    echo ">
+                </form>";
                 }
 
                 echo "</div>

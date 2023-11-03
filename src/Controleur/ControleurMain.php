@@ -239,9 +239,29 @@ class ControleurMain
         }
         $recherche = $_REQUEST['recherche'];
 
-        $resIdOffres = array();
-        $resIdEntreprises = array();
+        $resOffres = array();
+        $resEntreprises = array();
 
-        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), ["recherche" => $recherche, "offres" => $resIdOffres, "entreprises" => $resIdEntreprises]);
+        foreach ((new OffreRepository())->getListeObjet() as $offre) {
+            if (str_contains(strtolower($offre->getSujet()), strtolower($recherche)) ||
+                str_contains(strtolower($offre->getTypeOffre()), strtolower($recherche)) ||
+                str_contains(strtolower($offre->getDetailProjet()), strtolower($recherche))
+            ) {
+                $resOffres[] = $offre;
+            }
+        }
+        foreach ((new EntrepriseRepository())->getListeObjet() as $entr) {
+            if (
+                str_contains(strtolower($entr->getNomEntreprise()), strtolower($recherche))
+            ) {
+                $resEntreprises[] = $entr;
+            }
+        }
+
+        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+            "recherche" => $recherche,
+            "offres" => $resOffres,
+            "entreprises" => $resEntreprises
+        ]);
     }
 }
