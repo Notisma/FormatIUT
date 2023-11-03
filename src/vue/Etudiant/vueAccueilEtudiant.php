@@ -4,7 +4,7 @@
     <script src="../ressources/javaScript/mesFonctions.js"></script>
 </head>
 <body <?php
-if ($_REQUEST["premiereConnexion"]) {
+if (isset($_REQUEST["premiereConnexion"])) {
     echo "onload='afficherPopupPremiereCo(0)'";
 } ?>
 >
