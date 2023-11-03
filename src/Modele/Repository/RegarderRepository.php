@@ -85,4 +85,11 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
+
+    public function modifierFichiers($numEtudiant, $idOffre, $cv, $lm){
+        $sql="UPDATE ".$this->getNomTable()." SET cv=:cvTag AND lettre=:lmTag WHERE numEtudiant=:etuTag AND idOffre=:offreTag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("etuTag"=>$numEtudiant, "offreTag"=>$idOffre, "cvTag"=>$cv, "lmTag"=>$lm);
+        $pdoStatement->execute($values);
+    }
 }

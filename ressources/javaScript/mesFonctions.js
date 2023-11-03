@@ -34,3 +34,11 @@ function updateImage(inputNumber) {
         fileSelectedImage.style.display = "none";
     }
 }
+function afficherPopupModifCV_LM(){
+    document.getElementById("popupModif").style.display = "flex";
+    document.getElementById("aGriser").style.opacity = "0.3";
+}
+function fermerPopupModifCV_LM() {
+    document.getElementById("popupModif").style.display = "none";
+    document.getElementById("aGriser").style.opacity = "1";
+}

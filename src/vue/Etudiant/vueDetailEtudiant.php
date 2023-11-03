@@ -61,34 +61,6 @@
 
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
-        <?php
-        /*
-        echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
-                <button class="boutonAssigner" ';
-        $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
-        if (is_null($formation)) {
-            if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
-                    $bool = true;
-                }
-            }
-        }
-        if (!$bool) {
-            echo 'id="disabled" disabled';
-        }
-        */
-        ?>
-        <!--
-        >POSTULER</button></a>
-        -->
-
-        <!--
-        <a id="my-button">
-            <button class="boutonAssigner" onclick="afficherPopupDepotCV_LM()">POSTULER</button>
-        </a>
-
-       -->
 
         <?php
 
@@ -107,6 +79,14 @@
             echo 'id="disabled" disabled';
         }
         echo ">POSTULER</button></a>";
+
+        echo '<a id="my-button">
+                <button class="boutonAssigner" onclick="afficherPopupModifCV_LM()" ';
+
+        if ($bool) {
+            echo 'id="disabled" disabled';
+        }
+        echo ">MODIFIER VOS FICHIERS</button></a>";
         ?>
 
 
@@ -165,7 +145,7 @@
 
 </div>
 
-<div id="popup">
+<div id="popup" class="popup">
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
 
@@ -201,6 +181,54 @@
 
         <div class="conteneurBoutonPopup">
             <a onclick="fermerPopupDepotCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="descPopup">
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
+    </div>
+</div>
+
+<div id="popupModif" class="popup">
+    <div class="mainPopup">
+        <h2>MODIFIEZ VOS DOCUMENTS !</h2>
+
+        <form enctype="multipart/form-data"
+              action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              method="post">
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre CV :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose3" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre Lettre de Motivation :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose4" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" value="Modifier vos documents">
+        </form>
+
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupModifCV_LM()">
                 <button class="boutonAssignerPopup">RETOUR</button>
             </a>
 

@@ -196,15 +196,16 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-    public static function aDeposeCv(): bool
-    {
-        //TODO à compléter
-        return true;
-    }
-
-    public static function aDeposeLM(): bool
-    {
-        //TODO à compléter
-        return true;
+    public static function modifierFichiers(){
+        $cvData = null;
+        $lmData = null;
+        if($_FILES["fic"]["tmp_name"] != null){
+            $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        }
+        if($_FILES["ficLM"]["tmp_name"] != null){
+            $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        }
+        (new RegarderRepository())->modifierFichiers(self::$cleEtudiant, $_GET["idOffre"], $cvData, $lmData);
+        self::afficherMesOffres();
     }
 }

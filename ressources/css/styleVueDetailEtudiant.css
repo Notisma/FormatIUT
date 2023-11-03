@@ -464,7 +464,7 @@ body {
     width: 50%;
 }
 
-#popup {
+.popup {
     display: none;
     position: fixed;
     top: 50%;
@@ -485,6 +485,7 @@ body {
     border: 1px solid black;
     z-index: 100;
 }
+
 
 .mainPopup {
     width: 50%;
