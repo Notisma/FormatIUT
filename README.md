@@ -29,32 +29,9 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 
 ## Organisation
 
-- Premier Sprint
-  - Vues
-    - vueGenerale
-    - vueIndex
-    - Entreprises
-      - vueEntrepriseAccueil
-      - vueEntrepriseProfil
-      - formulaireCreationOffre
-      - vueBandeauEntreprise
-    - Etudiant
-      - vueEtudiantAccueil
-      - vueOffreCatalogue
-      - vueOffreDetail
-      - vueEtudiantProfil
-      - vueBandeauEtudiant
-  - Modele
-    - Repository
-      - Offre
-    - DataObject
-      - Offre
-  - Controleur
-    - Offre
-    - ControleurFrontal
-  - Lib
-    - AutoLoader
-
-## Detail de la branche
-
-- MAIN
+- Sprint 1
+  - Efforts Estimés : 155
+  - Efforts Validés : 
+  - Efforts Réels : 155
+- Sprint 2
+  - Efforts Estimés : 175
