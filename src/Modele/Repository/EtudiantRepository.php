@@ -197,4 +197,37 @@ class   EtudiantRepository extends AbstractRepository
         return $pdoStatement->fetch()[0];
     }
 
+    public function modifierNumEtuSexe(Etudiant $etudiant,int $oldNumEtudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET numEtudiant=:TagNum,sexeEtu=:TagSexe WHERE numEtudiant=:tagOldNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "TagNum"=>$etudiant->getNumEtudiant(),
+            "TagSexe"=>$etudiant->getSexeEtu(),
+            "tagOldNum"=>$oldNumEtudiant
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function modifierTelMailPerso(Etudiant $etudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET telephone=:tag1,mailPerso=:tag2 WHERE numEtudiant=:tagNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tag1"=>$etudiant->getTelephone(),
+            "tag2"=>$etudiant->getMailPerso(),
+            "tagNum"=>$etudiant->getNumEtudiant()
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function modifierGroupeParcours(Etudiant $etudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET groupe=:tag1,parcours=:tag2 WHERE numEtudiant=:tagNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tag1"=>$etudiant->getGroupe(),
+            "tag2"=>$etudiant->getParcours(),
+            "tagNum"=>$etudiant->getNumEtudiant()
+        );
+        $pdoStatement->execute($values);
+    }
+
 }

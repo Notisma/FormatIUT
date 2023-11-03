@@ -197,7 +197,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($ancienNumEtu);
         $etudiant->setNumEtudiant($numEtu);
         $etudiant->setSexeEtu($sexe);
-        (new EtudiantRepository())->modifierObjet($etudiant);
+        (new EtudiantRepository())->modifierNumEtuSexe($etudiant,$ancienNumEtu);
         self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(2)</script>";
     }
@@ -211,7 +211,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setTelephone($tel);
         $etudiant->setMailPerso($mailPerso);
-        (new EtudiantRepository())->modifierObjet($etudiant);
+        (new EtudiantRepository())->modifierTelMailPerso($etudiant);
         self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(3)</script>";
     }
@@ -225,17 +225,14 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setGroupe($groupe);
         $etudiant->setParcours($parcours);
-        (new EtudiantRepository())->modifierObjet($etudiant);
+        (new EtudiantRepository())->modifierGroupeParcours($etudiant);
         self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
 
     public static function photoInitiale(): void
     {
-        $numEtu = $_REQUEST['numEtu'];
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         self::updateImage();
-        (new EtudiantRepository())->modifierObjet($etudiant);
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");
     }
 
