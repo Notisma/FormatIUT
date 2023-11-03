@@ -195,22 +195,6 @@
                     <img id="imageDepose2" src="../ressources/images/verifie.png" alt="image" style="display: none;">
                 </div>
 
-                <script>
-                    function updateImage(inputNumber) {
-                        const fileInput = document.getElementById("fd" + inputNumber);
-                        const noFileImage = document.getElementById("imageNonDepose" + inputNumber);
-                        const fileSelectedImage = document.getElementById("imageDepose" + inputNumber);
-
-                        if (fileInput.files.length > 0) {
-                            noFileImage.style.display = "none";
-                            fileSelectedImage.style.display = "inline-block";
-                        } else {
-                            noFileImage.style.display = "inline-block";
-                            fileSelectedImage.style.display = "none";
-                        }
-                    }
-                </script>
-
             </div>
             <input type="submit" value="Postuler">
         </form>
