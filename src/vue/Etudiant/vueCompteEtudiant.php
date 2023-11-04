@@ -14,7 +14,7 @@
                 <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post">
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" name="fic" size=500/>
-                    <input type="submit" value="TERMINER"/>
+                    <input type="submit" value="Envoyer"/>
                 </form>
             </div>
             <div class="imageEtu">

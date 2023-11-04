@@ -478,7 +478,7 @@ body {
     background-color: #ff9095;
 }
 
-.contenuPremiereCo > form > label >input[type="file"]::-webkit-file-upload-button {
+.contenuPremiereCo > form >input[type="file"]::-webkit-file-upload-button {
     background-color: #ff5660;
     border-radius: 10px;
     border: none;
