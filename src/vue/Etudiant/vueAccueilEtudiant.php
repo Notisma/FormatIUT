@@ -234,7 +234,7 @@ if (isset($_REQUEST["premiereConnexion"])) {
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
-                    <input type="submit" value="Envoyer" onclick="fermerPopupPremiereCo()"/>
+                    <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()"/>
                 </div>
             </form>
         </div>
