@@ -486,7 +486,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.contenuPremiereCo > form > label > input[type="file"]::-webkit-file-upload-button:hover {
+.contenuPremiereCo > form > input[type="file"]::-webkit-file-upload-button:hover {
     background-color: white;
     border: 1px solid black;
     color: black;

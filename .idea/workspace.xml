@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Beaucoup de corrections.">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,15 +171,7 @@
       <workItem from="1697631246556" duration="1639000" />
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
-      <workItem from="1699121237507" duration="1363000" />
-    </task>
-    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
-      <option name="closed" value="true" />
-      <created>1696606913582</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1696606913582</updated>
+      <workItem from="1699121237507" duration="2032000" />
     </task>
     <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
       <option name="closed" value="true" />
@@ -565,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699122043928</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Corrections">
+      <option name="closed" value="true" />
+      <created>1699122636870</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1699122636870</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +653,6 @@
     <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
     <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
@@ -670,7 +669,8 @@
     <MESSAGE value="Merge" />
     <MESSAGE value="Corrections." />
     <MESSAGE value="Beaucoup de corrections." />
-    <option name="LAST_COMMIT_MESSAGE" value="Beaucoup de corrections." />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

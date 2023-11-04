@@ -167,6 +167,11 @@ class ControleurEtuMain extends ControleurMain
         $ancienId = (new ImageRepository())->imageParEtudiant(self::getCleEtudiant());
         (new EtudiantRepository())->updateImage(self::getCleEtudiant(), $id);
         if ($ancienId["img_id"] != 1 && $ancienId["img_id"] != 0) (new ImageRepository())->supprimer($ancienId["img_id"]);
+
+        if (isset($_REQUEST['estPremiereCo'])) {
+            self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
+        }
+
         self::redirectionFlash("afficherProfilEtu", "success", "Image de profil ajoutée");
     }
 
@@ -197,7 +202,7 @@ class ControleurEtuMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($ancienNumEtu);
         $etudiant->setNumEtudiant($numEtu);
         $etudiant->setSexeEtu($sexe);
-        (new EtudiantRepository())->modifierNumEtuSexe($etudiant,$ancienNumEtu);
+        (new EtudiantRepository())->modifierNumEtuSexe($etudiant, $ancienNumEtu);
         self::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(2)</script>";
     }
