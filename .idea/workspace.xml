@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore des corrections">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de crash -&gt; accueil Etudiant">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCompteEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="deposerCV" />
+        <entry key="$PROJECT_DIR$" value="convention" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +57,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Connexion__via__ldap&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/MAMP/htdocs/SAE_DEV&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ann2/tordeuxm/public_html/devapplicationformatiut&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -167,16 +168,106 @@
       <workItem from="1697270110676" duration="10458000" />
       <workItem from="1697390647553" duration="6954000" />
       <workItem from="1697437379985" duration="4823000" />
-      <workItem from="1697704415446" duration="313000" />
-      <workItem from="1698165307716" duration="4265000" />
-      <workItem from="1698213151700" duration="632000" />
-      <workItem from="1698437688291" duration="2272000" />
-      <workItem from="1698759456400" duration="499000" />
-      <workItem from="1698844556806" duration="3851000" />
-      <workItem from="1698871896358" duration="3119000" />
-      <workItem from="1698917285758" duration="7363000" />
-      <workItem from="1698927422292" duration="6676000" />
-      <workItem from="1698942446173" duration="3636000" />
+      <workItem from="1697631246556" duration="1639000" />
+      <workItem from="1697637847518" duration="330000" />
+      <workItem from="1697640163955" duration="2888000" />
+      <workItem from="1699121237507" duration="763000" />
+    </task>
+    <task id="LOCAL-00038" summary="début de factorisation des dataObject et Repository">
+      <option name="closed" value="true" />
+      <created>1696599303251</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1696599303251</updated>
+    </task>
+    <task id="LOCAL-00039" summary="mini avancement sur vueDetail et changement des dateDebut et dateFin d'une offre (string -&gt; DateTime)">
+      <option name="closed" value="true" />
+      <created>1696606913582</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1696606913582</updated>
+    </task>
+    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
+      <option name="closed" value="true" />
+      <created>1696626967802</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1696626967804</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
+      <option name="closed" value="true" />
+      <created>1696697664097</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1696697664097</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
+      <option name="closed" value="true" />
+      <created>1696698095999</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1696698095999</updated>
+    </task>
+    <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
+      <option name="closed" value="true" />
+      <created>1696700847363</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1696700847363</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Encore un bug de git">
+      <option name="closed" value="true" />
+      <created>1696704451740</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704451740</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Fix bug git">
+      <option name="closed" value="true" />
+      <created>1696704734990</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1696704734992</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Tentative de fix un bug (j'ai échoué mdr)">
+      <option name="closed" value="true" />
+      <created>1696705439768</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1696705439769</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Merge de branches">
+      <option name="closed" value="true" />
+      <created>1696758880659</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1696758880659</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Avancées graphiques">
+      <option name="closed" value="true" />
+      <created>1696773423164</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1696773423164</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Avancées sur vueMesOffres.php">
+      <option name="closed" value="true" />
+      <created>1696776872670</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1696776872670</updated>
     </task>
     <task id="LOCAL-00050" summary="Update">
       <option name="closed" value="true" />
@@ -474,103 +565,7 @@
       <option name="project" value="LOCAL" />
       <updated>1697540830638</updated>
     </task>
-    <task id="LOCAL-00087" summary="je peux enfin me connecter sur mon pc">
-      <option name="closed" value="true" />
-      <created>1698163360877</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1698163360877</updated>
-    </task>
-    <task id="LOCAL-00088" summary="j'essaye de déposer un cv ça tourne mal (explications)">
-      <option name="closed" value="true" />
-      <created>1697982173160</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1697982173161</updated>
-    </task>
-    <task id="LOCAL-00089" summary="correction du dépot des cv et des lettres">
-      <option name="closed" value="true" />
-      <created>1698759599465</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1698759599465</updated>
-    </task>
-    <task id="LOCAL-00090" summary="Début des travaux sur popup première connexion etu">
-      <option name="closed" value="true" />
-      <created>1698787237082</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1698787237082</updated>
-    </task>
-    <task id="LOCAL-00091" summary="popup première co etu en cours">
-      <option name="closed" value="true" />
-      <created>1698789413557</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1698789413557</updated>
-    </task>
-    <task id="LOCAL-00092" summary="Grosses avancées première connexion (visuel)">
-      <option name="closed" value="true" />
-      <created>1698850755105</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1698850755105</updated>
-    </task>
-    <task id="LOCAL-00093" summary="Visuel PopupPremiereCo terminé.">
-      <option name="closed" value="true" />
-      <created>1698874316647</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1698874316647</updated>
-    </task>
-    <task id="LOCAL-00094" summary="vueResetMdp terminée. Début du back-end">
-      <option name="closed" value="true" />
-      <created>1698922471325</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1698922471329</updated>
-    </task>
-    <task id="LOCAL-00095" summary="Réinitialisation mots de passes terminé (front &amp; back)">
-      <option name="closed" value="true" />
-      <created>1698928040172</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1698928040173</updated>
-    </task>
-    <task id="LOCAL-00096" summary="Correction de crash">
-      <option name="closed" value="true" />
-      <created>1698934645283</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1698934645285</updated>
-    </task>
-    <task id="LOCAL-00097" summary="Back premièreConnexion bien avancé">
-      <option name="closed" value="true" />
-      <created>1698936214659</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1698936214659</updated>
-    </task>
-    <task id="LOCAL-00098" summary="Encore des corrections">
-      <option name="closed" value="true" />
-      <created>1698944587560</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1698944587560</updated>
-    </task>
-    <option name="localTasksCounter" value="99" />
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,17 +579,6 @@
     </option>
     <option name="RECENT_FILTERS">
       <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="main" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
         <entry key="User">
           <value>
             <list>
@@ -642,13 +626,43 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="convention" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Refonte graphique vueCompteEntreprise.php" />
+    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
+    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
+    <MESSAGE value="Correction de crash" />
+    <MESSAGE value="Correction" />
+    <MESSAGE value="Améliorations visuelles" />
+    <MESSAGE value="Modifications de controleur" />
+    <MESSAGE value="Correction bug" />
+    <MESSAGE value="Je répare ce que je peux" />
+    <MESSAGE value="Corrections" />
+    <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
+    <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
+    <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
+    <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci." />
+    <MESSAGE value="Améliorations et corrections visuelles" />
+    <MESSAGE value="Ajout d'erreurs" />
+    <MESSAGE value="Améliorations visuelles vueGénérale" />
+    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
@@ -656,25 +670,7 @@
     <MESSAGE value="Vue mes offres fin" />
     <MESSAGE value="Merge" />
     <MESSAGE value="Corrections." />
-    <MESSAGE value="essais de connexion ldab depuis local" />
-    <MESSAGE value="fix problème de git (encore)" />
-    <MESSAGE value="Améliorations de code et corrections" />
-    <MESSAGE value="Améliorations popup dépôt CV et LM" />
-    <MESSAGE value="Début des travaux sur popup infos étudiants (controleurEntrMain)" />
-    <MESSAGE value="je peux enfin me connecter sur mon pc" />
-    <MESSAGE value="j'essaye de déposer un cv ça tourne mal (explications)" />
-    <MESSAGE value="correction du dépot des cv et des lettres" />
-    <MESSAGE value="Début des travaux sur popup première connexion etu" />
-    <MESSAGE value="popup première co etu en cours" />
-    <MESSAGE value="Grosse avancées première connexion (visuel)" />
-    <MESSAGE value="Grosses avancées première connexion (visuel)" />
-    <MESSAGE value="Visuel PopupPremiereCo terminé." />
-    <MESSAGE value="vueResetMdp terminée. Début du back-end" />
-    <MESSAGE value="Réinitialisation mots de passes terminé (front &amp; back)" />
-    <MESSAGE value="Correction de crash" />
-    <MESSAGE value="Back premièreConnexion bien avancé" />
-    <MESSAGE value="Encore des corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Encore des corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

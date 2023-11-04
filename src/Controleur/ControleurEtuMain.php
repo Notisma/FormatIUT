@@ -167,7 +167,7 @@ class ControleurEtuMain extends ControleurMain
         $ancienId = (new ImageRepository())->imageParEtudiant(self::getCleEtudiant());
         (new EtudiantRepository())->updateImage(self::getCleEtudiant(), $id);
         if ($ancienId["img_id"] != 1 && $ancienId["img_id"] != 0) (new ImageRepository())->supprimer($ancienId["img_id"]);
-        self::afficherProfilEtu();
+        self::redirectionFlash("afficherProfilEtu", "success", "Image de profil ajoutée");
     }
 
     public static function getMenu(): array
