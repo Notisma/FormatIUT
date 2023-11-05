@@ -194,8 +194,7 @@ class ControleurMain
     public static function validerEmail(): void
     {
         VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
-        self::afficherPageConnexion();
-        header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
+        self::redirectionFlash("afficherPageConnexion", "success", "Email validé");
     }
 
     public static function redirectionFlash(string $action, string $type, string $message): void
@@ -224,7 +223,7 @@ class ControleurMain
                             $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
                             (new EntrepriseRepository())->creerObjet($entreprise);
                             VerificationEmail::envoiEmailValidation($entreprise);
-                            header("Location: controleurFrontal.php");
+                            self::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
                         } else {
                             self::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                         }

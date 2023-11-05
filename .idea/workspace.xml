@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections de crashs (reste à voir pour les nonces)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction des nonces et des emails mdp oubliés">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVuePresentationEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVuePresentationEntreprise.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/MotDePasse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/MotDePasse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,15 +172,7 @@
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
       <workItem from="1699121237507" duration="2821000" />
-      <workItem from="1699175237209" duration="1692000" />
-    </task>
-    <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
-      <option name="closed" value="true" />
-      <created>1696698095999</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1696698095999</updated>
+      <workItem from="1699175237209" duration="3961000" />
     </task>
     <task id="LOCAL-00043" summary="formulaireCreationOffre.php (version 1) terminé.">
       <option name="closed" value="true" />
@@ -563,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699176844316</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Correction des nonces et des emails mdp oubliés">
+      <option name="closed" value="true" />
+      <created>1699177252649</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1699177252649</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
     <MESSAGE value="Modifications de controleur" />
@@ -668,7 +670,8 @@
     <MESSAGE value="Corrections" />
     <MESSAGE value="Modifications" />
     <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections de crashs (reste à voir pour les nonces)" />
+    <MESSAGE value="Correction des nonces et des emails mdp oubliés" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction des nonces et des emails mdp oubliés" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
