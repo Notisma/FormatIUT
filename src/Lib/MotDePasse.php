@@ -23,8 +23,11 @@ class MotDePasse
     public static function genererChaineAleatoire(int $nbCaracteres = 22): string
     {
         //TODO : vérifier que ce qui est généré n'est pas déjà pris dans la base de données
+
         $octetsAleatoires = random_bytes(ceil($nbCaracteres * 6 / 8));
-        return substr(base64_encode($octetsAleatoires), 0, $nbCaracteres);
+        $chaineAleatoire = bin2hex($octetsAleatoires);
+        $chaineAleatoire = preg_replace('/[^0-9a-zA-Z]/', '', $chaineAleatoire);
+        return substr($chaineAleatoire, 0, $nbCaracteres);
     }
 
 }

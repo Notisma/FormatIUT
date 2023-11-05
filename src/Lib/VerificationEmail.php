@@ -16,11 +16,13 @@ class VerificationEmail
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
         $lienValidationEmail = "$absoluteURL?action=validerEmail&controleur=Main&login=$siretURL&nonce=$nonceURL";
-        $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
+        $corpsEmail = "<h2>Vous avez demandé la création de votre compte sur l'application Format'IUT.</h2><p>Cliquez sur le lien ci-dessous pour valider votre adresse mail.</p><a style='color: blue; text-decoration: underline;'  href=\"$lienValidationEmail\">VALIDER</a> <p>L'équipe de Format'IUT vous souhaite une bonne journée !</p>";
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
-        // Temporairement avant d'envoyer un vrai mail
-        mail($entreprise->getEmail(), "Validation Mot de Passe", $corpsEmail, "From: FormatIUT");
-        MessageFlash::ajouter("info", $corpsEmail);
+        mail($entreprise->getEmailAValider(), "Validation adresse email", self::squeletteCorpsMail("VALIDATION EMAIL", $corpsEmail), implode("\r\n", $headers));
+        mail("formatiut@yopmail.com", "reset mdp", "l'entreprise " . $entreprise->getNomEntreprise() . " a demandé un reset de mdp", implode("\r\n", $headers));
+
     }
 
     public static function traiterEmailValidation($login, $nonce): bool
@@ -50,7 +52,7 @@ class VerificationEmail
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
         mail($entreprise->getEmail(), "Reinitialisation de mot de passe", self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
-        mail("formatiut@gmail.com", "reset mdp", "l'entreprise " . $mailURL . " a demandé un reset de mdp", implode("\r\n", $headers));
+        mail("formatiut@yopmail.com", "reset mdp", "l'entreprise " . $mailURL . " a demandé un reset de mdp", implode("\r\n", $headers));
 
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
@@ -71,7 +73,7 @@ class VerificationEmail
 
     public static function aValideEmail(Entreprise $entreprise): bool
     {
-        // À compléter
+        //TODO À compléter
         if ($entreprise->getEmail() != "") return true;
         return false;
     }

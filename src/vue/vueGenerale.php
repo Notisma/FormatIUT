@@ -55,7 +55,7 @@
                 <div class="flash">
                     <?php
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                        echo "<div class='alert alert-" . $type . "'>";
+                        echo "<div id='flash' class='alert alert-" . $type . "' onclick=' ". \App\FormatIUT\Lib\MessageFlash::supprimerTousMessages() ." '>";
                         echo "<img src='../ressources/images/".$type.".png'>";
                             echo'<p>' . $lireMessage . '</p></div>'
                         ;
@@ -111,6 +111,7 @@
                     </ul>
                 </div>
             </div>
+            <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a> </p>
         </div>
         <div id="footerLogo">
             <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo">

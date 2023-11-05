@@ -52,10 +52,10 @@ class ControleurMain
                 $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
                 self::afficherVue('vueGenerale.php', ["menu" => $menu::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
             } else {
-                $menu::afficherErreur("L'offre n'existe pas");
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
             }
         } else {
-            $menu::afficherErreur("L'offre n'est pas renseignée");
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
         }
     }
 
@@ -186,23 +186,19 @@ class ControleurMain
     {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
-        //header("Location: controleurFrontal.php");
-        MessageFlash::ajouter("info", "Vous êtes déconnecté");
-        self::afficherIndex();
+        self::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
     }
 
     public static function validerEmail(): void
     {
         VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
-        self::afficherPageConnexion();
-        header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
+        self::redirectionFlash("afficherPageConnexion", "success", "Email validé");
     }
 
     public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        $controleur="App\FormatIUT\Controleur\Controleur".ucfirst($_REQUEST['controleur']);
-        $controleur::$action();
+        self::$action();
 
     }
 
@@ -225,7 +221,7 @@ class ControleurMain
                             $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
                             (new EntrepriseRepository())->creerObjet($entreprise);
                             VerificationEmail::envoiEmailValidation($entreprise);
-                            header("Location: controleurFrontal.php");
+                            self::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
                         } else {
                             self::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                         }
@@ -284,7 +280,7 @@ class ControleurMain
                         self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
                     }
                 } else {
-                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passes doivent corréler");
+                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passe doivent corréler");
                 }
             } else {
                 self::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");

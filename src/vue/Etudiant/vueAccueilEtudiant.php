@@ -173,11 +173,11 @@ if (isset($_REQUEST["premiereConnexion"])) {
         <div class="contenuPremiereCo">
             <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(3)">
                 <label for="telephone">Téléphone :
-                    <input type="number" name="telephone" placeholder="0670809010" required>
+                    <input type="number" name="telephone" placeholder="0670809010">
                 </label>
 
                 <label for="telephone">Mail personnel :
-                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex" required>
+                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex">
                 </label>
 
                 <?php
@@ -234,6 +234,7 @@ if (isset($_REQUEST["premiereConnexion"])) {
                 <div class="wrapBoutons">
                     <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
+                    <input type="hidden" name="estPremiereCo" value="true">
                     <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()"/>
                 </div>
             </form>
