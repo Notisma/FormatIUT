@@ -111,6 +111,7 @@
                     </ul>
                 </div>
             </div>
+            <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a> </p>
         </div>
         <div id="footerLogo">
             <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo">

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Modification des messages flash">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction visuelle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,15 +171,7 @@
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
       <workItem from="1699121237507" duration="2821000" />
-      <workItem from="1699175237209" duration="6017000" />
-    </task>
-    <task id="LOCAL-00046" summary="Tentative de fix un bug (j'ai échoué mdr)">
-      <option name="closed" value="true" />
-      <created>1696705439768</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1696705439769</updated>
+      <workItem from="1699175237209" duration="8264000" />
     </task>
     <task id="LOCAL-00047" summary="Merge de branches">
       <option name="closed" value="true" />
@@ -564,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699180892707</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Correction visuelle">
+      <option name="closed" value="true" />
+      <created>1699181320045</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1699181320045</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifications de controleur" />
     <MESSAGE value="Correction bug" />
     <MESSAGE value="Je répare ce que je peux" />
     <MESSAGE value="visuel vueDetailEntreprise.php (version 1) terminé." />
@@ -669,7 +669,8 @@
     <MESSAGE value="Envoi des emails de validation terminé." />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Modification des messages flash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modification des messages flash" />
+    <MESSAGE value="Correction visuelle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction visuelle" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

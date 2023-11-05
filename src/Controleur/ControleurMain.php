@@ -280,7 +280,7 @@ class ControleurMain
                         self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
                     }
                 } else {
-                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passes doivent corréler");
+                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passe doivent corréler");
                 }
             } else {
                 self::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
