@@ -52,10 +52,10 @@ class ControleurMain
                 $chemin = ucfirst($client) . "/vueDetail" . ucfirst($client) . ".php";
                 self::afficherVue('vueGenerale.php', ["menu" => $menu::getMenu(), "chemin" => $chemin, "titrePage" => "Detail de l'offre", "offre" => $offre, "entreprise" => $entreprise]);
             } else {
-                $menu::afficherErreur("L'offre n'existe pas");
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
             }
         } else {
-            $menu::afficherErreur("L'offre n'est pas renseignée");
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
         }
     }
 
