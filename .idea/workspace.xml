@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Modifications">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections de crashs (reste à voir pour les nonces)">
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lib/MotDePasse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/MotDePasse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,15 +169,7 @@
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
       <workItem from="1699121237507" duration="2821000" />
-      <workItem from="1699175237209" duration="1518000" />
-    </task>
-    <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
-      <option name="closed" value="true" />
-      <created>1696697664097</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1696697664097</updated>
+      <workItem from="1699175237209" duration="1692000" />
     </task>
     <task id="LOCAL-00042" summary="Ajouts d'espaces dans les titles.">
       <option name="closed" value="true" />
@@ -566,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699123674640</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Corrections de crashs (reste à voir pour les nonces)">
+      <option name="closed" value="true" />
+      <created>1699176844316</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1699176844316</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +643,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
     <MESSAGE value="Améliorations visuelles" />
@@ -671,7 +667,8 @@
     <MESSAGE value="Beaucoup de corrections." />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifications" />
+    <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections de crashs (reste à voir pour les nonces)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
