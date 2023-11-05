@@ -21,7 +21,7 @@ class VerificationEmail
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
         mail($entreprise->getEmailAValider(), "Validation adresse email", self::squeletteCorpsMail("VALIDATION EMAIL", $corpsEmail), implode("\r\n", $headers));
-        mail("formatiut@gmail.com", "reset mdp", "l'entreprise " . $entreprise->getNomEntreprise() . " a demandé un reset de mdp", implode("\r\n", $headers));
+        mail("formatiut@yopmail.com", "reset mdp", "l'entreprise " . $entreprise->getNomEntreprise() . " a demandé un reset de mdp", implode("\r\n", $headers));
 
     }
 
@@ -52,7 +52,7 @@ class VerificationEmail
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
 
         mail($entreprise->getEmail(), "Reinitialisation de mot de passe", self::squeletteCorpsMail("MOT DE PASSE OUBLIE", $corpsEmail), implode("\r\n", $headers));
-        mail("formatiut@gmail.com", "reset mdp", "l'entreprise " . $mailURL . " a demandé un reset de mdp", implode("\r\n", $headers));
+        mail("formatiut@yopmail.com", "reset mdp", "l'entreprise " . $mailURL . " a demandé un reset de mdp", implode("\r\n", $headers));
 
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
