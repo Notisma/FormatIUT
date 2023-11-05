@@ -55,10 +55,9 @@
                 <div class="flash">
                     <?php
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                        echo "<div id='flash' class='alert alert-" . $type . "' onclick=' ". \App\FormatIUT\Lib\MessageFlash::supprimerTousMessages() ." '>";
-                        echo "<img src='../ressources/images/".$type.".png'>";
-                            echo'<p>' . $lireMessage . '</p></div>'
-                        ;
+                        echo "<div id='flash' class='alert alert-" . $type . "' onclick=' " . \App\FormatIUT\Lib\MessageFlash::supprimerTousMessages() . " '>";
+                        echo "<img src='../ressources/images/" . $type . ".png'>";
+                        echo '<p>' . $lireMessage . '</p></div>';
                     }
                     ?>
                 </div>
@@ -67,18 +66,23 @@
 
         </div>
 
-        <div class="bandeauConteneur">
-            <div class="bandeau">
-                <?php
-                foreach ($menu as $item) {
-                    $actuel = "";
-                    if ($item['label'] == $titrePage) {
-                        $actuel = "id='active'";
-                    }
-                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
-                }
-                ?>
+
+        <div class="bandeau">
+            <div class="menuBurger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+
+            <?php
+            foreach ($menu as $item) {
+                $actuel = "";
+                if ($item['label'] == $titrePage) {
+                    $actuel = "id='active'";
+                }
+                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}'><p>{$item['label']}</p></div></a>";
+            }
+            ?>
         </div>
 
 
@@ -90,6 +94,8 @@
             </div>
         </div>
     </div>
+
+
 </body>
 <footer>
     <div id="footerContent">
@@ -111,7 +117,7 @@
                     </ul>
                 </div>
             </div>
-            <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a> </p>
+            <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a></p>
         </div>
         <div id="footerLogo">
             <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo">
