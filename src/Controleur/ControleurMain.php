@@ -186,9 +186,7 @@ class ControleurMain
     {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
-        //header("Location: controleurFrontal.php");
-        MessageFlash::ajouter("info", "Vous êtes déconnecté");
-        self::afficherIndex();
+        self::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
     }
 
     public static function validerEmail(): void

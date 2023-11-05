@@ -553,6 +553,10 @@ form {
     z-index: 0;
 }
 
+.alert:hover {
+    cursor: pointer;
+}
+
 .alert > p {
     margin-left: 5%;
     line-height: 1em;

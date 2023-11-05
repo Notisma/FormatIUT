@@ -65,4 +65,11 @@ class MessageFlash
         return array();
     }
 
+    public static function supprimerTousMessages() : void
+    {
+        $session=Session::getInstance();
+        $session->supprimer(self::$cleFlash);
+
+    }
+
 }
