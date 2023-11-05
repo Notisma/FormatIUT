@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Modifications">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueAccueilEtudiant.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/MotDePasse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/MotDePasse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/VerificationEmail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,15 +171,8 @@
       <workItem from="1697631246556" duration="1639000" />
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
-      <workItem from="1699121237507" duration="2032000" />
-    </task>
-    <task id="LOCAL-00040" summary="avancement sur vueDetail mais l'idEntreprise n'arrive pas à récupérer dans une Offre.php">
-      <option name="closed" value="true" />
-      <created>1696626967802</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1696626967804</updated>
+      <workItem from="1699121237507" duration="2821000" />
+      <workItem from="1699175237209" duration="1518000" />
     </task>
     <task id="LOCAL-00041" summary="Le formulaire avance, et c'est une bonne nouvelle">
       <option name="closed" value="true" />
@@ -565,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699122636870</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Modifications">
+      <option name="closed" value="true" />
+      <created>1699123674640</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1699123674640</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Avancées sur vueCompteEntreprise.php" />
     <MESSAGE value="Visuel (version 1) de vueCompte Entreprise et étudiant terminés." />
     <MESSAGE value="Correction de crash" />
     <MESSAGE value="Correction" />
@@ -670,7 +670,8 @@
     <MESSAGE value="Corrections." />
     <MESSAGE value="Beaucoup de corrections." />
     <MESSAGE value="Corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
+    <MESSAGE value="Modifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifications" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

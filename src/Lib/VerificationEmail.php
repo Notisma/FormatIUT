@@ -19,7 +19,7 @@ class VerificationEmail
         $corpsEmail = "<a href=\"$lienValidationEmail\">Validation</a>";
 
         // Temporairement avant d'envoyer un vrai mail
-        mail($entreprise->getEmail(), "Validation Mot de Passe", $corpsEmail, "From: FormatIUT");
+        mail($entreprise->getEmail(), "Validation Format'IUT", $corpsEmail, "From: FormatIUT");
         MessageFlash::ajouter("info", $corpsEmail);
     }
 
