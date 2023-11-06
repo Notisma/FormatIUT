@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="TODO controleurFrontal.php">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="connexion en tant que prof">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Prof.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Prof.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Connexion__Prof",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/home/ann2/tordeuxm/public_html/devapplicationformatiut",
+    "last_opened_file_path": "C:/MAMP/htdocs/SAE_DEV/src/vue/Prof",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -76,6 +76,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\SAE_DEV\src\vue\Prof" />
+      <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css\Prof" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\src\vue\Etudiant" />
@@ -176,14 +180,6 @@
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
-    </task>
-    <task id="LOCAL-00055" summary="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1).">
-      <option name="closed" value="true" />
-      <created>1696924918294</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1696924918294</updated>
     </task>
     <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
       <option name="closed" value="true" />
@@ -569,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699305219199</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="connexion en tant que prof">
+      <option name="closed" value="true" />
+      <created>1699308570753</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1699308570753</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -648,7 +652,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations et corrections visuelles" />
     <MESSAGE value="Ajout d'erreurs" />
     <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
@@ -673,7 +676,8 @@
     <MESSAGE value="Corrections de crashs" />
     <MESSAGE value="correction mesOffres" />
     <MESSAGE value="TODO controleurFrontal.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO controleurFrontal.php" />
+    <MESSAGE value="connexion en tant que prof" />
+    <option name="LAST_COMMIT_MESSAGE" value="connexion en tant que prof" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

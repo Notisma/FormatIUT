@@ -10,6 +10,7 @@ class Prof extends AbstractDataObject
     private string $nomProf;
     private string $prenomProf;
     private string $mailUniversitaire;
+    private string $img;
 
     /**
      * @param int $idProf
@@ -17,12 +18,13 @@ class Prof extends AbstractDataObject
      * @param string $prenomProf
      * @param string $loginProf
      */
-    public function __construct(int $idProf, string $nomProf, string $prenomProf,string $mailUniversitaire)
+    public function __construct(int $idProf, string $nomProf, string $prenomProf,string $mailUniversitaire,string $img)
     {
         $this->idProf = $idProf;
         $this->nomProf = $nomProf;
         $this->prenomProf = $prenomProf;
         $this->mailUniversitaire=$mailUniversitaire;
+        $this->img=$img;
     }
 
     public function getMailUniversitaire(): string
@@ -67,6 +69,17 @@ class Prof extends AbstractDataObject
         $this->prenomProf = $prenomProf;
     }
 
+    public function getImg(): string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): void
+    {
+        $this->img = $img;
+    }
+
+
 
     public function formatTableau(): array
     {
@@ -74,7 +87,8 @@ class Prof extends AbstractDataObject
             "idProf"=>$this->idProf,
             "nomProf"=>$this->nomProf,
             "prenomProf"=>$this->prenomProf,
-            "mailUniversitaire"=>$this->mailUniversitaire
+            "mailUniversitaire"=>$this->mailUniversitaire,
+            "img"=>$this->img,
         );
     }
 }

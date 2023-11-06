@@ -10,6 +10,10 @@ class ControleurProfMain extends ControleurMain
     public static function afficherAccueilProf(){
         self::afficherVue("Accueil Personnels","Prof/vueAccueilProf.php",self::getMenu());
     }
+
+    public static function afficherProfilProf(){
+        self::afficherVue("Compte Personnel","Prof/vueCompteProf.php",self::getMenu());
+    }
     public static function getMenu(): array
     {
         return array(

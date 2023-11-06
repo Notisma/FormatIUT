@@ -36,15 +36,27 @@ use App\FormatIUT\Configuration\Configuration;
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else {
-                    if (Configuration::controleurIs('EntrMain')) {
-                        $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                        $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                        $liaison = "?controleur=entrMain&action=afficherProfilEntr";
-                    } else if (Configuration::controleurIs('EtuMain')) {
-                        $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                        $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                        $liaison = "?controleur=etuMain&action=afficherProfilEtu";
+                    switch (Configuration::getControleur()){
+                        case "EntrMain" :
+                        {
+                            $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $liaison = "?controleur=entrMain&action=afficherProfilEntr";
+                        }
+                        case "EtuMain" :
+                        {
+                            $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
+                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $liaison = "?controleur=etuMain&action=afficherProfilEtu";
+                        }
+                        case "ProfMain" :
+                        {
+                            $image=((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                            $src="data:image/jpeg;base64,".base64_encode($image->getImg());
+                            $liaison="?controleur=ProfMain&action=afficherProfilProf";
+                        }
                     }
+
                     echo "<form action='?controleur=" . Configuration::getControleur() . "&action=rechercher' method='post'>
                 <input class='searchField' name='recherche' placeholder='Rechercher...' required>
             </form>";

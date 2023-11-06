@@ -11,26 +11,28 @@ class ProfRepository extends AbstractRepository
 
     protected function getNomTable(): string
     {
-        return "Prof";
+        return "Profs";
     }
 
     protected function getNomsColonnes(): array
     {
-        return array("idProf","nomProf","prenomProf","mailUniversitaire");
+        return array("idProf","nomProf","prenomProf","mailUniversitaire","img_id");
     }
 
     protected function getClePrimaire(): string
     {
-        return "idProf";
+        return "nomProf";
     }
 
     public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
     {
+        $image=((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
         return new Prof(
             $DataObjectTableau["idProf"],
             $DataObjectTableau["nomProf"],
             $DataObjectTableau["prenomProf"],
-            $DataObjectTableau["mailUniversitaire"]
+            $DataObjectTableau["mailUniversitaire"],
+            $image["img_blob"]
         );
     }
 
