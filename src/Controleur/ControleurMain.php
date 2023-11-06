@@ -22,7 +22,7 @@ class ControleurMain
     /***
      * Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
      */
-    public static function afficherIndex()
+    public static function afficherIndex(): void
     {
         self::afficherVue("Accueil", "vueIndex.php", self::getMenu());
     }
@@ -30,9 +30,9 @@ class ControleurMain
     /***
      * Affiche la page de présentations aux entreprises n'ayant pas de compte
      */
-    public static function afficherVuePresentation()
+    public static function afficherVuePresentation(): void
     {
-        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
+        self::afficherVue("Accueilm Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
     /***
@@ -151,7 +151,7 @@ class ControleurMain
         return $id;
     }
 
-    public static function afficherPageConnexion()
+    public static function afficherPageConnexion(): void
     {
         self::afficherVue("Se Connecter", "vueFormulaireConnexion.php", self::getMenu());
     }
@@ -184,7 +184,7 @@ class ControleurMain
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
 
-    public static function seDeconnecter()
+    public static function seDeconnecter(): void
     {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
@@ -204,7 +204,7 @@ class ControleurMain
 
     }
 
-    public static function creerCompteEntreprise()
+    public static function creerCompteEntreprise(): void
     {
         //vérification des nombres négatifs
         if ($_REQUEST["siret"] > 0 && $_REQUEST["codePostal"] > 0 && $_REQUEST["tel"] > 0 && $_REQUEST["effectif"] > 0) {

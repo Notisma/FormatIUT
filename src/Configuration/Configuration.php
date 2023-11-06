@@ -48,6 +48,8 @@ class Configuration
 
     public static function getAbsoluteURL()
     {
+        //return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
+
         return "http://localhost/SAE_DEV/web/controleurFrontal.php";
     }
 

@@ -1,11 +1,11 @@
-    <!-- TODO le script pour erreur html -->
-    <script src="../ressources/javaScript/mesFonctions.js"></script>
- <?php
+<!-- TODO le script pour erreur html -->
+<script src="../ressources/javaScript/mesFonctions.js"></script>
+
+<div class="conteneurPrincipal" id="conteneurPrincipal" <?php
 if (isset($_REQUEST["premiereConnexion"])) {
     echo "onload='afficherPopupPremiereCo(0)'";
-} ?>
->
-<div class="conteneurPrincipal" id="conteneurPrincipal">
+}
+?>>
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3 onclick="afficherPopupPremiereCo(0)">Bonjour, <?php
@@ -123,7 +123,7 @@ if (isset($_REQUEST["premiereConnexion"])) {
             <p>En quelques clics, complétez votre profil, puis démarrez l'aventure Format'IUT !</p>
 
             <div class="wrapBoutons">
-                <a href="?action=seDeconnecter&controleur=EtuMain">RETOUR</a>
+                <a href="?action=seDeconnecter">RETOUR</a>
                 <a onclick="afficherPopupPremiereCo(1)">SUIVANT</a>
             </div>
         </div>
@@ -240,3 +240,4 @@ if (isset($_REQUEST["premiereConnexion"])) {
 
 
 </div>
+
