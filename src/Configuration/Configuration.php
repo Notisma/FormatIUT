@@ -30,10 +30,10 @@ class Configuration
     );
     
     static private function getConfig():array{
-        if (strpbrk($_SERVER["HTTP_HOST"],"localhost")) {
-            return self::$configLocal;
+        if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
+            return self::$configWebInfo;
         }
-        else return self::$configWebInfo;
+        else return self::$configLocal;
     }
 
     public static function getHostname(): string
@@ -63,10 +63,11 @@ class Configuration
 
     public static function getAbsoluteURL()
     {
-        if (strpbrk($_SERVER["HTTP_HOST"],"localhost")) {
-            return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+        if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
+            return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
         }
-        return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
+        return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+
     }
 
 
