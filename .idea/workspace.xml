@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Encore une correction après merge (il était délicat celui-ci)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections de crashs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,15 +172,7 @@
       <workItem from="1699121237507" duration="2821000" />
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
-      <workItem from="1699277443918" duration="5425000" />
-    </task>
-    <task id="LOCAL-00052" summary="Avancées graphiques">
-      <option name="closed" value="true" />
-      <created>1696834602644</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1696834602644</updated>
+      <workItem from="1699277443918" duration="6925000" />
     </task>
     <task id="LOCAL-00053" summary="Avancées">
       <option name="closed" value="true" />
@@ -568,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699281899300</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="Corrections de crashs">
+      <option name="closed" value="true" />
+      <created>1699283922689</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1699283922689</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des travaux sur vueDetailEtudiant.php" />
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) terminé." />
     <MESSAGE value="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci." />
     <MESSAGE value="Améliorations et corrections visuelles" />
@@ -672,7 +669,8 @@
     <MESSAGE value="Tests" />
     <MESSAGE value="Correction après merge" />
     <MESSAGE value="Encore une correction après merge (il était délicat celui-ci)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Encore une correction après merge (il était délicat celui-ci)" />
+    <MESSAGE value="Corrections de crashs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections de crashs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

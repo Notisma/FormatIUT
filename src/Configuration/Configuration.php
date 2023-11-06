@@ -12,45 +12,61 @@ namespace App\FormatIUT\Configuration;
 class Configuration
 {
 
-    static private array $config = array(
+    static private array $configLocal = array(
+        
         'hostname' => 'localhost',
         'database' => 'loyet',
         'port' => '3306',
         'login' => 'root',
-        //'password' => 'gfsGnT!!hSSfE88.'
         'password'=>'root'
     );
+    static private array $configWebInfo = array(
+
+        'hostname' => 'localhost',
+        'database' => 'loyet',
+        'port' => '3306',
+        'login' => 'loyet',
+        'password' => 'gfsGnT!!hSSfE88.'
+    );
+    
+    static private function getConfig():array{
+        if ($_SERVER['HTTP_HOST'] == "localhost") {
+            return self::$configLocal;
+        }
+        else return self::$configWebInfo;
+    }
 
     public static function getHostname(): string
     {
-        return self::$config['hostname'];
+        return self::getConfig()['hostname'];
     }
 
     public static function getDatabase(): string
     {
-        return self::$config['database'];
+        return self::getConfig()['database'];
     }
 
     public static function getLogin(): string
     {
-        return self::$config['login'];
+        return self::getConfig()['login'];
     }
 
     public static function getPassword(): string
     {
-        return self::$config['password'];
+        return self::getConfig()['password'];
     }
 
     public static function getPort(): string
     {
-        return self::$config['port'];
+        return self::getConfig()['port'];
     }
 
     public static function getAbsoluteURL()
     {
-        //return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
-
-        return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+        if ($_SERVER['HTTP_HOST'] =="localhost") {
+            return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+        }
+        return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
     }
 
 

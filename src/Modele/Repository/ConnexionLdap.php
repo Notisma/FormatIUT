@@ -13,9 +13,10 @@ class ConnexionLdap
     {
         //on essaie de se connecter, et si ça crash on affiche une erreur
         //echo $_SERVER['HTTP_HOST'];//.$_SERVER['PHP_SELF'];
-        if (strpos($_SERVER['HTTP_HOST'], "webinfo")) {
+        if ($_SERVER['HTTP_HOST'] != "localhost") {
             ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(), ConfigurationLdap::getPort()));
             ldap_set_option(ConfigurationLdap::getConn(), LDAP_OPT_PROTOCOL_VERSION, 3);
+            self::verifLDap($login, $mdp);
         } else {
             //on se connecte à une page web sur internet, et on lit ce qui est écrit en json
             //on apelle une fonction dans ce même fichier
@@ -34,7 +35,6 @@ class ConnexionLdap
 
     public static function verifLDap(string $login, string $password): bool
     {
-        self::connexion($login, $password, "connexion");
         $ldap_searchfilter = "(uid=$login)";
         $search = ldap_search(ConfigurationLdap::getConn(), ConfigurationLdap::getBasedn(), $ldap_searchfilter, array());
         $user_result = ldap_get_entries(ConfigurationLdap::getConn(), $search);
