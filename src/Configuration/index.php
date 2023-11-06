@@ -4,6 +4,9 @@
 // récupère en paramètre un login et un mot de passse, se connecte à ldap et vérifie que le mot de passe est correct pour ce login, puis écrit en json sur la page toutes les informations
 if (isset($_REQUEST["login"],$_REQUEST["mdp"],$_REQUEST["action"],$_REQUEST["cle"])) {
     if (rawurldecode($_REQUEST["cle"])==ControleurConnexionLdap::getCleIndex()) {
+        if ($_REQUEST["action"]=="afficherListe"){
+            ControleurConnexionLdap::listePersonnes();
+        }
             ControleurConnexionLdap::connexion();
             if (ControleurConnexionLdap::userExist($_REQUEST["login"])) {
                 if (ControleurConnexionLdap::verifLDap($_REQUEST["login"], $_REQUEST["mdp"])) {

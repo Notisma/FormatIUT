@@ -53,7 +53,7 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherMesOffres()
     {
         $listOffre = (new OffreRepository())->listOffreEtu(self::getCleEtudiant());
-        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" => $listOffre, "numEtu" => self::$cleEtudiant]);
+        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
     }
 
     public static function annulerOffre()

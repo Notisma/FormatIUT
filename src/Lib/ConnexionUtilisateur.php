@@ -3,9 +3,11 @@ namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\DataObject\Etudiant;
+use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ConnexionUtilisateur
 {
@@ -74,7 +76,7 @@ class ConnexionUtilisateur
         return $chiffres;
     }
 
-    public static function premiereConnexion(string $login) : bool{
+    public static function premiereConnexionEtu(string $login) : bool{
         if (!(new EtudiantRepository())->estEtudiant($login)){
             $infos=ConnexionLdap::getInfoPersonne();
             $value=array("numEtudiant"=>self::genererChiffresAleatoires(),"prenomEtudiant"=>$infos["prenom"],"nomEtudiant"=>$infos["nom"],"loginEtudiant"=>$login,"mailUniversitaire"=>$infos["mail"]);
@@ -83,4 +85,14 @@ class ConnexionUtilisateur
         }
         return false;
     }
+
+    public static function premiereConnexionProf(string $login)
+    {
+        if (!(new ProfRepository())->estProf($login)){
+            $infos=ConnexionLdap::getInfoPersonne();
+            $prof=new Prof(2,$infos["nom"],$infos["prenom"],$infos["mail"]);
+            (new ProfRepository())->creerObjet($prof);
+        }
+    }
+
 }

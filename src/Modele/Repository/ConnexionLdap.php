@@ -63,14 +63,17 @@ class ConnexionLdap
 
     public static function getInfoPersonne()
     {
-        return array(
+
+        $infos= array(
             "nom" => self::$infosUser[1],
             "prenom" => self::$infosUser[3],
             "mail" => self::$infosUser[5],
             "type" => self::$infosUser[7],
-            "Annee" => self::$infosUser[9],
-
         );
+        if ($infos["type"]=="Etudiants"){
+            $infos["Annee"] = self::$infosUser[9];
+        }
+        return $infos;
 
     }
 
