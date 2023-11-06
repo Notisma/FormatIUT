@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Modifications">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,15 +171,8 @@
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
       <workItem from="1699121237507" duration="2821000" />
-      <workItem from="1699175237209" duration="8640000" />
-    </task>
-    <task id="LOCAL-00048" summary="Avancées graphiques">
-      <option name="closed" value="true" />
-      <created>1696773423164</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1696773423164</updated>
+      <workItem from="1699175237209" duration="8661000" />
+      <workItem from="1699188217938" duration="6330000" />
     </task>
     <task id="LOCAL-00049" summary="Avancées sur vueMesOffres.php">
       <option name="closed" value="true" />
@@ -564,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699183593151</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Corrections">
+      <option name="closed" value="true" />
+      <created>1699183968779</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1699183968779</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,11 +666,11 @@
     <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
     <MESSAGE value="Correction des nonces et des emails mdp oubliés" />
     <MESSAGE value="Envoi des emails de validation terminé." />
-    <MESSAGE value="Corrections" />
     <MESSAGE value="Modification des messages flash" />
     <MESSAGE value="Correction visuelle" />
     <MESSAGE value="Modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifications" />
+    <MESSAGE value="Corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
