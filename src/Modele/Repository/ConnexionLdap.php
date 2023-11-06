@@ -16,7 +16,8 @@ class ConnexionLdap
         if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
             ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(), ConfigurationLdap::getPort()));
             ldap_set_option(ConfigurationLdap::getConn(), LDAP_OPT_PROTOCOL_VERSION, 3);
-            self::verifLDap($login, $mdp);
+            return self::verifLDap($login, $mdp);
+
         } else {
             //on se connecte à une page web sur internet, et on lit ce qui est écrit en json
             //on apelle une fonction dans ce même fichier

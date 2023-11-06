@@ -31,7 +31,7 @@ if (class_exists($nomClasseControleur)) {
         if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
             \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
         } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
-            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","veuillez vous connecter");
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","Veuillez vous connecter");
         } else {
             $nomClasseControleur::$action();
         }
