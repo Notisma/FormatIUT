@@ -37,5 +37,5 @@ if (class_exists($nomClasseControleur)) {
         $nomClasseControleur::afficherErreur('L\'action : "'.$action.'" n\'existe pas dans le contrôleur : "'.$nomClasseControleur.'"');
 } else {
     Configuration::setControleur("Main");
-    ControleurMain::afficherErreur("Le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets} n'existe pas");
+    ControleurMain::afficherErreur('Le contrôleur : '.$nomClasseControleur.' n\'existe pas');
 }
