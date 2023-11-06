@@ -57,20 +57,19 @@
                     <input type="text" name="assurance" id="assu_id" required></p>
                 <p>Informations de l'entreprise :</p>
                 <p><label for="sir_id">Siret</label>
-                    <input type="number" name="siret" id="assu_id" required></p>
+                    <input type="number" name="siret" value="<?= $entreprise->getSiret();?>" id="sir_id" required></p>
                 <p><label for="nomEntr_id"> Nom entreprise </label>
-                    <input type="text" name="nomEntreprise" id="nomEntr_id" required>
+                    <input type="text" name="nomEntreprise" value="<?= $entreprise->getNomEntreprise();?>" id="nomEntr_id" required>
                 </p>
                 <p><label for="adrEntr_id">Adresse Entreprise</label>
-                    <input type="text" name="adresseEntr" id="adrEntr_id" required></p>
+                    <input type="text" name="adresseEntr" value="<?= $entreprise->getAdresse();?>" id="adrEntr_id" required></p>
                 <p><label for="villeEntr_id"> Ville </label>
-                    <input type="text" name="villeEntr" id="villeEntr_id" required>
+                    <input type="text" name="villeEntr" value="<?= $villeEntr->getNomVille();?>" id="villeEntr_id" required>
                 <p><label for="cpEntr_id">Code postal </label>
-                    <input type="text" name="codePostalEntr" id="cpEntr_id" required></p>
+                    <input type="text" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>" id="cpEntr_id" required></p>
                 <?php
                 $dateDebut = $offre->getDateDebut();
                 $dateD = $dateDebut->format('Y-m-d');
-                //echo $dateD
                 $dateFin = $offre->getDateFin();
                 $dateF = $dateFin->format('Y-m-d');
                 echo '<p><label for="debut_id"> Alternance : Date début </label>

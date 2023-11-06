@@ -13,13 +13,9 @@
                 <p><label for="offre_id">Votre stage : </label>
 
                     <?php
-                        if((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getOffreValidee($etudiant->getNumEtudiant(), "Stage")){
-                        foreach ($listOffres as $offre){
-                        if((new \App\FormatIUT\Modele\Repository\RegarderRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "Validée" && $offre->getTypeOffre() == "Stage"){
+                        if($offre){
                             echo '<input value="'.$offre->getNomOffre().'" name="nomOffre" id="offre_id"  readonly required> </input>';
                             echo '<input type="hidden" value="'.$offre->getIdOffre().'" name="idOff"> </input>';
-                        }
-                        }
                         }
                         else{
                             echo '<input value="aucune" name="idOff" id="offre_id"  readonly required>';
@@ -53,23 +49,30 @@
                 <p><label for="mail_id">Mail</label>
                     <input type="text" value="<?= $etudiant->getMailPerso(); ?>" name="mailEtu" id="mail_id" readonly required></p>
                 <p><label for="assu_id">Assurance</label>
-                    <input type="text" name="assurance" id="assu_id" required></p>
+                    <input type="text" name="assurance" id="assu_id" required>
+                </p>
                 <p>Informations de l'entreprise :</p>
                 <p><label for="sir_id">Siret</label>
-                    <input type="number" name="siret" id="assu_id" required></p>
+                    <input type="number" name="siret" value="<?= $entreprise->getSiret();?>" id="sir_id" required></p>
                 <p><label for="nomEntr_id"> Nom entreprise </label>
-                    <input type="text" name="nomEntreprise" id="nomEntr_id" required>
+                    <input type="text" name="nomEntreprise" value="<?= $entreprise->getNomEntreprise();?>" id="nomEntr_id" required>
                 </p>
                 <p><label for="adrEntr_id">Adresse Entreprise</label>
-                    <input type="text" name="adresseEntr" id="adrEntr_id" required></p>
+                    <input type="text" name="adresseEntr" value="<?= $entreprise->getAdresse();?>" id="adrEntr_id" required></p>
                 <p><label for="villeEntr_id"> Ville </label>
-                    <input type="text" name="villeEntr" id="villeEntr_id" required>
+                    <input type="text" name="villeEntr" value="<?= $villeEntr->getNomVille();?>" id="villeEntr_id" required>
                 <p><label for="cpEntr_id">Code postal </label>
-                    <input type="text" name="codePostalEntr" id="cpEntr_id" required></p>
-                <p><label for="debut_id"> Stage : Date début </label>
-                    <input type="date" name="dateDebut" id="debut_id" required>
+                    <input type="text" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>" id="cpEntr_id" required></p>
+
+                 <?php
+                $dateDebut = $offre->getDateDebut();
+                $dateD = $dateDebut->format('Y-m-d');
+                $dateFin = $offre->getDateFin();
+                $dateF = $dateFin->format('Y-m-d');
+                echo '<p><label for="debut_id"> Stage : Date début </label>
+                    <input type="date" name="dateDebut" value="'.$dateD.'" id="debut_id" required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" name="dateFin" id="fin_id" required></p>
+                    <input type="date" name="dateFin" value="'.$dateF.'" id="fin_id" required></p>';?>
                 <p>
                     <label class="labelFormulaire" for="objStage_id">Objectifs du stage : </label>
                 <div class="grandInputCentre">

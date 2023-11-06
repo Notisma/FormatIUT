@@ -246,21 +246,24 @@ class ControleurEtuMain extends ControleurMain
 
     public static function afficherFormulaireConventionStage()
     {
-        $listOffres = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
+        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
         $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
         $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-        self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "listOffres" => $listOffres]);
+        self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise"=>$entreprise, "villeEntr"=>$villeEntr]);
     }
 
     public static function afficherFormulaireConventionAlternance()
     {
-        $listOffres = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
         $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
         $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
         $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-        self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre]);
+        self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise"=>$entreprise , "villeEntr"=>$villeEntr]);
     }
 
 

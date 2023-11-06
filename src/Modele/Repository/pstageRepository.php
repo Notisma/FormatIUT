@@ -2,6 +2,7 @@
 namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\pstage;
+use DateTime;
 
 class pstageRepository extends AbstractRepository {
     public function getNomTable(): string
@@ -10,20 +11,178 @@ class pstageRepository extends AbstractRepository {
     }
     public function getClePrimaire(): string
     {
-        return "numeroEtudiant";
+        return "numeroConvention";
     }
     public function getNomsColonnes(): array
     {
-        return array("numeroEtudiant", "nomEtudiant", "prenomEtudiant", "age", "annee", "stage");
+        return array(
+        "numeroConvention",
+        "numeroEtudiant",
+        "nomEtudiant",
+        "prenomEtudiant",
+        "telPersoEtu",
+        "telPortEtu",
+        "mailPersoEtu",
+        "mailUnivEtu",
+        "codeUFR",
+        "libelleUFR",
+        "codeDepartement",
+        "dateDebutStage",
+        "dateFinStage",
+        "interruption",
+        "dateDebutInterruption",
+        "dateFinInterruption",
+        "thematique",
+        "sujet",
+        "fonctionTache",
+        "detailProjet",
+        "dureeStage",
+        "nbJoursTravail",
+        "nbHeuresHebdo",
+        "gratification",
+        "uniteGratification",
+        "uniteDureeGratification",
+        "conventionValidee",
+        "nomEnseignantReferent",
+        "prenomEnseignantReferent",
+        "mailEnseignantReferent",
+        "nomSignataire",
+        "prenomSignataire",
+        "mailSignataire",
+        "fonctionSignataire",
+        "anneeUniversitaire",
+        "typeConvention",
+        "commentaireStage",
+        "commentaireDureeTravail",
+        "codeELP",
+        "elementPedagogique",
+        "codeSexeEtu",
+        "avantagesNature",
+        "adresseEtu",
+        "codePostalEtu",
+        "paysEtu",
+        "villeEtu",
+        "conventionValideePedagogiquement",
+        "avenantConvention",
+        "detailsAvenant",
+        "dateCreationConvention",
+        "modificationConvention",
+        "origineStage",
+        "nomEtablissement",
+        "siret",
+        "adresseResidence",
+        "adresseVoie",
+        "adresseLibCedex",
+        "codePostal",
+        "etablissementCommune",
+        "pays",
+        "statutJuridique",
+        "typeStructure",
+        "effectif",
+        "codeNAF",
+        "tel",
+        "fax",
+        "mail",
+        "siteWeb",
+        "nomServiceAccueil",
+        "residenceServiceAccueil",
+        "cedexServiceAccueil",
+        "postalServiceAccueil",
+        "communeServiceAccueil",
+        "paysServiceAccueil",
+        "nomTuteurProfessionnel",
+        "prenomTuteurProfessionnel",
+        "mailTuteurProfessionnel",
+        "telTuteurProfessionnel",
+        "fonctionTuteurProfessionnel"
+    );
     }
-   public function construireDepuisTableau(array $DataObjectTableau): pstage
-   {
-       if($DataObjectTableau[5]==0){
-           $boolean = false;
-       }
-       else{
-           $boolean=true;
-       }
-      return new pstage($DataObjectTableau[0], $DataObjectTableau[1], $DataObjectTableau[2], $DataObjectTableau[3], $DataObjectTableau[4], $boolean);
-   }
+    public function construireDepuisTableau(array $DataObjectTableau): pstage
+{
+    $interruption = $DataObjectTableau[13] ? true : false;
+    $conventionValidee = $DataObjectTableau[24] ? true : false;
+    $conventionValideePedagogiquement = $DataObjectTableau[47] ? true : false;
+    $avenantConvention = $DataObjectTableau[48] ? true : false;
+
+    return new pstage(
+        $DataObjectTableau[0],
+        $DataObjectTableau[1],
+        $DataObjectTableau[2],
+        $DataObjectTableau[3],
+        $DataObjectTableau[4],
+        $DataObjectTableau[5],
+        $DataObjectTableau[6],
+        $DataObjectTableau[7],
+        $DataObjectTableau[8],
+        $DataObjectTableau[9],
+        $DataObjectTableau[10],
+        new DateTime($DataObjectTableau[11]),
+        new DateTime($DataObjectTableau[12]),
+        $interruption,
+        new DateTime($DataObjectTableau[14]),
+        new DateTime($DataObjectTableau[15]),
+        $DataObjectTableau[16],
+        $DataObjectTableau[17],
+        $DataObjectTableau[18],
+        $DataObjectTableau[19],
+        $DataObjectTableau[20],
+        $DataObjectTableau[21],
+        $DataObjectTableau[22],
+        $DataObjectTableau[23],
+        $DataObjectTableau[25],
+        $DataObjectTableau[26],
+        $conventionValidee,
+        $DataObjectTableau[27],
+        $DataObjectTableau[28],
+        $DataObjectTableau[29],
+        $DataObjectTableau[30],
+        $DataObjectTableau[31],
+        $DataObjectTableau[32],
+        $DataObjectTableau[33],
+        $DataObjectTableau[34],
+        $DataObjectTableau[35],
+        $DataObjectTableau[36],
+        $DataObjectTableau[37],
+        $DataObjectTableau[38],
+        $DataObjectTableau[39],
+        $DataObjectTableau[40],
+        $DataObjectTableau[41],
+        $DataObjectTableau[42],
+        $DataObjectTableau[43],
+        $DataObjectTableau[44],
+        $DataObjectTableau[45],
+        $conventionValideePedagogiquement,
+        $avenantConvention,
+        $DataObjectTableau[49],
+        new DateTime($DataObjectTableau[50]),
+        new DateTime($DataObjectTableau[51]),
+        $DataObjectTableau[52],
+        $DataObjectTableau[53],
+        $DataObjectTableau[54],
+        $DataObjectTableau[55],
+        $DataObjectTableau[56],
+        $DataObjectTableau[57],
+        $DataObjectTableau[58],
+        $DataObjectTableau[59],
+        $DataObjectTableau[60],
+        $DataObjectTableau[61],
+        $DataObjectTableau[62],
+        $DataObjectTableau[63],
+        $DataObjectTableau[64],
+        $DataObjectTableau[65],
+        $DataObjectTableau[66],
+        $DataObjectTableau[67],
+        $DataObjectTableau[68],
+        $DataObjectTableau[69],
+        $DataObjectTableau[70],
+        $DataObjectTableau[71],
+        $DataObjectTableau[72],
+        $DataObjectTableau[73],
+        $DataObjectTableau[74],
+        $DataObjectTableau[75],
+        $DataObjectTableau[76],
+        $DataObjectTableau[77],
+        $DataObjectTableau[78]
+    );
+}
 }
