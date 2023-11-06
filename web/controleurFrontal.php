@@ -25,7 +25,6 @@ if (isset($_REQUEST['action'])) {
 
 $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 
-$guillemets = '"';
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
@@ -35,7 +34,7 @@ if (class_exists($nomClasseControleur)) {
             $nomClasseControleur::$action();
         }
     } else
-        $nomClasseControleur::afficherErreur("L'action : {$guillemets}{$action}{$guillemets} n'existe pas dans le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets}");
+        $nomClasseControleur::afficherErreur('L\'action : "'.$action.'" n\'existe pas dans le contrôleur : "'.$nomClasseControleur.'"');
 } else {
     Configuration::setControleur("Main");
     ControleurMain::afficherErreur("Le contrôleur : {$guillemets}{$nomClasseControleur}{$guillemets} n'existe pas");
