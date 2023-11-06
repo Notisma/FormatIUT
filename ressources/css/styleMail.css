@@ -1,0 +1,70 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.wrapHeadMail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+}
+
+.wrapHeadMail > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+.wrapHeadMail > div > img {
+    width: 70%;
+}
+
+.wrapHeadMail > div > h1 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    margin-top: 3%;
+    letter-spacing: 0.04em;
+}
+
+.corpsMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 100%;
+}
+
+.corpsMessage > p {
+    font-family: "Open Sans extra", sans-serif;
+    line-height: 1.4em;
+}
+
+.corpsMessage > a {
+    color: white;
+    background-color: #ff5660;
+    text-decoration: none;
+    border-radius: 50px;
+    width: 30%;
+    height: 5%;
+}
+
+.corpsMessage > a:hover {
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.corpsMessage > h3 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    margin-top: 3%;
+    letter-spacing: 0.04em;
+}

@@ -28,8 +28,10 @@ $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        if ($controleur == "EntrMain" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-            ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","veuillez vous connecter");
         } else {
             $nomClasseControleur::$action();
         }

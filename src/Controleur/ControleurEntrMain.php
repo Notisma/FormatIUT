@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -75,30 +76,37 @@ class ControleurEntrMain extends ControleurMain
     {
         //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
+            $idOffre = $_REQUEST["idOffre"];
             $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
                 if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
-                    self::afficherErreur("L'offre est déjà prise");
+                    MessageFlash::ajouter("danger", "L'offre est déjà assignée à un étudiant");
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
                 } else {
                     if (((new EtudiantRepository())->aUneFormation($_REQUEST["idOffre"]))) {
-                        self::afficherErreur("L'étudiant a déjà une formation");
+                        MessageFlash::ajouter("danger", "Cet étudiant a déjà une formation");
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
                     } else {
                         if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
                             (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
-                            self::afficherAccueilEntr();
+                            self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné avec succès");
                         } else {
-                            self::afficherErreur("L'étudiant n'es pas en Attente");
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                            MessageFlash::ajouter("danger", "Cet étudiant n'a pas postulé à cette offre");
                         }
 
                     }
                 }
             } else {
-                self::afficherErreur("L'étudiant ou l'offre n'existe pas");
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                MessageFlash::ajouter("danger", "Cet étudiant n'existe pas");
             }
         } else {
-            self::afficherErreur("Données Manquantes pour assigner un étudiant");
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+            MessageFlash::ajouter("danger", "Des données sont manquantes");
+
         }
 
     }
@@ -125,6 +133,7 @@ class ControleurEntrMain extends ControleurMain
             (new ImageRepository())->supprimer($ancienId["img_id"]);
         }
         $_REQUEST["action"] = "afficherProfilEntr()";
+        MessageFlash::ajouter("success", "Image modifiée avec succès.");
         self::afficherProfilEntr();
     }
 
@@ -144,15 +153,19 @@ class ControleurEntrMain extends ControleurMain
                         $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
                         (new OffreRepository())->creerObjet($offre);
                         $_REQUEST["action"] = "mesOffres";
+                        MessageFlash::ajouter("success", "Offre créée avec succès");
                         self::mesOffres();
                     } else {
-                        self::afficherErreur("Concordance des heures");
+                        header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                        MessageFlash::ajouter("danger", "Les heures inscrites ne sont pas correctes");
                     }
                 } else {
-                    self::afficherErreur("Concordance des jours");
+                    header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                    MessageFlash::ajouter("danger", "Les jours inscrits ne sont pas corrects");
                 }
             } else {
-                self::afficherErreur("Des données sont érronées");
+                header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                MessageFlash::ajouter("danger", "Des données sont erronées");
             }
             /*}else {
                 //redirectionFlash "Concordance des dates
@@ -161,7 +174,8 @@ class ControleurEntrMain extends ControleurMain
             }*/
         } else {
             //redirectionFlash "éléments manquants
-            self::afficherErreur("Des données sont manquantes");
+            header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+            MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
 
     }
@@ -178,18 +192,23 @@ class ControleurEntrMain extends ControleurMain
                         (new RegarderRepository())->supprimerOffreDansRegarder($_REQUEST["idOffre"]);
                         (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
-                        self::afficherAccueilEntr();
+                        header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
+                        MessageFlash::ajouter("success", "Offre supprimée");
                     } else {
-                        self::afficherErreur("Cette offre ne vous appartient pas");
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                        MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
                     }
                 } else {
-                    self::afficherErreur("Cette offre a été admise par un étudiant");
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                    MessageFlash::ajouter("danger", "Cette offre a été acceptée par un étudiant");
                 }
             } else {
-                self::afficherErreur("Cette offre n'existe pas");
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                MessageFlash::ajouter("danger", "Cette offre n'existe pas");
             }
         } else {
-            self::afficherErreur("Données Manquantes");
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+            MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
 
@@ -212,21 +231,27 @@ class ControleurEntrMain extends ControleurMain
                             $offre->setJoursParSemaine($_POST['joursParSemaine']);
                             $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
                             (new OffreRepository())->modifierObjet($offre);
-                            self::afficherVueDetailOffre($offre->getIdOffre());
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                            MessageFlash::ajouter("success", "Offre modifiée avec succès");
                         } else {
-                            self::afficherErreur("Cette offre ne vous appartient pas");
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                            MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
                         }
                     } else {
-                        self::afficherErreur("Cette offre a déjà été admise par un étudiant");
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                        MessageFlash::ajouter("danger", "Cette offre a déjà été acceptée par l'étudiant");
                     }
                 } else {
-                    self::afficherErreur("Cette offre n'existe pas");
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                    MessageFlash::ajouter("danger", "Cette offre n'existe pas");
                 }
             } else {
-                self::afficherErreur("Certaines données renseignées sont erronnées");
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                MessageFlash::ajouter("danger", "Certaines données sont erronnées");
             }
         } else {
-            self::afficherErreur("Données manquantes");
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+            MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
 }

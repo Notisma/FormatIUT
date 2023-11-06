@@ -46,9 +46,12 @@
             <li>Parcours : " . $etudiant->getParcours() . "</li>
             " ?>
             </ul>
+
             <img src="../ressources/images/donneesEtu.png" alt="illu">
+
         </div>
     </div>
+
 
     <div class="detailsDeEntreprise">
         <!-- TODO/ STats 2/3-->
@@ -68,7 +71,9 @@
 
                     en attente d'assignation</h4>
             </div>
+
         </div>
+
 
         <div class="statistiques">
             <div class="illustrationStat">

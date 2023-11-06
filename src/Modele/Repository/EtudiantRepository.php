@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
@@ -16,7 +17,7 @@ class   EtudiantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","mdpEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
+        return array("numEtudiant","prenomEtudiant","nomEtudiant","loginEtudiant","sexeEtu","mailUniversitaire","mailPerso","telephone","groupe","parcours","validationPedagogique","codeEtape","idResidence","img_id");
     }
 
     protected function getClePrimaire(): string
@@ -162,6 +163,70 @@ class   EtudiantRepository extends AbstractRepository
         $values=array("Tag"=>$numEtudiant,"TagEtat"=>$etat);
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["nb"];
+    }
+
+    public function estEtudiant(string $login) : bool{
+        $sql="SELECT COUNT(*) FROM ".$this->getNomTable()." WHERE loginEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        $count=$pdoStatement->fetch();
+        if ($count[0]==1) return true;
+        return false;
+    }
+
+    public function premiereConnexion(array $etudiant){
+        $sql="INSERT INTO ".$this->getNomTable()." (numEtudiant,prenomEtudiant,nomEtudiant,loginEtudiant,mailUniversitaire) VALUES (:numTag,:prenomTag,:nomTag,:loginTag,:mailTag)";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "numTag"=>$etudiant["numEtudiant"],
+            "prenomTag"=>$etudiant["prenomEtudiant"],
+            "nomTag"=>$etudiant["nomEtudiant"],
+            "loginTag"=>$etudiant["loginEtudiant"],
+            "mailTag"=>$etudiant["mailUniversitaire"]
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function getNumEtudiantParLogin(string $login):int{
+        $sql="SELECT numEtudiant FROM ".$this->getNomTable(). " WHERE loginEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()[0];
+    }
+
+    public function modifierNumEtuSexe(Etudiant $etudiant,int $oldNumEtudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET numEtudiant=:TagNum,sexeEtu=:TagSexe WHERE numEtudiant=:tagOldNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "TagNum"=>$etudiant->getNumEtudiant(),
+            "TagSexe"=>$etudiant->getSexeEtu(),
+            "tagOldNum"=>$oldNumEtudiant
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function modifierTelMailPerso(Etudiant $etudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET telephone=:tag1,mailPerso=:tag2 WHERE numEtudiant=:tagNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tag1"=>$etudiant->getTelephone(),
+            "tag2"=>$etudiant->getMailPerso(),
+            "tagNum"=>$etudiant->getNumEtudiant()
+        );
+        $pdoStatement->execute($values);
+    }
+
+    public function modifierGroupeParcours(Etudiant $etudiant){
+        $sql="UPDATE ".$this->getNomTable()." SET groupe=:tag1,parcours=:tag2 WHERE numEtudiant=:tagNum";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "tag1"=>$etudiant->getGroupe(),
+            "tag2"=>$etudiant->getParcours(),
+            "tagNum"=>$etudiant->getNumEtudiant()
+        );
+        $pdoStatement->execute($values);
     }
 
 }

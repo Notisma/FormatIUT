@@ -14,12 +14,12 @@ class Etudiant extends AbstractDataObject
     private ?string $sexeEtu;
     private ?string $mailUniersitaire;
     private ?string $mailPerso;
-    private ?int $telephone;
+    private ?string $telephone;
     private ?string $groupe;
     private ?string $parcours;
     private ?int $validationPedagogique;
-    private int $codeEtape;
-    private string $idResidence;
+    private ?int $codeEtape;
+    private ?string $idResidence;
     private string $img;
 
     /**
@@ -38,7 +38,7 @@ class Etudiant extends AbstractDataObject
      * @param string $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
@@ -128,12 +128,12 @@ class Etudiant extends AbstractDataObject
         $this->mailPerso = $mailPerso;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?int $telephone): void
+    public function setTelephone(?string $telephone): void
     {
         $this->telephone = $telephone;
     }
@@ -168,22 +168,22 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
     }
 
-    public function getCodeEtape(): int
+    public function getCodeEtape(): ?int
     {
         return $this->codeEtape;
     }
 
-    public function setCodeEtape(int $codeEtape): void
+    public function setCodeEtape(?int $codeEtape): void
     {
         $this->codeEtape = $codeEtape;
     }
 
-    public function getIdResidence(): string
+    public function getIdResidence(): ?string
     {
         return $this->idResidence;
     }
 
-    public function setIdResidence(string $idResidence): void
+    public function setIdResidence(?string $idResidence): void
     {
         $this->idResidence = $idResidence;
     }

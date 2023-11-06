@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Configuration\index;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
@@ -11,6 +12,7 @@ use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
+use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -55,10 +57,10 @@ class ControleurMain
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                 self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
-                $menu::afficherErreur("L'offre n'existe pas");
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
             }
         } else {
-            $menu::afficherErreur("L'offre n'est pas renseignée");
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
         }
     }
 
@@ -82,7 +84,6 @@ class ControleurMain
     {
         return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
-            array("image" => "../ressources/images/profil.png", "label" => "(prov étudiants)", "lien" => "?controleur=EtuMain&action=afficherAccueilEtu"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
@@ -155,17 +156,29 @@ class ControleurMain
         self::afficherVue("Se Connecter", "vueFormulaireConnexion.php", self::getMenu());
     }
 
-    public static function seConnecter()
+    public static function seConnecter(): void
     {
         if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
-            $user = ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["login"]));
+            $user = ((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
+            var_dump($user);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"]);
-                    MessageFlash::ajouter("success", "Connexion Réussie");
-                    header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
-                    exit();
+                    if (VerificationEmail::aValideEmail($user)) {
+                        ConnexionUtilisateur::connecter($user->getSiret(), "Entreprise");
+                        MessageFlash::ajouter("success", "Connexion Réussie");
+                        header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
+                        exit();
+                    }
                 }
+            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
+                ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
+                MessageFlash::ajouter("success", "Connexion Réussie");
+                if (ConnexionUtilisateur::premiereConnexion($_REQUEST["login"])) {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
+                } else {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
+                }
+                exit();
             }
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
@@ -175,20 +188,20 @@ class ControleurMain
     {
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
-        header("Location: controleurFrontal.php");
+        self::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
     }
 
-    public static function validerEmail()
+    public static function validerEmail(): void
     {
         VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
-        self::afficherPageConnexion();
-        header("Location : controleurFrontal.php?action=afficherPageConnexion&controleur=Main");
+        self::redirectionFlash("afficherPageConnexion", "success", "Email validé");
     }
 
-    public static function redirectionFlash(string $action, string $type, string $message)
+    public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        self::$action();
+        $controleur="App\FormatIUT\Controleur\Controleur".ucfirst($_REQUEST['controleur']);
+        $controleur::$action();
 
     }
 
@@ -211,7 +224,7 @@ class ControleurMain
                             $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
                             (new EntrepriseRepository())->creerObjet($entreprise);
                             VerificationEmail::envoiEmailValidation($entreprise);
-                            header("Location: controleurFrontal.php");
+                            self::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
                         } else {
                             self::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                         }
@@ -229,4 +242,52 @@ class ControleurMain
         }
     }
 
+    public static function mdpOublie(): void
+    {
+        if (isset($_REQUEST["mail"])) {
+            $liste = ((new EntrepriseRepository())->getListeObjet());
+            foreach ($liste as $entreprise) {
+                $listeMail[] = $entreprise->getEmail();
+            }
+            //vérification de doublon de mail
+            if (in_array($_REQUEST["mail"], $listeMail)) {
+                $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["mail"]);
+                $entreprise->setNonce(MotDePasse::genererChaineAleatoire());
+                (new EntrepriseRepository())->modifierObjet($entreprise);
+                VerificationEmail::EnvoyerMailMdpOublie($entreprise);
+                self::afficherIndex();
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "warning", "Cette adresse mail n'existe pas");
+            }
+        }
+    }
+
+    public static function motDePasseARemplir(): void
+    {
+        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vueResetMdp.php", "titrePage" => "Mot de Passe oublié"]);
+    }
+
+
+    public static function resetMdp(): void
+    {
+        if (isset($_REQUEST["mdp"], $_REQUEST["confirmerMdp"])) {
+            $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]);
+            if ($_REQUEST["nonce"] == $entreprise->getNonce()) {
+                if ($_REQUEST["mdp"] == $_REQUEST["confirmerMdp"]) {
+                    if (strlen($_REQUEST["mdp"]) >= 8) {
+                        $entreprise->setMdpHache(MotDePasse::hacher($_REQUEST["mdp"]));
+                        $entreprise->setNonce(MotDePasse::genererChaineAleatoire(22));
+                        (new EntrepriseRepository())->modifierObjet($entreprise);
+                        self::redirectionFlash("afficherPageConnexion", "success", "Mot de passe modifié");
+                    } else {
+                        self::redirectionFlash("motDePasseARemplir", "warning", "Le mot de passe doit faire plus de 7 caractères");
+                    }
+                } else {
+                    self::redirectionFlash("motDePasseARemplir", "warning", "Les mots de passe doivent corréler");
+                }
+            } else {
+                self::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
+            }
+        }
+    }
 }

@@ -58,14 +58,10 @@ use App\FormatIUT\Configuration\Configuration;
 
                 <div class="flash">
                     <?php
-                    //solutionTemporaire
-                    if (!isset($_REQUEST["controleur"]) || $_REQUEST["controleur"] != "EtuMain") {
-                        //\App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Compte créé avec succès");
-                        foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                            echo "<div class='alert alert-" . $type . "'>";
-                            echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
-                            echo '<p>' . $lireMessage . '</p></div>';
-                        }
+                    foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
+                        echo "<div id='flash' class='alert alert-" . $type . "' onclick=' " . \App\FormatIUT\Lib\MessageFlash::supprimerTousMessages() . " '>";
+                        echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
+                        echo '<p>' . $lireMessage . '</p></div>';
                     }
                     ?>
                 </div>
@@ -73,18 +69,23 @@ use App\FormatIUT\Configuration\Configuration;
 
         </div>
 
-        <div class="bandeauConteneur">
-            <div class="bandeau">
-                <?php
-                foreach ($menu as $item) {
-                    $actuel = "";
-                    if ($item['label'] == $titrePage) {
-                        $actuel = "id='active'";
-                    }
-                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
-                }
-                ?>
+
+        <div class="bandeau">
+            <div class="menuBurger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+
+            <?php
+            foreach ($menu as $item) {
+                $actuel = "";
+                if ($item['label'] == $titrePage) {
+                    $actuel = "id='active'";
+                }
+                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+            }
+            ?>
         </div>
 
         <div id="corpsPage">
@@ -116,6 +117,7 @@ use App\FormatIUT\Configuration\Configuration;
                         </ul>
                     </div>
                 </div>
+                <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a></p>
             </div>
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
