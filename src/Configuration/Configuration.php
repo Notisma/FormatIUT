@@ -30,7 +30,7 @@ class Configuration
     );
     
     static private function getConfig():array{
-        if ($_SERVER['HTTP_HOST'] == "localhost") {
+        if (strpbrk($_SERVER["HTTP_HOST"],"localhost")) {
             return self::$configLocal;
         }
         else return self::$configWebInfo;
@@ -63,7 +63,7 @@ class Configuration
 
     public static function getAbsoluteURL()
     {
-        if ($_SERVER['HTTP_HOST'] =="localhost") {
+        if (strpbrk($_SERVER["HTTP_HOST"],"localhost")) {
             return "http://localhost/SAE_DEV/web/controleurFrontal.php";
         }
         return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
