@@ -13,7 +13,7 @@ class ConnexionLdap
     {
         //on essaie de se connecter, et si ça crash on affiche une erreur
         //echo $_SERVER['HTTP_HOST'];//.$_SERVER['PHP_SELF'];
-        if (strpbrk($_SERVER["HTTP_HOST"],"webinfo")) {
+        if (!strpbrk($_SERVER["HTTP_HOST"],"localhost")) {
             ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(), ConfigurationLdap::getPort()));
             ldap_set_option(ConfigurationLdap::getConn(), LDAP_OPT_PROTOCOL_VERSION, 3);
             self::verifLDap($login, $mdp);
