@@ -35,6 +35,7 @@ class ConnexionUtilisateur
             ConnexionLdap::deconnexion();
         }
         $session->supprimer(self::$cleConnexion);
+        $session->supprimer(self::$cleTypeConnexion);
 
     }
 
