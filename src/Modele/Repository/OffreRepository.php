@@ -195,8 +195,13 @@ use Cassandra\Bigint;
             return $this->construireDepuisTableau($pdoStatement->fetch());
 
         }
-
-
-
+        public function trouverOffreValide($numEtu, $typeOffre){
+            $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre
+            FROM Offre o JOIN regarder r ON r.idOffre = o.idOffre WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";
+            $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+            $values = array("tagEtu"=>$numEtu, "tagType"=>$typeOffre);
+            $pdoStatement->execute($values);
+            return $this->construireDepuisTableau($pdoStatement->fetch());
+        }
 
 }

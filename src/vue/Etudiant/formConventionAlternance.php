@@ -12,14 +12,12 @@
                 <legend> Ma convention :</legend>
                 <p><label for="offre_id">Votre alternance : </label>
                     <?php
-                    if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getOffreValidee($etudiant->getNumEtudiant(), "Alternance")) {
-                        foreach ($listOffres as $offre) {
-                            if ((new \App\FormatIUT\Modele\Repository\RegarderRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "Validée" && $offre->getTypeOffre() == "Alternance") {
-                                echo '<input value="' . $offre->getNomOffre() . '" name="nomOffre" id="offre_id"  readonly required> </input>';
-                                echo '<input type="hidden" value="' . $offre->getIdOffre() . '" name="idOff"> </input>';
-                            }
+                    if ($offre) {
+                        echo '<input value="' . $offre->getNomOffre() . '" name="nomOffre" id="offre_id"  readonly required> </input>';
+                        echo '<input type="hidden" value="'.$offre->getIdOffre().'" name="idOff"> </input>';
+
                         }
-                    } else {
+                     else {
                         echo '<input value="aucune" name="idOff" id="offre_id"  readonly required>';
                     } ?>
 
@@ -69,17 +67,25 @@
                     <input type="text" name="villeEntr" id="villeEntr_id" required>
                 <p><label for="cpEntr_id">Code postal </label>
                     <input type="text" name="codePostalEntr" id="cpEntr_id" required></p>
-                <p><label for="debut_id"> Alternance : Date début </label>
-                    <input type="date" name="dateDebut" id="debut_id" required>
+                <?php
+                $dateDebut = $offre->getDateDebut();
+                $dateD = $dateDebut->format('Y-m-d');
+                //echo $dateD
+                $dateFin = $offre->getDateFin();
+                $dateF = $dateFin->format('Y-m-d');
+                echo '<p><label for="debut_id"> Alternance : Date début </label>
+                    <input type="date" name="dateDebut" value="'.$dateD.'" id="debut_id" required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" name="dateFin" id="fin_id" required></p>
-                <p>
+                    <input type="date" name="dateFin" value="'.$dateF.'" id="fin_id" required></p>
+                <p>'
+                ?>
                     <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
                 <div class="grandInputCentre">
                     <textarea class="inputFormulaire" name="objfOffre" id="objStage_id"
                               required maxlength="255"></textarea>
                 </div>
                 </p>
+
 
 
                 <input type="hidden" value="<?= date("d-m-Y"); ?>" name="dateCreation">

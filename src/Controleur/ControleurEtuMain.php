@@ -210,7 +210,6 @@ class ControleurEtuMain extends ControleurMain
         $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
         if (!$convention) {
             $offreValidee = (new RegarderRepository())->getOffreValider(self::$cleEtudiant);
-            var_dump($offreValidee);
             if ($offreValidee) {
                 $offre = (new OffreRepository())->getObjectParClePrimaire($offreValidee->getIdOffre());
                 if ($offre->getTypeOffre() == "Stage")
@@ -257,10 +256,11 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherFormulaireConventionAlternance()
     {
         $listOffres = (new OffreRepository())->listOffreEtu(self::$cleEtudiant);
+        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
         $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
         $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-        self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "listOffres" => $listOffres]);
+        self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre]);
     }
 
 
