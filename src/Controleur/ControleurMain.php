@@ -32,7 +32,7 @@ class ControleurMain
      */
     public static function afficherVuePresentation()
     {
-        self::afficherVue("Présentation Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
+        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
     /***
