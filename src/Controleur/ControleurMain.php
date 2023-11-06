@@ -200,8 +200,7 @@ class ControleurMain
     public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        $controleur="App\FormatIUT\Controleur\Controleur".ucfirst($_REQUEST['controleur']);
-        $controleur::$action();
+        (Configuration::getCheminControleur())::$action();
 
     }
 
