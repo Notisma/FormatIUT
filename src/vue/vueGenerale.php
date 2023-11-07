@@ -13,7 +13,13 @@ use App\FormatIUT\Configuration\Configuration;
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
 </head>
-<body>
+<body
+    <?php
+    if (isset($_REQUEST["premiereConnexion"])) {
+        echo "onload='afficherPopupPremiereCo(0)'";
+    }
+    ?>
+>
 
 <div class="couleur">
 
