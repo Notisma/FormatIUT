@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Correction de la première connexion (affichage popup)">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Finalisation de la première connexion + changement fonctionnement des images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,15 +173,7 @@
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
       <workItem from="1699378557175" duration="1546000" />
-      <workItem from="1699474223105" duration="1823000" />
-    </task>
-    <task id="LOCAL-00055" summary="Ajout d'un onglet &quot;assistance&quot;. vueMesOffres terminé (version 1).">
-      <option name="closed" value="true" />
-      <created>1696924918294</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1696924918294</updated>
+      <workItem from="1699474223105" duration="2299000" />
     </task>
     <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
       <option name="closed" value="true" />
@@ -569,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699378993549</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="fix : Finalisation de la première connexion + changement fonctionnement des images">
+      <option name="closed" value="true" />
+      <created>1699476103008</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1699476103008</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations et corrections visuelles" />
     <MESSAGE value="Ajout d'erreurs" />
     <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
@@ -678,7 +675,8 @@
     <MESSAGE value="Corrections de crashs" />
     <MESSAGE value="Corrections connexion et configuration automatiques" />
     <MESSAGE value="Correction de la première connexion (affichage popup)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction de la première connexion (affichage popup)" />
+    <MESSAGE value="fix : Finalisation de la première connexion + changement fonctionnement des images" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : Finalisation de la première connexion + changement fonctionnement des images" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

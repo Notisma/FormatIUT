@@ -29,16 +29,18 @@ if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         //TODO les ifs ne fonctionnent pas
-        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
-            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
-        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
-            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","Veuillez vous connecter");
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Entreprise") {
+            header("Location: ?controleur=Main&action=afficherPageConnexion");
+            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
+        } else if ($controleur == "EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Etudiants" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+            header("Location: ?controleur=Main&action=afficherPageConnexion");
+            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
         } else {
             $nomClasseControleur::$action();
         }
     } else
-        $nomClasseControleur::afficherErreur('L\'action : "'.$action.'" n\'existe pas dans le contrôleur : "'.$nomClasseControleur.'"');
+        $nomClasseControleur::afficherErreur('L\'action : "' . $action . '" n\'existe pas dans le contrôleur : "' . $nomClasseControleur . '"');
 } else {
     Configuration::setControleur("Main");
-    ControleurMain::afficherErreur('Le contrôleur : '.$nomClasseControleur.' n\'existe pas');
+    ControleurMain::afficherErreur('Le contrôleur : ' . $nomClasseControleur . ' n\'existe pas');
 }
