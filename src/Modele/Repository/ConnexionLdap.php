@@ -26,6 +26,9 @@ class ConnexionLdap
             $json = file_get_contents($url);
             $obj = json_decode($json);
             $infos = explode('"', $json);
+            if ($action=="afficherListe"){
+                return $json;
+            }
             if (in_array("Valider", $infos)) {
                 self::$infosUser = $infos;
                 return true;

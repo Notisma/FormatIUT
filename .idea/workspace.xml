@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="connexion en tant que prof">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="accueil et compte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Prof.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Prof.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,31 +48,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Connexion__Prof",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/MAMP/htdocs/SAE_DEV/src/vue/Prof",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "discord-application",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Connexion__Prof&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/MAMP/htdocs/SAE_DEV/src/vue/Prof&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;discord-application&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\MAMP\htdocs\SAE_DEV\src\vue\Prof" />
@@ -180,14 +178,7 @@
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
-    </task>
-    <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
-      <option name="closed" value="true" />
-      <created>1696929442750</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1696929442750</updated>
+      <workItem from="1699478205637" duration="2472000" />
     </task>
     <task id="LOCAL-00057" summary="Ajout de fichiers">
       <option name="closed" value="true" />
@@ -573,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699308570753</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="accueil et compte">
+      <option name="closed" value="true" />
+      <created>1699311111397</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1699311111397</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajout d'erreurs" />
     <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
@@ -677,7 +675,8 @@
     <MESSAGE value="correction mesOffres" />
     <MESSAGE value="TODO controleurFrontal.php" />
     <MESSAGE value="connexion en tant que prof" />
-    <option name="LAST_COMMIT_MESSAGE" value="connexion en tant que prof" />
+    <MESSAGE value="accueil et compte" />
+    <option name="LAST_COMMIT_MESSAGE" value="accueil et compte" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
