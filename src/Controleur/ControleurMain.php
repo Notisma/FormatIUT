@@ -175,6 +175,8 @@ class ControleurMain
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 if (ConnexionUtilisateur::premiereConnexion($_REQUEST["login"])) {
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
+                } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } else {
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
                 }
@@ -264,6 +266,7 @@ class ControleurMain
     public static function motDePasseARemplir(): void
     {
         self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vueResetMdp.php", "titrePage" => "Mot de Passe oublié"]);
+
     }
 
 

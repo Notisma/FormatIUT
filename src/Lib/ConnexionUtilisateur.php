@@ -83,4 +83,12 @@ class ConnexionUtilisateur
         }
         return false;
     }
+
+    public static function profilEstComplet(string $login) : bool {
+        $etudiant=(new EtudiantRepository())->getObjectParClePrimaire(self::getNumEtudiantConnecte());
+        if ($etudiant->getGroupe()!="" && $etudiant->getParcours()!=""){
+            return true;
+        }
+        return false;
+    }
 }
