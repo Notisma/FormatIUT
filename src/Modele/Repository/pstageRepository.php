@@ -27,6 +27,8 @@ class pstageRepository extends AbstractRepository {
         "codeUFR",
         "libelleUFR",
         "codeDepartement",
+        "codeEtape",
+        "libelleEtape",
         "dateDebutStage",
         "dateFinStage",
         "interruption",
@@ -86,6 +88,7 @@ class pstageRepository extends AbstractRepository {
         "siteWeb",
         "nomServiceAccueil",
         "residenceServiceAccueil",
+        "voieServiceAccueil",
         "cedexServiceAccueil",
         "postalServiceAccueil",
         "communeServiceAccueil",
@@ -99,14 +102,11 @@ class pstageRepository extends AbstractRepository {
     }
     public function construireDepuisTableau(array $DataObjectTableau): pstage
 {
-    $date1 = date_format($DataObjectTableau[11],'Y-m-d');
-    $date2 = date_format($DataObjectTableau[12],'Y-m-d');
-    $date3 = date_format($DataObjectTableau[14], 'Y-m-d');
-    $date4 = date_format($DataObjectTableau[15], 'Y-m-d');
-    $interruption = $DataObjectTableau[13] ? true : false;
-    $conventionValidee = $DataObjectTableau[24] ? true : false;
-    $conventionValideePedagogiquement = $DataObjectTableau[47] ? true : false;
-    $avenantConvention = $DataObjectTableau[48] ? true : false;
+
+    $interruption = $DataObjectTableau[15] ? true : false;
+    $conventionValidee = $DataObjectTableau[28] ? true : false;
+    $conventionValideePedagogiquement = $DataObjectTableau[48] ? true : false;
+    $avenantConvention = $DataObjectTableau[49] ? true : false;
 
     return new pstage(
         $DataObjectTableau[0],
@@ -120,11 +120,11 @@ class pstageRepository extends AbstractRepository {
         $DataObjectTableau[8],
         $DataObjectTableau[9],
         $DataObjectTableau[10],
-        $date1,
-        $date2,
+        $DataObjectTableau[11],
+        $DataObjectTableau[12],
+        $DataObjectTableau[13],
+        $DataObjectTableau[14],
         $interruption,
-        $date3,
-        $date4,
         $DataObjectTableau[16],
         $DataObjectTableau[17],
         $DataObjectTableau[18],
@@ -133,11 +133,11 @@ class pstageRepository extends AbstractRepository {
         $DataObjectTableau[21],
         $DataObjectTableau[22],
         $DataObjectTableau[23],
+        $DataObjectTableau[24],
         $DataObjectTableau[25],
         $DataObjectTableau[26],
-        $conventionValidee,
         $DataObjectTableau[27],
-        $DataObjectTableau[28],
+        $conventionValidee,
         $DataObjectTableau[29],
         $DataObjectTableau[30],
         $DataObjectTableau[31],
@@ -155,11 +155,12 @@ class pstageRepository extends AbstractRepository {
         $DataObjectTableau[43],
         $DataObjectTableau[44],
         $DataObjectTableau[45],
+        $DataObjectTableau[46],
+        $DataObjectTableau[47],
         $conventionValideePedagogiquement,
         $avenantConvention,
-        $DataObjectTableau[49],
-        new DateTime($DataObjectTableau[50]),
-        new DateTime($DataObjectTableau[51]),
+        $DataObjectTableau[50],
+        $DataObjectTableau[51],
         $DataObjectTableau[52],
         $DataObjectTableau[53],
         $DataObjectTableau[54],
@@ -186,7 +187,12 @@ class pstageRepository extends AbstractRepository {
         $DataObjectTableau[75],
         $DataObjectTableau[76],
         $DataObjectTableau[77],
-        $DataObjectTableau[78]
+        $DataObjectTableau[78],
+        $DataObjectTableau[79],
+        $DataObjectTableau[80],
+        $DataObjectTableau[81]
     );
+
+
 }
 }

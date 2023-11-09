@@ -14,19 +14,21 @@ class pstage extends AbstractDataObject
     private string $telPortEtu;
     private string $mailPersoEtu;
     private string $mailUnivEtu;
-    private int $codeUFR;
+    private string $codeUFR;
     private string $libelleUFR;
     private string $codeDepartement;
-    private DateTime $dateDebutStage;
-    private DateTime $dateFinStage;
+    private string $codeEtape;
+    private string $libelleEtape;
+    private string $dateDebutStage;
+    private string $dateFinStage;
     private bool $interruption;
-    private DateTime $dateDebutInterruption;
-    private DateTime $dateFinInterruption;
+    private string $dateDebutInterruption;
+    private string $dateFinInterruption;
     private string $thematique;
     private string $sujet;
     private string $fonctionTache;
     private string $detailProjet;
-    private int $dureeStage;
+    private string $dureeStage;
     private int $nbJoursTravail;
     private float $nbHeuresHebdo;
     private float $gratification;
@@ -55,8 +57,8 @@ class pstage extends AbstractDataObject
     private bool $conventionValideePedagogiquement;
     private bool $avenantConvention;
     private string $detailsAvenant;
-    private DateTime $dateCreationConvention;
-    private DateTime $modificationConvention;
+    private string $dateCreationConvention;
+    private string $modificationConvention;
     private string $origineStage;
     private string $nomEtablissement;
     private int $siret;
@@ -68,7 +70,7 @@ class pstage extends AbstractDataObject
     private string $pays;
     private string $statutJuridique;
     private string $typeStructure;
-    private int $effectif;
+    private string $effectif;
     private string $codeNAF;
     private string $tel;
     private string $fax;
@@ -76,6 +78,7 @@ class pstage extends AbstractDataObject
     private string $siteWeb;
     private string $nomServiceAccueil;
     private string $residenceServiceAccueil;
+    private string $voieServiceAccueil;
     private string $cedexServiceAccueil;
     private int $postalServiceAccueil;
     private string $communeServiceAccueil;
@@ -98,11 +101,13 @@ class pstage extends AbstractDataObject
      * @param int $codeUFR
      * @param string $libelleUFR
      * @param string $codeDepartement
-     * @param DateTime $dateDebutStage
-     * @param DateTime $dateFinStage
+     * @param string $codeEtape
+     * @param string $libelleEtape
+     * @param string $dateDebutStage
+     * @param string $dateFinStage
      * @param bool $interruption
-     * @param DateTime $dateDebutInterruption
-     * @param DateTime $dateFinInterruption
+     * @param string $dateDebutInterruption
+     * @param string $dateFinInterruption
      * @param string $thematique
      * @param string $sujet
      * @param string $fonctionTache
@@ -136,8 +141,8 @@ class pstage extends AbstractDataObject
      * @param bool $conventionValideePedagogiquement
      * @param bool $avenantConvention
      * @param string $detailsAvenant
-     * @param DateTime $dateCreationConvention
-     * @param DateTime $modificationConvention
+     * @param string $dateCreationConvention
+     * @param string $modificationConvention
      * @param string $origineStage
      * @param string $nomEtablissement
      * @param int $siret
@@ -157,6 +162,7 @@ class pstage extends AbstractDataObject
      * @param string $siteWeb
      * @param string $nomServiceAccueil
      * @param string $residenceServiceAccueil
+     * @param string $voieServiceAccueil
      * @param string $cedexServiceAccueil
      * @param int $postalServiceAccueil
      * @param string $communeServiceAccueil
@@ -167,7 +173,7 @@ class pstage extends AbstractDataObject
      * @param string $telTuteurProfessionnel
      * @param string $fonctionTuteurProfessionnel
      */
-    public function __construct(int $numeroConvention, int $numeroEtudiant, string $nomEtudiant, string $prenomEtudiant, string $telPersoEtu, string $telPortEtu, string $mailPersoEtu, string $mailUnivEtu, int $codeUFR, string $libelleUFR, string $codeDepartement, DateTime $dateDebutStage, DateTime $dateFinStage, bool $interruption, DateTime $dateDebutInterruption, DateTime $dateFinInterruption, string $thematique, string $sujet, string $fonctionTache, string $detailProjet, int $dureeStage, int $nbJoursTravail, float $nbHeuresHebdo, float $gratification, string $uniteGratification, string $uniteDureeGratification, bool $conventionValidee, string $nomEnseignantReferent, string $prenomEnseignantReferent, string $mailEnseignantReferent, string $nomSignataire, string $prenomSignataire, string $mailSignataire, string $fonctionSignataire, string $anneeUniversitaire, string $typeConvention, string $commentaireStage, string $commentaireDureeTravail, string $codeELP, string $elementPedagogique, string $codeSexeEtu, string $avantagesNature, string $adresseEtu, int $codePostalEtu, string $paysEtu, string $villeEtu, bool $conventionValideePedagogiquement, bool $avenantConvention, string $detailsAvenant, DateTime $dateCreationConvention, DateTime $modificationConvention, string $origineStage, string $nomEtablissement, int $siret, string $adresseResidence, string $adresseVoie, string $adresseLibCedex, int $codePostal, string $etablissementCommune, string $pays, string $statutJuridique, string $typeStructure, int $effectif, string $codeNAF, string $tel, string $fax, string $mail, string $siteWeb, string $nomServiceAccueil, string $residenceServiceAccueil, string $cedexServiceAccueil, int $postalServiceAccueil, string $communeServiceAccueil, string $paysServiceAccueil, string $nomTuteurProfessionnel, string $prenomTuteurProfessionnel, string $mailTuteurProfessionnel, string $telTuteurProfessionnel, string $fonctionTuteurProfessionnel)
+    public function __construct(int $numeroConvention, int $numeroEtudiant, string $nomEtudiant, string $prenomEtudiant, string $telPersoEtu, string $telPortEtu, string $mailPersoEtu, string $mailUnivEtu, string $codeUFR, string $libelleUFR, string $codeDepartement, string $codeEtape, string $libelleEtape, string $dateDebutStage, string $dateFinStage, bool $interruption, string $dateDebutInterruption, string $dateFinInterruption, string $thematique, string $sujet, string $fonctionTache, string $detailProjet, string $dureeStage, int $nbJoursTravail, float $nbHeuresHebdo, float $gratification, string $uniteGratification, string $uniteDureeGratification, bool $conventionValidee, string $nomEnseignantReferent, string $prenomEnseignantReferent, string $mailEnseignantReferent, string $nomSignataire, string $prenomSignataire, string $mailSignataire, string $fonctionSignataire, string $anneeUniversitaire, string $typeConvention, string $commentaireStage, string $commentaireDureeTravail, string $codeELP, string $elementPedagogique, string $codeSexeEtu, string $avantagesNature, string $adresseEtu, int $codePostalEtu, string $paysEtu, string $villeEtu, bool $conventionValideePedagogiquement, bool $avenantConvention, string $detailsAvenant, string $dateCreationConvention, string $modificationConvention, string $origineStage, string $nomEtablissement, int $siret, string $adresseResidence, string $adresseVoie, string $adresseLibCedex, int $codePostal, string $etablissementCommune, string $pays, string $statutJuridique, string $typeStructure, string $effectif, string $codeNAF, string $tel, string $fax, string $mail, string $siteWeb, string $nomServiceAccueil, string $residenceServiceAccueil, string $voieServiceAccueil, string $cedexServiceAccueil, int $postalServiceAccueil, string $communeServiceAccueil, string $paysServiceAccueil, string $nomTuteurProfessionnel, string $prenomTuteurProfessionnel, string $mailTuteurProfessionnel, string $telTuteurProfessionnel, string $fonctionTuteurProfessionnel)
     {
         $this->numeroConvention = $numeroConvention;
         $this->numeroEtudiant = $numeroEtudiant;
@@ -180,6 +186,8 @@ class pstage extends AbstractDataObject
         $this->codeUFR = $codeUFR;
         $this->libelleUFR = $libelleUFR;
         $this->codeDepartement = $codeDepartement;
+        $this->codeEtape = $codeEtape;
+        $this->libelleEtape = $libelleEtape;
         $this->dateDebutStage = $dateDebutStage;
         $this->dateFinStage = $dateFinStage;
         $this->interruption = $interruption;
@@ -239,6 +247,7 @@ class pstage extends AbstractDataObject
         $this->siteWeb = $siteWeb;
         $this->nomServiceAccueil = $nomServiceAccueil;
         $this->residenceServiceAccueil = $residenceServiceAccueil;
+        $this->voieServiceAccueil = $voieServiceAccueil;
         $this->cedexServiceAccueil = $cedexServiceAccueil;
         $this->postalServiceAccueil = $postalServiceAccueil;
         $this->communeServiceAccueil = $communeServiceAccueil;
@@ -250,795 +259,7 @@ class pstage extends AbstractDataObject
         $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
     }
 
-    public function getNumeroConvention(): int
-    {
-        return $this->numeroConvention;
-    }
 
-    public function setNumeroConvention(int $numeroConvention): void
-    {
-        $this->numeroConvention = $numeroConvention;
-    }
-
-    public function getNumeroEtudiant(): int
-    {
-        return $this->numeroEtudiant;
-    }
-
-    public function setNumeroEtudiant(int $numeroEtudiant): void
-    {
-        $this->numeroEtudiant = $numeroEtudiant;
-    }
-
-    public function getNomEtudiant(): string
-    {
-        return $this->nomEtudiant;
-    }
-
-    public function setNomEtudiant(string $nomEtudiant): void
-    {
-        $this->nomEtudiant = $nomEtudiant;
-    }
-
-    public function getPrenomEtudiant(): string
-    {
-        return $this->prenomEtudiant;
-    }
-
-    public function setPrenomEtudiant(string $prenomEtudiant): void
-    {
-        $this->prenomEtudiant = $prenomEtudiant;
-    }
-
-    public function getTelPersoEtu(): string
-    {
-        return $this->telPersoEtu;
-    }
-
-    public function setTelPersoEtu(string $telPersoEtu): void
-    {
-        $this->telPersoEtu = $telPersoEtu;
-    }
-
-    public function getTelPortEtu(): string
-    {
-        return $this->telPortEtu;
-    }
-
-    public function setTelPortEtu(string $telPortEtu): void
-    {
-        $this->telPortEtu = $telPortEtu;
-    }
-
-    public function getMailPersoEtu(): string
-    {
-        return $this->mailPersoEtu;
-    }
-
-    public function setMailPersoEtu(string $mailPersoEtu): void
-    {
-        $this->mailPersoEtu = $mailPersoEtu;
-    }
-
-    public function getMailUnivEtu(): string
-    {
-        return $this->mailUnivEtu;
-    }
-
-    public function setMailUnivEtu(string $mailUnivEtu): void
-    {
-        $this->mailUnivEtu = $mailUnivEtu;
-    }
-
-    public function getCodeUFR(): int
-    {
-        return $this->codeUFR;
-    }
-
-    public function setCodeUFR(int $codeUFR): void
-    {
-        $this->codeUFR = $codeUFR;
-    }
-
-    public function getLibelleUFR(): string
-    {
-        return $this->libelleUFR;
-    }
-
-    public function setLibelleUFR(string $libelleUFR): void
-    {
-        $this->libelleUFR = $libelleUFR;
-    }
-
-    public function getCodeDepartement(): string
-    {
-        return $this->codeDepartement;
-    }
-
-    public function setCodeDepartement(string $codeDepartement): void
-    {
-        $this->codeDepartement = $codeDepartement;
-    }
-
-    public function getDateDebutStage(): DateTime
-    {
-        return $this->dateDebutStage;
-    }
-
-    public function setDateDebutStage(DateTime $dateDebutStage): void
-    {
-        $this->dateDebutStage = $dateDebutStage;
-    }
-
-    public function getDateFinStage(): DateTime
-    {
-        return $this->dateFinStage;
-    }
-
-    public function setDateFinStage(DateTime $dateFinStage): void
-    {
-        $this->dateFinStage = $dateFinStage;
-    }
-
-    public function isInterruption(): bool
-    {
-        return $this->interruption;
-    }
-
-    public function setInterruption(bool $interruption): void
-    {
-        $this->interruption = $interruption;
-    }
-
-    public function getDateDebutInterruption(): DateTime
-    {
-        return $this->dateDebutInterruption;
-    }
-
-    public function setDateDebutInterruption(DateTime $dateDebutInterruption): void
-    {
-        $this->dateDebutInterruption = $dateDebutInterruption;
-    }
-
-    public function getDateFinInterruption(): DateTime
-    {
-        return $this->dateFinInterruption;
-    }
-
-    public function setDateFinInterruption(DateTime $dateFinInterruption): void
-    {
-        $this->dateFinInterruption = $dateFinInterruption;
-    }
-
-    public function getThematique(): string
-    {
-        return $this->thematique;
-    }
-
-    public function setThematique(string $thematique): void
-    {
-        $this->thematique = $thematique;
-    }
-
-    public function getSujet(): string
-    {
-        return $this->sujet;
-    }
-
-    public function setSujet(string $sujet): void
-    {
-        $this->sujet = $sujet;
-    }
-
-    public function getFonctionTache(): string
-    {
-        return $this->fonctionTache;
-    }
-
-    public function setFonctionTache(string $fonctionTache): void
-    {
-        $this->fonctionTache = $fonctionTache;
-    }
-
-    public function getDetailProjet(): string
-    {
-        return $this->detailProjet;
-    }
-
-    public function setDetailProjet(string $detailProjet): void
-    {
-        $this->detailProjet = $detailProjet;
-    }
-
-    public function getDureeStage(): int
-    {
-        return $this->dureeStage;
-    }
-
-    public function setDureeStage(int $dureeStage): void
-    {
-        $this->dureeStage = $dureeStage;
-    }
-
-    public function getNbJoursTravail(): int
-    {
-        return $this->nbJoursTravail;
-    }
-
-    public function setNbJoursTravail(int $nbJoursTravail): void
-    {
-        $this->nbJoursTravail = $nbJoursTravail;
-    }
-
-    public function getNbHeuresHebdo(): float
-    {
-        return $this->nbHeuresHebdo;
-    }
-
-    public function setNbHeuresHebdo(float $nbHeuresHebdo): void
-    {
-        $this->nbHeuresHebdo = $nbHeuresHebdo;
-    }
-
-    public function getGratification(): float
-    {
-        return $this->gratification;
-    }
-
-    public function setGratification(float $gratification): void
-    {
-        $this->gratification = $gratification;
-    }
-
-    public function getUniteGratification(): string
-    {
-        return $this->uniteGratification;
-    }
-
-    public function setUniteGratification(string $uniteGratification): void
-    {
-        $this->uniteGratification = $uniteGratification;
-    }
-
-    public function getUniteDureeGratification(): string
-    {
-        return $this->uniteDureeGratification;
-    }
-
-    public function setUniteDureeGratification(string $uniteDureeGratification): void
-    {
-        $this->uniteDureeGratification = $uniteDureeGratification;
-    }
-
-    public function isConventionValidee(): bool
-    {
-        return $this->conventionValidee;
-    }
-
-    public function setConventionValidee(bool $conventionValidee): void
-    {
-        $this->conventionValidee = $conventionValidee;
-    }
-
-    public function getNomEnseignantReferent(): string
-    {
-        return $this->nomEnseignantReferent;
-    }
-
-    public function setNomEnseignantReferent(string $nomEnseignantReferent): void
-    {
-        $this->nomEnseignantReferent = $nomEnseignantReferent;
-    }
-
-    public function getPrenomEnseignantReferent(): string
-    {
-        return $this->prenomEnseignantReferent;
-    }
-
-    public function setPrenomEnseignantReferent(string $prenomEnseignantReferent): void
-    {
-        $this->prenomEnseignantReferent = $prenomEnseignantReferent;
-    }
-
-    public function getMailEnseignantReferent(): string
-    {
-        return $this->mailEnseignantReferent;
-    }
-
-    public function setMailEnseignantReferent(string $mailEnseignantReferent): void
-    {
-        $this->mailEnseignantReferent = $mailEnseignantReferent;
-    }
-
-    public function getNomSignataire(): string
-    {
-        return $this->nomSignataire;
-    }
-
-    public function setNomSignataire(string $nomSignataire): void
-    {
-        $this->nomSignataire = $nomSignataire;
-    }
-
-    public function getPrenomSignataire(): string
-    {
-        return $this->prenomSignataire;
-    }
-
-    public function setPrenomSignataire(string $prenomSignataire): void
-    {
-        $this->prenomSignataire = $prenomSignataire;
-    }
-
-    public function getMailSignataire(): string
-    {
-        return $this->mailSignataire;
-    }
-
-    public function setMailSignataire(string $mailSignataire): void
-    {
-        $this->mailSignataire = $mailSignataire;
-    }
-
-    public function getFonctionSignataire(): string
-    {
-        return $this->fonctionSignataire;
-    }
-
-    public function setFonctionSignataire(string $fonctionSignataire): void
-    {
-        $this->fonctionSignataire = $fonctionSignataire;
-    }
-
-    public function getAnneeUniversitaire(): string
-    {
-        return $this->anneeUniversitaire;
-    }
-
-    public function setAnneeUniversitaire(string $anneeUniversitaire): void
-    {
-        $this->anneeUniversitaire = $anneeUniversitaire;
-    }
-
-    public function getTypeConvention(): string
-    {
-        return $this->typeConvention;
-    }
-
-    public function setTypeConvention(string $typeConvention): void
-    {
-        $this->typeConvention = $typeConvention;
-    }
-
-    public function getCommentaireStage(): string
-    {
-        return $this->commentaireStage;
-    }
-
-    public function setCommentaireStage(string $commentaireStage): void
-    {
-        $this->commentaireStage = $commentaireStage;
-    }
-
-    public function getCommentaireDureeTravail(): string
-    {
-        return $this->commentaireDureeTravail;
-    }
-
-    public function setCommentaireDureeTravail(string $commentaireDureeTravail): void
-    {
-        $this->commentaireDureeTravail = $commentaireDureeTravail;
-    }
-
-    public function getCodeELP(): string
-    {
-        return $this->codeELP;
-    }
-
-    public function setCodeELP(string $codeELP): void
-    {
-        $this->codeELP = $codeELP;
-    }
-
-    public function getElementPedagogique(): string
-    {
-        return $this->elementPedagogique;
-    }
-
-    public function setElementPedagogique(string $elementPedagogique): void
-    {
-        $this->elementPedagogique = $elementPedagogique;
-    }
-
-    public function getCodeSexeEtu(): string
-    {
-        return $this->codeSexeEtu;
-    }
-
-    public function setCodeSexeEtu(string $codeSexeEtu): void
-    {
-        $this->codeSexeEtu = $codeSexeEtu;
-    }
-
-    public function getAvantagesNature(): string
-    {
-        return $this->avantagesNature;
-    }
-
-    public function setAvantagesNature(string $avantagesNature): void
-    {
-        $this->avantagesNature = $avantagesNature;
-    }
-
-    public function getAdresseEtu(): string
-    {
-        return $this->adresseEtu;
-    }
-
-    public function setAdresseEtu(string $adresseEtu): void
-    {
-        $this->adresseEtu = $adresseEtu;
-    }
-
-    public function getCodePostalEtu(): int
-    {
-        return $this->codePostalEtu;
-    }
-
-    public function setCodePostalEtu(int $codePostalEtu): void
-    {
-        $this->codePostalEtu = $codePostalEtu;
-    }
-
-    public function getPaysEtu(): string
-    {
-        return $this->paysEtu;
-    }
-
-    public function setPaysEtu(string $paysEtu): void
-    {
-        $this->paysEtu = $paysEtu;
-    }
-
-    public function getVilleEtu(): string
-    {
-        return $this->villeEtu;
-    }
-
-    public function setVilleEtu(string $villeEtu): void
-    {
-        $this->villeEtu = $villeEtu;
-    }
-
-    public function isConventionValideePedagogiquement(): bool
-    {
-        return $this->conventionValideePedagogiquement;
-    }
-
-    public function setConventionValideePedagogiquement(bool $conventionValideePedagogiquement): void
-    {
-        $this->conventionValideePedagogiquement = $conventionValideePedagogiquement;
-    }
-
-    public function isAvenantConvention(): bool
-    {
-        return $this->avenantConvention;
-    }
-
-    public function setAvenantConvention(bool $avenantConvention): void
-    {
-        $this->avenantConvention = $avenantConvention;
-    }
-
-    public function getDetailsAvenant(): string
-    {
-        return $this->detailsAvenant;
-    }
-
-    public function setDetailsAvenant(string $detailsAvenant): void
-    {
-        $this->detailsAvenant = $detailsAvenant;
-    }
-
-    public function getDateCreationConvention(): DateTime
-    {
-        return $this->dateCreationConvention;
-    }
-
-    public function setDateCreationConvention(DateTime $dateCreationConvention): void
-    {
-        $this->dateCreationConvention = $dateCreationConvention;
-    }
-
-    public function getModificationConvention(): DateTime
-    {
-        return $this->modificationConvention;
-    }
-
-    public function setModificationConvention(DateTime $modificationConvention): void
-    {
-        $this->modificationConvention = $modificationConvention;
-    }
-
-    public function getOrigineStage(): string
-    {
-        return $this->origineStage;
-    }
-
-    public function setOrigineStage(string $origineStage): void
-    {
-        $this->origineStage = $origineStage;
-    }
-
-    public function getNomEtablissement(): string
-    {
-        return $this->nomEtablissement;
-    }
-
-    public function setNomEtablissement(string $nomEtablissement): void
-    {
-        $this->nomEtablissement = $nomEtablissement;
-    }
-
-    public function getSiret(): int
-    {
-        return $this->siret;
-    }
-
-    public function setSiret(int $siret): void
-    {
-        $this->siret = $siret;
-    }
-
-    public function getAdresseResidence(): string
-    {
-        return $this->adresseResidence;
-    }
-
-    public function setAdresseResidence(string $adresseResidence): void
-    {
-        $this->adresseResidence = $adresseResidence;
-    }
-
-    public function getAdresseVoie(): string
-    {
-        return $this->adresseVoie;
-    }
-
-    public function setAdresseVoie(string $adresseVoie): void
-    {
-        $this->adresseVoie = $adresseVoie;
-    }
-
-    public function getAdresseLibCedex(): string
-    {
-        return $this->adresseLibCedex;
-    }
-
-    public function setAdresseLibCedex(string $adresseLibCedex): void
-    {
-        $this->adresseLibCedex = $adresseLibCedex;
-    }
-
-    public function getCodePostal(): int
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(int $codePostal): void
-    {
-        $this->codePostal = $codePostal;
-    }
-
-    public function getEtablissementCommune(): string
-    {
-        return $this->etablissementCommune;
-    }
-
-    public function setEtablissementCommune(string $etablissementCommune): void
-    {
-        $this->etablissementCommune = $etablissementCommune;
-    }
-
-    public function getPays(): string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $pays): void
-    {
-        $this->pays = $pays;
-    }
-
-    public function getStatutJuridique(): string
-    {
-        return $this->statutJuridique;
-    }
-
-    public function setStatutJuridique(string $statutJuridique): void
-    {
-        $this->statutJuridique = $statutJuridique;
-    }
-
-    public function getTypeStructure(): string
-    {
-        return $this->typeStructure;
-    }
-
-    public function setTypeStructure(string $typeStructure): void
-    {
-        $this->typeStructure = $typeStructure;
-    }
-
-    public function getEffectif(): int
-    {
-        return $this->effectif;
-    }
-
-    public function setEffectif(int $effectif): void
-    {
-        $this->effectif = $effectif;
-    }
-
-    public function getCodeNAF(): string
-    {
-        return $this->codeNAF;
-    }
-
-    public function setCodeNAF(string $codeNAF): void
-    {
-        $this->codeNAF = $codeNAF;
-    }
-
-    public function getTel(): string
-    {
-        return $this->tel;
-    }
-
-    public function setTel(string $tel): void
-    {
-        $this->tel = $tel;
-    }
-
-    public function getFax(): string
-    {
-        return $this->fax;
-    }
-
-    public function setFax(string $fax): void
-    {
-        $this->fax = $fax;
-    }
-
-    public function getMail(): string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): void
-    {
-        $this->mail = $mail;
-    }
-
-    public function getSiteWeb(): string
-    {
-        return $this->siteWeb;
-    }
-
-    public function setSiteWeb(string $siteWeb): void
-    {
-        $this->siteWeb = $siteWeb;
-    }
-
-    public function getNomServiceAccueil(): string
-    {
-        return $this->nomServiceAccueil;
-    }
-
-    public function setNomServiceAccueil(string $nomServiceAccueil): void
-    {
-        $this->nomServiceAccueil = $nomServiceAccueil;
-    }
-
-    public function getResidenceServiceAccueil(): string
-    {
-        return $this->residenceServiceAccueil;
-    }
-
-    public function setResidenceServiceAccueil(string $residenceServiceAccueil): void
-    {
-        $this->residenceServiceAccueil = $residenceServiceAccueil;
-    }
-
-    public function getCedexServiceAccueil(): string
-    {
-        return $this->cedexServiceAccueil;
-    }
-
-    public function setCedexServiceAccueil(string $cedexServiceAccueil): void
-    {
-        $this->cedexServiceAccueil = $cedexServiceAccueil;
-    }
-
-    public function getPostalServiceAccueil(): int
-    {
-        return $this->postalServiceAccueil;
-    }
-
-    public function setPostalServiceAccueil(int $postalServiceAccueil): void
-    {
-        $this->postalServiceAccueil = $postalServiceAccueil;
-    }
-
-    public function getCommuneServiceAccueil(): string
-    {
-        return $this->communeServiceAccueil;
-    }
-
-    public function setCommuneServiceAccueil(string $communeServiceAccueil): void
-    {
-        $this->communeServiceAccueil = $communeServiceAccueil;
-    }
-
-    public function getPaysServiceAccueil(): string
-    {
-        return $this->paysServiceAccueil;
-    }
-
-    public function setPaysServiceAccueil(string $paysServiceAccueil): void
-    {
-        $this->paysServiceAccueil = $paysServiceAccueil;
-    }
-
-    public function getNomTuteurProfessionnel(): string
-    {
-        return $this->nomTuteurProfessionnel;
-    }
-
-    public function setNomTuteurProfessionnel(string $nomTuteurProfessionnel): void
-    {
-        $this->nomTuteurProfessionnel = $nomTuteurProfessionnel;
-    }
-
-    public function getPrenomTuteurProfessionnel(): string
-    {
-        return $this->prenomTuteurProfessionnel;
-    }
-
-    public function setPrenomTuteurProfessionnel(string $prenomTuteurProfessionnel): void
-    {
-        $this->prenomTuteurProfessionnel = $prenomTuteurProfessionnel;
-    }
-
-    public function getMailTuteurProfessionnel(): string
-    {
-        return $this->mailTuteurProfessionnel;
-    }
-
-    public function setMailTuteurProfessionnel(string $mailTuteurProfessionnel): void
-    {
-        $this->mailTuteurProfessionnel = $mailTuteurProfessionnel;
-    }
-
-    public function getTelTuteurProfessionnel(): string
-    {
-        return $this->telTuteurProfessionnel;
-    }
-
-    public function setTelTuteurProfessionnel(string $telTuteurProfessionnel): void
-    {
-        $this->telTuteurProfessionnel = $telTuteurProfessionnel;
-    }
-
-    public function getFonctionTuteurProfessionnel(): string
-    {
-        return $this->fonctionTuteurProfessionnel;
-    }
-
-    public function setFonctionTuteurProfessionnel(string $fonctionTuteurProfessionnel): void
-    {
-        $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
-    }
 
     public function formatTableau(): array
     {
@@ -1059,11 +280,13 @@ class pstage extends AbstractDataObject
             "codeUFR" => $this->codeUFR,
             "libelleUFR" => $this->libelleUFR,
             "codeDepartement" => $this->codeDepartement,
-            "dateDebutStage" => date_format($this->dateDebutStage, 'Y-m-d'),
-            "dateFinStage" => date_format($this->dateFinStage, 'Y-m-d'),
+            "codeEtape" => $this->codeEtape,
+            "libelleEtape" => $this->libelleEtape,
+            "dateDebutStage" => $this->dateDebutStage,
+            "dateFinStage" => $this->dateFinStage,
             "interruption" => $interruption,
-            "dateDebutInterruption" => date_format($this->dateDebutInterruption, 'Y-m-d'),
-            "dateFinInterruption" => date_format($this->dateFinInterruption, 'Y-m-d'),
+            "dateDebutInterruption" => $this->dateDebutInterruption,
+            "dateFinInterruption" => $this->dateFinInterruption,
             "thematique" => $this->thematique,
             "sujet" => $this->sujet,
             "fonctionTache" => $this->fonctionTache,
@@ -1097,8 +320,8 @@ class pstage extends AbstractDataObject
             "conventionValideePedagogiquement" => $conventionValideePedagogiquement,
             "avenantConvention" => $avenantConvention,
             "detailsAvenant" => $this->detailsAvenant,
-            "dateCreationConvention" => date_format($this->dateCreationConvention, 'Y-m-d'),
-            "modificationConvention" => date_format($this->modificationConvention, 'Y-m-d'),
+            "dateCreationConvention" => $this->dateCreationConvention,
+            "modificationConvention" => $this->modificationConvention,
             "origineStage" => $this->origineStage,
             "nomEtablissement" => $this->nomEtablissement,
             "siret" => $this->siret,
@@ -1118,6 +341,7 @@ class pstage extends AbstractDataObject
             "siteWeb" => $this->siteWeb,
             "nomServiceAccueil" => $this->nomServiceAccueil,
             "residenceServiceAccueil" => $this->residenceServiceAccueil,
+            "voieServiceAccueil"=> $this->voieServiceAccueil,
             "cedexServiceAccueil" => $this->cedexServiceAccueil,
             "postalServiceAccueil" => $this->postalServiceAccueil,
             "communeServiceAccueil" => $this->communeServiceAccueil,
