@@ -150,12 +150,12 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function afficherCSV()
+    public static function afficherCSV() : void
     {
         self::afficherVueDansCorps("import CSV", "Etudiant/vueTestCSV.php", self::getMenu());
     }
 
-    public static function ajouterCSV()
+    public static function ajouterCSV() : void
     {
         echo $_FILES['file']['name'];
         echo "\n";
@@ -236,7 +236,7 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-    public static function afficherMaConvention()
+    public static function afficherMaConvention() : void
     {
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
         $residenceEtu = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
@@ -250,9 +250,9 @@ class ControleurEtuMain extends ControleurMain
                 "offre" => $offre, "convention" => $convention]);
     }
 
-    public static function afficherFormulaireConventionStage()
+    public static function afficherFormulaireConventionStage() : void
     {
-        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
+        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Stage");
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
@@ -261,7 +261,7 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise"=>$entreprise, "villeEntr"=>$villeEntr]);
     }
 
-    public static function afficherFormulaireConventionAlternance()
+    public static function afficherFormulaireConventionAlternance() : void
     {
         $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
