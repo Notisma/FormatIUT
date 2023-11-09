@@ -36,24 +36,27 @@ use App\FormatIUT\Configuration\Configuration;
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else {
-                    switch (Configuration::getControleur()){
+                    switch ($_REQUEST["controleur"]){
                         case "EntrMain" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                             $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                             $liaison = "?controleur=entrMain&action=afficherProfilEntr";
+                            break;
                         }
                         case "EtuMain" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                             $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                             $liaison = "?controleur=etuMain&action=afficherProfilEtu";
+                            break;
                         }
-                        case "ProfMain" :
+                        case "AdminMain" :
                         {
                             $image=((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                             $src="data:image/jpeg;base64,".base64_encode($image->getImg());
-                            $liaison="?controleur=ProfMain&action=afficherProfilProf";
+                            $liaison="?controleur=AdminMain&action=afficherProfilAdmin";
+                            break;
                         }
                     }
 

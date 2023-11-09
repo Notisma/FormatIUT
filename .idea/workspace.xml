@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="accueil et compte">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ConnexionLdap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueAccueilProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueCompteProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueListeEtudiants.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueCompteProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueListeEtudiants.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +184,9 @@
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
-      <workItem from="1699478205637" duration="2472000" />
-    </task>
-    <task id="LOCAL-00057" summary="Ajout de fichiers">
-      <option name="closed" value="true" />
-      <created>1696929631516</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1696929631516</updated>
+      <workItem from="1699478205637" duration="3160000" />
+      <workItem from="1699520774406" duration="2000" />
+      <workItem from="1699538893462" duration="628000" />
     </task>
     <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
       <option name="closed" value="true" />
@@ -572,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699311111397</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof">
+      <option name="closed" value="true" />
+      <created>1699480759672</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1699480759675</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +659,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
@@ -676,7 +683,8 @@
     <MESSAGE value="TODO controleurFrontal.php" />
     <MESSAGE value="connexion en tant que prof" />
     <MESSAGE value="accueil et compte" />
-    <option name="LAST_COMMIT_MESSAGE" value="accueil et compte" />
+    <MESSAGE value="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

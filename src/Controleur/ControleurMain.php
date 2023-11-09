@@ -181,7 +181,7 @@ class ControleurMain
                     }
                 }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnel"){
                     ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
-                    header("Location: controleurFrontal.php?action=afficherAccueilProf&controleur=ProfMain");
+                    header("Location: controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                 }
                 exit();
                 //solution pour nous se connecter avec un prof provisoire
@@ -189,7 +189,7 @@ class ControleurMain
                 if (MotDePasse::verifier($_REQUEST["mdp"],'$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')){
                     ConnexionUtilisateur::connecter($_REQUEST["login"],"Personnel");
                     MessageFlash::ajouter("success","Connexion Réussie");
-                    header("Location:controleurFrontal.php?action=afficherAccueilProf&controleur=ProfMain");
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
                 }
             }
