@@ -170,7 +170,13 @@ class ControleurEtuMain extends ControleurMain
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
             echo $ligne[0];
             echo "\n";
-            (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
+            $pstage = (new pstageRepository())->getObjectParClePrimaire($ligne[0]);
+            if($pstage){
+                (new pstageRepository())->mettreAJour((new pstageRepository())->construireDepuisTableau($ligne));
+            }
+            else {
+                (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
+            }
         }
         fclose($csvFile);
     }
