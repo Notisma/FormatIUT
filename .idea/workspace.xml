@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="connexion en tant que prof">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueAccueilProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueCompteProf.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Prof/styleVueListeEtudiants.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurProfMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueAccueilProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueCompteProf.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Prof/vueListeEtudiants.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,9 +178,23 @@
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
-      <workItem from="1699478205637" duration="3160000" />
-      <workItem from="1699520774406" duration="2000" />
-      <workItem from="1699538893462" duration="628000" />
+      <workItem from="1699560269874" duration="3445000" />
+    </task>
+    <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
+      <option name="closed" value="true" />
+      <created>1696929442750</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1696929442750</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Ajout de fichiers">
+      <option name="closed" value="true" />
+      <created>1696929631516</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1696929631516</updated>
     </task>
     <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
       <option name="closed" value="true" />
@@ -564,23 +572,7 @@
       <option name="project" value="LOCAL" />
       <updated>1699308570753</updated>
     </task>
-    <task id="LOCAL-00105" summary="accueil et compte">
-      <option name="closed" value="true" />
-      <created>1699311111397</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1699311111397</updated>
-    </task>
-    <task id="LOCAL-00106" summary="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof">
-      <option name="closed" value="true" />
-      <created>1699480759672</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1699480759675</updated>
-    </task>
-    <option name="localTasksCounter" value="107" />
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,6 +651,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajout d'erreurs" />
+    <MESSAGE value="Améliorations visuelles vueGénérale" />
     <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
@@ -682,9 +676,7 @@
     <MESSAGE value="correction mesOffres" />
     <MESSAGE value="TODO controleurFrontal.php" />
     <MESSAGE value="connexion en tant que prof" />
-    <MESSAGE value="accueil et compte" />
-    <MESSAGE value="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat - ajout de la fonctionnalité de base de la liste des étudiants pour un prof" />
+    <option name="LAST_COMMIT_MESSAGE" value="connexion en tant que prof" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

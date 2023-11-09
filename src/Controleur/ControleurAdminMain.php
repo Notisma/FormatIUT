@@ -17,13 +17,14 @@ class ControleurAdminMain extends ControleurMain
     }
 
     public static function afficherListeEtudiant(){
-        self::afficherVue("Liste Etudiants","Admin/vueListeEtudiants.php",self::getMenu());
+        self::afficherVue("Liste Étudiants","Admin/vueListeEtudiants.php",self::getMenu());
     }
     public static function getMenu(): array
     {
         return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Administrateurs", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
-            array("image" => "../ressources/images/liste.png","label"=>"Liste Etudiants","lien"=>"?action=afficherListeEtudiant&controleur=AdminMain"),
+            array("image" => "../ressources/images/etudiants.png","label"=>"Liste Étudiants","lien"=>"?action=afficherListeEtudiant&controleur=AdminMain"),
+            array("image" => "../ressources/images/entreprise.png","label"=>"Liste Entreprises","lien"=>"?action=afficherListeEtudiant&controleur=AdminMain"),
             array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter"),
 
         );
