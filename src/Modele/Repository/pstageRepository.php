@@ -99,6 +99,10 @@ class pstageRepository extends AbstractRepository {
     }
     public function construireDepuisTableau(array $DataObjectTableau): pstage
 {
+    $date1 = date_format($DataObjectTableau[11],'Y-m-d');
+    $date2 = date_format($DataObjectTableau[12],'Y-m-d');
+    $date3 = date_format($DataObjectTableau[14], 'Y-m-d');
+    $date4 = date_format($DataObjectTableau[15], 'Y-m-d');
     $interruption = $DataObjectTableau[13] ? true : false;
     $conventionValidee = $DataObjectTableau[24] ? true : false;
     $conventionValideePedagogiquement = $DataObjectTableau[47] ? true : false;
@@ -116,11 +120,11 @@ class pstageRepository extends AbstractRepository {
         $DataObjectTableau[8],
         $DataObjectTableau[9],
         $DataObjectTableau[10],
-        new DateTime($DataObjectTableau[11]),
-        new DateTime($DataObjectTableau[12]),
+        $date1,
+        $date2,
         $interruption,
-        new DateTime($DataObjectTableau[14]),
-        new DateTime($DataObjectTableau[15]),
+        $date3,
+        $date4,
         $DataObjectTableau[16],
         $DataObjectTableau[17],
         $DataObjectTableau[18],
