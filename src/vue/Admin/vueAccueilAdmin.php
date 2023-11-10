@@ -53,11 +53,11 @@
 
 
     <div class="wrapAdminEntr">
-        <p></p>
+        <h3 class="titre">Alertes - Entreprises</h3>
     </div>
 
     <div class="wrapAdminEtu">
-        <p></p>
+        <h3 class="titre">Alertes - Étudiants</h3>
     </div>
 
 
