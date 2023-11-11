@@ -148,6 +148,7 @@
 <div id="popup" class="popup">
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
+        <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
               action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
@@ -166,7 +167,7 @@
             </div>
             <div>
                 <div class="contenuDepot">
-                    <label>Déposez votre Lettre de Motivation :</label>
+                    <label>Déposez votre lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" size=500/>
                 </div>
@@ -204,7 +205,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" size=500/>
+                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
@@ -214,9 +215,9 @@
             </div>
             <div>
                 <div class="contenuDepot">
-                    <label>Déposez votre Lettre de Motivation :</label>
+                    <label>Déposez votre lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" size=500/>
+                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">

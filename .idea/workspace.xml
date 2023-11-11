@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="correction du js">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueDetailEtudiant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,15 +177,8 @@
       <workItem from="1698927422292" duration="6643000" />
       <workItem from="1699006433738" duration="1074000" />
       <workItem from="1699017796296" duration="2199000" />
-      <workItem from="1699039217790" duration="2954000" />
-    </task>
-    <task id="LOCAL-00051" summary="Corrections visuelles">
-      <option name="closed" value="true" />
-      <created>1696780278781</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1696780278781</updated>
+      <workItem from="1699039217790" duration="4080000" />
+      <workItem from="1699699950752" duration="7270000" />
     </task>
     <task id="LOCAL-00052" summary="Avancées graphiques">
       <option name="closed" value="true" />
@@ -574,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699006871768</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre">
+      <option name="closed" value="true" />
+      <created>1699043779258</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1699043779259</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -642,7 +640,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
     <MESSAGE value="Nombreuses Corrections" />
     <MESSAGE value="Vue mes offres fin" />
@@ -667,7 +664,8 @@
     <MESSAGE value="simplification de la postulation" />
     <MESSAGE value="image qui affiche si on a choisi un fichier avec du js" />
     <MESSAGE value="correction du js" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction du js" />
+    <MESSAGE value="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre" />
+    <option name="LAST_COMMIT_MESSAGE" value="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
