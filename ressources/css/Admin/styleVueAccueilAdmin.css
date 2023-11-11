@@ -155,11 +155,118 @@ body {
     background-color: #ff9095;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     height: 98%;
     width: 98%;
+    padding-bottom: 2%;
+}
+
+.wrapAdminEntr > .wrapBoutons {
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapAdminEntr > .wrapBoutons > a {
+    width : 40%;
+    height: 100%;
+}
+
+.wrapAlertes {
+    width: 95%;
+    height: 75%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1%;
+}
+
+.wrapAlertes::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.wrapAlertes::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.alerteEntr {
+    width: 95%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1%;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.alerteEntr:hover {
+    background-color: #aadcda;
+    cursor: pointer;
+}
+
+.alerteEntr > .imageAlerte {
+    width: 20%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.imageAlerte > img {
+    width: 85%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.contenuAlerte {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.sujetAlerte {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.sujetAlerte > img {
+    height: 100%;
+}
+
+.sujetAlerte > p {
+    text-align: left;
+    color: red;
+    margin: 0;
 }
 
 .wrapAdminEtu {
@@ -175,6 +282,8 @@ body {
     height: 98%;
     width: 98%;
 }
+
+
 
 
 
