@@ -174,6 +174,416 @@ class pstage extends AbstractDataObject
         $this->fonctionTuteurProfessionnel = $fonctionTuteurProfessionnel;
     }
 
+    public function getNumeroConvention(): int
+    {
+        return $this->numeroConvention;
+    }
+
+    public function getNumeroEtudiant(): int
+    {
+        return $this->numeroEtudiant;
+    }
+
+    public function getNomEtudiant(): string
+    {
+        return $this->nomEtudiant;
+    }
+
+    public function getPrenomEtudiant(): string
+    {
+        return $this->prenomEtudiant;
+    }
+
+    public function getTelPersoEtu(): string
+    {
+        return $this->telPersoEtu;
+    }
+
+    public function getTelPortEtu(): string
+    {
+        return $this->telPortEtu;
+    }
+
+    public function getMailPersoEtu(): string
+    {
+        return $this->mailPersoEtu;
+    }
+
+    public function getMailUnivEtu(): string
+    {
+        return $this->mailUnivEtu;
+    }
+
+    public function getCodeUFR(): string
+    {
+        return $this->codeUFR;
+    }
+
+    public function getLibelleUFR(): string
+    {
+        return $this->libelleUFR;
+    }
+
+    public function getCodeDepartement(): string
+    {
+        return $this->codeDepartement;
+    }
+
+    public function getCodeEtape(): string
+    {
+        return $this->codeEtape;
+    }
+
+    public function getLibelleEtape(): string
+    {
+        return $this->libelleEtape;
+    }
+
+    public function getDateDebutStage(): string
+    {
+        return $this->dateDebutStage;
+    }
+
+    public function getDateFinStage(): string
+    {
+        return $this->dateFinStage;
+    }
+
+    public function isInterruption(): bool
+    {
+        return $this->interruption;
+    }
+
+    public function getDateDebutInterruption(): string
+    {
+        return $this->dateDebutInterruption;
+    }
+
+    public function getDateFinInterruption(): string
+    {
+        return $this->dateFinInterruption;
+    }
+
+    public function getThematique(): string
+    {
+        return $this->thematique;
+    }
+
+    public function getSujet(): string
+    {
+        return $this->sujet;
+    }
+
+    public function getFonctionTache(): string
+    {
+        return $this->fonctionTache;
+    }
+
+    public function getDetailProjet(): string
+    {
+        return $this->detailProjet;
+    }
+
+    public function getDureeStage(): string
+    {
+        return $this->dureeStage;
+    }
+
+    public function getNbJoursTravail(): int
+    {
+        return $this->nbJoursTravail;
+    }
+
+    public function getNbHeuresHebdo(): float
+    {
+        return $this->nbHeuresHebdo;
+    }
+
+    public function getGratification(): float
+    {
+        return $this->gratification;
+    }
+
+    public function getUniteGratification(): string
+    {
+        return $this->uniteGratification;
+    }
+
+    public function getUniteDureeGratification(): string
+    {
+        return $this->uniteDureeGratification;
+    }
+
+    public function isConventionValidee(): bool
+    {
+        return $this->conventionValidee;
+    }
+
+    public function getNomEnseignantReferent(): string
+    {
+        return $this->nomEnseignantReferent;
+    }
+
+    public function getPrenomEnseignantReferent(): string
+    {
+        return $this->prenomEnseignantReferent;
+    }
+
+    public function getMailEnseignantReferent(): string
+    {
+        return $this->mailEnseignantReferent;
+    }
+
+    public function getNomSignataire(): string
+    {
+        return $this->nomSignataire;
+    }
+
+    public function getPrenomSignataire(): string
+    {
+        return $this->prenomSignataire;
+    }
+
+    public function getMailSignataire(): string
+    {
+        return $this->mailSignataire;
+    }
+
+    public function getFonctionSignataire(): string
+    {
+        return $this->fonctionSignataire;
+    }
+
+    public function getAnneeUniversitaire(): string
+    {
+        return $this->anneeUniversitaire;
+    }
+
+    public function getTypeConvention(): string
+    {
+        return $this->typeConvention;
+    }
+
+    public function getCommentaireStage(): string
+    {
+        return $this->commentaireStage;
+    }
+
+    public function getCommentaireDureeTravail(): string
+    {
+        return $this->commentaireDureeTravail;
+    }
+
+    public function getCodeELP(): string
+    {
+        return $this->codeELP;
+    }
+
+    public function getElementPedagogique(): string
+    {
+        return $this->elementPedagogique;
+    }
+
+    public function getCodeSexeEtu(): string
+    {
+        return $this->codeSexeEtu;
+    }
+
+    public function getAvantagesNature(): string
+    {
+        return $this->avantagesNature;
+    }
+
+    public function getAdresseEtu(): string
+    {
+        return $this->adresseEtu;
+    }
+
+    public function getCodePostalEtu(): int
+    {
+        return $this->codePostalEtu;
+    }
+
+    public function getPaysEtu(): string
+    {
+        return $this->paysEtu;
+    }
+
+    public function getVilleEtu(): string
+    {
+        return $this->villeEtu;
+    }
+
+    public function isConventionValideePedagogiquement(): bool
+    {
+        return $this->conventionValideePedagogiquement;
+    }
+
+    public function isAvenantConvention(): bool
+    {
+        return $this->avenantConvention;
+    }
+
+    public function getDetailsAvenant(): string
+    {
+        return $this->detailsAvenant;
+    }
+
+    public function getDateCreationConvention(): string
+    {
+        return $this->dateCreationConvention;
+    }
+
+    public function getModificationConvention(): string
+    {
+        return $this->modificationConvention;
+    }
+
+    public function getOrigineStage(): string
+    {
+        return $this->origineStage;
+    }
+
+    public function getNomEtablissement(): string
+    {
+        return $this->nomEtablissement;
+    }
+
+    public function getSiret(): int
+    {
+        return $this->siret;
+    }
+
+    public function getAdresseResidence(): string
+    {
+        return $this->adresseResidence;
+    }
+
+    public function getAdresseVoie(): string
+    {
+        return $this->adresseVoie;
+    }
+
+    public function getAdresseLibCedex(): string
+    {
+        return $this->adresseLibCedex;
+    }
+
+    public function getCodePostal(): int
+    {
+        return $this->codePostal;
+    }
+
+    public function getEtablissementCommune(): string
+    {
+        return $this->etablissementCommune;
+    }
+
+    public function getPays(): string
+    {
+        return $this->pays;
+    }
+
+    public function getStatutJuridique(): string
+    {
+        return $this->statutJuridique;
+    }
+
+    public function getTypeStructure(): string
+    {
+        return $this->typeStructure;
+    }
+
+    public function getEffectif(): string
+    {
+        return $this->effectif;
+    }
+
+    public function getCodeNAF(): string
+    {
+        return $this->codeNAF;
+    }
+
+    public function getTel(): string
+    {
+        return $this->tel;
+    }
+
+    public function getFax(): string
+    {
+        return $this->fax;
+    }
+
+    public function getMail(): string
+    {
+        return $this->mail;
+    }
+
+    public function getSiteWeb(): string
+    {
+        return $this->siteWeb;
+    }
+
+    public function getNomServiceAccueil(): string
+    {
+        return $this->nomServiceAccueil;
+    }
+
+    public function getResidenceServiceAccueil(): string
+    {
+        return $this->residenceServiceAccueil;
+    }
+
+    public function getVoieServiceAccueil(): string
+    {
+        return $this->voieServiceAccueil;
+    }
+
+    public function getCedexServiceAccueil(): string
+    {
+        return $this->cedexServiceAccueil;
+    }
+
+    public function getPostalServiceAccueil(): int
+    {
+        return $this->postalServiceAccueil;
+    }
+
+    public function getCommuneServiceAccueil(): string
+    {
+        return $this->communeServiceAccueil;
+    }
+
+    public function getPaysServiceAccueil(): string
+    {
+        return $this->paysServiceAccueil;
+    }
+
+    public function getNomTuteurProfessionnel(): string
+    {
+        return $this->nomTuteurProfessionnel;
+    }
+
+    public function getPrenomTuteurProfessionnel(): string
+    {
+        return $this->prenomTuteurProfessionnel;
+    }
+
+    public function getMailTuteurProfessionnel(): string
+    {
+        return $this->mailTuteurProfessionnel;
+    }
+
+    public function getTelTuteurProfessionnel(): string
+    {
+        return $this->telTuteurProfessionnel;
+    }
+
+    public function getFonctionTuteurProfessionnel(): string
+    {
+        return $this->fonctionTuteurProfessionnel;
+    }
+
 
 
     public function formatTableau(): array
