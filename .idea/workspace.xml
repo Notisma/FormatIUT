@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 2">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,14 +179,7 @@
       <workItem from="1699560269874" duration="4078000" />
       <workItem from="1699643503737" duration="111000" />
       <workItem from="1699693028390" duration="1836000" />
-    </task>
-    <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
-      <option name="closed" value="true" />
-      <created>1696936548623</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1696936548623</updated>
+      <workItem from="1699695263228" duration="388000" />
     </task>
     <task id="LOCAL-00059" summary="Avancées sur vueCompteEntreprise.php">
       <option name="closed" value="true" />
@@ -573,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699643609580</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="Feat - Avancées sur accueil ADMIN 3">
+      <option name="closed" value="true" />
+      <created>1699695514330</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1699695514334</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +652,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
     <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
@@ -677,7 +676,8 @@
     <MESSAGE value="connexion en tant que prof" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat - Avancées sur accueil ADMIN 2" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat - Avancées sur accueil ADMIN 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
