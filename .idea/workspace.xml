@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Finalisation de la première connexion + changement fonctionnement des images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/VilleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/VilleRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,6 +176,8 @@
       <workItem from="1699277443918" duration="6925000" />
       <workItem from="1699378557175" duration="1546000" />
       <workItem from="1699474223105" duration="2299000" />
+      <workItem from="1699655734903" duration="1233000" />
+      <workItem from="1699694964658" duration="3390000" />
     </task>
     <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
       <option name="closed" value="true" />

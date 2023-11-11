@@ -15,10 +15,10 @@ class Configuration
     static private array $configLocal = array(
         
         'hostname' => 'localhost',
-        'database' => 'loyet',
+        'database' => 'sae',
         'port' => '3306',
-        'login' => 'root',
-        'password'=>'root'
+        'login' => 'notisma',
+        'password'=>''
     );
     static private array $configWebInfo = array(
 
