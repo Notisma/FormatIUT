@@ -63,7 +63,7 @@
             if (empty($listeEtu)) {
                 $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
                 if ($formation) {
-                    $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
+                    $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
                     echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
