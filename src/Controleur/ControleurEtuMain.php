@@ -283,7 +283,7 @@ class ControleurEtuMain extends ControleurMain
                     if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
                         $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
                         if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_POST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresse()) == trim($_POST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_POST['villeEntr'])) && ($villeEntr->getCodePostal() == $_POST['codePostalEntr'])) {
-                            if ($offreVerif->getDateDebut() == new \DateTime($_POST['dateDebut'], new \DateTimeZone("Europe/Paris")) && $offreVerif->getDateFin() == new \DateTime($_POST['dateFin'], new \DateTimeZone("Europe/Paris"))) {
+                            if ($offreVerif->getDateDebut() == new \DateTime($_POST['dateDebut']) && $offreVerif->getDateFin() == new \DateTime($_POST['dateFin'])) {
                                 $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
                                 $convention = (new ConventionRepository())->construireDepuisTableau(["idConvention" => $clefPrimConv,
                                     "conventionValidee" => 0, "dateCreation" => $_POST['dateCreation'], "dateTransmission" => $_POST['dateCreation'],
