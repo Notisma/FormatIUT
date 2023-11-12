@@ -12,7 +12,8 @@
                 <legend> Ma convention :</legend>
                 <?php
                 if($convention->getTypeCovention() == "Alternance"){
-                echo '<p><label for="offre_id">Votre alternance : </label>'; }
+                    echo '<p><label for="offre_id">Votre alternance : </label>';
+                }
                 else{
                     echo '<p><label for="offre_id">Votre stage : </label>';
                 } ?>
