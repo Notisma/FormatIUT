@@ -65,6 +65,7 @@
                     <h3 class="titre" id="rouge">CRÉDIT AGRICOLE - Demande de création de compte</h3>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
+                        <p>Compte créé</p>
                         <p>Demande de création de compte le 11/11/2023</p>
                     </div>
                 </div>

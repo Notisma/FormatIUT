@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 3">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,15 +179,8 @@
       <workItem from="1699560269874" duration="4078000" />
       <workItem from="1699643503737" duration="111000" />
       <workItem from="1699693028390" duration="1836000" />
-      <workItem from="1699695263228" duration="388000" />
-    </task>
-    <task id="LOCAL-00059" summary="Avancées sur vueCompteEntreprise.php">
-      <option name="closed" value="true" />
-      <created>1696942373057</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1696942373057</updated>
+      <workItem from="1699695263228" duration="998000" />
+      <workItem from="1699820967422" duration="647000" />
     </task>
     <task id="LOCAL-00060" summary="Avancées sur vueCompteEntreprise.php">
       <option name="closed" value="true" />
@@ -573,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699695514334</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Feat - Avancées sur accueil ADMIN 4">
+      <option name="closed" value="true" />
+      <created>1699696009587</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1699696009587</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
     <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
     <MESSAGE value="Nombreuses Corrections" />
@@ -677,7 +677,8 @@
     <MESSAGE value="Feat - Avancées sur accueil ADMIN" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 2" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat - Avancées sur accueil ADMIN 3" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat - Avancées sur accueil ADMIN 4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
