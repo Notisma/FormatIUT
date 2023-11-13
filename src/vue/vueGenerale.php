@@ -75,7 +75,7 @@ use App\FormatIUT\Configuration\Configuration;
                 <div class="flash">
                     <?php
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                        echo "<div onclick='supprimerElement(flash)' id='flash' class='alert alert-" . $type . "' onclick=' " . \App\FormatIUT\Lib\MessageFlash::supprimerTousMessages() . " '>";
+                        echo "<div onclick='supprimerElement(\"flash\")' id='flash' class='alert alert-" . $type . "'>";
                         echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
                         echo '<p>' . $lireMessage . '</p></div>';
                     }
