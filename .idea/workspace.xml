@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Finalisation de la première connexion + changement fonctionnement des images">
-      <change afterPath="$PROJECT_DIR$/ressources/css/styleVueResultatRecherche.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vue/vueResultatRecherche.php" afterDir="false" />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Connexion_via_ldap" />
+        <entry key="$PROJECT_DIR$" value="Connexion_Prof" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,9 +52,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging sprint2",
+    "git-widget-placeholder": "sprint2",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/home/ann2/tordeuxm/public_html/devapplicationformatiut",
+    "last_opened_file_path": "C:/MAMP/htdocs/SAE_DEV/src/vue/Prof",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -79,6 +72,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\SAE_DEV\src\vue\Prof" />
+      <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css\Prof" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\MAMP\htdocs\SAE_DEV\ressources\css" />
       <recent name="C:\MAMP\htdocs\devapplicationformatiut\src\vue\Etudiant" />
@@ -179,50 +176,12 @@
       <workItem from="1699175237209" duration="8661000" />
       <workItem from="1699188217938" duration="6466000" />
       <workItem from="1699277443918" duration="6925000" />
-      <workItem from="1699378557175" duration="1546000" />
-      <workItem from="1699474223105" duration="2299000" />
-      <workItem from="1699655734903" duration="1233000" />
-      <workItem from="1699694964658" duration="3390000" />
-    </task>
-    <task id="LOCAL-00056" summary="Push dans l'attente de la séparation entre détail offre entr et etu">
-      <option name="closed" value="true" />
-      <created>1696929442750</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1696929442750</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Ajout de fichiers">
-      <option name="closed" value="true" />
-      <created>1696929631516</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1696929631516</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Refonte graphique vueCompteEntreprise.php">
-      <option name="closed" value="true" />
-      <created>1696936548623</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1696936548623</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Avancées sur vueCompteEntreprise.php">
-      <option name="closed" value="true" />
-      <created>1696942373057</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1696942373057</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Avancées sur vueCompteEntreprise.php">
-      <option name="closed" value="true" />
-      <created>1696954724735</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1696954724747</updated>
+      <workItem from="1699560269874" duration="4078000" />
+      <workItem from="1699643503737" duration="111000" />
+      <workItem from="1699693028390" duration="1836000" />
+      <workItem from="1699695263228" duration="998000" />
+      <workItem from="1699820967422" duration="676000" />
+      <workItem from="1699865325770" duration="1468000" />
     </task>
     <task id="LOCAL-00061" summary="Corrections.">
       <option name="closed" value="true" />
@@ -552,31 +511,71 @@
       <option name="project" value="LOCAL" />
       <updated>1699283922689</updated>
     </task>
-    <task id="LOCAL-00102" summary="Corrections connexion et configuration automatiques">
+    <task id="LOCAL-00102" summary="correction mesOffres">
       <option name="closed" value="true" />
-      <created>1699286566494</created>
+      <created>1699305181298</created>
       <option name="number" value="00102" />
       <option name="presentableId" value="LOCAL-00102" />
       <option name="project" value="LOCAL" />
-      <updated>1699286566494</updated>
+      <updated>1699305181299</updated>
     </task>
-    <task id="LOCAL-00103" summary="Correction de la première connexion (affichage popup)">
+    <task id="LOCAL-00103" summary="TODO controleurFrontal.php">
       <option name="closed" value="true" />
-      <created>1699378993549</created>
+      <created>1699305219199</created>
       <option name="number" value="00103" />
       <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
-      <updated>1699378993549</updated>
+      <updated>1699305219199</updated>
     </task>
-    <task id="LOCAL-00104" summary="fix : Finalisation de la première connexion + changement fonctionnement des images">
+    <task id="LOCAL-00104" summary="connexion en tant que prof">
       <option name="closed" value="true" />
-      <created>1699476103008</created>
+      <created>1699308570753</created>
       <option name="number" value="00104" />
       <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1699476103008</updated>
+      <updated>1699308570753</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Feat - Avancées sur accueil ADMIN">
+      <option name="closed" value="true" />
+      <created>1699563769179</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1699563769186</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Feat - Avancées sur accueil ADMIN 2">
+      <option name="closed" value="true" />
+      <created>1699643609580</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1699643609580</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Feat - Avancées sur accueil ADMIN 3">
+      <option name="closed" value="true" />
+      <created>1699695514330</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1699695514334</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Feat - Avancées sur accueil ADMIN 4">
+      <option name="closed" value="true" />
+      <created>1699696009587</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1699696009587</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Feat - Avancées sur accueil ADMIN 5">
+      <option name="closed" value="true" />
+      <created>1699821636706</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1699821636708</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,11 +592,6 @@
         <entry key="Branch">
           <value>
             <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/sprint2" />
-                </option>
-              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="main" />
@@ -660,11 +654,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajout d'erreurs" />
-    <MESSAGE value="Améliorations visuelles vueGénérale" />
-    <MESSAGE value="Début des travaux sur vueMesOffresEtu.php" />
-    <MESSAGE value="Visuel (version 1) vueMesOffresEtu.php terminé." />
-    <MESSAGE value="Début des améliorations visuelles vueCatalogueOffre.php" />
     <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
     <MESSAGE value="Nombreuses Corrections" />
     <MESSAGE value="Vue mes offres fin" />
@@ -682,10 +671,15 @@
     <MESSAGE value="Correction après merge" />
     <MESSAGE value="Encore une correction après merge (il était délicat celui-ci)" />
     <MESSAGE value="Corrections de crashs" />
-    <MESSAGE value="Corrections connexion et configuration automatiques" />
-    <MESSAGE value="Correction de la première connexion (affichage popup)" />
-    <MESSAGE value="fix : Finalisation de la première connexion + changement fonctionnement des images" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : Finalisation de la première connexion + changement fonctionnement des images" />
+    <MESSAGE value="correction mesOffres" />
+    <MESSAGE value="TODO controleurFrontal.php" />
+    <MESSAGE value="connexion en tant que prof" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 2" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 4" />
+    <MESSAGE value="Feat - Avancées sur accueil ADMIN 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat - Avancées sur accueil ADMIN 5" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
