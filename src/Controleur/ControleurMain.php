@@ -292,4 +292,40 @@ class ControleurMain
             }
         }
     }
+
+    public static function rechercher(): void
+    {
+        $controleur = Configuration::getCheminControleur();
+
+        if (is_null($_REQUEST['recherche'])) {
+            $controleur::afficherErreur("Il faut renseigner une recherche.");
+            return;
+        }
+        $recherche = $_REQUEST['recherche'];
+
+        $resOffres = array();
+        $resEntreprises = array();
+
+        foreach ((new OffreRepository())->getListeObjet() as $offre) {
+            if (str_contains(strtolower($offre->getSujet()), strtolower($recherche)) ||
+                str_contains(strtolower($offre->getTypeOffre()), strtolower($recherche)) ||
+                str_contains(strtolower($offre->getDetailProjet()), strtolower($recherche))
+            ) {
+                $resOffres[] = $offre;
+            }
+        }
+        foreach ((new EntrepriseRepository())->getListeObjet() as $entr) {
+            if (
+                str_contains(strtolower($entr->getNomEntreprise()), strtolower($recherche))
+            ) {
+                $resEntreprises[] = $entr;
+            }
+        }
+
+        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+            "recherche" => $recherche,
+            "offres" => $resOffres,
+            "entreprises" => $resEntreprises
+        ]);
+    }
 }
