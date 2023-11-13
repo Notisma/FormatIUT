@@ -1,4 +1,12 @@
-<div class="boiteMain">
+<html>
+<head>
+    <link rel="stylesheet" href="./../ressources/css/styleVueDetailEtudiant.css">
+    <script src="../ressources/javaScript/mesFonctions.js"></script>
+</head>
+<body>
+<div class="boiteMain" id="aGriser">
+
+
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
@@ -34,7 +42,7 @@
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="pp entreprise">';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">';
                                 ?>
                             </div>
                             <div class="right">
@@ -54,26 +62,37 @@
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
 
-        <form method="post">
-            <button type="submit" class="boutonAssigner"
-                    formaction="?controleur=EtuMain&action=postuler&idOffre=<?= rawurlencode($offre->getIdOffre()) ?>" <?php
-            $peutPostuler = false;
-            if (is_null((new FormationRepository())->estFormation($_REQUEST['idOffre']))
-                && !(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())
-                && !(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_REQUEST['idOffre'])) {
-                $peutPostuler = true;
-            }
-            if (!$peutPostuler) {
-                echo 'id="disabled" disabled';
-            }
-            ?>
-            >POSTULER
-            </button>
+        <?php
 
-            <button type="submit" class="boutonAssigner" formaction="?action=afficherMesOffres&controleur=EtuMain">
-                RETOUR
-            </button>
-        </form>
+        echo '<a id="my-button">
+                <button class="boutonAssigner" onclick="afficherPopupDepotCV_LM()" ';
+        $bool = false;
+        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+        if (is_null($formation)) {
+            if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
+                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                    $bool = true;
+                }
+            }
+        }
+        if (!$bool) {
+            echo 'id="disabled" disabled';
+        }
+        echo ">POSTULER</button></a>";
+
+        echo '<a id="my-button">
+                <button class="boutonAssigner" onclick="afficherPopupModifCV_LM()" ';
+
+        if ($bool) {
+            echo 'id="disabled" disabled';
+        }
+        echo ">MODIFIER VOS FICHIERS</button></a>";
+        ?>
+
+
+        <a href='?action=afficherAccueilEtu&controleur=EtuMain'>
+            <button class='boutonAssigner'>RETOUR</button>
+        </a>
     </div>
 
 
@@ -82,6 +101,7 @@
 
         <div class="wrapPostulants">
             <?php
+
             $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
             if ($formation) {
                 if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
@@ -122,4 +142,106 @@
 
     </div>
 
+
 </div>
+
+<div id="popup" class="popup">
+    <div class="mainPopup">
+        <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
+        <p>Les documents doivent être au format PDF</p>
+
+        <form enctype="multipart/form-data"
+              action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              method="post">
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre CV :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose1" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre lettre de Motivation :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose2" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" value="Postuler">
+        </form>
+
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupDepotCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="descPopup">
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
+    </div>
+</div>
+
+<div id="popupModif" class="popup">
+    <div class="mainPopup">
+        <h2>MODIFIEZ VOS DOCUMENTS !</h2>
+
+        <form enctype="multipart/form-data"
+              action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              method="post">
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre CV :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose3" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre lettre de Motivation :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose4" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" value="Modifier vos documents">
+        </form>
+
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupModifCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="descPopup">
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
+    </div>
+</div>
+
+
+</body>
+</html>

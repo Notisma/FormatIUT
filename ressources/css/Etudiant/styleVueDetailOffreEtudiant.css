@@ -148,7 +148,7 @@ body {
     width: 95%;
     height: 95%;
     border-radius: 10px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .overflowListe2 > ul > li{
@@ -277,13 +277,12 @@ body {
     margin-bottom: 0;
 }
 
-.actionsRapidesEntr > form {
+.actionsRapidesEntr > a {
+    margin: 5%;
     width: 90%;
 }
 
-.actionsRapidesEntr > form > button {
-    margin: 5% 0;
-}
+
 
 
 .listeEtudiantsPostulants {
@@ -391,7 +390,7 @@ body {
 
 .boutonAssigner {
     width: 100%;
-    height: 25%;
+    height: 100%;
     border-radius: 50px;
     border: none;
     background-color: #ff5660;

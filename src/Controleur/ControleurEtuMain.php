@@ -138,7 +138,7 @@ class ControleurEtuMain extends ControleurMain
                         if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
                             self::afficherErreur("Vous avez déjà postulé");
                         } else {
-                            $regarder = new Regarder(self::$cleEtudiant, $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
+                            $regarder = new Regarder(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
                             (new RegarderRepository())->creerObjet($regarder);
                             $_REQUEST['action'] = "afficherMesOffres";
                             self::afficherMesOffres();
@@ -224,7 +224,7 @@ class ControleurEtuMain extends ControleurMain
         if($_FILES["ficLM"]["tmp_name"] != null){
             $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
         }
-        (new RegarderRepository())->modifierFichiers(self::$cleEtudiant, $_GET["idOffre"], $cvData, $lmData);
+        (new RegarderRepository())->modifierFichiers(self::getCleEtudiant(), $_GET["idOffre"], $cvData, $lmData);
         self::afficherMesOffres();
     }
 

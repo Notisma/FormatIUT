@@ -28,6 +28,14 @@ class Configuration
         'login' => 'notisma',
         'password' => ''
     );
+    static private array $configLocalNoe = array(
+
+        'hostname' => 'localhost',
+        'database' => 'devapplicationformatiut',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
     static private array $configWebInfo = array(
 
         'hostname' => 'localhost',
@@ -43,6 +51,8 @@ class Configuration
             return self::$configWebInfo;
         else if ($_SERVER['SERVER_PORT'] == 9999)
             return self::$configLocalRaphael;
+        else if ($_SERVER['SERVER_PORT'] == 1024)
+            return self::$configLocalNoe;
         else
             return self::$configLocal;
     }

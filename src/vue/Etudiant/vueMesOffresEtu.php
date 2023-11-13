@@ -37,7 +37,7 @@
 
                 $countAttente = 0;
                 foreach ($listOffre as $offre) {
-                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En Attente") {
+                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente") {
                         $countAttente++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
@@ -46,7 +46,7 @@
                         echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
                         echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
                         $sujetHTML = htmlspecialchars($offre->getSujet());
-                        echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
+                        echo "<p>Sujet de l'offre: " . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
                         echo '<form method="get">
                              <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
