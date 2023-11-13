@@ -148,7 +148,7 @@
 <div id="popup" class="popup">
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
-        <p>Les documents doivent être au format PDF (500ko maximum) </p>
+        <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
               action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
@@ -197,7 +197,7 @@
 <div id="popupModif" class="popup">
     <div class="mainPopup">
         <h2>MODIFIEZ VOS DOCUMENTS !</h2>
-        <p>Les documents doivent être au format PDF (500ko maximum) </p>
+        <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
               action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
