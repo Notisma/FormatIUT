@@ -42,15 +42,6 @@ function fermerPopupPremiereCo() {
 
 function supprimerElement(id) {
     let element = document.getElementById(id);
-    if (element) {
-        element.style.display = "none";
-    } else {
-        alert("L'élément n'existe pas")
-    }
-}
-
-function supprimerElement(id) {
-    let element = document.getElementById(id);
     //si l'élément existe
     if (element) {
         element.style.display = "none";

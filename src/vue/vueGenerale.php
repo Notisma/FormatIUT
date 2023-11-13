@@ -13,7 +13,11 @@ use App\FormatIUT\Configuration\Configuration;
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
 </head>
-<body>
+<body <?php
+if (isset($_REQUEST["premiereConnexion"])) {
+    echo "onload='afficherPopupPremiereCo(0)'";
+}
+?>>
 
 <div class="couleur">
 
@@ -36,7 +40,7 @@ use App\FormatIUT\Configuration\Configuration;
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 } else {
-                    switch ($_REQUEST["controleur"]){
+                    switch ($_REQUEST["controleur"]) {
                         case "EntrMain" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
@@ -53,9 +57,9 @@ use App\FormatIUT\Configuration\Configuration;
                         }
                         case "AdminMain" :
                         {
-                            $image=((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            $src="data:image/jpeg;base64,".base64_encode($image->getImg());
-                            $liaison="?controleur=AdminMain&action=afficherProfilAdmin";
+                            $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
                             break;
                         }
                     }

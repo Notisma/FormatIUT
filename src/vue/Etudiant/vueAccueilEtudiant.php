@@ -1,11 +1,7 @@
 <!-- TODO le script pour erreur html -->
 <script src="../ressources/javaScript/mesFonctions.js"></script>
 
-<div class="conteneurPrincipal" id="conteneurPrincipal" <?php
-if (isset($_REQUEST["premiereConnexion"])) {
-    echo "onload='afficherPopupPremiereCo(0)'";
-}
-?>>
+<div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3 onclick="afficherPopupPremiereCo(0)">Bonjour, <?php
