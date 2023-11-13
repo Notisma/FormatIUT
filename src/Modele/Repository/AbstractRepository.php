@@ -79,19 +79,6 @@ abstract class AbstractRepository
         $values=array("Tag"=>$clePrimaire);
         $pdoStatement->execute($values);
     }
-    public function mettreAJour(AbstractDataObject $object): void
-    {
-        $sql = "UPDATE ".$this->getNomTable()." SET ";
-        $colonnes = $this->getNomsColonnes();
-        $setClause = [];
-        foreach ($colonnes as $colonne) {
-            $setClause[] = "$colonne = :{$colonne}Tag";
-        }
-        $sql .= implode(", ", $setClause);
-        $sql .= " WHERE " . $this->getNomClePrimaire() . " = :".$this->getNomClePrimaire()."Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = $object->formatTableau();
-        $pdoStatement->execute($values);
-    }
+
 
 }
