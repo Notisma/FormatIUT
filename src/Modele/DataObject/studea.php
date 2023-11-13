@@ -1011,7 +1011,176 @@ class studea extends AbstractDataObject{
 
     public function formatTableau(): array
     {
-        return array();
+        if($this->aDejaEteMaitreApprentissage == true){
+            $maitreApprentissage = 1;
+        }
+        else {
+            $maitreApprentissage = 0;
+        }
+        if($this->aDejaRecuUneFormationDeMaitreApprentissage == true){
+            $formationMaitreApprentissage = 1;
+        }
+        else {
+            $formationMaitreApprentissage = 0;
+        }
+        if($this->aDejaEteMaitreApprentissage2 == true){
+            $maitreApprentissage2 = 1;
+        }
+        else {
+            $maitreApprentissage2 = 0;
+        }
+        if($this->aDejaRecuUneFormationDeMaitreApprentissage2 == true){
+            $formationMaitreApprentissage2 = 1;
+        }
+        else {
+            $formationMaitreApprentissage2 = 0;
+        }
+
+        return array(
+            "archiveeTag" => $this->archivee,
+            "gereEnDehorsDeStudeaTag" => $this->gereEnDehorsDeStudea,
+            "statutOPCOTag" => $this->statutOPCO,
+            "idTag" => $this->id,
+            "etablissementTag" => $this->etablissement,
+            "formationTag" => $this->formation,
+            "anneeDebutTag" => $this->anneeDebut,
+            "anneeFinTag" => $this->anneeFin,
+            "genreAlternantTag" => $this->genreAlternant,
+            "nomAlternantTag" => $this->nomAlternant,
+            "prenomAlternantTag" => $this->prenomAlternant,
+            "dateSaisieParEntrepriseTag" => $this->dateSaisieParEntreprise,
+            "validationPedagogiqueDesMissionsTag" => $this->validationPedagogiqueDesMissions,
+            "ficheEnErreurTag" => $this->ficheEnErreur,
+            "codeErreurTag" => $this->codeErreur,
+            "contratEtConventionEnvoyeALEntrepriseTag" => $this->contratEtConventionEnvoyeALEntreprise,
+            "contratOuConventionSigneTag" => $this->contratOuConventionSigne,
+            "dateNaissanceTag" => $this->dateNaissance,
+            "communeNaissanceTag" => $this->communeNaissance,
+            "paysNaissanceTag" => $this->paysNaissance,
+            "nationaliteTag" => $this->nationalite,
+            "travailleurHandicapeTag" => $this->travailleurHandicape,
+            "titulairePermisDeConduireTag" => $this->titulairePermisDeConduire,
+            "numeroSecuriteSocialeTag" => $this->numeroSecuriteSociale,
+            "pasDeNumeroDeSecuriteSocialeTag" => $this->pasDeNumeroDeSecuriteSociale,
+            "sportifHautNiveauTag" => $this->sportifHautNiveau,
+            "telephone1Tag" => $this->telephone1,
+            "telephone2Tag" => $this->telephone2,
+            "email1Tag" => $this->email1,
+            "email2Tag" => $this->email2,
+            "adresseTag" => $this->adresse,
+            "complementTag" => $this->complement,
+            "codePostalTag" => $this->codePostal,
+            "villeTag" => $this->ville,
+            "genreRepresentantLegalTag" => $this->genreRepresentantLegal,
+            "nomRepresentantLegalTag" => $this->nomRepresentantLegal,
+            "prenomRepresentantLegalTag" => $this->prenomRepresentantLegal,
+            "adresse2Tag" => $this->adresse2,
+            "complement2Tag" => $this->complement2,
+            "codePostal2Tag" => $this->codePostal2,
+            "ville2Tag" => $this->ville2,
+            "codeINETag" => $this->codeINE,
+            "situationAvantContratTag" => $this->situationAvantContrat,
+            "paysDernierDiplomePrepareTag" => $this->paysDernierDiplomePrepare,
+            "departementDernierDiplomePrepareTag" => $this->departementDernierDiplomePrepare,
+            "etablissementDernierDiplomePrepareTag" => $this->etablissementDernierDiplomePrepare,
+            "UAIEtablissementDernierDiplomePrepareTag" => $this->UAIEtablissementDernierDiplomePrepare,
+            "typeDiplomeTag" => $this->typeDiplome,
+            "anneeTag" => $this->annee,
+            "intituleTag" => $this->intitule,
+            "obtentionTag" => $this->obtention,
+            "derniereAnneeOuClasseSuivieTag" => $this->derniereAnneeOuClasseSuivie,
+            "dernierDiplomeObtenuTag" => $this->dernierDiplomeObtenu,
+            "entrepriseTemporaireTag" => $this->entrepriseTemporaire,
+            "nomContratTemporaireTag" => $this->nomContratTemporaire,
+            "prenomContratTemporaireTag" => $this->prenomContratTemporaire,
+            "mailContratTemporaireTag" => $this->mailContratTemporaire,
+            "telephoneContratTemporaireTag" => $this->telephoneContratTemporaire,
+            "siretTag" => $this->siret,
+            "typeEmployeurTag" => $this->typeEmployeur,
+            "raisonSocialeTag" => $this->raisonSociale,
+            "codeNAFTag" => $this->codeNAF,
+            "caisseRetraiteComplementaireTag" => $this->caisseRetraiteComplementaire,
+            "effectifTotalTag" => $this->effectifTotal,
+            "adresseEntrepriseTag" => $this->adresseEntreprise,
+            "complementAdresseTag" => $this->complementAdresse,
+            "codePostalEntrepriseTag" => $this->codePostalEntreprise,
+            "villeEntrepriseTag" => $this->villeEntreprise,
+            "adresse2EntrepriseTag" => $this->adresse2Entreprise,
+            "complementAdresse2Tag" => $this->complementAdresse2,
+            "codePostal2EntrepriseTag" => $this->codePostal2Entreprise,
+            "ville2EntrepriseTag" => $this->ville2Entreprise,
+            "genreDirecteurTag" => $this->genreDirecteur,
+            "nomDirecteurTag" => $this->nomDirecteur,
+            "prenomDirecteurTag" => $this->prenomDirecteur,
+            "fonctionDirecteurTag" => $this->fonctionDirecteur,
+            "mailDirecteurTag" => $this->mailDirecteur,
+            "siretAdministratifTag" => $this->siretAdministratif,
+            "typeEmployeurAdministratifTag" => $this->typeEmployeurAdministratif,
+            "raisonSocialeAdministratifTag" => $this->raisonSocialeAdministratif,
+            "codeNAFAdministratifTag" => $this->codeNAFAdministratif,
+            "caisseRetraiteComplementaireAdministratifTag" => $this->caisseRetraiteComplementaireAdministratif,
+            "effectifTotalAdministratifTag" => $this->effectifTotalAdministratif,
+            "adresseAdministratifTag" => $this->adresseAdministratif,
+            "complementAdresseAdministratifTag" => $this->complementAdresseAdministratif,
+            "codePostalAdministratifTag" => $this->codePostalAdministratif,
+            "villeAdministratifTag" => $this->villeAdministratif,
+            "genreDirecteurAdministratifTag" => $this->genreDirecteurAdministratif,
+            "nomDirecteurAdministratifTag" => $this->nomDirecteurAdministratif,
+            "prenomDirecteurAdministratifTag" => $this->prenomDirecteurAdministratif,
+            "fonctionDirecteurAdministratifTag" => $this->fonctionDirecteurAdministratif,
+            "mailDirecteurAdministratifTag" => $this->mailDirecteurAdministratif,
+            "genreInterlocuteurRHTag" => $this->genreInterlocuteurRH,
+            "nomInterlocuteurRHTag" => $this->nomInterlocuteurRH,
+            "prenomInterlocuteurRHTag" => $this->prenomInterlocuteurRH,
+            "fonctionInterlocuteurRHTag" => $this->fonctionInterlocuteurRH,
+            "mailInterlocuteurRHTag" => $this->mailInterlocuteurRH,
+            "OPCOTag" => $this->OPCO,
+            "IDCCTag" => $this->IDCC,
+            "codeIDCCTag" => $this->codeIDCC,
+            "missionsSaisiesTag" => $this->missionsSaisies,
+            "fichierJointPourLesMissionsTag" => $this->fichierJointPourLesMissions,
+            "mandatCFATag" => $this->mandatCFA,
+            "typeContratTag" => $this->typeContrat,
+            "dateDebutContratTag" => $this->dateDebutContrat,
+            "dateFinContratTag" => $this->dateFinContrat,
+            "genreMaitreApprentissageTag" => $this->genreMaitreApprentissage,
+            "nomMaitreApprentissageTag" => $this->nomMaitreApprentissage,
+            "prenomMaitreApprentissageTag" => $this->prenomMaitreApprentissage,
+            "fonctionMaitreApprentissageTag" => $this->fonctionMaitreApprentissage,
+            "telephoneMaitreApprentissageTag" => $this->telephoneMaitreApprentissage,
+            "mailMaitreApprentissageTag" => $this->mailMaitreApprentissage,
+            "dateNaissanceMaitreApprentissageTag" => $this->dateNaissanceMaitreApprentissage,
+            "aDejaEteMaitreApprentissageTag" => $maitreApprentissage,
+            "aDejaRecuUneFormationDeMaitreApprentissageTag" => $formationMaitreApprentissage,
+            "genreSecondMaitreApprentissageTag" => $this->genreSecondMaitreApprentissage,
+            "nomSecondMaitreApprentissageTag" => $this->nomSecondMaitreApprentissage,
+            "prenomSecondMaitreApprentissageTag" => $this->prenomSecondMaitreApprentissage,
+            "fonctionSecondMaitreApprentissageTag" => $this->fonctionSecondMaitreApprentissage,
+            "telephoneSecondMaitreApprentissageTag" => $this->telephoneSecondMaitreApprentissage,
+            "mailSecondMaitreApprentissageTag" => $this->mailSecondMaitreApprentissage,
+            "dateNaissanceSecondMaitreApprentissageTag" => $this->dateNaissanceSecondMaitreApprentissage,
+            "aDejaEteMaitreApprentissage2Tag" => $maitreApprentissage2,
+            "aDejaRecuUneFormationDeMaitreApprentissage2Tag" => $formationMaitreApprentissage2,
+            "responsableFormationTag" => $this->responsableFormation,
+            "validateurDevisTag" => $this->validateurDevis,
+            "dureeContratTag" => $this->dureeContrat,
+            "coutContratTag" => $this->coutContrat,
+            "montantPriseEnChargeNPETag" => $this->montantPriseEnChargeNPEC,
+            "montantResteAChargeTag" => $this->montantResteACharge,
+            "coutFormationALAnneTag" => $this->coutFormationALAnne,
+            "coutContratAvantNegociationTag" => $this->coutContratAvantNegociation,
+            "numeroDECATag" => $this->numeroDECA,
+            "codeDiplomeTag" => $this->codeDiplome,
+            "codeRNCPTag" => $this->codeRNCP,
+            "SFPTag" => $this->SFP,
+            "dateEnvoiSFPTag" => $this->dateEnvoiSFP,
+            "gestionnaireEnvoiTag" => $this->gestionnaireEnvoi,
+            "dureeSFPTag" => $this->dureeSFP,
+            "dateDebutFormationTag" => $this->dateDebutFormation,
+            "dateFinFormationTag" => $this->dateFinFormation,
+            "etablissementDocEmployeurTag" => $this->etablissementDocEmployeur,
+            "dateEtablissementDocEmployeurTag" => $this->dateEtablissementDocEmployeur
+        );
     }
 }
 
