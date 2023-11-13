@@ -14,6 +14,7 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
+use App\FormatIUT\Modele\Repository\StudeaRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class ControleurEtuMain extends ControleurMain
@@ -175,7 +176,7 @@ class ControleurEtuMain extends ControleurMain
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
             }
             else{
-
+                $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
             }
         }
         fclose($csvFile);
