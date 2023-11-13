@@ -13,11 +13,11 @@ class Configuration
 {
 
     static private array $config = array(
-        'hostname'=>'localhost',
-        'database'=>'sae',
-        'login'=>'notisma',
-        'password'=>'',
-        'port' =>'3306'
+        'hostname'=>'webinfo',
+        'database'=>'loyet',
+        'login'=>'loyet',
+        'password'=>'gfsGnT!!hSSfE88.',
+        'port' =>'3316'
     );
 
 

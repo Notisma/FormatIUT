@@ -150,12 +150,12 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function afficherCSV() : void
+    public static function afficherCSV(): void
     {
         self::afficherVueDansCorps("import CSV", "Etudiant/vueTestCSV.php", self::getMenu());
     }
 
-    public static function ajouterCSV() : void
+    public static function ajouterCSV(): void
     {
         echo $_FILES['file']['name'];
         echo "\n";
@@ -171,10 +171,9 @@ class ControleurEtuMain extends ControleurMain
             echo $ligne[0];
             echo "\n";
             $pstage = (new pstageRepository())->getObjectParClePrimaire($ligne[0]);
-            if($pstage){
+            if ($pstage) {
                 (new pstageRepository())->mettreAJour((new pstageRepository())->construireDepuisTableau($ligne));
-            }
-            else {
+            } else {
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
             }
         }
@@ -236,40 +235,57 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
-    public static function afficherMaConvention() : void
+    public static function afficherMaConvention(): void
     {
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
-        $residenceEtu = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
-        $villeEtu = (new VilleRepository())->getVilleParIdResidence($residenceEtu->getIdResidence());
-        $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::$cleEtudiant);
-        $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entreprise->getSiret());
-        $offre = (new OffreRepository())->trouverOffreDepuisForm(self::$cleEtudiant);
-        $convention = (new ConventionRepository())->trouverConventionDepuisForm(self::$cleEtudiant);
-        self::afficherVueDansCorps("Ma convention", "Etudiant/afficherConvention.php", self::getMenu(),
-            ["etudiant" => $etudiant, "residenceEtu" => $residenceEtu, "villeEtu" => $villeEtu, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                "offre" => $offre, "convention" => $convention]);
+        $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
+        if ($convention) {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residenceEtu = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $villeEtu = (new VilleRepository())->getVilleParIdResidence($residenceEtu->getIdResidence());
+            $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::$cleEtudiant);
+            $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entreprise->getSiret());
+            $offre = (new OffreRepository())->trouverOffreDepuisForm(self::$cleEtudiant);
+            $convention = (new ConventionRepository())->trouverConventionDepuisForm(self::$cleEtudiant);
+            self::afficherVueDansCorps("Ma convention", "Etudiant/afficherConvention.php", self::getMenu(),
+                ["etudiant" => $etudiant, "residenceEtu" => $residenceEtu, "villeEtu" => $villeEtu, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                    "offre" => $offre, "convention" => $convention]);
+        } else {
+            self::afficherErreur("Ne possède pas de convention");
+        }
     }
 
-    public static function afficherFormulaireConventionStage() : void
+    public static function afficherFormulaireConventionStage(): void
     {
-        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Stage");
-        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
-        $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
-        $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-        self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise"=>$entreprise, "villeEntr"=>$villeEntr]);
+
+
+        $offre = (new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Stage");
+        if ($offre) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+        } else {
+            self::afficherErreur("offre non valide");
+        }
     }
 
-    public static function afficherFormulaireConventionAlternance() : void
+    public static function afficherFormulaireConventionAlternance(): void
     {
-        $offre =(new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
-        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
-        $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
-        $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-        self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise"=>$entreprise , "villeEntr"=>$villeEntr]);
+//        $offreVerif = (new RegarderRepository())->getOffreValider(self::$cleEtudiant);
+        $offre = (new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
+        if ($offre) {
+
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+        } else {
+            self::afficherErreur("offre non valide");
+        }
     }
 
 
