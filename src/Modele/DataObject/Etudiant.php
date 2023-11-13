@@ -34,8 +34,8 @@ class Etudiant extends AbstractDataObject
      * @param string|null $groupe
      * @param string|null $parcours
      * @param int|null $validationPedagogique
-     * @param int $codeEtape
-     * @param string $idResidence
+     * @param int|null $codeEtape
+     * @param string|null $idResidence
      * @param string $img
      */
     public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
@@ -173,7 +173,7 @@ class Etudiant extends AbstractDataObject
         return $this->codeEtape;
     }
 
-    public function setCodeEtape(?int $codeEtape): void
+    public function setCodeEtape(int $codeEtape): void
     {
         $this->codeEtape = $codeEtape;
     }

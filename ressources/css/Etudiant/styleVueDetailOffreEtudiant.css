@@ -464,3 +464,209 @@ body {
 .nbPostulants > img {
     width: 50%;
 }
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 70%;
+    height: 70%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+}
+
+
+.mainPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.mainPopup > h2 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.mainPopup > form {
+    width: 90%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 3%;
+    border: #ff5660 1px solid;
+
+}
+
+.mainPopup > form > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ff9095;
+    padding: 5%;
+}
+
+.contenuDepot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.imagesDepot {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.imagesDepot > img {
+    width: 50%;
+}
+
+.imagesDepot > p {
+    font-size: 0.5em;
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
+}
+
+
+
+.mainPopup > form > div > label {
+    font-family: "Oswald", sans-serif;
+    color: black;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mainPopup > form > input[type="submit"] {
+    border-radius: 50px;
+    border: none;
+    width: 80px;
+    height: 20px;
+    background-color: #ff5660;
+    color: white;
+}
+
+.mainPopup > form > input[type="submit"]:hover {
+    border-radius: 50px;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    border-radius: 50px;
+    border: none;
+    width: 120px;
+    height: 20px;
+    background-color: #ff5660;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.conteneurBoutonPopup {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.conteneurBoutonPopup > a {
+    width: 40%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.boutonAssignerPopup {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    padding: 3%;
+}
+
+.boutonAssignerPopup:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+.descPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    background-color: #aadcda;
+}
+
+.descPopup > img {
+    width: 80%;
+}
+
+.descPopup > h2 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin: 0 2%;
+    text-align: center;
+}
+

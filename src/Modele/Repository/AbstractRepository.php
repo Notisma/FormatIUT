@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository
@@ -148,4 +147,23 @@ abstract class AbstractRepository
 
         return $res;
     }
+    /***
+     * @param $clePrimaire
+     * @return true si l'objet existe dans la base de donnée, false sinon
+     */
+    public function estExistant($clePrimaire):bool{
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$clePrimaire);
+        $pdoStatement->execute($values);
+        $objet=$pdoStatement->fetch();
+        if (!$objet){
+            return false;
+        }
+        return true;
+    }
 }
+
+
+
+
