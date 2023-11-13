@@ -148,7 +148,7 @@
 <div id="popup" class="popup">
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
-        <p>Les documents doivent être au format PDF</p>
+        <p>Les documents doivent être au format PDF (500ko maximum) </p>
 
         <form enctype="multipart/form-data"
               action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
@@ -157,7 +157,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" size=500/>
+                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
@@ -169,7 +169,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" size=500/>
+                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
@@ -197,6 +197,7 @@
 <div id="popupModif" class="popup">
     <div class="mainPopup">
         <h2>MODIFIEZ VOS DOCUMENTS !</h2>
+        <p>Les documents doivent être au format PDF (500ko maximum) </p>
 
         <form enctype="multipart/form-data"
               action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
@@ -205,7 +206,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf" size=500/>
+                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
@@ -217,7 +218,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf" size=500/>
+                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">

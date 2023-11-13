@@ -93,8 +93,16 @@ abstract class AbstractRepository
             $sql .= "$nomColonne = :$nomColonne" . "Tag";
             $values[$nomColonne . "Tag"] = $objet->formatTableau()[$nomColonne];
         }
-        $clePrim = $this->getClePrimaire();
-        $sql .= " WHERE $clePrim = :$clePrim" . "Tag;";
+        $where = " WHERE ";
+        $clePrimaire = $this->getClePrimaire();
+        $clePrimaire = trim($clePrimaire, "()");
+        $colonnesClePrimaire = explode(', ', $clePrimaire);
+        foreach ($colonnesClePrimaire as $colonne) {
+            $where .= "$colonne = :$colonne" . "Tag AND ";
+            $values[$colonne . "Tag"] = $objet->formatTableau()[$colonne];
+        }
+        $where = rtrim($where, " AND ");
+        $sql .= $where;
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
     }
