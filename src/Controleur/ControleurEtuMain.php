@@ -2,6 +2,10 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Modele\DataObject\CV;
+use App\FormatIUT\Modele\DataObject\LM;
+use App\FormatIUT\Modele\DataObject\Regarder;
+use App\FormatIUT\Modele\Repository\CVRepository;
 use App\FormatIUT\Configuration\ConfigurationLdap;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Formation;
@@ -10,6 +14,7 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\LMRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
@@ -108,13 +113,21 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    /* public static function annulerOffre(){
-         (new RegarderRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idOffre']);
-         self::afficherMesOffres();
-     }*/
+   /* public static function annulerOffre(){
+        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
+        self::afficherMesOffres();
+    }*/
 
-    public static function postuler()
+    public static function postuler(): void
     {
+        $cvData = null;
+        $lmData = null;
+        if($_FILES["fic"]["tmp_name"] != null){
+            $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        }
+        if($_FILES["ficLM"]["tmp_name"] != null){
+            $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        }
         //TODO vérifier les vérifs
         if (isset($_REQUEST['idOffre'])) {
             $liste = ((new OffreRepository())->getListeIdOffres());
@@ -125,9 +138,10 @@ class ControleurEtuMain extends ControleurMain
                         if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
                             self::afficherErreur("Vous avez déjà postulé");
                         } else {
-                            (new EtudiantRepository())->EtudiantPostuler(self::getCleEtudiant(), $_REQUEST['idOffre']);
-                            $_REQUEST['action'] = "afficherVueDetailOffre";
-                            self::afficherVueDetailOffre();
+                            $regarder = new Regarder(self::$cleEtudiant, $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
+                            (new RegarderRepository())->creerObjet($regarder);
+                            $_REQUEST['action'] = "afficherMesOffres";
+                            self::afficherMesOffres();
                         }
                     } else {
                         self::afficherErreur("Vous avez déjà une formation");
@@ -147,7 +161,7 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function updateImage()
+    public static function updateImage(): void
     {
         //si un fichier a été passé en paramètre
         if (!empty($_FILES['fic']['name'])) {
@@ -201,6 +215,18 @@ class ControleurEtuMain extends ControleurMain
         return $menu;
     }
 
+    public static function modifierFichiers(){
+        $cvData = null;
+        $lmData = null;
+        if($_FILES["fic"]["tmp_name"] != null){
+            $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+        }
+        if($_FILES["ficLM"]["tmp_name"] != null){
+            $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+        }
+        (new RegarderRepository())->modifierFichiers(self::$cleEtudiant, $_GET["idOffre"], $cvData, $lmData);
+        self::afficherMesOffres();
+    }
 
     public static function setnumEtuSexe(): void
     {

@@ -14,7 +14,7 @@ class Ville extends AbstractDataObject
     /**
      * @param string $idVille
      * @param string $nomVille
-     * @param string $paysVille
+     * @param string $codePostal
      */
     public function __construct(string $idVille, string $nomVille, int $codePostal)
     {
