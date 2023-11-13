@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Finalisation de la première connexion + changement fonctionnement des images">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/VilleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/VilleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Connexion_via_ldap" />
+        <entry key="$PROJECT_DIR$" value="deposerCV" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

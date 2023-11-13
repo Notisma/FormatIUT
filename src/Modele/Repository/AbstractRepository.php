@@ -110,9 +110,6 @@ abstract class AbstractRepository
         $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
     }
-}
-
-
     /***
      * @param $clePrimaire
      * @return true si l'objet existe dans la base de donnée, false sinon
@@ -128,4 +125,8 @@ abstract class AbstractRepository
         }
         return true;
     }
+}
+
+
+
 
