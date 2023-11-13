@@ -58,7 +58,8 @@ if (isset($_REQUEST["premiereConnexion"])) {
                         case "AdminMain" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            //$src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $src = "../ressources/images/admin.png";
                             $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
                             break;
                         }
