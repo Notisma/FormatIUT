@@ -13,12 +13,20 @@ class Configuration
 {
 
     static private array $configLocal = array(
-        
+
         'hostname' => 'localhost',
         'database' => 'loyet',
         'port' => '3306',
         'login' => 'root',
-        'password'=>'root'
+        'password' => 'root'
+    );
+    static private array $configLocalRaphael = array(
+
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
     );
     static private array $configWebInfo = array(
 
@@ -28,12 +36,15 @@ class Configuration
         'login' => 'loyet',
         'password' => 'gfsGnT!!hSSfE88.'
     );
-    
-    static private function getConfig():array{
-        if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
+
+    static private function getConfig(): array
+    {
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr")
             return self::$configWebInfo;
-        }
-        else return self::$configLocal;
+        else if ($_SERVER['SERVER_PORT'] == 9999)
+            return self::$configLocalRaphael;
+        else
+            return self::$configLocal;
     }
 
     public static function getHostname(): string
@@ -63,7 +74,7 @@ class Configuration
 
     public static function getAbsoluteURL()
     {
-        if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
             return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
         }
         return "http://localhost/SAE_DEV/web/controleurFrontal.php";
@@ -77,7 +88,9 @@ class Configuration
     {
         return self::$controleur;
     }
-    public static function controleurIs(string $contr): bool {
+
+    public static function controleurIs(string $contr): bool
+    {
         return self::$controleur == $contr;
     }
 
@@ -86,7 +99,8 @@ class Configuration
         self::$controleur = $controleur;
     }
 
-    public static function getCheminControleur(): string {
+    public static function getCheminControleur(): string
+    {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
     }
 }
