@@ -1182,6 +1182,5 @@ class studea extends AbstractDataObject{
             "dateEtablissementDocEmployeurTag" => $this->dateEtablissementDocEmployeur
         );
     }
-}
 
-?>
+}
