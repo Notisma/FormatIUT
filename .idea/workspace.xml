@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="petit message pour dire aux golmons qui veulent mettre des .nsp qui faut mettre des .pdf (à défaut de les empêcher)">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/RegarderRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +178,8 @@
       <workItem from="1699006433738" duration="1074000" />
       <workItem from="1699017796296" duration="2199000" />
       <workItem from="1699039217790" duration="4080000" />
-      <workItem from="1699699950752" duration="7270000" />
-    </task>
-    <task id="LOCAL-00052" summary="Avancées graphiques">
-      <option name="closed" value="true" />
-      <created>1696834602644</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1696834602644</updated>
+      <workItem from="1699699950752" duration="8403000" />
+      <workItem from="1699906047647" duration="434000" />
     </task>
     <task id="LOCAL-00053" summary="Avancées">
       <option name="closed" value="true" />
@@ -572,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699043779259</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="petit message pour dire aux golmons qui veulent mettre des .nsp qui faut mettre des .pdf (à défaut de les empêcher)">
+      <option name="closed" value="true" />
+      <created>1699711713160</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1699711713163</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,7 +641,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)" />
     <MESSAGE value="Nombreuses Corrections" />
     <MESSAGE value="Vue mes offres fin" />
     <MESSAGE value="Merge" />
@@ -665,7 +665,8 @@
     <MESSAGE value="image qui affiche si on a choisi un fichier avec du js" />
     <MESSAGE value="correction du js" />
     <MESSAGE value="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre" />
-    <option name="LAST_COMMIT_MESSAGE" value="popup qui permet de modifier les cv et lettres feat une erreur sql bizarre" />
+    <MESSAGE value="petit message pour dire aux golmons qui veulent mettre des .nsp qui faut mettre des .pdf (à défaut de les empêcher)" />
+    <option name="LAST_COMMIT_MESSAGE" value="petit message pour dire aux golmons qui veulent mettre des .nsp qui faut mettre des .pdf (à défaut de les empêcher)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
