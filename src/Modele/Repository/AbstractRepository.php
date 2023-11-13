@@ -28,11 +28,13 @@ abstract class AbstractRepository
         }
         return $listeObjet;
     }
-    public function getListeID(){
-        $sql='SELECT * FROM '.$this->getNomTable();
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+
+    public function getListeID()
+    {
+        $sql = 'SELECT * FROM ' . $this->getNomTable();
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $item) {
-            $listeObjet[]=$item[$this->getClePrimaire()];
+            $listeObjet[] = $item[$this->getClePrimaire()];
         }
         return $listeObjet;
     }
@@ -109,6 +111,41 @@ abstract class AbstractRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
+    }
+
+    //-------------AUTRES------------
+
+    public static function getResultatRechercheTrie($recherche): array
+    {
+        $pdo = ConnexionBaseDeDonnee::getPdo();
+        $res = [
+            'offres' => array(),
+            'entreprises' => array(),
+        ];
+
+        $sql = "
+        SELECT *
+        FROM Offre
+        WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
+            OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
+            OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)
+        ;";
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        foreach ($pdoStatement as $row)
+            $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
+
+        $sql = "
+        SELECT *
+        FROM Entreprise
+        WHERE LOWER(nomEntreprise) LIKE LOWER(:rechercheTag)
+        ;";
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        foreach ($pdoStatement as $row)
+            $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
+
+        return $res;
     }
     /***
      * @param $clePrimaire

@@ -30,13 +30,15 @@ if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         //TODO les ifs ne fonctionnent pas
         if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Entreprise") {
-            header("Location: ?controleur=Main&action=afficherPageConnexion");
-            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
+            $nonConnecte=true;
         } else if ($controleur == "EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Etudiants" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-            header("Location: ?controleur=Main&action=afficherPageConnexion");
-            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
+            $nonConnecte=true;
         } else {
             $nomClasseControleur::$action();
+        }
+        if ($nonConnecte){
+            header("Location: ?controleur=Main&action=afficherPageConnexion");
+            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
         }
     } else
         $nomClasseControleur::afficherErreur('L\'action : "' . $action . '" n\'existe pas dans le contrôleur : "' . $nomClasseControleur . '"');

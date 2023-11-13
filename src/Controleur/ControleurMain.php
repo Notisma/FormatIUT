@@ -13,6 +13,7 @@ use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -291,5 +292,24 @@ class ControleurMain
                 self::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
             }
         }
+    }
+
+    public static function rechercher(): void
+    {
+        $controleur = Configuration::getCheminControleur();
+
+        if (is_null($_REQUEST['recherche'])) {
+            $controleur::afficherErreur("Il faut renseigner une recherche.");
+            return;
+        }
+        $recherche = $_REQUEST['recherche'];
+
+        $res = AbstractRepository::getResultatRechercheTrie($recherche);
+
+        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+            "recherche" => $recherche,
+            "offres" => $res['offres'],
+            "entreprises" => $res['entreprises']
+        ]);
     }
 }
