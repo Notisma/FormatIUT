@@ -13,6 +13,7 @@ use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
@@ -303,29 +304,12 @@ class ControleurMain
         }
         $recherche = $_REQUEST['recherche'];
 
-        $resOffres = array();
-        $resEntreprises = array();
-
-        foreach ((new OffreRepository())->getListeObjet() as $offre) {
-            if (str_contains(strtolower($offre->getSujet()), strtolower($recherche)) ||
-                str_contains(strtolower($offre->getTypeOffre()), strtolower($recherche)) ||
-                str_contains(strtolower($offre->getDetailProjet()), strtolower($recherche))
-            ) {
-                $resOffres[] = $offre;
-            }
-        }
-        foreach ((new EntrepriseRepository())->getListeObjet() as $entr) {
-            if (
-                str_contains(strtolower($entr->getNomEntreprise()), strtolower($recherche))
-            ) {
-                $resEntreprises[] = $entr;
-            }
-        }
+        $res = AbstractRepository::getResultatRechercheTrie($recherche);
 
         $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
             "recherche" => $recherche,
-            "offres" => $resOffres,
-            "entreprises" => $resEntreprises
+            "offres" => $res['offres'],
+            "entreprises" => $res['entreprises']
         ]);
     }
 }
