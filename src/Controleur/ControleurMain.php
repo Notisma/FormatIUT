@@ -173,22 +173,18 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                if(ConnexionUtilisateur::getTypeConnecte()=="Etudiants") {
-                    if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
-                        header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
-                    } else {
-                        header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
-                    }
-                }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnel"){
-                    ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
-                    header("Location: controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                if (ConnexionUtilisateur::premiereConnexion($_REQUEST["login"])) {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
+                } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
+                } else {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
                 }
                 exit();
-                //solution pour nous se connecter avec un prof provisoire
-            }else if ($_REQUEST["login"]=="ProfTest"){
-                if (MotDePasse::verifier($_REQUEST["mdp"],'$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')){
-                    ConnexionUtilisateur::connecter($_REQUEST["login"],"Personnel");
-                    MessageFlash::ajouter("success","Connexion Réussie");
+            } else if ($_REQUEST["login"] == "ProfTest") {
+                if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnel");
+                    MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
                 }

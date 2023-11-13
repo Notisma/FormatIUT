@@ -149,30 +149,39 @@ class ControleurEtuMain extends ControleurMain
 
     public static function updateImage()
     {
-        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
-        //TODO vérif de doublons d'image
-        $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
-        $nom = "";
-        $nomEtudiant = $etudiant->getLogin();
-        for ($i = 0; $i < strlen($etudiant->getLogin()); $i++) {
-            if ($nomEtudiant[$i] == ' ') {
-                $nom .= "_";
+        if (!empty($_FILES['fic']['name'])) {
+
+            $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
+            //TODO vérif de doublons d'image
+            $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
+            $nom = "";
+            $nomEtudiant = $etudiant->getLogin();
+            for ($i = 0; $i < strlen($etudiant->getLogin()); $i++) {
+                if ($nomEtudiant[$i] == ' ') {
+                    $nom .= "_";
+                } else {
+                    $nom .= $nomEtudiant[$i];
+                }
+            }
+            $nom .= "_logo";
+            $estPasse = parent::insertImage($nom);
+            $ancienId = (new ImageRepository())->imageParEtudiant(self::getCleEtudiant());
+            (new EtudiantRepository())->updateImage(self::getCleEtudiant(), $id);
+            if ($ancienId["img_id"] != 1 && $ancienId["img_id"] != 0) (new ImageRepository())->supprimer($ancienId["img_id"]);
+
+            if (isset($_REQUEST['estPremiereCo'])) {
+                self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
             } else {
-                $nom .= $nomEtudiant[$i];
+                self::redirectionFlash("afficherProfilEtu", "success", "Image modifiée");
+            }
+        } else {
+            if (isset($_REQUEST['estPremiereCo'])) {
+                self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
+            } else {
+                self::redirectionFlash("afficherProfilEtu", "warning", "Aucune image selectionnée");
             }
         }
-        $nom .= "_logo";
-        $estPasse = parent::insertImage($nom);
-        if (!$estPasse) self::afficherProfilEtu();
-        $ancienId = (new ImageRepository())->imageParEtudiant(self::getCleEtudiant());
-        (new EtudiantRepository())->updateImage(self::getCleEtudiant(), $id);
-        if ($ancienId["img_id"] != 1 && $ancienId["img_id"] != 0) (new ImageRepository())->supprimer($ancienId["img_id"]);
 
-        if (isset($_REQUEST['estPremiereCo'])) {
-            self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
-        } else {
-            self::redirectionFlash("afficherProfilEtu", "success", "Image modifiée");
-        }
     }
 
     public static function getMenu(): array
