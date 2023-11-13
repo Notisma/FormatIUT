@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Feat - Avancées sur accueil ADMIN 5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +183,7 @@
       <workItem from="1699695263228" duration="998000" />
       <workItem from="1699820967422" duration="676000" />
       <workItem from="1699865325770" duration="1468000" />
+      <workItem from="1699869674160" duration="2446000" />
     </task>
     <task id="LOCAL-00061" summary="Corrections.">
       <option name="closed" value="true" />

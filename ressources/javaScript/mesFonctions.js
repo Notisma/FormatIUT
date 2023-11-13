@@ -39,3 +39,8 @@ function fermerPopupPremiereCo() {
     document.getElementById("popupPremiereCo").style.display = "none";
     document.getElementById("conteneurPrincipal").style.opacity = "1";
 }
+
+function supprimerElement(id) {
+    let element = document.getElementById(id);
+    element.style.display = "none";
+}
