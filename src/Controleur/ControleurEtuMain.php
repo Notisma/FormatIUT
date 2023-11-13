@@ -224,7 +224,7 @@ class ControleurEtuMain extends ControleurMain
         if($_FILES["ficLM"]["tmp_name"] != null){
             $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
         }
-        (new RegarderRepository())->modifierFichiers(self::getCleEtudiant(), $_GET["idOffre"], $cvData, $lmData);
+        (new RegarderRepository())->modifierObjet(new Regarder(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData));
         self::afficherMesOffres();
     }
 
