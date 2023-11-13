@@ -17,7 +17,13 @@
         <h3 class="titre">Données Entreprises :</h3>
         <div>
             <img src="../ressources/images/creationCompte.png" alt="image">
-            <h4 class="titre">400 Créations comptes</h4>
+            <h4 class="titre">
+                <?php
+                $nb= sizeof($listeEntreprises);
+                $s="";
+                if ($nb>1) $s="s";
+                echo $nb ." Création".$s." compte".$s;
+                ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
             </div>
@@ -25,7 +31,13 @@
 
         <div>
             <img src="../ressources/images/offres.png" alt="image">
-            <h4 class="titre">500 Créations offres</h4>
+            <h4 class="titre">
+                <?php
+                $nb= sizeof($listeOffres);
+                $s="";
+                if ($nb>1) $s="s";
+                echo $nb ." Création".$s." offre".$s;
+                ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
             </div>

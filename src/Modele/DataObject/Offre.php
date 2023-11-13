@@ -21,6 +21,19 @@ class Offre extends AbstractDataObject
     private string $typeOffre;
     private float $siret;
 
+    private bool $estValide;
+
+    public function isEstValide(): bool
+    {
+        return $this->estValide;
+    }
+
+    public function setEstValide(bool $estValide): void
+    {
+        $this->estValide = $estValide;
+    }
+
+
 
 
     public function getIdOffre(): int
@@ -143,7 +156,7 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation)
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation,bool $estValide)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -157,6 +170,7 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
         $this->typeOffre=$typeFormation;
+        $this->estValide=$estValide;
     }
 
 
@@ -173,7 +187,9 @@ class Offre extends AbstractDataObject
             'joursParSemaine' => $this->joursParSemaine,
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
-            'typeOffre'=>$this->typeOffre];
+            'typeOffre'=>$this->typeOffre,
+            'estValide'=>$this->estValide
+        ];
     }
 
 }

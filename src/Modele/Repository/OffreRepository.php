@@ -12,7 +12,7 @@ class OffreRepository extends AbstractRepository
 
 
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre","estValide"];
     }
 
     public function getNomTable():string{
@@ -164,7 +164,21 @@ class OffreRepository extends AbstractRepository
         $dateDebut= new \DateTime($offre['dateDebut']);
         $dateFin= new \DateTime($offre['dateFin']);
         //echo $idEntreprise;
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],$offre["idEntreprise"],$offre['typeOffre']);
+        return new Offre(
+            $offre['idOffre'],
+            $offre['nomOffre'],
+            $dateDebut,
+            $dateFin,
+            $offre['sujet'],
+            $offre['detailProjet'],
+            $offre['gratification'],
+            $offre['dureeHeures'],
+            $offre['joursParSemaine'],
+            $offre['nbHeuresHebdo'],
+            $offre["idEntreprise"],
+            $offre['typeOffre'],
+            $offre["estValide"]
+        );
     }
 
     protected function getClePrimaire(): string
@@ -183,6 +197,16 @@ class OffreRepository extends AbstractRepository
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("TagEtu"=>$numEtudiant,"TagOffre"=>$idOffre);
         $pdoStatement->execute($values);
+    }
+
+    public function offresNonValides()
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estValide=0";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
     }
 
 

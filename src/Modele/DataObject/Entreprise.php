@@ -23,6 +23,7 @@ class Entreprise extends AbstractDataObject
     private string $email;
     private string $emailAValider;
     private string $nonce;
+    private bool $estValide;
 
     /**
      * @param float $siret
@@ -39,7 +40,7 @@ class Entreprise extends AbstractDataObject
      * @param string $emailAValider
      * @param string $nonce
      */
-    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce)
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce,bool $estValide)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -54,7 +55,19 @@ class Entreprise extends AbstractDataObject
         $this->email = $email;
         $this->emailAValider = $emailAValider;
         $this->nonce = $nonce;
+        $this->estValide=$estValide;
     }
+
+    public function isEstValide(): bool
+    {
+        return $this->estValide;
+    }
+
+    public function setEstValide(bool $estValide): void
+    {
+        $this->estValide = $estValide;
+    }
+
 
     public function getAdresseEntreprise(): string
     {
@@ -147,7 +160,8 @@ class Entreprise extends AbstractDataObject
             "mdpHache"=>$this->mdpHache,
             "email"=>$this->email,
             "emailAValider"=>$this->emailAValider,
-            "nonce"=>$this->nonce
+            "nonce"=>$this->nonce,
+            "estValide"=>$this->estValide
         ];
     }
 
@@ -249,7 +263,8 @@ class Entreprise extends AbstractDataObject
             MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
             "",
             $EntrepriseEnFormulaire["email"],
-            MotDePasse::genererChaineAleatoire()
+            MotDePasse::genererChaineAleatoire(),
+            false
         );
     }
     protected static function autoIncrementVille($listeId, $get): string

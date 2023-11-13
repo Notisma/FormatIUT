@@ -18,7 +18,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["numSiret","nomEntreprise","statutJuridique","effectif","codeNAF","tel","Adresse_Entreprise","idVille","img_id","mdpHache","email","emailAValider","nonce"];
+        return ["numSiret","nomEntreprise","statutJuridique","effectif","codeNAF","tel","Adresse_Entreprise","idVille","img_id","mdpHache","email","emailAValider","nonce","estValide"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
@@ -35,7 +35,8 @@ class EntrepriseRepository extends AbstractRepository
         $entrepriseFormatTableau["mdpHache"],
         $entrepriseFormatTableau["email"],
         $entrepriseFormatTableau["emailAValider"],
-        $entrepriseFormatTableau["nonce"]
+        $entrepriseFormatTableau["nonce"],
+            $entrepriseFormatTableau["estValide"]
         );
     }
 
@@ -68,6 +69,15 @@ class EntrepriseRepository extends AbstractRepository
             return null;
         }
         return $this->construireDepuisTableau($objet);
+    }
+
+    public function entreprisesNonValide(){
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE estValide=0";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $entreprise) {
+            $listeEntreprises[]=$this->construireDepuisTableau($entreprise);
+        }
+        return $listeEntreprises;
     }
 
 }
