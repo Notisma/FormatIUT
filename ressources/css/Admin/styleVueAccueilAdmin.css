@@ -178,6 +178,21 @@ body {
     height: 100%;
 }
 
+.wrapAdminEtu > .wrapBoutons {
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapAdminEtu > .wrapBoutons > a {
+    width : 40%;
+    height: 100%;
+}
+
 .wrapAlertes {
     width: 95%;
     height: 75%;
@@ -249,6 +264,17 @@ body {
     align-content: center;
 }
 
+.contenuAlerte > h3 {
+    margin: 0;
+}
+
+.contenuAlerte > p {
+    line-height: 0.8em;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    color: black;
+}
+
 .sujetAlerte {
     width: 90%;
     height: 40%;
@@ -276,11 +302,17 @@ body {
     background-color: #aadcda;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     height: 98%;
     width: 98%;
+    padding-bottom: 2%;
+}
+
+
+#hoverRose:hover {
+    background-color: #ff9095;
 }
 
 
