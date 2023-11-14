@@ -165,7 +165,7 @@ class StudeaRepository extends AbstractRepository
     }
 
     public function callProcedure(studea $studea) : bool{
-        $sql='CALL InsererStudea(:numEtudiant, :nomEtudiant, :prenomEtudiant, :loginEtudiant);';
+        $sql='CALL insertionStudea(:numEtudiant, :prenomEtudiant, :nomEtudiant, :loginEtudiant);';
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("numEtudiant" => $studea->getId(), "nomEtudiant" => $studea->getNomAlternant(), "prenomEtudiant"=>$studea->getPrenomAlternant(), "loginEtudiant"=>"loginRandom");
         $pdoStatement->execute($values);
