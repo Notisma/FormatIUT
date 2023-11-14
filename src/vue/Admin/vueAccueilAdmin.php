@@ -48,7 +48,13 @@
         <h3 class="titre">Données Étudiants :</h3>
         <div>
             <img src="../ressources/images/anomalies.png" alt="image">
-            <h4 class="titre">100 Anomalies Étudiants</h4>
+            <h4 class="titre">
+                <?php
+                $nb=sizeof($listeEtudiants);
+                $s="";
+                if ($nb>1) $s="s";
+                echo $nb . " Anomalie".$s." Étudiant".$s;
+                ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
             </div>
@@ -70,11 +76,19 @@
             <!-- exemple d'alerte - compte créé -->
             <a href="tt" class="alerteEntr">
                 <div class="imageAlerte">
-                    <img src="../ressources/images/logo_CA.png" alt="image">
+                    <?php
+                    $src='"data:image/jpeg;base64,' . base64_encode($listeEntreprises[0]->getImg()). '"';
+                    echo '<img src='. $src . 'alt="image">';
+                    ?>
                 </div>
 
                 <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">CRÉDIT AGRICOLE - Demande de création de compte</h3>
+                    <h3 class="titre" id="rouge">
+                    <?php
+                    echo $listeEntreprises[0]->getNomEntreprise();
+                     ?>
+
+                        - Demande de création de compte</h3>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
                         <p>Demande de création de compte le 11/11/2023</p>
@@ -85,11 +99,18 @@
             <!-- exemple d'alerte - offre postée -->
             <a href="?action=afficherDetailOffre&controleur=AdminMain" class="alerteEntr">
                 <div class="imageAlerte">
-                    <img src="../ressources/images/logo_CA.png" alt="image">
+                    <?php
+                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffres[0]->getSiret());
+                    $src='"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()). '"';
+                    echo '<img src='. $src . 'alt="image">';
+                    ?>
                 </div>
 
                 <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">CRÉDIT AGRICOLE - Offre en attente</h3>
+                    <h3 class="titre" id="rouge">
+                        <?php
+                        echo $entreprise->getNomEntreprise();
+                        ?> - Offre en attente</h3>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
                         <p>Demande d'envoi d'une offre le 13/11/2023</p>
@@ -111,12 +132,21 @@
             <!-- exemple d'alerte - compte créé -->
             <a href="tt" class="alerteEntr" id="hoverRose">
                 <div class="imageAlerte">
-                    <img src="../ressources/images/profil.png" alt="image">
+                    <?php
+                    $src='"data:image/jpeg;base64,' . base64_encode($listeEtudiants[0]->getImg()). '"';
+                    echo '<img src='. $src . 'alt="image">';
+                    ?>
                 </div>
 
                 <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">Romain TOUZÉ</h3>
-                    <p>2e année - RACDV - Q2</p>
+                    <h3 class="titre" id="rouge">
+                        <?php
+                        echo $listeEtudiants[0]->getPrenomEtudiant() . " " . strtoupper($listeEtudiants[0]->getNomEtudiant());
+                        ?></h3>
+                    <p>
+                        <?php
+                        echo $listeEtudiants[0]->getParcours()." - ".$listeEtudiants[0]->getGroupe();
+                        ?></p>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
                         <p>Aucun Stage/Alternance</p>

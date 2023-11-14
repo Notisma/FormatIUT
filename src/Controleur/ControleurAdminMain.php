@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurAdminMain extends ControleurMain
@@ -14,10 +15,11 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherAccueilAdmin()
     {
+        $listeEtudiants=(new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new OffreRepository())->offresNonValides();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres]);
+        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres,"listeEtudiants"=>$listeEtudiants]);
     }
 
     public static function afficherProfilAdmin()

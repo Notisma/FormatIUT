@@ -229,4 +229,13 @@ class   EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function etudiantsSansOffres(){
+        $sql="SELECT * FROM ".$this->getNomTable()." etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $etudiant) {
+            $listeEtudiants[]=$this->construireDepuisTableau($etudiant);
+        }
+        return $listeEtudiants;
+    }
+
 }
