@@ -1011,25 +1011,25 @@ class studea extends AbstractDataObject{
 
     public function formatTableau(): array
     {
-        if($this->aDejaEteMaitreApprentissage == true){
+        if($this->aDejaEteMaitreApprentissage){
             $maitreApprentissage = 1;
         }
         else {
             $maitreApprentissage = 0;
         }
-        if($this->aDejaRecuUneFormationDeMaitreApprentissage == true){
+        if($this->aDejaRecuUneFormationDeMaitreApprentissage){
             $formationMaitreApprentissage = 1;
         }
         else {
             $formationMaitreApprentissage = 0;
         }
-        if($this->aDejaEteMaitreApprentissage2 == true){
+        if($this->aDejaEteMaitreApprentissage2){
             $maitreApprentissage2 = 1;
         }
         else {
             $maitreApprentissage2 = 0;
         }
-        if($this->aDejaRecuUneFormationDeMaitreApprentissage2 == true){
+        if($this->aDejaRecuUneFormationDeMaitreApprentissage2){
             $formationMaitreApprentissage2 = 1;
         }
         else {

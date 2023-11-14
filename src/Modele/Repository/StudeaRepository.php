@@ -4,7 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\studea;
 
-class StudeaRepository
+class StudeaRepository extends AbstractRepository
 {
     public function getNomTable(): string
     {
@@ -12,10 +12,10 @@ class StudeaRepository
     }
 
     public function construireDepuisTableau(array $DataObjectTableau): studea {
-        $maitreApprentissage = $DataObjectTableau[113] ? true : false;
-        $formationMaitreApprentissage = $DataObjectTableau[114] ? true : false;
-        $maitreApprentissage2 = $DataObjectTableau[122] ? true : false;
-        $formationMaitreApprentissage2 = $DataObjectTableau[123] ? true : false;
+        $maitreApprentissage = (bool)$DataObjectTableau[113];
+        $formationMaitreApprentissage = (bool)$DataObjectTableau[114];
+        $maitreApprentissage2 = (bool)$DataObjectTableau[122];
+        $formationMaitreApprentissage2 = (bool)$DataObjectTableau[123];
 
         return new studea(
             $DataObjectTableau[0],
@@ -164,4 +164,25 @@ class StudeaRepository
         );
     }
 
+    public function callProcedure(studea $studea) : bool{
+        $sql='CALL InsererStudea(:numEtudiant, :nomEtudiant, :prenomEtudiant, :loginEtudiant);';
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("numEtudiant" => $studea->getId(), "nomEtudiant" => $studea->getNomAlternant(), "prenomEtudiant"=>$studea->getPrenomAlternant(), "loginEtudiant"=>"loginRandom");
+        $pdoStatement->execute($values);
+        if($pdoStatement->fetch()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    protected function getNomsColonnes(): array
+    {
+        return array();
+    }
+
+    protected function getClePrimaire(): string
+    {
+        return "codeUFR";
+    }
 }

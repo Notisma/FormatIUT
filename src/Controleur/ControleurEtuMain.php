@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\DataObject\studea;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -170,14 +171,15 @@ class ControleurEtuMain extends ControleurMain
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
             echo "test";
-            echo $ligne[0];
+            echo $ligne[3];
             echo "\n";
 
             if (sizeof($ligne) == 82) {
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
             }
-            else{
-                $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
+            else if (sizeof($ligne) == 143){
+                $studea = (new StudeaRepository())->construireDepuisTableau($ligne)
+                (new StudeaRepository())->callProcedure($studea);
             }
         }
         fclose($csvFile);
