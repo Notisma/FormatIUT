@@ -202,11 +202,9 @@ class pstageRepository extends AbstractRepository
 
     }
     public function callProcedure($stage){
-        $sql='CALL InsererDonnees('.$stage->get.');';
+        $sql='CALL InsererDonnees('.$stage->getCodeUFR().', '.$stage->getLibelleUFR().','.$stage->getCodeEtape().','. $stage->getLibelleEtape().');';
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array(
 
-        );
-        $pdoStatement->execute($values);
+        $pdoStatement->execute();
     }
 }
