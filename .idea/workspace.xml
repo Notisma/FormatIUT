@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Fix- correction de bugs git 1/2">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat: ajout image Administrateur">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,14 +184,9 @@
       <workItem from="1699865325770" duration="1468000" />
       <workItem from="1699869674160" duration="3387000" />
       <workItem from="1699886872253" duration="2426000" />
-    </task>
-    <task id="LOCAL-00063" summary="Visuel (version 1) de vueCompte Entreprise et étudiant terminés.">
-      <option name="closed" value="true" />
-      <created>1697055293781</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1697055293781</updated>
+      <workItem from="1699942247034" duration="170000" />
+      <workItem from="1699942468419" duration="157000" />
+      <workItem from="1699943204314" duration="2145000" />
     </task>
     <task id="LOCAL-00064" summary="Correction de crash">
       <option name="closed" value="true" />
@@ -577,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699888396269</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="feat: ajout image Administrateur">
+      <option name="closed" value="true" />
+      <created>1699914997862</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1699914997862</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -673,7 +676,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Vue mes offres fin" />
     <MESSAGE value="Merge" />
     <MESSAGE value="Corrections." />
     <MESSAGE value="Beaucoup de corrections." />
@@ -698,7 +700,8 @@
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 5" />
     <MESSAGE value="Feat - Ajout de fonctionnalités" />
     <MESSAGE value="Fix- correction de bugs git 1/2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix- correction de bugs git 1/2" />
+    <MESSAGE value="feat: ajout image Administrateur" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: ajout image Administrateur" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
