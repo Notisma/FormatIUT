@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat: ajout image Administrateur">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : modification du bandeau">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,15 +191,8 @@
       <workItem from="1699886872253" duration="2426000" />
       <workItem from="1699942247034" duration="170000" />
       <workItem from="1699942468419" duration="157000" />
-      <workItem from="1699943204314" duration="2145000" />
-    </task>
-    <task id="LOCAL-00064" summary="Correction de crash">
-      <option name="closed" value="true" />
-      <created>1697056195818</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1697056195818</updated>
+      <workItem from="1699943204314" duration="2244000" />
+      <workItem from="1699964835999" duration="2106000" />
     </task>
     <task id="LOCAL-00065" summary="Correction">
       <option name="closed" value="true" />
@@ -580,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699914997862</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="rebase : modification du bandeau">
+      <option name="closed" value="true" />
+      <created>1699945709935</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1699945709935</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,7 +682,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge" />
     <MESSAGE value="Corrections." />
     <MESSAGE value="Beaucoup de corrections." />
     <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
@@ -701,7 +706,8 @@
     <MESSAGE value="Feat - Ajout de fonctionnalités" />
     <MESSAGE value="Fix- correction de bugs git 1/2" />
     <MESSAGE value="feat: ajout image Administrateur" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: ajout image Administrateur" />
+    <MESSAGE value="rebase : modification du bandeau" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebase : modification du bandeau" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

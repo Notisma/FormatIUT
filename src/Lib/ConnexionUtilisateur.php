@@ -32,12 +32,14 @@ class ConnexionUtilisateur
     public static function deconnecter(): void
     {
         // À compléter
-        $session=Session::getInstance();
-        if (self::getTypeConnecte()=="Etudiant"){
-            ConnexionLdap::deconnexion();
+        if (self::estConnecte()) {
+            $session = Session::getInstance();
+            if (self::getTypeConnecte() == "Etudiant") {
+                ConnexionLdap::deconnexion();
+            }
+            $session->supprimer(self::$cleConnexion);
+            $session->supprimer(self::$cleTypeConnexion);
         }
-        $session->supprimer(self::$cleConnexion);
-        $session->supprimer(self::$cleTypeConnexion);
 
     }
 

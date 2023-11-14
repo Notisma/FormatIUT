@@ -183,7 +183,7 @@ class ControleurMain
                 exit();
             } else if ($_REQUEST["login"] == "ProfTest") {
                 if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnel");
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();

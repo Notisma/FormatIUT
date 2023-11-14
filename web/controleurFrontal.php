@@ -29,10 +29,16 @@ if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+            \App\FormatIUT\Lib\ConnexionUtilisateur::deconnecter();
             \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex", "danger", "Veuillez vous connecter");
         } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
+            \App\FormatIUT\Lib\ConnexionUtilisateur::deconnecter();
             \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","Veuillez vous connecter");
-        } else {
+        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
+            \App\FormatIUT\Lib\ConnexionUtilisateur::deconnecter();
+            \App\FormatIUT\Controleur\ControleurMain::redirectionFlash("afficherIndex","danger","Veuillez vous connecter");
+        }
+        else {
             $nomClasseControleur::$action();
         }
     } else

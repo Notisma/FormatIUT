@@ -83,7 +83,7 @@
             </a>
 
             <!-- exemple d'alerte - offre postée -->
-            <a href="tt" class="alerteEntr">
+            <a href="?action=afficherDetailOffre&controleur=AdminMain" class="alerteEntr">
                 <div class="imageAlerte">
                     <img src="../ressources/images/logo_CA.png" alt="image">
                 </div>
@@ -99,7 +99,7 @@
 
         </div>
         <div class="wrapBoutons">
-            <a href="">VOIR PLUS</a>
+            <a href="?action=afficherListeEntreprises&controleur=AdminMain">VOIR PLUS</a>
         </div>
     </div>
 
@@ -145,7 +145,7 @@
         </div>
 
         <div class="wrapBoutons">
-            <a href="">VOIR PLUS</a>
+            <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
 
     </div>
