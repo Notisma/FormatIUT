@@ -173,12 +173,12 @@ class ControleurEtuMain extends ControleurMain
             echo $ligne[0];
             echo "\n";
 
-            //if (sizeof($ligne) == 82) {
+            if (sizeof($ligne) == 82) {
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
-            //}
-            /*else{
+            }
+            else{
                 $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
-            }*/
+            }
         }
         fclose($csvFile);
     }
