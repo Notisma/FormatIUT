@@ -178,7 +178,7 @@ class ControleurEtuMain extends ControleurMain
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
             }
             else if (sizeof($ligne) == 143){
-                $studea = (new StudeaRepository())->construireDepuisTableau($ligne)
+                $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
                 (new StudeaRepository())->callProcedure($studea);
             }
         }
