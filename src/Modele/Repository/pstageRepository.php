@@ -212,4 +212,17 @@ class pstageRepository extends AbstractRepository
             return false;
         }
     }
+
+    public function exportCSV(){
+        $sql="SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, nomOffre, sujet
+        FROM Etudiants etu LEFT JOIN regarder r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Offre offr ON offr.idOffre = r.idOffre";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $pdoStatement->setFetchMode(\PDO::FETCH_ASSOC);
+        foreach ($pdoStatement as $item) {
+            $listeObjet[]=$item;
+
+        }
+        return $listeObjet;
+
+    }
 }

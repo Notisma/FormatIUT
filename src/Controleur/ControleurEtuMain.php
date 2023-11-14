@@ -192,6 +192,27 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+    public static function exporterCSV(){
+        $tab = (new pstageRepository())->exportCSV();
+
+        $delimiter = ",";
+        $filename = "sae-data_" . date('Y-m-d') . ".csv";
+        $f = fopen('php://memory', 'w');
+
+        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'telephone', 'groupe', 'parcours', 'nomOffre', 'sujet');
+        fputcsv($f, $champs, $delimiter);
+
+        foreach ($tab as $ligne){
+
+            fputcsv($f, $ligne, $delimiter);
+        }
+        fseek($f, 0);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        fpassthru($f);
+    }
+
     public static function updateImage()
     {
         $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
