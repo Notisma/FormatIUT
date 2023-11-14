@@ -182,6 +182,13 @@ class ControleurEtuMain extends ControleurMain
         fclose($csvFile);
     }
 
+    public static function traiterCSV(){
+        $pstage = (new pstageRepository())->getListeObjet();
+        foreach ($pstage as $stage){
+
+        }
+    }
+
     public static function updateImage()
     {
         $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
