@@ -30,8 +30,9 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherListeEtudiant()
     {
+        $listeEtudiants=(new EtudiantRepository())->etudiantsEtats();
         self::$pageActuelleAdmin = "Liste Étudiants";
-        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu());
+        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(),["listeEtudiants"=>$listeEtudiants]);
     }
 
     public static function afficherDetailOffre(/* string $idOffre = null */): void

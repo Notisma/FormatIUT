@@ -2,8 +2,9 @@
 <div class="offresEtu">
     <div class="contenuOffresEtu">
 <?php
-
-echo(\App\FormatIUT\Modele\Repository\ConnexionLdap::connexion("a","a","afficherListe"));
+foreach ($listeEtudiants as $etudiant){
+    echo $etudiant["etudiant"]->getPrenomEtudiant()." ".$etudiant["etudiant"]->getNomEtudiant(). " : ".$etudiant["aUneFormation"] ."<br>";
+}
 ?>
     </div>
 </div>

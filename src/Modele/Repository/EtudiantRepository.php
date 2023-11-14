@@ -238,4 +238,20 @@ class   EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
+    //Fonction en cours de développement pour profilEtudiant depuis Admin
+    public function etudiantsEtats(){
+        $sql="SELECT numEtudiant,COUNT(idFormation) as AUneOffre
+                FROM Etudiants etu 
+                LEFT JOIN formation f ON f.idEtudiant=etu.numEtudiant
+                GROUP BY numEtudiant";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $item) {
+            $nb = $item["AUneOffre"];
+            unset($item["AUneOffre"]);
+            $listeEtudiants[] = array("etudiant"=>$this->getObjectParClePrimaire($item["numEtudiant"]), "aUneFormation"=>$nb);
+
+        }
+        return $listeEtudiants;
+    }
+
 }
