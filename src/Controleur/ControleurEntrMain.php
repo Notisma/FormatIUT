@@ -256,12 +256,14 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
-    public static function afficherFormulaireModification(){
-        $entreprise=((new EntrepriseRepository())->getObjectParClePrimaire(self::$cleEntreprise));
-        self::afficherVue("vueGenerale.php", ["entreprise"=>$entreprise,"menu"=>self::getMenu(), "chemin"=> "Entreprise/vueMettreAJour.php", "titrePage" => "Modifier vos informations"]);
+    public static function afficherFormulaireModification(): void
+    {
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
-    public static function mettreAJour(){
+    public static function mettreAJour(): void
+    {
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
         self::afficherProfilEntr();
     }

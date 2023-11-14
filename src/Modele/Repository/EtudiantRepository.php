@@ -184,7 +184,7 @@ class   EtudiantRepository extends AbstractRepository
         return false;
     }
 
-    public function premiereConnexion(array $etudiant)
+    public function premiereConnexion(array $etudiant): void
     {
         $sql = "INSERT INTO " . $this->getNomTable() . " (numEtudiant,prenomEtudiant,nomEtudiant,loginEtudiant,mailUniversitaire) VALUES (:numTag,:prenomTag,:nomTag,:loginTag,:mailTag)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -210,7 +210,7 @@ class   EtudiantRepository extends AbstractRepository
         else return $result[0];
     }
 
-    public function modifierNumEtuSexe(Etudiant $etudiant, int $oldNumEtudiant)
+    public function modifierNumEtuSexe(Etudiant $etudiant, int $oldNumEtudiant): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET numEtudiant=:TagNum,sexeEtu=:TagSexe WHERE numEtudiant=:tagOldNum";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -222,7 +222,7 @@ class   EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function modifierTelMailPerso(Etudiant $etudiant)
+    public function modifierTelMailPerso(Etudiant $etudiant): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET telephone=:tag1,mailPerso=:tag2 WHERE numEtudiant=:tagNum";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -234,7 +234,7 @@ class   EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function modifierGroupeParcours(Etudiant $etudiant)
+    public function modifierGroupeParcours(Etudiant $etudiant): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET groupe=:tag1,parcours=:tag2 WHERE numEtudiant=:tagNum";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -245,10 +245,11 @@ class   EtudiantRepository extends AbstractRepository
         );
     }
 
-    public function mettreAJourInfos(string $adresseMail, int $telephone, string $numEtu){
-        $sql="UPDATE Etudiants SET mailPerso = :mailTag, telephone = :telTag WHERE numEtudiant = :numTag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("mailTag"=>$adresseMail,"telTag"=>$telephone, "numTag"=>$numEtu);
+    public function mettreAJourInfos(string $adresseMail, int $telephone, string $numEtu): void
+    {
+        $sql = "UPDATE Etudiants SET mailPerso = :mailTag, telephone = :telTag WHERE numEtudiant = :numTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("mailTag" => $adresseMail, "telTag" => $telephone, "numTag" => $numEtu);
         $pdoStatement->execute($values);
     }
 

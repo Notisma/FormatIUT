@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<?php use App\FormatIUT\Modele\DataObject\Etudiant; ?>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleFormulaireCreationOffre.css">
-</head>
-<body>
 <div id="center" class="antiPadding">
     <div class="wrapDroite">
         <form method="POST">
@@ -38,6 +30,3 @@
         </form>
     </div>
 </div>
-</body>
-
-</html>
