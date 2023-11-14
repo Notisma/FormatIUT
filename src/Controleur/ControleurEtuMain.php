@@ -276,5 +276,16 @@ class ControleurEtuMain extends ControleurMain
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");
     }
 
+    public static function afficherFormulaireModification(): void
+    {
+        $etudiant=((new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant));
+        self::afficherVue("vueGenerale.php", ["etudiant"=>$etudiant,"menu"=>self::getMenu(), "chemin"=> "Etudiant/vueMettreAJour.php", "titrePage" => "Modifier vos informations"]);
+    }
+
+    public static function mettreAJour(): void
+    {
+        (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
+        self::afficherProfilEtu();
+    }
 
 }

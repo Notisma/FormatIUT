@@ -36,15 +36,17 @@
             <ul id="infosEtu">
                 <?php
                 echo "
-            <li>Prénom : " . $etudiant->getPrenomEtudiant() . "</li>
-            <li>Nom : " . $etudiant->getNomEtudiant() . "</li>
-            <li>Login : " . $etudiant->getLogin() . "</li>
-            <li>Numéro Etudiant : " . $etudiant->getNumEtudiant() . "</li>
-            <li>Mail universitaire : " . $etudiant->getMailUniersitaire() . "</li>
-            <li>Téléphone : " . $etudiant->getTelephone() . "</li>
-            <li>Groupe : " . $etudiant->getGroupe() . "</li>
-            <li>Parcours : " . $etudiant->getParcours() . "</li>
+            <li>Prénom : ".$etudiant->getPrenomEtudiant()."</li>
+            <li>Nom : ".$etudiant->getNomEtudiant()."</li>
+            <li>Login : ".$etudiant->getLogin()."</li>
+            <li>Numéro Etudiant : ".$etudiant->getNumEtudiant()."</li>
+            <li>Mail universitaire : ".$etudiant->getMailUniersitaire()."</li>
+            <li>Mail personnel : ".$etudiant->getMailPerso()."</li>
+            <li>Téléphone : ".$etudiant->getTelephone()."</li>
+            <li>Groupe : ".$etudiant->getGroupe()."</li>
+            <li>Parcours : ".$etudiant->getParcours()."</li>
             " ?>
+                <a href="?action=afficherFormulaireModification&controleur=EtuMain">Modifier vos informations</a>
             </ul>
 
             <img src="../ressources/images/donneesEtu.png" alt="illu">
