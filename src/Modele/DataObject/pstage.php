@@ -16,7 +16,7 @@ class pstage extends AbstractDataObject
     private string $codeUFR;
     private string $libelleUFR;
     private string $codeDepartement;
-    private string $codeEtape;
+    private int $codeEtape;
     private string $libelleEtape;
     private string $dateDebutStage;
     private string $dateFinStage;

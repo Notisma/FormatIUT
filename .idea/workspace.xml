@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections." />
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/pstage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/pstage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/pstageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/pstageRepository.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +56,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;convention&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ann2/tordeuxm/public_html/devapplicationformatiut&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ann2/tordeuxm/public_html/td-php&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -166,6 +171,8 @@
       <workItem from="1697637847518" duration="330000" />
       <workItem from="1697640163955" duration="2888000" />
       <workItem from="1699808640934" duration="314000" />
+      <workItem from="1699974152332" duration="1346000" />
+      <workItem from="1699978986221" duration="708000" />
     </task>
     <task id="LOCAL-00038" summary="début de factorisation des dataObject et Repository">
       <option name="closed" value="true" />

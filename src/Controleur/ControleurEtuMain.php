@@ -169,15 +169,16 @@ class ControleurEtuMain extends ControleurMain
         fgetcsv($csvFile);
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
+            echo "test";
             echo $ligne[0];
             echo "\n";
 
-            if (sizeof($ligne) == 82) {
+            //if (sizeof($ligne) == 82) {
                 (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
-            }
-            else{
+            //}
+            /*else{
                 $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
-            }
+            }*/
         }
         fclose($csvFile);
     }
@@ -185,7 +186,7 @@ class ControleurEtuMain extends ControleurMain
     public static function traiterCSV(){
         $pstage = (new pstageRepository())->getListeObjet();
         foreach ($pstage as $stage){
-
+            (new pstageRepository())->callProcedure($stage);
         }
     }
 
