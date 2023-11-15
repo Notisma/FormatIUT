@@ -74,10 +74,11 @@
         <h3 class="titre">Alertes - Entreprises</h3>
         <div class="wrapAlertes">
             <!-- exemple d'alerte - compte créé -->
+            <?php foreach ($listeEntreprises as $entreprise){?>
             <a href="tt" class="alerteEntr">
                 <div class="imageAlerte">
                     <?php
-                    $src='"data:image/jpeg;base64,' . base64_encode($listeEntreprises[0]->getImg()). '"';
+                    $src='"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()). '"';
                     echo '<img src='. $src . 'alt="image">';
                     ?>
                 </div>
@@ -85,7 +86,7 @@
                 <div class="contenuAlerte">
                     <h3 class="titre" id="rouge">
                     <?php
-                    echo $listeEntreprises[0]->getNomEntreprise();
+                    echo $entreprise->getNomEntreprise();
                      ?>
 
                         - Demande de création de compte</h3>
@@ -95,12 +96,15 @@
                     </div>
                 </div>
             </a>
+            <?php } ?>
 
             <!-- exemple d'alerte - offre postée -->
+            <?php foreach ($listeOffres as $offre) {?>
+
             <a href="?action=afficherDetailOffre&controleur=AdminMain" class="alerteEntr">
                 <div class="imageAlerte">
                     <?php
-                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffres[0]->getSiret());
+                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                     $src='"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()). '"';
                     echo '<img src='. $src . 'alt="image">';
                     ?>
@@ -117,6 +121,7 @@
                     </div>
                 </div>
             </a>
+            <?php } ?>
 
         </div>
         <div class="wrapBoutons">
@@ -130,10 +135,12 @@
         <div class="wrapAlertes">
 
             <!-- exemple d'alerte - compte créé -->
+            <?php foreach ($listeEtudiants as $etudiant) { ?>
+
             <a href="tt" class="alerteEntr" id="hoverRose">
                 <div class="imageAlerte">
                     <?php
-                    $src='"data:image/jpeg;base64,' . base64_encode($listeEtudiants[0]->getImg()). '"';
+                    $src='"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()). '"';
                     echo '<img src='. $src . 'alt="image">';
                     ?>
                 </div>
@@ -141,11 +148,11 @@
                 <div class="contenuAlerte">
                     <h3 class="titre" id="rouge">
                         <?php
-                        echo $listeEtudiants[0]->getPrenomEtudiant() . " " . strtoupper($listeEtudiants[0]->getNomEtudiant());
+                        echo $etudiant->getPrenomEtudiant() . " " . strtoupper($etudiant->getNomEtudiant());
                         ?></h3>
                     <p>
                         <?php
-                        echo $listeEtudiants[0]->getParcours()." - ".$listeEtudiants[0]->getGroupe();
+                        echo $etudiant->getParcours()." - ".$etudiant->getGroupe();
                         ?></p>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
@@ -153,6 +160,8 @@
                     </div>
                 </div>
             </a>
+            <?php }?>
+
 
             <!-- un exemple différent -->
             <a href="tt" class="alerteEntr" id="hoverRose">

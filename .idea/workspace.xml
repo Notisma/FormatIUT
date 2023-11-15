@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : modification du bandeau">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueAccueilAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -679,7 +677,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Corrections." />
     <MESSAGE value="Beaucoup de corrections." />
     <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
     <MESSAGE value="Correction des nonces et des emails mdp oubliés" />
@@ -704,7 +701,8 @@
     <MESSAGE value="Fix- correction de bugs git 1/2" />
     <MESSAGE value="feat: ajout image Administrateur" />
     <MESSAGE value="rebase : modification du bandeau" />
-    <option name="LAST_COMMIT_MESSAGE" value="rebase : modification du bandeau" />
+    <MESSAGE value="autre ; commit pour checkout" />
+    <option name="LAST_COMMIT_MESSAGE" value="autre ; commit pour checkout" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
