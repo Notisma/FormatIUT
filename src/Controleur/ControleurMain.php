@@ -33,7 +33,7 @@ class ControleurMain
      */
     public static function afficherVuePresentation(): void
     {
-        self::afficherVue("Accueilm Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
+        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
     /***
@@ -265,8 +265,7 @@ class ControleurMain
 
     public static function motDePasseARemplir(): void
     {
-        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vueResetMdp.php", "titrePage" => "Mot de Passe oublié"]);
-
+        self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
     }
 
 
