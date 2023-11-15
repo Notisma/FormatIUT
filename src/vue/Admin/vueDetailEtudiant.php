@@ -15,8 +15,22 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             ?>
         </div>
 
+        <div class="detailsEtudiants">
+            <?php
+            //on affiche toutes les informations de l'étudiant
+            echo "<h3 class='titre'>Informations :</h3>";
+            echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
+            echo "<p>Login : " . $etudiant->getLogin() . "</p>";
+            echo "<p>Mail Universitaire : " . $etudiant->getMailUniersitaire() . "</p>";
+            echo "<p>Mail Personnel : " . $etudiant->getMailPerso() . "</p>";
+            echo "<p>Téléphone : " . $etudiant->getTelephone() . "</p>";
+            echo "<p>Groupe : " . $etudiant->getGroupe() . "</p>";
+            echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
+            ?>
+        </div>
+
         <div class="wrapBoutons">
-            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">Supprimer</a>
+            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
         </div>
 
     </div>
