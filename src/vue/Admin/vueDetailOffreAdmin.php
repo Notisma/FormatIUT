@@ -55,7 +55,7 @@
         if ($offre->isEstValide()) {
             echo "<div class='statutOffre' id='valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
-            echo "<h5 class='titre'>Validée</h5>";
+            echo "<h5 class='titre'>Validée - cette offre est postée</h5>";
             echo "</div>";
         } else {
             echo "<div class='statutOffre' id='attente'>";

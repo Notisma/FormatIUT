@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Détails offre ADMIN : correction de crash">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : Correction de crash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,15 +190,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="3777000" />
-    </task>
-    <task id="LOCAL-00070" summary="Je répare ce que je peux">
-      <option name="closed" value="true" />
-      <created>1697210293730</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1697210293732</updated>
+      <workItem from="1700071240528" duration="3915000" />
     </task>
     <task id="LOCAL-00071" summary="Corrections">
       <option name="closed" value="true" />
@@ -584,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700074886586</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="fix : Correction de crash">
+      <option name="closed" value="true" />
+      <created>1700075122009</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1700075122009</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modification des messages flash" />
     <MESSAGE value="Correction visuelle" />
     <MESSAGE value="Modifications" />
     <MESSAGE value="Corrections" />
@@ -705,7 +704,8 @@
     <MESSAGE value="feat : Avancées 2 : de l'ajout de la vue détails offre ADMIN" />
     <MESSAGE value="feat : Avancées 3 : de l'ajout de la vue détails offre ADMIN" />
     <MESSAGE value="fix : Détails offre ADMIN : correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : Détails offre ADMIN : correction de crash" />
+    <MESSAGE value="fix : Correction de crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : Correction de crash" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
