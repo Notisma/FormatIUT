@@ -103,7 +103,7 @@ class ControleurAdminMain extends ControleurMain
     public static function supprimerOffre() : void {
         //TODO : FAIRE LES VERIFICATIONS
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        (new OffreRepository())->supprimer($offre);
+        (new OffreRepository())->supprimer($_REQUEST['idOffre']);
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
     }
 }

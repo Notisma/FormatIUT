@@ -49,7 +49,7 @@
     <div class="wrapDroite">
         <h3 class="titre">INFORMATIONS</h3>
 
-        <h5 class="titre">Statut de l'offre :</h5>
+        <h4 class="titre">Statut de l'offre :</h4>
 
         <?php
         if ($offre->isEstValide()) {
@@ -93,9 +93,8 @@
                 }
             } else {
                 echo "<div class='erreur'>";
-                echo "<h5 class='titre'>Cette offre n'est pas postée. Il ne peut pas y avoir de candidats</h5>";
                 echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
-                echo "<h4 class='titre'>Aucun étudiant candidat</h4>";
+                echo "<h4 class='titre'>Offre non postée</h4>";
                 echo "</div>";
             }
             ?>
