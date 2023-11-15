@@ -54,7 +54,8 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu());
     }
 
-    public static function afficherVueCSV(): void {
+    public static function afficherVueCSV(): void
+    {
         self::$pageActuelleAdmin = "Mes CSV";
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
@@ -109,10 +110,19 @@ class ControleurAdminMain extends ControleurMain
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
     }
 
-    public static function supprimerOffre() : void {
+    public static function supprimerOffre(): void
+    {
         //TODO : FAIRE LES VERIFICATIONS
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
         (new OffreRepository())->supprimer($_REQUEST['idOffre']);
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
+    }
+
+    public static function supprimerEtudiant(): void
+    {
+        //TODO : FAIRE LES VERIFICATIONS
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
+        (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
+        self::redirectionFlash("afficherAccueilEntr", "success", "L'étudiant a bien été supprimé");
     }
 }

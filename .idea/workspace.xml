@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : avancée vue detail etu ADMINS">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : avancée vue detail (encore) etu ADMINS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,15 +189,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="12424000" />
-    </task>
-    <task id="LOCAL-00080" summary="Visuel (version 1) vueMesOffresEtu.php terminé.">
-      <option name="closed" value="true" />
-      <created>1697386537551</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1697386537551</updated>
+      <workItem from="1700071240528" duration="12670000" />
     </task>
     <task id="LOCAL-00081" summary="Début des améliorations visuelles vueCatalogueOffre.php">
       <option name="closed" value="true" />
@@ -584,7 +575,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700085062460</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="feat : avancée vue detail (encore) etu ADMINS">
+      <option name="closed" value="true" />
+      <created>1700085675998</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1700085675998</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +679,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connexion en tant que prof" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 2" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
@@ -705,7 +703,8 @@
     <MESSAGE value="feat : ajout de fichiers pour début Details Etu ADMIN" />
     <MESSAGE value="feat : ajout de fonctions" />
     <MESSAGE value="feat : avancée vue detail etu ADMINS" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : avancée vue detail etu ADMINS" />
+    <MESSAGE value="feat : avancée vue detail (encore) etu ADMINS" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : avancée vue detail (encore) etu ADMINS" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
