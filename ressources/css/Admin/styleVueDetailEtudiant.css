@@ -4,6 +4,17 @@ body {
     height: 100vh;
 }
 
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
+    margin: 0;
+}
+
+#rouge {
+    color: #ff5660;
+}
+
 .wrapCentreEtu {
     position: absolute;
     top: 56%;
@@ -19,4 +30,79 @@ body {
     align-content: center;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+}
+
+.gaucheEtu {
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #aadcda;
+}
+
+.infosEtu {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.infosEtu > img {
+    width: 25%;
+}
+
+.wrapBoutons {
+    width: 90%;
+    height: 9%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding-bottom: 1%;
+}
+
+.wrapBoutons > a {
+    width: 40%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-decoration: none;
+    color: white;
+    border-radius: 50px;
+    background-color: #ff5660;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.wrapBoutons > a:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.droiteEtu {
+    float: right;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
 }
