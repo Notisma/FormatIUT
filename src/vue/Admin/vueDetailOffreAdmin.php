@@ -55,12 +55,12 @@
         if ($offre->isEstValide()) {
             echo "<div class='statutOffre' id='valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
-            echo "<h5 class='titre'>Validée - cette offre est postée</h5>";
+            echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
             echo "</div>";
         } else {
             echo "<div class='statutOffre' id='attente'>";
             echo "<img src='../ressources/images/sablier.png' alt='entreprise'>";
-            echo "<h5 class='titre'>En Attente de Validation</h5>";
+            echo "<h3 class='titre'>En Attente de Validation</h3>";
             echo "</div>";
         }
 
@@ -73,7 +73,7 @@
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
                 $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
 
-                if (sizeof($listeEtudiants) == 1    ) {
+                if (sizeof($listeEtudiants) == 1  || sizeof($listeEtudiants) == 0  ) {
                     echo "<div class='erreur'>";
                     echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
                     echo "<h4 class='titre'>Aucun étudiant candidat n'a été trouvé pour cette offre</h4>";

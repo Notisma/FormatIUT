@@ -133,7 +133,7 @@ body {
 
 .statutOffre {
     height: 12%;
-    width: 60%;
+    width: 80%;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -145,7 +145,7 @@ body {
 }
 
 .statutOffre > img {
-    width: 20%;
+    width: 15%;
 }
 
 #attente {

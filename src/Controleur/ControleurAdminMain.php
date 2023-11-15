@@ -94,10 +94,8 @@ class ControleurAdminMain extends ControleurMain
     public static function rejeterOffre(): void
     {
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        $offre->setEstValide(false);
-        (new OffreRepository())->modifierObjet($offre);
-        header("Location: ?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
-        MessageFlash::ajouter("success", "L'offre a bien été rejetée");
+        (new OffreRepository())->supprimer($offre->getIdOffre());
+        self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
     }
 
     public static function supprimerOffre() : void {

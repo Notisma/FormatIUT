@@ -105,7 +105,8 @@
                 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                 ?>
 
-                <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=<?php echo $offre->getIdOffre() ?>" class="alerteEntr">
+                <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+                   class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
                         $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
@@ -155,7 +156,11 @@
                             ?></h3>
                         <p>
                             <?php
-                            echo $etudiant->getParcours() . " - " . $etudiant->getGroupe();
+                            if ($etudiant->getParcours() == "") {
+                                echo "Données non renseignées";
+                            } else {
+                                echo $etudiant->getParcours() . " - " . $etudiant->getGroupe();
+                            }
                             ?></p>
                         <div class="sujetAlerte">
                             <img src="../ressources/images/attention.png" alt="image">

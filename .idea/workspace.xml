@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : Ajout de style pour les overflows">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : Corrections détails offre">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,15 +192,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="4117000" />
-    </task>
-    <task id="LOCAL-00072" summary="visuel vueDetailEntreprise.php (version 1) terminé.">
-      <option name="closed" value="true" />
-      <created>1697273752249</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1697273752249</updated>
+      <workItem from="1700071240528" duration="5352000" />
     </task>
     <task id="LOCAL-00073" summary="Début des travaux sur vueDetailEtudiant.php">
       <option name="closed" value="true" />
@@ -584,7 +578,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700075217459</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="rebase : Corrections détails offre">
+      <option name="closed" value="true" />
+      <created>1700075425442</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1700075425442</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,7 +682,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifications" />
     <MESSAGE value="Corrections" />
     <MESSAGE value="Tests" />
     <MESSAGE value="Correction après merge" />
@@ -705,7 +706,8 @@
     <MESSAGE value="fix : Détails offre ADMIN : correction de crash" />
     <MESSAGE value="fix : Correction de crash" />
     <MESSAGE value="rebase : Ajout de style pour les overflows" />
-    <option name="LAST_COMMIT_MESSAGE" value="rebase : Ajout de style pour les overflows" />
+    <MESSAGE value="rebase : Corrections détails offre" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebase : Corrections détails offre" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
