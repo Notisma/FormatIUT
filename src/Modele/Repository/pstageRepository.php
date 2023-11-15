@@ -214,13 +214,15 @@ class pstageRepository extends AbstractRepository
     }
 
     public function exportCSV(){
-        $sql="SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, nomOffre, sujet
-        FROM Etudiants etu LEFT JOIN regarder r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Offre offr ON offr.idOffre = r.idOffre";
+        $sql="SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, etuV.nomVille, etuV.codePostal ,nomOffre, dateDebut, dateFin ,sujet, gratification, typeOffre, entr.numSiret, nomEntreprise, statutJuridique, effectif, codeNAF, tel, vEntr.nomVille, vEntr.codePostal
+        FROM Etudiants etu LEFT JOIN regarder r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Offre offr ON offr.idOffre = r.idOffre LEFT JOIN Entreprise entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Ville vEntr ON vEntr.idVille = entr.idVille
+        LEFT JOIN Residence etuRes ON etuRes.idResidence = etu.idResidence LEFT JOIN Ville etuV ON etuV.idVille = etuRes.idVille";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $pdoStatement->setFetchMode(\PDO::FETCH_ASSOC);
+        $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
         foreach ($pdoStatement as $item) {
-            $listeObjet[]=$item;
+            //echo '<pre>'; print_r($item); echo '</pre>';
 
+            $listeObjet[]=$item;
         }
         return $listeObjet;
 
