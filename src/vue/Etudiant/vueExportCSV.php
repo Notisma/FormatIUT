@@ -6,7 +6,10 @@
 <div id="center">
 
     <div class="presentation">
-        <p>exporter CSV dans la BD :</p>
+        <p>exporter le fichier CSV depuis la BD :</p>
+        <form method="post" action="?controleur=EtuMain&action=exporterCSV">
+            <input type="submit" value="Envoyer"/>
+        </form>
 
     </div>
 </div>

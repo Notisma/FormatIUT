@@ -152,30 +152,26 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function afficherCSV(): void
+    public static function afficherImporterCSV(): void
     {
-        self::afficherVueDansCorps("import CSV", "Etudiant/vueTestCSV.php", self::getMenu());
+        self::afficherVueDansCorps("importer CSV", "Etudiant/vueImportCSV.php", self::getMenu());
+    }
+
+    public static function afficherExporterCSV(){
+        self::afficherVueDansCorps("exporter CSV", "Etudiant/vueExportCSV.php", self::getMenu());
     }
 
     public static function ajouterCSV(): void
     {
-        echo $_FILES['file']['name'];
-        echo "\n";
-        echo $_FILES['file']['type'];
-        echo "\n";
-        echo $_FILES['file']['tmp_name'];
-        echo "\n";
+
         $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
         fgetcsv($csvFile);
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
-            echo "test";
-            echo $ligne[3];
-            echo "\n";
-
             if (sizeof($ligne) == 82) {
-                (new pstageRepository())->creerObjet((new pstageRepository())->construireDepuisTableau($ligne));
+                $pstage = (new pstageRepository())->construireDepuisTableau($ligne);
+                (new pstageRepository())->callProcedure($pstage);
             }
             else if (sizeof($ligne) == 143){
                 $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
@@ -183,13 +179,8 @@ class ControleurEtuMain extends ControleurMain
             }
         }
         fclose($csvFile);
-    }
 
-    public static function traiterCSV(){
-        $pstage = (new pstageRepository())->getListeObjet();
-        foreach ($pstage as $stage){
-            (new pstageRepository())->callProcedure($stage);
-        }
+        self::afficherAccueilEtu();
     }
 
     public static function exporterCSV(){
@@ -211,6 +202,7 @@ class ControleurEtuMain extends ControleurMain
         header('Content-Disposition: attachment; filename="' . $filename . '";');
 
         fpassthru($f);
+        fclose($f);
     }
 
     public static function updateImage()
@@ -263,7 +255,8 @@ class ControleurEtuMain extends ControleurMain
         if ($formation) {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=" . $formation['idOffre']);
         }
-        $menu[] = array("image" => "", "label" => "CSV", "lien" => "?controleur=EtuMain&action=afficherCSV");
+        $menu[] = array("image" => "", "label" => "importer CSV", "lien" => "?controleur=EtuMain&action=afficherImporterCSV");
+        $menu[] = array("image"=>"", "label"=>"exporter CSV", "lien"=> "?controleur=EtuMain&action=afficherExporterCSV");
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php");
         return $menu;
     }
