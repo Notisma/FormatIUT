@@ -19,10 +19,10 @@
             <img src="../ressources/images/creationCompte.png" alt="image">
             <h4 class="titre">
                 <?php
-                $nb= sizeof($listeEntreprises);
-                $s="";
-                if ($nb>1) $s="s";
-                echo $nb ." Création".$s." compte".$s;
+                $nb = sizeof($listeEntreprises);
+                $s = "";
+                if ($nb > 1) $s = "s";
+                echo $nb . " Création" . $s . " compte" . $s;
                 ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
@@ -33,10 +33,10 @@
             <img src="../ressources/images/offres.png" alt="image">
             <h4 class="titre">
                 <?php
-                $nb= sizeof($listeOffres);
-                $s="";
-                if ($nb>1) $s="s";
-                echo $nb ." Création".$s." offre".$s;
+                $nb = sizeof($listeOffres);
+                $s = "";
+                if ($nb > 1) $s = "s";
+                echo $nb . " Création" . $s . " offre" . $s;
                 ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
@@ -50,10 +50,10 @@
             <img src="../ressources/images/anomalies.png" alt="image">
             <h4 class="titre">
                 <?php
-                $nb=sizeof($listeEtudiants);
-                $s="";
-                if ($nb>1) $s="s";
-                echo $nb . " Anomalie".$s." Étudiant".$s;
+                $nb = sizeof($listeEtudiants);
+                $s = "";
+                if ($nb > 1) $s = "s";
+                echo $nb . " Anomalie" . $s . " Étudiant" . $s;
                 ?></h4>
             <div class="wrapBoutons" id="boutonsGO">
                 <a href="">VOIR</a>
@@ -74,53 +74,56 @@
         <h3 class="titre">Alertes - Entreprises</h3>
         <div class="wrapAlertes">
             <!-- exemple d'alerte - compte créé -->
-            <?php foreach ($listeEntreprises as $entreprise){?>
-            <a href="tt" class="alerteEntr">
-                <div class="imageAlerte">
-                    <?php
-                    $src='"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()). '"';
-                    echo '<img src='. $src . 'alt="image">';
-                    ?>
-                </div>
+            <?php foreach ($listeEntreprises as $entreprise) {
 
-                <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">
-                    <?php
-                    echo $entreprise->getNomEntreprise();
-                     ?>
-
-                        - Demande de création de compte</h3>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>Demande de création de compte le 11/11/2023</p>
+                ?>
+                <a href="tt" class="alerteEntr">
+                    <div class="imageAlerte">
+                        <?php
+                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
+                        echo '<img src=' . $src . 'alt="image">';
+                        ?>
                     </div>
-                </div>
-            </a>
+
+                    <div class="contenuAlerte">
+                        <h3 class="titre" id="rouge">
+                            <?php
+                            echo $entreprise->getNomEntreprise();
+                            ?>
+
+                            - Demande de création de compte</h3>
+                        <div class="sujetAlerte">
+                            <img src="../ressources/images/attention.png" alt="image">
+                            <p>Demande de création de compte le 11/11/2023</p>
+                        </div>
+                    </div>
+                </a>
             <?php } ?>
 
             <!-- exemple d'alerte - offre postée -->
-            <?php foreach ($listeOffres as $offre) {?>
+            <?php foreach ($listeOffres as $offre) {
+                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                ?>
 
-            <a href="?action=afficherDetailOffre&controleur=AdminMain" class="alerteEntr">
-                <div class="imageAlerte">
-                    <?php
-                    $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                    $src='"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()). '"';
-                    echo '<img src='. $src . 'alt="image">';
-                    ?>
-                </div>
-
-                <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">
+                <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=<?php echo $offre->getIdOffre() ?>" class="alerteEntr">
+                    <div class="imageAlerte">
                         <?php
-                        echo $entreprise->getNomEntreprise();
-                        ?> - Offre en attente</h3>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>Demande d'envoi d'une offre le 13/11/2023</p>
+                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
+                        echo '<img src=' . $src . 'alt="image">';
+                        ?>
                     </div>
-                </div>
-            </a>
+
+                    <div class="contenuAlerte">
+                        <h3 class="titre" id="rouge">
+                            <?php
+                            echo $entreprise->getNomEntreprise();
+                            ?> - Offre en attente</h3>
+                        <div class="sujetAlerte">
+                            <img src="../ressources/images/attention.png" alt="image">
+                            <p>Demande d'envoi d'une offre le 13/11/2023</p>
+                        </div>
+                    </div>
+                </a>
             <?php } ?>
 
         </div>
@@ -137,30 +140,30 @@
             <!-- exemple d'alerte - compte créé -->
             <?php foreach ($listeEtudiants as $etudiant) { ?>
 
-            <a href="tt" class="alerteEntr" id="hoverRose">
-                <div class="imageAlerte">
-                    <?php
-                    $src='"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()). '"';
-                    echo '<img src='. $src . 'alt="image">';
-                    ?>
-                </div>
-
-                <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">
+                <a href="tt" class="alerteEntr" id="hoverRose">
+                    <div class="imageAlerte">
                         <?php
-                        echo $etudiant->getPrenomEtudiant() . " " . strtoupper($etudiant->getNomEtudiant());
-                        ?></h3>
-                    <p>
-                        <?php
-                        echo $etudiant->getParcours()." - ".$etudiant->getGroupe();
-                        ?></p>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>Aucun Stage/Alternance</p>
+                        $src = '"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"';
+                        echo '<img src=' . $src . 'alt="image">';
+                        ?>
                     </div>
-                </div>
-            </a>
-            <?php }?>
+
+                    <div class="contenuAlerte">
+                        <h3 class="titre" id="rouge">
+                            <?php
+                            echo $etudiant->getPrenomEtudiant() . " " . strtoupper($etudiant->getNomEtudiant());
+                            ?></h3>
+                        <p>
+                            <?php
+                            echo $etudiant->getParcours() . " - " . $etudiant->getGroupe();
+                            ?></p>
+                        <div class="sujetAlerte">
+                            <img src="../ressources/images/attention.png" alt="image">
+                            <p>Aucun Stage/Alternance</p>
+                        </div>
+                    </div>
+                </a>
+            <?php } ?>
 
 
             <!-- un exemple différent -->
@@ -178,7 +181,6 @@
                     </div>
                 </div>
             </a>
-
 
 
         </div>

@@ -15,11 +15,11 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherAccueilAdmin()
     {
-        $listeEtudiants=(new EtudiantRepository())->etudiantsSansOffres();
+        $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new OffreRepository())->offresNonValides();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres,"listeEtudiants"=>$listeEtudiants]);
+        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
 
     public static function afficherProfilAdmin()
@@ -28,17 +28,23 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
     }
 
-    public static function afficherListeEtudiant()
+    public static function afficherVueDetailEtudiant()
     {
-        $listeEtudiants=(new EtudiantRepository())->etudiantsEtats();
-        self::$pageActuelleAdmin = "Liste Étudiants";
-        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(),["listeEtudiants"=>$listeEtudiants]);
+        self::$pageActuelleAdmin = "Détails d'un Étudiant";
+        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
     }
 
-    public static function afficherDetailOffre(/* string $idOffre = null */): void
+    public static function afficherListeEtudiant()
     {
-        self::$pageActuelleAdmin = "Détails d'une Offre";
-        self::afficherVue("Détails d'une Offre", "Admin/vueDetailOffre.php", self::getMenu());
+        $listeEtudiants = (new EtudiantRepository())->etudiantsEtats();
+        self::$pageActuelleAdmin = "Liste Étudiants";
+        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(), ["listeEtudiants" => $listeEtudiants]);
+    }
+
+    public static function afficherDetailEntreprise(/* String $mailEntreprise */)
+    {
+        self::$pageActuelleAdmin = "Détails d'une Entreprise";
+        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
     }
 
     public static function afficherListeEntreprises(): void
@@ -58,8 +64,8 @@ class ControleurAdminMain extends ControleurMain
 
         );
 
-        if (self::$pageActuelleAdmin == "Détails d'une Offre") {
-            $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails d'une Offre", "lien" => "?action=afficherDetailOffre");
+        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
+            $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherDetailOffre");
         }
 
         if (self::$pageActuelleAdmin == "Mon Compte") {
