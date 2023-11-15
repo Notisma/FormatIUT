@@ -239,6 +239,7 @@ class   EtudiantRepository extends AbstractRepository
     }
 
     //Fonction en cours de développement pour profilEtudiant depuis Admin
+    //TODO TERMINER
     public function etudiantsEtats(){
         $sql="SELECT numEtudiant,COUNT(idFormation) as AUneOffre
                 FROM Etudiants etu 

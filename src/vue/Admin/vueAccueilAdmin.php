@@ -141,7 +141,7 @@
             <!-- exemple d'alerte - compte créé -->
             <?php foreach ($listeEtudiants as $etudiant) { ?>
 
-                <a href="tt" class="alerteEntr" id="hoverRose">
+                <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu= <?php echo $etudiant->getNumEtudiant() ?>" class="alerteEntr" id="hoverRose">
                     <div class="imageAlerte">
                         <?php
                         $src = '"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"';

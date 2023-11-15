@@ -29,7 +29,7 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
     }
 
-    public static function afficherVueDetailEtudiant()
+    public static function afficherDetailEtudiant()
     {
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
         self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
@@ -67,11 +67,15 @@ class ControleurAdminMain extends ControleurMain
         );
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
-            $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherDetailOffre");
+            $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
         }
 
         if (self::$pageActuelleAdmin == "Mon Compte") {
             $menu[] = array("image" => "../ressources/images/mon-compte.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
+        }
+
+        if (self::$pageActuelleAdmin == "Détails d'un Étudiant") {
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherDetailEtudiant");
         }
 
 
