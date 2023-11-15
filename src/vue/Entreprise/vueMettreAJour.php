@@ -24,7 +24,7 @@
 
                 <label for="effectif_id">Effectif</label> :
                 <div class="inputCentre">
-                    <input type="text" value=<?= htmlspecialchars($entreprise->getEffectif()); ?> name="effectif"
+                    <input type="number" value=<?= htmlspecialchars($entreprise->getEffectif()); ?> name="effectif"
                            id="effectif_id" required maxlength="11"/>
                 </div class="inputCentre">
 
