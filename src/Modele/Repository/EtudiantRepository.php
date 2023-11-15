@@ -266,4 +266,32 @@ class   EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
+    public function getAssociationPourOffre($idOffre, $numEtudiant) {
+        //retourne 'assigné' si l'étudiant a une formation, 'candidate' si l'étudiant a postulé, 'non assigné' sinon
+        $sql="SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagOffre"=>$idOffre, "TagEtu"=>$numEtudiant);
+        $pdoStatement->execute($values);
+        $resultat = $pdoStatement->fetch();
+        if ($resultat) {
+            if ($resultat["Etat"] == "En Attente") {
+                return "Candidat";
+            } else {
+                return "Candidat";
+            }
+        } else {
+            //on regarde si l'étudiant a une formation
+            $sql="SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
+            $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+            $values=array("TagEtu"=>$numEtudiant);
+            $pdoStatement->execute($values);
+            $resultat = $pdoStatement->fetch();
+            if ($resultat) {
+                return "Assigné";
+            } else {
+                return "Erreur";
+            }
+        }
+    }
+
 }

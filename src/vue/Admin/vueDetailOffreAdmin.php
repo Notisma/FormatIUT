@@ -73,20 +73,20 @@
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
                 $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
 
-                if (sizeof($listeEtudiants) == 1  || sizeof($listeEtudiants) == 0  ) {
+                if (sizeof($listeEtudiants) == 0  ) {
                     echo "<div class='erreur'>";
                     echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
                     echo "<h4 class='titre'>Aucun étudiant candidat n'a été trouvé pour cette offre</h4>";
                     echo "</div>";
                 } else {
                     foreach ($listeEtudiants as $etudiant) {
-                        echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtu() . "'>" .
+                        echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
-                            "<h5 class='titre' id='rouge'>" . $etudiant->getPrenom() . " " . $etudiant->getNom() . "</h5>" .
-                            "<p>" . $etudiant->getGroupe() . " - " . $etudiant->getParcours() . "</p>" .
+                            "<h3 class='titre' id='rouge'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h3>" .
+                            "<p>" . $etudiant->getGroupe() . " - " . $etudiant->getParcours() . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";
                     }

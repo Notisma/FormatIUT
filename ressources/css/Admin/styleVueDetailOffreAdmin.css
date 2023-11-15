@@ -169,6 +169,7 @@ body {
     align-items: center;
     align-content: center;
     overflow-y: auto;
+    text-decoration: none;
 }
 
 .detailsEtudiants::-webkit-scrollbar {
@@ -184,7 +185,7 @@ body {
 
 .etudiantCandidat {
     width: 90%;
-    height: 20%;
+    height: 25%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -193,6 +194,7 @@ body {
     border-radius: 10px;
     background-color: white;
     margin-bottom: 2%;
+    text-decoration: none;
 }
 
 .etudiantCandidat:hover {
@@ -227,6 +229,10 @@ body {
 
 .infosEtudiant > * {
     margin: 0;
+}
+
+.infosEtudiant > p {
+    color: black;
 }
 
 .erreur {
