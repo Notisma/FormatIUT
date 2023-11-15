@@ -267,7 +267,6 @@ class   EtudiantRepository extends AbstractRepository
     }
 
     public function getAssociationPourOffre($idOffre, $numEtudiant) {
-        //retourne 'assigné' si l'étudiant a une formation, 'candidate' si l'étudiant a postulé, 'non assigné' sinon
         $sql="SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("TagOffre"=>$idOffre, "TagEtu"=>$numEtudiant);
@@ -275,23 +274,25 @@ class   EtudiantRepository extends AbstractRepository
         $resultat = $pdoStatement->fetch();
         if ($resultat) {
             if ($resultat["Etat"] == "En Attente") {
-                return "Candidat";
+                return "Candidat en attente";
+            } else if ($resultat["Etat"] == "Validée") {
+                return "Accepté par l'entreprise";
+            } else if ($resultat["Etat"] == "Refusée") {
+                return "Refusé par l'entreprise";
             } else {
-                return "Candidat";
+                $sql="SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
+                $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+                $values=array("TagEtu"=>$numEtudiant);
+                $pdoStatement->execute($values);
+                $resultat = $pdoStatement->fetch();
+                if ($resultat) {
+                    return "Assigné";
+                }
             }
         } else {
-            //on regarde si l'étudiant a une formation
-            $sql="SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
-            $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-            $values=array("TagEtu"=>$numEtudiant);
-            $pdoStatement->execute($values);
-            $resultat = $pdoStatement->fetch();
-            if ($resultat) {
-                return "Assigné";
-            } else {
-                return "Erreur";
-            }
+            return "Non assigné";
         }
+        return null;
     }
 
 }

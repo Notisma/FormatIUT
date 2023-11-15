@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : correction de crash rejeter offre">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout du statut des étudiants pour les offres">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,15 +189,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="6979000" />
-    </task>
-    <task id="LOCAL-00074" summary="Visuel vueDetailEtudiant.php (version 1) terminé.">
-      <option name="closed" value="true" />
-      <created>1697276760917</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1697276760917</updated>
+      <workItem from="1700071240528" duration="7316000" />
     </task>
     <task id="LOCAL-00075" summary="Visuel vueDetailEtudiant.php (version 1) vraiment terminé cette fois-ci.">
       <option name="closed" value="true" />
@@ -586,7 +575,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700077344521</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="feat : ajout du statut des étudiants pour les offres">
+      <option name="closed" value="true" />
+      <created>1700079717105</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1700079717105</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,7 +679,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tests" />
     <MESSAGE value="Correction après merge" />
     <MESSAGE value="Encore une correction après merge (il était délicat celui-ci)" />
     <MESSAGE value="Corrections de crashs" />
@@ -707,7 +703,8 @@
     <MESSAGE value="rebase : Ajout de style pour les overflows" />
     <MESSAGE value="rebase : Corrections détails offre" />
     <MESSAGE value="fix : correction de crash rejeter offre" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : correction de crash rejeter offre" />
+    <MESSAGE value="feat : ajout du statut des étudiants pour les offres" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout du statut des étudiants pour les offres" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
