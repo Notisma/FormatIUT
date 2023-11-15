@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : avancée vue detail (encore) etu ADMINS">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout de fonction supprimerEtudiant()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Entreprise/styleVueDetailOffreEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Entreprise/styleVueDetailOffreEntreprise.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +39,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.1" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -189,15 +195,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="12670000" />
-    </task>
-    <task id="LOCAL-00081" summary="Début des améliorations visuelles vueCatalogueOffre.php">
-      <option name="closed" value="true" />
-      <created>1697392919674</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1697392919674</updated>
+      <workItem from="1700071240528" duration="16361000" />
     </task>
     <task id="LOCAL-00082" summary="Améliorations visuelles (vueErreur.php et vueMesOffresEtu.php)">
       <option name="closed" value="true" />
@@ -583,7 +581,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700085675998</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="feat : ajout de fonction supprimerEtudiant()">
+      <option name="closed" value="true" />
+      <created>1700086035339</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1700086035339</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat - Avancées sur accueil ADMIN" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 2" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 4" />
@@ -704,7 +709,8 @@
     <MESSAGE value="feat : ajout de fonctions" />
     <MESSAGE value="feat : avancée vue detail etu ADMINS" />
     <MESSAGE value="feat : avancée vue detail (encore) etu ADMINS" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : avancée vue detail (encore) etu ADMINS" />
+    <MESSAGE value="feat : ajout de fonction supprimerEtudiant()" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout de fonction supprimerEtudiant()" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

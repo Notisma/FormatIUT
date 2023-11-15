@@ -1,6 +1,5 @@
 <div class="wrapCentreOffre">
     <?php
-    //on récupère l'offre à partir de son id offre qui est en $ request
     $offre = (new App\FormatIUT\Modele\Repository\OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
     ?>

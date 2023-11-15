@@ -154,14 +154,6 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function getValidite(): bool
-    {
-        if (this->estValide == 0) {
-            return false;
-        }
-        return true;
-    }
-
 
     public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret, string $typeFormation, bool $estValide)
     {

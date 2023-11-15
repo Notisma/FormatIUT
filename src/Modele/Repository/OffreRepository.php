@@ -213,6 +213,21 @@ class OffreRepository extends AbstractRepository
     }
 
 
+    public function offresPourEtudiant($numEtudiant)
+    {
+        //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
+        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN regarder r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $numEtudiant);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
+    }
+
+
 
 
 

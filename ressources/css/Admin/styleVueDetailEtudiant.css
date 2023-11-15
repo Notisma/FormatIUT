@@ -122,4 +122,84 @@ body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: white;
+    padding: 1%;
+}
+
+.wrapAllEtu {
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    overflow-y: auto;
+}
+
+.wrapAllEtu::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #ffd0d4;
+    width: 10px;
+}
+
+.wrapAllEtu::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.erreur {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.erreur > img {
+    width: 50%;
+}
+
+.offre {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: #ff9095;
+}
+
+.offre:hover {
+    background-color: #ffbdbe;
+    cursor: pointer;
+}
+
+.imgOffre {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.imgOffre > img {
+    width: 70%;
+    background-color: white;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.infosOffre {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
 }
