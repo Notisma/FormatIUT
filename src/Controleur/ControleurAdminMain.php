@@ -54,6 +54,11 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu());
     }
 
+    public static function afficherVueCSV(): void {
+        self::$pageActuelleAdmin = "Mes CSV";
+        self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
+    }
+
 
     public static function getMenu(): array
     {
@@ -62,6 +67,7 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
+            array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
 
 
         );
