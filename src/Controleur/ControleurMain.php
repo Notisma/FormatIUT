@@ -161,7 +161,6 @@ class ControleurMain
     {
         if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
             $user = ((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
-            var_dump($user);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
                     if (VerificationEmail::aValideEmail($user)) {
