@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : correction">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="rebase : ajout de petites fonctionnalités">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,15 +188,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="8241000" />
-    </task>
-    <task id="LOCAL-00076" summary="Améliorations et corrections visuelles">
-      <option name="closed" value="true" />
-      <created>1697283922013</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1697283922029</updated>
+      <workItem from="1700071240528" duration="8680000" />
     </task>
     <task id="LOCAL-00077" summary="Ajout d'erreurs">
       <option name="closed" value="true" />
@@ -585,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700080056103</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="rebase : ajout de petites fonctionnalités">
+      <option name="closed" value="true" />
+      <created>1700081768099</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1700081768099</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +678,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Encore une correction après merge (il était délicat celui-ci)" />
     <MESSAGE value="Corrections de crashs" />
     <MESSAGE value="correction mesOffres" />
     <MESSAGE value="TODO controleurFrontal.php" />
@@ -706,7 +702,8 @@
     <MESSAGE value="fix : correction de crash rejeter offre" />
     <MESSAGE value="feat : ajout du statut des étudiants pour les offres" />
     <MESSAGE value="rebase : correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="rebase : correction" />
+    <MESSAGE value="rebase : ajout de petites fonctionnalités" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebase : ajout de petites fonctionnalités" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
