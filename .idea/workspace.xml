@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : Avancées 2 : de l'ajout de la vue détails offre ADMIN">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : Avancées 3 : de l'ajout de la vue détails offre ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,15 +190,7 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="2904000" />
-    </task>
-    <task id="LOCAL-00068" summary="Correction bug">
-      <option name="closed" value="true" />
-      <created>1697132252980</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1697132252980</updated>
+      <workItem from="1700071240528" duration="3579000" />
     </task>
     <task id="LOCAL-00069" summary="Correction bug">
       <option name="closed" value="true" />
@@ -585,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700062014387</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="feat : Avancées 3 : de l'ajout de la vue détails offre ADMIN">
+      <option name="closed" value="true" />
+      <created>1700074191717</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1700074191718</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction des nonces et des emails mdp oubliés" />
     <MESSAGE value="Envoi des emails de validation terminé." />
     <MESSAGE value="Modification des messages flash" />
     <MESSAGE value="Correction visuelle" />
@@ -706,7 +704,8 @@
     <MESSAGE value="feat : Début de l'ajout de la vue détails offre ADMIN" />
     <MESSAGE value="feat : Avancées : de l'ajout de la vue détails offre ADMIN" />
     <MESSAGE value="feat : Avancées 2 : de l'ajout de la vue détails offre ADMIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : Avancées 2 : de l'ajout de la vue détails offre ADMIN" />
+    <MESSAGE value="feat : Avancées 3 : de l'ajout de la vue détails offre ADMIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : Avancées 3 : de l'ajout de la vue détails offre ADMIN" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

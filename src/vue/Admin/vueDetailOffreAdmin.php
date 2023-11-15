@@ -32,7 +32,7 @@
             if (!$offre->isEstValide()) {
                 echo "
                 <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre" . $offre->getIdOffre() . "'>ACCEPTER</a>
+            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>ACCEPTER</a>
                 ";
             } else {
                 echo "
@@ -73,9 +73,8 @@
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
                 $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
 
-                if (count($listeEtudiants) == 0) {
+                if (sizeof($listeEtudiants) == 1    ) {
                     echo "<div class='erreur'>";
-                    echo "<h5 class='titre'>Aucun Résultat</h5>";
                     echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
                     echo "<h4 class='titre'>Aucun étudiant candidat n'a été trouvé pour cette offre</h4>";
                     echo "</div>";

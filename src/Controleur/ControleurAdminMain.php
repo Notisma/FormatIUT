@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -77,5 +78,25 @@ class ControleurAdminMain extends ControleurMain
 
 
         return $menu;
+    }
+
+
+    public static function accepterOffre(): void
+    {
+        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        $offre->setEstValide(true);
+        (new OffreRepository())->modifierObjet($offre);
+        header("Location: ?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
+        MessageFlash::ajouter("success", "L'offre a bien été validée");
+    }
+
+
+    public static function rejeterOffre(): void
+    {
+        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        $offre->setEstValide(false);
+        (new OffreRepository())->modifierObjet($offre);
+        header("Location: ?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
+        MessageFlash::ajouter("success", "L'offre a bien été rejetée");
     }
 }
