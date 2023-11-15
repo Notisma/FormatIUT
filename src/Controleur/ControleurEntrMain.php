@@ -14,7 +14,6 @@ use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
 
-
 class ControleurEntrMain extends ControleurMain
 {
     public static function afficherAccueilEntr()

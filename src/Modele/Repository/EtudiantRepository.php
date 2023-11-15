@@ -7,11 +7,12 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 
-class   EtudiantRepository extends AbstractRepository
+class EtudiantRepository extends AbstractRepository
 {
 
     protected function getNomTable(): string
     {
+
         return "Etudiants";
     }
 
