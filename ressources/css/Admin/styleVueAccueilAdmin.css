@@ -108,6 +108,7 @@ body {
 
 .wrapBoutons > *:hover {
     background-color: white;
+    border: 1px solid black;
     color: black;
     cursor: pointer;
 }
@@ -248,7 +249,7 @@ body {
 }
 
 .imageAlerte > img {
-    width: 85%;
+    width: 70%;
     padding: 2%;
     border-radius: 10px;
     background-color: white;
