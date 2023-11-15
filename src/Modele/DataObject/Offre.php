@@ -183,6 +183,8 @@ class Offre extends AbstractDataObject
 
     public function formatTableau(): array
     {
+        $valide=0;
+        if ($this->estValide) $valide=1;
         return ['idOffre' => $this->idOffre,
             'nomOffre' => $this->nomOffre,
             'dateDebut' => date_format($this->dateDebut, 'Y-m-d'),
@@ -195,7 +197,7 @@ class Offre extends AbstractDataObject
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
             'typeOffre' => $this->typeOffre,
-            'estValide' => $this->estValide
+            'estValide' => $valide
         ];
     }
 

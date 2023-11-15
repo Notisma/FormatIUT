@@ -164,6 +164,9 @@ class OffreRepository extends AbstractRepository
         $dateDebut= new \DateTime($offre['dateDebut']);
         $dateFin= new \DateTime($offre['dateFin']);
         //echo $idEntreprise;
+
+        $valide=0;
+        if (isset($offre["estValide"]) && $offre["estValide"]) $valide=1;
         return new Offre(
             $offre['idOffre'],
             $offre['nomOffre'],
@@ -177,7 +180,7 @@ class OffreRepository extends AbstractRepository
             $offre['nbHeuresHebdo'],
             $offre["idEntreprise"],
             $offre['typeOffre'],
-            $offre["estValide"]
+            $valide
         );
     }
 
