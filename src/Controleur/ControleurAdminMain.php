@@ -99,4 +99,11 @@ class ControleurAdminMain extends ControleurMain
         header("Location: ?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
         MessageFlash::ajouter("success", "L'offre a bien été rejetée");
     }
+
+    public static function supprimerOffre() : void {
+        //TODO : FAIRE LES VERIFICATIONS
+        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        (new OffreRepository())->supprimer($offre);
+        self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
+    }
 }
