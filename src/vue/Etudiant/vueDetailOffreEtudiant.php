@@ -10,8 +10,11 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
-            <h2><?php use App\FormatIUT\Modele\Repository\EtudiantRepository;
+            <h2><?php use App\FormatIUT\Controleur\ControleurEtuMain;
+                use App\FormatIUT\Modele\DataObject\Regarder;
+                use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
+                use App\FormatIUT\Modele\Repository\RegarderRepository;
 
                 $nomHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
@@ -205,6 +208,15 @@
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
+                    <?php
+                        $regarder = (new RegarderRepository())->getObjectParClePrimaire();
+                        if($regarder->formatTableau()["cv"] != null){
+                            echo "<p> Vous avez déjà déposé un CV </p>";
+                        }
+                        else{
+                            echo "<p> Vous n'avez pas encore déposé de CV</p>";
+                        }
+                    ?>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf, .txt" size=500/>
                 </div>
@@ -217,6 +229,15 @@
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
+                    <?php
+                        $regarder = (new RegarderRepository())->getObjectParClePrimaire();
+                        if($regarder->formatTableau()["lettre"] != null){
+                            echo "<p> Vous avez déjà déposé une lettre de motivation </p>";
+                        }
+                        else{
+                            echo "<p> Vous n'avez pas encore déposé de lettre de motivation</p>";
+                        }
+                    ?>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
                     <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf, .txt" size=500/>
                 </div>

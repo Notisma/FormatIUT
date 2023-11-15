@@ -49,7 +49,14 @@ abstract class AbstractRepository
 
     public function getObjectParClePrimaire($clePrimaire): ?AbstractDataObject
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $primaire = $this->getClePrimaire();
+        $primaire = trim($primaire, "()");
+        $colonnesClePrimaire = explode(', ', $primaire);
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE ";
+        foreach ($colonnesClePrimaire as $colonne) {
+            $sql .= "$colonne = :$colonne" . "Tag AND ";
+            $values[$colonne . "Tag"] = $objet->formatTableau()[$colonne];
+        }
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
