@@ -124,3 +124,7 @@ body {
     border-bottom-right-radius: 10px;
     background-color: #ff9095;
 }
+
+.wrapDetails {
+    width: 90%;
+}
