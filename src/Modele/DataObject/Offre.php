@@ -34,8 +34,6 @@ class Offre extends AbstractDataObject
     }
 
 
-
-
     public function getIdOffre(): int
     {
         return $this->idOffre;
@@ -156,7 +154,16 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation,bool $estValide)
+    public function getValidite(): bool
+    {
+        if (this->estValide == 0) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret, string $typeFormation, bool $estValide)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -169,8 +176,8 @@ class Offre extends AbstractDataObject
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
-        $this->typeOffre=$typeFormation;
-        $this->estValide=$estValide;
+        $this->typeOffre = $typeFormation;
+        $this->estValide = $estValide;
     }
 
 
@@ -178,8 +185,8 @@ class Offre extends AbstractDataObject
     {
         return ['idOffre' => $this->idOffre,
             'nomOffre' => $this->nomOffre,
-            'dateDebut' => date_format($this->dateDebut,'Y-m-d'),
-            'dateFin' => date_format($this->dateFin,'Y-m-d'),
+            'dateDebut' => date_format($this->dateDebut, 'Y-m-d'),
+            'dateFin' => date_format($this->dateFin, 'Y-m-d'),
             'sujet' => $this->sujet,
             'detailProjet' => $this->detailProjet,
             'gratification' => $this->gratification,
@@ -187,8 +194,8 @@ class Offre extends AbstractDataObject
             'joursParSemaine' => $this->joursParSemaine,
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
-            'typeOffre'=>$this->typeOffre,
-            'estValide'=>$this->estValide
+            'typeOffre' => $this->typeOffre,
+            'estValide' => $this->estValide
         ];
     }
 

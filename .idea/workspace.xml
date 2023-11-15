@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : Début de l'ajout de la vue détails offre ADMIN">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : Avancées : de l'ajout de la vue détails offre ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailOffreAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,14 +191,6 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-    </task>
-    <task id="LOCAL-00066" summary="Améliorations visuelles">
-      <option name="closed" value="true" />
-      <created>1697130478362</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1697130478362</updated>
     </task>
     <task id="LOCAL-00067" summary="Modifications de controleur">
       <option name="closed" value="true" />
@@ -583,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700056497848</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="feat : Avancées : de l'ajout de la vue détails offre ADMIN">
+      <option name="closed" value="true" />
+      <created>1700057468789</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1700057468789</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Beaucoup de corrections." />
     <MESSAGE value="Corrections de crashs (reste à voir pour les nonces)" />
     <MESSAGE value="Correction des nonces et des emails mdp oubliés" />
     <MESSAGE value="Envoi des emails de validation terminé." />
@@ -704,7 +704,8 @@
     <MESSAGE value="feat: ajout image Administrateur" />
     <MESSAGE value="rebase : modification du bandeau" />
     <MESSAGE value="feat : Début de l'ajout de la vue détails offre ADMIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : Début de l'ajout de la vue détails offre ADMIN" />
+    <MESSAGE value="feat : Avancées : de l'ajout de la vue détails offre ADMIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : Avancées : de l'ajout de la vue détails offre ADMIN" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
