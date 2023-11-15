@@ -31,8 +31,12 @@
             <?php
             if (!$offre->isEstValide()) {
                 echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= ".$offre->getIdOffre()."'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre".$offre->getIdOffre()."'>ACCEPTER</a>
+                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>REJETER</a>
+            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre" . $offre->getIdOffre() . "'>ACCEPTER</a>
+                ";
+            } else {
+                echo "
+                <a href='?action=supprimerOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>SUPPRIMER</a>
                 ";
             }
 
@@ -43,8 +47,61 @@
 
 
     <div class="wrapDroite">
-        <p></p>
+        <h3 class="titre">INFORMATIONS</h3>
+
+        <h5 class="titre">Statut de l'offre :</h5>
+
+        <?php
+        if ($offre->isEstValide()) {
+            echo "<div class='statutOffre' id='valide' >";
+            echo "<img src='../ressources/images/success.png' alt='entreprise'>";
+            echo "<h5 class='titre'>Validée</h5>";
+            echo "</div>";
+        } else {
+            echo "<div class='statutOffre' id='attente'>";
+            echo "<img src='../ressources/images/sablier.png' alt='entreprise'>";
+            echo "<h5 class='titre'>En Attente de Validation</h5>";
+            echo "</div>";
+        }
+
+        ?>
+
+
+        <div class="detailsEtudiants">
+            <?php
+            if ($offre->isEstValide()) {
+                echo "<h5 class='titre'>Étudiants Candidats :</h5>";
+                $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
+
+                if (count($listeEtudiants) == 0) {
+                    echo "<div class='erreur'>";
+                    echo "<h5 class='titre'>Aucun Résultat</h5>";
+                    echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
+                    echo "<h4 class='titre'>Aucun étudiant candidat n'a été trouvé pour cette offre</h4>";
+                    echo "</div>";
+                } else {
+                    foreach ($listeEtudiants as $etudiant) {
+                        echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtu() . "'>" .
+                            "<div class='imgEtudiant'>" .
+                            "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
+                            "</div>" .
+                            "<div class='infosEtudiant'>" .
+                            "<h5 class='titre' id='rouge'>" . $etudiant->getPrenom() . " " . $etudiant->getNom() . "</h5>" .
+                            "<p>" . $etudiant->getGroupe() . " - " . $etudiant->getParcours() . "</p>" .
+                            "</div>" .
+                            "</a>";
+                    }
+                }
+            } else {
+                echo "<div class='erreur'>";
+                echo "<h5 class='titre'>Cette offre n'est pas postée. Il ne peut pas y avoir de candidats</h5>";
+                echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
+                echo "<h4 class='titre'>Aucun étudiant candidat</h4>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+
+
     </div>
-
-
 </div>

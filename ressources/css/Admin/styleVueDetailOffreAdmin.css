@@ -113,6 +113,10 @@ body {
     height: 50%;
 }
 
+.wrapDetails {
+    width: 90%;
+}
+
 .wrapDroite {
     float: right;
     width: 40%;
@@ -127,6 +131,106 @@ body {
     background-color: #ff9095;
 }
 
-.wrapDetails {
-    width: 90%;
+.statutOffre {
+    height: 12%;
+    width: 60%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding: 1%;
+    text-align: center;
 }
+
+.statutOffre > img {
+    width: 20%;
+}
+
+#attente {
+    background-color: #ffcf32;
+    color: #814900;
+    border: 2px solid #fa7506;
+}
+
+#valide {
+    background-color: #329438;
+    color: #0d4e00;
+    border: 2px solid #0d4e00;
+}
+
+.detailsEtudiants {
+    width: 90%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    overflow-y: auto;
+}
+
+.etudiantCandidat {
+    width: 90%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 2%;
+}
+
+.etudiantCandidat:hover {
+    cursor: pointer;
+    background-color: #aadcda;
+}
+
+.imgEtudiant {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.imgEtudiant > img {
+    width: 70%;
+}
+
+.infosEtudiant {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+    padding: 2%;
+}
+
+.infosEtudiant > * {
+    margin: 0;
+}
+
+.erreur {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.erreur > img {
+    width: 50%;
+}
+
+
+
