@@ -311,4 +311,8 @@ class ControleurMain
             "entreprises" => $res['entreprises']
         ]);
     }
+
+    public static function afficherSources(){
+        self::afficherVue("Sources","sources.php",self::getMenu());
+    }
 }
