@@ -7,8 +7,6 @@
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Corrections.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/pstage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/pstage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/pstageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/pstageRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\InsertionCSV;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Offre;
@@ -161,17 +162,14 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVueDansCorps("exporter CSV", "Etudiant/vueExportCSV.php", self::getMenu());
     }
 
-    public static function ajouterCSV(): void
-    {
-
+    public static function ajouterCSV(): void {
         $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
         fgetcsv($csvFile);
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
             if (sizeof($ligne) == 82) {
-                $pstage = (new pstageRepository())->construireDepuisTableau($ligne);
-                (new pstageRepository())->callProcedure($pstage);
+                InsertionCSV::insererPstage($ligne);
             }
             else if (sizeof($ligne) == 143){
                 $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
