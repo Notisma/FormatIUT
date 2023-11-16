@@ -1,6 +1,6 @@
 <div class="wrapCentreListEntr">
     <div class="gauche">
-        <p></p>
+        <h2 class="titre">Liste des Entreprises :</h2>
     </div>
 
     <div class="droite">

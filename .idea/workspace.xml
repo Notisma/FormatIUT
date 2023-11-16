@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="Merge OK">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout de fichiers pour liste entreprises ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,14 +198,6 @@
       <workItem from="1700124131080" duration="1309000" />
       <workItem from="1700133240936" duration="4140000" />
       <workItem from="1700140639367" duration="1829000" />
-    </task>
-    <task id="LOCAL-00087" summary="Beaucoup de corrections.">
-      <option name="closed" value="true" />
-      <created>1699122043928</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1699122043928</updated>
     </task>
     <task id="LOCAL-00088" summary="Corrections">
       <option name="closed" value="true" />
@@ -587,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700145233186</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="feat : ajout de fichiers pour liste entreprises ADMIN">
+      <option name="closed" value="true" />
+      <created>1700148234438</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1700148234438</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +675,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix- correction de bugs git 1/2" />
     <MESSAGE value="feat: ajout image Administrateur" />
     <MESSAGE value="rebase : modification du bandeau" />
     <MESSAGE value="feat : Début de l'ajout de la vue détails offre ADMIN" />
@@ -696,7 +699,8 @@
     <MESSAGE value="feat : début liste étudiants ADMIN" />
     <MESSAGE value="feat : avancée liste étudiants ADMIN" />
     <MESSAGE value="Merge OK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge OK" />
+    <MESSAGE value="feat : ajout de fichiers pour liste entreprises ADMIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout de fichiers pour liste entreprises ADMIN" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
