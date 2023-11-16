@@ -154,6 +154,7 @@ abstract class AbstractRepository
         SELECT *
         FROM Offre
         WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
+           OR LOWER(nomOffre) LIKE LOWER(:rechercheTag)
             OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
             OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)
         ;";
