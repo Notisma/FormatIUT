@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout de fichiers pour liste entreprises ADMIN">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="fix : corrections de crash chez les Admins">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueDetailEtudiant.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Entreprise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,14 +195,6 @@
       <workItem from="1700124131080" duration="1309000" />
       <workItem from="1700133240936" duration="4140000" />
       <workItem from="1700140639367" duration="1829000" />
-    </task>
-    <task id="LOCAL-00088" summary="Corrections">
-      <option name="closed" value="true" />
-      <created>1699122636870</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1699122636870</updated>
     </task>
     <task id="LOCAL-00089" summary="Modifications">
       <option name="closed" value="true" />
@@ -591,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700148234438</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="fix : corrections de crash chez les Admins">
+      <option name="closed" value="true" />
+      <created>1700150902357</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1700150902357</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +672,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: ajout image Administrateur" />
     <MESSAGE value="rebase : modification du bandeau" />
     <MESSAGE value="feat : Début de l'ajout de la vue détails offre ADMIN" />
     <MESSAGE value="feat : Avancées : de l'ajout de la vue détails offre ADMIN" />
@@ -700,7 +696,8 @@
     <MESSAGE value="feat : avancée liste étudiants ADMIN" />
     <MESSAGE value="Merge OK" />
     <MESSAGE value="feat : ajout de fichiers pour liste entreprises ADMIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout de fichiers pour liste entreprises ADMIN" />
+    <MESSAGE value="fix : corrections de crash chez les Admins" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : corrections de crash chez les Admins" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

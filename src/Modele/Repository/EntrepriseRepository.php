@@ -23,6 +23,10 @@ class EntrepriseRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
+        $valide=0;
+        if (isset($entrepriseFormatTableau["estValide"])&& $entrepriseFormatTableau["estValide"]){
+            $valide=1;
+        }
         return new Entreprise($entrepriseFormatTableau['numSiret'],
             $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
@@ -36,7 +40,7 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["email"],
             $entrepriseFormatTableau["emailAValider"],
             $entrepriseFormatTableau["nonce"],
-            $entrepriseFormatTableau["estValide"]
+            $valide
         );
     }
 

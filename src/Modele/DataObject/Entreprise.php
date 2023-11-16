@@ -148,6 +148,8 @@ class Entreprise extends AbstractDataObject
 
     public function formatTableau(): array
     {
+        $valide=0;
+        if ($this->estValide) $valide=1;
         return ['numSiret' => $this->siret,
             'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique,
@@ -161,7 +163,7 @@ class Entreprise extends AbstractDataObject
             "email"=>$this->email,
             "emailAValider"=>$this->emailAValider,
             "nonce"=>$this->nonce,
-            "estValide"=>$this->estValide
+            "estValide"=>$valide
         ];
     }
 
