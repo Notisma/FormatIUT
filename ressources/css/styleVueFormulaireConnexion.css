@@ -274,7 +274,7 @@ input {
     border: 1px solid #000000;
 }
 
-.popupOublié {
+#popupMdp {
     display: none;
     flex-direction: row;
     justify-content: center;
