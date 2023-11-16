@@ -32,6 +32,10 @@ class Offre extends AbstractDataObject
     {
         $this->estValide = $estValide;
     }
+    private int $anneeMin;
+
+    private int $anneeMax;
+
 
 
     public function getIdOffre(): int
@@ -154,8 +158,40 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
+    /**
+     * @return int
+     */
+    public function getAnneeMin(): int
+    {
+        return $this->anneeMin;
+    }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret, string $typeFormation, bool $estValide)
+    /**
+     * @param int $anneeMin
+     */
+    public function setAnneeMin(int $anneeMin): void
+    {
+        $this->anneeMin = $anneeMin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeMax(): int
+    {
+        return $this->anneeMax;
+    }
+
+    /**
+     * @param int $anneeMax
+     */
+    public function setAnneeMax(int $anneeMax): void
+    {
+        $this->anneeMax = $anneeMax;
+    }
+
+
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation, int $anneeMin, int $anneeMax)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -168,7 +204,9 @@ class Offre extends AbstractDataObject
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
-        $this->typeOffre = $typeFormation;
+        $this->typeOffre=$typeFormation;
+        $this->anneeMin=$anneeMin;
+        $this->anneeMax=$anneeMax;
         $this->estValide = $estValide;
     }
 
@@ -188,9 +226,10 @@ class Offre extends AbstractDataObject
             'joursParSemaine' => $this->joursParSemaine,
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
-            'typeOffre' => $this->typeOffre,
-            'estValide' => $valide
-        ];
+            'typeOffre'=>$this->typeOffre,
+            'anneeMin'=>$this->anneeMin,
+            'anneeMax'=>$this->anneeMax,
+            'estValide' => $valide];
     }
 
 }

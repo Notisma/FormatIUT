@@ -12,7 +12,7 @@ class OffreRepository extends AbstractRepository
 
 
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre","estValide"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre", "anneeMin", "anneeMax", "estValide"];
     }
 
     public function getNomTable():string{
@@ -180,6 +180,8 @@ class OffreRepository extends AbstractRepository
             $offre['nbHeuresHebdo'],
             $offre["idEntreprise"],
             $offre['typeOffre'],
+            $offre['anneeMin'],
+            $offre['anneeMax'],
             $valide
         );
     }

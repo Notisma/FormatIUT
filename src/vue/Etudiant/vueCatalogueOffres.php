@@ -9,7 +9,8 @@
                 <input type="hidden" name="action" value="afficherCatalogue">
 
                 <input type="submit" name="type" value="Tous" class="offre"
-                    <?php use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+                    <?php use App\FormatIUT\Controleur\ControleurEtuMain;
+                    use App\FormatIUT\Modele\Repository\EntrepriseRepository;
                     use App\FormatIUT\Modele\Repository\EtudiantRepository;
                     use App\FormatIUT\Modele\Repository\FormationRepository;
 
@@ -41,31 +42,34 @@
             <?php
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
-                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                    echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
-                        <div class='partieGauche'>
-                        <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
-                        <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>
-                        <p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
+                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
+                            <div class='partieGauche'>
+                            <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
+                            <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>
+                            <p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
+                            </div>
+                            <div class='partieDroite'>
+                            <div class='divInfo'>
+                            <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                            </div>
+                            <div class='divInfo'>
+                            <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
+                            <p>";
+                        if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                            $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
+                            echo $nb . " postulation";
+                            if ($nb > 1) echo "s";
+                        } else {
+                            echo "Assignée";
+                        }
+                        echo "</p>
                         </div>
-                        <div class='partieDroite'>
-                        <div class='divInfo'>
-                        <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
                         </div>
-                        <div class='divInfo'>
-                        <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
-                        <p>";
-                    if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                        $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
-                        echo $nb . " postulation";
-                        if ($nb > 1) echo "s";
-                    } else {
-                        echo "Assignée";
+                        </a>";
                     }
-                    echo "</p>
-                    </div>
-                    </div>
-                    </a>";
                 }
             } else {
                 echo "<p>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</p>";
