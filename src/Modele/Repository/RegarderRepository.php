@@ -85,4 +85,24 @@ class RegarderRepository extends AbstractRepository {
         );
         $pdoStatement->execute($values);
     }
+    public function recupererCV($numEtudiant, $idOffre){
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "etudiantTag"=>$numEtudiant,
+            "offreTag"=>$idOffre
+        );
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()["cv"];
+    }
+    public function recupererLettre($numEtudiant, $idOffre){
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array(
+            "etudiantTag"=>$numEtudiant,
+            "offreTag"=>$idOffre
+        );
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()["lettre"];
+    }
 }

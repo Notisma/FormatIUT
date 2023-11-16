@@ -261,5 +261,20 @@ class ControleurEntrMain extends ControleurMain
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
         self::afficherProfilEntr();
     }
+    public static function telechargerCV(): void{
+        $cv = (new RegarderRepository())->recupererCV($_REQUEST['etudiant'],$_REQUEST['idOffre']);
+        $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename=CV de '. $etu->getPrenomEtudiant().' '.$etu->getNomEtudiant().'.pdf');
+        echo $cv;
+    }
+
+    public static function telechargerLettre(): void{
+        $lettre = (new RegarderRepository())->recupererLettre($_REQUEST['etudiant'],$_REQUEST['idOffre']);
+        $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename=Lettre de motivation de '. $etu->getPrenomEtudiant().' '.$etu->getNomEtudiant().'.pdf');
+        echo $lettre;
+    }
 
 }
