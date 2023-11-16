@@ -12,7 +12,7 @@
                                <img src='data:image/jpeg;base64," . base64_encode($etudiant['etudiant']->getImg()) . "' alt='etudiant'>
                             </div>
                             <div class='etudiantDroite'>
-                                <h3 class='titre'>" . $etudiant['etudiant']->getPrenomEtudiant() . " " . $etudiant['etudiant']->getNomEtudiant() . " - ". $etudiant['etudiant']->getGroupe() . " - " . $etudiant['etudiant']->getParcours() ."</h3>
+                                <h3 class='titre'>" . $etudiant['etudiant']->getPrenomEtudiant() . " " . $etudiant['etudiant']->getNomEtudiant() . " - "; if ($etudiant['etudiant']->getGroupe() != ""){echo $etudiant['etudiant']->getGroupe()  . " - " . $etudiant['etudiant']->getParcours(); } else {echo "Des informations sont manquantes";} echo "</h3>
                                 ";
                             if ($etudiant["aUneFormation"]) {
                                 echo "<div id='valide' class='statutEtu'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
@@ -31,6 +31,10 @@
     </div>
 
     <div class="droite">
+        <img src="../ressources/images/adminRemove.png" alt="admin">
+        <h3 class="titre" id="rouge">Gestion des Étudiants de la Base de Données</h3>
+        <h4 class="titre">Consultez le statut de chaque étudiant en un coup d'oeil</h4>
+        <p>Cliquez sur un étudiant pour voir ses détails</p>
     </div>
 
 
