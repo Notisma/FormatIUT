@@ -254,4 +254,12 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function getAnneeEtudiant(Etudiant $etudiant): int{
+        return match (substr($etudiant->getGroupe(), 0, 1)) {
+            "Q" => 2,
+            "G" => 3,
+            default => 2,
+        };
+    }
+
 }

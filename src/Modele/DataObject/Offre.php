@@ -21,6 +21,10 @@ class Offre extends AbstractDataObject
     private string $typeOffre;
     private float $siret;
 
+    private int $anneeMin;
+
+    private int $anneeMax;
+
 
 
     public function getIdOffre(): int
@@ -143,7 +147,40 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation)
+    /**
+     * @return int
+     */
+    public function getAnneeMin(): int
+    {
+        return $this->anneeMin;
+    }
+
+    /**
+     * @param int $anneeMin
+     */
+    public function setAnneeMin(int $anneeMin): void
+    {
+        $this->anneeMin = $anneeMin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeMax(): int
+    {
+        return $this->anneeMax;
+    }
+
+    /**
+     * @param int $anneeMax
+     */
+    public function setAnneeMax(int $anneeMax): void
+    {
+        $this->anneeMax = $anneeMax;
+    }
+
+
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation, int $anneeMin, int $anneeMax)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -157,6 +194,8 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
         $this->typeOffre=$typeFormation;
+        $this->anneeMin=$anneeMin;
+        $this->anneeMax=$anneeMax;
     }
 
 
@@ -173,7 +212,9 @@ class Offre extends AbstractDataObject
             'joursParSemaine' => $this->joursParSemaine,
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
-            'typeOffre'=>$this->typeOffre];
+            'typeOffre'=>$this->typeOffre,
+            'anneeMin'=>$this->anneeMin,
+            'anneeMax'=>$this->anneeMax];
     }
 
 }
