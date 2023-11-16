@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use PDO;
 
@@ -150,17 +152,22 @@ abstract class AbstractRepository
             'offres' => array(),
             'entreprises' => array(),
         ];
-        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-
+        if (Configuration::controleurIs("EtuMain")) {
+            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+        }
         $sql = "
         SELECT *
         FROM Offre
         WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
             OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
-            OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)
-            AND  $anneeEtu >= anneeMin
-            AND  $anneeEtu <= anneeMax
-        ;";
+            OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)";
+
+        if(Configuration::controleurIs("EtuMain")){
+            $sql .= "AND  $anneeEtu >= anneeMin
+                    AND  $anneeEtu <= anneeMax";
+        }
+
+        $sql.=";";
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
         foreach ($pdoStatement as $row)

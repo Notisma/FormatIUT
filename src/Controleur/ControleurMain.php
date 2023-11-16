@@ -53,35 +53,62 @@ class ControleurMain
 
     public static function afficherVueDetailOffre(string $idOffre = null): void
     {
-        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-        if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            self::$pageActuelle="Détails de l'offre";
-            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-            $liste = (new OffreRepository())->getListeIdOffres();
-            if ($idOffre || isset($_REQUEST["idOffre"])) {
-                if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
-                if (in_array($idOffre, $liste)) {
-                    $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+        if(Configuration::controleurIs("EtuMain")){
+            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+            if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+                self::$pageActuelle = "Détails de l'offre";
+                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                $liste = (new OffreRepository())->getListeIdOffres();
+                if ($idOffre || isset($_REQUEST["idOffre"])) {
+                    if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
+                    if (in_array($idOffre, $liste)) {
+                        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
 
-                    if (Configuration::controleurIs("EntrMain"))
-                        $client = "Entreprise";
-                    else if (Configuration::controleurIs("EtuMain"))
-                        $client = "Etudiant";
-                    else if (Configuration::controleurIs("AdminMain"))
-                        $client = "Admin";
-                    $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                        if (Configuration::controleurIs("EntrMain"))
+                            $client = "Entreprise";
+                        else if (Configuration::controleurIs("EtuMain"))
+                            $client = "Etudiant";
+                        else if (Configuration::controleurIs("AdminMain"))
+                            $client = "Admin";
+                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                        self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    } else {
+                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    }
                 } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
                 }
-            } else {
-                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
             }
-        }   
+            else{
+                self::afficherErreur("Vous n'avez pas le droit de voir cette offre");
+            }
+        }
         else{
-            self::afficherErreur("Vous n'avez pas le droit de voir cette offre");
+            self::$pageActuelle = "Détails de l'offre";
+                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                $liste = (new OffreRepository())->getListeIdOffres();
+                if ($idOffre || isset($_REQUEST["idOffre"])) {
+                    if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
+                    if (in_array($idOffre, $liste)) {
+                        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+
+                        if (Configuration::controleurIs("EntrMain"))
+                            $client = "Entreprise";
+                        else if (Configuration::controleurIs("EtuMain"))
+                            $client = "Etudiant";
+                        else if (Configuration::controleurIs("AdminMain"))
+                            $client = "Admin";
+                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                        self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    } else {
+                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    }
+                } else {
+                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                }
         }
     }
 
