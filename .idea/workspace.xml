@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout des détails Etudiants ADMIN">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout des détails Entreprise ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,15 +193,9 @@
       <workItem from="1699943204314" duration="2244000" />
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
-      <workItem from="1700071240528" duration="20313000" />
-    </task>
-    <task id="LOCAL-00083" summary="Nombreuses Corrections">
-      <option name="closed" value="true" />
-      <created>1697439901215</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1697439901215</updated>
+      <workItem from="1700071240528" duration="20524000" />
+      <workItem from="1700124131080" duration="1309000" />
+      <workItem from="1700133240936" duration="3876000" />
     </task>
     <task id="LOCAL-00084" summary="Vue mes offres fin">
       <option name="closed" value="true" />
@@ -587,7 +581,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700090735621</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="feat : ajout des détails Entreprise ADMIN">
+      <option name="closed" value="true" />
+      <created>1700094745252</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1700094745252</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,26 +666,13 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/Connexion_Prof" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat - Avancées sur accueil ADMIN 3" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 4" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 5" />
     <MESSAGE value="Feat - Ajout de fonctionnalités" />
@@ -708,7 +697,8 @@
     <MESSAGE value="feat : avancée vue detail (encore) etu ADMINS" />
     <MESSAGE value="feat : ajout de fonction supprimerEtudiant()" />
     <MESSAGE value="feat : ajout des détails Etudiants ADMIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout des détails Etudiants ADMIN" />
+    <MESSAGE value="feat : ajout des détails Entreprise ADMIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout des détails Entreprise ADMIN" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -255,14 +255,15 @@ class   EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    public function etudiantsCandidats($idOffre){
-        $sql="SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$idOffre);
+    public function etudiantsCandidats($idOffre)
+    {
+        $sql = "SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
-        $listeEtudiants=array();
+        $listeEtudiants = array();
         foreach ($pdoStatement as $item) {
-            $listeEtudiants[]=$this->getObjectParClePrimaire($item["numEtudiant"]);
+            $listeEtudiants[] = $this->getObjectParClePrimaire($item["numEtudiant"]);
         }
         return $listeEtudiants;
     }

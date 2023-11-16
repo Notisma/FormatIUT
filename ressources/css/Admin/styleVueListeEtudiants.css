@@ -1,63 +1,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
+body {
+    height: 100vh;
+}
+
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
+    margin: 0;
+}
+
+#rouge {
+    color: #ff5660;
+}
+
 #center {
     position: absolute;
-    top: 70%;
+    top: 56%;
     left: 54%;
     transform: translate(-50%, -50%);
     margin: auto;
-    width: 92%;
-    height: 110vh;
-    min-width: 300px;
-    text-align: left;
-    line-height: 2em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-    grid-auto-columns: 1fr;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-}
-
-.offresEtu {
-    grid-column: 1/4;
-    grid-row: 2/5;
-    float: left;
-    display: flex;
+    width: 80%;
+    height: 80%;
+    display:flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     align-content: center;
     border-radius: 10px;
-    width: 93%;
-    height: 90%;
-    margin: 0;
-    background-color: #ff9095;
-    padding: 5px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
 }
 
-.contenuOffresEtu {
+.gauche {
+    float: left;
+    width: 60%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: white;
+    padding: 1%;
+}
+
+.wrapEtudiants {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    width: 100%;
-    height: 95%;
-    margin-top: 3%;
-    margin-bottom: 2%;
-    overflow-y: scroll;
+    align-items: center;
+    align-content: center;
+    overflow-y: auto;
 }
 
-.contenuOffresEtu::-webkit-scrollbar {
+.wrapEtudiants::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #ffd0d4;
     width: 10px;
-    border-radius: 10px;
-    background-color: #ffbfc2;
 }
 
-.contenuOffresEtu::-webkit-scrollbar-thumb {
-    background-color: #ff5660;
+.wrapEtudiants::-webkit-scrollbar-thumb {
     border-radius: 10px;
+    background-color: #ff5660;
+}
+
+
+.etudiant {
+    width: 96%;
+    height: 20%;
+    border-radius: 10px;
+    background-color: #ff9095;
+    margin-bottom: 1%;
+    text-decoration: none;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.etudiant:hover {
+    background-color: #ffbcbf;
+    cursor: pointer;
+}
+
+.etudiantGauche {
+    height: 100%;
+    width: 17%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.etudiantGauche > img {
+    width: 80%;
+}
+
+.etudiantDroite {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.etudiantDroite > p {
+    color: black;
+}
+
+
+
+.droite {
+    float: right;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #aadcda;
 }

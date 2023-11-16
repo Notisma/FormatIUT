@@ -135,7 +135,7 @@ class ControleurAdminMain extends ControleurMain
         //TODO : rajouter des éléments
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-            if (is_null($entreprise)) {
+            if (!is_null($entreprise)) {
                 if (!$entreprise->isEstValide()) {
                     (new EntrepriseRepository())->supprimer($entreprise->getSiret());
                     MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
@@ -151,7 +151,7 @@ class ControleurAdminMain extends ControleurMain
         //TODO : rajouter des vérifications
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-            if (is_null($entreprise)) {
+            if (!is_null($entreprise)) {
                 if (!$entreprise->isEstValide()) {
                     $entreprise->setEstValide(true);
                     (new EntrepriseRepository())->modifierObjet($entreprise);
@@ -176,6 +176,5 @@ class ControleurAdminMain extends ControleurMain
             MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
         }
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
-
     }
 }
