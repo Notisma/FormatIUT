@@ -4,6 +4,7 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -12,7 +13,6 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
-
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -254,4 +254,17 @@ class ControleurEntrMain extends ControleurMain
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
+
+    public static function afficherFormulaireModification(): void
+    {
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+    }
+
+    public static function mettreAJour(): void
+    {
+        (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
+        self::afficherProfilEntr();
+    }
+
 }
