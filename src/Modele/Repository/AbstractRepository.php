@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use PDO;
 
@@ -48,13 +49,14 @@ abstract class AbstractRepository
      * si l'objet n'existe pas, renvoie null
      */
 
-    public function getObjectParClePrimaire($clePrimaire):?AbstractDataObject{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$clePrimaire);
+    public function getObjectParClePrimaire($clePrimaire): ?AbstractDataObject
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
-        $objet=$pdoStatement->fetch();
-        if (!$objet){
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
             return null;
         }
         return $this->construireDepuisTableau($objet);
@@ -142,7 +144,7 @@ abstract class AbstractRepository
 
     //-------------AUTRES------------
 
-    public static function getResultatRechercheTrie($recherche): array
+    public static function getResultatRechercheTrie($motsclefs): ?array
     {
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $res = [
@@ -150,42 +152,57 @@ abstract class AbstractRepository
             'entreprises' => array(),
         ];
 
-        $sql = "
-        SELECT *
-        FROM Offre
-        WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
-           OR LOWER(nomOffre) LIKE LOWER(:rechercheTag)
-            OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
-            OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)
-        ;";
-        $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        $sql = "";
+        $tags = [];
+        foreach ($motsclefs as $mot) {
+            $sql .= "
+            SELECT *
+            FROM Offre
+            WHERE LOWER(sujet) LIKE LOWER(:tag$mot)
+                OR LOWER(nomOffre) LIKE LOWER(:tag$mot)
+                OR LOWER(typeOffre) LIKE LOWER(:tag$mot)
+                OR LOWER(detailProjet) LIKE LOWER(:tag$mot)
+            INTERSECT";
+            $tags["tag$mot"] = "%$mot%";
+        }
+
+        $sql = substr($sql, 0, -9);
+
+        try {
+            $pdoStatement = $pdo->prepare($sql);
+            $pdoStatement->execute($tags);
+        } catch (\PDOException) {
+            return null;
+        }
+
         foreach ($pdoStatement as $row)
             $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
 
-        $sql = "
+        /*$sql = "
         SELECT *
         FROM Entreprise
         WHERE LOWER(nomEntreprise) LIKE LOWER(:rechercheTag)
         ;";
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        $pdoStatement->execute(['rechercheTag' => "%$motsclefs%"]);
         foreach ($pdoStatement as $row)
             $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
-
+*/
         return $res;
     }
+
     /***
      * @param $clePrimaire
      * @return true si l'objet existe dans la base de donnée, false sinon
      */
-    public function estExistant($clePrimaire):bool{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$clePrimaire);
+    public function estExistant($clePrimaire): bool
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
-        $objet=$pdoStatement->fetch();
-        if (!$objet){
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
             return false;
         }
         return true;

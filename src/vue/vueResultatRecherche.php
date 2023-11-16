@@ -9,12 +9,15 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
     <h2>La recherche est : <?= $recherche ?></h2>
 
     <?php
-    if (!empty($offres)) {
-        echo "<p>Offres trouvées :</p>
+    if (empty($offres) && empty($entreprise))
+        echo "<h3>Aucun résultat trouvé. Essayez des mots-clefs plus généraux ?</h3>";
+    else {
+        if (!empty($offres)) {
+            echo "<h3>Offres trouvées :</h3>
             <ul>";
-        foreach ($offres as $offre) {
-            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-            echo "<li><a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
+            foreach ($offres as $offre) {
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                echo "<li><a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
                     <div class='partieGauche'>
                         <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
                         <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>
@@ -27,26 +30,26 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
                         <div class='divInfo'>
                             <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
                             <p>";
-            if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
-                echo $nb . " postulation";
-                if ($nb > 1) echo "s";
-            } else {
-                echo "Assignée";
-            }
-            echo "</p>
+                if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                    $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
+                    echo $nb . " postulation";
+                    if ($nb > 1) echo "s";
+                } else {
+                    echo "Assignée";
+                }
+                echo "</p>
                         </div>
                     </div>
                 </a></li>";
+            }
+            echo "</ul>";
         }
-        echo "</ul>";
-    }
 
-    if (!empty($entreprises)) {
-        echo "<p>Entreprises trouvées :</p>
+        if (!empty($entreprises)) {
+            echo "<h3>Entreprises trouvées :</h3>
             <ul>";
-        foreach ($entreprises as $entr) {
-            echo '<li>
+            foreach ($entreprises as $entr) {
+                echo '<li>
                     <div class="infosSurEntreprise">
                         <div class="left">
                             <img src = "data:image/jpeg;base64,' . base64_encode($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
@@ -58,8 +61,9 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
                         </div>
                     </div>
                 </li>';
+            }
+            echo "</ul>";
         }
-        echo "</ul>";
     }
     ?>
 </div>

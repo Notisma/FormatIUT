@@ -51,10 +51,12 @@ use App\FormatIUT\Configuration\Configuration;
                         $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                         $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                     }
-                    echo "<form action='?controleur=" . Configuration::getControleur() . "&action=rechercher' method='post'>
-                <input class='searchField' name='recherche' placeholder='Rechercher...' required";
-                    if (isset($recherche)) echo " value=\"$recherche\"";
+                    echo "<form action='?' method='get'>
+                    <input class='searchField' name='recherche' placeholder='Rechercher...' required";
+                    if (isset($recherche)) echo " value='" . htmlspecialchars($recherche) . "'";
                     echo ">
+                    <input type='hidden' name='controleur' value='" . Configuration::getControleur() . "'>
+                    <input type='hidden' name='action' value='rechercher'>                    
                 </form>";
                 }
 
