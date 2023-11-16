@@ -74,7 +74,6 @@ class ControleurEntrMain extends ControleurMain
 
     public static function assignerEtudiantOffre(): void
     {
-        //TODO vérifs que l'offre et l'étudiant existent
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
             $idOffre = $_REQUEST["idOffre"];
             $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
@@ -114,7 +113,6 @@ class ControleurEntrMain extends ControleurMain
     public static function updateImage(): void
     {
         $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
-        //TODO vérif de doublons d'image
         $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
@@ -140,10 +138,8 @@ class ControleurEntrMain extends ControleurMain
     // ---- CRUD de l'offre ----
     public static function creerOffre(): void
     {
-        //TODO faire toutes les vérif liés à la BD, se référencier aux td de web
         if (isset($_REQUEST['nomOffre'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             //if (strtotime($_REQUEST["dateDebut"]) > strtotime($_REQUEST["dateFin"])){
-            //TODO vérif que début après aujourd'hui
             if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
                 if ($_REQUEST["joursParSemaine"] < 8) {
                     if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
@@ -182,7 +178,6 @@ class ControleurEntrMain extends ControleurMain
 
     public static function supprimerOffre(): void
     {
-        //TODO vérifs
         if (isset($_REQUEST["idOffre"])) {
             $listeOffre = ((new OffreRepository())->getListeIdOffres());
             if (in_array($_REQUEST["idOffre"], $listeOffre)) {

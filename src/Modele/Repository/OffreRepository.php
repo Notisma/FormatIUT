@@ -12,7 +12,7 @@ class OffreRepository extends AbstractRepository
 
 
     public function getNomsColonnes() : array{
-        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre"];
+        return ["idOffre","nomOffre","dateDebut","dateFin","sujet","detailProjet","gratification","dureeHeures","joursParSemaine","nbHeuresHebdo","idEntreprise","typeOffre","estValide"];
     }
 
     public function getNomTable():string{
@@ -164,7 +164,24 @@ class OffreRepository extends AbstractRepository
         $dateDebut= new \DateTime($offre['dateDebut']);
         $dateFin= new \DateTime($offre['dateFin']);
         //echo $idEntreprise;
-        return new Offre($offre['idOffre'], $offre['nomOffre'], $dateDebut, $dateFin, $offre['sujet'], $offre['detailProjet'], $offre['gratification'], $offre['dureeHeures'], $offre['joursParSemaine'], $offre['nbHeuresHebdo'],$offre["idEntreprise"],$offre['typeOffre']);
+
+        $valide=0;
+        if (isset($offre["estValide"]) && $offre["estValide"]) $valide=1;
+        return new Offre(
+            $offre['idOffre'],
+            $offre['nomOffre'],
+            $dateDebut,
+            $dateFin,
+            $offre['sujet'],
+            $offre['detailProjet'],
+            $offre['gratification'],
+            $offre['dureeHeures'],
+            $offre['joursParSemaine'],
+            $offre['nbHeuresHebdo'],
+            $offre["idEntreprise"],
+            $offre['typeOffre'],
+            $valide
+        );
     }
 
     protected function getClePrimaire(): string
@@ -183,6 +200,44 @@ class OffreRepository extends AbstractRepository
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values=array("TagEtu"=>$numEtudiant,"TagOffre"=>$idOffre);
         $pdoStatement->execute($values);
+    }
+
+    public function offresNonValides()
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estValide=0";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
+    }
+
+
+    public function offresPourEtudiant($numEtudiant)
+    {
+        //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
+        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN regarder r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $numEtudiant);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
+    }
+
+    public function offresPourEntreprise($idEntreprise)
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idEntreprise=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[]=$this->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
     }
 
 

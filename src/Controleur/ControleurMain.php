@@ -19,6 +19,15 @@ use App\FormatIUT\Modele\Repository\OffreRepository;
 
 class ControleurMain
 {
+    private static string $pageActuelle = "Accueil";
+
+    /**
+     * @return string
+     */
+    public static function getPageActuelle(): string
+    {
+        return self::$pageActuelle;
+    }
 
     /***
      * Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
@@ -42,6 +51,7 @@ class ControleurMain
 
     public static function afficherVueDetailOffre(string $idOffre = null): void
     {
+        self::$pageActuelle="Détails de l'offre";
         $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
         $liste = (new OffreRepository())->getListeIdOffres();
         if ($idOffre || isset($_REQUEST["idOffre"])) {
@@ -52,11 +62,12 @@ class ControleurMain
 
                 if (Configuration::controleurIs("EntrMain"))
                     $client = "Entreprise";
-                else
+                else if (Configuration::controleurIs("EtuMain"))
                     $client = "Etudiant";
-
+                else if (Configuration::controleurIs("AdminMain"))
+                    $client = "Admin";
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
                 self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
             }
@@ -83,11 +94,13 @@ class ControleurMain
 
     public static function getMenu(): array
     {
-        return array(
+        $value= array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
+
+        return $value;
     }
 
     /***
@@ -173,7 +186,9 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                if (ConnexionUtilisateur::premiereConnexion($_REQUEST["login"])) {
+                if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
+                } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
@@ -181,6 +196,13 @@ class ControleurMain
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
                 }
                 exit();
+            } else if ($_REQUEST["login"] == "ProfTest") {
+                if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                    MessageFlash::ajouter("success", "Connexion Réussie");
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                    exit();
+                }
             }
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");

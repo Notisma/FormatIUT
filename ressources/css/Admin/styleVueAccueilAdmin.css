@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 100vh;
+}
+
+.adminMain {
+    position: absolute;
+    top: 56%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 92%;
+    height: 86%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+}
+
+#rouge {
+    color: #ff5660;
+}
+
+.wrapBonjour {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 10px;
+    background-color: #aadcda;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 98%;
+    width: 98%;
+}
+
+.texteBonjour {
+    height: 95%;
+    width: 60%;
+}
+
+.imageBonjour {
+    height: 95%;
+    width: 40%;
+}
+
+.imageBonjour > img {
+    width: 90%;
+}
+
+.wrapEntrCount {
+    grid-column: 4 / 6;
+    grid-row: 1 ;
+    border-radius: 10px;
+    background-color: #ff9095;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 98%;
+    width: 98%;
+}
+
+.wrapEntrCount > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 40%;
+    width: 95%;
+}
+
+#boutonsGO {
+    padding: 2%;
+    width: 40%;
+}
+
+.wrapBoutons > * {
+    background-color: #ff5660;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.5s;
+}
+
+.wrapBoutons > *:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+#boutonsGO > * {
+    width: 90%;
+}
+
+.wrapEtuCount {
+    grid-column: 6 / 8;
+    grid-row: 1 ;
+    border-radius: 10px;
+    background-color: #ff9095;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 98%;
+    width: 98%;
+}
+
+.wrapEtuCount > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 40%;
+    width: 95%;
+}
+
+.wrapEntrCount > div > img{
+    width: 10%;
+}
+
+.wrapEtuCount > div > img {
+    width: 10%;
+}
+
+.wrapAdminEntr {
+    grid-column: 1 / 5;
+    grid-row: 2 / 6;
+    border-radius: 10px;
+    background-color: #ff9095;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 98%;
+    width: 98%;
+    padding-bottom: 2%;
+}
+
+.wrapAdminEntr > .wrapBoutons {
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapAdminEntr > .wrapBoutons > a {
+    width : 40%;
+    height: 100%;
+}
+
+.wrapAdminEtu > .wrapBoutons {
+    width: 95%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapAdminEtu > .wrapBoutons > a {
+    width : 40%;
+    height: 100%;
+}
+
+.wrapAlertes {
+    width: 95%;
+    height: 75%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1%;
+}
+
+.wrapAlertes::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.wrapAlertes::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.alerteEntr {
+    width: 95%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1%;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.alerteEntr:hover {
+    background-color: #aadcda;
+    cursor: pointer;
+}
+
+.alerteEntr > .imageAlerte {
+    width: 20%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.imageAlerte > img {
+    width: 70%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.contenuAlerte {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.contenuAlerte > h3 {
+    margin: 0;
+}
+
+.contenuAlerte > p {
+    line-height: 0.8em;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    color: black;
+}
+
+.sujetAlerte {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.sujetAlerte > img {
+    height: 100%;
+}
+
+.sujetAlerte > p {
+    text-align: left;
+    color: red;
+    margin: 0;
+}
+
+.wrapAdminEtu {
+    grid-column: 5 / 8;
+    grid-row: 2 / 6;
+    border-radius: 10px;
+    background-color: #aadcda;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 98%;
+    width: 98%;
+    padding-bottom: 2%;
+}
+
+
+#hoverRose:hover {
+    background-color: #ff9095;
+}
+
+
+
+
+
+

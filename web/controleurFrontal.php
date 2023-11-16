@@ -28,12 +28,14 @@ $nonConnecte=false;
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        //TODO les ifs ne fonctionnent pas
-        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Entreprise") {
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+           $nonConnecte=true;
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
             $nonConnecte=true;
-        } else if ($controleur == "EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() != "Etudiants" && !\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
             $nonConnecte=true;
-        } else {
+        }
+        else {
             $nomClasseControleur::$action();
         }
         if ($nonConnecte){

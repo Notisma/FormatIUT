@@ -1,5 +1,3 @@
-<!-- TODO srcipt pour erreur HTML -->
-<script src="../ressources/javaScript/mesFonctions.js"></script>
 
 <div id="center">
 

@@ -73,7 +73,6 @@ class VerificationEmail
 
     public static function aValideEmail(Entreprise $entreprise): bool
     {
-        //TODO À compléter
         if ($entreprise->getEmail() != "") return true;
         return false;
     }

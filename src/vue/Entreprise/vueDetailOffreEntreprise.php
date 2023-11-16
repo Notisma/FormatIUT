@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueDetailEntreprise.css">
-</head>
-<body>
 <div class="boiteMain">
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">

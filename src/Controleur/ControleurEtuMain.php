@@ -21,12 +21,13 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 class ControleurEtuMain extends ControleurMain
 {
 
+    private static String $titrePageActuelleEtu = "Accueil Etudiants";
+
     public static function getCleEtudiant(): int
     {
         return ConnexionUtilisateur::getNumEtudiantConnecte();
     }
 
-    //TODO Se déconnecter, connecter à la BD
     public static function afficherAccueilEtu()
     {
         $listeIdAlternance = self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
@@ -39,6 +40,7 @@ class ControleurEtuMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeIdAlternance); $i++) {
             $listeAlternance[] = (new OffreRepository())->getObjectParClePrimaire($listeIdAlternance[$i]);
         }
+        self::$titrePageActuelleEtu = "Accueil Etudiants";
         self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(), ["listeStage" => $listeStage, "listeAlternance" => $listeAlternance]);
     }
 
@@ -46,18 +48,21 @@ class ControleurEtuMain extends ControleurMain
     {
         $type = $_REQUEST["type"] ?? "Tous";
         $offres = (new OffreRepository())->getListeOffresDispoParType($type);
+        self::$titrePageActuelleEtu = "Offres de Stage/Alternance";
         self::afficherVue("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffres.php", self::getMenu(), ["offres" => $offres, "type" => $type]);
     }
 
     public static function afficherProfilEtu()
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
-        self::afficherVue("Compte étudiant", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant" => $etudiant]);
+        self::$titrePageActuelleEtu = "Mon Compte";
+        self::afficherVue("Mon Compte", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant" => $etudiant]);
     }
 
     public static function afficherMesOffres()
     {
         $listOffre = (new OffreRepository())->listOffreEtu(self::getCleEtudiant());
+        self::$titrePageActuelleEtu = "Mes Offres";
         self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
     }
 
@@ -113,10 +118,10 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-   /* public static function annulerOffre(){
-        (new RegarderRepository())->supprimerOffreEtudiant(self::$cleEtudiant, $_GET['idOffre']);
-        self::afficherMesOffres();
-    }*/
+    /* public static function annulerOffre(){
+         (new RegarderRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idOffre']);
+         self::afficherMesOffres();
+     }*/
 
     public static function postuler(): void
     {
@@ -196,23 +201,34 @@ class ControleurEtuMain extends ControleurMain
                 self::redirectionFlash("afficherProfilEtu", "warning", "Aucune image selectionnée");
             }
         }
+
     }
 
     public static function getMenu(): array
     {
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Etudiants", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain"),
-            //array("image"=>"../ressources/images/mallette.png","label"=>"Offres d'Alternance","lien"=>"?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
 
         );
+
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
         if ($formation) {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=" . $formation['idOffre']);
         }
+
+        if (self::$titrePageActuelleEtu == "Mon Compte") {
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilEtu&controleur=EtuMain");
+        }
+
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
         return $menu;
+    }
+
+    public static function getTitrePageActuelleEtu(): string
+    {
+        return self::$titrePageActuelleEtu;
     }
 
     public static function modifierFichiers(){
@@ -227,6 +243,7 @@ class ControleurEtuMain extends ControleurMain
         (new RegarderRepository())->modifierObjet(new Regarder(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData));
         self::afficherMesOffres();
     }
+
 
     public static function setnumEtuSexe(): void
     {
@@ -270,7 +287,7 @@ class ControleurEtuMain extends ControleurMain
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
 
-    public static function photoInitiale(): void
+    public static function ajouterDansMenu(): void
     {
         self::updateImage();
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");

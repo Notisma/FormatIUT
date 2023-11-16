@@ -254,4 +254,72 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    public function etudiantsSansOffres(){
+        $sql="SELECT * FROM ".$this->getNomTable()." etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $etudiant) {
+            $listeEtudiants[]=$this->construireDepuisTableau($etudiant);
+        }
+        return $listeEtudiants;
+    }
+
+    //Fonction en cours de développement pour profilEtudiant depuis Admin
+    //TODO TERMINER
+    public function etudiantsEtats(){
+        $sql="SELECT numEtudiant,COUNT(idFormation) as AUneOffre
+                FROM Etudiants etu 
+                LEFT JOIN formation f ON f.idEtudiant=etu.numEtudiant
+                GROUP BY numEtudiant";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        foreach ($pdoStatement as $item) {
+            $nb = $item["AUneOffre"];
+            unset($item["AUneOffre"]);
+            $listeEtudiants[] = array("etudiant"=>$this->getObjectParClePrimaire($item["numEtudiant"]), "aUneFormation"=>$nb);
+
+        }
+        return $listeEtudiants;
+    }
+
+    public function etudiantsCandidats($idOffre)
+    {
+        $sql = "SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $idOffre);
+        $pdoStatement->execute($values);
+        $listeEtudiants = array();
+        foreach ($pdoStatement as $item) {
+            $listeEtudiants[] = $this->getObjectParClePrimaire($item["numEtudiant"]);
+        }
+        return $listeEtudiants;
+    }
+
+    public function getAssociationPourOffre($idOffre, $numEtudiant) {
+        $sql="SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("TagOffre"=>$idOffre, "TagEtu"=>$numEtudiant);
+        $pdoStatement->execute($values);
+        $resultat = $pdoStatement->fetch();
+        if ($resultat) {
+            if ($resultat["Etat"] == "En Attente") {
+                return "Candidat en attente";
+            } else if ($resultat["Etat"] == "Validée") {
+                return "Accepté par l'entreprise";
+            } else if ($resultat["Etat"] == "Refusée") {
+                return "Refusé par l'entreprise";
+            } else {
+                $sql="SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
+                $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+                $values=array("TagEtu"=>$numEtudiant);
+                $pdoStatement->execute($values);
+                $resultat = $pdoStatement->fetch();
+                if ($resultat) {
+                    return "Assigné";
+                }
+            }
+        } else {
+            return "Non assigné";
+        }
+        return null;
+    }
+
 }

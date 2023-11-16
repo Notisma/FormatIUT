@@ -1,5 +1,3 @@
-<!-- TODO le script pour erreur html -->
-<script src="../ressources/javaScript/mesFonctions.js"></script>
 
 <div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
