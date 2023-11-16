@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
+use PDO;
 
 abstract class AbstractRepository
 {
@@ -47,26 +48,37 @@ abstract class AbstractRepository
      * si l'objet n'existe pas, renvoie null
      */
 
-    public function getObjectParClePrimaire($clePrimaire): ?AbstractDataObject
-    {
-        $primaire = $this->getClePrimaire();
-        $primaire = trim($primaire, "()");
-        $colonnesClePrimaire = explode(', ', $primaire);
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE ";
-        foreach ($colonnesClePrimaire as $colonne) {
-            $sql .= "$colonne = :$colonne" . "Tag AND ";
-            $values[$colonne . "Tag"] = $objet->formatTableau()[$colonne];
-        }
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $clePrimaire);
+    public function getObjectParClePrimaire($clePrimaire):?AbstractDataObject{
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$clePrimaire);
         $pdoStatement->execute($values);
-        $objet = $pdoStatement->fetch();
-        if (!$objet) {
+        $objet=$pdoStatement->fetch();
+        if (!$objet){
             return null;
         }
-
         return $this->construireDepuisTableau($objet);
     }
+
+
+    /*public function getObjectParClesPrimaires($clesPrimaires):?AbstractDataObject{
+        $placeholders = implode(',', array_fill(0, count($clesPrimaires), '?'));
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . " IN ({$placeholders})";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        foreach ($clesPrimaires as $index => $valeur) {
+            $pdoStatement->bindValue($index + 1, $valeur, PDO::PARAM_INT);
+        }
+        $pdoStatement->execute();
+        $objets = $pdoStatement->fetchAll();
+        if (!$objets){
+            return null;
+        }
+        $result = array();
+        foreach ($objets as $objet) {
+            $result[] = $this->construireDepuisTableau($objet);
+        }
+        return $this->construireDepuisTableau($result);
+    }*/
 
     // ----- CRUD -----
 
