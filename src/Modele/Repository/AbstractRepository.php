@@ -34,18 +34,26 @@ abstract class AbstractRepository
      * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
      */
 
-    public function creerObjet(AbstractDataObject $objet):void{
-        $sql = "INSERT IGNORE INTO ".$this->getNomTable()." VALUES (";
-        foreach ($this->getNomsColonnes() as $nomsColonne) {
-            if ($nomsColonne!=$this->getNomsColonnes()[0]){
-                $sql.=",";
+
+
+    public function creerObjet(AbstractDataObject $object): void
+    {
+        $fields = "";
+        $values = "";
+        $tags = array();
+        foreach ($this->getNomsColonnes() as $nomColonne) {
+            if ($nomColonne != $this->getNomsColonnes()[0]) {
+                $fields .= ", ";
+                $values .= ", ";
             }
-            $sql.=":".$nomsColonne."Tag";
-            $values[$nomsColonne."Tag"]=$objet->formatTableau()[$nomsColonne];
+            $fields .= $nomColonne;
+            $values .= ":" . $nomColonne . "Tag";
+            $tags[$nomColonne . "Tag"] = $object->formatTableau()[$nomColonne];
         }
-        $sql.=")";
+        $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
+
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute($values);
+        $pdoStatement->execute($tags);
     }
 
     /***

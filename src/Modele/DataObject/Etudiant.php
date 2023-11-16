@@ -21,7 +21,7 @@ class Etudiant extends AbstractDataObject
     private ?int $validationPedagogique;
     private int $codeEtape;
     private string $idResidence;
-    private string $img;
+    private string $img_id;
 
     /**
      * @param float $numEtudiant
@@ -55,18 +55,18 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
         $this->codeEtape = $codeEtape;
         $this->idResidence = $idResidence;
-        $this->img = $img;
+        $this->img_id = $img;
     }
 
 
     public function getImg(): string
     {
-        return $this->img;
+        return $this->img_id;
     }
 
-    public function setImg(string $img): void
+    public function setImg(string $img_id): void
     {
-        $this->img = $img;
+        $this->img_id = $img_id;
     }
 
     public function getPrenomEtudiant(): string
@@ -226,7 +226,7 @@ class Etudiant extends AbstractDataObject
     {
         return array(
             "numEtudiant"=>$this->numEtudiant,
-            "prenomEtudiant",$this->prenomEtudiant,
+            "prenomEtudiant"=>$this->prenomEtudiant,
             "nomEtudiant"=>$this->nomEtudiant,
             "loginEtudiant"=>$this->loginEtudiant,
             "sexeEtu"=>$this->sexeEtu,
@@ -238,7 +238,7 @@ class Etudiant extends AbstractDataObject
             "validationPedagogique"=>$this->validationPedagogique,
             "codeEtape"=>$this->codeEtape,
             "idResidence"=>$this->idResidence,
-            "img"=>$this->img
+            "img_id"=>$this->img_id
         );
     }
 }
