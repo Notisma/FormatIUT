@@ -44,6 +44,16 @@
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
                            placeholder="Développeur Web" maxlength="24">
                 </div>
+                <label class="labelFormulaire" for="anneeMin_id">Année d'étude minimum des étudiants visés</label>
+                <div class="inputCentre">
+                    <input class="inputFormulaire" type="text" name="anneeMin" id="anneeMin_id" required
+                           placeholder="2">
+                </div>
+                <label class="labelFormulaire" for="anneeMax_id">Année d'étude maximum des étudiants visés</label>
+                <div class="inputCentre">
+                    <input class="inputFormulaire" type="text" name="anneeMax" id="anneeMax_id" required
+                           placeholder="3">
+                </div>
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" required>
