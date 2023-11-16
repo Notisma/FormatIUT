@@ -172,8 +172,7 @@ class ControleurEtuMain extends ControleurMain
                 InsertionCSV::insererPstage($ligne);
             }
             else if (sizeof($ligne) == 143){
-                $studea = (new StudeaRepository())->construireDepuisTableau($ligne);
-                (new StudeaRepository())->callProcedure($studea);
+                InsertionCSV::insererStudea($ligne);
             }
         }
         fclose($csvFile);

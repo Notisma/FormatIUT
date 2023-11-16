@@ -18,9 +18,9 @@ class InsertionCSV
 {
 
     public static function insererPstage($ligne): void {
-
         $login = $ligne[2];
         $login .= $ligne[3][0]; //surement à changer si un étudiant à le même nom et le même prenom
+        $login = strtolower($login);
         $etudiant = new Etudiant($ligne[1], $ligne[3], $ligne[2], $login, $ligne[42], $ligne[7], $ligne[6], $ligne[5], "XX", "XXXXX", 1, 1, "R1", 0);
         //echo '<pre>'; print_r($etudiant); echo '</pre>';
         (new EtudiantRepository())->creerObjet($etudiant);
@@ -54,8 +54,34 @@ class InsertionCSV
 
         $ville2 = new Ville("V24", $ligne[60], $ligne[59]);
         (new VilleRepository())->creerObjet($ville2);
+    }
 
+    public static function insererStudea($ligne): void {
+        $login = $ligne[9];
+        $login .= $ligne[10][0]; //surement à changer si un étudiant à le même nom et le même prenom
+        $login = strtolower($login);
+        $etudiant = new Etudiant($ligne[3], $ligne[10], $ligne[9], $login, $ligne[8], $ligne[28], $ligne[29], $ligne[26], "XX", "XXXXX", 1, 1, "R1", 0);
+        //echo '<pre>'; print_r($etudiant); echo '</pre>';
+        (new EtudiantRepository())->creerObjet($etudiant);
 
+        //il faut changer l'effectif,
+        $entreprise = new Entreprise($ligne[58], "", "XX", $ligne[82], $ligne[80], "XX", $ligne[64], "V1", 0);
+        (new EntrepriseRepository())->creerObjet($entreprise);
+
+        $dateString = $ligne[139]; // Chaîne représentant la date
+        $dateDebut = DateTime::createFromFormat('d/m/Y', $dateString); // Créer un objet DateTime à partir de la chaîne
+
+        $timestampe = $ligne[140];
+        $dateFin = DateTime::createFromFormat("d/m/Y", $timestampe);
+
+        $formation = new Formation($ligne[5], $dateDebut, $dateFin, $ligne[3], "TP1", $ligne[58], null, 1, 2);
+        (new FormationRepository())->creerObjet($formation);
+
+        $ville = new Ville("V25", $ligne[33], $ligne[32]);
+        (new VilleRepository())->creerObjet($ville);
+
+        $ville2 = new Ville("V26", $ligne[67], $ligne[66]);
+        (new VilleRepository())->creerObjet($ville2);
     }
 
 }
