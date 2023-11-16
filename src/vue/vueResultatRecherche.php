@@ -9,7 +9,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
     <h2>La recherche est : <?= $recherche ?></h2>
 
     <?php
-    if (empty($offres) && empty($entreprise))
+    if (empty($offres) && empty($entreprises))
         echo "<h3>Aucun résultat trouvé. Essayez des mots-clefs plus généraux ?</h3>";
     else {
         if (!empty($offres)) {

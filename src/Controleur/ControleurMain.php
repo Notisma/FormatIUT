@@ -308,13 +308,14 @@ class ControleurMain
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-        if ($res == null) self::afficherErreur("Erreur dans la recherche, veuillez réessayer.");
-
-        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
-            "recherche" => $recherche,
-            "offres" => $res['offres'],
-            "entreprises" => $res['entreprises']
-        ]);
+        if ($res == null)
+            self::afficherErreur("Erreur dans la recherche, veuillez réessayer.");
+        else
+            $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+                "recherche" => $recherche,
+                "offres" => $res['offres'],
+                "entreprises" => $res['entreprises']
+            ]);
     }
 
     public static function afficherSources()

@@ -154,16 +154,17 @@ abstract class AbstractRepository
 
         $sql = "";
         $tags = [];
-        foreach ($motsclefs as $mot) {
+        for ($i = 0; $i < count($motsclefs); $i++) {
+            $mot = $motsclefs[$i];
             $sql .= "
             SELECT *
             FROM Offre
-            WHERE LOWER(sujet) LIKE LOWER(:tag$mot)
-                OR LOWER(nomOffre) LIKE LOWER(:tag$mot)
-                OR LOWER(typeOffre) LIKE LOWER(:tag$mot)
-                OR LOWER(detailProjet) LIKE LOWER(:tag$mot)
+            WHERE LOWER(sujet) LIKE LOWER(:tag$i)
+                OR LOWER(nomOffre) LIKE LOWER(:tag$i)
+                OR LOWER(typeOffre) LIKE LOWER(:tag$i)
+                OR LOWER(detailProjet) LIKE LOWER(:tag$i)
             INTERSECT";
-            $tags["tag$mot"] = "%$mot%";
+            $tags["tag$i"] = "%$mot%";
         }
 
         $sql = substr($sql, 0, -9);
@@ -178,16 +179,30 @@ abstract class AbstractRepository
         foreach ($pdoStatement as $row)
             $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
 
-        /*$sql = "
-        SELECT *
-        FROM Entreprise
-        WHERE LOWER(nomEntreprise) LIKE LOWER(:rechercheTag)
-        ;";
-        $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->execute(['rechercheTag' => "%$motsclefs%"]);
+
+        $sql = "";
+        $tags = [];
+        for ($i = 0; $i < count($motsclefs); $i++) {
+            $mot = $motsclefs[$i];
+            $sql .= "
+            SELECT *
+            FROM Entreprise
+            WHERE LOWER(nomEntreprise) LIKE LOWER(:tag$i)
+            INTERSECT";
+            $tags["tag$i"] = "%$mot%";
+        }
+
+        $sql = substr($sql, 0, -9);
+
+        try {
+            $pdoStatement = $pdo->prepare($sql);
+            $pdoStatement->execute($tags);
+        } catch (\PDOException) {
+            return null;
+        }
         foreach ($pdoStatement as $row)
             $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
-*/
+
         return $res;
     }
 
@@ -208,7 +223,3 @@ abstract class AbstractRepository
         return true;
     }
 }
-
-
-
-
