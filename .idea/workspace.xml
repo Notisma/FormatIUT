@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout des détails Etudiants ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueAccueilAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +192,7 @@
       <workItem from="1699964835999" duration="2106000" />
       <workItem from="1700040239074" duration="554000" />
       <workItem from="1700071240528" duration="20313000" />
+      <workItem from="1700124374464" duration="646000" />
     </task>
     <task id="LOCAL-00083" summary="Nombreuses Corrections">
       <option name="closed" value="true" />
