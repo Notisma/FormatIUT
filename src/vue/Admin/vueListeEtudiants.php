@@ -14,8 +14,12 @@
                             <div class='etudiantDroite'>
                                 <h3 class='titre'>" . $etudiant['etudiant']->getPrenomEtudiant() . " " . $etudiant['etudiant']->getNomEtudiant() . " - ". $etudiant['etudiant']->getGroupe() . " - " . $etudiant['etudiant']->getParcours() ."</h3>
                                 ";
-                            echo "<p>Formation : " . $etudiant["aUneFormation"] . " - " . $etudiant["etudiant"]->getParcours() . "</p>"
-                         . "
+                            if ($etudiant["aUneFormation"]) {
+                                echo "<div id='valide' class='statutEtu'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
+                            } else {
+                                echo "<div id='nonValide' class='statutEtu'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
+                            }
+                            echo "
                             </div>
                         </a>
                     

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : ajout des détails Entreprise ADMIN">
+    <list default="true" id="95710fba-45ad-4f54-9e80-68fdc3daabcb" name="Changes" comment="feat : début liste étudiants ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEtudiants.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEtudiants.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,15 +193,8 @@
       <workItem from="1700040239074" duration="554000" />
       <workItem from="1700071240528" duration="20524000" />
       <workItem from="1700124131080" duration="1309000" />
-      <workItem from="1700133240936" duration="3876000" />
-    </task>
-    <task id="LOCAL-00084" summary="Vue mes offres fin">
-      <option name="closed" value="true" />
-      <created>1697445918982</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1697445918982</updated>
+      <workItem from="1700133240936" duration="4140000" />
+      <workItem from="1700140639367" duration="959000" />
     </task>
     <task id="LOCAL-00085" summary="Corrections.">
       <option name="closed" value="true" />
@@ -589,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700094745252</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="feat : début liste étudiants ADMIN">
+      <option name="closed" value="true" />
+      <created>1700137539480</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1700137539480</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -673,7 +672,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat - Avancées sur accueil ADMIN 4" />
     <MESSAGE value="Feat - Avancées sur accueil ADMIN 5" />
     <MESSAGE value="Feat - Ajout de fonctionnalités" />
     <MESSAGE value="Fix- correction de bugs git 1/2" />
@@ -698,7 +696,8 @@
     <MESSAGE value="feat : ajout de fonction supprimerEtudiant()" />
     <MESSAGE value="feat : ajout des détails Etudiants ADMIN" />
     <MESSAGE value="feat : ajout des détails Entreprise ADMIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout des détails Entreprise ADMIN" />
+    <MESSAGE value="feat : début liste étudiants ADMIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : début liste étudiants ADMIN" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

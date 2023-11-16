@@ -118,6 +118,39 @@ body {
     color: black;
 }
 
+.statutEtu {
+    width: 70%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.statutEtu > * {
+    margin: 0;
+}
+
+#valide {
+    background-color: #24942b;
+    color: #0d4e00;
+    border: 2px solid #0d4e00;
+}
+
+#nonValide {
+    background-color: #ffb700;
+    color: #814900;
+    border: 2px solid #fa7506;
+}
+
+.statutEtu > img {
+    height: 80%;
+}
+
+
 
 
 .droite {
