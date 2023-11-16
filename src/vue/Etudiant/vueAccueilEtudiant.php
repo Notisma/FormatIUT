@@ -44,7 +44,7 @@
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
                         echo '<a href =' . $lien . ' >
                     <div class="imagesAnnonce" >';
-                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'"/>
+                        echo '<img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImgId()).'"/>
                     </div >
                     <div class="texteAnnonce" >
                         <h4 >';

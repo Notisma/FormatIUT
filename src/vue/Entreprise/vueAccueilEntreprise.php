@@ -81,7 +81,7 @@
                 $lien="?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=".$listeOffre[$i]->getIdOffre();
                 echo '<a href="'.$lien.'" class="annonceEntreprise">
                 <div class="imgAnnonce">
-                    <img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'" class="imageEntr">
+                    <img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImgId()).'" class="imageEntr">
                 </div>
                 <div class="wrapTexte">
                     <h4>';

@@ -38,7 +38,7 @@
         </form>";
                 } else if (ucfirst($_GET['controleur']) == 'EntrMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()));
-                    $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                    $src = "data:image/jpeg;base64," . base64_encode($image->getImgId());
                     $liaison = "?controleur=entrMain&action=afficherProfilEntr";
                     echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>
@@ -47,7 +47,7 @@
         </form>";
                 } else if (ucfirst($_GET['controleur']) == 'EtuMain') {
                     $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                    $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                    $src = "data:image/jpeg;base64," . base64_encode($image->getImgId());
                     $liaison = "?controleur=etuMain&action=afficherProfilEtu";
                     echo "<form action='controleurFrontal.php' method='get'>
             <input type='hidden' name='action' value='rechercher'>

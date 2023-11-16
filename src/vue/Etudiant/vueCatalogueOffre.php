@@ -53,7 +53,7 @@
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                         echo "<div class='divInfo' id='wrapLogo'>";
-                            echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo"/>';
+                            echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImgId()) . '" alt="logo"/>';
                         echo "</div>";
                         echo "<div class='divInfo' id='nbPostu'>";
                             echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";

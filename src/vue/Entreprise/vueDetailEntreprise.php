@@ -73,7 +73,7 @@
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImgId()) . '"/>';
                     echo '</div>
                 <div class="nomEtuPostulant">
                     <h4>';
