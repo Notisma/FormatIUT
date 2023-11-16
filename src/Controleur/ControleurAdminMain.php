@@ -152,9 +152,16 @@ class ControleurAdminMain extends ControleurMain
     public static function supprimerEntreprise(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
-        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-        (new EntrepriseRepository())->supprimer($_REQUEST['siret']);
+        if (isset($_REQUEST["siret"])) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+            if (!is_null($entreprise)) {
+                (new EntrepriseRepository())->supprimer($_REQUEST['siret']);
+                MessageFlash::ajouter("success", "L'entreprise a bien été supprimée");
+            }else MessageFlash::ajouter("info","L'entreprise n'existe pas");
+        }else {
+            MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
+        }
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
-        MessageFlash::ajouter("success", "L'entreprise a bien été supprimée");
+
     }
 }
