@@ -142,11 +142,18 @@ class ControleurAdminMain extends ControleurMain
     public static function validerEntreprise(): void
     {
         //TODO : rajouter des vérifications
-        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-        $entreprise->setEstValide(true);
-        (new EntrepriseRepository())->modifierObjet($entreprise);
+        if (isset($_REQUEST["siret"])) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+            if (is_null($entreprise)) {
+                if (!$entreprise->isEstValide()) {
+                    $entreprise->setEstValide(true);
+                    (new EntrepriseRepository())->modifierObjet($entreprise);
+                    MessageFlash::ajouter("success", "L'entreprise a bien été validée");
+                }else MessageFlash::ajouter("info","L'entreprise est déjà valider");
+            } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
+        } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
-        MessageFlash::ajouter("success", "L'entreprise a bien été validée");
+
     }
 
     public static function supprimerEntreprise(): void
