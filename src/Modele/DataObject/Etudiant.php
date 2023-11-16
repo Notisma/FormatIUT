@@ -98,9 +98,10 @@ class Etudiant extends AbstractDataObject
     }
 
 
-    public function getSexeEtu(): ?string
+    public function getSexeEtu(): string
     {
-        return $this->sexeEtu;
+        if ($this->sexeEtu == null) return "";
+        else return $this->sexeEtu;
     }
 
     public function setSexeEtu(?string $sexeEtu): void
@@ -108,9 +109,10 @@ class Etudiant extends AbstractDataObject
         $this->sexeEtu = $sexeEtu;
     }
 
-    public function getMailUniersitaire(): ?string
+    public function getMailUniersitaire(): string
     {
-        return $this->mailUniersitaire;
+        if ($this->mailUniersitaire == null) return "";
+        else return $this->mailUniersitaire;
     }
 
     public function setMailUniersitaire(?string $mailUniersitaire): void
@@ -118,9 +120,10 @@ class Etudiant extends AbstractDataObject
         $this->mailUniersitaire = $mailUniersitaire;
     }
 
-    public function getMailPerso(): ?string
+    public function getMailPerso(): string
     {
-        return $this->mailPerso;
+        if ($this->mailPerso == null) return "";
+        else return $this->mailPerso;
     }
 
     public function setMailPerso(?string $mailPerso): void
@@ -128,9 +131,10 @@ class Etudiant extends AbstractDataObject
         $this->mailPerso = $mailPerso;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): string
     {
-        return $this->telephone;
+        if ($this->telephone == null) return "";
+        else return $this->telephone;
     }
 
     public function setTelephone(?string $telephone): void
@@ -138,9 +142,10 @@ class Etudiant extends AbstractDataObject
         $this->telephone = $telephone;
     }
 
-    public function getGroupe(): ?string
+    public function getGroupe(): string
     {
-        return $this->groupe;
+        if ($this->groupe == null) return "";
+        else return $this->groupe;
     }
 
     public function setGroupe(?string $groupe): void
@@ -148,9 +153,10 @@ class Etudiant extends AbstractDataObject
         $this->groupe = $groupe;
     }
 
-    public function getParcours(): ?string
+    public function getParcours(): string
     {
-        return $this->parcours;
+        if ($this->parcours == null) return "";
+        else return $this->parcours;
     }
 
     public function setParcours(?string $parcours): void
@@ -178,9 +184,10 @@ class Etudiant extends AbstractDataObject
         $this->codeEtape = $codeEtape;
     }
 
-    public function getIdResidence(): ?string
+    public function getIdResidence(): string
     {
-        return $this->idResidence;
+        if ($this->idResidence == null) return "";
+        else return $this->idResidence;
     }
 
     public function setIdResidence(?string $idResidence): void

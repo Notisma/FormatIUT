@@ -246,7 +246,7 @@ class EtudiantRepository extends AbstractRepository
         );
     }
 
-    public function mettreAJourInfos(string $adresseMail, int $telephone, string $numEtu): void
+    public function mettreAJourInfos(string $adresseMail, string $telephone, string $numEtu): void
     {
         $sql = "UPDATE Etudiants SET mailPerso = :mailTag, telephone = :telTag WHERE numEtudiant = :numTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
