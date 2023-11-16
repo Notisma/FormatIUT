@@ -303,9 +303,11 @@ class ControleurMain
             $controleur::afficherErreur("Il faut renseigner une recherche.");
             return;
         }
-        $recherche = $_REQUEST['recherche'];
 
-        $res = AbstractRepository::getResultatRechercheTrie($recherche);
+        $recherche = $_REQUEST['recherche'];
+        $morceaux = explode(" ", $_REQUEST['recherche']);
+
+        $res = AbstractRepository::getResultatRechercheTrie($morceaux);
 
         $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
             "recherche" => $recherche,
