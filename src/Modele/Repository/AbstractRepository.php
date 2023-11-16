@@ -35,7 +35,7 @@ abstract class AbstractRepository
      */
 
     public function creerObjet(AbstractDataObject $objet):void{
-        $sql = "INSERT INTO ".$this->getNomTable()." VALUES (";
+        $sql = "INSERT IGNORE INTO ".$this->getNomTable()." VALUES (";
         foreach ($this->getNomsColonnes() as $nomsColonne) {
             if ($nomsColonne!=$this->getNomsColonnes()[0]){
                 $sql.=",";
