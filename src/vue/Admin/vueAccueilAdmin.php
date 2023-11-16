@@ -77,7 +77,7 @@
             <?php foreach ($listeEntreprises as $entreprise) {
 
                 ?>
-                <a href="tt" class="alerteEntr">
+                <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>" class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
                         $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';

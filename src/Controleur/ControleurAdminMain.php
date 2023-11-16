@@ -42,7 +42,7 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(), ["listeEtudiants" => $listeEtudiants]);
     }
 
-    public static function afficherDetailEntreprise(/* String $mailEntreprise */)
+    public static function afficherDetailEntreprise()
     {
         self::$pageActuelleAdmin = "Détails d'une Entreprise";
         self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
@@ -85,6 +85,10 @@ class ControleurAdminMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherDetailEtudiant");
         }
 
+        if (self::$pageActuelleAdmin == "Détails d'une Entreprise") {
+            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise");
+        }
+
 
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
 
@@ -124,5 +128,33 @@ class ControleurAdminMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
         (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
         self::redirectionFlash("afficherAccueilEntr", "success", "L'étudiant a bien été supprimé");
+    }
+
+    public static function refuserEntreprise(): void
+    {
+        //TODO : rajouter des éléments
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+        (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
+        MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
+    }
+
+    public static function validerEntreprise(): void
+    {
+        //TODO : rajouter des vérifications
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+        $entreprise->setEstValide(true);
+        (new EntrepriseRepository())->modifierObjet($entreprise);
+        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
+        MessageFlash::ajouter("success", "L'entreprise a bien été validée");
+    }
+
+    public static function supprimerEntreprise(): void
+    {
+        //TODO : FAIRE LES VERIFICATIONS
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+        (new EntrepriseRepository())->supprimer($_REQUEST['siret']);
+        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
+        MessageFlash::ajouter("success", "L'entreprise a bien été supprimée");
     }
 }
