@@ -133,10 +133,17 @@ class ControleurAdminMain extends ControleurMain
     public static function refuserEntreprise(): void
     {
         //TODO : rajouter des éléments
-        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-        (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+        if (isset($_REQUEST["siret"])) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+            if (is_null($entreprise)) {
+                if (!$entreprise->isEstValide()) {
+                    (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+                    MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
+                }else MessageFlash::ajouter("info","L'entreprise est déjà validée");
+            } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
+        } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
-        MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
+
     }
 
     public static function validerEntreprise(): void
