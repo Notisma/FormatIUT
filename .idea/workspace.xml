@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3bca7fbb-63f7-45a6-bfc0-5b4b1ea2d9b6" name="Changes" comment="Corrections.">
+    <list default="true" id="3bca7fbb-63f7-45a6-bfc0-5b4b1ea2d9b6" name="Changes" comment="feat : afficher les offres du catalogue seulement si l'étudiant est dans l'année ciblée par l'offre">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Offre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/OffreRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurEtuMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,9 +76,22 @@
       <workItem from="1700082704540" duration="722000" />
       <workItem from="1700083435625" duration="317000" />
     </task>
+    <task id="LOCAL-00001" summary="feat : afficher les offres du catalogue seulement si l'étudiant est dans l'année ciblée par l'offre">
+      <option name="closed" value="true" />
+      <created>1700143506431</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700143506431</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat : afficher les offres du catalogue seulement si l'étudiant est dans l'année ciblée par l'offre" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : afficher les offres du catalogue seulement si l'étudiant est dans l'année ciblée par l'offre" />
   </component>
 </project>

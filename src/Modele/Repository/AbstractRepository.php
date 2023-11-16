@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository
@@ -130,6 +131,7 @@ abstract class AbstractRepository
             'offres' => array(),
             'entreprises' => array(),
         ];
+        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
 
         $sql = "
         SELECT *
@@ -137,6 +139,8 @@ abstract class AbstractRepository
         WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
             OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
             OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)
+            AND  $anneeEtu >= anneeMin
+            AND  $anneeEtu <= anneeMax
         ;";
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
