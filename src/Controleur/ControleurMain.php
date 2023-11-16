@@ -265,7 +265,10 @@ class ControleurMain
 
     public static function motDePasseARemplir(): void
     {
-        self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
+        if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
+            self::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
+        else
+            self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
     }
 
 
@@ -311,7 +314,8 @@ class ControleurMain
         ]);
     }
 
-    public static function afficherSources(){
-        self::afficherVue("Sources","sources.php",self::getMenu());
+    public static function afficherSources()
+    {
+        self::afficherVue("Sources", "sources.php", self::getMenu());
     }
 }

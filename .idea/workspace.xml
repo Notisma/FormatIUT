@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3bca7fbb-63f7-45a6-bfc0-5b4b1ea2d9b6" name="Changes" comment="Corrections.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Etudiant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueMettreAJour.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueMettreAJour.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueResetMdp.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Entreprise/styleVueResetMdp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Entreprise/vueResetMdp.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Entreprise/vueResetMdp.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +58,9 @@
       <recent name="$PROJECT_DIR$/ressources/css/Entreprise" />
       <recent name="$PROJECT_DIR$/ressources/css/Etudiant" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ressources/css/Entreprise" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,6 +75,7 @@
       <workItem from="1700053573342" duration="831000" />
       <workItem from="1700082704540" duration="722000" />
       <workItem from="1700083435625" duration="317000" />
+      <workItem from="1700139982329" duration="1771000" />
     </task>
     <servers />
   </component>

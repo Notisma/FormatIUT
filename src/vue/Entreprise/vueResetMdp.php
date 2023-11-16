@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueResetMdp.css">
-</head>
-<body>
 <div class="mainReset">
 
     <div class="resetGauche">
@@ -38,7 +33,4 @@
             </form>
         </div>
     </div>
-
 </div>
-</body>
-</html>
