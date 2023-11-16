@@ -244,6 +244,7 @@ class EtudiantRepository extends AbstractRepository
             "tag2" => $etudiant->getParcours(),
             "tagNum" => $etudiant->getNumEtudiant()
         );
+        $pdoStatement->execute($values);
     }
 
     public function mettreAJourInfos(string $adresseMail, string $telephone, string $numEtu): void

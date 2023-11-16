@@ -285,7 +285,7 @@ class ControleurEtuMain extends ControleurMain
         $numEtu = $_REQUEST['numEtu'];
         $groupe = $_REQUEST['groupe'];
         $parcours = $_REQUEST['parcours'];
-
+        echo "BlaBla";
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setGroupe($groupe);
         $etudiant->setParcours($parcours);

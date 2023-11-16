@@ -81,6 +81,7 @@ class ConnexionUtilisateur
     public static function premiereConnexionEtu(string $login) : bool{
         if (!(new EtudiantRepository())->estEtudiant($login)){
             $infos=ConnexionLdap::getInfoPersonne();
+            echo $infos["mail"];
             $value=array("numEtudiant"=>self::genererChiffresAleatoires(),"prenomEtudiant"=>$infos["prenom"],"nomEtudiant"=>$infos["nom"],"loginEtudiant"=>$login,"mailUniversitaire"=>$infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
             return true;
