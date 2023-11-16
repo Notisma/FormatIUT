@@ -171,7 +171,7 @@ class ControleurEtuMain extends ControleurMain
     public static function updateImage(): void
     {
         //si un fichier a été passé en paramètre
-        if (!empty($_FILES['fic']['name'])) {
+        if (!empty($_FILES['pdp']['name'])) {
 
             $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
             //TODO vérif de doublons d'image
