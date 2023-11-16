@@ -242,7 +242,6 @@ class Entreprise extends AbstractDataObject
     }
 
     public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
-        //TODO vérifier si ville existe dans BD sinon, en créer une avec les données de EntrepriseEnFormulaire
         $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
         if (!$ville){
             $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);

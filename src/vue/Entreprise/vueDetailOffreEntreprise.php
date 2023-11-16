@@ -12,7 +12,6 @@
         </div>
     </div>
 
-    <!-- TODO finir de lier à la BD -->
     <div class="infosOffreEntr">
         <h3>Les Informations de votre Offre</h3>
         <div class="petitConteneurInfosOffre">

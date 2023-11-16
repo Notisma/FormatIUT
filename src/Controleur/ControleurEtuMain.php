@@ -23,7 +23,6 @@ class ControleurEtuMain extends ControleurMain
         return ConnexionUtilisateur::getNumEtudiantConnecte();
     }
 
-    //TODO Se déconnecter, connecter à la BD
     public static function afficherAccueilEtu()
     {
         $listeIdAlternance = self::getTroisMax((new OffreRepository())->ListeIdTypeOffre("Alternance"));
@@ -121,7 +120,6 @@ class ControleurEtuMain extends ControleurMain
 
     public static function postuler()
     {
-        //TODO vérifier les vérifs
         if (isset($_REQUEST['idOffre'])) {
             $liste = ((new OffreRepository())->getListeIdOffres());
             if (in_array($_REQUEST["idOffre"], $liste)) {
@@ -158,7 +156,6 @@ class ControleurEtuMain extends ControleurMain
         if (!empty($_FILES['fic']['name'])) {
 
             $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
-            //TODO vérif de doublons d'image
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
             $nom = "";
             $nomEtudiant = $etudiant->getLogin();

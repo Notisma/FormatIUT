@@ -54,7 +54,6 @@
 
 
     <div class="detailsDeEntreprise">
-        <!-- TODO/ STats 2/3-->
         <h3>Vos Statistiques</h3>
 
         <div class="statistiques">
