@@ -64,17 +64,31 @@ class ConnexionLdap
 
     public static function getInfoPersonne()
     {
-        $infos= array(
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
+        $infos = array(
             "nom" => self::$infosUser[0][0],
             "prenom" => self::$infosUser[0][1],
             "mail" => self::$infosUser[1],
             "type" => self::$infosUser[2],
 
         );
-        if ($infos["type"]=="Etudiants"){
-            $infos["Annee"]=self::$infosUser[3];
+        if ($infos["type"] == "Etudiants") {
+            $infos["Annee"] = self::$infosUser[3];
         }
         return $infos;
+    }else {
+        $infos= array(
+            "nom" => self::$infosUser[1],
+            "prenom" => self::$infosUser[3],
+            "mail" => self::$infosUser[5],
+            "type" => self::$infosUser[7],
+
+        );
+        if ($infos["type"]=="Etudiants"){
+            $infos["Annee"]=self::$infosUser[9];
+        }
+        return $infos;
+    }
 
     }
 

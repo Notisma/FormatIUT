@@ -187,8 +187,7 @@ class ControleurMain
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
-                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
-                } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
+                    MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
