@@ -191,7 +191,7 @@ class Offre extends AbstractDataObject
     }
 
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation, int $anneeMin, int $anneeMax)
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation, int $anneeMin, int $anneeMax, bool $estValide)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
