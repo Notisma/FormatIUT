@@ -263,12 +263,10 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    //Fonction en cours de développement pour profilEtudiant depuis Admin
-    //TODO TERMINER
     public function etudiantsEtats(){
         $sql="SELECT numEtudiant,COUNT(idFormation) as AUneOffre
                 FROM Etudiants etu 
-                LEFT JOIN formation f ON f.idEtudiant=etu.numEtudiant
+                LEFT JOIN Formation f ON f.idEtudiant=etu.numEtudiant
                 GROUP BY numEtudiant";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $item) {

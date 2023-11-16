@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 100vh;
+}
+
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
+    margin: 0;
+}
+
+#rouge {
+    color: #ff5660;
+}
+
+.wrapBoutons {
+    width: 90%;
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapBoutons > a {
+    height: 98%;
+    width: 40%;
+    text-decoration: none;
+    color: white;
+    background-color: #ff5660;
+    border-radius: 50px;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapBoutons > a:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.wrapCentreListEntr {
+    position: absolute;
+    top: 56%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+}
+
+.gauche {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    background-color: #ff9095;
+}
+
+.droite {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    background-color: white;
+}
