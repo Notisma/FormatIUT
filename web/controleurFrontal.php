@@ -24,7 +24,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
-
+$nonConnecte=false;
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {

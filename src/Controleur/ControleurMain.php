@@ -33,7 +33,7 @@ class ControleurMain
      */
     public static function afficherVuePresentation(): void
     {
-        self::afficherVue("Accueilm Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
+        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
     /***
@@ -161,7 +161,6 @@ class ControleurMain
     {
         if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
             $user = ((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
-            var_dump($user);
             if (!is_null($user)) {
                 if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
                     if (VerificationEmail::aValideEmail($user)) {
@@ -266,8 +265,7 @@ class ControleurMain
 
     public static function motDePasseARemplir(): void
     {
-        self::afficherVue('vueGenerale.php', ["menu" => self::getMenu(), "chemin" => "Entreprise/vueResetMdp.php", "titrePage" => "Mot de Passe oublié"]);
-
+        self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
     }
 
 
@@ -311,5 +309,9 @@ class ControleurMain
             "offres" => $res['offres'],
             "entreprises" => $res['entreprises']
         ]);
+    }
+
+    public static function afficherSources(){
+        self::afficherVue("Sources","sources.php",self::getMenu());
     }
 }
