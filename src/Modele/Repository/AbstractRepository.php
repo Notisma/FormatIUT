@@ -51,13 +51,14 @@ abstract class AbstractRepository
      * si l'objet n'existe pas, renvoie null
      */
 
-    public function getObjectParClePrimaire($clePrimaire):?AbstractDataObject{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$clePrimaire);
+    public function getObjectParClePrimaire($clePrimaire): ?AbstractDataObject
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
-        $objet=$pdoStatement->fetch();
-        if (!$objet){
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
             return null;
         }
         return $this->construireDepuisTableau($objet);
@@ -145,63 +146,89 @@ abstract class AbstractRepository
 
     //-------------AUTRES------------
 
-    public static function getResultatRechercheTrie($recherche): array
+    public static function getResultatRechercheTrie($motsclefs): ?array
     {
+        if (Configuration::controleurIs("EtuMain"))
+            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $res = [
             'offres' => array(),
             'entreprises' => array(),
         ];
-        if (Configuration::controleurIs("EtuMain")) {
-            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-        }
-        $sql = "
-        SELECT *
-        FROM Offre
-        WHERE LOWER(sujet) LIKE LOWER(:rechercheTag)
-            OR LOWER(typeOffre) LIKE LOWER(:rechercheTag)
-            OR LOWER(detailProjet) LIKE LOWER(:rechercheTag)";
 
-        if(Configuration::controleurIs("EtuMain")){
-            $sql .= "AND  $anneeEtu >= anneeMin
-                    AND  $anneeEtu <= anneeMax";
+        $sql = "";
+        $tags = [];
+        for ($i = 0; $i < count($motsclefs); $i++) {
+            $mot = $motsclefs[$i];
+            $sql .= "
+            SELECT *
+            FROM Offre
+            WHERE (LOWER(sujet) LIKE LOWER(:tag$i)
+                OR LOWER(nomOffre) LIKE LOWER(:tag$i)
+                OR LOWER(typeOffre) LIKE LOWER(:tag$i)
+                OR LOWER(detailProjet) LIKE LOWER(:tag$i))";
+
+            if (Configuration::controleurIs("EtuMain"))
+                $sql .= "AND  $anneeEtu >= anneeMin
+                         AND  $anneeEtu <= anneeMax";
+
+            $sql .= "INTERSECT";
+            $tags["tag$i"] = "%$mot%";
         }
 
-        $sql.=";";
-        $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        $sql = substr($sql, 0, -9);
+
+        try {
+            $pdoStatement = $pdo->prepare($sql);
+            $pdoStatement->execute($tags);
+        } catch (\PDOException) {
+            return null;
+        }
+
         foreach ($pdoStatement as $row)
             $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
 
-        $sql = "
-        SELECT *
-        FROM Entreprise
-        WHERE LOWER(nomEntreprise) LIKE LOWER(:rechercheTag)
-        ;";
-        $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->execute(['rechercheTag' => "%$recherche%"]);
+        $sql = "";
+        $tags = [];
+        for ($i = 0; $i < count($motsclefs); $i++) {
+            $mot = $motsclefs[$i];
+            $sql .= "
+            SELECT *
+            FROM Entreprise
+            WHERE LOWER(nomEntreprise) LIKE LOWER(:tag$i)
+            INTERSECT";
+            $tags["tag$i"] = "%$mot%";
+        }
+
+        $sql = substr($sql, 0, -9);
+
+        try {
+            $pdoStatement = $pdo->prepare($sql);
+            $pdoStatement->execute($tags);
+        } catch (\PDOException) {
+            return null;
+        }
         foreach ($pdoStatement as $row)
             $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
 
         return $res;
     }
+
     /***
      * @param $clePrimaire
      * @return true si l'objet existe dans la base de donnée, false sinon
      */
-    public function estExistant($clePrimaire):bool{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE ".$this->getClePrimaire()."=:Tag ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$clePrimaire);
+    public function estExistant($clePrimaire): bool
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $clePrimaire);
         $pdoStatement->execute($values);
-        $objet=$pdoStatement->fetch();
-        if (!$objet){
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
             return false;
         }
         return true;
     }
 }
-
-
-
-

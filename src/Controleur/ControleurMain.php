@@ -356,19 +356,23 @@ class ControleurMain
     {
         $controleur = Configuration::getCheminControleur();
 
-        if (is_null($_REQUEST['recherche'])) {
+        if (!isset($_REQUEST['recherche'])) {
             $controleur::afficherErreur("Il faut renseigner une recherche.");
             return;
         }
+
         $recherche = $_REQUEST['recherche'];
+        $morceaux = explode(" ", $recherche);
 
-        $res = AbstractRepository::getResultatRechercheTrie($recherche);
-
-        $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
-            "recherche" => $recherche,
-            "offres" => $res['offres'],
-            "entreprises" => $res['entreprises']
-        ]);
+        $res = AbstractRepository::getResultatRechercheTrie($morceaux);
+        if ($res == null)
+            self::afficherErreur("Erreur dans la recherche, veuillez réessayer.");
+        else
+            $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+                "recherche" => $recherche,
+                "offres" => $res['offres'],
+                "entreprises" => $res['entreprises']
+            ]);
     }
 
     public static function afficherSources()

@@ -36,7 +36,7 @@ use App\FormatIUT\Configuration\Configuration;
                 $liaison = "";
                 $src = "../ressources/images/profil.png";
                 $liaison = "?controleur=Main&action=afficherPageConnexion";
-                $recherche = "<form action='?action=nothing' method='post'>            
+                $codeRecherche = "<form action='?action=nothing' method='post'>            
             <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
         </form>";
                 if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
@@ -65,12 +65,17 @@ use App\FormatIUT\Configuration\Configuration;
                         }
                     }
 
-                    $recherche = "<form action='?controleur=" . Configuration::getControleur() . "&action=rechercher' method='post'>
-                <input class='searchField' name='recherche' placeholder='Rechercher...' required>
-            </form>";
+                    $codeRecherche = "
+                        <form action='?' method='get'>
+                            <input class='searchField' name='recherche' placeholder='Rechercher...' required";
+                    if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
+                    $codeRecherche .=
+                            ">
+                            <input type='hidden' name='controleur' value='" . Configuration::getControleur() . "'>
+                            <input type='hidden' name='action' value='rechercher'>                    
+                        </form>";
                 }
-
-                echo $recherche;
+                echo $codeRecherche;
                 echo "</div>
         <div id='profil'>
         <a href='{$liaison}'>";
