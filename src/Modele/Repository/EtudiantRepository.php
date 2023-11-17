@@ -305,10 +305,13 @@ class EtudiantRepository extends AbstractRepository
             if ($resultat["Etat"] == "En attente") {
                 return "Candidat en attente";
             } else if ($resultat["Etat"] == "Validée") {
-                return "Accepté par l'entreprise";
+                return "Assigné";
             } else if ($resultat["Etat"] == "Refusée") {
                 return "Refusé par l'entreprise";
-            } else {
+            } else if ($resultat["Etat"] == "A Choisir") {
+                return "Accepté par l'entreprise";
+            }
+            else {
                 $sql = "SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
                 $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
                 $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
