@@ -73,6 +73,9 @@ class ControleurAdminMain extends ControleurMain
             }
             else if (sizeof($ligne) == 143){
                 InsertionCSV::insererStudea($ligne);
+            } else {
+                self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
+                return;
             }
         }
         fclose($csvFile);
