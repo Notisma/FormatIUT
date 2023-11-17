@@ -35,6 +35,7 @@
                 function extracted($listeStage): array
                 {
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
+                        if($listeStage[$i]->isEstValide()){
                         $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
                         $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                         $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
@@ -80,6 +81,7 @@
                         </div >
                     </div >
                 </a >';
+                    }
                     }
                     return array($i, $entreprise, $lien);
                 }
