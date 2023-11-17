@@ -1,8 +1,3 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffres.css">
-</head>
-<body>
 <div id="center">
     <div class="presentation">
         <p>Importer un CSV :</p>
@@ -18,8 +13,3 @@
         </form>
     </div>
 </div>
-</body>
-</html>
-
-
-
