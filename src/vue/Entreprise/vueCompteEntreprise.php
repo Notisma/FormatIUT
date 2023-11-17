@@ -8,7 +8,7 @@
                 <p>Changez votre logo ici :</p>
                 <form enctype="multipart/form-data" action="?action=updateImage&controleur=EntrMain" method="post">
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000" >
-                    <input type="file" name="fic" size=50 >
+                    <input type="file" name="pdp" size=50 >
                     <input type="submit" value="Envoyer" >
                 </form>
             </div>
