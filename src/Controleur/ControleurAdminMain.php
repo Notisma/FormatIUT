@@ -146,7 +146,7 @@ class ControleurAdminMain extends ControleurMain
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
         $offre->setEstValide(true);
         (new OffreRepository())->modifierObjet($offre);
-        header("Location: ?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
+        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
         MessageFlash::ajouter("success", "L'offre a bien été validée");
     }
 

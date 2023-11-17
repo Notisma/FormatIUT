@@ -40,10 +40,12 @@
     <div class="offresEtu">
         <div class="contenuOffresEtu">
             <?php
+            $compteurOffres = 0;
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
                     $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->isEstValide()) {
+                        $compteurOffres++;
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                         echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
                             <div class='partieGauche'>
@@ -71,8 +73,11 @@
                         </a>";
                     }
                 }
+                if($compteurOffres == 0){
+                    echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
+                }
             } else {
-                echo "<p>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</p>";
+                echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
             } ?>
         </div>
     </div>
