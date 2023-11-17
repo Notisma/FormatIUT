@@ -16,6 +16,10 @@ use App\FormatIUT\Modele\Repository\RegarderRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
+    public static function getCleEntreprise(): int
+    {
+        return ConnexionUtilisateur::getNumEtudiantConnecte();
+    }
     public static function afficherAccueilEntr()
     {
         $listeIDOffre = self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
