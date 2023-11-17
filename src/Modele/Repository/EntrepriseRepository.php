@@ -95,7 +95,7 @@ class EntrepriseRepository extends AbstractRepository
             "telTag" => $tel,
             "adTag" => $adresse,
             "siretTag" => $siret);
-
+        $pdoStatement->execute($values);
     }
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
