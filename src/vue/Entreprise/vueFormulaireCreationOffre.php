@@ -44,16 +44,19 @@
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
                            placeholder="Développeur Web" maxlength="24">
                 </div>
+
                 <label class="labelFormulaire" for="anneeMin_id">Année d'étude minimum des étudiants visés</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="text" name="anneeMin" id="anneeMin_id" required
-                           placeholder="2">
+                    <input class="inputFormulaire" type="number" name="anneeMin" id="anneeMin_id" required
+                           placeholder="2" min="2" max="3">
                 </div>
+
                 <label class="labelFormulaire" for="anneeMax_id">Année d'étude maximum des étudiants visés</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="text" name="anneeMax" id="anneeMax_id" required
-                           placeholder="3">
+                    <input class="inputFormulaire" type="number" name="anneeMax" id="anneeMax_id" required
+                           placeholder="3" min="2" max="3">
                 </div>
+
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" required>
@@ -64,13 +67,11 @@
                     <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id" required>
                 </div>
 
-
                 <label class="labelFormulaire" for="sujet_id">Sujet bref de l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="sujet" id="sujet_id"
                            placeholder="Développement d'application Web en full stack" required maxlength="50">
                 </div>
-
 
                 <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
                 <div class="grandInputCentre">

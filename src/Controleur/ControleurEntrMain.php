@@ -138,36 +138,37 @@ class ControleurEntrMain extends ControleurMain
     // ---- CRUD de l'offre ----
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'],$_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
-            //if (strtotime($_REQUEST["dateDebut"]) > strtotime($_REQUEST["dateFin"])){
-            if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
-                if ($_REQUEST["joursParSemaine"] < 8) {
-                    if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
-                        $listeId = (new OffreRepository())->getListeIdOffres();
-                        self::autoIncrement($listeId, "idOffre");
-                        $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                        $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
-                        (new OffreRepository())->creerObjet($offre);
-                        $_REQUEST["action"] = "mesOffres";
-                        MessageFlash::ajouter("success", "Offre créée avec succès");
-                        self::mesOffres();
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+            $anneeMin = $_REQUEST['anneeMin'];
+            $anneeMax = $_REQUEST['anneeMax'];
+            if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
+                if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
+                    if ($_REQUEST["joursParSemaine"] < 8) {
+                        if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
+                            $listeId = (new OffreRepository())->getListeIdOffres();
+                            self::autoIncrement($listeId, "idOffre");
+                            $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+                            $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
+                            (new OffreRepository())->creerObjet($offre);
+                            $_REQUEST["action"] = "mesOffres";
+                            MessageFlash::ajouter("success", "Offre créée avec succès");
+                            self::mesOffres();
+                        } else {
+                            header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                            MessageFlash::ajouter("danger", "Les heures inscrites ne sont pas correctes");
+                        }
                     } else {
                         header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
-                        MessageFlash::ajouter("danger", "Les heures inscrites ne sont pas correctes");
+                        MessageFlash::ajouter("danger", "Les jours inscrits ne sont pas corrects");
                     }
                 } else {
                     header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
-                    MessageFlash::ajouter("danger", "Les jours inscrits ne sont pas corrects");
+                    MessageFlash::ajouter("danger", "Des données sont erronées");
                 }
             } else {
                 header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
-                MessageFlash::ajouter("danger", "Des données sont erronées");
+                MessageFlash::ajouter("danger", "Erreur sur année min / max (il n'y a que les années 2 et 3 de disponibles)");
             }
-            /*}else {
-                //redirectionFlash "Concordance des dates
-                echo "dates";
-                self::formulaireCreationOffre();
-            }*/
         } else {
             //redirectionFlash "éléments manquants
             header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
@@ -209,40 +210,47 @@ class ControleurEntrMain extends ControleurMain
 
     public static function modifierOffre(): void
     {
-        if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
-            if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
-                $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
-                if ($offre) {
-                    if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                        if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                            $offre->setTypeOffre($_POST['typeOffre']);
-                            $offre->setNomOffre($_POST['nomOffre']);
-                            $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
-                            $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
-                            $offre->setSujet($_POST['sujet']);
-                            $offre->setDetailProjet($_POST['detailProjet']);
-                            $offre->setGratification($_POST['gratification']);
-                            $offre->setDureeHeures($_POST['dureeHeures']);
-                            $offre->setJoursParSemaine($_POST['joursParSemaine']);
-                            $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
-                            (new OffreRepository())->modifierObjet($offre);
-                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
-                            MessageFlash::ajouter("success", "Offre modifiée avec succès");
+        if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST['anneeMin'], $_POST['anneeMax'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
+            $anneeMin = $_REQUEST['anneeMin'];
+            $anneeMax = $_REQUEST['anneeMax'];
+            if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
+                if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
+                    $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+                    if ($offre) {
+                        if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                            if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
+                                $offre->setTypeOffre($_POST['typeOffre']);
+                                $offre->setNomOffre($_POST['nomOffre']);
+                                $offre->setDateDebut(date_create_from_format("Y-m-d", $_POST['dateDebut']));
+                                $offre->setDateFin(date_create_from_format("Y-m-d", $_POST['dateFin']));
+                                $offre->setSujet($_POST['sujet']);
+                                $offre->setDetailProjet($_POST['detailProjet']);
+                                $offre->setGratification($_POST['gratification']);
+                                $offre->setDureeHeures($_POST['dureeHeures']);
+                                $offre->setJoursParSemaine($_POST['joursParSemaine']);
+                                $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
+                                (new OffreRepository())->modifierObjet($offre);
+                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                                MessageFlash::ajouter("success", "Offre modifiée avec succès");
+                            } else {
+                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                                MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
+                            }
                         } else {
                             header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
-                            MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
+                            MessageFlash::ajouter("danger", "Cette offre a déjà été acceptée par l'étudiant");
                         }
                     } else {
                         header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
-                        MessageFlash::ajouter("danger", "Cette offre a déjà été acceptée par l'étudiant");
+                        MessageFlash::ajouter("danger", "Cette offre n'existe pas");
                     }
                 } else {
                     header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
-                    MessageFlash::ajouter("danger", "Cette offre n'existe pas");
+                    MessageFlash::ajouter("danger", "Certaines données sont erronnées");
                 }
             } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
-                MessageFlash::ajouter("danger", "Certaines données sont erronnées");
+                header("Location: controleurFrontal.php?action=afficherFormulaireModificationOffre&controleur=EntrMain&idOffre=" . $_POST["idOffre"]);
+                MessageFlash::ajouter("danger", "Erreur sur année min / max (il n'y a que les années 2 et 3 de disponibles)");
             }
         } else {
             header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
@@ -261,19 +269,22 @@ class ControleurEntrMain extends ControleurMain
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
         self::afficherProfilEntr();
     }
-    public static function telechargerCV(): void{
-        $cv = (new RegarderRepository())->recupererCV($_REQUEST['etudiant'],$_REQUEST['idOffre']);
+
+    public static function telechargerCV(): void
+    {
+        $cv = (new RegarderRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idOffre']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=CV de '. $etu->getPrenomEtudiant().' '.$etu->getNomEtudiant().'.pdf');
+        header('Content-Disposition: attachment; filename=CV de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
         echo $cv;
     }
 
-    public static function telechargerLettre(): void{
-        $lettre = (new RegarderRepository())->recupererLettre($_REQUEST['etudiant'],$_REQUEST['idOffre']);
+    public static function telechargerLettre(): void
+    {
+        $lettre = (new RegarderRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idOffre']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=Lettre de motivation de '. $etu->getPrenomEtudiant().' '.$etu->getNomEtudiant().'.pdf');
+        header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
         echo $lettre;
     }
 
