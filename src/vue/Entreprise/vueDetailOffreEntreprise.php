@@ -117,7 +117,7 @@
                                 echo ">Assigner";
                             }
                         }
-                        echo '</button></a></div>;
+                        echo '</button></a></div>
                 </div>';
                     }
                 }
@@ -157,12 +157,13 @@
     </div>
 
     <div class="wrapBoutonsDoc">
-        <a href="">
+        <?php
+        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idOffre='.$_REQUEST['idOffre'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
-        <a href="">
+        <a href=?action=telechargerLettre&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'>
             <button class="boutonDoc">TELECHARGER LETTRE</button>
-        </a>
+        </a>' ?>
     </div>
 
     <div class="wrapActions">
