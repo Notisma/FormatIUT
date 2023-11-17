@@ -10,13 +10,22 @@ use App\FormatIUT\Configuration\ConfigurationLdap;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
+use App\FormatIUT\Lib\InsertionCSV;
+use App\FormatIUT\Modele\DataObject\Etudiant;
+use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\DataObject\studea;
+use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\LMRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\pstageRepository;
 use App\FormatIUT\Modele\Repository\RegarderRepository;
+use App\FormatIUT\Modele\Repository\ResidenceRepository;
+use App\FormatIUT\Modele\Repository\StudeaRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -208,8 +217,58 @@ class ControleurEtuMain extends ControleurMain
                 self::redirectionFlash("afficherProfilEtu", "warning", "Aucune image selectionnée");
             }
         }
-
     }
+
+    public static function afficherImporterCSV(): void
+    {
+        self::afficherVueDansCorps("importer CSV", "Etudiant/vueImportCSV.php", self::getMenu());
+    }
+
+    public static function afficherExporterCSV(){
+        self::afficherVueDansCorps("exporter CSV", "Etudiant/vueExportCSV.php", self::getMenu());
+    }
+
+    public static function ajouterCSV(): void {
+        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+
+        fgetcsv($csvFile);
+
+        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
+            if (sizeof($ligne) == 82) {
+                InsertionCSV::insererPstage($ligne);
+            }
+            else if (sizeof($ligne) == 143){
+                InsertionCSV::insererStudea($ligne);
+            }
+        }
+        fclose($csvFile);
+
+        self::afficherAccueilEtu();
+    }
+
+    public static function exporterCSV(){
+        $tab = (new pstageRepository())->exportCSV();
+
+        $delimiter = ",";
+        $filename = "sae-data_" . date('Y-m-d') . ".csv";
+        $f = fopen('php://memory', 'w');
+
+        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours','Nom ville etudiant', 'Code postal Etudiant' ,'nomOffre','dateDebut', 'dateFin', 'sujetOffre', 'gratification','dureeHeures' ,'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
+        fputcsv($f, $champs, $delimiter);
+
+        foreach ($tab as $ligne){
+
+            fputcsv($f, $ligne, $delimiter);
+        }
+        fseek($f, 0);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        fpassthru($f);
+        fclose($f);
+    }
+
+
 
     public static function getMenu(): array
     {
@@ -224,13 +283,125 @@ class ControleurEtuMain extends ControleurMain
         if ($formation) {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=" . $formation['idOffre']);
         }
-
         if (self::$titrePageActuelleEtu == "Mon Compte") {
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilEtu&controleur=EtuMain");
         }
 
+        $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
+        if (!$convention) {
+            $offreValidee = (new RegarderRepository())->getOffreValider(self::$cleEtudiant);
+            if ($offreValidee) {
+                $offre = (new OffreRepository())->getObjectParClePrimaire($offreValidee->getIdOffre());
+                if ($offre->getTypeOffre() == "Stage")
+                    $menu[] = array("image" => "", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
+                else if ($offre->getTypeOffre() == "Alternance")
+                    $menu[] = array("image" => "", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
+            }
+        } else {
+            $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+        }
+
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
+        $menu[] = array("image" => "", "label" => "importer CSV", "lien" => "?controleur=EtuMain&action=afficherImporterCSV");
+        $menu[] = array("image"=>"", "label"=>"exporter CSV", "lien"=> "?controleur=EtuMain&action=afficherExporterCSV");
         return $menu;
+    }
+
+    public static function afficherMaConvention(): void
+    {
+        $convention = (new ConventionRepository())->aUneConvention(self::$cleEtudiant);
+        if ($convention) {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residenceEtu = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $villeEtu = (new VilleRepository())->getVilleParIdResidence($residenceEtu->getIdResidence());
+            $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::$cleEtudiant);
+            $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entreprise->getSiret());
+            $offre = (new OffreRepository())->trouverOffreDepuisForm(self::$cleEtudiant);
+            $convention = (new ConventionRepository())->trouverConventionDepuisForm(self::$cleEtudiant);
+            self::afficherVueDansCorps("Ma convention", "Etudiant/afficherConvention.php", self::getMenu(),
+                ["etudiant" => $etudiant, "residenceEtu" => $residenceEtu, "villeEtu" => $villeEtu, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                    "offre" => $offre, "convention" => $convention]);
+        } else {
+            self::afficherErreur("Ne possède pas de convention");
+        }
+    }
+
+    public static function afficherFormulaireConventionStage(): void
+    {
+        $offre = (new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Stage");
+        if ($offre) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            self::afficherVueDansCorps("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+        } else {
+            self::afficherErreur("offre non valide");
+        }
+    }
+
+    public static function afficherFormulaireConventionAlternance(): void
+    {
+//        $offreVerif = (new RegarderRepository())->getOffreValider(self::$cleEtudiant);
+        $offre = (new OffreRepository())->trouverOffreValide(self::$cleEtudiant, "Alternance");
+        if ($offre) {
+
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::$cleEtudiant);
+            $residence = (new ResidenceRepository())->getResidenceParEtu(self::$cleEtudiant);
+            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            self::afficherVueDansCorps("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+        } else {
+            self::afficherErreur("offre non valide");
+        }
+    }
+
+
+    public static function creationConvention()
+    {
+        if ($_POST['idOff'] != "aucune") {
+            if ($_POST['codePostalEntr'] > 0 && $_POST['siret'] > 0) {
+                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_POST['siret']);
+                if (isset($entrepriseVerif)) {
+                    $offreVerif = (new OffreRepository())->getObjectParClePrimaire($_POST['idOff']);
+                    if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
+                        $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
+                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_POST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresse()) == trim($_POST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_POST['villeEntr'])) && ($villeEntr->getCodePostal() == $_POST['codePostalEntr'])) {
+                            if ($offreVerif->getDateDebut() == new \DateTime($_POST['dateDebut']) && $offreVerif->getDateFin() == new \DateTime($_POST['dateFin'])) {
+                                $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
+                                $convention = (new ConventionRepository())->construireDepuisTableau(["idConvention" => $clefPrimConv,
+                                    "conventionValidee" => 0, "dateCreation" => $_POST['dateCreation'], "dateTransmission" => $_POST['dateCreation'],
+                                    "retourSigne" => 1, "assurance" => $_POST['assurance'], "objectifOffre" => $_POST['objfOffre'], "typeConvention" => $offreVerif->getTypeOffre()]);
+                                (new ConventionRepository())->creerObjet($convention);
+                                if (!(new EtudiantRepository())->aUneFormation(self::$cleEtudiant)) {
+                                    $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ('F' . $offreVerif->getIdOffre()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
+                                        "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => self::$cleEtudiant, "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
+                                        "idOffre" => $offreVerif->getIdOffre()]);
+                                    (new FormationRepository())->creerObjet($formation);
+                                } else {
+                                    (new FormationRepository())->ajouterConvention(self::$cleEtudiant, $convention->getIdConvention());
+                                }
+                                self::afficherAccueilEtu();
+                            } else {
+                                self::afficherErreur("Erreur sur les dates");
+                            }
+                        } else {
+                            self::afficherErreur("Erreur sur les informations de l'entreprise");
+                        }
+                    } else {
+                        self::afficherErreur("L'entreprise n'a jamais créé cette offre");
+                    }
+                } else {
+                    self::afficherErreur("Erreur l'entreprise n'existe pas");
+                }
+            } else {
+                self::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
+            }
+        } else {
+            self::afficherErreur("Aucune offre est liée à votre convention");
+        }
     }
 
     public static function getTitrePageActuelleEtu(): string

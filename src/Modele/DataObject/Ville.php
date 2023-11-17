@@ -6,7 +6,6 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 class Ville extends AbstractDataObject
 {
-
     private string $idVille;
     private string $nomVille;
     private int $codePostal;

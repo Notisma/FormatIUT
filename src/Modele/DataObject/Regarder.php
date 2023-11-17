@@ -10,7 +10,6 @@ class Regarder extends AbstractDataObject{
 
     private ?string $lettre;
 
-
     /**
      * @return float
      */
@@ -57,6 +56,39 @@ class Regarder extends AbstractDataObject{
     public function setEtat(string $Etat): void
     {
         $this->Etat = $Etat;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getCv(): string
+    {
+        return $this->cv;
+    }
+
+    /**
+     * @param string $cv
+     */
+    public function setCv(string $cv): void
+    {
+        $this->cv = $cv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLettre(): string
+    {
+        return $this->lettre;
+    }
+
+    /**
+     * @param string $lettre
+     */
+    public function setLettre(string $lettre): void
+    {
+        $this->lettre = $lettre;
     }
 
 

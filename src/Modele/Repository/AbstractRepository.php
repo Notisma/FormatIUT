@@ -43,7 +43,6 @@ abstract class AbstractRepository
         return $listeObjet;
     }
 
-
     /***
      * @param $clePrimaire
      * @return AbstractDataObject|null
@@ -91,21 +90,26 @@ abstract class AbstractRepository
      * @return void
      * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
      */
-
-    public function creerObjet(AbstractDataObject $objet): void
+    public function creerObjet(AbstractDataObject $object): void
     {
-        $sql = "INSERT INTO " . $this->getNomTable() . " VALUES (";
+        $fields = "";
+        $values = "";
+        $tags = array();
         foreach ($this->getNomsColonnes() as $nomColonne) {
             if ($nomColonne != $this->getNomsColonnes()[0]) {
-                $sql .= ",";
+                $fields .= ", ";
+                $values .= ", ";
             }
-            $sql .= ":" . $nomColonne . "Tag";
-            $values[$nomColonne . "Tag"] = $objet->formatTableau()[$nomColonne];
+            $fields .= $nomColonne;
+            $values .= ":" . $nomColonne . "Tag";
+            $tags[$nomColonne . "Tag"] = $object->formatTableau()[$nomColonne];
         }
-        $sql .= ")";
+        $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
+
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute($values);
+        $pdoStatement->execute($tags);
     }
+
 
     public function modifierObjet(AbstractDataObject $objet): void
     {
@@ -182,7 +186,7 @@ abstract class AbstractRepository
         try {
             $pdoStatement = $pdo->prepare($sql);
             $pdoStatement->execute($tags);
-        } catch (\PDOException) {
+        } catch (\PDOException $e) {
             return null;
         }
 
@@ -206,7 +210,7 @@ abstract class AbstractRepository
         try {
             $pdoStatement = $pdo->prepare($sql);
             $pdoStatement->execute($tags);
-        } catch (\PDOException) {
+        } catch (\PDOException $e) {
             return null;
         }
         foreach ($pdoStatement as $row)

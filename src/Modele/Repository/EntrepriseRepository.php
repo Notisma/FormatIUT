@@ -6,11 +6,8 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use PDO;
 
-// cette classe n'est pas encore faite, sauf deux fonctions utilisées dans Offre
 class EntrepriseRepository extends AbstractRepository
 {
-
-
     protected function getNomTable(): string
     {
         return "Entreprise";
@@ -23,12 +20,11 @@ class EntrepriseRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
-        $valide=0;
-        if (isset($entrepriseFormatTableau["estValide"])&& $entrepriseFormatTableau["estValide"]){
-            $valide=1;
+        $valide = 0;
+        if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
+            $valide = 1;
         }
-        return new Entreprise($entrepriseFormatTableau['numSiret'],
-            $entrepriseFormatTableau['nomEntreprise'],
+        return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
             $entrepriseFormatTableau['codeNAF'],
@@ -47,7 +43,6 @@ class EntrepriseRepository extends AbstractRepository
     protected function getClePrimaire(): string
     {
         return "numSiret";
-
     }
 
     /***
@@ -88,17 +83,29 @@ class EntrepriseRepository extends AbstractRepository
         }
         return $listeEntreprises;
     }
-    public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse){
-        $sql="UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, Adresse_Entreprise = :adTag WHERE numSiret = :siretTag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("nomTag"=>$nom,
-            "statutTag"=>$statut,
-            "effTag"=>$effectif,
-            "codeTag"=>$codeNAF,
-            "telTag"=>$tel,
-            "adTag"=>$adresse,
-            "siretTag"=>$siret);
-        $pdoStatement->execute($values);
+
+    public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse)
+    {
+        $sql = "UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, Adresse_Entreprise = :adTag WHERE numSiret = :siretTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("nomTag" => $nom,
+            "statutTag" => $statut,
+            "effTag" => $effectif,
+            "codeTag" => $codeNAF,
+            "telTag" => $tel,
+            "adTag" => $adresse,
+            "siretTag" => $siret);
+
     }
 
+    public function trouverEntrepriseDepuisForm($numEtu): Entreprise
+    {
+        $sql = "Select numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id
+        FROM Formation f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagEtu" => $numEtu);
+        $pdoStatement->execute($values);
+        return $this->construireDepuisTableau($pdoStatement->fetch());
+
+    }
 }

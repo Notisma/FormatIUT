@@ -255,25 +255,27 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function etudiantsSansOffres(){
-        $sql="SELECT * FROM ".$this->getNomTable()." etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+    public function etudiantsSansOffres()
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $etudiant) {
-            $listeEtudiants[]=$this->construireDepuisTableau($etudiant);
+            $listeEtudiants[] = $this->construireDepuisTableau($etudiant);
         }
         return $listeEtudiants;
     }
 
-    public function etudiantsEtats(){
-        $sql="SELECT numEtudiant,COUNT(idFormation) as AUneOffre
+    public function etudiantsEtats()
+    {
+        $sql = "SELECT numEtudiant,COUNT(idFormation) as AUneOffre
                 FROM Etudiants etu 
                 LEFT JOIN Formation f ON f.idEtudiant=etu.numEtudiant
                 GROUP BY numEtudiant";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $item) {
             $nb = $item["AUneOffre"];
             unset($item["AUneOffre"]);
-            $listeEtudiants[] = array("etudiant"=>$this->getObjectParClePrimaire($item["numEtudiant"]), "aUneFormation"=>$nb);
+            $listeEtudiants[] = array("etudiant" => $this->getObjectParClePrimaire($item["numEtudiant"]), "aUneFormation" => $nb);
 
         }
         return $listeEtudiants;
@@ -292,10 +294,11 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    public function getAssociationPourOffre($idOffre, $numEtudiant) {
-        $sql="SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("TagOffre"=>$idOffre, "TagEtu"=>$numEtudiant);
+    public function getAssociationPourOffre($idOffre, $numEtudiant)
+    {
+        $sql = "SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagOffre" => $idOffre, "TagEtu" => $numEtudiant);
         $pdoStatement->execute($values);
         $resultat = $pdoStatement->fetch();
         if ($resultat) {
@@ -306,9 +309,9 @@ class EtudiantRepository extends AbstractRepository
             } else if ($resultat["Etat"] == "Refusée") {
                 return "Refusé par l'entreprise";
             } else {
-                $sql="SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
-                $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-                $values=array("TagEtu"=>$numEtudiant,"TagOffre"=>$idOffre);
+                $sql = "SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
+                $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+                $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
                 $pdoStatement->execute($values);
                 $resultat = $pdoStatement->fetch();
                 if ($resultat) {
@@ -321,12 +324,23 @@ class EtudiantRepository extends AbstractRepository
         return null;
     }
 
-    public function getAnneeEtudiant(Etudiant $etudiant): int{
+    public function getAnneeEtudiant(Etudiant $etudiant): int
+    {
         return match (substr($etudiant->getGroupe(), 0, 1)) {
             "Q" => 2,
             "G" => 3,
             default => 2,
         };
+    }
+
+
+    public function getOffreValidee($numEtu, $typeOffre)
+    {
+        $sql = "Select * FROM regarder r JOIN Offre o ON o.idOffre = r.idOffre WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND Etat = 'Validée'";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagType" => $typeOffre, "tagEtu" => $numEtu);
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch();
     }
 
 }
