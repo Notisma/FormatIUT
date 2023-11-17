@@ -171,7 +171,7 @@ class ControleurAdminMain extends ControleurMain
         //TODO : FAIRE LES VERIFICATIONS
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
         (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
-        self::redirectionFlash("afficherAccueilEntr", "success", "L'étudiant a bien été supprimé");
+        self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été supprimé");
     }
 
     public static function refuserEntreprise(): void
