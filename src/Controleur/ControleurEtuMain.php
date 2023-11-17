@@ -276,7 +276,6 @@ class ControleurEtuMain extends ControleurMain
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Etudiants", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain"),
             array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
             array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
-
         );
 
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
@@ -301,9 +300,9 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
         $menu[] = array("image" => "", "label" => "importer CSV", "lien" => "?controleur=EtuMain&action=afficherImporterCSV");
         $menu[] = array("image"=>"", "label"=>"exporter CSV", "lien"=> "?controleur=EtuMain&action=afficherExporterCSV");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
         return $menu;
     }
 
