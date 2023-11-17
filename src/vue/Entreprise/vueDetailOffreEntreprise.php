@@ -1,4 +1,4 @@
-<div class="boiteMain">
+<div class="boiteMain" id="aGriser">
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
@@ -45,13 +45,13 @@
                 echo '
             <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
         
-            <button type="submit" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
             
-            <button type="submit" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
         ';
             }
             ?>
-            <button type="submit" class="boutonAssigner" formaction="?action=mesOffres&controleur=EntrMain">RETOUR</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=mesOffres&controleur=EntrMain">RETOUR</button>
         </form>
     </div>
 
@@ -98,7 +98,7 @@
                         $idURL = rawurlencode($etudiant->getNumEtudiant());
                         echo '</h4>
                             <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
-                        echo '<button class="boutonAssigner" ';
+                        echo '<button id="petit" class="boutonAssigner" ';
                         if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                             echo ' id="disabled" disabled';
                         }
