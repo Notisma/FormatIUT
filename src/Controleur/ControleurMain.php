@@ -235,7 +235,10 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+                    header("Location : controleurFrontal.php?action=afficherAccueilAdminacontroleur=AdminMain");
+                }
+                else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
