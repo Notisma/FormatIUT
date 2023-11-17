@@ -17,7 +17,8 @@ use DateTime;
 class InsertionCSV
 {
 
-    public static function insererPstage($ligne): void {
+    public static function insererPstage($ligne): void
+    {
         $login = $ligne[2];
         $login .= $ligne[3][0]; //surement à changer si un étudiant à le même nom et le même prenom
         $login = strtolower($login);
@@ -26,18 +27,18 @@ class InsertionCSV
         (new EtudiantRepository())->creerObjet($etudiant);
 
         //il faut changer l'effectif,
-       $entreprise = new Entreprise($ligne[55], "", $ligne[62], 0, $ligne[65], $ligne[66], "ligne[56]", "V1", 0);
-      (new EntrepriseRepository())->creerObjet($entreprise);
+        $entreprise = new Entreprise($ligne[55], "", $ligne[62], 0, $ligne[65], $ligne[66], "", "V1", 0, "", "", "", "", 0);
+        (new EntrepriseRepository())->creerObjet($entreprise);
 
-        $dateConv1= $ligne[13]; // Chaîne représentant la date
+        $dateConv1 = $ligne[13]; // Chaîne représentant la date
         $dateDebutConv = DateTime::createFromFormat('d/m/Y', $dateConv1);
 
         $dateConv2 = $ligne[14];
         $dateFinConv = DateTime::createFromFormat("d/m/Y", $dateConv2);
 
         $conventionValidee = $ligne[28] == "oui" ? 1 : 0;
-            $convention = new ConventionStage($ligne[0], $conventionValidee, $dateDebutConv, $dateFinConv, 0, "", $ligne[20], $ligne[37]);
-            (new ConventionStageRepository())->creerObjet($convention);
+        $convention = new ConventionStage($ligne[0], $conventionValidee, $dateDebutConv, $dateFinConv, 0, "", $ligne[20], $ligne[37]);
+        (new ConventionStageRepository())->creerObjet($convention);
 
         $dateString = $ligne[13]; // Chaîne représentant la date
         $dateDebut = DateTime::createFromFormat('d/m/Y', $dateString); // Créer un objet DateTime à partir de la chaîne
@@ -56,7 +57,8 @@ class InsertionCSV
         (new VilleRepository())->creerObjet($ville2);
     }
 
-    public static function insererStudea($ligne): void {
+    public static function insererStudea($ligne): void
+    {
         $login = $ligne[9];
         $login .= $ligne[10][0]; //surement à changer si un étudiant à le même nom et le même prenom
         $login = strtolower($login);
@@ -65,7 +67,7 @@ class InsertionCSV
         (new EtudiantRepository())->creerObjet($etudiant);
 
         //il faut changer l'effectif,
-        $entreprise = new Entreprise($ligne[58], "", "XX", $ligne[82], $ligne[80], "XX", $ligne[64], "V1", 0);
+        $entreprise = new Entreprise($ligne[58], "", "XX", $ligne[82], $ligne[80], "XX", $ligne[64], "V1", 0, "", "", "", "", 0);
         (new EntrepriseRepository())->creerObjet($entreprise);
 
         $dateString = $ligne[139]; // Chaîne représentant la date
