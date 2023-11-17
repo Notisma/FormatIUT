@@ -260,12 +260,15 @@ class ControleurEtuMain extends ControleurMain
         if ($convention) {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $residenceEtu = (new ResidenceRepository())->getResidenceParEtu(self::getCleEtudiant());
-            $villeEtu = (new VilleRepository())->getVilleParIdResidence($residenceEtu->getIdResidence());
+            $villeEtu = false;
+            if($residenceEtu != false) {
+                $villeEtu = (new VilleRepository())->getVilleParIdResidence($residenceEtu->getIdResidence());
+            }
             $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::getCleEtudiant());
             $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entreprise->getSiret());
             $offre = (new OffreRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
             $convention = (new ConventionRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
-            self::afficherVue("Ma convention", "Etudiant/afficherConvention.php", self::getMenu(),
+            self::afficherVue("Ma convention", "Etudiant/vueAfficherConvention.php", self::getMenu(),
                 ["etudiant" => $etudiant, "residenceEtu" => $residenceEtu, "villeEtu" => $villeEtu, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                     "offre" => $offre, "convention" => $convention]);
         } else {
@@ -281,8 +284,11 @@ class ControleurEtuMain extends ControleurMain
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $residence = (new ResidenceRepository())->getResidenceParEtu(self::getCleEtudiant());
-            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-            self::afficherVue("Convention Stage", "Etudiant/formConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+             $ville =  false;
+            if($residence != false) {
+                $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            }
+            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         } else {
             self::afficherErreur("offre non valide");
         }
@@ -298,8 +304,11 @@ class ControleurEtuMain extends ControleurMain
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $residence = (new ResidenceRepository())->getResidenceParEtu(self::getCleEtudiant());
-            $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
-            self::afficherVue("Convention Alternance", "Etudiant/formConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            $ville =  false;
+            if($residence != false) {
+                $ville = (new VilleRepository())->getVilleParIdResidence($residence->getIdResidence());
+            }
+            self::afficherVue("Convention Alternance", "Etudiant/vueFormulaireConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "residence" => $residence, "ville" => $ville, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         } else {
             self::afficherErreur("offre non valide");
         }

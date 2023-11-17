@@ -100,7 +100,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
-        $sql = "Select numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id
+        $sql = "Select numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
         FROM Formation f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
