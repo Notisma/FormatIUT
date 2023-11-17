@@ -1,0 +1,21 @@
+Index: src/Configuration/Configuration.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n/*\r\n//On configure ici l'accès à la base de données\r\ndefine('DB_HOST', 'localhost'); //Adresse de la base de données\r\ndefine('DB_USER', 'loyet'); //Nom d'utilisateur de la base de données\r\ndefine('DB_PASS', '26032004'); //Mot de passe de la base de données\r\ndefine('DB_NAME', 'loyet'); //Nom de la base de données4\r\n*/\r\nnamespace App\\FormatIUT\\Configuration;\r\n\r\nclass Configuration{\r\n    static private array $config= array(\r\n     'hostname'=>'localhost',\r\n     'database'=>'loyet',\r\n     'login'=>'loyet',\r\n     'password'=>'26032004',\r\n     'port' =>'3306'\r\n    );\r\n\r\n    public static function getHostname(): string\r\n    {\r\n        return self::$config['hostname'];\r\n    }\r\n\r\n    public static function getDatabase(): string\r\n    {\r\n        return self::$config['database'];\r\n    }\r\n\r\n    public static function getLogin():string{\r\n        return self::$config['login'];\r\n    }\r\n\r\n    public static function getPassword():string{\r\n        return self::$config['password'];\r\n    }\r\n\r\n    public static function getPort():string{\r\n        return self::$config['port'];\r\n    }\r\n\r\n}\r\n?>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Configuration/Configuration.php b/src/Configuration/Configuration.php
+--- a/src/Configuration/Configuration.php	(revision 703079cdace4f22fdf65edd0cf46f1439950f7fc)
++++ b/src/Configuration/Configuration.php	(date 1697540570152)
+@@ -12,8 +12,8 @@
+     static private array $config= array(
+      'hostname'=>'localhost',
+      'database'=>'loyet',
+-     'login'=>'loyet',
+-     'password'=>'26032004',
++     'login'=>'root',
++     'password'=>'root',
+      'port' =>'3306'
+     );
+ 

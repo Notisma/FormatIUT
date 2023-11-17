@@ -357,7 +357,21 @@ class ControleurMain
         $controleur = Configuration::getCheminControleur();
 
         if (!isset($_REQUEST['recherche'])) {
-            $controleur::afficherErreur("Il faut renseigner une recherche.");
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
+            ConnexionUtilisateur::deconnecter();
+            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            return;
+        } //si la recherche contient des chiffres
+        if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
+            ConnexionUtilisateur::deconnecter();
+            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            return;
+        } //si la recherche ne contient que un ou des espaces
+        if (preg_match('/^[\s]+$/', $_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
+            ConnexionUtilisateur::deconnecter();
+            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
             return;
         }
 
@@ -365,15 +379,24 @@ class ControleurMain
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-        if ($res == null)
-            self::afficherErreur("Erreur dans la recherche, veuillez réessayer.");
-        else
+        if (count($res['offres']) == 0 && count($res['entreprises']) == 0) {
+            MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
+            self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
+                "recherche" => $recherche,
+                "offres" => $res['offres'],
+                "entreprises" => $res['entreprises']
+            ]);
+        }
+        else {
+            MessageFlash::ajouter("success", count($res['offres']) + count($res['entreprises']) . " Résultats trouvés.");
             $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
                 "offres" => $res['offres'],
                 "entreprises" => $res['entreprises']
             ]);
+            }
     }
+
 
     public static function afficherSources()
     {
