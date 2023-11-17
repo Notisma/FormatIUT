@@ -3,11 +3,13 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\InsertionCSV;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\pstageRepository;
 
 class ControleurAdminMain extends ControleurMain
 {
@@ -60,6 +62,45 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
+    public static function ajouterCSV(): void {
+        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+
+        fgetcsv($csvFile);
+
+        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
+            if (sizeof($ligne) == 82) {
+                InsertionCSV::insererPstage($ligne);
+            }
+            else if (sizeof($ligne) == 143){
+                InsertionCSV::insererStudea($ligne);
+            }
+        }
+        fclose($csvFile);
+
+        self::afficherAccueilAdmin();
+    }
+
+    public static function exporterCSV(){
+        $tab = (new pstageRepository())->exportCSV();
+
+        $delimiter = ",";
+        $filename = "sae-data_" . date('Y-m-d') . ".csv";
+        $f = fopen('php://memory', 'w');
+
+        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours','Nom ville etudiant', 'Code postal Etudiant' ,'nomOffre','dateDebut', 'dateFin', 'sujetOffre', 'gratification','dureeHeures' ,'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
+        fputcsv($f, $champs, $delimiter);
+
+        foreach ($tab as $ligne){
+
+            fputcsv($f, $ligne, $delimiter);
+        }
+        fseek($f, 0);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        fpassthru($f);
+        fclose($f);
+    }
 
     public static function getMenu(): array
     {

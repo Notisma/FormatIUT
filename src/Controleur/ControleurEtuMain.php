@@ -219,57 +219,6 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
-    public static function afficherImporterCSV(): void
-    {
-        self::afficherVue("importer CSV", "Etudiant/vueImportCSV.php", self::getMenu());
-    }
-
-    public static function afficherExporterCSV(){
-        self::afficherVue("exporter CSV", "Etudiant/vueExportCSV.php", self::getMenu());
-    }
-
-    public static function ajouterCSV(): void {
-        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-
-        fgetcsv($csvFile);
-
-        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
-            if (sizeof($ligne) == 82) {
-                InsertionCSV::insererPstage($ligne);
-            }
-            else if (sizeof($ligne) == 143){
-                InsertionCSV::insererStudea($ligne);
-            }
-        }
-        fclose($csvFile);
-
-        self::afficherAccueilEtu();
-    }
-
-    public static function exporterCSV(){
-        $tab = (new pstageRepository())->exportCSV();
-
-        $delimiter = ",";
-        $filename = "sae-data_" . date('Y-m-d') . ".csv";
-        $f = fopen('php://memory', 'w');
-
-        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours','Nom ville etudiant', 'Code postal Etudiant' ,'nomOffre','dateDebut', 'dateFin', 'sujetOffre', 'gratification','dureeHeures' ,'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
-        fputcsv($f, $champs, $delimiter);
-
-        foreach ($tab as $ligne){
-
-            fputcsv($f, $ligne, $delimiter);
-        }
-        fseek($f, 0);
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $filename . '";');
-
-        fpassthru($f);
-        fclose($f);
-    }
-
-
-
     public static function getMenu(): array
     {
         $menu = array(
@@ -300,8 +249,6 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "", "label" => "importer CSV", "lien" => "?controleur=EtuMain&action=afficherImporterCSV");
-        $menu[] = array("image"=>"", "label"=>"exporter CSV", "lien"=> "?controleur=EtuMain&action=afficherExporterCSV");
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
         return $menu;
     }
