@@ -28,12 +28,12 @@ $count = count($offres) + count($entreprises);
         if (!empty($entreprises)) {
             foreach ($entreprises as $entr) {
                 echo '
-                    <div class="resultat">
+                    <div class="resultat" id="petitRouge">
                         <div class="partieGauche">
                             <img src = "data:image/jpeg;base64,' . base64_encode($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
                         </div>
                         <div class="partieDroite">
-                            <h3 class="titre" id="rouge">' . $entr->getNomEntreprise() . ' - Entreprise</h3>
+                            <h3 class="titre">' . $entr->getNomEntreprise() . ' - Entreprise</h3>
                             <p><span>Téléphone : </span>' . $entr->getTel() . '</p>
                             <p><span>Adresse : </span>' . $entr->getAdresse() . '</p>
                         </div>

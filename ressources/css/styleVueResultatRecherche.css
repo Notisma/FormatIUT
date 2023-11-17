@@ -125,6 +125,14 @@ p {
     width: 80%;
 }
 
+#petitRouge {
+    background-color: #ff9095;
+}
+
+#petitRouge:hover {
+    background-color: #ffbcbf;
+}
+
 .partieDroite {
     height: 100%;
     width: 85%;
