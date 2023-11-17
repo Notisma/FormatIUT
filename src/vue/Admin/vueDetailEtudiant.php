@@ -9,10 +9,15 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
     <div class="gaucheEtu">
         <div class="infosEtu">
             <?php
+
+            $prenomHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
+            $nomHTML=htmlspecialchars($etudiant->getNomEtudiant());
+            $parcoursHTML=htmlspecialchars($etudiant->getParcours());
+            $groupeHTML=htmlspecialchars($etudiant->getGroupe());
             echo "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>";
-            echo "<h1 id='rouge' class='titre'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h1>";
+            echo "<h1 id='rouge' class='titre'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($etudiant->getGroupe() != null && $etudiant->getParcours() != null) {
-                echo "<h3 class='titre'>" . $etudiant->getGroupe() . " - " . $etudiant->getParcours() . "</h3>";
+                echo "<h3 class='titre'>" . $groupeHTML . " - " . $parcoursHTML . "</h3>";
             } else {
                 echo "<h3 class='titre'>Des données sont manquantes</h3>";
             }
@@ -21,14 +26,15 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
 
         <div class="detailsEtudiants">
             <?php
+            $mailHTML=htmlspecialchars($etudiant->getMailPerso());
+            $telHTML=htmlspecialchars($etudiant->getTelephone());
             echo "<h3 class='titre'>Informations :</h3>";
             echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
             echo "<p>Login : " . $etudiant->getLogin() . "</p>";
             echo "<p>Mail Universitaire : " . $etudiant->getMailUniersitaire() . "</p>";
-            echo "<p>Mail Personnel : " . $etudiant->getMailPerso() . "</p>";
-            echo "<p>Téléphone : " . $etudiant->getTelephone() . "</p>";
-            echo "<p>Groupe : " . $etudiant->getGroupe() . "</p>";
-            echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
+            echo "<p>Mail Personnel : " . $mailHTML . "</p>";
+            echo "<p>Téléphone : " . $telHTML . "</p>";
+            echo "<p>Groupe : " . $groupeHTML . "</p>";
             ?>
         </div>
 
@@ -55,13 +61,15 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
                         $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
+                        $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
-                            "<h3 class='titre'>" . $offre->getNomOffre() . "</h3>" .
-                            "<h4 class='titre'>" . $entreprise->getNomEntreprise() . "</h4>" .
+                            "<h3 class='titre'>" . $nomOffreHTML . "</h3>" .
+                            "<h4 class='titre'>" . $nomEntrHTML . "</h4>" .
                             "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant() ) . "</h5> " .
                             "</div>" .
                             "</a>";
