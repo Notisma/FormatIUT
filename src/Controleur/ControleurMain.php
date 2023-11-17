@@ -65,13 +65,7 @@ class ControleurMain
                     if (in_array($idOffre, $liste)) {
                         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-
-                        if (Configuration::controleurIs("EntrMain"))
-                            $client = "Entreprise";
-                        else if (Configuration::controleurIs("EtuMain"))
-                            $client = "Etudiant";
-                        else if (Configuration::controleurIs("AdminMain"))
-                            $client = "Admin";
+                        $client = "Etudiant";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                         self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                     } else {
@@ -85,6 +79,31 @@ class ControleurMain
                 self::afficherErreur("Vous n'avez pas le droit de voir cette offre");
             }
         }
+        else if(Configuration::controleurIs("EntrMain")){
+            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+            if($offre->getSiret() == ConnexionUtilisateur::getNumEntrepriseConnectee()){
+                self::$pageActuelle = "Détails de l'offre";
+                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                $liste = (new OffreRepository())->getListeIdOffres();
+                if ($idOffre || isset($_REQUEST["idOffre"])) {
+                    if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
+                    if (in_array($idOffre, $liste)) {
+                        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $client = "Admin";
+                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                        self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    } else {
+                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    }
+                } else {
+                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                }
+            }
+            else{
+                self::redirectionFlash("mesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
+            }
+        }
         else{
             self::$pageActuelle = "Détails de l'offre";
                 $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
@@ -94,13 +113,7 @@ class ControleurMain
                     if (in_array($idOffre, $liste)) {
                         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-
-                        if (Configuration::controleurIs("EntrMain"))
-                            $client = "Entreprise";
-                        else if (Configuration::controleurIs("EtuMain"))
-                            $client = "Etudiant";
-                        else if (Configuration::controleurIs("AdminMain"))
-                            $client = "Admin";
+                        $client = "Admin";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                         self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                     } else {

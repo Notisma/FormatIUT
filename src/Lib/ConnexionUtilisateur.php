@@ -6,6 +6,7 @@ use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 
@@ -57,6 +58,15 @@ class ConnexionUtilisateur
             $session=Session::getInstance();
             $Loginetu=$session->lire(self::$cleConnexion);
             return (new EtudiantRepository())->getNumEtudiantParLogin($Loginetu);
+        }
+        return null;
+    }
+
+    public static function getNumEntrepriseConnectee():?int{
+        if (self::estConnecte()){
+            $session=Session::getInstance();
+            $loginentr=$session->lire(self::$cleConnexion);
+           return $loginentr;
         }
         return null;
     }
