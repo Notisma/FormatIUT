@@ -8,17 +8,22 @@
         <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise= <?php echo rawurlencode($entreprise->getSiret()) ?>"
            class="presentationPrincipale">
             <?php
+            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+            $sujetHTML=htmlspecialchars($offre->getSujet());
+            $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
+            $detailHTML=htmlspecialchars($offre->getDetailProjet());
+
             $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
             echo '<img src=' . $src . 'alt="image">';
-            echo "<h2 class='titre' id='rouge'>" . $entreprise->getNomEntreprise() . "</h2>";
-            echo "<h3 class='titre'>" . $offre->getSujet() . " - " . $offre->getTypeOffre() . "</h3>";
+            echo "<h2 class='titre' id='rouge'>" . $nomEntrHTML . "</h2>";
+            echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
             ?>
         </a>
 
 
         <div class="wrapDetails">
-            <h4 class="titre"> <?php echo $offre->getNomOffre() . " - " . $offre->getSujet() ?></h4>
-            <p>- Description de l'offre : <?php echo $offre->getDetailProjet() ?></p>
+            <h4 class="titre"> <?php echo $nomOffreHTML . " - " . $sujetHTML ?></h4>
+            <p>- Description de l'offre : <?php echo $detailHTML ?></p>
             <p>- Offre
                 de <?php echo "" . $offre->getTypeOffre() . " du : " . date_format($offre->getDateDebut(), "d/m/Y") . " au : " . date_format($offre->getDateFin(), "d/m/Y") ?></p>
             <p>- Rémunation : <?php echo $offre->getGratification() ?> €</p>
@@ -79,13 +84,15 @@
                     echo "</div>";
                 } else {
                     foreach ($listeEtudiants as $etudiant) {
+                        $parcoursHTML=htmlspecialchars($etudiant->getParcours());
+                        $groupeHTML=htmlspecialchars($etudiant->getGroupe());
                         echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
                             "<h3 class='titre' id='rouge'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h3>" .
-                            "<p>" . $etudiant->getGroupe() . " - " . $etudiant->getParcours() . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
+                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";
                     }
