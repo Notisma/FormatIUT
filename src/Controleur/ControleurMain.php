@@ -95,7 +95,7 @@ class ControleurMain
                     if (in_array($idOffre, $liste)) {
                         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                        $client = "Admin";
+                        $client = "Entreprise";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                         self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                     } else {

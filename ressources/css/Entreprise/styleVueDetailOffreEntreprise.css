@@ -349,12 +349,20 @@ body {
 
 .boutonAssigner {
     width: 100%;
-    height: 25%;
+    height: 100%;
     border-radius: 50px;
     border: none;
     background-color: #ff5660;
     color: white;
     padding: 3%;
+}
+
+#petit {
+    height: 100%;
+}
+
+#grand {
+    height: 25%;
 }
 
 .boutonAssigner:hover {

@@ -82,15 +82,16 @@ class ControleurEtuMain extends ControleurMain
             if (in_array($_REQUEST["idOffre"], $listeId)) {
                 if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST["idOffre"])) {
                     (new RegarderRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idOffre']);
-                    self::afficherMesOffres();
+                    self::redirectionFlash("afficherMesOffres", "success", "Offre annulée");
                 } else {
-                    self::afficherErreur("L'étudiant n'a jamais posutlé à cette offre");
+                    self::redirectionFlash("afficherMesOffres", "warning", "Vous n'avez pas postulé à cette offre");
                 }
             } else {
                 self::afficherErreur("L'offre n'existe pas");
+                self::redirectionFlash("afficherMesOffres", "danger", "L'offre n'existe pas");
             }
         } else {
-            self::afficherErreur("Données manquantes");
+            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
         }
     }
 
@@ -109,21 +110,21 @@ class ControleurEtuMain extends ControleurMain
                             $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->ListeIdTypeFormation()), "idFormation");
                             $formation = (new FormationRepository())->construireDepuisTableau(["idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateDebut(), "Y-m-d"), "dateFin" => date_format($offre->getDateFin(), 'Y-m-d'), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getSiret(), "idOffre" => $idOffre, "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
                             (new FormationRepository())->creerObjet($formation);
-                            self::afficherMesOffres();
+                            self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
                         } else {
-                            self::afficherErreur("Vous n'êtes pas en état de choisir pour cette offre");
+                            self::redirectionFlash("afficherMesOffres", "danger", "Vous n'êtes pas en état de choisir pour cette offre");
                         }
                     } else {
-                        self::afficherErreur("Cette Offre est déjà assignée");
+                        self::redirectionFlash("afficherMesOffres", "danger", "Cette Offre est déjà assignée");
                     }
                 } else {
-                    self::afficherErreur("Vous avez déjà une Offre assignée");
+                    self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une Offre assignée");
                 }
             } else {
-                self::afficherErreur("Offre non existante");
+                self::redirectionFlash("afficherMesOffres", "danger", "Offre non existante");
             }
         } else {
-            self::afficherErreur("Données Manquantes");
+            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
         }
     }
 
@@ -153,32 +154,32 @@ class ControleurEtuMain extends ControleurMain
                     if (is_null($formation)) {
                         if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
                             if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
-                                self::afficherErreur("Vous avez déjà postulé");
+                                self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
                                 $regarder = new Regarder(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
                                 (new RegarderRepository())->creerObjet($regarder);
                                 $_REQUEST['action'] = "afficherMesOffres";
-                                self::afficherMesOffres();
+                                self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
                             }
                         } else {
-                            self::afficherErreur("Vous avez déjà une formation");
+                            self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une formation");
                         }
                     } else {
                         if ($formation->getIdEtudiant() == self::getCleEtudiant()) {
-                            self::afficherErreur("Vous avez déjà cette Formation");
+                            self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà cette Formation");
                         } else {
-                            self::afficherErreur("Cette offre est déjà assignée");
+                            self::redirectionFlash("afficherMesOffres", "danger", "Cette offre est déjà assignée");
                         }
                     }
                 } else {
-                    self::afficherErreur("Offre inexistante");
+                    self::redirectionFlash("afficherMesOffres", "danger", "Offre inexistante");
                 }
             } else {
-                self::afficherErreur("Données Manquantes");
+                self::redirectionFlash("afficherMesOffres", "danger", "Données Manquantes");
             }
         }
         else{
-            self::afficherErreur("Vous ne pouvez pas postuler à cette offre");
+            self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas postuler à cette offre");
         }
     }
 
@@ -268,7 +269,7 @@ class ControleurEtuMain extends ControleurMain
                 ["etudiant" => $etudiant, "residenceEtu" => $residenceEtu, "villeEtu" => $villeEtu, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                     "offre" => $offre, "convention" => $convention]);
         } else {
-            self::afficherErreur("Ne possède pas de convention");
+            self::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne possèdez pas de convention");
         }
     }
 
@@ -329,7 +330,7 @@ class ControleurEtuMain extends ControleurMain
                                 } else {
                                     (new FormationRepository())->ajouterConvention(self::getCleEtudiant(), $convention->getIdConvention());
                                 }
-                                self::afficherAccueilEtu();
+                                self::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
                             } else {
                                 self::afficherErreur("Erreur sur les dates");
                             }
@@ -365,7 +366,7 @@ class ControleurEtuMain extends ControleurMain
             $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
         }
         (new RegarderRepository())->modifierObjet(new Regarder(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData));
-        self::afficherMesOffres();
+        self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
     }
 
 
