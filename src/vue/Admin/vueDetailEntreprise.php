@@ -1,24 +1,30 @@
 <div class="wrapCentreDetailEntr">
     <?php
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["idEntreprise"]);
+    $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+    $adresseHTML=htmlspecialchars($entreprise->getAdresse());
+    $statutHTML=htmlspecialchars($entreprise->getStatutJuridique());
+    $nafHTML=htmlspecialchars($entreprise->getCodeNAF());
+    $telHTML=htmlspecialchars($entreprise->getTel());
+    $mailHTML=htmlspecialchars($entreprise->getEmail());
     ?>
 
     <div class="gaucheEntr">
         <div class="wrapImgEntr">
             <img src="data:image/jpeg;base64,<?php echo base64_encode($entreprise->getImg()) ?>" alt="entreprise">
-            <h2 class="titre" id="rouge"><?php echo $entreprise->getNomEntreprise() ?></h2>
+            <h2 class="titre" id="rouge"><?php echo $nomEntrHTML ?></h2>
         </div>
 
         <div class="wrapInfosEntr">
             <h3 class="titre">Informations :</h3>
             <p>- SIRET : <?php echo $entreprise->getSiret() ?></p>
-            <p>- Adresse : <?php echo $entreprise->getAdresse() ?></p>
+            <p>- Adresse : <?php echo $adresseHTML ?></p>
             <p>- Ville : <?php echo $entreprise->getIdVille() ?></p>
-            <p>- Statut Juridique : <?php echo $entreprise->getStatutJuridique() ?></p>
+            <p>- Statut Juridique : <?php echo $statutHTML ?></p>
             <p>- Effectif : <?php echo $entreprise->getEffectif() ?></p>
-            <p>- Code NAF : <?php echo $entreprise->getCodeNAF() ?></p>
-            <p>- Téléphone : <?php echo $entreprise->getTel() ?></p>
-            <p>- Adresse Mail : <?php echo $entreprise->getEmail() ?></p>
+            <p>- Code NAF : <?php echo $nafHTML ?></p>
+            <p>- Téléphone : <?php echo $telHTML ?></p>
+            <p>- Adresse Mail : <?php echo $mailHTML ?></p>
         </div>
 
         <div class="wrapBoutons">
@@ -52,13 +58,14 @@
             } else {
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
+                        $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
-                            "<h3 class='titre'>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>" .
-                            "<h4 class='titre'>" . $entreprise->getNomEntreprise() . "</h4>";
+                            "<h3 class='titre'>" . $nomOffreHTML . " - " . $offre->getTypeOffre() . "</h3>" .
+                            "<h4 class='titre'>" . $nomEntrHTML . "</h4>";
 
                         if ($offre->isEstValide()) {
                             echo '<div class="statut" id="valide"> <img src="../ressources/images/success.png" alt="sab"> <p>Offre Postée</p> </div>';
