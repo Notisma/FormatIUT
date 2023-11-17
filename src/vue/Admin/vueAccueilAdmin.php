@@ -88,7 +88,8 @@
                     <div class="contenuAlerte">
                         <h3 class="titre" id="rouge">
                             <?php
-                            echo $entreprise->getNomEntreprise();
+                            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+                            echo $nomEntrHTML;
                             ?>
 
                             - Demande de création de compte</h3>
@@ -117,7 +118,8 @@
                     <div class="contenuAlerte">
                         <h3 class="titre" id="rouge">
                             <?php
-                            echo $entreprise->getNomEntreprise();
+                            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+                            echo $nomEntrHTML;
                             ?> - Offre en attente</h3>
                         <div class="sujetAlerte">
                             <img src="../ressources/images/attention.png" alt="image">
@@ -159,7 +161,10 @@
                             if ($etudiant->getParcours() == "") {
                                 echo "Données non renseignées";
                             } else {
-                                echo $etudiant->getParcours() . " - " . $etudiant->getGroupe();
+
+                                $parcoursHTML=htmlspecialchars($etudiant->getParcours());
+                                $groupeHTML=htmlspecialchars($etudiant->getGroupe());
+                                echo $parcoursHTML . " - " . $groupeHTML;
                             }
                             ?></p>
                         <div class="sujetAlerte">
