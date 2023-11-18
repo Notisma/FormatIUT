@@ -6,6 +6,9 @@ class Regarder extends AbstractDataObject{
     private int $idOffre;
     private string $Etat;
 
+    private ?string $cv;
+
+    private ?string $lettre;
 
     /**
      * @return float
@@ -55,11 +58,47 @@ class Regarder extends AbstractDataObject{
         $this->Etat = $Etat;
     }
 
-    public function __construct(float $numEtudiant, int $idOffre, string $Etat)
+
+    /**
+     * @return string
+     */
+    public function getCv(): string
+    {
+        return $this->cv;
+    }
+
+    /**
+     * @param string $cv
+     */
+    public function setCv(string $cv): void
+    {
+        $this->cv = $cv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLettre(): string
+    {
+        return $this->lettre;
+    }
+
+    /**
+     * @param string $lettre
+     */
+    public function setLettre(string $lettre): void
+    {
+        $this->lettre = $lettre;
+    }
+
+
+    public function __construct(float $numEtudiant, int $idOffre, string $Etat, ?string $cv, ?string $lettre)
     {
         $this->numEtudiant = $numEtudiant;
         $this->idOffre = $idOffre;
         $this->Etat = $Etat;
+        $this->cv = $cv;
+        $this->lettre = $lettre;
     }
 
 
@@ -67,7 +106,9 @@ class Regarder extends AbstractDataObject{
         return array(
             "numEtudiant"=> $this->numEtudiant,
             "idOffre"=> $this->idOffre,
-            "Etat" => $this->Etat
+            "Etat" => $this->Etat,
+            "cv"=> $this->cv,
+            "lettre"=> $this->lettre
         );
     }
 }

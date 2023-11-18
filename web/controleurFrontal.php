@@ -8,27 +8,43 @@ $loader->register();
 // enregistrement d'une association "namespace" → "dossier"
 $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
-use App\FormatIUT\Controleur\ControleurMain as CGlobal;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Configuration\Configuration;
 
-if (isset($_GET['controleur'])) {
-    $controleur = ucfirst($_GET["controleur"]);
+if (isset($_REQUEST['controleur'])) {
+    $controleur = ucfirst($_REQUEST["controleur"]);
 } else {
     $controleur = "Main";
 }
 
-if (isset($_GET['action'])) {
-    $action = lcfirst($_GET["action"]);
+if (isset($_REQUEST['action'])) {
+    $action = lcfirst($_REQUEST["action"]);
 } else {
     $action = "afficherIndex";
 }
 
 $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
-
-$guillemets = '"';
+$nonConnecte=false;
 if (class_exists($nomClasseControleur)) {
+    Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        $nomClasseControleur::$action();
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+           $nonConnecte=true;
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
+            $nonConnecte=true;
+        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
+            $nonConnecte=true;
+        }
+        else {
+            $nomClasseControleur::$action();
+        }
+        if ($nonConnecte){
+            header("Location: ?controleur=Main&action=afficherPageConnexion");
+            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
+        }
     } else
-        $nomClasseControleur::afficherErreur("L'action :$guillemets $action $guillemets n'existe pas dans le controleur :$guillemets $nomClasseControleur $guillemets");
-} else
-    $nomClasseControleur::afficherErreur("Le contrôleur :$guillemets $nomClasseControleur $guillemets n'existe pas");
+        $nomClasseControleur::afficherErreur('L\'action : "' . $action . '" n\'existe pas dans le contrôleur : "' . $nomClasseControleur . '"');
+} else {
+    Configuration::setControleur("Main");
+    ControleurMain::afficherErreur('Le contrôleur : ' . $nomClasseControleur . ' n\'existe pas');
+}

@@ -16,29 +16,29 @@ class TransfertImage
         $img_type = '';
         $img_nom = '';
         $taille_max = 1000000;
-        $ret = is_uploaded_file($_FILES['fic']['tmp_name']);
+        $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
 
         if (!$ret) {
             echo "Problème de transfert";
             return false;
         } else {
             // Le fichier a bien été reçu
-            $img_taille = $_FILES['fic']['size'];
+            $img_taille = $_FILES['pdp']['size'];
 
             if ($img_taille > $taille_max) {
                 echo "Trop gros !";
                 return false;
             }
 
-            $img_type = $_FILES['fic']['type'];
-            $img_nom = $_FILES['fic']['name'];
+            $img_type = $_FILES['pdp']['type'];
+            $img_nom = $_FILES['pdp']['name'];
 
-            $img_blob = file_get_contents($_FILES['fic']['tmp_name']);
-            if ($_GET["controleur"] == "EtuMain") {
+            $img_blob = file_get_contents($_FILES['pdp']['tmp_name']);
+            if ($_REQUEST["controleur"] == "EtuMain") {
                 $image = self::img_ronde($img_blob);
                 $img_blob = self::image_data($image);
             }
-            (new ImageRepository())->insert(["img_id" => $_POST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
+            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
         }
         return true;
     }

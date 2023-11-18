@@ -6,29 +6,26 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 class Etudiant extends AbstractDataObject
 {
-
     private float $numEtudiant;
     private string $prenomEtudiant;
     private string $nomEtudiant;
     private string $loginEtudiant;
-    private string $mdpEtudiant;
     private ?string $sexeEtu;
     private ?string $mailUniersitaire;
     private ?string $mailPerso;
-    private ?int $telephone;
+    private ?string $telephone;
     private ?string $groupe;
     private ?string $parcours;
     private ?int $validationPedagogique;
-    private int $codeEtape;
-    private string $idResidence;
-    private string $img;
+    private ?int $codeEtape;
+    private ?string $idResidence;
+    private string $img_id;
 
     /**
      * @param float $numEtudiant
      * @param string $prenomEtudiant
      * @param string $nomEtudiant
      * @param string $loginEtudiant
-     * @param string $mdpEtudiant
      * @param string|null $sexeEtu
      * @param string|null $mailUniersitaire
      * @param string|null $mailPerso
@@ -36,17 +33,16 @@ class Etudiant extends AbstractDataObject
      * @param string|null $groupe
      * @param string|null $parcours
      * @param int|null $validationPedagogique
-     * @param int $codeEtape
-     * @param string $idResidence
+     * @param int|null $codeEtape
+     * @param string|null $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, string $mdpEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?int $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, int $codeEtape, string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
         $this->nomEtudiant = $nomEtudiant;
         $this->loginEtudiant = $loginEtudiant;
-        $this->mdpEtudiant = $mdpEtudiant;
         $this->sexeEtu = $sexeEtu;
         $this->mailUniersitaire = $mailUniersitaire;
         $this->mailPerso = $mailPerso;
@@ -56,18 +52,18 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
         $this->codeEtape = $codeEtape;
         $this->idResidence = $idResidence;
-        $this->img = $img;
+        $this->img_id = $img;
     }
 
 
     public function getImg(): string
     {
-        return $this->img;
+        return $this->img_id;
     }
 
-    public function setImg(string $img): void
+    public function setImg(string $img_id): void
     {
-        $this->img = $img;
+        $this->img_id = $img_id;
     }
 
     public function getPrenomEtudiant(): string
@@ -100,19 +96,11 @@ class Etudiant extends AbstractDataObject
         $this->loginEtudiant = $loginEtudiant;
     }
 
-    public function getMdpEtudiant(): string
-    {
-        return $this->mdpEtudiant;
-    }
 
-    public function setMdpEtudiant(string $mdpEtudiant): void
+    public function getSexeEtu(): string
     {
-        $this->mdpEtudiant = $mdpEtudiant;
-    }
-
-    public function getSexeEtu(): ?string
-    {
-        return $this->sexeEtu;
+        if ($this->sexeEtu == null) return "";
+        else return $this->sexeEtu;
     }
 
     public function setSexeEtu(?string $sexeEtu): void
@@ -120,9 +108,10 @@ class Etudiant extends AbstractDataObject
         $this->sexeEtu = $sexeEtu;
     }
 
-    public function getMailUniersitaire(): ?string
+    public function getMailUniersitaire(): string
     {
-        return $this->mailUniersitaire;
+        if ($this->mailUniersitaire == null) return "";
+        else return $this->mailUniersitaire;
     }
 
     public function setMailUniersitaire(?string $mailUniersitaire): void
@@ -130,9 +119,10 @@ class Etudiant extends AbstractDataObject
         $this->mailUniersitaire = $mailUniersitaire;
     }
 
-    public function getMailPerso(): ?string
+    public function getMailPerso(): string
     {
-        return $this->mailPerso;
+        if ($this->mailPerso == null) return "";
+        else return $this->mailPerso;
     }
 
     public function setMailPerso(?string $mailPerso): void
@@ -140,19 +130,21 @@ class Etudiant extends AbstractDataObject
         $this->mailPerso = $mailPerso;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): string
     {
-        return $this->telephone;
+        if ($this->telephone == null) return "";
+        else return $this->telephone;
     }
 
-    public function setTelephone(?int $telephone): void
+    public function setTelephone(?string $telephone): void
     {
         $this->telephone = $telephone;
     }
 
-    public function getGroupe(): ?string
+    public function getGroupe(): string
     {
-        return $this->groupe;
+        if ($this->groupe == null) return "";
+        else return $this->groupe;
     }
 
     public function setGroupe(?string $groupe): void
@@ -160,9 +152,10 @@ class Etudiant extends AbstractDataObject
         $this->groupe = $groupe;
     }
 
-    public function getParcours(): ?string
+    public function getParcours(): string
     {
-        return $this->parcours;
+        if ($this->parcours == null) return "";
+        else return $this->parcours;
     }
 
     public function setParcours(?string $parcours): void
@@ -180,7 +173,7 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
     }
 
-    public function getCodeEtape(): int
+    public function getCodeEtape(): ?int
     {
         return $this->codeEtape;
     }
@@ -192,10 +185,11 @@ class Etudiant extends AbstractDataObject
 
     public function getIdResidence(): string
     {
-        return $this->idResidence;
+        if ($this->idResidence == null) return "";
+        else return $this->idResidence;
     }
 
-    public function setIdResidence(string $idResidence): void
+    public function setIdResidence(?string $idResidence): void
     {
         $this->idResidence = $idResidence;
     }
@@ -221,16 +215,13 @@ class Etudiant extends AbstractDataObject
         $this->loginEtudiant = $login;
     }
 
-
-
     public function formatTableau(): array
     {
         return array(
             "numEtudiant"=>$this->numEtudiant,
-            "prenomEtudiant",$this->prenomEtudiant,
+            "prenomEtudiant"=>$this->prenomEtudiant,
             "nomEtudiant"=>$this->nomEtudiant,
             "loginEtudiant"=>$this->loginEtudiant,
-            "mdpEtudiant"=>$this->mdpEtudiant,
             "sexeEtu"=>$this->sexeEtu,
             "mailUniversitaire"=>$this->mailUniersitaire,
             "mailPerso"=>$this->mailPerso,
@@ -240,7 +231,7 @@ class Etudiant extends AbstractDataObject
             "validationPedagogique"=>$this->validationPedagogique,
             "codeEtape"=>$this->codeEtape,
             "idResidence"=>$this->idResidence,
-            "img"=>$this->img
+            "img_id"=>$this->img_id
         );
     }
 }

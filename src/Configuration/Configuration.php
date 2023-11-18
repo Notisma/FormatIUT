@@ -11,48 +11,106 @@ namespace App\FormatIUT\Configuration;
 
 class Configuration
 {
-    /*
-    static private array $config = array(
-        'hostname'=>'localhost',
-        'database'=>'loyet',
-        'login'=>'loyet',
-        'password'=>'26032004',
-        'port' =>'3306'
-    );*/
 
+    static private array $configLocal = array(
 
-    static private array $config = array(
         'hostname' => 'localhost',
         'database' => 'loyet',
         'port' => '3306',
         'login' => 'root',
         'password' => 'root'
     );
+    static private array $configLocalRaphael = array(
 
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
+    );
+    static private array $configLocalNoe = array(
+
+        'hostname' => 'localhost',
+        'database' => 'devapplicationformatiut',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
+    static private array $configWebInfo = array(
+
+        'hostname' => 'localhost',
+        'database' => 'loyet',
+        'port' => '3306',
+        'login' => 'loyet',
+        'password' => 'gfsGnT!!hSSfE88.'
+    );
+
+    static private function getConfig(): array
+    {
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr")
+            return self::$configWebInfo;
+        else if ($_SERVER['SERVER_PORT'] == 9999)
+            return self::$configLocalRaphael;
+        else if ($_SERVER['SERVER_PORT'] == 1024)
+            return self::$configLocalNoe;
+        else
+            return self::$configLocal;
+    }
 
     public static function getHostname(): string
     {
-        return self::$config['hostname'];
+        return self::getConfig()['hostname'];
     }
 
     public static function getDatabase(): string
     {
-        return self::$config['database'];
+        return self::getConfig()['database'];
     }
 
     public static function getLogin(): string
     {
-        return self::$config['login'];
+        return self::getConfig()['login'];
     }
 
     public static function getPassword(): string
     {
-        return self::$config['password'];
+        return self::getConfig()['password'];
     }
 
     public static function getPort(): string
     {
-        return self::$config['port'];
+        return self::getConfig()['port'];
     }
 
+    public static function getAbsoluteURL()
+    {
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
+            return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
+        }
+        return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+
+    }
+
+
+    private static string $controleur;
+
+    public static function getControleur(): string
+    {
+        return self::$controleur;
+    }
+
+    public static function controleurIs(string $contr): bool
+    {
+        return self::$controleur == $contr;
+    }
+
+    public static function setControleur(string $controleur): void
+    {
+        self::$controleur = $controleur;
+    }
+
+    public static function getCheminControleur(): string
+    {
+        return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
+    }
 }

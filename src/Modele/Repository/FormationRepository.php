@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
+use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 
@@ -65,5 +66,13 @@ class FormationRepository extends AbstractRepository
         return $this->construireDepuisTableau($formation);
 
     }
+
+    public function ajouterConvention($idEtu, $idConvention){
+        $sql = "UPDATE Formation SET idConvention =:tagConvention WHERE idEtudiant=:tagEtu";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("tagConvention"=>$idConvention, "tagEtu"=>$idEtu);
+        $pdoStatement->execute($values);
+    }
+
 
 }

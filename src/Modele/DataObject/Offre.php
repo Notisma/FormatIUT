@@ -17,10 +17,22 @@ class Offre extends AbstractDataObject
     private int $dureeHeures;
     private int $joursParSemaine;
     private int $nbHeuresHebdo;
-
     private string $typeOffre;
     private float $siret;
+    private bool $estValide;
+    private int $anneeMin;
+    private int $anneeMax;
 
+
+    public function isEstValide(): bool
+    {
+        return $this->estValide;
+    }
+
+    public function setEstValide(bool $estValide): void
+    {
+        $this->estValide = $estValide;
+    }
 
 
     public function getIdOffre(): int
@@ -143,7 +155,40 @@ class Offre extends AbstractDataObject
         $this->nbHeuresHebdo = $nbHeuresHebdo;
     }
 
-    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret,string $typeFormation)
+    /**
+     * @return int
+     */
+    public function getAnneeMin(): int
+    {
+        return $this->anneeMin;
+    }
+
+    /**
+     * @param int $anneeMin
+     */
+    public function setAnneeMin(int $anneeMin): void
+    {
+        $this->anneeMin = $anneeMin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnneeMax(): int
+    {
+        return $this->anneeMax;
+    }
+
+    /**
+     * @param int $anneeMax
+     */
+    public function setAnneeMax(int $anneeMax): void
+    {
+        $this->anneeMax = $anneeMax;
+    }
+
+
+    public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret, string $typeFormation, int $anneeMin, int $anneeMax, bool $estValide)
     {
         $this->idOffre = $idOffre;
         $this->nomOffre = $nomOffre;
@@ -156,16 +201,21 @@ class Offre extends AbstractDataObject
         $this->joursParSemaine = $joursParSemaine;
         $this->nbHeuresHebdo = $nbHeuresHebdo;
         $this->siret = $siret;
-        $this->typeOffre=$typeFormation;
+        $this->typeOffre = $typeFormation;
+        $this->anneeMin = $anneeMin;
+        $this->anneeMax = $anneeMax;
+        $this->estValide = $estValide;
     }
 
 
     public function formatTableau(): array
     {
+        $valide = 0;
+        if ($this->estValide) $valide = 1;
         return ['idOffre' => $this->idOffre,
             'nomOffre' => $this->nomOffre,
-            'dateDebut' => date_format($this->dateDebut,'Y-m-d'),
-            'dateFin' => date_format($this->dateFin,'Y-m-d'),
+            'dateDebut' => date_format($this->dateDebut, 'Y-m-d'),
+            'dateFin' => date_format($this->dateFin, 'Y-m-d'),
             'sujet' => $this->sujet,
             'detailProjet' => $this->detailProjet,
             'gratification' => $this->gratification,
@@ -173,7 +223,10 @@ class Offre extends AbstractDataObject
             'joursParSemaine' => $this->joursParSemaine,
             'nbHeuresHebdo' => $this->nbHeuresHebdo,
             'idEntreprise' => $this->siret,
-            'typeOffre'=>$this->typeOffre];
+            'typeOffre' => $this->typeOffre,
+            'anneeMin' => $this->anneeMin,
+            'anneeMax' => $this->anneeMax,
+            'estValide' => $valide];
     }
 
 }

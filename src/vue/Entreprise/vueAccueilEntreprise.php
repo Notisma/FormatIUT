@@ -1,11 +1,3 @@
-<html>
-
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueAccueilEntreprise.css">
-</head>
-
-<body>
-
 <div class="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
@@ -75,17 +67,17 @@
             -->
             <!-- exemple d'annonce publiée -->
             <?php
-            for ($i=0;$i<sizeof($listeOffre);$i++) {
-                $entreprise=(new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getSiret());
-                $ville=(new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                $lien="?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=".$listeOffre[$i]->getIdOffre();
-                echo '<a href="'.$lien.'" class="annonceEntreprise">
+            for ($i = 0; $i < sizeof($listeOffre); $i++) {
+                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getSiret());
+                $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $listeOffre[$i]->getIdOffre();
+                echo '<a href="' . $lien . '" class="annonceEntreprise">
                 <div class="imgAnnonce">
-                    <img src="data:image/jpeg;base64,'.base64_encode( $entreprise->getImg()).'" class="imageEntr">
+                    <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">
                 </div>
                 <div class="wrapTexte">
                     <h4>';
-                $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+                $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
                 echo $nomEntrHTML;
                 echo '</h4>
                     <div class="detailsAnnonce">
@@ -93,7 +85,7 @@
                             <div class="lieuAnnonce">
                                 <img src="../ressources/images/emplacement.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                $nomVilleHTML=htmlspecialchars($ville->getNomVille());
+                $nomVilleHTML = htmlspecialchars($ville->getNomVille());
                 echo $nomVilleHTML;
                 echo '</p>
                             </div>
@@ -114,7 +106,7 @@
                             <div class="libelleAnnonce">
                                 <img src="../ressources/images/emploi.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                $nomOffreHTML=htmlspecialchars($listeOffre[$i]->getNomOffre());
+                $nomOffreHTML = htmlspecialchars($listeOffre[$i]->getNomOffre());
                 echo $nomOffreHTML;
                 echo '</p>
                             </div>
@@ -122,7 +114,7 @@
                     </div>
                 </div>
                 <div class="statutAnnonceEntr">
-                    <div class="statut" id="valide">
+                    <div class="valide">
                         <img src="../ressources/images/verifie.png" alt="image" class="imagesStatut">
                         <p class="petitTexte">Offre publiée.</p>
                     </div>
@@ -172,17 +164,9 @@
             -->
 
 
-
-
         </div>
 
 
     </div>
 
 </div>
-
-</body>
-
-
-
-</html>

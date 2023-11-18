@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 100vh;
+}
+
+.mainReset {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    min-width: 300px;
+    border-radius: 10px;
+    text-align: left;
+    line-height: 2em;
+    box-shadow: 0 0 10px 0 #2c3e50;
+}
+
+.titres {
+    font-family: "Oswald", sans-serif;
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+.paragraphes {
+    font-family: "Oswald", sans-serif;
+    margin: 0;
+    letter-spacing: 0.04em;
+    line-height: 1.2em;
+}
+
+#noir {
+    color: black;
+}
+
+#rouge {
+    color: #ff5660;
+}
+
+.resetGauche {
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #aadcda;
+}
+
+
+.resetGauche > img {
+    width: 80%;
+}
+
+
+.resetDroit {
+    float: right;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.wrapReset {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: left;
+}
+
+.wrapReset > form {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.wrapReset > form > label {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.wrapReset > form > label > input[type="password"] {
+    border-radius: 5px;
+    border: none;
+    height: 50%;
+    padding-left: 5px;
+    background-color: #ff9095;
+}
+
+.wrapReset > form > input[type="submit"] {
+    border-radius: 50px;
+    border: none;
+    height: 15%;
+    width: 30%;
+    background-color: #ff5660;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.wrapReset > form > input[type="submit"]:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+

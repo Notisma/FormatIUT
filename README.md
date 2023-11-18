@@ -25,7 +25,7 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
 ## Conventions du projet
 
 - namespace : App\FormatIUT
-- Méthode : $_POST
+- Méthode : $_REQUEST$
 
 ## Organisation
 
@@ -35,3 +35,7 @@ Ce projet regroupe les différents fichiers qui composeront le site web : Format
   - Efforts Réels : 155
 - Sprint 2
   - Efforts Estimés : 175
+
+## Detail de la branche
+
+Main du projet, mis à jour à la fin de chaque sprint
