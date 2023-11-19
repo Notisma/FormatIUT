@@ -65,7 +65,7 @@
         $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostuler(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
                     $bool = true;
                 }
             }
@@ -112,7 +112,7 @@
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                    $nbEtudiants = ((new EtudiantRepository())->nbPostulation($offre->getIdOffre()));
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdOffre()));
                     echo $nbEtudiants . " étudiant";
                     if ($nbEtudiants == 1) echo " a";
                     else echo "s ont";

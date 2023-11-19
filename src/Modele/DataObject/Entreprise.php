@@ -59,7 +59,7 @@ class Entreprise extends AbstractDataObject
         $this->estValide = $estValide;
     }
 
-    public function isEstValide(): bool
+    public function estValide(): bool
     {
         return $this->estValide;
     }

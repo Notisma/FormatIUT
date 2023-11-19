@@ -1,4 +1,3 @@
-
 <div class="conteneurPrincipal" id="conteneurPrincipal">
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
@@ -34,54 +33,56 @@
                  */
                 function extracted($listeStage): array
                 {
+                    $entreprise = null;
+                    $lien = null;
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
-                        if($listeStage[$i]->isEstValide()){
-                        $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
-                        $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
-                        $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
-                        echo '<a href ="' . $lien . '">
+                        if ($listeStage[$i]->estValide()) {
+                            $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
+                            $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
+                            $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
+                            echo '<a href ="' . $lien . '">
                     <div class="imagesAnnonce" >';
-                        echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="pp entreprise">
+                            echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="pp entreprise">
                     </div>
                     <div class="texteAnnonce" >
                         <h4 >';
-                        echo $entreprise->getNomEntreprise();
-                        echo ' </h4 >
+                            echo $entreprise->getNomEntreprise();
+                            echo ' </h4 >
                         <div class="detailsAnnonce" >
                             <div class="lieuRemun" >
                                 <div class="lieuAnnonce" >
                                     <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo $ville->getNomVille();
-                        echo ' </p >
+                            echo $ville->getNomVille();
+                            echo ' </p >
                                 </div >
                                 <div class="remunAnnonce" >
                                     <img src = "../ressources/images/euros.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo $listeStage[$i]->getGratification();
-                        echo ' €/ mois</p >
+                            echo $listeStage[$i]->getGratification();
+                            echo ' €/ mois</p >
                                 </div >
                             </div >
                             <div class="dureeLibelle" >
                                 <div class="dureeAnnonce" >
                                     <img src = "../ressources/images/histoire.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        echo ($listeStage[$i]->getDateDebut()->diff($listeStage[$i]->getDateFin()))->format('%m mois');
+                            echo ($listeStage[$i]->getDateDebut()->diff($listeStage[$i]->getDateFin()))->format('%m mois');
 
-                        echo '</p >
+                            echo '</p >
                                 </div >
                                 <div class="libelleAnnonce" >
                                     <img src = "../ressources/images/emploi.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                        $nomHTML = htmlspecialchars($listeStage[$i]->getNomOffre());
-                        echo $nomHTML;
-                        echo '</p >
+                            $nomHTML = htmlspecialchars($listeStage[$i]->getNomOffre());
+                            echo $nomHTML;
+                            echo '</p >
                                 </div >
                             </div >
                         </div >
                     </div >
                 </a >';
-                    }
+                        }
                     }
                     return array($i, $entreprise, $lien);
                 }

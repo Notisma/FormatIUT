@@ -67,7 +67,7 @@
                             "<h3 class='titre'>" . $nomOffreHTML . " - " . $offre->getTypeOffre() . "</h3>" .
                             "<h4 class='titre'>" . $nomEntrHTML . "</h4>";
 
-                        if ($offre->isEstValide()) {
+                        if ($offre->estValide()) {
                             echo '<div class="statut" id="valide"> <img src="../ressources/images/success.png" alt="sab"> <p>Offre Postée</p> </div>';
                         } else {
                             echo '<div class="statut" id="attente"> <img src="../ressources/images/sablier.png" alt="sab"> <p>En attente de validation</p> </div>';

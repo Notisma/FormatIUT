@@ -93,7 +93,7 @@
                 <h4><?php
                     $nbEtudiant = 0;
                     foreach ($OffresEnLigne as $item) {
-                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulation($item->getIdOffre()));
+                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($item->getIdOffre()));
                     }
                     $s = "";
                     if ($nbEtudiant != 1) $s = "s";

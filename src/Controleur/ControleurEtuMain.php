@@ -80,7 +80,7 @@ class ControleurEtuMain extends ControleurMain
         if (isset($_REQUEST["idOffre"])) {
             $listeId = ((new OffreRepository())->getListeIdOffres());
             if (in_array($_REQUEST["idOffre"], $listeId)) {
-                if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST["idOffre"])) {
+                if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST["idOffre"])) {
                     (new PostulerRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idOffre']);
                     self::redirectionFlash("afficherMesOffres", "success", "Offre annulée");
                 } else {
@@ -153,7 +153,7 @@ class ControleurEtuMain extends ControleurMain
                     $formation = ((new FormationRepository())->estFormation($_REQUEST['idOffre']));
                     if (is_null($formation)) {
                         if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
-                            if ((new EtudiantRepository())->aPostuler(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
+                            if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
                                 $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData);

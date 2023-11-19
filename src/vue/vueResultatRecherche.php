@@ -54,7 +54,7 @@ $count = count($offres) + count($entreprises);
                         <p>
                        ";
                 if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                    $nb = (new EtudiantRepository())->nbPostulation($offre->getIdOffre());
+                    $nb = (new EtudiantRepository())->nbPostulations($offre->getIdOffre());
                     echo $nb . " postulation";
                     if ($nb > 1) echo "s";
                 } else {
