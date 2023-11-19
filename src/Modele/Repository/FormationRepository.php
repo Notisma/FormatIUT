@@ -3,9 +3,7 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\DataObject\Formation;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
 
 class FormationRepository extends AbstractRepository
 {
@@ -17,7 +15,7 @@ class FormationRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idFormation","dateDebut","dateFin","idEtudiant","idTuteurPro","idEntreprise",'idConvention',"idTuteurUM","idOffre");
+        return array("idFormation", "dateDebut", "dateFin", "idEtudiant", "idTuteurPro", "idEntreprise", 'idConvention', "idTuteurUM", "idOffre");
     }
 
     protected function getClePrimaire(): string
@@ -25,54 +23,57 @@ class FormationRepository extends AbstractRepository
         return "idFormation";
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $dateDebut= new \DateTime($DataObjectTableau['dateDebut']);
-        $dateFin= new \DateTime($DataObjectTableau['dateFin']);
+        $dateDebut = new \DateTime($dataObjectTableau['dateDebut']);
+        $dateFin = new \DateTime($dataObjectTableau['dateFin']);
 
         return new Formation(
-            $DataObjectTableau["idFormation"],
+            $dataObjectTableau["idFormation"],
             $dateDebut,
             $dateFin,
-            $DataObjectTableau["idEtudiant"],
-            $DataObjectTableau["idTuteurPro"],
-            $DataObjectTableau["idEntreprise"],
-            $DataObjectTableau["idConvention"],
-            $DataObjectTableau["idTuteurUM"],
-            $DataObjectTableau["idOffre"]
+            $dataObjectTableau["idEtudiant"],
+            $dataObjectTableau["idTuteurPro"],
+            $dataObjectTableau["idEntreprise"],
+            $dataObjectTableau["idConvention"],
+            $dataObjectTableau["idTuteurUM"],
+            $dataObjectTableau["idOffre"]
         );
     }
-    public function ListeIdTypeFormation():array{
-        $sql="SELECT idOffre FROM Offre";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $listeID=array();
-        foreach ($pdoStatement as $item=>$value) {
-            $listeID[]=$value["idOffre"];
+
+    public function listeIdTypeFormation(): array
+    {
+        $sql = "SELECT idOffre FROM Offre";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeID = array();
+        foreach ($pdoStatement as $item => $value) {
+            $listeID[] = $value["idOffre"];
         }
         return $listeID;
     }
 
     //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre)
 
-    public function estFormation(string $offre) : ?AbstractDataObject{
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE idOffre=:Tag ";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$offre);
+    public function estFormation(string $offre): ?AbstractDataObject
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idOffre=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $offre);
         $pdoStatement->execute($values);
-        $formation=$pdoStatement->fetch();
-        if (!$formation){
+        $formation = $pdoStatement->fetch();
+        if (!$formation) {
             return null;
         }
         return $this->construireDepuisTableau($formation);
 
     }
 
-    public function ajouterConvention($idEtu, $idConvention){
+    public function ajouterConvention($idEtu, $idConvention): void
+    {
         $sql = "UPDATE Formation SET idConvention =:tagConvention WHERE idEtudiant=:tagEtu";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("tagConvention"=>$idConvention, "tagEtu"=>$idEtu);
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagConvention" => $idConvention, "tagEtu" => $idEtu);
         $pdoStatement->execute($values);
     }
-
 
 }

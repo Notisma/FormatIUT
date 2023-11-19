@@ -62,7 +62,8 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
-    public static function ajouterCSV(): void {
+    public static function ajouterCSV(): void
+    {
         $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
         fgetcsv($csvFile);
@@ -70,8 +71,7 @@ class ControleurAdminMain extends ControleurMain
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
             if (sizeof($ligne) == 82) {
                 InsertionCSV::insererPstage($ligne);
-            }
-            else if (sizeof($ligne) == 143){
+            } else if (sizeof($ligne) == 143) {
                 InsertionCSV::insererStudea($ligne);
             } else {
                 self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
@@ -83,17 +83,18 @@ class ControleurAdminMain extends ControleurMain
         self::afficherAccueilAdmin();
     }
 
-    public static function exporterCSV(){
+    public static function exporterCSV()
+    {
         $tab = (new pstageRepository())->exportCSV();
 
         $delimiter = ",";
         $filename = "sae-data_" . date('Y-m-d') . ".csv";
         $f = fopen('php://memory', 'w');
 
-        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours','Nom ville etudiant', 'Code postal Etudiant' ,'nomOffre','dateDebut', 'dateFin', 'sujetOffre', 'gratification','dureeHeures' ,'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
+        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours', 'Nom ville etudiant', 'Code postal Etudiant', 'nomOffre', 'dateDebut', 'dateFin', 'sujetOffre', 'gratification', 'dureeHeures', 'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
         fputcsv($f, $champs, $delimiter);
 
-        foreach ($tab as $ligne){
+        foreach ($tab as $ligne) {
 
             fputcsv($f, $ligne, $delimiter);
         }
@@ -180,10 +181,10 @@ class ControleurAdminMain extends ControleurMain
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                if (!$entreprise->isEstValide()) {
+                if (!$entreprise->estValide()) {
                     (new EntrepriseRepository())->supprimer($entreprise->getSiret());
                     MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
-                }else MessageFlash::ajouter("info","L'entreprise est déjà validée");
+                } else MessageFlash::ajouter("info", "L'entreprise est déjà validée");
             } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
         } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
@@ -196,11 +197,11 @@ class ControleurAdminMain extends ControleurMain
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                if (!$entreprise->isEstValide()) {
+                if (!$entreprise->estValide()) {
                     $entreprise->setEstValide(true);
                     (new EntrepriseRepository())->modifierObjet($entreprise);
                     MessageFlash::ajouter("success", "L'entreprise a bien été validée");
-                }else MessageFlash::ajouter("info","L'entreprise est déjà valider");
+                } else MessageFlash::ajouter("info", "L'entreprise est déjà valider");
             } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
         } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");

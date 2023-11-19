@@ -29,7 +29,7 @@
 
         <div class="wrapBoutons">
             <?php
-            if ($entreprise->isEstValide()) {
+            if ($entreprise->estValide()) {
                 echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret=<?php echo $entreprise->getSiret() ?>">SUPPRIMER</a>';
             } else {
                 echo '<a href="?action=refuserEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">REFUSER</a>';

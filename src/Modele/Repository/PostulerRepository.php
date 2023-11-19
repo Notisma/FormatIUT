@@ -3,9 +3,9 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-use App\FormatIUT\Modele\DataObject\Regarder;
+use App\FormatIUT\Modele\DataObject\Postuler;
 
-class RegarderRepository extends AbstractRepository
+class PostulerRepository extends AbstractRepository
 {
     public function getNomTable(): string
     {
@@ -17,9 +17,9 @@ class RegarderRepository extends AbstractRepository
         return ["numEtudiant", "idOffre", "Etat", "cv", "lettre"];
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Regarder($DataObjectTableau['numEtudiant'], $DataObjectTableau['idOffre'], $DataObjectTableau['Etat'], $DataObjectTableau['cv'], $DataObjectTableau['lettre']);
+        return new Postuler($dataObjectTableau['numEtudiant'], $dataObjectTableau['idOffre'], $dataObjectTableau['Etat'], $dataObjectTableau['cv'], $dataObjectTableau['lettre']);
     }
 
     public function getClePrimaire(): string
@@ -94,7 +94,7 @@ class RegarderRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function getOffreValider($numEtudiant): ?Regarder
+    public function getOffreValider($numEtudiant): ?Postuler
     {
         $sql = "SELECT * FROM regarder WHERE etat='Validée' AND numEtudiant=:tagEtudiant";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -109,22 +109,26 @@ class RegarderRepository extends AbstractRepository
             return $this->construireDepuisTableau($fetch);
         }
     }
-    public function recupererCV($numEtudiant, $idOffre){
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array(
-            "etudiantTag"=>$numEtudiant,
-            "offreTag"=>$idOffre
+
+    public function recupererCV($numEtudiant, $idOffre)
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array(
+            "etudiantTag" => $numEtudiant,
+            "offreTag" => $idOffre
         );
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["cv"];
     }
-    public function recupererLettre($numEtudiant, $idOffre){
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array(
-            "etudiantTag"=>$numEtudiant,
-            "offreTag"=>$idOffre
+
+    public function recupererLettre($numEtudiant, $idOffre)
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array(
+            "etudiantTag" => $numEtudiant,
+            "offreTag" => $idOffre
         );
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["lettre"];

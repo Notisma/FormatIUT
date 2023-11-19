@@ -1,7 +1,9 @@
 <?php
+
 namespace App\FormatIUT\Modele\DataObject;
 
-class studea extends AbstractDataObject{
+class studea extends AbstractDataObject
+{
 
     private string $archivee;
     private string $gereEnDehorsDeStudea;
@@ -25,7 +27,7 @@ class studea extends AbstractDataObject{
     private string $paysNaissance;
     private string $nationalite;
     private string $travailleurHandicape;
-    private  string $titulairePermisDeConduire;
+    private string $titulairePermisDeConduire;
     private string $numeroSecuriteSociale;
     private string $pasDeNumeroDeSecuriteSociale;
     private string $sportifHautNiveau;
@@ -1011,28 +1013,24 @@ class studea extends AbstractDataObject{
 
     public function formatTableau(): array
     {
-        if($this->aDejaEteMaitreApprentissage){
+        if ($this->aDejaEteMaitreApprentissage) {
             $maitreApprentissage = 1;
-        }
-        else {
+        } else {
             $maitreApprentissage = 0;
         }
-        if($this->aDejaRecuUneFormationDeMaitreApprentissage){
+        if ($this->aDejaRecuUneFormationDeMaitreApprentissage) {
             $formationMaitreApprentissage = 1;
-        }
-        else {
+        } else {
             $formationMaitreApprentissage = 0;
         }
-        if($this->aDejaEteMaitreApprentissage2){
+        if ($this->aDejaEteMaitreApprentissage2) {
             $maitreApprentissage2 = 1;
-        }
-        else {
+        } else {
             $maitreApprentissage2 = 0;
         }
-        if($this->aDejaRecuUneFormationDeMaitreApprentissage2){
+        if ($this->aDejaRecuUneFormationDeMaitreApprentissage2) {
             $formationMaitreApprentissage2 = 1;
-        }
-        else {
+        } else {
             $formationMaitreApprentissage2 = 0;
         }
 

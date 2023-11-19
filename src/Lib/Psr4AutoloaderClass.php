@@ -66,7 +66,7 @@ class Psr4AutoloaderClass
      *
      * @return void
      */
-    public function register() : void
+    public function register(): void
     {
         spl_autoload_register(array($this, 'loadClass'));
     }
@@ -82,7 +82,7 @@ class Psr4AutoloaderClass
      * than last.
      * @return void
      */
-    public function addNamespace(string $prefix, string $base_dir, bool $prepend = false) : void
+    public function addNamespace(string $prefix, string $base_dir, bool $prepend = false): void
     {
         // normalize namespace prefix
         $prefix = trim($prefix, '\\') . '\\';
@@ -162,8 +162,8 @@ class Psr4AutoloaderClass
             // replace namespace separators with directory separators
             // in the relative class name, append with .php
             $file = $base_dir
-                  . str_replace('\\', '/', $relative_class)
-                  . '.php';
+                . str_replace('\\', '/', $relative_class)
+                . '.php';
 
             // if the mapped file exists, require it
             if ($this->requireFile($file)) {
@@ -182,7 +182,7 @@ class Psr4AutoloaderClass
      * @param string $file The file to require.
      * @return bool True if the file exists, false if not.
      */
-    protected function requireFile(string $file) : bool
+    protected function requireFile(string $file): bool
     {
         if (file_exists($file)) {
             require $file;

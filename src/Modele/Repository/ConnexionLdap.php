@@ -6,17 +6,16 @@ use App\FormatIUT\Configuration\ConfigurationLdap;
 
 class ConnexionLdap
 {
-
     private static array $infosUser;
 
-    public static function connexion(string $login, string $mdp, string $action)
+    public static function connexion(string $login, string $mdp, string $action): bool
     {
         //on essaie de se connecter, et si ça crash on affiche une erreur
         //echo $_SERVER['HTTP_HOST'];//.$_SERVER['PHP_SELF'];
-        if ($_SERVER["HTTP_HOST"]=="webinfo.iutmontp.univ-montp2.fr") {
+        if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
             ConfigurationLdap::setConnexion(ldap_connect(ConfigurationLdap::getHost(), ConfigurationLdap::getPort()));
             ldap_set_option(ConfigurationLdap::getConn(), LDAP_OPT_PROTOCOL_VERSION, 3);
-            self::$infosUser=self::getInfoLdap($login);
+            self::$infosUser = self::getInfoLdap($login);
             return self::verifLDap($login, $mdp);
 
         } else {
@@ -32,7 +31,7 @@ class ConnexionLdap
                 return true;
             }
         }
-
+        return false;
     }
 
     public static function verifLDap(string $login, string $password): bool
@@ -62,45 +61,46 @@ class ConnexionLdap
         return $passwd_ok;
     }
 
-    public static function getInfoPersonne()
+    public static function getInfoPersonne(): array
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
-        $infos = array(
-            "nom" => self::$infosUser[0][0],
-            "prenom" => self::$infosUser[0][1],
-            "mail" => self::$infosUser[1],
-            "type" => self::$infosUser[2],
+            $infos = array(
+                "nom" => self::$infosUser[0][0],
+                "prenom" => self::$infosUser[0][1],
+                "mail" => self::$infosUser[1],
+                "type" => self::$infosUser[2],
 
-        );
-        if ($infos["type"] == "Etudiants") {
-            $infos["Annee"] = self::$infosUser[3];
-        }
-        return $infos;
-    }else {
-        $infos= array(
-            "nom" => self::$infosUser[1],
-            "prenom" => self::$infosUser[3],
-            "mail" => self::$infosUser[5],
-            "type" => self::$infosUser[7],
+            );
+            if ($infos["type"] == "Etudiants") {
+                $infos["Annee"] = self::$infosUser[3];
+            }
+            return $infos;
+        } else {
+            $infos = array(
+                "nom" => self::$infosUser[1],
+                "prenom" => self::$infosUser[3],
+                "mail" => self::$infosUser[5],
+                "type" => self::$infosUser[7],
 
-        );
-        if ($infos["type"]=="Etudiants"){
-            $infos["Annee"]=self::$infosUser[9];
+            );
+            if ($infos["type"] == "Etudiants") {
+                $infos["Annee"] = self::$infosUser[9];
+            }
+            return $infos;
         }
-        return $infos;
+
     }
 
-    }
-
-    public static function getInfoLdap(string $login){
+    public static function getInfoLdap(string $login): array
+    {
         //self::connexion($login,);
         $search = ldap_search(ConfigurationLdap::getConn(), ConfigurationLdap::getBasedn(), "(uid=$login)");
         $resultats = ldap_get_entries(ConfigurationLdap::getConn(), $search);
-        $dn=explode(",",$resultats[0]["dn"]);
-        $infos=array(
+        $dn = explode(",", $resultats[0]["dn"]);
+        $infos = array(
             $nomprenom = explode(" ", $resultats[0]["displayname"][0]),
             $resultats[0]["mail"][0],
-            explode("=",$dn[sizeof($dn)-6])[1],
+            explode("=", $dn[sizeof($dn) - 6])[1],
             $promotion = explode("=", explode(",", $resultats[0]["dn"])[1])[1],
 
         );
@@ -108,7 +108,7 @@ class ConnexionLdap
     }
 
 
-    public static function deconnexion()
+    public static function deconnexion(): void
     {
         if (strstr("webinfo", $_SERVER['HTTP_HOST'])) {
             ldap_close(ConfigurationLdap::getConn());

@@ -10,20 +10,30 @@ class ConfigurationLdap
         'ldap_port' => 389,
         'ldap_conn' => false
     );
-    public static function getHost() : string{
+
+    public static function getHost(): string
+    {
         return self::$config["ldap_host"];
     }
-    public static function getBasedn() : string{
+
+    public static function getBasedn(): string
+    {
         return self::$config["ldap_basedn"];
     }
-    public static function getPort() : string{
+
+    public static function getPort(): string
+    {
         return self::$config["ldap_port"];
     }
-    public static function getConn() {
+
+    public static function getConn()
+    {
         return self::$config["ldap_conn"];
     }
-    public static function setConnexion($conn){
-        self::$config["ldap_conn"]=$conn;
+
+    public static function setConnexion($conn)
+    {
+        self::$config["ldap_conn"] = $conn;
     }
 
 }

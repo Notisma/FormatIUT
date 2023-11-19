@@ -1,10 +1,11 @@
 <?php
+
 namespace App\FormatIUT\Lib;
 
 class MotDePasse
 {
 
-    private static string $poivre="HU0ulztu0lR22QQWa7E4LX";
+    private static string $poivre = "HU0ulztu0lR22QQWa7E4LX";
 
     public static function hacher(string $mdpClair): string
     {

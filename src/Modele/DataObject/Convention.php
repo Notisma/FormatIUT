@@ -1,16 +1,29 @@
 <?php
+
 namespace App\FormatIUT\Modele\DataObject;
+
 use DateTime;
-class Convention extends AbstractDataObject{
+
+class Convention extends AbstractDataObject
+{
+    private string $idConvention;
+    private ?int $conventionValidee;
+    private DateTime $dateCreation;
+    private DateTime $dateTransmission;
+    private int $retourSigne;
+    private string $assurance;
+    private string $objectifOffre;
+    private string $typeCovention;
 
     /**
      * @param string $idConvetion
-     * @param bool $conventionValidee
+     * @param int $conventionValidee
      * @param DateTime $dateDebut
      * @param DateTime $dateFin
      * @param int $retourSigne
      * @param string $assurance
-     * @param string $objectifStage
+     * @param string $objectifOffre
+     * @param string $typeCovention
      */
     public function __construct(string $idConvetion, int $conventionValidee, DateTime $dateDebut, DateTime $dateFin, int $retourSigne, string $assurance, string $objectifOffre, string $typeCovention)
     {
@@ -24,25 +37,17 @@ class Convention extends AbstractDataObject{
         $this->typeCovention = $typeCovention;
     }
 
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return ['idConvention' => $this->idConvention,
-            'conventionValidee'=>$this->conventionValidee,
-            'dateCreation'=>date_format($this->dateCreation,'Y-m-d'),
-            'dateTransmission'=>date_format($this->dateTransmission,'Y-m-d'),
-            'retourSigne'=> $this->retourSigne,
+            'conventionValidee' => $this->conventionValidee,
+            'dateCreation' => date_format($this->dateCreation, 'Y-m-d'),
+            'dateTransmission' => date_format($this->dateTransmission, 'Y-m-d'),
+            'retourSigne' => $this->retourSigne,
             'assurance' => $this->assurance,
             'objectifOffre' => $this->objectifOffre,
-            'typeConvention'=> $this->typeCovention]; }
-
-
-    private string $idConvention;
-    private ?int $conventionValidee;
-    private DateTime $dateCreation;
-    private DateTime $dateTransmission;
-    private int $retourSigne;
-    private string $assurance;
-    private string $objectifOffre;
-    private string $typeCovention;
+            'typeConvention' => $this->typeCovention];
+    }
 
     public function getIdConvention(): string
     {
@@ -123,8 +128,6 @@ class Convention extends AbstractDataObject{
     {
         $this->typeCovention = $typeCovention;
     }
-
-
 
 
 }

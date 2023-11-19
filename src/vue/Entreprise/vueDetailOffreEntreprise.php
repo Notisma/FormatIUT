@@ -102,7 +102,7 @@
                         if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                             echo ' id="disabled" disabled';
                         }
-                        if ((new \App\FormatIUT\Modele\Repository\RegarderRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "A Choisir") {
+                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "A Choisir") {
                             echo 'id="disabled" disabled>Envoyée';
                         } else {
                             $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());

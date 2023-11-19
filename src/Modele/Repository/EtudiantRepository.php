@@ -2,17 +2,14 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
 
 class EtudiantRepository extends AbstractRepository
 {
 
     protected function getNomTable(): string
     {
-
         return "Etudiants";
     }
 
@@ -26,23 +23,23 @@ class EtudiantRepository extends AbstractRepository
         return "numEtudiant";
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $image = ((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
+        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
         return new Etudiant(
-            $DataObjectTableau["numEtudiant"],
-            $DataObjectTableau["prenomEtudiant"],
-            $DataObjectTableau["nomEtudiant"],
-            $DataObjectTableau["loginEtudiant"],
-            $DataObjectTableau["sexeEtu"],
-            $DataObjectTableau["mailUniversitaire"],
-            $DataObjectTableau["mailPerso"],
-            $DataObjectTableau["telephone"],
-            $DataObjectTableau["groupe"],
-            $DataObjectTableau["parcours"],
-            $DataObjectTableau["validationPedagogique"],
-            $DataObjectTableau["codeEtape"],
-            $DataObjectTableau["idResidence"],
+            $dataObjectTableau["numEtudiant"],
+            $dataObjectTableau["prenomEtudiant"],
+            $dataObjectTableau["nomEtudiant"],
+            $dataObjectTableau["loginEtudiant"],
+            $dataObjectTableau["sexeEtu"],
+            $dataObjectTableau["mailUniversitaire"],
+            $dataObjectTableau["mailPerso"],
+            $dataObjectTableau["telephone"],
+            $dataObjectTableau["groupe"],
+            $dataObjectTableau["parcours"],
+            $dataObjectTableau["validationPedagogique"],
+            $dataObjectTableau["codeEtape"],
+            $dataObjectTableau["idResidence"],
             $image["img_blob"]
         );
     }
@@ -51,7 +48,7 @@ class EtudiantRepository extends AbstractRepository
      * @return void
      * rajoute dans la BD un étudiant qui postule à une offre
      */
-    public function EtudiantPostuler($numEtu, $numOffre)
+    public function etudiantPostuler($numEtu, $numOffre): void
     {
         $sql = "INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente', NULL, NULL)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -69,7 +66,7 @@ class EtudiantRepository extends AbstractRepository
      * permet de savoir si un étudiant à postuler à cet Offre mais n'a pas changé d'état depuis
      */
 
-    public function EtudiantAPostuler($numEtu, $idOffre)
+    public function etudiantAPostule($numEtu, $idOffre): mixed
     {
         $sql = "SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre AND Etat='En Attente'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -85,7 +82,7 @@ class EtudiantRepository extends AbstractRepository
      * retourne le nombre de postulation faites au total pour cet offre
      */
 
-    public function nbPostulation($idOffre)
+    public function nbPostulations($idOffre): mixed
     {
         $sql = "SELECT COUNT(numEtudiant)as nb FROM regarder WHERE idOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -100,7 +97,7 @@ class EtudiantRepository extends AbstractRepository
      * retourne si l'étudiant à déjà une formation
      */
 
-    public function aUneFormation($idEtudiant)
+    public function aUneFormation($idEtudiant): mixed
     {
         $sql = "SELECT * FROM Formation WHERE idEtudiant=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -115,7 +112,7 @@ class EtudiantRepository extends AbstractRepository
      * @return mixed
      * retourne si l'étudiant à déjà postuler à cette offre
      */
-    public function aPostuler($numEtudiant, $idOffre)
+    public function aPostule($numEtudiant, $idOffre): mixed
     {
         $sql = "SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -131,7 +128,7 @@ class EtudiantRepository extends AbstractRepository
      * permet à un étudiant d'update son image de profil
      */
 
-    public function updateImage($numEtudiant, $idImage)
+    public function updateImage($numEtudiant, $idImage): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -145,7 +142,7 @@ class EtudiantRepository extends AbstractRepository
      * retourne la liste des étudiant qui sont actuellement dans la table regarder de cette offre
      */
 
-    public function EtudiantsEnAttente($idOffre)
+    public function etudiantsEnAttente($idOffre): array
     {
         $sql = "SELECT numEtudiant FROM regarder r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formation f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -165,7 +162,7 @@ class EtudiantRepository extends AbstractRepository
      * retourne le nombre de fois où l'étudiant est dans un certain état
      */
 
-    public function nbEnEtat($numEtudiant, $etat)
+    public function nbEnEtat($numEtudiant, $etat): mixed
     {
         $sql = "SELECT COUNT(idOffre) as nb FROM regarder WHERE numEtudiant=:Tag AND Etat=:TagEtat";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -255,7 +252,7 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function etudiantsSansOffres()
+    public function etudiantsSansOffres(): array
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -265,7 +262,7 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    public function etudiantsEtats()
+    public function etudiantsEtats(): array
     {
         $sql = "SELECT numEtudiant,COUNT(idFormation) as AUneOffre
                 FROM Etudiants etu 
@@ -281,7 +278,7 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    public function etudiantsCandidats($idOffre)
+    public function etudiantsCandidats($idOffre): array
     {
         $sql = "SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -294,7 +291,7 @@ class EtudiantRepository extends AbstractRepository
         return $listeEtudiants;
     }
 
-    public function getAssociationPourOffre($idOffre, $numEtudiant)
+    public function getAssociationPourOffre($idOffre, $numEtudiant): ?string
     {
         $sql = "SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -310,8 +307,7 @@ class EtudiantRepository extends AbstractRepository
                 return "Refusé par l'entreprise";
             } else if ($resultat["Etat"] == "A Choisir") {
                 return "Accepté par l'entreprise";
-            }
-            else {
+            } else {
                 $sql = "SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
                 $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
                 $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);

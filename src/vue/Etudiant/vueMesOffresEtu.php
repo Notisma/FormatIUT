@@ -33,11 +33,11 @@
                 <?php
 
 
-                use App\FormatIUT\Modele\Repository\RegarderRepository;
+                use App\FormatIUT\Modele\Repository\PostulerRepository;
 
                 $countAttente = 0;
                 foreach ($listOffre as $offre) {
-                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente") {
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente") {
                         $countAttente++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
@@ -85,7 +85,7 @@
                 <?php
                 $countChoisirValider = 0;
                 foreach ($listOffre as $offre) {
-                    if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                         $countChoisirValider++;
                         echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
@@ -96,7 +96,7 @@
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
-                        if ((new RegarderRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                        if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
                             echo '<button class="boutonOffre" id="disabled">Acceptée</button>';
                         } else {
                             echo '<form method="get">

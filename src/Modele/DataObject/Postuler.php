@@ -1,10 +1,12 @@
 <?php
+
 namespace App\FormatIUT\Modele\DataObject;
 
-class Regarder extends AbstractDataObject{
+class Postuler extends AbstractDataObject
+{
     private float $numEtudiant;
     private int $idOffre;
-    private string $Etat;
+    private string $etat;
 
     private ?string $cv;
 
@@ -47,15 +49,15 @@ class Regarder extends AbstractDataObject{
      */
     public function getEtat(): string
     {
-        return $this->Etat;
+        return $this->etat;
     }
 
     /**
-     * @param string $Etat
+     * @param string $etat
      */
-    public function setEtat(string $Etat): void
+    public function setEtat(string $etat): void
     {
-        $this->Etat = $Etat;
+        $this->etat = $etat;
     }
 
 
@@ -96,19 +98,20 @@ class Regarder extends AbstractDataObject{
     {
         $this->numEtudiant = $numEtudiant;
         $this->idOffre = $idOffre;
-        $this->Etat = $Etat;
+        $this->etat = $Etat;
         $this->cv = $cv;
         $this->lettre = $lettre;
     }
 
 
-    public function formatTableau(): array{
+    public function formatTableau(): array
+    {
         return array(
-            "numEtudiant"=> $this->numEtudiant,
-            "idOffre"=> $this->idOffre,
-            "Etat" => $this->Etat,
-            "cv"=> $this->cv,
-            "lettre"=> $this->lettre
+            "numEtudiant" => $this->numEtudiant,
+            "idOffre" => $this->idOffre,
+            "Etat" => $this->etat,
+            "cv" => $this->cv,
+            "lettre" => $this->lettre
         );
     }
 }

@@ -17,8 +17,6 @@ class ConnexionBaseDeDonnee
 
     public function __construct()
     {
-
-
         //require_once "ConfIUT.php";
         $hostname = Configuration::getHostName();
         $port = Configuration::getPort();
@@ -48,6 +46,4 @@ class ConnexionBaseDeDonnee
         return ConnexionBaseDeDonnee::$instance;
     }
 
-
 }
-

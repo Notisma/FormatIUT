@@ -43,7 +43,8 @@ class TransfertImage
         return true;
     }
 
-    public static function img_ronde(string $image) {
+    public static function img_ronde(string $image)
+    {
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
@@ -59,7 +60,7 @@ class TransfertImage
         $transparent = imagecolorallocate($mask, 255, 0, 0);
         imagecolortransparent($mask, $transparent);
 
-        imagefilledellipse($mask, $nouvellesdimensions/2, $nouvellesdimensions/2, $nouvellesdimensions, $nouvellesdimensions, $transparent);
+        imagefilledellipse($mask, $nouvellesdimensions / 2, $nouvellesdimensions / 2, $nouvellesdimensions, $nouvellesdimensions, $transparent);
 
         $red = imagecolorallocate($mask, 0, 0, 0);
         imagecopymerge($image_ronde, $mask, 0, 0, 0, 0, $nouvellesdimensions, $nouvellesdimensions, 100);
@@ -69,10 +70,11 @@ class TransfertImage
         return $image_ronde;
     }
 
-    private static function image_data($gdimage){
+    private static function image_data($gdimage)
+    {
         ob_start();
         imagepng($gdimage);
-        return(ob_get_clean());
+        return (ob_get_clean());
     }
 
 }

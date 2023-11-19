@@ -1,4 +1,5 @@
 <?php
+
 namespace App\FormatIUT\Modele\DataObject;
 
 use DateTime;
@@ -584,8 +585,6 @@ class pstage extends AbstractDataObject
         return $this->fonctionTuteurProfessionnel;
     }
 
-
-
     public function formatTableau(): array
     {
         $interruption = $this->interruption ? 1 : 0;
@@ -666,7 +665,7 @@ class pstage extends AbstractDataObject
             "siteWeb" => $this->siteWeb,
             "nomServiceAccueil" => $this->nomServiceAccueil,
             "residenceServiceAccueil" => $this->residenceServiceAccueil,
-            "voieServiceAccueil"=> $this->voieServiceAccueil,
+            "voieServiceAccueil" => $this->voieServiceAccueil,
             "cedexServiceAccueil" => $this->cedexServiceAccueil,
             "postalServiceAccueil" => $this->postalServiceAccueil,
             "communeServiceAccueil" => $this->communeServiceAccueil,

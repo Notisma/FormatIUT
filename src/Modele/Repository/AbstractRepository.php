@@ -4,9 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEtuMain;
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-use PDO;
 
 abstract class AbstractRepository
 {
@@ -16,7 +14,7 @@ abstract class AbstractRepository
 
     protected abstract function getClePrimaire(): string;
 
-    public abstract function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject;
+    public abstract function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject;
 
     /***
      * @return array|null
@@ -86,7 +84,7 @@ abstract class AbstractRepository
     // ----- CRUD -----
 
     /***
-     * @param AbstractDataObject $objet
+     * @param AbstractDataObject $object
      * @return void
      * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
      */

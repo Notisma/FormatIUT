@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-
 use DateTime;
 
 class Offre extends AbstractDataObject
@@ -24,7 +23,7 @@ class Offre extends AbstractDataObject
     private int $anneeMax;
 
 
-    public function isEstValide(): bool
+    public function estValide(): bool
     {
         return $this->estValide;
     }
@@ -187,7 +186,6 @@ class Offre extends AbstractDataObject
         $this->anneeMax = $anneeMax;
     }
 
-
     public function __construct(int $idOffre, string $nomOffre, DateTime $dateDebut, DateTime $dateFin, string $sujet, string $detailProjet, float $gratification, int $dureeHeures, int $joursParSemaine, int $nbHeuresHebdo, float $siret, string $typeFormation, int $anneeMin, int $anneeMax, bool $estValide)
     {
         $this->idOffre = $idOffre;
@@ -206,7 +204,6 @@ class Offre extends AbstractDataObject
         $this->anneeMax = $anneeMax;
         $this->estValide = $estValide;
     }
-
 
     public function formatTableau(): array
     {

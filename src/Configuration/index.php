@@ -107,12 +107,12 @@ class ControleurConnexionLdap
         for ($i = 0; $i < count($resultats) - 1; $i++) {
 //On stocke le login, nom/prnom, la classe et la promotion de l’utilisateur courant
             $promotion[$i] = explode("=", explode(",", $resultats[$i]["dn"])[1])[1];
-            if ($promotion[$i]!="Personnel" && $promotion[$i]!="people"){
+            if ($promotion[$i] != "Personnel" && $promotion[$i] != "people") {
 
-            $nomprenom[$i] = explode(" ", $resultats[$i]["displayname"][0]);
+                $nomprenom[$i] = explode(" ", $resultats[$i]["displayname"][0]);
 
-            echo $nomprenom[$i][0]. " ".$nomprenom[$i][1]." : ";
-            echo $promotion[$i]."<br>";
+                echo $nomprenom[$i][0] . " " . $nomprenom[$i][1] . " : ";
+                echo $promotion[$i] . "<br>";
             }
         }
 

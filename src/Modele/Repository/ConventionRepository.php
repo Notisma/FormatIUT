@@ -51,7 +51,7 @@ class ConventionRepository extends AbstractRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
-        if(!$pdoStatement->fetch()) return false;
+        if (!$pdoStatement->fetch()) return false;
         else return true;
     }
 

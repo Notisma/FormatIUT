@@ -2,8 +2,6 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-
 class Ville extends AbstractDataObject
 {
     private string $idVille;
@@ -13,7 +11,7 @@ class Ville extends AbstractDataObject
     /**
      * @param string $idVille
      * @param string $nomVille
-     * @param string $codePostal
+     * @param int $codePostal
      */
     public function __construct(string $idVille, string $nomVille, int $codePostal)
     {
@@ -56,9 +54,9 @@ class Ville extends AbstractDataObject
     public function formatTableau(): array
     {
         return array(
-            "idVille"=>$this->idVille,
-            "nomVille"=>$this->nomVille,
-            "codePostal"=>$this->codePostal
+            "idVille" => $this->idVille,
+            "nomVille" => $this->nomVille,
+            "codePostal" => $this->codePostal
         );
     }
 }

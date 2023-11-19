@@ -2,8 +2,6 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-
 class Etudiant extends AbstractDataObject
 {
     private float $numEtudiant;
@@ -29,7 +27,7 @@ class Etudiant extends AbstractDataObject
      * @param string|null $sexeEtu
      * @param string|null $mailUniersitaire
      * @param string|null $mailPerso
-     * @param int|null $telephone
+     * @param string|null $telephone
      * @param string|null $groupe
      * @param string|null $parcours
      * @param int|null $validationPedagogique
@@ -218,20 +216,20 @@ class Etudiant extends AbstractDataObject
     public function formatTableau(): array
     {
         return array(
-            "numEtudiant"=>$this->numEtudiant,
-            "prenomEtudiant"=>$this->prenomEtudiant,
-            "nomEtudiant"=>$this->nomEtudiant,
-            "loginEtudiant"=>$this->loginEtudiant,
-            "sexeEtu"=>$this->sexeEtu,
-            "mailUniversitaire"=>$this->mailUniersitaire,
-            "mailPerso"=>$this->mailPerso,
-            "telephone"=>$this->telephone,
-            "groupe"=>$this->groupe,
-            "parcours"=>$this->parcours,
-            "validationPedagogique"=>$this->validationPedagogique,
-            "codeEtape"=>$this->codeEtape,
-            "idResidence"=>$this->idResidence,
-            "img_id"=>$this->img_id
+            "numEtudiant" => $this->numEtudiant,
+            "prenomEtudiant" => $this->prenomEtudiant,
+            "nomEtudiant" => $this->nomEtudiant,
+            "loginEtudiant" => $this->loginEtudiant,
+            "sexeEtu" => $this->sexeEtu,
+            "mailUniversitaire" => $this->mailUniersitaire,
+            "mailPerso" => $this->mailPerso,
+            "telephone" => $this->telephone,
+            "groupe" => $this->groupe,
+            "parcours" => $this->parcours,
+            "validationPedagogique" => $this->validationPedagogique,
+            "codeEtape" => $this->codeEtape,
+            "idResidence" => $this->idResidence,
+            "img_id" => $this->img_id
         );
     }
 }

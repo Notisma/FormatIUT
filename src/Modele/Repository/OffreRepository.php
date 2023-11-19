@@ -2,14 +2,10 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Controleur\ControleurEntrMain;
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Offre;
-use Cassandra\Bigint;
 
 class OffreRepository extends AbstractRepository
 {
-
 
     public function getNomsColonnes(): array
     {
@@ -44,7 +40,7 @@ class OffreRepository extends AbstractRepository
      * @return array
      * retourne la liste des offres disponibles pour une entreprise
      */
-    public function OffresParEntrepriseDispo($idEntreprise)
+    public function offresParEntrepriseDispo($idEntreprise): array
     {
         $sql = "SELECT * 
                 FROM " . $this->getNomTable() . " o
@@ -97,9 +93,9 @@ class OffreRepository extends AbstractRepository
      * retourne la liste des offres auquel à déjà postuler un étudiant
      */
 
-    public function listOffreEtu($numEtudiant)
+    public function listeOffresEtu($numEtudiant): array
     {
-        $sql = "Select * FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant= :TagEtu";
+        $sql = "SELECT * FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant = :TagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "TagEtu" => $numEtudiant
@@ -134,7 +130,7 @@ class OffreRepository extends AbstractRepository
      * @return array
      * retourne la liste des ids pour un type donné
      */
-    public function ListeIdTypeOffre(string $type): array
+    public function listeIdTypeOffre(string $type): array
     {
         $sql = "SELECT idOffre FROM Offre WHERE typeOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -153,7 +149,7 @@ class OffreRepository extends AbstractRepository
      * retourne la liste des id des offres pour une entreprise
      */
 
-    public function ListeIdOffreEntreprise($idEntreprise): array
+    public function listeIdOffreEntreprise($idEntreprise): array
     {
         $sql = "SELECT idOffre FROM Offre WHERE idEntreprise=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -203,7 +199,7 @@ class OffreRepository extends AbstractRepository
      * @return void
      * mettre un étudiant en état de choix
      */
-    public function mettreAChoisir($numEtudiant, $idOffre)
+    public function mettreAChoisir($numEtudiant, $idOffre): void
     {
         $sql = "UPDATE regarder SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -211,7 +207,7 @@ class OffreRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
-    public function offresNonValides()
+    public function offresNonValides(): array
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estValide=0";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -222,7 +218,7 @@ class OffreRepository extends AbstractRepository
     }
 
 
-    public function offresPourEtudiant($numEtudiant)
+    public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
         $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN regarder r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag ORDER BY Etat DESC";
@@ -236,7 +232,7 @@ class OffreRepository extends AbstractRepository
         return $listeOffres;
     }
 
-    public function offresPourEntreprise($idEntreprise)
+    public function offresPourEntreprise($idEntreprise): array
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idEntreprise=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -262,7 +258,7 @@ class OffreRepository extends AbstractRepository
 
     }
 
-    public function trouverOffreValide($numEtu, $typeOffre)
+    public function trouverOffreValide($numEtu, $typeOffre): Offre
     {
         $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
             FROM Offre o JOIN regarder r ON r.idOffre = o.idOffre WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";

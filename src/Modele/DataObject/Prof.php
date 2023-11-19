@@ -2,8 +2,6 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-
 class Prof extends AbstractDataObject
 {
     private int $idProf;
@@ -16,15 +14,16 @@ class Prof extends AbstractDataObject
      * @param int $idProf
      * @param string $nomProf
      * @param string $prenomProf
-     * @param string $loginProf
+     * @param string $mailUniversitaire
+     * @param string $img
      */
-    public function __construct(int $idProf, string $nomProf, string $prenomProf,string $mailUniversitaire,string $img)
+    public function __construct(int $idProf, string $nomProf, string $prenomProf, string $mailUniversitaire, string $img)
     {
         $this->idProf = $idProf;
         $this->nomProf = $nomProf;
         $this->prenomProf = $prenomProf;
-        $this->mailUniversitaire=$mailUniversitaire;
-        $this->img=$img;
+        $this->mailUniversitaire = $mailUniversitaire;
+        $this->img = $img;
     }
 
     public function getMailUniversitaire(): string
@@ -80,15 +79,14 @@ class Prof extends AbstractDataObject
     }
 
 
-
     public function formatTableau(): array
     {
         return array(
-            "idProf"=>$this->idProf,
-            "nomProf"=>$this->nomProf,
-            "prenomProf"=>$this->prenomProf,
-            "mailUniversitaire"=>$this->mailUniversitaire,
-            "img"=>$this->img,
+            "idProf" => $this->idProf,
+            "nomProf" => $this->nomProf,
+            "prenomProf" => $this->prenomProf,
+            "mailUniversitaire" => $this->mailUniversitaire,
+            "img" => $this->img,
         );
     }
 }

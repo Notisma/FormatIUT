@@ -4,7 +4,6 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Prof;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
 
 class ProfRepository extends AbstractRepository
 {
@@ -16,7 +15,7 @@ class ProfRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idProf","nomProf","prenomProf","mailUniversitaire","img_id");
+        return array("idProf", "nomProf", "prenomProf", "mailUniversitaire", "img_id");
     }
 
     protected function getClePrimaire(): string
@@ -24,25 +23,26 @@ class ProfRepository extends AbstractRepository
         return "nomProf";
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $image=((new ImageRepository()))->getImage($DataObjectTableau["img_id"]);
+        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
         return new Prof(
-            $DataObjectTableau["idProf"],
-            $DataObjectTableau["nomProf"],
-            $DataObjectTableau["prenomProf"],
-            $DataObjectTableau["mailUniversitaire"],
+            $dataObjectTableau["idProf"],
+            $dataObjectTableau["nomProf"],
+            $dataObjectTableau["prenomProf"],
+            $dataObjectTableau["mailUniversitaire"],
             $image["img_blob"]
         );
     }
 
-    public function estProf(string $login) :bool{
-        $sql="SELECT COUNT(*) FROM ".$this->getNomTable()." WHERE nomProf=:Tag";
-        $pdoStetement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$login);
+    public function estProf(string $login): bool
+    {
+        $sql = "SELECT COUNT(*) FROM " . $this->getNomTable() . " WHERE nomProf=:Tag";
+        $pdoStetement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $login);
         $pdoStetement->execute($values);
-        $count=$pdoStetement->fetch();
-        if ($count>0) return true;
+        $count = $pdoStetement->fetch();
+        if ($count > 0) return true;
         else return false;
     }
 }

@@ -39,8 +39,9 @@ class Entreprise extends AbstractDataObject
      * @param string $email
      * @param string $emailAValider
      * @param string $nonce
+     * @param bool $estValide
      */
-    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce,bool $estValide)
+    public function __construct(float $siret, ?string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $Adresse_Entreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -55,7 +56,7 @@ class Entreprise extends AbstractDataObject
         $this->email = $email;
         $this->emailAValider = $emailAValider;
         $this->nonce = $nonce;
-        $this->estValide=$estValide;
+        $this->estValide = $estValide;
     }
 
     public function isEstValide(): bool
@@ -148,22 +149,22 @@ class Entreprise extends AbstractDataObject
 
     public function formatTableau(): array
     {
-        $valide=0;
-        if ($this->estValide) $valide=1;
+        $valide = 0;
+        if ($this->estValide) $valide = 1;
         return ['numSiret' => $this->siret,
             'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique,
             'effectif' => $this->effectif,
             'codeNAF' => $this->codeNAF,
             'tel' => $this->tel,
-            "Adresse_Entreprise"=>$this->Adresse_Entreprise,
-            "idVille"=>$this->idVille,
-            "img_id"=>$this->img,
-            "mdpHache"=>$this->mdpHache,
-            "email"=>$this->email,
-            "emailAValider"=>$this->emailAValider,
-            "nonce"=>$this->nonce,
-            "estValide"=>$valide
+            "Adresse_Entreprise" => $this->Adresse_Entreprise,
+            "idVille" => $this->idVille,
+            "img_id" => $this->img,
+            "mdpHache" => $this->mdpHache,
+            "email" => $this->email,
+            "emailAValider" => $this->emailAValider,
+            "nonce" => $this->nonce,
+            "estValide" => $valide
         ];
     }
 
@@ -243,12 +244,13 @@ class Entreprise extends AbstractDataObject
         $this->mdpHache = $mdpHache;
     }
 
-    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
-        $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
-        if (!$ville){
-            $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);
+    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire): Entreprise
+    {
+        $ville = (new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
+        if (!$ville) {
+            $newVille = new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(), "idVille"), $EntrepriseEnFormulaire["ville"], $EntrepriseEnFormulaire["codePostal"]);
             (new VilleRepository())->creerObjet($newVille);
-            $ville=$newVille->getIdVille();
+            $ville = $newVille->getIdVille();
         }
 
         return new Entreprise(
@@ -268,19 +270,19 @@ class Entreprise extends AbstractDataObject
             false
         );
     }
+
     protected static function autoIncrementVille($listeId, $get): string
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
-            if (in_array("V".$id, $listeId)) {
+            if (in_array("V" . $id, $listeId)) {
                 $id++;
             } else {
                 $_REQUEST[$get] = $id;
             }
         }
-        return "V".$id;
+        return "V" . $id;
     }
-
 
 
 }

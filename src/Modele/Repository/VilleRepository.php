@@ -4,7 +4,6 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Ville;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
 
 class VilleRepository extends AbstractRepository
 {
@@ -23,12 +22,12 @@ class VilleRepository extends AbstractRepository
         return "idVille";
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new Ville(
-            $DataObjectTableau['idVille'],
-            $DataObjectTableau['nomVille'],
-            $DataObjectTableau['codePostal']
+            $dataObjectTableau['idVille'],
+            $dataObjectTableau['nomVille'],
+            $dataObjectTableau['codePostal']
         );
     }
 

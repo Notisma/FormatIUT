@@ -53,11 +53,11 @@ class ControleurMain
 
     public static function afficherVueDetailOffre(string $idOffre = null): void
     {
-        if(Configuration::controleurIs("EtuMain")){
+        if (Configuration::controleurIs("EtuMain")) {
             $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
             $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-            if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-                if($offre->isEstValide()){
+            if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+                if ($offre->estValide()) {
                     self::$pageActuelle = "Détails de l'offre";
                     $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
                     $liste = (new OffreRepository())->getListeIdOffres();
@@ -75,18 +75,15 @@ class ControleurMain
                     } else {
                         self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
                     }
+                } else {
+                    self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
                 }
-                else{
-                    self::redirectionFlash("afficherCatalogue", "danger","Vous n'avez pas le droit de voir cette offre");
-                }
+            } else {
+                self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
             }
-            else{
-                self::redirectionFlash("afficherCatalogue", "danger","Vous n'avez pas le droit de voir cette offre");
-            }
-        }
-        else if(Configuration::controleurIs("EntrMain")){
+        } else if (Configuration::controleurIs("EntrMain")) {
             $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-            if($offre->getSiret() == ConnexionUtilisateur::getNumEntrepriseConnectee()){
+            if ($offre->getSiret() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
                 $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
                 $liste = (new OffreRepository())->getListeIdOffres();
@@ -104,29 +101,27 @@ class ControleurMain
                 } else {
                     self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
                 }
-            }
-            else{
+            } else {
                 self::redirectionFlash("mesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
             }
-        }
-        else{
+        } else {
             self::$pageActuelle = "Détails de l'offre";
-                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-                $liste = (new OffreRepository())->getListeIdOffres();
-                if ($idOffre || isset($_REQUEST["idOffre"])) {
-                    if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
-                    if (in_array($idOffre, $liste)) {
-                        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                        $client = "Admin";
-                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                        self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
-                    } else {
-                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
-                    }
+            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+            $liste = (new OffreRepository())->getListeIdOffres();
+            if ($idOffre || isset($_REQUEST["idOffre"])) {
+                if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
+                if (in_array($idOffre, $liste)) {
+                    $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                    $client = "Admin";
+                    $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
                 }
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+            }
         }
     }
 
@@ -148,7 +143,7 @@ class ControleurMain
 
     public static function getMenu(): array
     {
-        $value= array(
+        $value = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
@@ -240,10 +235,9 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdminacontroleur=AdminMain");
-                }
-                else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
@@ -333,7 +327,7 @@ class ControleurMain
                 $entreprise = (new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["mail"]);
                 $entreprise->setNonce(MotDePasse::genererChaineAleatoire());
                 (new EntrepriseRepository())->modifierObjet($entreprise);
-                VerificationEmail::EnvoyerMailMdpOublie($entreprise);
+                VerificationEmail::envoyerMailMdpOublie($entreprise);
                 self::afficherIndex();
             } else {
                 self::redirectionFlash("afficherPageConnexion", "warning", "Cette adresse mail n'existe pas");
@@ -407,15 +401,14 @@ class ControleurMain
                 "offres" => $res['offres'],
                 "entreprises" => $res['entreprises']
             ]);
-        }
-        else {
+        } else {
             MessageFlash::ajouter("success", count($res['offres']) + count($res['entreprises']) . " Résultats trouvés.");
             $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
                 "offres" => $res['offres'],
                 "entreprises" => $res['entreprises']
             ]);
-            }
+        }
     }
 
 

@@ -22,7 +22,7 @@ class Session
     {
         if (is_null(Session::$instance))
             Session::$instance = new Session();
-            //self::verifierDerniereActivite();
+        //self::verifierDerniereActivite();
         return Session::$instance;
     }
 
@@ -51,8 +51,9 @@ class Session
         session_unset();     // unset $_SESSION variable for the run-time
         session_destroy();   // destroy session data in storage
         Cookie::supprimer(session_name()); // deletes the session cookie
-        $instance = null;
+        self::$instance = null;
     }
+
     /*
     public static function verifierDerniereActivite():void{
 

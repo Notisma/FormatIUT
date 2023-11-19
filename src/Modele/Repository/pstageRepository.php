@@ -2,9 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\pstage;
-use DateTime;
 
 class pstageRepository extends AbstractRepository
 {
@@ -106,123 +104,127 @@ class pstageRepository extends AbstractRepository
         );
     }
 
-    public function construireDepuisTableau(array $DataObjectTableau): pstage
+    public function construireDepuisTableau(array $dataObjectTableau): pstage
     {
 
-        $interruption = $DataObjectTableau[15] ? true : false;
-        $conventionValidee = $DataObjectTableau[28] ? true : false;
-        $conventionValideePedagogiquement = $DataObjectTableau[48] ? true : false;
-        $avenantConvention = $DataObjectTableau[49] ? true : false;
+        $interruption = $dataObjectTableau[15] ? true : false;
+        $conventionValidee = $dataObjectTableau[28] ? true : false;
+        $conventionValideePedagogiquement = $dataObjectTableau[48] ? true : false;
+        $avenantConvention = $dataObjectTableau[49] ? true : false;
 
         return new pstage(
-            $DataObjectTableau[0],
-            $DataObjectTableau[1],
-            $DataObjectTableau[2],
-            $DataObjectTableau[3],
-            $DataObjectTableau[4],
-            $DataObjectTableau[5],
-            $DataObjectTableau[6],
-            $DataObjectTableau[7],
-            $DataObjectTableau[8],
-            $DataObjectTableau[9],
-            $DataObjectTableau[10],
-            $DataObjectTableau[11],
-            $DataObjectTableau[12],
-            $DataObjectTableau[13],
-            $DataObjectTableau[14],
+            $dataObjectTableau[0],
+            $dataObjectTableau[1],
+            $dataObjectTableau[2],
+            $dataObjectTableau[3],
+            $dataObjectTableau[4],
+            $dataObjectTableau[5],
+            $dataObjectTableau[6],
+            $dataObjectTableau[7],
+            $dataObjectTableau[8],
+            $dataObjectTableau[9],
+            $dataObjectTableau[10],
+            $dataObjectTableau[11],
+            $dataObjectTableau[12],
+            $dataObjectTableau[13],
+            $dataObjectTableau[14],
             $interruption,
-            $DataObjectTableau[16],
-            $DataObjectTableau[17],
-            $DataObjectTableau[18],
-            $DataObjectTableau[19],
-            $DataObjectTableau[20],
-            $DataObjectTableau[21],
-            $DataObjectTableau[22],
-            $DataObjectTableau[23],
-            $DataObjectTableau[24],
-            $DataObjectTableau[25],
-            $DataObjectTableau[26],
-            $DataObjectTableau[27],
+            $dataObjectTableau[16],
+            $dataObjectTableau[17],
+            $dataObjectTableau[18],
+            $dataObjectTableau[19],
+            $dataObjectTableau[20],
+            $dataObjectTableau[21],
+            $dataObjectTableau[22],
+            $dataObjectTableau[23],
+            $dataObjectTableau[24],
+            $dataObjectTableau[25],
+            $dataObjectTableau[26],
+            $dataObjectTableau[27],
             $conventionValidee,
-            $DataObjectTableau[29],
-            $DataObjectTableau[30],
-            $DataObjectTableau[31],
-            $DataObjectTableau[32],
-            $DataObjectTableau[33],
-            $DataObjectTableau[34],
-            $DataObjectTableau[35],
-            $DataObjectTableau[36],
-            $DataObjectTableau[37],
-            $DataObjectTableau[38],
-            $DataObjectTableau[39],
-            $DataObjectTableau[40],
-            $DataObjectTableau[41],
-            $DataObjectTableau[42],
-            $DataObjectTableau[43],
-            $DataObjectTableau[44],
-            $DataObjectTableau[45],
-            $DataObjectTableau[46],
-            $DataObjectTableau[47],
+            $dataObjectTableau[29],
+            $dataObjectTableau[30],
+            $dataObjectTableau[31],
+            $dataObjectTableau[32],
+            $dataObjectTableau[33],
+            $dataObjectTableau[34],
+            $dataObjectTableau[35],
+            $dataObjectTableau[36],
+            $dataObjectTableau[37],
+            $dataObjectTableau[38],
+            $dataObjectTableau[39],
+            $dataObjectTableau[40],
+            $dataObjectTableau[41],
+            $dataObjectTableau[42],
+            $dataObjectTableau[43],
+            $dataObjectTableau[44],
+            $dataObjectTableau[45],
+            $dataObjectTableau[46],
+            $dataObjectTableau[47],
             $conventionValideePedagogiquement,
             $avenantConvention,
-            $DataObjectTableau[50],
-            $DataObjectTableau[51],
-            $DataObjectTableau[52],
-            $DataObjectTableau[53],
-            $DataObjectTableau[54],
-            $DataObjectTableau[55],
-            $DataObjectTableau[56],
-            $DataObjectTableau[57],
-            $DataObjectTableau[58],
-            $DataObjectTableau[59],
-            $DataObjectTableau[60],
-            $DataObjectTableau[61],
-            $DataObjectTableau[62],
-            $DataObjectTableau[63],
-            $DataObjectTableau[64],
-            $DataObjectTableau[65],
-            $DataObjectTableau[66],
-            $DataObjectTableau[67],
-            $DataObjectTableau[68],
-            $DataObjectTableau[69],
-            $DataObjectTableau[70],
-            $DataObjectTableau[71],
-            $DataObjectTableau[72],
-            $DataObjectTableau[73],
-            $DataObjectTableau[74],
-            $DataObjectTableau[75],
-            $DataObjectTableau[76],
-            $DataObjectTableau[77],
-            $DataObjectTableau[78],
-            $DataObjectTableau[79],
-            $DataObjectTableau[80],
-            $DataObjectTableau[81]
+            $dataObjectTableau[50],
+            $dataObjectTableau[51],
+            $dataObjectTableau[52],
+            $dataObjectTableau[53],
+            $dataObjectTableau[54],
+            $dataObjectTableau[55],
+            $dataObjectTableau[56],
+            $dataObjectTableau[57],
+            $dataObjectTableau[58],
+            $dataObjectTableau[59],
+            $dataObjectTableau[60],
+            $dataObjectTableau[61],
+            $dataObjectTableau[62],
+            $dataObjectTableau[63],
+            $dataObjectTableau[64],
+            $dataObjectTableau[65],
+            $dataObjectTableau[66],
+            $dataObjectTableau[67],
+            $dataObjectTableau[68],
+            $dataObjectTableau[69],
+            $dataObjectTableau[70],
+            $dataObjectTableau[71],
+            $dataObjectTableau[72],
+            $dataObjectTableau[73],
+            $dataObjectTableau[74],
+            $dataObjectTableau[75],
+            $dataObjectTableau[76],
+            $dataObjectTableau[77],
+            $dataObjectTableau[78],
+            $dataObjectTableau[79],
+            $dataObjectTableau[80],
+            $dataObjectTableau[81]
         );
 
 
     }
-    public function callProcedure($stage){
-        $sql='CALL insertionPstage(:codeUFRTag, :libelleUFRTag, :codeEtapeTag, :libelleEtapeTag);';
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("codeUFRTag" => $stage->getCodeUFR(), "libelleUFRTag" => $stage->getLibelleUFR(), "codeEtapeTag"=>$stage->getCodeEtape(), "libelleEtapeTag"=>$stage->getLibelleEtape());
+
+    public function callProcedure($stage): bool
+    {
+        $sql = 'CALL insertionPstage(:codeUFRTag, :libelleUFRTag, :codeEtapeTag, :libelleEtapeTag);';
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("codeUFRTag" => $stage->getCodeUFR(), "libelleUFRTag" => $stage->getLibelleUFR(), "codeEtapeTag" => $stage->getCodeEtape(), "libelleEtapeTag" => $stage->getLibelleEtape());
         $pdoStatement->execute($values);
-        if($pdoStatement->fetch()){
+        if ($pdoStatement->fetch()) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
-    public function exportCSV(){
-        $sql="SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, etuV.nomVille, etuV.codePostal ,nomOffre, dateDebut, dateFin ,sujet, gratification, dureeHeures, typeOffre, Etat, entr.numSiret, nomEntreprise, statutJuridique, effectif, codeNAF, tel, vEntr.nomVille, vEntr.codePostal
+    public function exportCSV(): array
+    {
+        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, etuV.nomVille, etuV.codePostal ,nomOffre, dateDebut, dateFin ,sujet, gratification, dureeHeures, typeOffre, Etat, entr.numSiret, nomEntreprise, statutJuridique, effectif, codeNAF, tel, vEntr.nomVille, vEntr.codePostal
         FROM Etudiants etu LEFT JOIN regarder r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Offre offr ON offr.idOffre = r.idOffre LEFT JOIN Entreprise entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Ville vEntr ON vEntr.idVille = entr.idVille
         LEFT JOIN Residence etuRes ON etuRes.idResidence = etu.idResidence LEFT JOIN Ville etuV ON etuV.idVille = etuRes.idVille";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
+        $listeObjet = array();
         foreach ($pdoStatement as $item) {
             //echo '<pre>'; print_r($item); echo '</pre>';
 
-            $listeObjet[]=$item;
+            $listeObjet[] = $item;
         }
         return $listeObjet;
 

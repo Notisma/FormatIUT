@@ -12,7 +12,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\OffreRepository;
-use App\FormatIUT\Modele\Repository\RegarderRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -20,9 +20,10 @@ class ControleurEntrMain extends ControleurMain
     {
         return ConnexionUtilisateur::getNumEtudiantConnecte();
     }
+
     public static function afficherAccueilEntr()
     {
-        $listeIDOffre = self::getTroisMax((new OffreRepository())->ListeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $listeIDOffre = self::getTroisMax((new OffreRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
         for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
             $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
@@ -189,7 +190,7 @@ class ControleurEntrMain extends ControleurMain
                 if (!((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
                     if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                        (new RegarderRepository())->supprimerOffreDansRegarder($_REQUEST["idOffre"]);
+                        (new PostulerRepository())->supprimerOffreDansRegarder($_REQUEST["idOffre"]);
                         (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
@@ -276,7 +277,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function telechargerCV(): void
     {
-        $cv = (new RegarderRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idOffre']);
+        $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idOffre']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename=CV de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
@@ -285,7 +286,7 @@ class ControleurEntrMain extends ControleurMain
 
     public static function telechargerLettre(): void
     {
-        $lettre = (new RegarderRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idOffre']);
+        $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idOffre']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');

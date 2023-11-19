@@ -2,9 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use PDO;
 
 class EntrepriseRepository extends AbstractRepository
 {
@@ -100,7 +98,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
-        $sql = "Select numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
+        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
         FROM Formation f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);

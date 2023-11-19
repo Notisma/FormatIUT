@@ -1,7 +1,9 @@
 <?php
+
 namespace App\FormatIUT\Modele\DataObject;
 
-class Residence extends AbstractDataObject{
+class Residence extends AbstractDataObject
+{
     private string $idResidence;
     private string $voie;
     private string $libCedex;
@@ -21,8 +23,10 @@ class Residence extends AbstractDataObject{
         $this->idVille = $idVille;
     }
 
-    public function formatTableau(): array{
-        return ["idResidence" => $this->idResidence, "voie" => $this->voie, "libCedex"=>$this->libCedex, "idVille"=> $this->idVille]; }
+    public function formatTableau(): array
+    {
+        return ["idResidence" => $this->idResidence, "voie" => $this->voie, "libCedex" => $this->libCedex, "idVille" => $this->idVille];
+    }
 
     /**
      * @return string
@@ -87,6 +91,5 @@ class Residence extends AbstractDataObject{
     {
         $this->idVille = $idVille;
     }
-
 
 }

@@ -33,7 +33,7 @@
 
         <div class="wrapBoutons">
             <?php
-            if (!$offre->isEstValide()) {
+            if (!$offre->estValide()) {
                 echo "
                 <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>REJETER</a>
             <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>ACCEPTER</a>
@@ -56,7 +56,7 @@
         <h4 class="titre">Statut de l'offre :</h4>
 
         <?php
-        if ($offre->isEstValide()) {
+        if ($offre->estValide()) {
             echo "<div class='statutOffre' id='valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
             echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
@@ -73,7 +73,7 @@
 
         <div class="detailsEtudiants">
             <?php
-            if ($offre->isEstValide()) {
+            if ($offre->estValide()) {
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
                 $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
 

@@ -11,10 +11,10 @@
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
             <h2><?php use App\FormatIUT\Controleur\ControleurEtuMain;
-                use App\FormatIUT\Modele\DataObject\Regarder;
+                use App\FormatIUT\Modele\DataObject\Postuler;
                 use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
-                use App\FormatIUT\Modele\Repository\RegarderRepository;
+                use App\FormatIUT\Modele\Repository\PostulerRepository;
 
                 $nomHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
@@ -208,7 +208,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <?php
-                        /*$regarder = (new RegarderRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
+                        /*$regarder = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
                         if($regarder->formatTableau()["cv"] != null){
                             echo "<p> Vous avez déjà déposé un CV </p>";
                         }
@@ -229,7 +229,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
                     <?php
-                        /*$regarder = (new RegarderRepository())->getObjectParClePrimaire();
+                        /*$regarder = (new PostulerRepository())->getObjectParClePrimaire();
                         if($regarder->formatTableau()["lettre"] != null){
                             echo "<p> Vous avez déjà déposé une lettre de motivation </p>";
                         }

@@ -41,7 +41,7 @@ class VerificationEmail
         return false;
     }
 
-    public static function EnvoyerMailMdpOublie(Entreprise $entreprise): void
+    public static function envoyerMailMdpOublie(Entreprise $entreprise): void
     {
         $mailURL = rawurlencode($entreprise->getEmail());
         $nonceURL = rawurlencode($entreprise->getNonce());
