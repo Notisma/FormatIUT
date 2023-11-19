@@ -3,8 +3,9 @@
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
+if (!is_null($offres) && !is_null($entreprises)) {
 $count = count($offres) + count($entreprises);
+}
 ?>
 <div class="center">
 
