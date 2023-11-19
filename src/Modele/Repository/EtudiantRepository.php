@@ -50,7 +50,7 @@ class EtudiantRepository extends AbstractRepository
      */
     public function etudiantPostuler($numEtu, $numOffre): void
     {
-        $sql = "INSERT INTO regarder VALUES (:TagEtu,:TagOffre,'En Attente', NULL, NULL)";
+        $sql = "INSERT INTO Postuler VALUES (:TagEtu,:TagOffre,'En Attente', NULL, NULL)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "TagEtu" => $numEtu,
@@ -68,7 +68,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function etudiantAPostule($numEtu, $idOffre): mixed
     {
-        $sql = "SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre AND Etat='En Attente'";
+        $sql = "SELECT * FROM Postuler WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre AND Etat='En Attente'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtu, "TagOffre" => $idOffre);
         $pdoStatement->execute($values);
@@ -84,7 +84,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function nbPostulations($idOffre): mixed
     {
-        $sql = "SELECT COUNT(numEtudiant)as nb FROM regarder WHERE idOffre=:Tag";
+        $sql = "SELECT COUNT(numEtudiant)as nb FROM Postuler WHERE idOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -114,7 +114,7 @@ class EtudiantRepository extends AbstractRepository
      */
     public function aPostule($numEtudiant, $idOffre): mixed
     {
-        $sql = "SELECT * FROM regarder WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $sql = "SELECT * FROM Postuler WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
         $pdoStatement->execute($values);
@@ -139,12 +139,12 @@ class EtudiantRepository extends AbstractRepository
     /**
      * @param $idOffre
      * @return array
-     * retourne la liste des étudiant qui sont actuellement dans la table regarder de cette offre
+     * retourne la liste des étudiant qui sont actuellement dans la table Postuler de cette offre
      */
 
     public function etudiantsEnAttente($idOffre): array
     {
-        $sql = "SELECT numEtudiant FROM regarder r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formation f WHERE r.numEtudiant=f.idEtudiant)";
+        $sql = "SELECT numEtudiant FROM Postuler r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formation f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -164,7 +164,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function nbEnEtat($numEtudiant, $etat): mixed
     {
-        $sql = "SELECT COUNT(idOffre) as nb FROM regarder WHERE numEtudiant=:Tag AND Etat=:TagEtat";
+        $sql = "SELECT COUNT(idOffre) as nb FROM Postuler WHERE numEtudiant=:Tag AND Etat=:TagEtat";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $numEtudiant, "TagEtat" => $etat);
         $pdoStatement->execute($values);
@@ -280,7 +280,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function etudiantsCandidats($idOffre): array
     {
-        $sql = "SELECT numEtudiant FROM regarder WHERE idOffre=:Tag";
+        $sql = "SELECT numEtudiant FROM Postuler WHERE idOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -293,7 +293,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function getAssociationPourOffre($idOffre, $numEtudiant): ?string
     {
-        $sql = "SELECT * FROM regarder WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
+        $sql = "SELECT * FROM Postuler WHERE idOffre=:TagOffre AND numEtudiant=:TagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagOffre" => $idOffre, "TagEtu" => $numEtudiant);
         $pdoStatement->execute($values);
@@ -335,7 +335,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function getOffreValidee($numEtu, $typeOffre)
     {
-        $sql = "Select * FROM regarder r JOIN Offre o ON o.idOffre = r.idOffre WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND Etat = 'Validée'";
+        $sql = "Select * FROM Postuler r JOIN Offre o ON o.idOffre = r.idOffre WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND Etat = 'Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagType" => $typeOffre, "tagEtu" => $numEtu);
         $pdoStatement->execute($values);

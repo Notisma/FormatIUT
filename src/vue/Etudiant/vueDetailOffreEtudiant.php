@@ -208,8 +208,8 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <?php
-                        /*$regarder = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
-                        if($regarder->formatTableau()["cv"] != null){
+                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
+                        if($postuler->formatTableau()["cv"] != null){
                             echo "<p> Vous avez déjà déposé un CV </p>";
                         }
                         else{
@@ -229,8 +229,8 @@
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
                     <?php
-                        /*$regarder = (new PostulerRepository())->getObjectParClePrimaire();
-                        if($regarder->formatTableau()["lettre"] != null){
+                        /*$postuler = (new PostulerRepository())->getObjectParClePrimaire();
+                        if($postuler->formatTableau()["lettre"] != null){
                             echo "<p> Vous avez déjà déposé une lettre de motivation </p>";
                         }
                         else{

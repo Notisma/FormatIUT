@@ -95,7 +95,7 @@ class OffreRepository extends AbstractRepository
 
     public function listeOffresEtu($numEtudiant): array
     {
-        $sql = "SELECT * FROM Offre o JOIN regarder r ON o.idOffre = r.idOffre WHERE numEtudiant = :TagEtu";
+        $sql = "SELECT * FROM Offre o JOIN Postuler r ON o.idOffre = r.idOffre WHERE numEtudiant = :TagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "TagEtu" => $numEtudiant
@@ -201,7 +201,7 @@ class OffreRepository extends AbstractRepository
      */
     public function mettreAChoisir($numEtudiant, $idOffre): void
     {
-        $sql = "UPDATE regarder SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $sql = "UPDATE Postuler SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
         $pdoStatement->execute($values);
@@ -221,7 +221,7 @@ class OffreRepository extends AbstractRepository
     public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
-        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN regarder r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag ORDER BY Etat DESC";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN Postuler r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag ORDER BY Etat DESC";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $numEtudiant);
         $pdoStatement->execute($values);
@@ -261,7 +261,7 @@ class OffreRepository extends AbstractRepository
     public function trouverOffreValide($numEtu, $typeOffre): Offre
     {
         $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
-            FROM Offre o JOIN regarder r ON r.idOffre = o.idOffre WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";
+            FROM Offre o JOIN Postuler r ON r.idOffre = o.idOffre WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
         $pdoStatement->execute($values);

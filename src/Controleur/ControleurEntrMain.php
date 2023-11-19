@@ -190,7 +190,7 @@ class ControleurEntrMain extends ControleurMain
                 if (!((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
                     $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
                     if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                        (new PostulerRepository())->supprimerOffreDansRegarder($_REQUEST["idOffre"]);
+                        (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idOffre"]);
                         (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");

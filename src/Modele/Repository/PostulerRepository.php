@@ -9,7 +9,7 @@ class PostulerRepository extends AbstractRepository
 {
     public function getNomTable(): string
     {
-        return "regarder";
+        return "Postuler";
     }
 
     public function getNomsColonnes(): array
@@ -29,7 +29,7 @@ class PostulerRepository extends AbstractRepository
 
     public function getEtatEtudiantOffre($numEtudiant, $idOffre)
     {
-        $sql = "SELECT * FROM regarder WHERE numEtudiant =:etuTag AND idOffre =:offreTag";
+        $sql = "SELECT * FROM Postuler WHERE numEtudiant =:etuTag AND idOffre =:offreTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("etuTag" => $numEtudiant, "offreTag" => $idOffre);
         $pdoStatement->execute($values);
@@ -37,9 +37,9 @@ class PostulerRepository extends AbstractRepository
 
     }
 
-    public function supprimerOffreDansRegarder($idOffre): void
+    public function supprimerOffreDansPostuler($idOffre): void
     {
-        $sql = "DELETE FROM regarder WHERE idOffre=:Tag";
+        $sql = "DELETE FROM Postuler WHERE idOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -47,7 +47,7 @@ class PostulerRepository extends AbstractRepository
 
     public function supprimerOffreEtudiant($numEtudiant, $idOffre): void
     {
-        $sql = "DELETE FROM regarder WHERE $numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $sql = "DELETE FROM Postuler WHERE $numEtudiant=:TagEtu AND idOffre=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
         $pdoStatement->execute($values);
@@ -96,7 +96,7 @@ class PostulerRepository extends AbstractRepository
 
     public function getOffreValider($numEtudiant): ?Postuler
     {
-        $sql = "SELECT * FROM regarder WHERE etat='Validée' AND numEtudiant=:tagEtudiant";
+        $sql = "SELECT * FROM Postuler WHERE etat='Validée' AND numEtudiant=:tagEtudiant";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtudiant" => $numEtudiant
