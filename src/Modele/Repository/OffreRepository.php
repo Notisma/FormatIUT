@@ -252,7 +252,7 @@ class OffreRepository extends AbstractRepository
 
     public function trouverOffreDepuisForm($numEtu): Offre
     {
-        $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre
+        $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
             FROM Formation f JOIN Offre o ON f.idOffre = o.idOffre WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);

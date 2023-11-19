@@ -1,8 +1,4 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffres.css">
-</head>
-<body>
+
 <div id="center">
 
     <div class="presentation">
@@ -39,15 +35,15 @@
                     <input type="text" value="<?= $etudiant->getTelephone() ?>" name="telephone" id="tel_id" readonly
                            required></p>
                 <p><label for="adr_id"> Adresse </label>
-                    <input type="text" value="<?= $residence->getVoie(); ?>" name="adresseEtu" id="ard_id" readonly
+                    <input type="text" value="<?php if($residence) $residence->getVoie(); ?>" name="adresseEtu" id="ard_id" readonly
                            required>
                 </p>
                 <p><label for="post_id"> Code postal </label>
-                    <input type="number" value="<?= $residence->getLibCedex(); ?>" name="codePostalEtu" id="post_id"
+                    <input type="number" value="<?php if($residence) $residence->getLibCedex(); ?>" name="codePostalEtu" id="post_id"
                            readonly required>
                 </p>
                 <p><label for="ville_id"> Ville </label>
-                    <input type="text" value="<?= $ville->getNomVille(); ?>" name="villeEtu" id="ville_id" readonly
+                    <input type="text" value="<?php if($ville) $ville->getNomVille(); ?>" name="villeEtu" id="ville_id" readonly
                            required>
                 </p>
                 <p><label for="mail_id">Mail</label>
@@ -94,5 +90,3 @@
         </form>
     </div>
 </div>
-</body>
-</html>

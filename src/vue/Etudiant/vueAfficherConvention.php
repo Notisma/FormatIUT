@@ -36,15 +36,15 @@
                     <input type="text" value="<?= $etudiant->getTelephone() ?>" name="telephone" id="tel_id" readonly
                            required></p>
                 <p><label for="adr_id"> Adresse </label>
-                    <input type="text" value="<?= $residenceEtu->getVoie(); ?>" name="adresseEtu" id="ard_id" readonly
+                    <input type="text" value="<?php if($residenceEtu) $residenceEtu->getVoie(); ?>" name="adresseEtu" id="ard_id" readonly
                            required>
                 </p>
                 <p><label for="post_id"> Code postal </label>
-                    <input type="number" value="<?= $residenceEtu->getLibCedex(); ?>" name="codePostalEtu" id="post_id"
+                    <input type="number" value="<?php if($residenceEtu) $residenceEtu->getLibCedex(); ?>" name="codePostalEtu" id="post_id"
                            readonly required>
                 </p>
                 <p><label for="ville_id"> Ville </label>
-                    <input type="text" value="<?= $villeEtu->getNomVille(); ?>" name="villeEtu" id="ville_id" readonly
+                    <input type="text" value="<?php if($villeEtu) $villeEtu->getNomVille(); ?>" name="villeEtu" id="ville_id" readonly
                            required>
                 </p>
                 <p><label for="mail_id">Mail</label>
