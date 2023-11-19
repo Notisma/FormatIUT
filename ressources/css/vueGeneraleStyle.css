@@ -524,7 +524,7 @@ form {
         height: 55%;
         margin: 0;
         position: absolute;
-        z-index: 20;
+        z-index: 200;
         top: 125%;
         left: 50%;
         background-color: white;
@@ -584,6 +584,7 @@ form {
         margin-bottom: 2%;
         padding: 1%;
         text-decoration: none;
+        flex-shrink: 0;
     }
 
     .sousMenu > a > p {
