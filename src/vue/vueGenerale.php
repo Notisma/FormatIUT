@@ -85,10 +85,10 @@ use App\FormatIUT\Configuration\Configuration;
                 echo '<img id="petiteIcone" src="' . $src . '" alt="petite icone"></a>
         </div>'; ?>
 
-                <div class="flash">
+                <div class="flash" id="flash">
                     <?php
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                        echo "<div onclick='supprimerElement(\"flash\")' id='flash' class='alert alert-" . $type . "'>";
+                        echo "<div onclick='supprimerElement(\"flash\")' class='alert alert-" . $type . "'>";
                         echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
                         echo '<p>' . $lireMessage . '</p></div>';
                     }
@@ -100,7 +100,7 @@ use App\FormatIUT\Configuration\Configuration;
 
 
         <div class="bandeau">
-            <div class="menuBurger">
+            <div class="menuBurger" onclick="afficherSousMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -125,6 +125,21 @@ use App\FormatIUT\Configuration\Configuration;
             </div>
         </div>
     </div>
+
+
+    <div class="sousMenu" id="sousMenu">
+        <?php
+        foreach ($menu as $item) {
+            $actuel = "";
+            if ($item['label'] == $titrePage) {
+                $actuel = "id='active'";
+            }
+            echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
+        }
+        echo "<a onclick='afficherSousMenu()'><img src='../ressources/images/fermer.png' alt=\"imgmenu\"><p>Fermer</p></a>";
+        ?>
+    </div>
+
 
     <footer>
         <div id="footerContent">

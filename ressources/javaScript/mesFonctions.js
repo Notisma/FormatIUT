@@ -1,7 +1,3 @@
-const myButton = document.getElementById("my-button");
-
-myButton.addEventListener("click", afficherPopupDepotCV_LM);
-
 function afficherPopupDepotCV_LM() {
     document.getElementById("popup").style.display = "flex";
     document.getElementById("aGriser").style.opacity = "0.3";
@@ -82,5 +78,14 @@ function supprimerElement(id) {
         element.style.display = "none";
     } else {
         alert("L'élément n'existe pas")
+    }
+}
+
+function afficherSousMenu() {
+    let sousMenu = document.getElementById("sousMenu");
+    if (sousMenu.style.display === "none") {
+        sousMenu.style.display = "flex";
+    } else {
+        sousMenu.style.display = "none";
     }
 }

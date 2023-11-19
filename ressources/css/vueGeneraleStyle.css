@@ -109,6 +109,10 @@ body {
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* BANDEAU */
 
+.sousMenu {
+    display: none;
+}
+
 #headerContent {
     background-color: #ecf0f1;
     height: 30px;
@@ -470,11 +474,11 @@ form {
 /* RESPONSIVE */
 
 @media (max-width: 1050px) {
+
     .bandeau {
         height: 65px;
         width: 65px;
         position: absolute;
-        margin-top: -4%;
     }
 
     .bandeau > a {
@@ -493,7 +497,7 @@ form {
 
     #texteAccueil {
         width: 70%;
-        height: 100%;
+        height: 90%;
         margin: 0;
     }
 
@@ -516,12 +520,16 @@ form {
 
     .flash {
         /* une sorte de popup un peu en haut de la page, qui prend 70% de la largeur de la page */
-        width: 70%;
-        height: 10%;
+        width: 50%;
+        height: 55%;
         margin: 0;
         position: absolute;
-        top: 5%;
-        left: 15%;
+        z-index: 20;
+        top: 125%;
+        left: 50%;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
         /* doit rester en haut de la page, quelque soit la dimension de la page */
         transform: translate(-50%, -50%);
 
@@ -535,7 +543,7 @@ form {
         height: 100%;
     }
 
-    .rechercheResp {
+    #gestionRecherche > .rechercheResp {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -546,6 +554,56 @@ form {
         width: 30px;
         height: 30px;
     }
+
+    .sousMenu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80%;
+        position: absolute;
+        z-index: 2000;
+        top: 0;
+        left: 0;
+        background-color: #ff5660;
+        border-radius: 10px;
+        transform: translate(0%, 0%);
+    }
+
+    .sousMenu > * {
+        z-index: 2001;
+    }
+
+    .sousMenu > a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        height: 15%;
+        margin-bottom: 2%;
+        padding: 1%;
+        text-decoration: none;
+    }
+
+    .sousMenu > a > p {
+        width: 85%;
+        padding-left: 5%;
+        color: black;
+        font-weight: bolder;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+
+    .sousMenu > a > img {
+        width: 15%;
+    }
+
+    #active {
+        background-color: #ffb2b7;
+        border-radius: 10px;
+    }
+
 
     .rechercheResp > img {
         width: 25px;
