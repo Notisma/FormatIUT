@@ -471,9 +471,10 @@ form {
 
 @media (max-width: 1050px) {
     .bandeau {
-        height: 70px;
-        width: 70px;
+        height: 65px;
+        width: 65px;
         position: absolute;
+        margin-top: -4%;
     }
 
     .bandeau > a {
