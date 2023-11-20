@@ -567,10 +567,12 @@ form {
         background-color: #ff5660;
         border-radius: 10px;
         transform: translate(0%, 0%);
+        flex-shrink: 0;
     }
 
     .sousMenu > * {
         z-index: 2001;
+        flex-shrink: 0;
     }
 
     .sousMenu > a {
@@ -596,7 +598,7 @@ form {
     }
 
     .sousMenu > a > img {
-        width: 15%;
+        height: 90%;
     }
 
     #active {

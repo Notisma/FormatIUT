@@ -136,7 +136,7 @@ use App\FormatIUT\Configuration\Configuration;
             }
             echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
         }
-        echo "<a onclick='afficherSousMenu()'><img src='../ressources/images/fermer.png' alt=\"imgmenu\"><p>Fermer</p></a>";
+        echo "<a onclick='fermerSousMenu()'><img src='../ressources/images/fermer.png' alt=\"imgmenu\"><p>Fermer</p></a>";
         ?>
     </div>
 
