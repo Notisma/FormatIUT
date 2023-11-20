@@ -525,10 +525,9 @@ form {
         margin: 0;
         position: absolute;
         z-index: 200;
-        top: 125%;
+        top: 100%;
         left: 50%;
-        background-color: white;
-        border: 1px solid black;
+        opacity: 1;
         border-radius: 10px;
         /* doit rester en haut de la page, quelque soit la dimension de la page */
         transform: translate(-50%, -50%);
