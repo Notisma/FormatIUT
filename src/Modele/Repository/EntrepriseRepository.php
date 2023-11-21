@@ -8,12 +8,12 @@ class EntrepriseRepository extends AbstractRepository
 {
     protected function getNomTable(): string
     {
-        return "Entreprise";
+        return "Entreprises";
     }
 
     protected function getNomsColonnes(): array
     {
-        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "Adresse_Entreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide"];
+        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "Adresse_Entreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte","typeStructure","fax","siteWeb"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
@@ -22,6 +22,7 @@ class EntrepriseRepository extends AbstractRepository
         if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
             $valide = 1;
         }
+        $date=new \DateTime($entrepriseFormatTableau["dateCreationEntreprise"]);
         return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -34,7 +35,11 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["email"],
             $entrepriseFormatTableau["emailAValider"],
             $entrepriseFormatTableau["nonce"],
-            $valide
+            $valide,
+            $date,
+            $entrepriseFormatTableau["typeStructure"],
+            $entrepriseFormatTableau["fax"],
+            $entrepriseFormatTableau["siteWeb"]
         );
     }
 
