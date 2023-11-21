@@ -31,8 +31,48 @@ class ControleurMain
         return self::$pageActuelle;
     }
 
+    /**
+     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     */
+    public static function getMenu(): array
+    {
+        $value = array(
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
+            array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
+            array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
+        );
+
+        return $value;
+    }
+
+    //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @param string $titrePage Le titre de la Page actuelle
+     * @param string $cheminVue Le chemin de la vue à utiliser
+     * @param array $menu Le menu à utiliser dans le bandeau déroulant
+     * @param array $parametres des paramètres supplémentaire pour des informations spécifiques aux pages
+     * @return void fonctions à appeler pour afficher une vue
+     */
+    public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
+    {
+        $cssPath = str_replace('vue', 'styleVue', $cheminVue);
+        $cssPath = str_replace('.php', '.css', $cssPath);
+        extract(array_merge(
+            [
+                'titrePage' => $titrePage,
+                'chemin' => $cheminVue,
+                'menu' => $menu,
+                'css' => $cssPath
+            ],
+            $parametres
+        ));
+        require __DIR__ . "/../vue/vueGenerale.php"; // Charge la vue
+    }
+
+
     /***
-     * Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
+     * @return void Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
      */
     public static function afficherIndex(): void
     {
@@ -40,7 +80,7 @@ class ControleurMain
     }
 
     /***
-     * Affiche la page de présentations aux entreprises n'ayant pas de compte
+     * @return void Affiche la page de présentations aux entreprises n'ayant pas de compte
      */
     public static function afficherVuePresentation(): void
     {
@@ -48,9 +88,8 @@ class ControleurMain
     }
 
     /***
-     * Affiche la page de detail d'une offre qui varie selon le client
+     * @return void Affiche la page de detail d'une offre qui varie selon le client
      */
-
     public static function afficherVueDetailOffre(string $idOffre = null): void
     {
         if (Configuration::controleurIs("EtuMain")) {
@@ -125,55 +164,10 @@ class ControleurMain
         }
     }
 
-    public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
-    {
-        $cssPath = str_replace('vue', 'styleVue', $cheminVue);
-        $cssPath = str_replace('.php', '.css', $cssPath);
-        extract(array_merge(
-            [
-                'titrePage' => $titrePage,
-                'chemin' => $cheminVue,
-                'menu' => $menu,
-                'css' => $cssPath
-            ],
-            $parametres
-        ));
-        require __DIR__ . "/../vue/vueGenerale.php"; // Charge la vue
-    }
-
-    public static function getMenu(): array
-    {
-        $value = array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
-            array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
-            array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
-        );
-
-        return $value;
-    }
-
-    /***
-     * @param array $liste
-     * @return array|null
-     * retourne les 3 éléments avec la valeur les plus hautes
+    /**
+     * @param string $error le message que l'erreur va afficher
+     * @return void fonctions pour afficher la page d'erreur
      */
-    protected static function getTroisMax(array $liste): ?array
-    {
-        $list = array();
-        if (!empty($liste)) {
-            $min = min(3, sizeof($liste));
-            for ($i = 0; $i < $min; $i++) {
-                $id = max($liste);
-                foreach ($liste as $item => $value) {
-                    if ($value == $id) $key = $item;
-                }
-                unset($liste[$key]);
-                $list[] = $id;
-            }
-        }
-        return $list;
-    }
-
     public static function afficherErreur(string $error): void
     {
         $menu = Configuration::getCheminControleur();
@@ -183,42 +177,38 @@ class ControleurMain
         ]);
     }
 
-    public static function insertImage($nom)
-    {
-        return TransfertImage::transfert($nom);
-    }
-
-    protected static function autoIncrement($listeId, $get): int
-    {
-        $id = 1;
-        while (!isset($_REQUEST[$get])) {
-            if (in_array($id, $listeId)) {
-                $id++;
-            } else {
-                $_REQUEST[$get] = $id;
-            }
-        }
-        return $id;
-    }
-
-    protected static function autoIncrementF($listeId, $get): int
-    {
-        $id = 1;
-        while (!isset($_REQUEST[$get])) {
-            if (in_array("F" . $id, $listeId)) {
-                $id++;
-            } else {
-                $_REQUEST[$get] = $id;
-            }
-        }
-        return $id;
-    }
-
+    /**
+     * @return void affiche la page de connexion
+     */
     public static function afficherPageConnexion(): void
     {
         self::afficherVue("Se Connecter", "vueFormulaireConnexion.php", self::getMenu());
     }
 
+    /**
+     * @return void affiche la page sourçant les sources des images
+     */
+    public static function afficherSources()
+    {
+        self::afficherVue("Sources", "sources.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche la vue pour réinitialiser le mot de passe
+     */
+    public static function afficherMotDePasseARemplir(): void
+    {
+        if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
+            self::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
+        else
+            self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
+    }
+
+    //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void action connectant l'utilisateur
+     */
     public static function seConnecter(): void
     {
         if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
@@ -258,6 +248,9 @@ class ControleurMain
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
 
+    /**
+     * @return void déconnecte l'utilisateur
+     */
     public static function seDeconnecter(): void
     {
         ConnexionUtilisateur::deconnecter();
@@ -265,19 +258,18 @@ class ControleurMain
         self::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
     }
 
+    /**
+     * @return void valide l'email grâce au lien envoyé par mail
+     */
     public static function validerEmail(): void
     {
         VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
         self::redirectionFlash("afficherPageConnexion", "success", "Email validé");
     }
 
-    public static function redirectionFlash(string $action, string $type, string $message): void
-    {
-        MessageFlash::ajouter($type, $message);
-        (Configuration::getCheminControleur())::$action();
-
-    }
-
+    /**
+     * @return void créeer une entreprise dans la BD et envoie un mail de validation
+     */
     public static function creerCompteEntreprise(): void
     {
         //vérification des nombres négatifs
@@ -315,6 +307,9 @@ class ControleurMain
         }
     }
 
+    /**
+     * @return void envoie un mail pour réinitialiser le mot de passe d'un compte Entreprise
+     */
     public static function mdpOublie(): void
     {
         if (isset($_REQUEST["mail"])) {
@@ -335,15 +330,9 @@ class ControleurMain
         }
     }
 
-    public static function motDePasseARemplir(): void
-    {
-        if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
-            self::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
-        else
-            self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
-    }
-
-
+    /**
+     * @return void permet à l'utilisateur de réinitialiser son mot de passe
+     */
     public static function resetMdp(): void
     {
         if (isset($_REQUEST["mdp"], $_REQUEST["confirmerMdp"])) {
@@ -367,6 +356,9 @@ class ControleurMain
         }
     }
 
+    /**
+     * @return void permet à l'utilisateur de rechercher grâce à la barre de recherche
+     */
     public static function rechercher(): void
     {
         $controleur = Configuration::getCheminControleur();
@@ -411,9 +403,88 @@ class ControleurMain
         }
     }
 
+    //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static function afficherSources()
+
+    /***
+     * @param array $liste
+     * @return array|null
+     * retourne les 3 éléments avec la valeur les plus hautes
+     */
+    protected static function getTroisMax(array $liste): ?array
     {
-        self::afficherVue("Sources", "sources.php", self::getMenu());
+        $list = array();
+        if (!empty($liste)) {
+            $min = min(3, sizeof($liste));
+            for ($i = 0; $i < $min; $i++) {
+                $id = max($liste);
+                foreach ($liste as $item => $value) {
+                    if ($value == $id) $key = $item;
+                }
+                unset($liste[$key]);
+                $list[] = $id;
+            }
+        }
+        return $list;
     }
+
+    /**
+     * @param array $listeId la liste des IDs déjà utilisées
+     * @param string $get le nom du Request à envoyer
+     * @return int envoie en $_REQUEST une id auto-incrémentée
+     */
+    protected static function autoIncrement(array $listeId,string $get): int
+    {
+        $id = 1;
+        while (!isset($_REQUEST[$get])) {
+            if (in_array($id, $listeId)) {
+                $id++;
+            } else {
+                $_REQUEST[$get] = $id;
+            }
+        }
+        return $id;
+    }
+
+    /**
+     * @param array $listeId la liste des IDs déjà utilisées
+     * @param string $get le nom du Request à envoyer
+     * @return int envoie en $_REQUEST une id auto-incrémentée pour les formations
+     */
+    protected static function autoIncrementF(array $listeId,string $get): int
+    {
+        $id = 1;
+        while (!isset($_REQUEST[$get])) {
+            if (in_array("F" . $id, $listeId)) {
+                $id++;
+            } else {
+                $_REQUEST[$get] = $id;
+            }
+        }
+        return $id;
+    }
+
+    /**
+     * @param string $action le nom de la fonction sur laquelle rediriger
+     * @param string $type le type de message Flash
+     * @param string $message le message à envoyer
+     * @return void redirige en envoyant un messageFlash
+     */
+    public static function redirectionFlash(string $action, string $type, string $message): void
+    {
+        MessageFlash::ajouter($type, $message);
+        (Configuration::getCheminControleur())::$action();
+
+    }
+
+    /**
+     * @param string $nom nom de l'image à enregistrer
+     * @return bool insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
+     */
+    public static function insertImage(string $nom) : bool
+    {
+        return TransfertImage::transfert($nom);
+    }
+
+
 }
