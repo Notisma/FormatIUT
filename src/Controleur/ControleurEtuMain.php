@@ -447,6 +447,7 @@ class ControleurEtuMain extends ControleurMain
         (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
         self::afficherProfilEtu();
     }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
