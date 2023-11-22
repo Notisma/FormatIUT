@@ -18,7 +18,7 @@
                     echo '<input type="hidden" name="Etat" value="' . $_REQUEST["Etat"] . '">'
                     ?>
                     <input type="hidden" name="controleur" value="EntrMain">
-                    <input type="hidden" name="action" value="mesOffres">
+                    <input type="hidden" name="action" value="afficherMesOffres">
                 </form>
                 <form>
                     <?php
@@ -32,7 +32,7 @@
                     echo '<input type="hidden" name="type" value="' . $_REQUEST["type"] . '">'
                     ?>
                     <input type="hidden" name="controleur" value="EntrMain">
-                    <input type="hidden" name="action" value="mesOffres">
+                    <input type="hidden" name="action" value="afficherMesOffres">
 
                 </form>
             </div>

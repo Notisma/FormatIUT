@@ -28,8 +28,8 @@ class ControleurEntrMain extends ControleurMain
     {
         return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
-            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=formulaireCreationOffre&controleur=EntrMain"),
-            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=mesOffres&type=Tous&controleur=EntrMain"),
+            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=afficherFormulaireCreationOffre&controleur=EntrMain"),
+            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&type=Tous&controleur=EntrMain"),
             array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter")
 
         );
@@ -40,7 +40,7 @@ class ControleurEntrMain extends ControleurMain
     /**
      * @return void affiche l'accueil pour l'entreprise connecté
      */
-    public static function afficherAccueilEntr()
+    public static function afficherAccueilEntr(): void
     {
         $listeIDOffre = self::getTroisMax((new OffreRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
@@ -53,7 +53,7 @@ class ControleurEntrMain extends ControleurMain
     /**
      * @return void affiche la liste des offres de l'entreprise connecté
      */
-    public static function mesOffres(): void
+    public static function afficherMesOffres(): void
     {
         if (!isset($_REQUEST["type"])) {
             $_REQUEST["type"] = "Tous";
@@ -77,7 +77,7 @@ class ControleurEntrMain extends ControleurMain
     /**
      * @return void affiche le formulaire de Création d'offre
      */
-    public static function formulaireCreationOffre(): void
+    public static function afficherFormulaireCreationOffre(): void
     {
         self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php", self::getMenu());
     }
@@ -113,38 +113,36 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
             $idOffre = $_REQUEST["idOffre"];
-            $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+            $offre = ((new OffreRepository())->getObjectParClePrimaire($idOffre));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
-                if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
+                if (((new FormationRepository())->estFormation($idOffre))) {
                     MessageFlash::ajouter("danger", "L'offre est déjà assignée à un étudiant");
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $idOffre);
                 } else {
-                    if (((new EtudiantRepository())->aUneFormation($_REQUEST["idOffre"]))) {
+                    if (((new EtudiantRepository())->aUneFormation($idOffre))) {
                         MessageFlash::ajouter("danger", "Cet étudiant a déjà une formation");
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $idOffre);
                     } else {
-                        if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
-                            (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
+                        if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $idOffre))) {
+                            (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $idOffre);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
                             self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné avec succès");
                         } else {
-                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $idOffre);
                             MessageFlash::ajouter("danger", "Cet étudiant n'a pas postulé à cette offre");
                         }
 
                     }
                 }
             } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $idOffre);
                 MessageFlash::ajouter("danger", "Cet étudiant n'existe pas");
             }
         } else {
             header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
             MessageFlash::ajouter("danger", "Des données sont manquantes");
-
         }
-
     }
 
     /**
@@ -164,28 +162,28 @@ class ControleurEntrMain extends ControleurMain
                             $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
                             $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
                             (new OffreRepository())->creerObjet($offre);
-                            $_REQUEST["action"] = "mesOffres";
+                            $_REQUEST["action"] = "afficherMesOffres";
                             MessageFlash::ajouter("success", "Offre créée avec succès");
-                            self::mesOffres();
+                            self::afficherMesOffres();
                         } else {
-                            header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                            header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
                             MessageFlash::ajouter("danger", "Les heures inscrites ne sont pas correctes");
                         }
                     } else {
-                        header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                        header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
                         MessageFlash::ajouter("danger", "Les jours inscrits ne sont pas corrects");
                     }
                 } else {
-                    header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                    header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
                     MessageFlash::ajouter("danger", "Des données sont erronées");
                 }
             } else {
-                header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+                header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
                 MessageFlash::ajouter("danger", "Erreur sur année min / max (il n'y a que les années 2 et 3 de disponibles)");
             }
         } else {
             //redirectionFlash "éléments manquants
-            header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
+            header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
 
@@ -340,6 +338,4 @@ class ControleurEntrMain extends ControleurMain
         MessageFlash::ajouter("success", "Image modifiée avec succès.");
         self::afficherProfilEntr();
     }
-
-
 }
