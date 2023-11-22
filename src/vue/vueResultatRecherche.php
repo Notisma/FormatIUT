@@ -27,15 +27,18 @@ $count = count($offres) + count($entreprises);
         echo "<h3 class='titre'>" . $count . " Résultats trouvés :</h3>";
         if (!empty($entreprises)) {
             foreach ($entreprises as $entr) {
+                $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
+                $telHTML=htmlspecialchars($entr->getTel());
+                $adresseHTML=htmlspecialchars($entr->getAdresse());
                 echo '
                     <div class="resultat" id="petitRouge">
                         <div class="partieGauche">
                             <img src = "data:image/jpeg;base64,' . base64_encode($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
                         </div>
                         <div class="partieDroite">
-                            <h3 class="titre">' . $entr->getNomEntreprise() . ' - Entreprise</h3>
-                            <p><span>Téléphone : </span>' . $entr->getTel() . '</p>
-                            <p><span>Adresse : </span>' . $entr->getAdresse() . '</p>
+                            <h3 class="titre">' . $nomEntrepriseHTML . ' - Entreprise</h3>
+                            <p><span>Téléphone : </span>' . $telHTML . '</p>
+                            <p><span>Adresse : </span>' . $adresseHTML . '</p>
                         </div>
                     </div>';
             }
@@ -60,8 +63,9 @@ $count = count($offres) + count($entreprises);
                 } else {
                     echo "Assignée";
                 }
+                $sujetHTML=htmlspecialchars($offre->getSujet());
                 echo "</p>
-                        <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>               
+                        <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $sujetHTML . "</p>               
                         </div>
                 </a>";
             }

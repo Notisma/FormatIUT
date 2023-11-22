@@ -10,7 +10,7 @@ class FormationRepository extends AbstractRepository
 
     protected function getNomTable(): string
     {
-        return "Formation";
+        return "Formations";
     }
 
     protected function getNomsColonnes(): array
