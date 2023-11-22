@@ -16,96 +16,9 @@ class ControleurAdminMain extends ControleurMain
 
     private static string $pageActuelleAdmin = "Accueil Admin";
 
-    public static function afficherAccueilAdmin()
-    {
-        $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
-        $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
-        $listeOffres = (new OffreRepository())->offresNonValides();
-        self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
-    }
-
-    public static function afficherProfilAdmin()
-    {
-        self::$pageActuelleAdmin = "Mon Compte";
-        self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
-    }
-
-    public static function afficherDetailEtudiant()
-    {
-        self::$pageActuelleAdmin = "Détails d'un Étudiant";
-        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
-    }
-
-    public static function afficherListeEtudiant()
-    {
-        $listeEtudiants = (new EtudiantRepository())->etudiantsEtats();
-        self::$pageActuelleAdmin = "Liste Étudiants";
-        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(), ["listeEtudiants" => $listeEtudiants]);
-    }
-
-    public static function afficherDetailEntreprise()
-    {
-        self::$pageActuelleAdmin = "Détails d'une Entreprise";
-        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
-    }
-
-    public static function afficherListeEntreprises(): void
-    {
-        self::$pageActuelleAdmin = "Liste Entreprises";
-        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu());
-    }
-
-    public static function afficherVueCSV(): void
-    {
-        self::$pageActuelleAdmin = "Mes CSV";
-        self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
-    }
-
-    public static function ajouterCSV(): void
-    {
-        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-
-        fgetcsv($csvFile);
-
-        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
-            if (sizeof($ligne) == 82) {
-                InsertionCSV::insererPstage($ligne);
-            } else if (sizeof($ligne) == 143) {
-                InsertionCSV::insererStudea($ligne);
-            } else {
-                self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
-                return;
-            }
-        }
-        fclose($csvFile);
-
-        self::afficherAccueilAdmin();
-    }
-
-    public static function exporterCSV()
-    {
-        $tab = (new pstageRepository())->exportCSV();
-
-        $delimiter = ",";
-        $filename = "sae-data_" . date('Y-m-d') . ".csv";
-        $f = fopen('php://memory', 'w');
-
-        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours', 'Nom ville etudiant', 'Code postal Etudiant', 'nomOffre', 'dateDebut', 'dateFin', 'sujetOffre', 'gratification', 'dureeHeures', 'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
-        fputcsv($f, $champs, $delimiter);
-
-        foreach ($tab as $ligne) {
-
-            fputcsv($f, $ligne, $delimiter);
-        }
-        fseek($f, 0);
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $filename . '";');
-
-        fpassthru($f);
-        fclose($f);
-    }
-
+    /**
+     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     */
     public static function getMenu(): array
     {
         $menu = array(
@@ -142,6 +55,130 @@ class ControleurAdminMain extends ControleurMain
     }
 
 
+    //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void affiche l'accueil pour un Administrateur connecté
+     */
+    public static function afficherAccueilAdmin()
+    {
+        $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
+        $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
+        $listeOffres = (new OffreRepository())->offresNonValides();
+        self::$pageActuelleAdmin = "Accueil Administrateurs";
+        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+    }
+
+    /**
+     * @return void affiche le profil de l'administrateur connecté
+     */
+    public static function afficherProfilAdmin()
+    {
+        self::$pageActuelleAdmin = "Mon Compte";
+        self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche les informations d'un étudiant
+     */
+    public static function afficherDetailEtudiant()
+    {
+        self::$pageActuelleAdmin = "Détails d'un Étudiant";
+        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche la liste des étudiants
+     */
+    public static function afficherListeEtudiant()
+    {
+        $listeEtudiants = (new EtudiantRepository())->etudiantsEtats();
+        self::$pageActuelleAdmin = "Liste Étudiants";
+        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(), ["listeEtudiants" => $listeEtudiants]);
+    }
+
+    /**
+     * @return void affiche les informations d'une entreprise
+     */
+    public static function afficherDetailEntreprise()
+    {
+        self::$pageActuelleAdmin = "Détails d'une Entreprise";
+        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche la liste des entreprises
+     */
+    public static function afficherListeEntreprises(): void
+    {
+        self::$pageActuelleAdmin = "Liste Entreprises";
+        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche la page d'importation et d'exportation des csv
+     */
+    public static function afficherVueCSV(): void
+    {
+        self::$pageActuelleAdmin = "Mes CSV";
+        self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
+    }
+
+    //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void permet à l'admin connecté d'importer un fichier csv
+     */
+    public static function ajouterCSV(): void
+    {
+        $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+
+        fgetcsv($csvFile);
+
+        while (($ligne = fgetcsv($csvFile)) !== FALSE) {
+            if (sizeof($ligne) == 82) {
+                InsertionCSV::insererPstage($ligne);
+            } else if (sizeof($ligne) == 143) {
+                InsertionCSV::insererStudea($ligne);
+            } else {
+                self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
+                return;
+            }
+        }
+        fclose($csvFile);
+
+        self::afficherAccueilAdmin();
+    }
+
+    /**
+     * @return void permet à l'admin connecté d'exporter un fichier csv
+     */
+    public static function exporterCSV()
+    {
+        $tab = (new pstageRepository())->exportCSV();
+
+        $delimiter = ",";
+        $filename = "sae-data_" . date('Y-m-d') . ".csv";
+        $f = fopen('php://memory', 'w');
+
+        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours', 'Nom ville etudiant', 'Code postal Etudiant', 'nomOffre', 'dateDebut', 'dateFin', 'sujetOffre', 'gratification', 'dureeHeures', 'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
+        fputcsv($f, $champs, $delimiter);
+
+        foreach ($tab as $ligne) {
+
+            fputcsv($f, $ligne, $delimiter);
+        }
+        fseek($f, 0);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        fpassthru($f);
+        fclose($f);
+    }
+
+    /**
+     * @return void permet à l'admin connecté de valider une offre
+     */
     public static function accepterOffre(): void
     {
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
@@ -151,7 +188,9 @@ class ControleurAdminMain extends ControleurMain
         MessageFlash::ajouter("success", "L'offre a bien été validée");
     }
 
-
+    /**
+     * @return void permet à l'admin connecté de refuser une offre
+     */
     public static function rejeterOffre(): void
     {
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
@@ -159,6 +198,9 @@ class ControleurAdminMain extends ControleurMain
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
     }
 
+    /**
+     * @return void permet à l'admin connecté de supprimer(archiver) une offre
+     */
     public static function supprimerOffre(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
@@ -167,6 +209,9 @@ class ControleurAdminMain extends ControleurMain
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
     }
 
+    /**
+     * @return void permet à l'admin connecté de supprimer(archiver) un étudiant
+     */
     public static function supprimerEtudiant(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
@@ -175,6 +220,9 @@ class ControleurAdminMain extends ControleurMain
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été supprimé");
     }
 
+    /**
+     * @return void permet à l'admin connecté de refuser une entreprise
+     */
     public static function refuserEntreprise(): void
     {
         //TODO : rajouter des éléments
@@ -191,6 +239,9 @@ class ControleurAdminMain extends ControleurMain
 
     }
 
+    /**
+     * @return void permet à l'admin connecté de valider une entreprise
+     */
     public static function validerEntreprise(): void
     {
         //TODO : rajouter des vérifications
@@ -208,6 +259,9 @@ class ControleurAdminMain extends ControleurMain
 
     }
 
+    /**
+     * @return void permet à l'entreprise de supprimer(archiver) une entreprise
+     */
     public static function supprimerEntreprise(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
@@ -222,4 +276,7 @@ class ControleurAdminMain extends ControleurMain
         }
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
     }
+
+    //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
+
 }

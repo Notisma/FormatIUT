@@ -21,6 +21,25 @@ class ControleurEntrMain extends ControleurMain
         return ConnexionUtilisateur::getNumEtudiantConnecte();
     }
 
+    /**
+     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     */
+    public static function getMenu(): array
+    {
+        return array(
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
+            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=formulaireCreationOffre&controleur=EntrMain"),
+            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=mesOffres&type=Tous&controleur=EntrMain"),
+            array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter")
+
+        );
+    }
+
+    //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void affiche l'accueil pour l'entreprise connecté
+     */
     public static function afficherAccueilEntr()
     {
         $listeIDOffre = self::getTroisMax((new OffreRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
@@ -31,6 +50,9 @@ class ControleurEntrMain extends ControleurMain
         self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
     }
 
+    /**
+     * @return void affiche la liste des offres de l'entreprise connecté
+     */
     public static function mesOffres(): void
     {
         if (!isset($_REQUEST["type"])) {
@@ -43,29 +65,26 @@ class ControleurEntrMain extends ControleurMain
         self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "Etat" => $_REQUEST["Etat"]]);
     }
 
-    public static function getMenu(): array
-    {
-        return array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
-            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=formulaireCreationOffre&controleur=EntrMain"),
-            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=mesOffres&type=Tous&controleur=EntrMain"),
-            array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter")
-
-        );
-    }
-
-    // ---- AFFICHAGES ----
+    /**
+     * @return void affiche le profil de l'entreprise connecté
+     */
     public static function afficherProfilEntr(): void
     {
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
+    /**
+     * @return void affiche le formulaire de Création d'offre
+     */
     public static function formulaireCreationOffre(): void
     {
         self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php", self::getMenu());
     }
 
+    /**
+     * @return void affiche le formulaire de modification d'une offre
+     */
     public static function afficherFormulaireModificationOffre(): void
     {
         if (isset($_REQUEST['idOffre'])) {
@@ -76,7 +95,20 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
+    /**
+     * @return void affiche le formulaire de modification de l'entreprise connecté
+     */
+    public static function afficherFormulaireModification(): void
+    {
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+    }
 
+    //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void assigne un étudiant à une offre
+     */
     public static function assignerEtudiantOffre(): void
     {
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
@@ -115,32 +147,9 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
-    public static function updateImage(): void
-    {
-        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-        $nom = "";
-        $nomEntreprise = $entreprise->getNomEntreprise();
-        for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
-            if ($nomEntreprise[$i] == ' ') {
-                $nom .= "_";
-            } else {
-                $nom .= $nomEntreprise[$i];
-            }
-        }
-        $nom .= "_logo";
-        parent::insertImage($nom);
-        $ancienId = (new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $id);
-        if ($ancienId["img_id"] != 0) {
-            (new ImageRepository())->supprimer($ancienId["img_id"]);
-        }
-        $_REQUEST["action"] = "afficherProfilEntr()";
-        MessageFlash::ajouter("success", "Image modifiée avec succès.");
-        self::afficherProfilEntr();
-    }
-
-    // ---- CRUD de l'offre ----
+    /**
+     * @return void permet à l'entreprise connecté de créer une offre
+     */
     public static function creerOffre(): void
     {
         if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
@@ -182,6 +191,9 @@ class ControleurEntrMain extends ControleurMain
 
     }
 
+    /**
+     * @return void supprime une offre de l'entreprise connecté
+     */
     public static function supprimerOffre(): void
     {
         if (isset($_REQUEST["idOffre"])) {
@@ -213,6 +225,9 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
+    /**
+     * @return void modifie une offre de l'entreprise connecté
+     */
     public static function modifierOffre(): void
     {
         if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST['anneeMin'], $_POST['anneeMax'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
@@ -263,18 +278,18 @@ class ControleurEntrMain extends ControleurMain
         }
     }
 
-    public static function afficherFormulaireModification(): void
-    {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
-    }
-
+    /**
+     * @return void met à jour les informations de l'entreprise connecté
+     */
     public static function mettreAJour(): void
     {
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
         self::afficherProfilEntr();
     }
 
+    /**
+     * @return void télécharge le Cv d'un étudiant sur une offre
+     */
     public static function telechargerCV(): void
     {
         $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idOffre']);
@@ -284,6 +299,9 @@ class ControleurEntrMain extends ControleurMain
         echo $cv;
     }
 
+    /**
+     * @return void télécharge la lettre de motivation d'un étudiant sur une offre
+     */
     public static function telechargerLettre(): void
     {
         $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idOffre']);
@@ -292,5 +310,36 @@ class ControleurEntrMain extends ControleurMain
         header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
         echo $lettre;
     }
+
+    //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @return void met à jour l'image de profil de l'entreprise connecté
+     */
+    public static function updateImage(): void
+    {
+        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $nom = "";
+        $nomEntreprise = $entreprise->getNomEntreprise();
+        for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
+            if ($nomEntreprise[$i] == ' ') {
+                $nom .= "_";
+            } else {
+                $nom .= $nomEntreprise[$i];
+            }
+        }
+        $nom .= "_logo";
+        parent::insertImage($nom);
+        $ancienId = (new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $id);
+        if ($ancienId["img_id"] != 0) {
+            (new ImageRepository())->supprimer($ancienId["img_id"]);
+        }
+        $_REQUEST["action"] = "afficherProfilEntr()";
+        MessageFlash::ajouter("success", "Image modifiée avec succès.");
+        self::afficherProfilEntr();
+    }
+
 
 }
