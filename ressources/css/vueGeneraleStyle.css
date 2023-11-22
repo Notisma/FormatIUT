@@ -520,7 +520,7 @@ form {
 
     .flash {
         /* une sorte de popup un peu en haut de la page, qui prend 70% de la largeur de la page */
-        width: 50%;
+        width: 63%;
         height: 55%;
         margin: 0;
         position: absolute;
