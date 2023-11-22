@@ -10,7 +10,7 @@ class ImageRepository extends AbstractRepository
 
     protected function getNomTable(): string
     {
-        return "Image";
+        return "Images";
     }
 
     protected function getNomsColonnes(): array

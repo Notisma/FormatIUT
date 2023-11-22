@@ -15,8 +15,8 @@ class Etudiant extends AbstractDataObject
     private ?string $groupe;
     private ?string $parcours;
     private ?int $validationPedagogique;
+    private ?bool $presenceForumIUT;
     private ?int $codeEtape;
-    private ?string $idResidence;
     private string $img_id;
 
     /**
@@ -31,11 +31,11 @@ class Etudiant extends AbstractDataObject
      * @param string|null $groupe
      * @param string|null $parcours
      * @param int|null $validationPedagogique
+     * @param bool|null $presenceForumIUT
      * @param int|null $codeEtape
-     * @param string|null $idResidence
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?int $codeEtape, ?string $idResidence, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?bool $presenceForumIUT,?int $codeEtape, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
@@ -48,8 +48,8 @@ class Etudiant extends AbstractDataObject
         $this->groupe = $groupe;
         $this->parcours = $parcours;
         $this->validationPedagogique = $validationPedagogique;
+        $this->presenceForumIUT = $presenceForumIUT;
         $this->codeEtape = $codeEtape;
-        $this->idResidence = $idResidence;
         $this->img_id = $img;
     }
 
@@ -171,6 +171,23 @@ class Etudiant extends AbstractDataObject
         $this->validationPedagogique = $validationPedagogique;
     }
 
+    /**
+     * @return bool|null
+     */
+    public function getPresenceForumIUT(): ?bool
+    {
+        return $this->presenceForumIUT;
+    }
+
+    /**
+     * @param bool|null $presenceForumIUT
+     */
+    public function setPresenceForumIUT(?bool $presenceForumIUT): void
+    {
+        $this->presenceForumIUT = $presenceForumIUT;
+    }
+
+
     public function getCodeEtape(): ?int
     {
         return $this->codeEtape;
@@ -181,16 +198,6 @@ class Etudiant extends AbstractDataObject
         $this->codeEtape = $codeEtape;
     }
 
-    public function getIdResidence(): string
-    {
-        if ($this->idResidence == null) return "";
-        else return $this->idResidence;
-    }
-
-    public function setIdResidence(?string $idResidence): void
-    {
-        $this->idResidence = $idResidence;
-    }
 
 
     public function getNumEtudiant(): float
@@ -227,8 +234,8 @@ class Etudiant extends AbstractDataObject
             "groupe" => $this->groupe,
             "parcours" => $this->parcours,
             "validationPedagogique" => $this->validationPedagogique,
+            "presenceForumIUT"=> $this->presenceForumIUT,
             "codeEtape" => $this->codeEtape,
-            "idResidence" => $this->idResidence,
             "img_id" => $this->img_id
         );
     }

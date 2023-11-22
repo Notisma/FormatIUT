@@ -15,7 +15,7 @@ class EtudiantRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("numEtudiant", "prenomEtudiant", "nomEtudiant", "loginEtudiant", "sexeEtu", "mailUniversitaire", "mailPerso", "telephone", "groupe", "parcours", "validationPedagogique", "codeEtape", "idResidence", "img_id");
+        return array("numEtudiant", "prenomEtudiant", "nomEtudiant", "loginEtudiant", "sexeEtu", "mailUniversitaire", "mailPerso", "telephone", "groupe", "parcours", "validationPedagogique", "presenceForumIUT", "codeEtape", "img_id");
     }
 
     protected function getClePrimaire(): string
@@ -38,8 +38,8 @@ class EtudiantRepository extends AbstractRepository
             $dataObjectTableau["groupe"],
             $dataObjectTableau["parcours"],
             $dataObjectTableau["validationPedagogique"],
+            $dataObjectTableau["presenceForumIUT"],
             $dataObjectTableau["codeEtape"],
-            $dataObjectTableau["idResidence"],
             $image["img_blob"]
         );
     }
@@ -99,7 +99,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function aUneFormation($idEtudiant): mixed
     {
-        $sql = "SELECT * FROM Formation WHERE idEtudiant=:Tag";
+        $sql = "SELECT * FROM Formations WHERE idEtudiant=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idEtudiant);
         $pdoStatement->execute($values);
@@ -144,7 +144,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function etudiantsEnAttente($idOffre): array
     {
-        $sql = "SELECT numEtudiant FROM Postuler r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formation f WHERE r.numEtudiant=f.idEtudiant)";
+        $sql = "SELECT numEtudiant FROM Postuler r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -254,7 +254,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function etudiantsSansOffres(): array
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formation f WHERE f.idEtudiant=etu.numEtudiant ) ";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " etu WHERE NOT EXISTS( SELECT idEtudiant FROM Formations f WHERE f.idEtudiant=etu.numEtudiant ) ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $etudiant) {
             $listeEtudiants[] = $this->construireDepuisTableau($etudiant);
@@ -308,7 +308,7 @@ class EtudiantRepository extends AbstractRepository
             } else if ($resultat["Etat"] == "A Choisir") {
                 return "Accepté par l'entreprise";
             } else {
-                $sql = "SELECT * FROM Formation WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
+                $sql = "SELECT * FROM Formations WHERE idEtudiant=:TagEtu AND idOffre=:TagOffre";
                 $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
                 $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
                 $pdoStatement->execute($values);

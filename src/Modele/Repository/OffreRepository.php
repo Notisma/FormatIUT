@@ -9,19 +9,19 @@ class OffreRepository extends AbstractRepository
 
     public function getNomsColonnes(): array
     {
-        return ["idOffre", "nomOffre", "dateDebut", "dateFin", "sujet", "detailProjet", "gratification", "dureeHeures", "joursParSemaine", "nbHeuresHebdo", "idEntreprise", "typeOffre", "anneeMin", "anneeMax", "estValide"];
+        return ["idFormation", "nomOffre", "dateDebut", "dateFin", "sujet", "detailProjet", "gratification", "dureeHeures", "joursParSemaine", "nbHeuresHebdo", "idEntreprise", "typeOffre", "anneeMin", "anneeMax", "estValide"];
     }
 
     public function getNomTable(): string
     {
-        return "Offre";
+        return "Formations";
     }
 
     public function getListeOffresDispoParType($type): array
     {
         $values = array();
         $sql = "SELECT * FROM " . $this->getNomTable() . " o ";
-        $sql .= " WHERE NOT EXISTS (SELECT idOffre FROM Formation f WHERE f.idOffre=o.idOffre)";
+        $sql .= " WHERE NOT EXISTS (SELECT idFormation FROM Formations f WHERE f.idFormation=o.idFormation)";
         if ($type == "Stage" || $type == "Alternance") {
             $sql .= " AND typeOffre=:TypeTag";
             $values["TypeTag"] = $type;
@@ -46,8 +46,8 @@ class OffreRepository extends AbstractRepository
                 FROM " . $this->getNomTable() . " o
                 WHERE idEntreprise=:Tag 
                 AND NOT EXISTS (
-                SELECT idOffre FROM Formation f
-                WHERE f.idOffre=o.idOffre)";
+                SELECT idFormation FROM Formation f
+                WHERE f.idFormation=o.idFormation)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idEntreprise);
         $pdoStatement->execute($values);
@@ -73,9 +73,9 @@ class OffreRepository extends AbstractRepository
             $values["TypeTag"] = $type;
         }
         if ($etat == "Dispo") {
-            $sql .= " AND NOT EXISTS (SELECT idOffre FROM Formation f WHERE o.idOffre=f.idOffre)";
+            $sql .= " AND NOT EXISTS (SELECT idFormation FROM Formation f WHERE o.idFormation=f.idFormation)";
         } else if ($etat == "Assigné") {
-            $sql .= " AND EXISTS (SELECT idOffre FROM Formation f WHERE f.idOffre=o.idOffre)";
+            $sql .= " AND EXISTS (SELECT idFormation FROM Formation f WHERE f.idFormation=o.idFormation)";
         }
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"] = $idEntreprise;
@@ -95,7 +95,7 @@ class OffreRepository extends AbstractRepository
 
     public function listeOffresEtu($numEtudiant): array
     {
-        $sql = "SELECT * FROM Offre o JOIN Postuler r ON o.idOffre = r.idOffre WHERE numEtudiant = :TagEtu";
+        $sql = "SELECT * FROM Formations o JOIN Postuler r ON o.idFormation = r.idFormation WHERE numEtudiant = :TagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "TagEtu" => $numEtudiant
@@ -116,11 +116,11 @@ class OffreRepository extends AbstractRepository
 
     public function getListeIdOffres(): array
     {
-        $sql = "SELECT idOffre FROM Offre";
+        $sql = "SELECT idFormation FROM Formations";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $listeId = array();
         foreach ($pdoStatement as $item => $value) {
-            $listeId[] = $value["idOffre"];
+            $listeId[] = $value["idFormation"];
         }
         return $listeId;
     }
@@ -132,13 +132,13 @@ class OffreRepository extends AbstractRepository
      */
     public function listeIdTypeOffre(string $type): array
     {
-        $sql = "SELECT idOffre FROM Offre WHERE typeOffre=:Tag";
+        $sql = "SELECT idFormation FROM Formations WHERE typeOffre=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $type);
         $pdoStatement->execute($values);
         $listeID = array();
         foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idOffre"];
+            $listeID[] = $value["idFormation"];
         }
         return $listeID;
     }
@@ -151,13 +151,13 @@ class OffreRepository extends AbstractRepository
 
     public function listeIdOffreEntreprise($idEntreprise): array
     {
-        $sql = "SELECT idOffre FROM Offre WHERE idEntreprise=:Tag";
+        $sql = "SELECT idFormation FROM Formations WHERE idEntreprise=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idEntreprise);
         $pdoStatement->execute($values);
         $listeID = array();
         foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idOffre"];
+            $listeID[] = $value["idFormation"];
         }
         return $listeID;
     }
@@ -170,7 +170,7 @@ class OffreRepository extends AbstractRepository
         $valide = 0;
         if (isset($offre["estValide"]) && $offre["estValide"]) $valide = 1;
         return new Offre(
-            $offre['idOffre'],
+            $offre['idFormation'],
             $offre['nomOffre'],
             $dateDebut,
             $dateFin,
@@ -190,20 +190,20 @@ class OffreRepository extends AbstractRepository
 
     protected function getClePrimaire(): string
     {
-        return "idOffre";
+        return "idFormation";
     }
 
     /**
      * @param $numEtudiant
-     * @param $idOffre
+     * @param $idFormation
      * @return void
      * mettre un étudiant en état de choix
      */
-    public function mettreAChoisir($numEtudiant, $idOffre): void
+    public function mettreAChoisir($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE Postuler SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $sql = "UPDATE Postuler SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
+        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
         $pdoStatement->execute($values);
     }
 
@@ -221,7 +221,7 @@ class OffreRepository extends AbstractRepository
     public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
-        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN Postuler r ON o.idOffre=r.idOffre WHERE numEtudiant=:Tag ORDER BY Etat DESC";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " o JOIN Postuler r ON o.idFormation=r.idFormation WHERE numEtudiant=:Tag ORDER BY Etat DESC";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $numEtudiant);
         $pdoStatement->execute($values);
@@ -248,8 +248,8 @@ class OffreRepository extends AbstractRepository
 
     public function trouverOffreDepuisForm($numEtu): Offre
     {
-        $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
-            FROM Formation f JOIN Offre o ON f.idOffre = o.idOffre WHERE idEtudiant = :tagEtu";
+        $sql = "Select o.idFormation, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
+            FROM Formation f JOIN Offre o ON f.idFormation = o.idFormation WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
@@ -260,8 +260,8 @@ class OffreRepository extends AbstractRepository
 
     public function trouverOffreValide($numEtu, $typeOffre): Offre
     {
-        $sql = "Select o.idOffre, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
-            FROM Offre o JOIN Postuler r ON r.idOffre = o.idOffre WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";
+        $sql = "Select o.idFormation, nomOffre, o.dateDebut, o.dateFin, sujet, detailProjet, gratification, dureeHeures, joursParSemaine, nbHeuresHebdo, o.idEntreprise, typeOffre, anneeMin, anneeMax, estValide
+            FROM Formations o JOIN Postuler r ON r.idFormation = o.idFormation WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND Etat='Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
         $pdoStatement->execute($values);
