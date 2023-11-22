@@ -141,7 +141,7 @@ class ControleurMain
                     self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
                 }
             } else {
-                self::redirectionFlash("mesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
+                self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
             }
         } else {
             self::$pageActuelle = "Détails de l'offre";

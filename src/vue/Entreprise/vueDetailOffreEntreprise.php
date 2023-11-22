@@ -51,7 +51,7 @@
         ';
             }
             ?>
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=mesOffres&controleur=EntrMain">RETOUR</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherMesOffres&controleur=EntrMain">RETOUR</button>
         </form>
     </div>
 
