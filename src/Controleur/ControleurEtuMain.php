@@ -84,7 +84,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void affiche l'accueil pour un étudiant
      */
-    public static function afficherAccueilEtu()
+    public static function afficherAccueilEtu(): void
     {
         $listeIdAlternance = self::getTroisMax((new OffreRepository())->listeIdTypeOffre("Alternance"));
         $listeIdStage = self::getTroisMax((new OffreRepository())->listeIdTypeOffre("Stage"));
@@ -103,7 +103,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void affiche le catalogue des offres
      */
-    public static function afficherCatalogue()
+    public static function afficherCatalogue(): void
     {
         $type = $_REQUEST["type"] ?? "Tous";
         $offres = (new OffreRepository())->getListeOffresDispoParType($type);
@@ -114,7 +114,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void affiche le profil de l'étudiant connecté
      */
-    public static function afficherProfilEtu()
+    public static function afficherProfilEtu(): void
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
         self::$titrePageActuelleEtu = "Mon Compte";
@@ -124,7 +124,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void affiche les offres concernées par l'étudiant connecté
      */
-    public static function afficherMesOffres()
+    public static function afficherMesOffres(): void
     {
         $listOffre = (new OffreRepository())->listeOffresEtu(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Mes Offres";
@@ -214,7 +214,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void permet à l'étudiant connecté d'annuler sa postulation à une offre
      */
-    public static function annulerOffre()
+    public static function annulerOffre(): void
     {
         if (isset($_REQUEST["idOffre"])) {
             $listeId = ((new OffreRepository())->getListeIdOffres());
@@ -237,7 +237,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void permet à l'étudiant connecté de valider une offre
      */
-    public static function validerOffre()
+    public static function validerOffre(): void
     {
         if (isset($_REQUEST['idOffre'])) {
             $listeId = ((new OffreRepository())->getListeIdOffres());
@@ -326,7 +326,7 @@ class ControleurEtuMain extends ControleurMain
      * @return void permet à l'étudiant connecté de créer sa convention
      * @throws \Exception
      */
-    public static function   creationConvention()
+    public static function creerConvention(): void
     {
         if ($_POST['idOff'] != "aucune") {
             if ($_POST['codePostalEntr'] > 0 && $_POST['siret'] > 0) {
@@ -374,7 +374,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void modifie les Cv et Lettres de motivations de l'étudiant connecté pour une offre
      */
-    public static function modifierFichiers()
+    public static function modifierFichiers(): void
     {
         $cvData = null;
         $lmData = null;
@@ -391,7 +391,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void modifie le numéroEtudiant et le sexe lors de la Première Connexion
      */
-    public static function setnumEtuSexe(): void
+    public static function setNumEtuSexe(): void
     {
         $ancienNumEtu = $_REQUEST['oldNumEtu'];
         $numEtu = $_REQUEST['numEtu'];

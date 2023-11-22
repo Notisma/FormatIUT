@@ -85,7 +85,7 @@
 
                 <input type="hidden" value="<?= date("d-m-Y"); ?>" name="dateCreation">
                 <input type="submit" value="Envoyer"
-                       formaction="?action=creationConvention&controleur=EtuMain">
+                       formaction="?action=creerConvention&controleur=EtuMain">
             </fieldset>
         </form>
     </div>

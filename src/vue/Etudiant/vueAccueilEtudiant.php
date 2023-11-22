@@ -153,7 +153,7 @@
                     <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
                     <input type="hidden" name="oldNumEtu" value="<?php echo $ancienNumEtu ?>">
                     <input type="hidden" name="controleur" value="EtuMain">
-                    <input type="submit" value="SUIVANT" formaction="?action=setnumEtuSexe">
+                    <input type="submit" value="SUIVANT" formaction="?action=setNumEtuSexe">
                 </div>
             </form>
         </div>
