@@ -86,12 +86,14 @@
                     foreach ($listeEtudiants as $etudiant) {
                         $parcoursHTML=htmlspecialchars($etudiant->getParcours());
                         $groupeHTML=htmlspecialchars($etudiant->getGroupe());
+                        $prenomEtuHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
+                        $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
                         echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
-                            "<h3 class='titre' id='rouge'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h3>" .
+                            "<h3 class='titre' id='rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
                             "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";

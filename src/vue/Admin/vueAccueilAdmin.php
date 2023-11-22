@@ -3,7 +3,8 @@
         <div class="texteBonjour">
             <h3>Bonjour, <?php
                 $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
-                echo $prof->getPrenomProf();
+                $prenomHTML=htmlspecialchars($prof->getPrenomProf());
+                echo $prenomHTML;
                 ?></h3>
             <p>Retrouvez les dernières informations :</p>
         </div>
@@ -154,7 +155,9 @@
                     <div class="contenuAlerte">
                         <h3 class="titre" id="rouge">
                             <?php
-                            echo $etudiant->getPrenomEtudiant() . " " . strtoupper($etudiant->getNomEtudiant());
+                            $prenomEtuHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
+                            $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
+                            echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
                             ?></h3>
                         <p>
                             <?php
