@@ -278,14 +278,20 @@ class ControleurEtuMain extends ControleurMain
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            $cvData = null;
+            $cvLocation = null;
             $lmData = null;
             if ($_FILES["fic"]["tmp_name"] != null) {
-                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+                $cvLocation = "testupload/" . basename($_FILES['fic']['name']);
+                if (move_uploaded_file($_FILES['file']['tmp_name'], $cvLocation)) {
+                    echo "The file " . basename($_FILES['file']['name']) . " is now uploaded";
+                } else {
+                    echo "Problem uploading file";
+                }
+//                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
             }
-            if ($_FILES["ficLM"]["tmp_name"] != null) {
-                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-            }
+//            if ($_FILES["ficLM"]["tmp_name"] != null) {
+//                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+//            }
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idOffre'])) {
                 $liste = ((new OffreRepository())->getListeIdOffres());
@@ -296,7 +302,7 @@ class ControleurEtuMain extends ControleurMain
                             if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
+                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvLocation, $lmData);
                                 (new PostulerRepository())->creerObjet($postuler);
                                 $_REQUEST['action'] = "afficherMesOffres";
                                 self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
@@ -326,7 +332,7 @@ class ControleurEtuMain extends ControleurMain
      * @return void permet à l'étudiant connecté de créer sa convention
      * @throws \Exception
      */
-    public static function   creationConvention()
+    public static function creationConvention()
     {
         if ($_POST['idOff'] != "aucune") {
             if ($_POST['codePostalEntr'] > 0 && $_POST['siret'] > 0) {
