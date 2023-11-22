@@ -547,11 +547,11 @@ form {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 5%;
+        padding: 1%;
         border-radius: 10px;
         background-color: #ff9095;
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
     }
 
     .sousMenu {
@@ -564,8 +564,8 @@ form {
         z-index: 2000;
         top: 0;
         left: 0;
-        background-color: #ff5660;
-        border-radius: 10px;
+        border-radius: 0 0 10px 10px;
+        background: linear-gradient(to bottom, #FF5660, white 200%);
         transform: translate(0%, 0%);
         flex-shrink: 0;
     }
@@ -591,14 +591,14 @@ form {
     .sousMenu > a > p {
         width: 85%;
         padding-left: 5%;
+        font-size: 1.3em;
         color: black;
         font-weight: bolder;
-        font-size: 0.9rem;
         text-decoration: none;
     }
 
     .sousMenu > a > img {
-        height: 90%;
+        height: 70%;
     }
 
     #active {
@@ -609,6 +609,7 @@ form {
 
     .rechercheResp > img {
         width: 25px;
+        padding: 2%;
     }
 
     #gestionRecherche > form {
@@ -640,5 +641,30 @@ form {
         background-color: #fff;
         border-radius: 10px;
         transition: 0.4s;
+    }
+
+    #footerContent {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #footerLogo {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 70%;
+        height: 20%;
+    }
+
+    #footerText {
+        text-align: left;
+    }
+
+    #footerText > p {
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+        text-align: center;
     }
 }
