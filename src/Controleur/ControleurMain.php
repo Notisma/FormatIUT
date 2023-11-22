@@ -17,7 +17,7 @@ use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 
 class ControleurMain
 {
@@ -94,16 +94,16 @@ class ControleurMain
     {
         if (Configuration::controleurIs("EtuMain")) {
             $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
             if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
                 if ($offre->estValide()) {
                     self::$pageActuelle = "Détails de l'offre";
                     $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-                    $liste = (new OffreRepository())->getListeIdOffres();
+                    $liste = (new FormationRepository())->getListeIdOffres();
                     if ($idOffre || isset($_REQUEST["idOffre"])) {
                         if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
                         if (in_array($idOffre, $liste)) {
-                            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                             $client = "Etudiant";
                             $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
@@ -121,15 +121,15 @@ class ControleurMain
                 self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
             }
         } else if (Configuration::controleurIs("EntrMain")) {
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
             if ($offre->getSiret() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
                 $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-                $liste = (new OffreRepository())->getListeIdOffres();
+                $liste = (new FormationRepository())->getListeIdOffres();
                 if ($idOffre || isset($_REQUEST["idOffre"])) {
                     if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
                     if (in_array($idOffre, $liste)) {
-                        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                         $client = "Entreprise";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
@@ -146,12 +146,12 @@ class ControleurMain
         } else {
             self::$pageActuelle = "Détails de l'offre";
             $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-            $liste = (new OffreRepository())->getListeIdOffres();
+            $liste = (new FormationRepository())->getListeIdOffres();
             if ($idOffre || isset($_REQUEST["idOffre"])) {
                 if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
                 if (in_array($idOffre, $liste)) {
-                    $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                    $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $client = "Admin";
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                     self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);

@@ -25,7 +25,7 @@ class Entreprise extends AbstractDataObject
     private string $emailAValider;
     private string $nonce;
     private bool $estValide;
-    private DateTime $dateCreationCompte;
+    private ?string $dateCreationCompte;
 
     /**
      * @param float $siret
@@ -42,9 +42,9 @@ class Entreprise extends AbstractDataObject
      * @param string $emailAValider
      * @param string $nonce
      * @param bool $estValide
-     * @param DateTime $dateCreationCompte
+     * @param string|null $dateCreationCompte
      */
-    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, DateTime $dateCreationCompte)
+    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -74,7 +74,7 @@ class Entreprise extends AbstractDataObject
             'effectif' => $this->effectif,
             'codeNAF' => $this->codeNAF,
             'tel' => $this->tel,
-            "AdresseEntreprise"=>$this->adresseEntreprise,
+            "adresseEntreprise"=>$this->adresseEntreprise,
             "idVille"=>$this->idVille,
             "img_id"=>$this->img,
             "mdpHache"=>$this->mdpHache,

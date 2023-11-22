@@ -103,7 +103,7 @@
 
             <!-- exemple d'alerte - offre postée -->
             <?php foreach ($listeOffres as $offre) {
-                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                 ?>
 
                 <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=<?php echo $offre->getIdOffre() ?>"

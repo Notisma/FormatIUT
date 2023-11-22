@@ -8,7 +8,7 @@ use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
 
 class ControleurAdminMain extends ControleurMain
@@ -64,7 +64,7 @@ class ControleurAdminMain extends ControleurMain
     {
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
-        $listeOffres = (new OffreRepository())->offresNonValides();
+        $listeOffres = (new FormationRepository())->offresNonValides();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
         self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
@@ -181,9 +181,9 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function accepterOffre(): void
     {
-        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
         $offre->setEstValide(true);
-        (new OffreRepository())->modifierObjet($offre);
+        (new FormationRepository())->modifierObjet($offre);
         header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
         MessageFlash::ajouter("success", "L'offre a bien été validée");
     }
@@ -193,8 +193,8 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function rejeterOffre(): void
     {
-        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        (new OffreRepository())->supprimer($offre->getIdOffre());
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        (new FormationRepository())->supprimer($offre->getIdOffre());
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
     }
 
@@ -204,8 +204,8 @@ class ControleurAdminMain extends ControleurMain
     public static function supprimerOffre(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
-        $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        (new OffreRepository())->supprimer($_REQUEST['idOffre']);
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        (new FormationRepository())->supprimer($_REQUEST['idOffre']);
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
     }
 
@@ -248,7 +248,7 @@ class ControleurAdminMain extends ControleurMain
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                if (!$entreprise->estValide()) {
+                if (!$entreprise->isEstValide()) {
                     $entreprise->setEstValide(true);
                     (new EntrepriseRepository())->modifierObjet($entreprise);
                     MessageFlash::ajouter("success", "L'entreprise a bien été validée");

@@ -1,7 +1,7 @@
 <div class="wrapCentreOffre">
     <?php
-    $offre = (new App\FormatIUT\Modele\Repository\OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+    $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
     ?>
 
     <div class="wrapGauche">
@@ -33,14 +33,14 @@
 
         <div class="wrapBoutons">
             <?php
-            if (!$offre->estValide()) {
+            if (!$offre->getEstValide()) {
                 echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>ACCEPTER</a>
+                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdFormation() . "'>REJETER</a>
+            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdFormation() . "'>ACCEPTER</a>
                 ";
             } else {
                 echo "
-                <a href='?action=supprimerOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>SUPPRIMER</a>
+                <a href='?action=supprimerOffre&controleur=AdminMain&idOffre= " . $offre->getIdFormation() . "'>SUPPRIMER</a>
                 ";
             }
 
@@ -56,7 +56,7 @@
         <h4 class="titre">Statut de l'offre :</h4>
 
         <?php
-        if ($offre->estValide()) {
+        if ($offre->getEstValide()) {
             echo "<div class='statutOffre' id='valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
             echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
@@ -73,9 +73,9 @@
 
         <div class="detailsEtudiants">
             <?php
-            if ($offre->estValide()) {
+            if ($offre->getEstValide()) {
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
-                $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
+                $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdFormation());
 
                 if (sizeof($listeEtudiants) == 0  ) {
                     echo "<div class='erreur'>";
@@ -92,7 +92,7 @@
                             "</div>" .
                             "<div class='infosEtudiant'>" .
                             "<h3 class='titre' id='rouge'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h3>" .
-                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
+                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdFormation(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";
                     }

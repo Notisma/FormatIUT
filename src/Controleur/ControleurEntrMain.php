@@ -5,13 +5,12 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
-use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 
 class ControleurEntrMain extends ControleurMain
@@ -42,10 +41,10 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherAccueilEntr()
     {
-        $listeIDOffre = self::getTroisMax((new OffreRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $listeIDOffre = self::getTroisMax((new FormationRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
         for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
-            $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
+            $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
         }
         self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
     }
@@ -61,7 +60,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_REQUEST["Etat"])) {
             $_REQUEST["Etat"] = "Tous";
         }
-        $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["Etat"]);
+        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["Etat"]);
         self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "Etat" => $_REQUEST["Etat"]]);
     }
 
@@ -88,7 +87,7 @@ class ControleurEntrMain extends ControleurMain
     public static function afficherFormulaireModificationOffre(): void
     {
         if (isset($_REQUEST['idOffre'])) {
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
             self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
         } else {
             self::afficherErreur("Une offre devrait être renseignée");
@@ -113,7 +112,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
             $idOffre = $_REQUEST["idOffre"];
-            $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+            $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
                 if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
@@ -125,7 +124,7 @@ class ControleurEntrMain extends ControleurMain
                         header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
                     } else {
                         if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
-                            (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
+                            (new FormationRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
                             self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné avec succès");
                         } else {
@@ -159,11 +158,11 @@ class ControleurEntrMain extends ControleurMain
                 if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
                     if ($_REQUEST["joursParSemaine"] < 8) {
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
-                            $listeId = (new OffreRepository())->getListeIdOffres();
+                            $listeId = (new FormationRepository())->getListeIdOffres();
                             self::autoIncrement($listeId, "idOffre");
                             $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                            $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
-                            (new OffreRepository())->creerObjet($offre);
+                            $offre = (new FormationRepository())->construireDepuisTableau($_REQUEST);
+                            (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "mesOffres";
                             MessageFlash::ajouter("success", "Offre créée avec succès");
                             self::mesOffres();
@@ -197,13 +196,13 @@ class ControleurEntrMain extends ControleurMain
     public static function supprimerOffre(): void
     {
         if (isset($_REQUEST["idOffre"])) {
-            $listeOffre = ((new OffreRepository())->getListeIdOffres());
+            $listeOffre = ((new FormationRepository())->getListeIdOffres());
             if (in_array($_REQUEST["idOffre"], $listeOffre)) {
                 if (!((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
-                    $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+                    $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
                     if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                         (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idOffre"]);
-                        (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
+                        (new FormationRepository())->supprimer($_REQUEST["idOffre"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                         MessageFlash::ajouter("success", "Offre supprimée");
@@ -235,7 +234,7 @@ class ControleurEntrMain extends ControleurMain
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
                 if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
-                    $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+                    $offre = (new FormationRepository())->getObjectParClePrimaire($_POST["idOffre"]);
                     if ($offre) {
                         if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
                             if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
@@ -249,7 +248,7 @@ class ControleurEntrMain extends ControleurMain
                                 $offre->setDureeHeures($_POST['dureeHeures']);
                                 $offre->setJoursParSemaine($_POST['joursParSemaine']);
                                 $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
-                                (new OffreRepository())->modifierObjet($offre);
+                                (new FormationRepository())->modifierObjet($offre);
                                 header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
                                 MessageFlash::ajouter("success", "Offre modifiée avec succès");
                             } else {

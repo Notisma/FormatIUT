@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\DataObject;
 class Postuler extends AbstractDataObject
 {
     private float $numEtudiant;
-    private int $idOffre;
+    private int $idFormation;
     private string $etat;
 
     private ?string $cv;
@@ -33,15 +33,15 @@ class Postuler extends AbstractDataObject
      */
     public function getIdOffre(): int
     {
-        return $this->idOffre;
+        return $this->idFormation;
     }
 
     /**
-     * @param int $idOffre
+     * @param int $idFormation
      */
-    public function setIdOffre(int $idOffre): void
+    public function setIdOffre(int $idFormation): void
     {
-        $this->idOffre = $idOffre;
+        $this->idFormation = $idFormation;
     }
 
     /**
@@ -94,10 +94,10 @@ class Postuler extends AbstractDataObject
     }
 
 
-    public function __construct(float $numEtudiant, int $idOffre, string $Etat, ?string $cv, ?string $lettre)
+    public function __construct(float $numEtudiant, int $idFormation, string $Etat, ?string $cv, ?string $lettre)
     {
         $this->numEtudiant = $numEtudiant;
-        $this->idOffre = $idOffre;
+        $this->idFormation = $idFormation;
         $this->etat = $Etat;
         $this->cv = $cv;
         $this->lettre = $lettre;
@@ -108,7 +108,7 @@ class Postuler extends AbstractDataObject
     {
         return array(
             "numEtudiant" => $this->numEtudiant,
-            "idOffre" => $this->idOffre,
+            "idFormation" => $this->idFormation,
             "Etat" => $this->etat,
             "cv" => $this->cv,
             "lettre" => $this->lettre

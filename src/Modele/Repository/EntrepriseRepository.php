@@ -23,7 +23,6 @@ class EntrepriseRepository extends AbstractRepository
         if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
             $valide = 1;
         }
-        $date=new DateTime($entrepriseFormatTableau["dateCreationCompte"]);
         return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -37,7 +36,7 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["emailAValider"],
             $entrepriseFormatTableau["nonce"],
             $valide,
-            $date
+            $entrepriseFormatTableau["dateCreationCompte"]
         );
     }
 

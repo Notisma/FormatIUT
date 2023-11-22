@@ -84,9 +84,9 @@
                            placeholder="420" required maxlength="4">
                 </div>
 
-                <label class="labelFormulaire" for="dureeHeures_id">Durée en heure</label>
+                <label class="labelFormulaire" for="dureeHeure_id">Durée en heure</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="number" name="dureeHeures" id="dureeHeures_id"
+                    <input class="inputFormulaire" type="number" name="dureeHeure" id="dureeHeure_id"
                            placeholder="935" required maxlength="4">
                 </div>
 
