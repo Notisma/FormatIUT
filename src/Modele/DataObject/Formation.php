@@ -1,15 +1,12 @@
 <?php
 
 namespace App\FormatIUT\Modele\DataObject;
-
-use DateTime;
-
 class Formation extends AbstractDataObject
 {
     private string $idFormation;
     private ?string $nomOffre;
-    private DateTime $dateDebut;
-    private DateTime $dateFin;
+    private string $dateDebut;
+    private string $dateFin;
     private ?string $sujet;
     private ?string $detailProjet;
     private ?int $dureeHeure;
@@ -20,7 +17,7 @@ class Formation extends AbstractDataObject
     private ?int $nbHeuresHebdo;
     private ?bool $offreValidee;
     private ?string $objectifOffre;
-    private DateTime $dateCreationOffre;
+    private ?string $dateCreationOffre;
     private ?string $typeOffre;
     private ?int $anneeMax;
     private ?int $anneeMin;
@@ -28,12 +25,12 @@ class Formation extends AbstractDataObject
     private ?bool $validationPedagogique;
     private ?string $convention;
     private ?bool $conventionValidee;
-    private ?DateTime $dateCreationConvention;
-    private ?DateTime $dateTransmissionConvention;
+    private ?string $dateCreationConvention;
+    private ?string $dateTransmissionConvention;
     private ?bool $retourSigne;
     private ?string $assurance;
     private ?string $avenant;
-    private int $idEtudiant;
+    private ?int $idEtudiant;
     private ?string $idTuteurPro;
     private float $idEntreprise;
     private ?int $idTuteurUM;
@@ -41,8 +38,8 @@ class Formation extends AbstractDataObject
     /**
      * @param string $idFormation
      * @param string|null $nomOffre
-     * @param DateTime $dateDebut
-     * @param DateTime $dateFin
+     * @param string $dateDebut
+     * @param string $dateFin
      * @param string|null $sujet
      * @param string|null $detailProjet
      * @param int|null $dureeHeure
@@ -53,7 +50,7 @@ class Formation extends AbstractDataObject
      * @param int|null $nbHeuresHebdo
      * @param bool|null $offreValidee
      * @param string|null $objectifOffre
-     * @param DateTime $dateCreationOffre
+     * @param string|null $dateCreationOffre
      * @param string|null $typeOffre
      * @param int|null $anneeMax
      * @param int|null $anneeMin
@@ -61,8 +58,8 @@ class Formation extends AbstractDataObject
      * @param bool|null $validationPedagogique
      * @param string|null $convention
      * @param bool|null $conventionValidee
-     * @param DateTime|null $dateCreationConvention
-     * @param DateTime|null $dateTransmissionConvention
+     * @param string|null $dateCreationConvention
+     * @param string|null $dateTransmissionConvention
      * @param bool|null $retourSigne
      * @param string|null $assurance
      * @param string|null $avenant
@@ -71,7 +68,7 @@ class Formation extends AbstractDataObject
      * @param float $idEntreprise
      * @param int|null $idTuteurUM
      */
-    public function __construct(string $idFormation, ?string $nomOffre, DateTime $dateDebut, DateTime $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, DateTime $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?DateTime $dateCreationConvention, ?DateTime $dateTransmissionConvention, ?bool $retourSigne, ?string $assurance, ?string $avenant, int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?int $idTuteurUM)
+    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?bool $retourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?int $idTuteurUM)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -139,33 +136,33 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDateDebut(): DateTime
+    public function getDateDebut(): string
     {
         return $this->dateDebut;
     }
 
     /**
-     * @param DateTime $dateDebut
+     * @param string $dateDebut
      */
-    public function setDateDebut(DateTime $dateDebut): void
+    public function setDateDebut(string $dateDebut): void
     {
         $this->dateDebut = $dateDebut;
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDateFin(): DateTime
+    public function getDateFin(): string
     {
         return $this->dateFin;
     }
 
     /**
-     * @param DateTime $dateFin
+     * @param string $dateFin
      */
-    public function setDateFin(DateTime $dateFin): void
+    public function setDateFin(string $dateFin): void
     {
         $this->dateFin = $dateFin;
     }
@@ -331,17 +328,17 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDateCreationOffre(): DateTime
+    public function getDateCreationOffre(): string
     {
         return $this->dateCreationOffre;
     }
 
     /**
-     * @param DateTime $dateCreationOffre
+     * @param string $dateCreationOffre
      */
-    public function setDateCreationOffre(DateTime $dateCreationOffre): void
+    public function setDateCreationOffre(string $dateCreationOffre): void
     {
         $this->dateCreationOffre = $dateCreationOffre;
     }
@@ -459,33 +456,33 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return DateTime|null
+     * @return string|null
      */
-    public function getDateCreationConvention(): ?DateTime
+    public function getDateCreationConvention(): ?string
     {
         return $this->dateCreationConvention;
     }
 
     /**
-     * @param DateTime|null $dateCreationConvention
+     * @param string|null $dateCreationConvention
      */
-    public function setDateCreationConvention(?DateTime $dateCreationConvention): void
+    public function setDateCreationConvention(?string $dateCreationConvention): void
     {
         $this->dateCreationConvention = $dateCreationConvention;
     }
 
     /**
-     * @return DateTime|null
+     * @return string|null
      */
-    public function getDateTransmissionConvention(): ?DateTime
+    public function getDateTransmissionConvention(): ?string
     {
         return $this->dateTransmissionConvention;
     }
 
     /**
-     * @param DateTime|null $dateTransmissionConvention
+     * @param string|null $dateTransmissionConvention
      */
-    public function setDateTransmissionConvention(?DateTime $dateTransmissionConvention): void
+    public function setDateTransmissionConvention(?string $dateTransmissionConvention): void
     {
         $this->dateTransmissionConvention = $dateTransmissionConvention;
     }
@@ -539,9 +536,9 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getIdEtudiant(): int
+    public function getIdEtudiant(): ?int
     {
         return $this->idEtudiant;
     }

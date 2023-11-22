@@ -12,6 +12,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use DateTime;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -151,16 +152,30 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"],$_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
-                if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
+                if ($_REQUEST["gratification"] > $_REQUEST["uniteDureeGratification"] && $_REQUEST["uniteDureeGratification"] > 0 && $_REQUEST["dureeHeure"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
                     if ($_REQUEST["joursParSemaine"] < 8) {
-                        if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
+                        if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
                             $listeId = (new FormationRepository())->getListeIdOffres();
-                            self::autoIncrement($listeId, "idOffre");
+                            self::autoIncrement($listeId, "idFormation");
+                            $_REQUEST["dateCreationOffre"] = (new DateTime())->format('d-m-Y');
+                            $_REQUEST["estValide"] = 0;
+                            $_REQUEST["offreValidee"] = 0;
+                            $_REQUEST["validationPedagogique"] = 0;
                             $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
+                            $_REQUEST["convention"] = null;
+                            $_REQUEST["conventionValidee"] = 0;
+                            $_REQUEST["dateCreationConvention"] = null;
+                            $_REQUEST["dateTransmissionConvention"] = null;
+                            $_REQUEST["retourSigne"] = null;
+                            $_REQUEST["assurance"] = null;
+                            $_REQUEST["avenant"] = null;
+                            $_REQUEST["idEtudiant"] = null;
+                            $_REQUEST["idTuteurPro"] = null;
+                            $_REQUEST["idTuteurUM"] = null;
                             $offre = (new FormationRepository())->construireDepuisTableau($_REQUEST);
                             (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "mesOffres";
@@ -187,6 +202,7 @@ class ControleurEntrMain extends ControleurMain
             header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
+        var_dump($_REQUEST);
 
     }
 

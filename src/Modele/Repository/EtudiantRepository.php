@@ -84,7 +84,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function nbPostulations($idOffre): mixed
     {
-        $sql = "SELECT COUNT(numEtudiant)as nb FROM Postuler WHERE idOffre=:Tag";
+        $sql = "SELECT COUNT(numEtudiant)as nb FROM Postuler WHERE idFormation=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -144,7 +144,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function etudiantsEnAttente($idOffre): array
     {
-        $sql = "SELECT numEtudiant FROM Postuler r WHERE idOffre=:Tag AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
+        $sql = "SELECT numEtudiant FROM Postuler r WHERE idFormation=:Tag AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idOffre);
         $pdoStatement->execute($values);
@@ -266,7 +266,7 @@ class EtudiantRepository extends AbstractRepository
     {
         $sql = "SELECT numEtudiant,COUNT(idFormation) as AUneOffre
                 FROM Etudiants etu 
-                LEFT JOIN Formation f ON f.idEtudiant=etu.numEtudiant
+                LEFT JOIN Formations f ON f.idEtudiant=etu.numEtudiant
                 GROUP BY numEtudiant";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $item) {

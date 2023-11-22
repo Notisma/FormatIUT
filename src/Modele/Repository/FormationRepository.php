@@ -16,7 +16,7 @@ class FormationRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array(" idFormation, nomOffre, dateDebut, dateFin, sujet, detailProjet, dureeHeure, joursParSemaine, gratification, uniteGratification, uniteDureeGratification, nbHeuresHebdo, offreValidee, objectifOffre, dateCreationOffre, typeOffre, anneeMax, anneeMin, estValide, validationPedagogique, convention, conventionValidee, dateCreationConvention, dateTransmissionConvention, retourSigne, assurance, avenant, idEtudiant, idTuteurPro, idEntreprise, idTuteurUM");
+        return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet","detailProjet","dureeHeure","joursParSemaine","gratification","uniteGratification","uniteDureeGratification","nbHeuresHebdo","offreValidee","objectifOffre","dateCreationOffre","typeOffre","anneeMax","anneeMin","estValide","validationPedagogique","convention","conventionValidee","dateCreationConvention","dateTransmissionConvention","retourSigne","assurance","avenant","idEtudiant","idTuteurPro","idEntreprise","idTuteurUM");
     }
 
     protected function getClePrimaire(): string
@@ -26,7 +26,7 @@ class FormationRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Formation( $dataObjectTableau["idFormation"],$dataObjectTableau["nomOffre"],new DateTime($dataObjectTableau["dateDebut"]),new DateTime($dataObjectTableau["dateFin"]), $dataObjectTableau["sujet"],$dataObjectTableau["detailProjet"],$dataObjectTableau["dureeHeure"],$dataObjectTableau["joursParSemaine"],$dataObjectTableau["gratification"],$dataObjectTableau["uniteGratification"],$dataObjectTableau["uniteDureeGratification"],$dataObjectTableau["nbHeuresHebdo"],$dataObjectTableau["offreValidee"],$dataObjectTableau["objectifOffre"],new DateTime($dataObjectTableau["dateCreationOffre"]),$dataObjectTableau["typeOffre"],$dataObjectTableau["anneeMax"],$dataObjectTableau["anneeMin"],$dataObjectTableau["estValide"],$dataObjectTableau["validationPedagogique"],$dataObjectTableau["convention"],$dataObjectTableau["conventionValidee"],new DateTime($dataObjectTableau["dateCreationConvention"]),new DateTime($dataObjectTableau["dateTransmissionConvention"]),$dataObjectTableau["retourSigne"],$dataObjectTableau["assurance"],$dataObjectTableau["avenant"],$dataObjectTableau["idEtudiant"],$dataObjectTableau["idTuteurPro"],$dataObjectTableau["idEntreprise"],$dataObjectTableau["idTuteurUM"]);
+        return new Formation( $dataObjectTableau["idFormation"],$dataObjectTableau["nomOffre"],$dataObjectTableau["dateDebut"],$dataObjectTableau["dateFin"], $dataObjectTableau["sujet"],$dataObjectTableau["detailProjet"],$dataObjectTableau["dureeHeure"],$dataObjectTableau["joursParSemaine"],$dataObjectTableau["gratification"],$dataObjectTableau["uniteGratification"],$dataObjectTableau["uniteDureeGratification"],$dataObjectTableau["nbHeuresHebdo"],$dataObjectTableau["offreValidee"],$dataObjectTableau["objectifOffre"],$dataObjectTableau["dateCreationOffre"],$dataObjectTableau["typeOffre"],$dataObjectTableau["anneeMax"],$dataObjectTableau["anneeMin"],$dataObjectTableau["estValide"],$dataObjectTableau["validationPedagogique"],$dataObjectTableau["convention"],$dataObjectTableau["conventionValidee"],$dataObjectTableau["dateCreationConvention"],$dataObjectTableau["dateTransmissionConvention"],$dataObjectTableau["retourSigne"],$dataObjectTableau["assurance"],$dataObjectTableau["avenant"],$dataObjectTableau["idEtudiant"],$dataObjectTableau["idTuteurPro"],$dataObjectTableau["idEntreprise"],$dataObjectTableau["idTuteurUM"]);
     }
 
     public function listeIdTypeFormation(): array
@@ -44,7 +44,7 @@ class FormationRepository extends AbstractRepository
 
     public function estFormation(string $offre): ?AbstractDataObject
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idFormation=:Tag ";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idFormation=:Tag AND idEtudiant IS NOT NULL";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $offre);
         $pdoStatement->execute($values);

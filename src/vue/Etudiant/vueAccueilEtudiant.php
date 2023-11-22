@@ -36,7 +36,7 @@
                     $entreprise = null;
                     $lien = null;
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
-                        if ($listeStage[$i]->estValide()) {
+                        if ($listeStage[$i]->getEstValide()) {
                             $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
                             $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
                             $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();

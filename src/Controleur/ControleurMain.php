@@ -122,7 +122,7 @@ class ControleurMain
             }
         } else if (Configuration::controleurIs("EntrMain")) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-            if ($offre->getSiret() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+            if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
                 $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
                 $liste = (new FormationRepository())->getListeIdOffres();
@@ -130,7 +130,7 @@ class ControleurMain
                     if (!$idOffre) $idOffre = $_REQUEST['idOffre'];
                     if (in_array($idOffre, $liste)) {
                         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                         $client = "Entreprise";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                         self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);

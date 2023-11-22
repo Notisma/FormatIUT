@@ -4,8 +4,8 @@
             <!-- affhichage des informations principales de l'offre -->
             <h2><?php $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomOffreHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
-            <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h4><?php echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
+            <p><?php echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -20,7 +20,7 @@
                     <div class="overflowListe2">
                         <div id="liseInfosOffreEntr">
                             <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
-                            <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
+                            <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
                             <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?>
                                 jours
                             </p>
@@ -43,7 +43,7 @@
             <?php
             if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                 echo '
-            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
+            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdFormation()) . '">
         
             <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
             
@@ -61,9 +61,9 @@
 
         <div class="wrapPostulants">
             <?php
-            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
             if (empty($listeEtu)) {
-                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
                 if ($formation) {
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
                     echo '<div class="etudiantPostulant">

@@ -50,7 +50,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
         <div class="wrapAllEtu">
             <?php
             //on affiche toutes les offres auxquelles l'étudiant a postulé, ou toutes les offres auxquelles il est assigné
-            $listeOffres = (new App\FormatIUT\Modele\Repository\OffreRepository())->offresPourEtudiant($etudiant->getNumEtudiant());
+            $listeOffres = (new App\FormatIUT\Modele\Repository\FormationRepository())->offresPourEtudiant($etudiant->getNumEtudiant());
 
             if (sizeof($listeOffres) < 1) {
                 echo "<div class='erreur'>";
