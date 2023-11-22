@@ -270,14 +270,20 @@ class ControleurEtuMain extends ControleurMain
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            $cvData = null;
+            $cvLocation = null;
             $lmData = null;
             if ($_FILES["fic"]["tmp_name"] != null) {
-                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
+                $cvLocation = "testupload/" . basename($_FILES['fic']['name']);
+                if (move_uploaded_file($_FILES['file']['tmp_name'], $cvLocation)) {
+                    echo "The file " . basename($_FILES['file']['name']) . " is now uploaded";
+                } else {
+                    echo "Problem uploading file";
+                }
+//                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
             }
-            if ($_FILES["ficLM"]["tmp_name"] != null) {
-                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-            }
+//            if ($_FILES["ficLM"]["tmp_name"] != null) {
+//                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
+//            }
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeidFormations());
