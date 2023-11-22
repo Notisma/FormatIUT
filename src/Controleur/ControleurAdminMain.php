@@ -13,7 +13,6 @@ use App\FormatIUT\Modele\Repository\pstageRepository;
 
 class ControleurAdminMain extends ControleurMain
 {
-
     private static string $pageActuelleAdmin = "Accueil Admin";
 
     /**
@@ -27,8 +26,6 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
             array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
-
-
         );
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
@@ -60,7 +57,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche l'accueil pour un Administrateur connecté
      */
-    public static function afficherAccueilAdmin()
+    public static function afficherAccueilAdmin(): void
     {
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
@@ -72,7 +69,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche le profil de l'administrateur connecté
      */
-    public static function afficherProfilAdmin()
+    public static function afficherProfilAdmin(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
         self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
@@ -81,7 +78,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche les informations d'un étudiant
      */
-    public static function afficherDetailEtudiant()
+    public static function afficherDetailEtudiant(): void
     {
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
         self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
@@ -90,7 +87,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche la liste des étudiants
      */
-    public static function afficherListeEtudiant()
+    public static function afficherListeEtudiant(): void
     {
         $listeEtudiants = (new EtudiantRepository())->etudiantsEtats();
         self::$pageActuelleAdmin = "Liste Étudiants";
@@ -100,7 +97,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche les informations d'une entreprise
      */
-    public static function afficherDetailEntreprise()
+    public static function afficherDetailEntreprise(): void
     {
         self::$pageActuelleAdmin = "Détails d'une Entreprise";
         self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
@@ -153,7 +150,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void permet à l'admin connecté d'exporter un fichier csv
      */
-    public static function exporterCSV()
+    public static function exporterCSV(): void
     {
         $tab = (new pstageRepository())->exportCSV();
 
