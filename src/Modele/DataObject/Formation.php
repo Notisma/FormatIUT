@@ -7,8 +7,26 @@ use DateTime;
 class Formation extends AbstractDataObject
 {
     private string $idFormation;
+    private ?string $nomOffre;
     private DateTime $dateDebut;
     private DateTime $dateFin;
+    private ?string $sujet;
+    private ?string $detailSujet;
+    private ?int $dureeHeure;
+    private ?int $nbJoursParSemaine;
+    private ?int $gratification;
+    private ?string $uniteGratification;
+    private ?int $uniteDureeGratification;
+    private ?int $nbHeuresHebdo;
+    private ?bool $offreValidee;
+    private ?string $objectifOffre;
+    private DateTime $dateCreationOffre;
+    private ?string $dateCreationConvention;
+    private ?string $typeOffre;
+    private ?int $anneeMax;
+    private ?int $anneeMin;
+    private ?bool $estValide;
+    private ?bool $validationPedagogique;
     private int $idEtudiant;
     private ?string $idTuteurPro;
     private float $idEntreprise;

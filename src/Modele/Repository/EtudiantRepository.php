@@ -164,7 +164,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function nbEnEtat($numEtudiant, $etat): mixed
     {
-        $sql = "SELECT COUNT(idOffre) as nb FROM Postuler WHERE numEtudiant=:Tag AND Etat=:TagEtat";
+        $sql = "SELECT COUNT(idFormation) as nb FROM Postuler WHERE numEtudiant=:Tag AND Etat=:TagEtat";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $numEtudiant, "TagEtat" => $etat);
         $pdoStatement->execute($values);

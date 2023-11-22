@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\Entreprise;
+use DateTime;
 
 class EntrepriseRepository extends AbstractRepository
 {
@@ -13,7 +14,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "Adresse_Entreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte","typeStructure","fax","siteWeb"];
+        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "adresseEntreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
@@ -22,13 +23,13 @@ class EntrepriseRepository extends AbstractRepository
         if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
             $valide = 1;
         }
-        $date=new \DateTime($entrepriseFormatTableau["dateCreationEntreprise"]);
+        $date=new DateTime($entrepriseFormatTableau["dateCreationCompte"]);
         return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
             $entrepriseFormatTableau['codeNAF'],
             $entrepriseFormatTableau['tel'],
-            $entrepriseFormatTableau['Adresse_Entreprise'],
+            $entrepriseFormatTableau['adresseEntreprise'],
             $entrepriseFormatTableau['idVille'],
             $entrepriseFormatTableau["img_id"],
             $entrepriseFormatTableau["mdpHache"],
@@ -36,10 +37,7 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["emailAValider"],
             $entrepriseFormatTableau["nonce"],
             $valide,
-            $date,
-            $entrepriseFormatTableau["typeStructure"],
-            $entrepriseFormatTableau["fax"],
-            $entrepriseFormatTableau["siteWeb"]
+            $date
         );
     }
 
@@ -89,7 +87,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse)
     {
-        $sql = "UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, Adresse_Entreprise = :adTag WHERE numSiret = :siretTag";
+        $sql = "UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, adresseEntreprise = :adTag WHERE numSiret = :siretTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("nomTag" => $nom,
             "statutTag" => $statut,
@@ -103,7 +101,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
-        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
+        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
         FROM Formation f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
