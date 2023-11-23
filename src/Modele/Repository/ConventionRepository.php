@@ -59,7 +59,7 @@ class ConventionRepository extends AbstractRepository
     public function trouverConventionDepuisForm($numEtu): Convention
     {
         $sql = "Select c.idConvention, conventionValidee, dateCreation, dateTransmission, retourSigne, assurance, objectifOffre, typeConvention
-        FROM Formation f JOIN Convention c ON c.idConvention = f.idConvention WHERE idEtudiant = :tagEtu";
+        FROM Formations f JOIN Convention c ON c.idConvention = f.idConvention WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);

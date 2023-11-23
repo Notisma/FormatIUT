@@ -63,7 +63,7 @@ class Formation extends AbstractDataObject
      * @param bool|null $retourSigne
      * @param string|null $assurance
      * @param string|null $avenant
-     * @param int $idEtudiant
+     * @param int|null $idEtudiant
      * @param string|null $idTuteurPro
      * @param float $idEntreprise
      * @param int|null $idTuteurUM
@@ -616,16 +616,16 @@ class Formation extends AbstractDataObject
             'uniteGratification'=>$this->uniteGratification,
             'uniteDureeGratification'=>$this->uniteDureeGratification,
             'nbHeuresHebdo'=>$this->nbHeuresHebdo,
-            'offreValidee'=>$this->offreValidee,
+            'offreValidee'=>$this->offreValidee?1:0,
             'objectifOffre'=>$this->objectifOffre,
             'dateCreationOffre'=>$this->dateCreationOffre,
             'typeOffre'=>$this->typeOffre,
             'anneeMax'=>$this->anneeMax,
             'anneeMin'=>$this->anneeMin,
-            'estValide'=>$this->estValide,
-            'validationPedagogique'=>$this->validationPedagogique,
+            'estValide'=>$this->estValide?1:0,
+            'validationPedagogique'=>$this->validationPedagogique?1:0,
             'convention'=>$this->convention,
-            'conventionValidee'=>$this->conventionValidee,
+            'conventionValidee'=>$this->conventionValidee?1:0,
             'dateCreationConvention'=>$this->dateCreationConvention,
             'dateTransmissionConvention'=>$this->dateTransmissionConvention,
             'retourSigne'=>$this->retourSigne,
