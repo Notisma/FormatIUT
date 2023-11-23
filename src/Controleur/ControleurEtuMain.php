@@ -279,19 +279,23 @@ class ControleurEtuMain extends ControleurMain
         $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
             $cvLocation = null;
-            $lmData = null;
+            $lmLocation = null;
             if ($_FILES["fic"]["tmp_name"] != null) {
                 $cvLocation = "testupload/" . basename($_FILES['fic']['name']);
-                if (move_uploaded_file($_FILES['file']['tmp_name'], $cvLocation)) {
-                    echo "The file " . basename($_FILES['file']['name']) . " is now uploaded";
+                if (move_uploaded_file($_FILES['fic']['tmp_name'], $cvLocation)) {
+                    echo "Le CV " . basename($_FILES['fic']['name']) . " is now uploaded";
                 } else {
                     echo "Problem uploading file";
                 }
-//                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
             }
-//            if ($_FILES["ficLM"]["tmp_name"] != null) {
-//                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-//            }
+            if ($_FILES["ficLM"]["tmp_name"] != null) {
+                $lmLocation = "testupload/" . basename($_FILES['ficLM']['name']);
+                if (move_uploaded_file($_FILES['ficLM']['tmp_name'], $lmLocation)) {
+                    echo "La LM " . basename($_FILES['ficLM']['name']) . " is now uploaded";
+                } else {
+                    echo "Problem uploading file";
+                }
+            }
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idOffre'])) {
                 $liste = ((new OffreRepository())->getListeIdOffres());
@@ -302,7 +306,7 @@ class ControleurEtuMain extends ControleurMain
                             if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvLocation, $lmData);
+                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvLocation, $lmLocation);
                                 (new PostulerRepository())->creerObjet($postuler);
                                 $_REQUEST['action'] = "afficherMesOffres";
                                 self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
