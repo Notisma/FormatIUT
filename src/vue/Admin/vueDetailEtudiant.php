@@ -63,14 +63,14 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
                         $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
                         $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
                         $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>" .
+                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getidFormation() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
                             "<h3 class='titre'>" . $nomOffreHTML . "</h3>" .
                             "<h4 class='titre'>" . $nomEntrHTML . "</h4>" .
-                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant() ) . "</h5> " .
+                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant() ) . "</h5> " .
                             "</div>" .
                             "</a>";
                     }

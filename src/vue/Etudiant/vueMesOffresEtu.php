@@ -37,19 +37,19 @@
 
                 $countAttente = 0;
                 foreach ($listOffre as $offre) {
-                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "En attente") {
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "En attente") {
                         $countAttente++;
-                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
+                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         $nomHTML = htmlspecialchars($offre->getNomOffre());
                         echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
-                        echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo '<p> Du ' . $offre->getDateDebut() . " au " . $offre->getDateFin() . '</p>';
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre: " . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
                         echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+                             <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
@@ -85,9 +85,9 @@
                 <?php
                 $countChoisirValider = 0;
                 foreach ($listOffre as $offre) {
-                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "A Choisir" || (new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "A Choisir" || (new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "Validée") {
                         $countChoisirValider++;
-                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=' . $offre->getIdOffre() . '  class=wrapOffres>';
+                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '  class=wrapOffres>';
                         echo "<div class='partieGauche'>";
                         echo '<p>';
                         $nomHTML = htmlspecialchars($offre->getNomOffre());
@@ -96,17 +96,17 @@
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
-                        if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdOffre()) == "Validée") {
+                        if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "Validée") {
                             echo '<button class="boutonOffre" id="disabled">Acceptée</button>';
                         } else {
                             echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+                             <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="validerOffre">
                               <button class="boutonOffre" id="accepter">ACCEPTER</button>
                               </form>';
                             echo '<form method="get">
-                             <input type="hidden" name="idOffre" value= ' . $offre->getIdOffre() . '>
+                             <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
                               <input type="hidden" name="controleur" value="EtuMain">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>

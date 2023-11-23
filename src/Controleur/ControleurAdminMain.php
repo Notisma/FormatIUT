@@ -186,10 +186,10 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function accepterOffre(): void
     {
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
         $offre->setEstValide(true);
         (new FormationRepository())->modifierObjet($offre);
-        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idOffre=" . $offre->getIdOffre());
+        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idFormation=" . $offre->getidFormation());
         MessageFlash::ajouter("success", "L'offre a bien été validée");
     }
 
@@ -198,8 +198,8 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function rejeterOffre(): void
     {
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        (new FormationRepository())->supprimer($offre->getIdOffre());
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+        (new FormationRepository())->supprimer($offre->getidFormation());
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
     }
 
@@ -209,8 +209,8 @@ class ControleurAdminMain extends ControleurMain
     public static function supprimerOffre(): void
     {
         //TODO : FAIRE LES VERIFICATIONS
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
-        (new FormationRepository())->supprimer($_REQUEST['idOffre']);
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+        (new FormationRepository())->supprimer($_REQUEST['idFormation']);
         self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
     }
 

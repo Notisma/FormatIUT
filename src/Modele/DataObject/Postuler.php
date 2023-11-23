@@ -31,7 +31,7 @@ class Postuler extends AbstractDataObject
     /**
      * @return int
      */
-    public function getIdOffre(): int
+    public function getidFormation(): int
     {
         return $this->idFormation;
     }
@@ -39,7 +39,7 @@ class Postuler extends AbstractDataObject
     /**
      * @param int $idFormation
      */
-    public function setIdOffre(int $idFormation): void
+    public function setidFormation(int $idFormation): void
     {
         $this->idFormation = $idFormation;
     }

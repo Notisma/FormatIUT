@@ -129,7 +129,7 @@
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdOffre()));
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdFormation()));
                     echo $nbEtudiants . " étudiant";
                     if ($nbEtudiants == 1) echo " a";
                     else echo "s ont";
@@ -153,7 +153,7 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=postuler&controleur=EtuMain&idFormation=<?php echo $offre->getIdOffre() ?>"
+              action="?action=postuler&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
@@ -202,13 +202,13 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdOffre() ?>"
+              action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <?php
-                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
+                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdFormation()));
                         if($postuler->formatTableau()["cv"] != null){
                             echo "<p> Vous avez déjà déposé un CV </p>";
                         }

@@ -59,7 +59,7 @@
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
                         $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
-                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdFormation() . "'>" .
+                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .

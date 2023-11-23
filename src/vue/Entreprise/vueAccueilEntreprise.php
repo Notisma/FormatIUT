@@ -70,7 +70,7 @@
             for ($i = 0; $i < sizeof($listeOffre); $i++) {
                 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getIdEntreprise());
                 $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $listeOffre[$i]->getIdFormation();
+                $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $listeOffre[$i]->getIdFormation();
                 echo '<a href="' . $lien . '" class="annonceEntreprise">
                 <div class="imgAnnonce">
                     <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">

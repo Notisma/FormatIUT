@@ -59,13 +59,13 @@
     <div class="actionsRapidesEntr">
         <h3>Actions Rapides</h3>
         <?php
-        echo '<a href="?controleur=EtuMain&action=postuler&idOffre=' . rawurlencode($offre->getIdOffre()) . '">
+        echo '<a href="?controleur=EtuMain&action=postuler&idFormation=' . rawurlencode($offre->getidFormation()) . '">
                 <button class="boutonAssigner" ';
         $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+        $formation = ((new FormationRepository())->estFormation($_GET['idFormation']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idFormation'])) {
                     $bool = true;
                 }
             }
@@ -87,7 +87,7 @@
 
         <div class="wrapPostulants">
             <?php
-            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
             if ($formation) {
                 if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
                     echo "<div class='nbPostulants'>
@@ -99,7 +99,7 @@
                 <h4>L'offre est déjà occupée </h4></div>";
                 }
             } else {
-                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getidFormation()));
                 if (empty($listeEtu)) {
                     echo "
                 <div class='erreur'>
@@ -112,7 +112,7 @@
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdOffre()));
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getidFormation()));
                     echo $nbEtudiants . " étudiant";
                     if ($nbEtudiants == 1) echo " a";
                     else echo "s ont";

@@ -1,6 +1,6 @@
 <div class="wrapCentreOffre">
     <?php
-    $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+    $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
     ?>
 
@@ -35,12 +35,12 @@
             <?php
             if (!$offre->getEstValide()) {
                 echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdFormation() . "'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdFormation() . "'>ACCEPTER</a>
+                <a href='?action=rejeterOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>REJETER</a>
+            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>ACCEPTER</a>
                 ";
             } else {
                 echo "
-                <a href='?action=supprimerOffre&controleur=AdminMain&idOffre= " . $offre->getIdFormation() . "'>SUPPRIMER</a>
+                <a href='?action=supprimerOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>SUPPRIMER</a>
                 ";
             }
 

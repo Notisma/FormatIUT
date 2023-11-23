@@ -10,7 +10,7 @@
                     <?php
                     if ($offre) {
                         echo '<input value="' . $offre->getNomOffre() . '" name="nomOffre" id="offre_id"  readonly required> </input>';
-                        echo '<input type="hidden" value="'.$offre->getIdOffre().'" name="idOff"> </input>';
+                        echo '<input type="hidden" value="'.$offre->getidFormation().'" name="idOff"> </input>';
 
                         }
                      else {

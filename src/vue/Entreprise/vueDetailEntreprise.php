@@ -45,10 +45,10 @@
         <h3>Actions Rapides</h3>
         <?php
         if ($entreprise->getSiret() == \App\FormatIUT\Controleur\ControleurEntrMain::getCleEntreprise()) {
-            echo "<a href='?controleur=EntrMain&action=supprimerOffre&idOffre=" . rawurlencode($offre->getIdOffre()) . "'>
+            echo "<a href='?controleur=EntrMain&action=supprimerOffre&idFormation=" . rawurlencode($offre->getidFormation()) . "'>
             <button class='boutonAssigner'>SUPPRIMER L'OFFRE</button>
         </a>
-        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=3'>
+        <a href='?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=3'>
             <button class='boutonAssigner' id='disabled' disabled>MODIFIER L'OFFRE</button>
         </a>
         ";
@@ -66,9 +66,9 @@
 
         <div class="wrapPostulants">
             <?php
-            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getidFormation()));
             if (empty($listeEtu)) {
-                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
                 if ($formation) {
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                     echo '<div class="etudiantPostulant">
@@ -98,18 +98,18 @@
                 <div class="nomEtuPostulant">
                     <h4>';
                     echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant();
-                    $idOffreURl = rawurlencode($offre->getIdOffre());
+                    $idFormationURl = rawurlencode($offre->getidFormation());
                     $idURL = rawurlencode($etudiant->getNumEtudiant());
                     echo '</h4>
-                    <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
+                    <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
                     echo '<button class="boutonAssigner" ';
                     if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                         echo ' id="disabled" disabled';
                     }
-                    if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "A Choisir") {
+                    if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
                         echo 'id="disabled" disabled>Envoyée';
                     } else {
-                        $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                        $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
                         if (!is_null($formation)) {
                             echo ' id="disabled" disabled';
                             if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {

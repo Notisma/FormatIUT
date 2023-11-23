@@ -43,7 +43,7 @@
             <?php
             if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                 echo '
-            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdFormation()) . '">
+            <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
         
             <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
             
@@ -94,18 +94,18 @@
                         <div class="nomEtuPostulant">
                             <h4>';
                         echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant();
-                        $idOffreURl = rawurlencode($offre->getIdOffre());
+                        $idFormationURl = rawurlencode($offre->getidFormation());
                         $idURL = rawurlencode($etudiant->getNumEtudiant());
                         echo '</h4>
-                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
+                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
                         echo '<button id="petit" class="boutonAssigner" ';
                         if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                             echo ' id="disabled" disabled';
                         }
-                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "A Choisir") {
+                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
                             echo 'id="disabled" disabled>Envoyée';
                         } else {
-                            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
                             if (!is_null($formation)) {
                                 echo ' id="disabled" disabled';
                                 if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
@@ -158,7 +158,7 @@
 
     <div class="wrapBoutonsDoc">
         <?php
-        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idOffre='.$_REQUEST['idOffre'].'>
+        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
         <a href=?action=telechargerLettre&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'>

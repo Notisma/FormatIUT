@@ -40,7 +40,7 @@ class FormationRepository extends AbstractRepository
         return $listeID;
     }
 
-    //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idOffre)
+    //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idFormation)
 
     public function estFormation(string $offre): ?AbstractDataObject
     {
@@ -156,7 +156,7 @@ class FormationRepository extends AbstractRepository
      * retourne la liste des id des offres
      */
 
-    public function getListeIdOffres(): array
+    public function getListeidFormations(): array
     {
         $sql = "SELECT idFormation FROM Formations";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -183,13 +183,21 @@ class FormationRepository extends AbstractRepository
         }
         return $listeID;
     }
+    public function mettreAChoisir($numEtudiant, $idFormation): void
+    {
+        $sql = "UPDATE Postuler SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
+        $pdoStatement->execute($values);
+    }
+
     /**
      * @param $idEntreprise
      * @return array
      * retourne la liste des id des offres pour une entreprise
      */
 
-    public function listeIdOffreEntreprise($idEntreprise): array
+    public function listeidFormationEntreprise($idEntreprise): array
     {
         $sql = "SELECT idFormation FROM Formations WHERE idEntreprise=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);

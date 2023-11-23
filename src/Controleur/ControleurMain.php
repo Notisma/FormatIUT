@@ -99,7 +99,7 @@ class ControleurMain
                 if ($offre->getEstValide()) {
                     self::$pageActuelle = "Détails de l'offre";
                     $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-                    $liste = (new FormationRepository())->getListeIdOffres();
+                    $liste = (new FormationRepository())->getListeidFormations();
                     if ($idFormation || isset($_REQUEST["idFormation"])) {
                         if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
                         if (in_array($idFormation, $liste)) {
@@ -125,7 +125,7 @@ class ControleurMain
             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
                 $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-                $liste = (new FormationRepository())->getListeIdOffres();
+                $liste = (new FormationRepository())->getListeidFormations();
                 if ($idFormation || isset($_REQUEST["idFormation"])) {
                     if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
                     if (in_array($idFormation, $liste)) {
@@ -146,7 +146,7 @@ class ControleurMain
         } else {
             self::$pageActuelle = "Détails de l'offre";
             $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
-            $liste = (new FormationRepository())->getListeIdOffres();
+            $liste = (new FormationRepository())->getListeidFormations();
             if ($idFormation || isset($_REQUEST["idFormation"])) {
                 if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
                 if (in_array($idFormation, $liste)) {

@@ -56,7 +56,7 @@
             if (!empty($listeOffres)) {
                 foreach ($listeOffres as $offre) {
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                    echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdFormation() . "' class='wrapOffres'>";
+                    echo "<a href='?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $offre->getIdFormation() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
                     $nomHTML = htmlspecialchars($offre->getNomOffre());
                     echo "<h3>" . $nomHTML . " - " . $offre->getTypeOffre() . "</h3>";
