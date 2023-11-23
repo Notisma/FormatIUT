@@ -320,19 +320,19 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function   creationConvention()
     {
-        if ($_POST['idOff'] != "aucune") {
-            if ($_POST['codePostalEntr'] > 0 && $_POST['siret'] > 0) {
-                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_POST['siret']);
+        if ($_REQUEST['idOff'] != "aucune") {
+            if ($_REQUEST['codePostalEntr'] > 0 && $_REQUEST['siret'] > 0) {
+                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
                 if (isset($entrepriseVerif)) {
-                    $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_POST['idOff']);
+                    $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
                     if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
                         $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
-                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_POST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresse()) == trim($_POST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_POST['villeEntr'])) && ($villeEntr->getCodePostal() == $_POST['codePostalEntr'])) {
-                            if ($offreVerif->getDateDebut() == new \DateTime($_POST['dateDebut']) && $offreVerif->getDateFin() == new \DateTime($_POST['dateFin'])) {
+                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresse()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
+                            if ($offreVerif->getDateDebut() == new \DateTime($_REQUEST['dateDebut']) && $offreVerif->getDateFin() == new \DateTime($_REQUEST['dateFin'])) {
                                 $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
                                 $convention = (new ConventionRepository())->construireDepuisTableau(["idConvention" => $clefPrimConv,
-                                    "conventionValidee" => 0, "dateCreation" => $_POST['dateCreation'], "dateTransmission" => $_POST['dateCreation'],
-                                    "retourSigne" => 1, "assurance" => $_POST['assurance'], "objectifOffre" => $_POST['objfOffre'], "typeConvention" => $offreVerif->getTypeOffre()]);
+                                    "conventionValidee" => 0, "dateCreation" => $_REQUEST['dateCreation'], "dateTransmission" => $_REQUEST['dateCreation'],
+                                    "retourSigne" => 1, "assurance" => $_REQUEST['assurance'], "objectifOffre" => $_REQUEST['objfOffre'], "typeConvention" => $offreVerif->getTypeOffre()]);
                                 (new ConventionRepository())->creerObjet($convention);
                                 if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
                                     $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ('F' . $offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),

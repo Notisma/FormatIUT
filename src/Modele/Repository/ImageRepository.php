@@ -81,7 +81,7 @@ class ImageRepository extends AbstractRepository
 
     public function imageParEntreprise($Siret): mixed
     {
-        $sql = "SELECT img_id FROM Entreprise WHERE numSiret=:Tag";
+        $sql = "SELECT img_id FROM Entreprises WHERE numSiret=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $Siret);
         $pdoStatement->execute($values);
