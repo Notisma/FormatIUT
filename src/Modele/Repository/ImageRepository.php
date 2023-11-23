@@ -48,7 +48,7 @@ class ImageRepository extends AbstractRepository
      */
     public function insert(array $values): void
     {
-        $req = "INSERT INTO Image VALUES (" .
+        $req = "INSERT INTO Images VALUES (" .
             "'" . $values["img_id"] . "', " .
             "'" . $values["img_nom"] . "', " .
             "'" . $values["img_taille"] . "', " .
@@ -64,7 +64,7 @@ class ImageRepository extends AbstractRepository
      */
     public function listeID(): array
     {
-        $sql = "SELECT img_id FROM Image";
+        $sql = "SELECT img_id FROM Images";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $listeID = array();
         foreach ($pdoStatement as $item => $value) {

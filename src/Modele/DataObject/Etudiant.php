@@ -16,7 +16,6 @@ class Etudiant extends AbstractDataObject
     private ?string $parcours;
     private ?int $validationPedagogique;
     private ?bool $presenceForumIUT;
-    private ?int $codeEtape;
     private string $img_id;
 
     /**
@@ -32,10 +31,9 @@ class Etudiant extends AbstractDataObject
      * @param string|null $parcours
      * @param int|null $validationPedagogique
      * @param bool|null $presenceForumIUT
-     * @param int|null $codeEtape
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?bool $presenceForumIUT,?int $codeEtape, string $img)
+    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?bool $presenceForumIUT, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
@@ -49,7 +47,6 @@ class Etudiant extends AbstractDataObject
         $this->parcours = $parcours;
         $this->validationPedagogique = $validationPedagogique;
         $this->presenceForumIUT = $presenceForumIUT;
-        $this->codeEtape = $codeEtape;
         $this->img_id = $img;
     }
 
@@ -188,17 +185,6 @@ class Etudiant extends AbstractDataObject
     }
 
 
-    public function getCodeEtape(): ?int
-    {
-        return $this->codeEtape;
-    }
-
-    public function setCodeEtape(int $codeEtape): void
-    {
-        $this->codeEtape = $codeEtape;
-    }
-
-
 
     public function getNumEtudiant(): float
     {
@@ -235,7 +221,6 @@ class Etudiant extends AbstractDataObject
             "parcours" => $this->parcours,
             "validationPedagogique" => $this->validationPedagogique,
             "presenceForumIUT"=> $this->presenceForumIUT,
-            "codeEtape" => $this->codeEtape,
             "img_id" => $this->img_id
         );
     }

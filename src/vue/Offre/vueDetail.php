@@ -44,14 +44,14 @@
         </p>
     </div>
     <?php
-    $idOffreURl=rawurlencode($offre->getIdOffre());
+    $idFormationURl=rawurlencode($offre->getidFormation());
     if ($_GET["controleur"]=="EtuMain"){
-        echo "<a href='?controleur=EtuMain&action=postuler&idOffre=".$idOffreURl."''><button>Postuler</button></a>";
+        echo "<a href='?controleur=EtuMain&action=postuler&idFormation=".$idFormationURl."''><button>Postuler</button></a>";
     }
     
     if ($_GET["controleur"]=="EntrMain" && $entreprise->getSiret()==\App\FormatIUT\Controleur\ControleurEntrMain::getSiretEntreprise()){
         echo "<div id='listeEtu'>";
-        $tabEtu=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsParOffre($offre->getIdOffre());
+        $tabEtu=(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsParOffre($offre->getidFormation());
         foreach ($tabEtu as $item) {
             echo $item->getLogin();
         }

@@ -18,8 +18,8 @@
 
                 $nomHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
-            <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h4><?php echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
+            <p><?php echo (new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -33,7 +33,7 @@
                 <div class="overflowListe2">
                     <div id="liseInfosOffreEntr">
                         <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
-                        <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
+                        <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
                         <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?> jours
                         </p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures
@@ -50,7 +50,7 @@
                             <div class="right">
                                 <h3><?php echo $entreprise->getNomEntreprise(); ?></h3>
                                 <p><span>Téléphone : </span><?php echo $entreprise->getTel(); ?></p>
-                                <p><span>Adresse : </span><?php echo $entreprise->getAdresse(); ?></p>
+                                <p><span>Adresse : </span><?php echo $entreprise->getAdresseEntreprise(); ?></p>
                             </div>
                         </div>
                     </div>
@@ -69,10 +69,10 @@
         echo '<a id="my-button">
                 <button class="boutonAssigner" onclick="afficherPopupDepotCV_LM()" ';
         $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+        $formation = ((new FormationRepository())->estFormation($_GET['idFormation']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idFormation'])) {
                     $bool = true;
                 }
             }
@@ -104,7 +104,7 @@
         <div class="wrapPostulants">
             <?php
 
-            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
             if ($formation) {
                 if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
                     echo "<div class='nbPostulants'>
@@ -116,7 +116,7 @@
                 <h4>L'offre est déjà occupée </h4></div>";
                 }
             } else {
-                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
                 if (empty($listeEtu)) {
                     echo "
                 <div class='erreur'>
@@ -129,7 +129,7 @@
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdOffre()));
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdFormation()));
                     echo $nbEtudiants . " étudiant";
                     if ($nbEtudiants == 1) echo " a";
                     else echo "s ont";
@@ -153,7 +153,7 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              action="?action=postuler&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
@@ -202,13 +202,13 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <?php
-                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
+                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdFormation()));
                         if($postuler->formatTableau()["cv"] != null){
                             echo "<p> Vous avez déjà déposé un CV </p>";
                         }

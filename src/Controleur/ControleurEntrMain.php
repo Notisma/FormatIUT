@@ -5,14 +5,14 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\Offre;
+use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ImageRepository;
-use App\FormatIUT\Modele\Repository\OffreRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use DateTime;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -42,10 +42,10 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherAccueilEntr()
     {
-        $listeIDOffre = self::getTroisMax((new OffreRepository())->listeIdOffreEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $listeidFormation = self::getTroisMax((new FormationRepository())->listeidFormationEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
-        for ($i = 0; $i < sizeof($listeIDOffre); $i++) {
-            $listeOffre[] = (new OffreRepository())->getObjectParClePrimaire($listeIDOffre[$i]);
+        for ($i = 0; $i < sizeof($listeidFormation); $i++) {
+            $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
         }
         self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
     }
@@ -61,7 +61,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_REQUEST["Etat"])) {
             $_REQUEST["Etat"] = "Tous";
         }
-        $liste = (new OffreRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["Etat"]);
+        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["Etat"]);
         self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "Etat" => $_REQUEST["Etat"]]);
     }
 
@@ -87,8 +87,8 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModificationOffre(): void
     {
-        if (isset($_REQUEST['idOffre'])) {
-            $offre = (new OffreRepository())->getObjectParClePrimaire($_REQUEST['idOffre']);
+        if (isset($_REQUEST['idFormation'])) {
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
             self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
         } else {
             self::afficherErreur("Une offre devrait être renseignée");
@@ -111,36 +111,36 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function assignerEtudiantOffre(): void
     {
-        if (isset($_REQUEST["idEtudiant"], $_REQUEST["idOffre"])) {
-            $idOffre = $_REQUEST["idOffre"];
-            $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+        if (isset($_REQUEST["idEtudiant"], $_REQUEST["idFormation"])) {
+            $idFormation = $_REQUEST["idFormation"];
+            $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
-                if (((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
+                if (((new FormationRepository())->estFormation($_REQUEST["idFormation"]))) {
                     MessageFlash::ajouter("danger", "L'offre est déjà assignée à un étudiant");
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
                 } else {
-                    if (((new EtudiantRepository())->aUneFormation($_REQUEST["idOffre"]))) {
+                    if (((new EtudiantRepository())->aUneFormation($_REQUEST["idFormation"]))) {
                         MessageFlash::ajouter("danger", "Cet étudiant a déjà une formation");
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
                     } else {
-                        if (((new EtudiantRepository())->EtudiantAPostuler($_REQUEST["idEtudiant"], $_REQUEST["idOffre"]))) {
-                            (new OffreRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idOffre"]);
+                        if (((new EtudiantRepository())->etudiantAPostule($_REQUEST["idEtudiant"], $_REQUEST["idFormation"]))) {
+                            (new FormationRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idFormation"]);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
                             self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné avec succès");
                         } else {
-                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
                             MessageFlash::ajouter("danger", "Cet étudiant n'a pas postulé à cette offre");
                         }
 
                     }
                 }
             } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
                 MessageFlash::ajouter("danger", "Cet étudiant n'existe pas");
             }
         } else {
-            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_REQUEST["idOffre"]);
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
             MessageFlash::ajouter("danger", "Des données sont manquantes");
 
         }
@@ -152,18 +152,32 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["gratification"], $_REQUEST['dureeHeures'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"],$_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
-                if ($_REQUEST["gratification"] > 0 && $_REQUEST["dureeHeures"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
+                if ($_REQUEST["gratification"] > $_REQUEST["uniteDureeGratification"] && $_REQUEST["uniteDureeGratification"] > 0 && $_REQUEST["dureeHeure"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
                     if ($_REQUEST["joursParSemaine"] < 8) {
-                        if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeures"] > $_REQUEST["nbHeuresHebdo"]) {
-                            $listeId = (new OffreRepository())->getListeIdOffres();
-                            self::autoIncrement($listeId, "idOffre");
+                        if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
+                            $listeId = (new FormationRepository())->getListeidFormations();
+                            self::autoIncrement($listeId, "idFormation");
+                            $_REQUEST["dateCreationOffre"] = (new DateTime())->format('d-m-Y');
+                            $_REQUEST["estValide"] = 0;
+                            $_REQUEST["offreValidee"] = 0;
+                            $_REQUEST["validationPedagogique"] = 0;
                             $_REQUEST["idEntreprise"] = ConnexionUtilisateur::getLoginUtilisateurConnecte();
-                            $offre = (new OffreRepository())->construireDepuisTableau($_REQUEST);
-                            (new OffreRepository())->creerObjet($offre);
+                            $_REQUEST["convention"] = null;
+                            $_REQUEST["conventionValidee"] = 0;
+                            $_REQUEST["dateCreationConvention"] = null;
+                            $_REQUEST["dateTransmissionConvention"] = null;
+                            $_REQUEST["retourSigne"] = null;
+                            $_REQUEST["assurance"] = null;
+                            $_REQUEST["avenant"] = null;
+                            $_REQUEST["idEtudiant"] = null;
+                            $_REQUEST["idTuteurPro"] = null;
+                            $_REQUEST["idTuteurUM"] = null;
+                            $offre = (new FormationRepository())->construireDepuisTableau($_REQUEST);
+                            (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "mesOffres";
                             MessageFlash::ajouter("success", "Offre créée avec succès");
                             self::mesOffres();
@@ -188,6 +202,7 @@ class ControleurEntrMain extends ControleurMain
             header("Location: controleurFrontal.php?action=formulaireCreationOffre&controleur=EntrMain");
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
+        var_dump($_REQUEST);
 
     }
 
@@ -196,31 +211,31 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function supprimerOffre(): void
     {
-        if (isset($_REQUEST["idOffre"])) {
-            $listeOffre = ((new OffreRepository())->getListeIdOffres());
-            if (in_array($_REQUEST["idOffre"], $listeOffre)) {
-                if (!((new FormationRepository())->estFormation($_REQUEST["idOffre"]))) {
-                    $offre = ((new OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]));
+        if (isset($_REQUEST["idFormation"])) {
+            $listeOffre = ((new FormationRepository())->getListeidFormations());
+            if (in_array($_REQUEST["idFormation"], $listeOffre)) {
+                if (!((new FormationRepository())->estFormation($_REQUEST["idFormation"]))) {
+                    $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]));
                     if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                        (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idOffre"]);
-                        (new OffreRepository())->supprimer($_REQUEST["idOffre"]);
+                        (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idFormation"]);
+                        (new FormationRepository())->supprimer($_REQUEST["idFormation"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
                         header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                         MessageFlash::ajouter("success", "Offre supprimée");
                     } else {
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                         MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
                     }
                 } else {
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                     MessageFlash::ajouter("danger", "Cette offre a été acceptée par un étudiant");
                 }
             } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                 MessageFlash::ajouter("danger", "Cette offre n'existe pas");
             }
         } else {
-            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
@@ -230,14 +245,14 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function modifierOffre(): void
     {
-        if (isset($_POST["idOffre"], $_POST['nomOffre'], $_POST['anneeMin'], $_POST['anneeMax'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
+        if (isset($_POST["idFormation"], $_POST['nomOffre'], $_POST['anneeMin'], $_POST['anneeMax'], $_POST["dateDebut"], $_POST["dateFin"], $_POST["sujet"], $_POST["detailProjet"], $_POST["gratification"], $_POST['dureeHeures'], $_POST["joursParSemaine"], $_POST["nbHeuresHebdo"], $_POST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
                 if ($_POST["joursParSemaine"] <= 7 && $_POST["gratification"] > 0 && $_POST["dureeHeures"] > 0 && $_POST["joursParSemaine"] > 0 && $_POST["nbHeuresHebdo"] > 0 && $_POST["nbHeuresHebdo"] < 8 * 7 && $_POST["dureeHeures"] > $_POST["nbHeuresHebdo"]) {
-                    $offre = (new OffreRepository())->getObjectParClePrimaire($_POST["idOffre"]);
+                    $offre = (new FormationRepository())->getObjectParClePrimaire($_POST["idFormation"]);
                     if ($offre) {
-                        if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
+                        if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
                             if ($offre->getSiret() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_POST['typeOffre']);
                                 $offre->setNomOffre($_POST['nomOffre']);
@@ -249,31 +264,31 @@ class ControleurEntrMain extends ControleurMain
                                 $offre->setDureeHeures($_POST['dureeHeures']);
                                 $offre->setJoursParSemaine($_POST['joursParSemaine']);
                                 $offre->setNbHeuresHebdo($_POST['nbHeuresHebdo']);
-                                (new OffreRepository())->modifierObjet($offre);
-                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                                (new FormationRepository())->modifierObjet($offre);
+                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                                 MessageFlash::ajouter("success", "Offre modifiée avec succès");
                             } else {
-                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                                 MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
                             }
                         } else {
-                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                             MessageFlash::ajouter("danger", "Cette offre a déjà été acceptée par l'étudiant");
                         }
                     } else {
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                         MessageFlash::ajouter("danger", "Cette offre n'existe pas");
                     }
                 } else {
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
                     MessageFlash::ajouter("danger", "Certaines données sont erronnées");
                 }
             } else {
-                header("Location: controleurFrontal.php?action=afficherFormulaireModificationOffre&controleur=EntrMain&idOffre=" . $_POST["idOffre"]);
+                header("Location: controleurFrontal.php?action=afficherFormulaireModificationOffre&controleur=EntrMain&idFormation=" . $_POST["idFormation"]);
                 MessageFlash::ajouter("danger", "Erreur sur année min / max (il n'y a que les années 2 et 3 de disponibles)");
             }
         } else {
-            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $_POST["idOffre"]);
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_POST["idFormation"]);
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
@@ -292,7 +307,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function telechargerCV(): void
     {
-        $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idOffre']);
+        $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idFormation']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename=CV de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
@@ -304,7 +319,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function telechargerLettre(): void
     {
-        $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idOffre']);
+        $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idFormation']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');

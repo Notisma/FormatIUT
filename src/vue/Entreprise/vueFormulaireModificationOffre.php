@@ -84,7 +84,7 @@
             </div>
 
             <div class="boutonsForm">
-                <input type="hidden" name="idOffre" value="<?= $offre->getIdOffre() ?>">
+                <input type="hidden" name="idFormation" value="<?= $offre->getidFormation() ?>">
                 <input type="submit" value="Réinitialiser"
                        formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">
                 <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain">

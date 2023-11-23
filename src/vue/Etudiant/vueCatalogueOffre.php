@@ -45,7 +45,7 @@
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                    echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>";
+                    echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>";
                     echo "<div class='partieGauche'>";
                         echo "<h3>" . $offre->getNomOffre() . " - " . $offre->getTypeOffre() . "</h3>";
                         echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
@@ -58,8 +58,8 @@
                         echo "<div class='divInfo' id='nbPostu'>";
                             echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";
                             echo "<p>";
-                            if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                                $nb = (new EtudiantRepository())->nbPostulations($offre->getIdOffre());
+                            if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
+                                $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
                                 echo $nb . " postulation";
                                 if ($nb > 1) echo "s";
                             } else {

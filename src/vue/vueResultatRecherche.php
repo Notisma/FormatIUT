@@ -45,7 +45,7 @@ $count = count($offres) + count($entreprises);
         if (!empty($offres)) {
             foreach ($offres as $offre) {
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                echo "<a href='?controleur=" . \App\FormatIUT\Configuration\Configuration::getControleur() . "&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='resultat'>
+                echo "<a href='?controleur=" . \App\FormatIUT\Configuration\Configuration::getControleur() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
                     <div class='partieGauche'>
                             <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
                         </div>
@@ -53,8 +53,8 @@ $count = count($offres) + count($entreprises);
                         <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>
                         <p>
                        ";
-                if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getIdOffre());
+                if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
+                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
                     echo $nb . " postulation";
                     if ($nb > 1) echo "s";
                 } else {
