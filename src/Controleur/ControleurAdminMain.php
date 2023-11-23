@@ -161,7 +161,8 @@ class ControleurAdminMain extends ControleurMain
         $filename = "sae-data_" . date('Y-m-d') . ".csv";
         $f = fopen('php://memory', 'w');
 
-        $champs = array('numEtudiant', 'prenomEtudiant', 'nomEtudiant', 'sexeEtu', 'mailUniversitaire', 'mailPerso', 'tel Etu', 'groupe', 'parcours', 'Nom ville etudiant', 'Code postal Etudiant', 'nomOffre', 'dateDebut', 'dateFin', 'sujetOffre', 'gratification', 'dureeHeures', 'Type de loffre', 'Etat de l offre', 'Siret', 'nomEntreprise', 'StatutJurique', 'Effectif', 'code NAF', 'telEntreprise', 'Ville Entreprise', 'Code postal Entreprise');
+        $champs = array( 'prenomEtudiant', 'nomEtudiant','numEtudiant', 'EmailEtu', 'groupe', 'parcours', 'validationPedagogique', 'Type de formation', 'Date creation de la convention', 'Date de transmission de la convention',
+            'Date début de stage', 'Date fin de stage', 'Structure accueil', 'Tuteur email', 'Avenant/Remarque', 'Présence au forum de l IUT', 'Tuteur univ');
         fputcsv($f, $champs, $delimiter);
 
         foreach ($tab as $ligne) {
