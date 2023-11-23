@@ -94,11 +94,11 @@ class Postuler extends AbstractDataObject
     }
 
 
-    public function __construct(float $numEtudiant, int $idFormation, string $Etat, ?string $cv, ?string $lettre)
+    public function __construct(float $numEtudiant, int $idFormation, string $etat, ?string $cv, ?string $lettre)
     {
         $this->numEtudiant = $numEtudiant;
         $this->idFormation = $idFormation;
-        $this->etat = $Etat;
+        $this->etat = $etat;
         $this->cv = $cv;
         $this->lettre = $lettre;
     }
@@ -109,7 +109,7 @@ class Postuler extends AbstractDataObject
         return array(
             "numEtudiant" => $this->numEtudiant,
             "idFormation" => $this->idFormation,
-            "Etat" => $this->etat,
+            "etat" => $this->etat,
             "cv" => $this->cv,
             "lettre" => $this->lettre
         );

@@ -14,12 +14,12 @@ class PostulerRepository extends AbstractRepository
 
     public function getNomsColonnes(): array
     {
-        return ["numEtudiant", "idFormation", "Etat", "cv", "lettre"];
+        return ["numEtudiant", "idFormation", "etat", "cv", "lettre"];
     }
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Postuler($dataObjectTableau['numEtudiant'], $dataObjectTableau['idFormation'], $dataObjectTableau['Etat'], $dataObjectTableau['cv'], $dataObjectTableau['lettre']);
+        return new Postuler($dataObjectTableau['numEtudiant'], $dataObjectTableau['idFormation'], $dataObjectTableau['etat'], $dataObjectTableau['cv'], $dataObjectTableau['lettre']);
     }
 
     public function getClePrimaire(): string
@@ -33,7 +33,7 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("etuTag" => $numEtudiant, "offreTag" => $idFormation);
         $pdoStatement->execute($values);
-        return ($pdoStatement->fetch())["Etat"];
+        return ($pdoStatement->fetch())["etat"];
 
     }
 
@@ -63,7 +63,7 @@ class PostulerRepository extends AbstractRepository
 
     public function annulerAutresOffre($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Annulé' WHERE numEtudiant=:tagEtu AND idFormation!=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant=:tagEtu AND idFormation!=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
@@ -74,7 +74,7 @@ class PostulerRepository extends AbstractRepository
 
     public function annulerAutresEtudiant($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Annulé' WHERE numEtudiant!=:tagEtu AND idFormation=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant!=:tagEtu AND idFormation=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
@@ -85,7 +85,7 @@ class PostulerRepository extends AbstractRepository
 
     public function validerOffre($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Validée' WHERE numEtudiant=:tagEtu AND idFormation=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Validée' WHERE numEtudiant=:tagEtu AND idFormation=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
@@ -135,7 +135,7 @@ class PostulerRepository extends AbstractRepository
     }
     public function mettreAChoisir($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE Postuler SET Etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
+        $sql = "UPDATE Postuler SET etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
         $pdoStatement->execute($values);
