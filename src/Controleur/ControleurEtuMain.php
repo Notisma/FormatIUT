@@ -272,22 +272,18 @@ class ControleurEtuMain extends ControleurMain
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
             $cvLocation = null;
             $lmLocation = null;
+            $uploadsLocation = "../ressources/uploads/";
             if ($_FILES["fic"]["tmp_name"] != null) {
-                $cvLocation = "testupload/" . basename($_FILES['fic']['name']);
-                if (move_uploaded_file($_FILES['fic']['tmp_name'], $cvLocation)) {
-                    echo "Le CV " . basename($_FILES['fic']['name']) . " is now uploaded";
-                } else {
-                    echo "Problem uploading file";
-                }
+                $cvLocation = $uploadsLocation . basename($_FILES['fic']['name']);
+                if (!move_uploaded_file($_FILES['fic']['tmp_name'], $cvLocation))
+                    self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
             }
             if ($_FILES["ficLM"]["tmp_name"] != null) {
-                $lmLocation = "testupload/" . basename($_FILES['ficLM']['name']);
-                if (move_uploaded_file($_FILES['ficLM']['tmp_name'], $lmLocation)) {
-                    echo "La LM " . basename($_FILES['ficLM']['name']) . " is now uploaded";
-                } else {
-                    echo "Problem uploading file";
-                }
+                $lmLocation = $uploadsLocation . basename($_FILES['ficLM']['name']);
+                if (!move_uploaded_file($_FILES['ficLM']['tmp_name'], $lmLocation))
+                    self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
             }
+
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeidFormations());
