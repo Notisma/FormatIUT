@@ -327,3 +327,48 @@ body {
 .partieDroitePE > img {
     width: 80%;
 }
+
+
+@media (max-width: 500px) {
+    body {
+        height: 450vh;
+    }
+
+    .wrapComplet {
+        height: 400vh;
+        top : 210%;
+        width: 100%;
+        left:50%;
+    }
+
+    .partie1 {
+        flex-direction: column-reverse;
+        background-color: transparent;
+    }
+
+    .partie1 > img {
+        width: 300px;
+    }
+
+    .partie1 > div {
+        width: 100%;
+        margin: 0;
+    }
+
+    .partie1 > div > h1, .partie1 > div > h3 {
+        text-align: center;
+    }
+
+
+    .partie2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+
+    .sousCategorie {
+        justify-content: center;
+        margin-bottom: 2%;
+        flex-shrink: 0;
+        height: 190px;
+    }
+}
