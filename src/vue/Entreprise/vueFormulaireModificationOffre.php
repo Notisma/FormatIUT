@@ -18,7 +18,7 @@
             <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
-                       value="<?= $offre->getNomOffre() ?>" maxlength="24">
+                       value="<?= htmlspecialchars($offre->getNomOffre()) ?>" maxlength="24">
             </div>
 
             <label class="labelFormulaire" for="anneeMin_id">Année d'étude minimum des étudiants visés</label>
@@ -48,14 +48,14 @@
             <label class="labelFormulaire" for="sujet_id">Sujet bref de l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="text" name="sujet" id="sujet_id"
-                       value="<?= $offre->getSujet() ?>" required maxlength="50">
+                       value="<?= htmlspecialchars($offre->getSujet()) ?>" required maxlength="50">
             </div>
 
             <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
             <br>
             <div class="grandInputCentre">
                     <textarea class="inputFormulaire" name="detailProjet" id="detailProjet_id" required maxlength="255"
-                    ><?= $offre->getDetailProjet() ?>
+                    ><?= htmlspecialchars($offre->getDetailProjet()) ?>
                     </textarea>
             </div>
 

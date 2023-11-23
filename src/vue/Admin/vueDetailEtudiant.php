@@ -28,10 +28,12 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             <?php
             $mailHTML=htmlspecialchars($etudiant->getMailPerso());
             $telHTML=htmlspecialchars($etudiant->getTelephone());
+            $loginHTML=htmlspecialchars($etudiant->getLogin());
+            $mailEtuHTML=htmlspecialchars($etudiant->getMailUniversitaire());
             echo "<h3 class='titre'>Informations :</h3>";
             echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
-            echo "<p>Login : " . $etudiant->getLogin() . "</p>";
-            echo "<p>Mail Universitaire : " . $etudiant->getMailUniersitaire() . "</p>";
+            echo "<p>Login : " . $loginHTML . "</p>";
+            echo "<p>Mail Universitaire : " . $mailEtuHTML . "</p>";
             echo "<p>Mail Personnel : " . $mailHTML . "</p>";
             echo "<p>Téléphone : " . $telHTML . "</p>";
             echo "<p>Groupe : " . $groupeHTML . "</p>";

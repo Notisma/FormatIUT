@@ -48,9 +48,9 @@
                                 ?>
                             </div>
                             <div class="right">
-                                <h3><?php echo $entreprise->getNomEntreprise(); ?></h3>
-                                <p><span>Téléphone : </span><?php echo $entreprise->getTel(); ?></p>
-                                <p><span>Adresse : </span><?php echo $entreprise->getAdresse(); ?></p>
+                                <h3><?php echo htmlspecialchars($entreprise->getNomEntreprise()); ?></h3>
+                                <p><span>Téléphone : </span><?php echo htmlspecialchars($entreprise->getTel()); ?></p>
+                                <p><span>Adresse : </span><?php echo htmlspecialchars($entreprise->getAdresse()); ?></p>
                             </div>
                         </div>
                     </div>

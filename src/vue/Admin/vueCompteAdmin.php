@@ -38,10 +38,13 @@
         <div class="infosActu">
             <ul id="infosProf">
                 <?php
+                $prenomHTML=htmlspecialchars($prof->getPrenomProf());
+                $nomHTML=htmlspecialchars($prof->getNomProf());
+                $mailHTML=htmlspecialchars($prof->getMailUniversitaire());
                 echo "
-            <li>Prénom : " . $prof->getPrenomProf() . "</li>
-            <li>Nom : " . $prof->getNomProf() . "</li>
-            <li>Mail universitaire : " . $prof->getMailUniversitaire() . "</li>
+            <li>Prénom : " . $prenomHTML . "</li>
+            <li>Nom : " . $nomHTML . "</li>
+            <li>Mail universitaire : " . $mailHTML . "</li>
             " ?>
             </ul>
 

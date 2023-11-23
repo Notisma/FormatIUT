@@ -3,7 +3,7 @@
         <div class="texteBienvenue">
             <h3>Bonjour, <?php
                 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
-                echo $etudiant->getPrenomEtudiant();
+                echo htmlspecialchars($etudiant->getPrenomEtudiant());
                 ?></h3>
 
             <p>Voici les dernières nouveautés en offres de stage et d'alternance :</p>
@@ -46,14 +46,14 @@
                     </div>
                     <div class="texteAnnonce" >
                         <h4 >';
-                            echo $entreprise->getNomEntreprise();
+                            echo htmlspecialchars($entreprise->getNomEntreprise());
                             echo ' </h4 >
                         <div class="detailsAnnonce" >
                             <div class="lieuRemun" >
                                 <div class="lieuAnnonce" >
                                     <img src = "../ressources/images/emplacement.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                            echo $ville->getNomVille();
+                            echo htmlspecialchars($ville->getNomVille());
                             echo ' </p >
                                 </div >
                                 <div class="remunAnnonce" >

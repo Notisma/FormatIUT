@@ -60,8 +60,8 @@
                     echo "<div class='partieGauche'>";
                     $nomHTML = htmlspecialchars($offre->getNomOffre());
                     echo "<h3>" . $nomHTML . " - " . $offre->getTypeOffre() . "</h3>";
-                    echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>";
-                    echo "<p>" . $offre->getDetailProjet() . "</p>";
+                    echo "<p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . htmlspecialchars($offre->getSujet()) . "</p>";
+                    echo "<p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>";
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                     echo "<div class='divInfo' id='wrapLogo'>";

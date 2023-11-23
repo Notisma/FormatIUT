@@ -36,15 +36,15 @@
             <ul id="infosEtu">
                 <?php
                 echo "
-            <li>Prénom : ".$etudiant->getPrenomEtudiant()."</li>
-            <li>Nom : ".$etudiant->getNomEtudiant()."</li>
-            <li>Login : ".$etudiant->getLogin()."</li>
+            <li>Prénom : ".htmlspecialchars($etudiant->getPrenomEtudiant())."</li>
+            <li>Nom : ".htmlspecialchars($etudiant->getNomEtudiant())."</li>
+            <li>Login : ".htmlspecialchars($etudiant->getLogin())."</li>
             <li>Numéro Etudiant : ".$etudiant->getNumEtudiant()."</li>
-            <li>Mail universitaire : ".$etudiant->getMailUniersitaire()."</li>
-            <li>Mail personnel : ".$etudiant->getMailPerso()."</li>
-            <li>Téléphone : ".$etudiant->getTelephone()."</li>
-            <li>Groupe : ".$etudiant->getGroupe()."</li>
-            <li>Parcours : ".$etudiant->getParcours()."</li>
+            <li>Mail universitaire : ".htmlspecialchars($etudiant->getMailUniersitaire())."</li>
+            <li>Mail personnel : ".htmlspecialchars($etudiant->getMailPerso())."</li>
+            <li>Téléphone : ".htmlspecialchars($etudiant->getTelephone())."</li>
+            <li>Groupe : ".htmlspecialchars($etudiant->getGroupe())."</li>
+            <li>Parcours : ".htmlspecialchars($etudiant->getParcours())."</li>
             " ?>
                 <a href="?action=afficherFormulaireModification&controleur=EtuMain">Modifier vos informations</a>
             </ul>

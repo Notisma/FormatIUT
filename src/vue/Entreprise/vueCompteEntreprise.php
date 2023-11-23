@@ -46,13 +46,13 @@
                 <?php
                 $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
                 echo "<li>Siret : " . $entreprise->getSiret() . "</li>
-            <li>Nom : " . $entreprise->getNomEntreprise() . "</li>
-            <li>Statut juridique : " . $entreprise->getStatutJuridique() . "</li>
+            <li>Nom : " . htmlspecialchars($entreprise->getNomEntreprise()) . "</li>
+            <li>Statut juridique : " . htmlspecialchars($entreprise->getStatutJuridique()) . "</li>
             <li>Effectif : " . $entreprise->getEffectif() . "</li>
-            <li>CodeNAF : " . $entreprise->getCodeNaf() . "</li>
-            <li>Téléphone : " . $entreprise->getTel() . "</li>
-            <li>Adresse : " . $entreprise->getAdresse() . "</li>
-            <li>Ville : " . $ville->getNomVille() . "</li>
+            <li>CodeNAF : " . htmlspecialchars($entreprise->getCodeNaf()) . "</li>
+            <li>Téléphone : " . htmlspecialchars($entreprise->getTel()) . "</li>
+            <li>Adresse : " . htmlspecialchars($entreprise->getAdresse()) . "</li>
+            <li>Ville : " . htmlspecialchars($ville->getNomVille()) . "</li>
             " ?>
                 <a href="?action=afficherFormulaireModification&controleur=EntrMain">Modifier vos informations</a>
             </ul>

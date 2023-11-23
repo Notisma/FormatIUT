@@ -72,7 +72,7 @@
                     echo '</div>
                 <div class="nomEtuPostulant">
                     <h4>';
-                    echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h4>";
+                    echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h4>";
                     echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button>
                     </a>
                     </div> </div>";
@@ -93,7 +93,7 @@
                         echo '</div>
                         <div class="nomEtuPostulant">
                             <h4>';
-                        echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant();
+                        echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant());
                         $idOffreURl = rawurlencode($offre->getIdOffre());
                         $idURL = rawurlencode($etudiant->getNumEtudiant());
                         echo '</h4>
@@ -145,13 +145,13 @@
 
         <div class="infosEtu">
             <?php
-            echo "<h2>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h2>";
+            echo "<h2>" . htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h2>";
             echo "<p><span>Numéro Etudiant :</span> " . $etudiant->getNumEtudiant() . "</p>";
-            echo "<p><span>Mail Universitaire :</span> " . $etudiant->getMailUniersitaire() . "</p>";
-            echo "<p><span>Mail Personnel :</span> " . $etudiant->getMailPerso() . "</p>";
-            echo "<p><span>Téléphone :</span> " . $etudiant->getTelephone() . "</p>";
-            echo "<p><span>Groupe :</span> " . $etudiant->getGroupe() . "</p>";
-            echo "<p><span>Parcours :</span> " . $etudiant->getParcours() . "</p>";
+            echo "<p><span>Mail Universitaire :</span> " . htmlspecialchars($etudiant->getMailUniersitaire()) . "</p>";
+            echo "<p><span>Mail Personnel :</span> " . htmlspecialchars($etudiant->getMailPerso()) . "</p>";
+            echo "<p><span>Téléphone :</span> " . htmlspecialchars($etudiant->getTelephone()) . "</p>";
+            echo "<p><span>Groupe :</span> " . htmlspecialchars($etudiant->getGroupe()) . "</p>";
+            echo "<p><span>Parcours :</span> " . htmlspecialchars($etudiant->getParcours()) . "</p>";
             ?>
         </div>
     </div>
