@@ -59,16 +59,34 @@
                     </textarea>
             </div>
 
+            <label class="labelFormulaire" for="objectifOffre_id">Objectifs pour l'étudiant</label>
+                <div class="grandInputCentre">
+                    <textarea class="inputFormulaire" name="objectifOffre" id="objectifOffre_id"
+                              <?= $offre->getObjectifOffre() ?>required maxlength="255"></textarea>
+                </div>
+
             <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="number" name="gratification" id="gratification_id"
                        value="<?= $offre->getGratification() ?>" required min="1" max="9999">
             </div>
 
-            <label class="labelFormulaire" for="dureeHeures_id">Durée en heure</label>
+            <label class="labelFormulaire" for="uniteGratification_id">Devise utilisée pour la rémunération</label>
+                <div class="inputCentre">
+                    <input class="inputFormulaire" type="text" name="uniteGratification" id="uniteGratification_id"
+                           value="<?= $offre->getUniteGratification() ?>" required>
+                </div>
+
+                <label class="labelFormulaire" for="uniteDureeGratification_id">Rémunération par heure</label>
+                <div class="inputCentre">
+                    <input class="inputFormulaire" type="number" name="uniteDureeGratification" id="uniteDureeGratification_id"
+                           value="<?= $offre->getUniteDureeGratification() ?>" required maxlength="4">
+                </div>
+
+            <label class="labelFormulaire" for="dureeHeure_id">Durée en heure</label>
             <div class="inputCentre">
-                <input class="inputFormulaire" type="number" name="dureeHeures" id="dureeHeures_id"
-                       value="<?= $offre->getDureeHeures() ?>" required min="1" max="9999">
+                <input class="inputFormulaire" type="number" name="dureeHeure" id="dureeHeure_id"
+                       value="<?= $offre->getDureeHeure() ?>" required min="1" max="9999">
             </div>
 
             <label class="labelFormulaire" for="jourParSemaine_id">Nombre de jours par semaine</label>

@@ -73,7 +73,7 @@
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
-                <?php if (isset($_POST["siret"])) { ?>
+                <?php if (isset($_REQUEST["siret"])) { ?>
                     <input type="number" name="siret" placeholder="SIRET de l'entreprise"
                            <?php echo "value='" . $_REQUEST["siret"] . "'" ?>required>
                     <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise"
