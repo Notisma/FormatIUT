@@ -196,7 +196,7 @@ body {
     height: 98%;
 }
 
-.partie4  > div {
+.partie4 > div {
     float: left;
     width: 45%;
 }
@@ -204,20 +204,6 @@ body {
 .partie4 > div > img {
     width: 95%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .wrapFormulaireCreationPE {
@@ -329,16 +315,19 @@ body {
 }
 
 
+
+/* RESPONSIVE */
+
 @media (max-width: 500px) {
     body {
-        height: 450vh;
+        height: 410vh;
     }
 
     .wrapComplet {
         height: 400vh;
-        top : 210%;
+        top: 212%;
         width: 100%;
-        left:50%;
+        left: 50%;
     }
 
     .partie1 {
@@ -371,4 +360,92 @@ body {
         flex-shrink: 0;
         height: 190px;
     }
+
+    .partie3 {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .partie3 > div {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .partie3 > div > img {
+        width: 350px;
+    }
+
+    .partie3 > .textePartie3 {
+        margin: 0;
+        padding: 0;
+        width: 97%;
+    }
+
+    .partie3 > .textePartie3 > * {
+        text-align: center;
+    }
+
+    .partie4 {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .partie4 > div {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .partie4 > .textePartie3 {
+        margin: 0;
+        padding: 0;
+        width: 97%;
+    }
+
+    .partie4 > .textePartie3 > * {
+        text-align: center;
+    }
+
+    .wrapFormulaireCreationPE {
+        flex-direction: column;
+        width: 95%;
+        border: none;
+        box-shadow: none;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .partieDroitePE {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .partieDroitePE > img {
+        width: 300px;
+    }
+
+    .partieDroitePE > h2 {
+        text-align: center;
+    }
+
+    .formulaireGauchePE {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .formulaireGauchePE > form > h1{
+        text-align: center;
+    }
+
+    .formulaireGauchePE > form >input[type='text'], input[type='password'], input[type='number'], input[type='email'] {
+        width: 98%;
+    }
+
 }
