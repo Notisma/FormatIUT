@@ -114,7 +114,7 @@ class EtudiantRepository extends AbstractRepository
      */
     public function aPostule($numEtudiant, $idOffre): mixed
     {
-        $sql = "SELECT * FROM Postuler WHERE numEtudiant=:TagEtu AND idOffre=:TagOffre";
+        $sql = "SELECT * FROM Postuler WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
         $pdoStatement->execute($values);

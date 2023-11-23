@@ -100,7 +100,7 @@
                             <div class="dureeAnnonce">
                                 <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                echo ($listeOffre[$i]->getDateDebut()->diff($listeOffre[$i]->getDateFin()))->format('%m mois');
+                echo (new DateTime($listeOffre[$i]->getDateDebut()))->diff((new DateTime($listeOffre[$i]->getDateFin())))->format('%m mois');
                 echo '</p>
                             </div>
                             <div class="libelleAnnonce">

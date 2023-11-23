@@ -37,9 +37,9 @@
                     $lien = null;
                     for ($i = 0; $i < sizeof($listeStage); $i++) {
                         if ($listeStage[$i]->getEstValide()) {
-                            $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getSiret());
-                            $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getVille());
-                            $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $listeStage[$i]->getIdOffre();
+                            $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeStage[$i]->getIdEntreprise());
+                            $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                            $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $listeStage[$i]->getIdFormation();
                             echo '<a href ="' . $lien . '">
                     <div class="imagesAnnonce" >';
                             echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="pp entreprise">
@@ -67,7 +67,7 @@
                                 <div class="dureeAnnonce" >
                                     <img src = "../ressources/images/histoire.png" alt = "image" class="imagesPuces" >
                                     <p class="petitTexte" >';
-                            echo ($listeStage[$i]->getDateDebut()->diff($listeStage[$i]->getDateFin()))->format('%m mois');
+                            echo (new DateTime($listeStage[$i]->getDateDebut()))->diff(new DateTime($listeStage[$i]->getDateFin()))->format('%m mois');
 
                             echo '</p >
                                 </div >

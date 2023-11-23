@@ -124,6 +124,11 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
+    public static function afficherListeOffres(): void{
+        self::$pageActuelleAdmin = "Liste des Offres";
+        self::afficherVue("Liste des offres", "Admin/vueListeOffres.php", self::getMenu());
+    }
+
     //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**

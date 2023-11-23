@@ -47,7 +47,7 @@ class ControleurEtuMain extends ControleurMain
 
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
         if ($formation) {
-            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idOffre=" . $formation['idOffre']);
+            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
         }
         if (self::$titrePageActuelleEtu == "Mon Compte") {
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilEtu&controleur=EtuMain");
@@ -208,11 +208,11 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function annulerOffre()
     {
-        if (isset($_REQUEST["idOffre"])) {
+        if (isset($_REQUEST["idFormation"])) {
             $listeId = ((new FormationRepository())->getListeIdOffres());
-            if (in_array($_REQUEST["idOffre"], $listeId)) {
-                if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST["idOffre"])) {
-                    (new PostulerRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idOffre']);
+            if (in_array($_REQUEST["idFormation"], $listeId)) {
+                if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST["idFormation"])) {
+                    (new PostulerRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idFormation']);
                     self::redirectionFlash("afficherMesOffres", "success", "Offre annulée");
                 } else {
                     self::redirectionFlash("afficherMesOffres", "warning", "Vous n'avez pas postulé à cette offre");
@@ -231,18 +231,18 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function validerOffre()
     {
-        if (isset($_REQUEST['idOffre'])) {
+        if (isset($_REQUEST['idFormation'])) {
             $listeId = ((new FormationRepository())->getListeIdOffres());
-            $idOffre = $_REQUEST['idOffre'];
-            if (in_array($idOffre, $listeId)) {
-                $formation = ((new FormationRepository())->estFormation($idOffre));
+            $idFormation = $_REQUEST['idFormation'];
+            if (in_array($idFormation, $listeId)) {
+                $formation = ((new FormationRepository())->estFormation($idFormation));
                 if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
                     if (is_null($formation)) {
-                        if ((new PostulerRepository())->getEtatEtudiantOffre(self::getCleEtudiant(), $idOffre) == "A Choisir") {
-                            (new PostulerRepository())->validerOffreEtudiant(self::getCleEtudiant(), $idOffre);
-                            $offre = ((new FormationRepository())->getObjectParClePrimaire($idOffre));
+                        if ((new PostulerRepository())->getEtatEtudiantOffre(self::getCleEtudiant(), $idFormation) == "A Choisir") {
+                            (new PostulerRepository())->validerOffreEtudiant(self::getCleEtudiant(), $idFormation);
+                            $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
                             $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->listeIdTypeFormation()), "idFormation");
-                            $formation = (new FormationRepository())->construireDepuisTableau(["idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateDebut(), "Y-m-d"), "dateFin" => date_format($offre->getDateFin(), 'Y-m-d'), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getSiret(), "idOffre" => $idOffre, "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
+                            $formation = (new FormationRepository())->construireDepuisTableau(["idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateDebut(), "Y-m-d"), "dateFin" => date_format($offre->getDateFin(), 'Y-m-d'), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getSiret(), "idFormation" => $idFormation, "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
                             (new FormationRepository())->creerObjet($formation);
                             self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
                         } else {
@@ -268,7 +268,7 @@ class ControleurEtuMain extends ControleurMain
     public static function postuler(): void
     {
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
             $cvData = null;
             $lmData = null;
@@ -279,16 +279,16 @@ class ControleurEtuMain extends ControleurMain
                 $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
             }
             //TODO vérifier les vérifs
-            if (isset($_REQUEST['idOffre'])) {
+            if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeIdOffres());
-                if (in_array($_REQUEST["idOffre"], $liste)) {
-                    $formation = ((new FormationRepository())->estFormation($_REQUEST['idOffre']));
+                if (in_array($_REQUEST["idFormation"], $liste)) {
+                    $formation = ((new FormationRepository())->estFormation($_REQUEST['idFormation']));
                     if (is_null($formation)) {
                         if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
-                            if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idOffre'])) {
+                            if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idFormation'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData);
+                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $cvData, $lmData);
                                 (new PostulerRepository())->creerObjet($postuler);
                                 $_REQUEST['action'] = "afficherMesOffres";
                                 self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
@@ -337,7 +337,7 @@ class ControleurEtuMain extends ControleurMain
                                 if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
                                     $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ('F' . $offreVerif->getIdOffre()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
                                         "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => self::getCleEtudiant(), "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
-                                        "idOffre" => $offreVerif->getIdOffre()]);
+                                        "idFormation" => $offreVerif->getIdOffre()]);
                                     (new FormationRepository())->creerObjet($formation);
                                 } else {
                                     (new FormationRepository())->ajouterConvention(self::getCleEtudiant(), $convention->getIdConvention());
@@ -376,7 +376,7 @@ class ControleurEtuMain extends ControleurMain
         if ($_FILES["ficLM"]["tmp_name"] != null) {
             $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
         }
-        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idOffre"], "En attente", $cvData, $lmData));
+        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $cvData, $lmData));
         self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
     }
 
