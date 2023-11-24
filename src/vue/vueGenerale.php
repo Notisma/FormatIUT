@@ -37,9 +37,9 @@ use App\FormatIUT\Configuration\Configuration;
                 $src = "../ressources/images/profil.png";
                 $liaison = "?controleur=Main&action=afficherPageConnexion";
                 $codeRecherche = "<a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
-<form action='?action=nothing' method='post'>            
-            <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
-        </form>";
+                <form action='?action=nothing' method='post'>            
+                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
+                </form>";
                 if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
                     switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
                         case "Entreprise" :
@@ -72,7 +72,7 @@ use App\FormatIUT\Configuration\Configuration;
                             <input class='searchField' name='recherche' placeholder='Rechercher...' required";
                     if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                     $codeRecherche .=
-                            ">
+                        ">
                             <input type='hidden' name='controleur' value='" . Configuration::getControleur() . "'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
@@ -95,30 +95,30 @@ use App\FormatIUT\Configuration\Configuration;
                     ?>
                 </div>
             </div>
-
         </div>
 
 
-        <div class="bandeau">
-            <div class="menuBurger" onclick="afficherSousMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="centrePage">
+            <div class="bandeau">
+                <div class="menuBurger" onclick="afficherSousMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <?php
+                foreach ($menu as $item) {
+                    $actuel = "";
+                    if ($item['label'] == $titrePage) {
+                        $actuel = "id='active'";
+                    }
+                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+                }
+                ?>
             </div>
 
-            <?php
-            foreach ($menu as $item) {
-                $actuel = "";
-                if ($item['label'] == $titrePage) {
-                    $actuel = "id='active'";
-                }
-                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
-            }
-            ?>
-        </div>
 
-        <div id="corpsPage">
-            <div id="main">
+            <div id="corpsPage">
                 <?php
                 require __DIR__ . "/{$chemin}";
                 ?>
@@ -170,5 +170,6 @@ use App\FormatIUT\Configuration\Configuration;
             </div>
         </div>
     </footer>
+</div>
 </body>
 </html>

@@ -11,22 +11,6 @@ body {
     height: 100vh;
 }
 
-.container {
-    max-width: 1050px;
-    width: 90%;
-    margin: auto;
-}
-
-.navbar {
-    width: 100%;
-    background: linear-gradient(to right, #FF5660, #4bc2bc 90%);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* HORS ANIMATIONS */
@@ -99,10 +83,19 @@ body {
 
 #corpsPage {
     display: flex;
-    background-color: #ecf0f1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 0;
     margin: 0;
+    width: 92%;
+    height: 90%;
+    flex-shrink: 0;
+}
+
+.main {
     width: 100%;
+    height: 100%;
 }
 
 
@@ -120,7 +113,6 @@ body {
     margin-top: 0;
     z-index: 0;
     position: relative;
-
 }
 
 #texteAccueil {
@@ -193,16 +185,24 @@ form {
     display: none;
 }
 
+.centrePage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    margin: 0;
+}
+
 .bandeau {
     z-index: 90;
     width: 70px;
-    height: 92vh;
+    height: 90vh;
     margin-left: 1%;
-    margin-top: -5px;
     background-color: #ff5660;
     position: sticky;
-    top: 20px;
-    /* doit s'arrêter juste avant le footer */
+    top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -280,7 +280,10 @@ form {
 }
 
 .bandeau:hover {
-    width: 19%;
+    z-index: 900;
+    width: 25%;
+    /* doit passer au dessus des autres éléments, même ceux de la même div , sans les déplacer */
+    position: sticky;
 }
 
 .bandeau:hover > a {
