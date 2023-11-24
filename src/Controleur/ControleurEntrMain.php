@@ -310,20 +310,20 @@ class ControleurEntrMain extends ControleurMain
         $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idFormation']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=CV de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
-        echo $cv;
+        header('Content-Disposition: attachment; filename=CV_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
+        readfile($cv);
     }
 
     /**
      * @return void télécharge la lettre de motivation d'un étudiant sur une offre
      */
-    public static function telechargerLettre(): void
+    public static function telechargerLM(): void
     {
-        $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idFormation']);
+        $lm = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idFormation']);
         $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
-        echo $lettre;
+        header('Content-Disposition: attachment; filename=Lettre_de_motivation_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
+        readfile($lm);
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
