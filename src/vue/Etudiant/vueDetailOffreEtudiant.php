@@ -158,8 +158,8 @@
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd1" name="fileCV" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
@@ -170,8 +170,8 @@
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd2" name="fileLM" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
@@ -216,8 +216,8 @@
                             echo "<p> Vous n'avez pas encore déposé de CV</p>";
                         }*/
                     ?>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd3" name="fileCV" onchange="updateImage(3)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
@@ -237,8 +237,8 @@
                             echo "<p> Vous n'avez pas encore déposé de lettre de motivation</p>";
                         }*/
                     ?>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd4" name="fileLM" onchange="updateImage(4)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
