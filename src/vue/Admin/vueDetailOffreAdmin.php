@@ -25,7 +25,7 @@
             <h4 class="titre"> <?php echo $nomOffreHTML . " - " . $sujetHTML ?></h4>
             <p>- Description de l'offre : <?php echo $detailHTML ?></p>
             <p>- Offre
-                de <?php echo "" . $offre->getTypeOffre() . " du : " . $offre->getDateDebut() . " au : " .$offre->getDateFin() ?></p>
+                de <?php echo "" . $offre->getTypeOffre() . " du : " . $offre->getDateDebut() . " au : " . $offre->getDateFin() ?></p>
             <p>- Rémunation : <?php echo $offre->getGratification() ?> €</p>
             <p>- Offre publiée le 17/11/2023</p>
         </div>

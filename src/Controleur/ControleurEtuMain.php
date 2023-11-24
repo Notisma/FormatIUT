@@ -270,14 +270,7 @@ class ControleurEtuMain extends ControleurMain
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            $cvData = null;
-            $lmData = null;
-            if ($_FILES["fic"]["tmp_name"] != null) {
-                $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
-            }
-            if ($_FILES["ficLM"]["tmp_name"] != null) {
-                $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-            }
+            $emplacementsFichiers = self::obtenirCVetLM();
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeidFormations());
@@ -288,7 +281,7 @@ class ControleurEtuMain extends ControleurMain
                             if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idFormation'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $cvData, $lmData);
+                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $emplacementsFichiers['cv'], $emplacementsFichiers['lm']);
                                 (new PostulerRepository())->creerObjet($postuler);
                                 $_REQUEST['action'] = "afficherMesOffres";
                                 self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
@@ -368,15 +361,8 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function modifierFichiers(): void
     {
-        $cvData = null;
-        $lmData = null;
-        if ($_FILES["fic"]["tmp_name"] != null) {
-            $cvData = file_get_contents($_FILES["fic"]["tmp_name"]);
-        }
-        if ($_FILES["ficLM"]["tmp_name"] != null) {
-            $lmData = file_get_contents($_FILES["ficLM"]["tmp_name"]);
-        }
-        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $cvData, $lmData));
+        $emplacementsFichiers = self::obtenirCVetLM();
+        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $emplacementsFichiers['cv'], $emplacementsFichiers['lm']));
         self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
     }
 
@@ -441,6 +427,51 @@ class ControleurEtuMain extends ControleurMain
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Récupère, stocke et renvoie la position de fichiers (dans ce cas, CV et LM).
+     * @return array contenant 'cv' et 'lm', leurs positions
+     */
+    private static function obtenirCVetLM(): array
+    {
+        if (!isset($_FILES['fileCV'], $_FILES['fileLM'])) {
+            self::redirectionFlash("afficherMesOffres", "warning", "Fichiers non-fournis");
+            die();
+        }
+
+        $cv = $_FILES['fileCV'];
+        $lm = $_FILES['fileLM'];
+
+        if ($cv['error'] == 1 || $cv['error'] == 2) {
+            self::redirectionFlash("afficherMesOffres", "warning", "Fichier CV trop lourd (si le fichier est normal, merci de reporter ce problème)");
+            die();
+        }
+        if ($lm['error'] == 1 || $lm['error'] == 2) {
+            self::redirectionFlash("afficherMesOffres", "warning", "Fichier LM trop lourd (si le fichier est normal, merci de reporter ce problème)");
+            die();
+        }
+
+        $cvLocation = null;
+        $lmLocation = null;
+
+        $uploadsLocation = "../ressources/uploads/";
+
+        if ($_FILES['fileCV']["tmp_name"] != null) {
+            $cvLocation = $uploadsLocation . basename($_FILES['fileCV']['name']);
+            if (!move_uploaded_file($_FILES['fileCV']['tmp_name'], $cvLocation))
+                self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
+        }
+        if ($_FILES['fileLM']["tmp_name"] != null) {
+            $lmLocation = $uploadsLocation . basename($_FILES['fileLM']['name']);
+            if (!move_uploaded_file($_FILES['fileLM']['tmp_name'], $lmLocation))
+                self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
+        }
+
+        return [
+            'cv' => $cvLocation,
+            'lm' => $lmLocation
+        ];
+    }
 
     /**
      * @return void met à jour l'image de profil d'un étudiant

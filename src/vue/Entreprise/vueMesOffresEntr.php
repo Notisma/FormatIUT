@@ -15,19 +15,19 @@
                     echo '><input type="submit" name="type" value="Alternance" class="alternance" ';
                     if ($type == "Alternance") echo 'id="typeActuel" disabled';
                     echo '>';
-                    echo '<input type="hidden" name="Etat" value="' . $_REQUEST["Etat"] . '">'
+                    echo '<input type="hidden" name="etat" value="' . $_REQUEST["etat"] . '">'
                     ?>
                     <input type="hidden" name="controleur" value="EntrMain">
                     <input type="hidden" name="action" value="afficherMesOffres">
                 </form>
                 <form>
                     <?php
-                    echo '<input type="submit" name="Etat" value="Tous" class="offre" ';
-                    if ($Etat == "Tous") echo 'id="etatActuel" disabled';
-                    echo '><input type="submit" name="Etat" value="Dispo" class="stage" ';
-                    if ($Etat == "Dispo") echo 'id="etatActuel" disabled';
-                    echo '><input type="submit" name="Etat" value="Assigné" class="alternance" ';
-                    if ($Etat == "Assigné") echo 'id="etatActuel" disabled';
+                    echo '<input type="submit" name="etat" value="Tous" class="offre" ';
+                    if ($etat == "Tous") echo 'id="etatActuel" disabled';
+                    echo '><input type="submit" name="etat" value="Dispo" class="stage" ';
+                    if ($etat == "Dispo") echo 'id="etatActuel" disabled';
+                    echo '><input type="submit" name="etat" value="Assigné" class="alternance" ';
+                    if ($etat == "Assigné") echo 'id="etatActuel" disabled';
                     echo '>';
                     echo '<input type="hidden" name="type" value="' . $_REQUEST["type"] . '">'
                     ?>
