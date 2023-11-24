@@ -65,7 +65,7 @@ $count = count($offres) + count($entreprises);
                 }
                 $sujetHTML=htmlspecialchars($offre->getSujet());
                 echo "</p>
-                        <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $sujetHTML . "</p>               
+                        <p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . " pour " . $sujetHTML . "</p>               
                         </div>
                 </a>";
             }

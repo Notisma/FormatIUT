@@ -29,7 +29,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             $mailHTML=htmlspecialchars($etudiant->getMailPerso());
             $telHTML=htmlspecialchars($etudiant->getTelephone());
             $loginHTML=htmlspecialchars($etudiant->getLogin());
-            $mailEtuHTML=htmlspecialchars($etudiant->getMailUniversitaire());
+            $mailEtuHTML=htmlspecialchars($etudiant->getMailUniersitaire());
             echo "<h3 class='titre'>Informations :</h3>";
             echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
             echo "<p>Login : " . $loginHTML . "</p>";
@@ -62,7 +62,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             } else {
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
-                        $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                         $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
                         $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getidFormation() . "'>" .

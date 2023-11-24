@@ -50,7 +50,7 @@
                         echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>
                             <div class='partieGauche'>
                             <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
-                            <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . htmlspecialchars($offre->getSujet()) . "</p>
+                            <p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . " pour " . htmlspecialchars($offre->getSujet()) . "</p>
                             <p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
                             </div>
                             <div class='partieDroite'>

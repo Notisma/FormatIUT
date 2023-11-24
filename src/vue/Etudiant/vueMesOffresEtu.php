@@ -92,7 +92,7 @@
                         echo '<p>';
                         $nomHTML = htmlspecialchars($offre->getNomOffre());
                         echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
-                        echo '<p> Du ' . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . '</p>';
+                        echo '<p> Du ' .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . '</p>';
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';

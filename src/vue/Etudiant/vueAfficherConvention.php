@@ -72,10 +72,10 @@
                            required></p>
                 <?php if($convention->getTypeCovention() == "Alternance"){
                 echo '<p><label for="debut_id"> Alternance : Date début </label>
-                    <input type="date" value="'.date_format($offre->getDateDebut(), 'Y-m-d').'" name="dateDebut" id="debut_id" readonly
+                    <input type="date" value="'. $offre->getDateDebut() .'" name="dateDebut" id="debut_id" readonly
                            required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" value="'.date_format($offre->getDateFin(),'Y-m-d').'" name="dateFin" id="fin_id" readonly
+                    <input type="date" value="'. $offre->getDateFin() .'" name="dateFin" id="fin_id" readonly
                            required></p>
                 <p>
                     <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
@@ -85,9 +85,9 @@
                 }
                 else {
                     echo '<p><label for="debut_id"> Stage : Date début </label>
-                    <input type="date" value="'.date_format($offre->getDateDebut(), 'Y-m-d').'" name="dateDebut" id="debut_id" required>
+                    <input type="date" value="'. $offre->getDateDebut() .'" name="dateDebut" id="debut_id" required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" value="'.date_format($offre->getDateFin(),'Y-m-d').'" name="dateFin" id="fin_id" required></p>
+                    <input type="date" value="'. $offre->getDateFin() .'" name="dateFin" id="fin_id" required></p>
                 <p>
                     <label class="labelFormulaire" for="objStage_id">Objectifs du stage : </label>
                     <input class="inputFormulaire" value="'.htmlspecialchars($convention->getObjectifOffre()).'" name="objectifOffre" id="objStage_id"
