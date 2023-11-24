@@ -141,7 +141,7 @@ class ControleurMain
                     self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
                 }
             } else {
-                self::redirectionFlash("mesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
+                self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
             }
         } else {
             self::$pageActuelle = "Détails de l'offre";
@@ -188,7 +188,7 @@ class ControleurMain
     /**
      * @return void affiche la page sourçant les sources des images
      */
-    public static function afficherSources()
+    public static function afficherSources(): void
     {
         self::afficherVue("Sources", "sources.php", self::getMenu());
     }
@@ -278,6 +278,7 @@ class ControleurMain
             //vérification de doublon de Siret
             if (is_null($entreprise)) {
                 $liste = ((new EntrepriseRepository())->getListeObjet());
+                $listeMail = null;
                 foreach ($liste as $entreprise) {
                     $listeMail[] = $entreprise->getEmail();
                 }
@@ -314,6 +315,7 @@ class ControleurMain
     {
         if (isset($_REQUEST["mail"])) {
             $liste = ((new EntrepriseRepository())->getListeObjet());
+            $listeMail = null;
             foreach ($liste as $entreprise) {
                 $listeMail[] = $entreprise->getEmail();
             }
@@ -375,7 +377,7 @@ class ControleurMain
             header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
             return;
         } //si la recherche ne contient que un ou des espaces
-        if (preg_match('/^[\s]+$/', $_REQUEST['recherche'])) {
+        if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
             ConnexionUtilisateur::deconnecter();
             header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
@@ -417,6 +419,7 @@ class ControleurMain
             $min = min(3, sizeof($liste));
             for ($i = 0; $i < $min; $i++) {
                 $id = max($liste);
+                $key = null;
                 foreach ($liste as $item => $value) {
                     if ($value == $id) $key = $item;
                 }
@@ -432,7 +435,7 @@ class ControleurMain
      * @param string $get le nom du Request à envoyer
      * @return int envoie en $_REQUEST une id auto-incrémentée
      */
-    protected static function autoIncrement(array $listeId,string $get): int
+    protected static function autoIncrement(array $listeId, string $get): int
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
@@ -450,7 +453,7 @@ class ControleurMain
      * @param string $get le nom du Request à envoyer
      * @return int envoie en $_REQUEST une id auto-incrémentée pour les formations
      */
-    protected static function autoIncrementF(array $listeId,string $get): int
+    protected static function autoIncrementF(array $listeId, string $get): int
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
@@ -480,10 +483,9 @@ class ControleurMain
      * @param string $nom nom de l'image à enregistrer
      * @return bool insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
      */
-    public static function insertImage(string $nom) : bool
+    public static function insertImage(string $nom): bool
     {
         return TransfertImage::transfert($nom);
     }
-
 
 }
