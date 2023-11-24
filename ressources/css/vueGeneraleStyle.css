@@ -195,13 +195,31 @@ form {
     margin: 0;
 }
 
+
+.wrapBandeau {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 70px;
+    flex-shrink: 0;
+    /*doit conserver cette taille même si il n'y a pas de contenu*/
+    background-color: transparent;
+    z-index: 900;
+    position: relative;
+    margin-left: 1%;
+
+
+}
+
 .bandeau {
+    position: absolute;
     z-index: 90;
     width: 70px;
-    height: 90vh;
+    height: 87vh;
     margin-left: 1%;
     background-color: #ff5660;
-    position: sticky;
     top: 10px;
     display: flex;
     flex-direction: column;
@@ -281,7 +299,8 @@ form {
 
 .bandeau:hover {
     z-index: 900;
-    width: 25%;
+    /* doit prendre 25% de la largeur du body */
+    width: 20vw;
     position: absolute;
 }
 

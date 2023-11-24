@@ -99,22 +99,24 @@ use App\FormatIUT\Configuration\Configuration;
 
 
         <div class="centrePage">
-            <div class="bandeau">
-                <div class="menuBurger" onclick="afficherSousMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+            <div class="wrapBandeau">
+                <div class="bandeau">
+                    <div class="menuBurger" onclick="afficherSousMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
 
-                <?php
-                foreach ($menu as $item) {
-                    $actuel = "";
-                    if ($item['label'] == $titrePage) {
-                        $actuel = "id='active'";
+                    <?php
+                    foreach ($menu as $item) {
+                        $actuel = "";
+                        if ($item['label'] == $titrePage) {
+                            $actuel = "id='active'";
+                        }
+                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
-                    echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
-                }
-                ?>
+                    ?>
+                </div>
             </div>
 
 
