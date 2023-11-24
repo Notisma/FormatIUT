@@ -158,8 +158,6 @@
 
     <div class="wrapBoutonsDoc">
         <?php
-        
-
         echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
