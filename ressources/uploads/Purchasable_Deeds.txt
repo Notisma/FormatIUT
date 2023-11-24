@@ -1,0 +1,110 @@
+Purchasable Deeds
+
+
+Area 	Name 	Shop 	Benefit 	Number of Items Sold 	Item(s) 	Prerequisite(s)
+
+
+Goldmouth
+
+
+Reedirait Deeds 	Reedirait Bookstore 	Increases Idea Point gains by one. 	6 	Adventures of Myram 	Adventures Contract   Long-Awaited Work   Mumuni the Littlepon 	Littlepon Contract    New Sounds  Tome of Morytha #2 	Resonated with Adenine
+
+Cleo Deeds 	Cleo's Cosmetics 	Increases item drop collection range by 50cm. 	6 	Full Moon Eyeliner 	    Full Moon Contract  First Class Freshness!
+
+Strummer Deeds 	Strummer Instruments 	Decreases enemy detection range by 5%. 	6 	Casta-Mutes 	Silent Contract   New Sounds  Clicky-Clacks 	Clicky-Clacks Contract   Old Routes
+
+Nopox Deeds 	Nopox Hobby Store 	Increases capacity for lifestyle items by ten. 	6 	Coral Nopon Chess Set 	Coral Contract    Cooking Display Leftherian Life 	Leftheria Contract     First Class Freshness!
+
+Rumbletum Deeds 	Rumbletum Canteen 	Increases battle experience by 10%. 	5 	Bright Samod 	Bright Contract   Cooking Display     Tasty Kordeth Samod 	Tasty Contract     Old Routes
+
+Brothersisterpon Deeds 	12 Brothersisterpon 	Increases item discovery rate by 10% 	6 	Sappan Veg Juice 	Inventory only expands after finding all of Motata's siblings       Honey au Lait   Crispy Blendshake
+
+
+Torigoth
+
+
+Soniarus Deeds 	Soniarus Music 	Increases running speed by 5%. 	5 	Woodboard 	Woodboard Contract  Raddon Family     Coralline Marimba 	Coralline Contract   The Water City
+
+Tomi Deeds 	Tomi Fishmongers 	Increases item drop collection range by 50cm. 	3 	Bipedal Crab Chili 	Bipedal Crab Contract   The Water City
+
+Savvy Deeds 	Café Savvy 	Decreases out-of-battle Party Gauge drain rate by 25%. 	5 	Passion Fruit Shake 	Passion Fruit Contract     Raddon Family       Victory Smoothie 	Victory Contract      The Water City
+
+Cmalaf Deeds 	Cmalaf Artwork 	Increases item discovery rate by 10%. 	4 	Woodcut Print of Bana 	Bana Etching Contract    Turf War Protection     Wood-Carven Queen 	 Wood-Carving Contract   The Water City
+
+Tilly Deeds 	Tilly Bakery 	Increases running speed by 5%. 	7 	Ruska Noodle Soup 	Ruska Noodle Contract    Turf War ProtectionLucky Dawn Bread 	Our Daily Bread started
+
+Gryff Deeds 	Gryff Butchers 	Increases lure range by 2m. 	4 	Mince & Lentil Stir-Fry 	Lentil Contract    Raddon FamilyMustard Kordeth 	Mustard Contract    Farming Tech
+
+Cosmetipolitan Deeds 	Cosmetipolitan 	Increases battle experience by 10%. 	5 	Conch Hairpin 	Conch Contract    Renowned GoodsSparkly Snow Perfume 	Sparkly Snow Contract    Farming Tech
+
+Neuromin Deeds 	Neuromin Textiles 	Increases gold earned in battle by 10%. 	6 	Leaf-Weave Cape 	Leaf-Weave Contract    Renowned GoodsSnowflake Scarf 	Snowflake Contract    Farming Tech
+
+
+Garfont Village
+
+
+Sadecott Deeds 	Sadecott Groceries 	Increases Dev Point gains by one. 	4 	Boiled Hustle Hyacinth 	Hyacinth Contract    Bumper CropPickled Ice Cabbage 	Pickling Contract    Secret Route
+
+
+Fonsa Myma
+
+
+Knick-Aquaneze Deeds 	Aquaneze Cosmetics 	Reduces terrain damage by 10%. 	5 	Gorgeous Blusher 	Beautiful Contract    Latest CrazeFonsett-Rouge Lipgloss 	Fonsett-Rouge Contract    Shipping Lanes Closed
+
+Sprintsy Deeds 	Sprintsy Sweets 	Decreases out-of-battle Party Gauge drain rate by 25%. 	3 	Plumage Peach Jelly 	Jelly Contract    Shipping Lanes Closed
+
+Volty Deeds 	Volty Butchers 	Increases item drop collection range by 50cm. 	4 	Hotplate Fry-Up 	Hotplate Contract    Bumper CropChar-Grilled Grumbird 	Char-Grilling Contract    Beneath the Cloud Sea
+
+Maluria Deeds 	Maluria Antiques 	Increases gold earned in battle by 10%. 	4 	Singing Maiden Statue 	Maiden Statue Contract    Shipping Lanes ClosedSkywards by Titan 	Skywards Contract    Beneath the Cloud Sea
+
+Ikthus Deeds 	Ikthus Fishmongers 	Increases gold earned in battle by 10%. 	4 	Steamed Bluegill 	Bluegill Contract    Fad FoodsWhitebait With Seeds 	Seed-Grill Contract    Secret Route
+
+Aldomar Deeds 	Aldomar Books 	Increases lure range by 2m. 	4 	Masterpieces of Alrest 	Masterpiece Contract    Bumper CropAddam's Love and War 	Love and War Contract    Secret Route
+
+Brad Deeds 	Brad Flatforms 	Increases item discovery rate by 10%. 	5 	Glitterspud Puran 	Glitterspud Contract    Fad FoodsHearty Kordeth Puran 	Hearty Contract    Secret Route
+
+
+Alba Cavanich
+
+
+Salter Deeds 	Salter Sweets 	Increases lure range by 2m. 	6 	Odifa Gelée Tart 	Gelée Tart Contract    Shipping Lane SafetyHot Ruby Steamed Bun 	Hot Ruby Contract    Cold Storage
+
+Elgeschel Deeds 	Elgeschel Hobby Store 	Increases item discovery rate by 10%. 	6 	Dealing Kingdoms 	Kingdom Contract    Shipyard SecurityPlumber Escape Game 	Plumber Contract    Cold Storage
+
+Hanoon Deeds 	Hanoon Fishmongers 	Max Booster items raised by ten. 	4 	Sand Salmon Ceviche 	Ceviche Contract    Shipyard SecurityFish and Herb Broth 	Fish Contract    Cold Storage
+
+Yafush Deeds 	Yafush Antiques 	Decreases out-of-battle Party Gauge drain rate by 25%. 	5 	Conch Music Box 	Music Box Contract    Shipping Lane SafetyFelmeri Fairy Statue 	Felmeri Contract    Secret Spice
+
+Griogair Deeds 	Griogair's Greens 	Decreases enemy detection range by 5%. 	4 	Crispy Vegetable Salad 	Crispy Veg Contract    Secret SpiceSteamflake Tabbouleh 	Steamflake Contract    White and Cold
+
+Adelno Deeds 	Adelno Music 	Increases item drop collection range by 50cm. 	6 	Tube Xylophone 	Xylophone Contract    Secret SpiceIcicle Marimba 	Icicle Contract    White and Cold
+
+
+Fonsett Village
+
+
+Speck Deeds 	Speck Butchers 	Reduces terrain damage by 10%. 	6 	Fragrant Samod Stralu 	Stralu Contract    Nopon CookingGlarna Stir-Fry 	Glarna Contract    Ship Lane Lighting
+
+Future Deeds 	Future Crafts 	Increases lure range by 2m. 	6 	Noponcho 	Noponcho Contract    Nopon CookingPrismatic Headband 	Prismatic Contract    Ship Lane Lighting
+
+Corcaja Deeds 	Corcaja Greengrocers 	Increases gold earned in battle by 10%. 	5 	Veg & Oyster Aspic 	Veg Contract    Nopon CookingSnowbaby Potato Salad 	Snowbaby Contract    Sinking Storehouse?
+
+Lutino Deeds 	Cafe Lutino ※1 	Decreases enemy detection range by 5%. 	5 	Pipestraw Smoothie 	Pipestraw Contract    Merchant ShipArmu Milk Earl Grey 	Armu Milk Contract    Wagon Guard
+
+
+Theosoir
+
+
+Placks Deeds 	Placks Patisserie 	Increases capacity for lifestyle items by ten. 	6 	Odifa Punch 	Odifa Punch Contract    Weathered ShipSnow Dumplings 	Dumplings Contract    Beat the Heat
+
+Platini Deeds 	Platini Deli 	Decreases out-of-battle Party Gauge drain rate by 25%. 	5 	Poached Fruit Samod 	Samod Contract    Frozen DoorGrumbird Rice Bowl 	Grumbird Contract    Beat the Heat
+
+Tatraty Deeds 	Tatraty Fish 	Increases battle experience by 10%. 	4 	Bagna Oyster Roll 	Bagna Contract    Frozen DoorWhitebait-Samod Hotpot 	Whitebait Contract    Cuisine Researcher
+
+Trappers Deeds 	Hobby Trappers 	Increases item discovery rate by 10%. 	5 	Smack-A-Nopon 	Nopon Contract    Frozen DoorJeweled Billiard Balls 	Billiard Contract    Cuisine Researcher
+
+Boldarde Deeds 	Boldarde Textiles 	Increases battle experience by 10%. 	6 	Musical Hair Clasp 	Musical Contract    Cuisine ResearcherTorigoth Snowpouch 	Torigoth Contract    Crafty Developments
+
+Paulio Deeds ※2 	Biblio Paulio 	Increase running speed by 5%. 	6 	Astrology Made Simple 	Astrology Contract    Crafty Developments The Blizzard Choir 	Blizzard Contract    Weathered Ship
+
+Memoria Deeds 	Memoria Art 	Decreases enemy detection range by 5%. 	5 	The Girl on the Hill 	Chapter 8Final Chorus※2 The Flora of Alrest and Gentlemen: A Study do not count toward deed requirements.
