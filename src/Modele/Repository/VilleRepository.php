@@ -9,7 +9,7 @@ class VilleRepository extends AbstractRepository
 {
     protected function getNomTable(): string
     {
-        return "Ville";
+        return "Villes";
     }
 
     protected function getNomsColonnes(): array

@@ -17,6 +17,7 @@
                 //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
                 //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'" >';
                 //on affiche le logo de l'entreprise depuis ImageRepository
+                use App\FormatIUT\Modele\Repository\FormationRepository;
                 use App\FormatIUT\Modele\Repository\OffreRepository;
 
                 echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="profilePic" >';
@@ -51,7 +52,7 @@
             <li>Effectif : " . $entreprise->getEffectif() . "</li>
             <li>CodeNAF : " . htmlspecialchars($entreprise->getCodeNaf()) . "</li>
             <li>Téléphone : " . htmlspecialchars($entreprise->getTel()) . "</li>
-            <li>Adresse : " . htmlspecialchars($entreprise->getAdresse()) . "</li>
+            <li>Adresse : " . htmlspecialchars($entreprise->getAdresseEntreprise()) . "</li>
             <li>Ville : " . htmlspecialchars($ville->getNomVille()) . "</li>
             " ?>
                 <a href="?action=afficherFormulaireModification&controleur=EntrMain">Modifier vos informations</a>
@@ -73,7 +74,7 @@
 
             <div class="descStat">
                 <h4><?php
-                    $OffresEnLigne = ((new OffreRepository())->offresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                    $OffresEnLigne = ((new FormationRepository())->offresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                     $nbOffresEnLigne = sizeof($OffresEnLigne);
                     echo $nbOffresEnLigne . " Offre";
                     if ($nbOffresEnLigne != 1) echo "s";
@@ -93,7 +94,7 @@
                 <h4><?php
                     $nbEtudiant = 0;
                     foreach ($OffresEnLigne as $item) {
-                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($item->getIdOffre()));
+                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($item->getidFormation()));
                     }
                     $s = "";
                     if ($nbEtudiant != 1) $s = "s";

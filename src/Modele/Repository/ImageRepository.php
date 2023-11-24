@@ -10,7 +10,7 @@ class ImageRepository extends AbstractRepository
 
     protected function getNomTable(): string
     {
-        return "Image";
+        return "Images";
     }
 
     protected function getNomsColonnes(): array
@@ -48,7 +48,7 @@ class ImageRepository extends AbstractRepository
      */
     public function insert(array $values): void
     {
-        $req = "INSERT INTO Image VALUES (" .
+        $req = "INSERT INTO Images VALUES (" .
             "'" . $values["img_id"] . "', " .
             "'" . $values["img_nom"] . "', " .
             "'" . $values["img_taille"] . "', " .
@@ -64,7 +64,7 @@ class ImageRepository extends AbstractRepository
      */
     public function listeID(): array
     {
-        $sql = "SELECT img_id FROM Image";
+        $sql = "SELECT img_id FROM Images";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $listeID = array();
         foreach ($pdoStatement as $item => $value) {
@@ -81,7 +81,7 @@ class ImageRepository extends AbstractRepository
 
     public function imageParEntreprise($Siret): mixed
     {
-        $sql = "SELECT img_id FROM Entreprise WHERE numSiret=:Tag";
+        $sql = "SELECT img_id FROM Entreprises WHERE numSiret=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $Siret);
         $pdoStatement->execute($values);

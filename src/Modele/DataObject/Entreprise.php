@@ -17,7 +17,7 @@ class Entreprise extends AbstractDataObject
     private ?int $effectif;
     private ?string $codeNAF;
     private ?string $tel;
-    private string $AdresseEntreprise;
+    private string $adresseEntreprise;
     private string $idVille;
     private string $img;
     private string $mdpHache;
@@ -25,10 +25,7 @@ class Entreprise extends AbstractDataObject
     private string $emailAValider;
     private string $nonce;
     private bool $estValide;
-    private DateTime $dateCreationCompte;
-    private string $typeStructure;
-    private string $fax;
-    private string $siteWeb;
+    private ?string $dateCreationCompte;
 
     /**
      * @param float $siret
@@ -45,12 +42,9 @@ class Entreprise extends AbstractDataObject
      * @param string $emailAValider
      * @param string $nonce
      * @param bool $estValide
-     * @param DateTime $dateCreationCompte
-     * @param string $typeStructure
-     * @param string $fax
-     * @param string $siteWeb
+     * @param string|null $dateCreationCompte
      */
-    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, DateTime $dateCreationCompte, string $typeStructure, string $fax, string $siteWeb)
+    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -58,7 +52,7 @@ class Entreprise extends AbstractDataObject
         $this->effectif = $effectif;
         $this->codeNAF = $codeNAF;
         $this->tel = $tel;
-        $this->AdresseEntreprise = $AdresseEntreprise;
+        $this->adresseEntreprise = $AdresseEntreprise;
         $this->idVille = $idVille;
         $this->img = $img;
         $this->mdpHache = $mdpHache;
@@ -67,9 +61,6 @@ class Entreprise extends AbstractDataObject
         $this->nonce = $nonce;
         $this->estValide = $estValide;
         $this->dateCreationCompte = $dateCreationCompte;
-        $this->typeStructure = $typeStructure;
-        $this->fax = $fax;
-        $this->siteWeb = $siteWeb;
     }
 
 
@@ -83,7 +74,7 @@ class Entreprise extends AbstractDataObject
             'effectif' => $this->effectif,
             'codeNAF' => $this->codeNAF,
             'tel' => $this->tel,
-            "AdresseEntreprise"=>$this->AdresseEntreprise,
+            "adresseEntreprise"=>$this->adresseEntreprise,
             "idVille"=>$this->idVille,
             "img_id"=>$this->img,
             "mdpHache"=>$this->mdpHache,
@@ -92,9 +83,6 @@ class Entreprise extends AbstractDataObject
             "nonce"=>$this->nonce,
             "estValide"=>$valide,
             "dateCreationCompte"=>$this->dateCreationCompte,
-            "typeStructure"=>$this->typeStructure,
-            "fax"=>$this->fax,
-            "siteWeb"=>$this->siteWeb
         ];
     }
 
@@ -114,7 +102,7 @@ class Entreprise extends AbstractDataObject
             $EntrepriseEnFormulaire["effectif"],
             $EntrepriseEnFormulaire["codeNAF"],
             $EntrepriseEnFormulaire["tel"],
-            $EntrepriseEnFormulaire["Adresse_Entreprise"],
+            $EntrepriseEnFormulaire["adresseEntreprise"],
             $ville,
             0,
             MotDePasse::hacher($EntrepriseEnFormulaire["mdp"]),
@@ -122,10 +110,7 @@ class Entreprise extends AbstractDataObject
             $EntrepriseEnFormulaire["email"],
             MotDePasse::genererChaineAleatoire(),
             false,
-            (new DateTime())->format('d-m-Y'),
-            $EntrepriseEnFormulaire["typeStructure"],
-            $EntrepriseEnFormulaire["fax"],
-            $EntrepriseEnFormulaire["siteWeb"]
+            (new DateTime())->format('d-m-Y')
         );
     }
     protected static function autoIncrementVille($listeId, $get): string
@@ -203,12 +188,12 @@ class Entreprise extends AbstractDataObject
 
     public function getAdresseEntreprise(): string
     {
-        return $this->AdresseEntreprise;
+        return $this->adresseEntreprise;
     }
 
-    public function setAdresseEntreprise(string $AdresseEntreprise): void
+    public function setAdresseEntreprise(string $adresseEntreprise): void
     {
-        $this->AdresseEntreprise = $AdresseEntreprise;
+        $this->adresseEntreprise = $adresseEntreprise;
     }
 
     public function getIdVille(): string
@@ -290,39 +275,5 @@ class Entreprise extends AbstractDataObject
     {
         $this->dateCreationCompte = $dateCreationCompte;
     }
-
-    public function getTypeStructure(): string
-    {
-        return $this->typeStructure;
-    }
-
-    public function setTypeStructure(string $typeStructure): void
-    {
-        $this->typeStructure = $typeStructure;
-    }
-
-    public function getFax(): string
-    {
-        return $this->fax;
-    }
-
-    public function setFax(string $fax): void
-    {
-        $this->fax = $fax;
-    }
-
-    public function getSiteWeb(): string
-    {
-        return $this->siteWeb;
-    }
-
-    public function setSiteWeb(string $siteWeb): void
-    {
-        $this->siteWeb = $siteWeb;
-    }
-
-
-
-
 
 }

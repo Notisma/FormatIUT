@@ -68,9 +68,9 @@
             <!-- exemple d'annonce publiée -->
             <?php
             for ($i = 0; $i < sizeof($listeOffre); $i++) {
-                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getSiret());
+                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getIdEntreprise());
                 $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idOffre=" . $listeOffre[$i]->getIdOffre();
+                $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $listeOffre[$i]->getIdFormation();
                 echo '<a href="' . $lien . '" class="annonceEntreprise">
                 <div class="imgAnnonce">
                     <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">
@@ -100,7 +100,7 @@
                             <div class="dureeAnnonce">
                                 <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                echo ($listeOffre[$i]->getDateDebut()->diff($listeOffre[$i]->getDateFin()))->format('%m mois');
+                echo (new DateTime($listeOffre[$i]->getDateDebut()))->diff((new DateTime($listeOffre[$i]->getDateFin())))->format('%m mois');
                 echo '</p>
                             </div>
                             <div class="libelleAnnonce">

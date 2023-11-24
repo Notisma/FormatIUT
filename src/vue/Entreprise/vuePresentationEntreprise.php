@@ -73,13 +73,13 @@
         <div class="formulaireGauchePE">
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
-                <?php if (isset($_POST["siret"])) { ?>
+                <?php if (isset($_REQUEST["siret"])) { ?>
                     <input type="number" name="siret" placeholder="SIRET de l'entreprise"
                            <?php echo "value='" . $_REQUEST["siret"] . "'" ?>required>
                     <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise"
                            <?php echo "value='" . $_REQUEST["nomEntreprise"] . "'" ?>required>
-                    <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise"
-                           <?php echo "value='" . $_REQUEST["Adresse_Entreprise"] . "'" ?>required>
+                    <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise"
+                           <?php echo "value='" . $_REQUEST["adresseEntreprise"] . "'" ?>required>
                     <input type="email" name="email" placeholder="Email de l'entreprise"
                            <?php echo "value='" . $_REQUEST["email"] . "'" ?>required>
                     <input type="number" name="codePostal" placeholder="Code Postal"
@@ -100,7 +100,7 @@
                 <?php } else { ?>
                     <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
                     <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
-                    <input type="text" name="Adresse_Entreprise" placeholder="Adresse de l'entreprise" required>
+                    <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise" required>
                     <input type="email" name="email" placeholder="Email de l'entreprise" required>
                     <input type="number" name="codePostal" placeholder="Code Postal" required>
                     <input type="text" name="ville" placeholder="Ville" required>

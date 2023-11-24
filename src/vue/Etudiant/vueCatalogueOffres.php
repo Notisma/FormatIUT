@@ -47,7 +47,7 @@
                     if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->estValide()) {
                         $compteurOffres++;
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                        echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='wrapOffres'>
+                        echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>
                             <div class='partieGauche'>
                             <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
                             <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . htmlspecialchars($offre->getSujet()) . "</p>
@@ -60,8 +60,8 @@
                             <div class='divInfo'>
                             <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
                             <p>";
-                        if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                            $nb = (new EtudiantRepository())->nbPostulations($offre->getIdOffre());
+                        if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
+                            $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
                             echo $nb . " postulation";
                             if ($nb > 1) echo "s";
                         } else {
