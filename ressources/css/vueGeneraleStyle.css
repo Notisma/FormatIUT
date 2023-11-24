@@ -282,8 +282,7 @@ form {
 .bandeau:hover {
     z-index: 900;
     width: 25%;
-    /* doit passer au dessus des autres éléments, même ceux de la même div , sans les déplacer */
-    position: sticky;
+    position: absolute;
 }
 
 .bandeau:hover > a {
