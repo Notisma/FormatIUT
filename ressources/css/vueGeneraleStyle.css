@@ -191,6 +191,7 @@ form {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    /* la hauteur est égale à la hauteur de la page - la hauteur du header - la hauteur du footer */
     height: 90%;
     margin: 0;
 }
@@ -214,13 +215,14 @@ form {
 }
 
 .bandeau {
-    position: absolute;
+    position: sticky;
     z-index: 90;
     width: 70px;
     height: 87vh;
     margin-left: 1%;
     background-color: #ff5660;
-    top: 10px;
+    top: 42px;
+    bottom: -300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -299,9 +301,9 @@ form {
 
 .bandeau:hover {
     z-index: 900;
-    /* doit prendre 25% de la largeur du body */
     width: 20vw;
     position: absolute;
+    top: 0;
 }
 
 .bandeau:hover > a {
