@@ -254,8 +254,12 @@ class ControleurEntrMain extends ControleurMain
                             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
-                                $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
-                                $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                if(isset($_REQUEST['dateDebut'])){
+                                    $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
+                                }
+                                if(isset($_REQUEST['dateFin'])){
+                                    $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                }
                                 $offre->setSujet($_REQUEST['sujet']);
                                 $offre->setDetailProjet($_REQUEST['detailProjet']);
                                 $offre->setObjectifOffre($_REQUEST["objectifOffre"]);
