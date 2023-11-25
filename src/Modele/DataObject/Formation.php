@@ -27,7 +27,7 @@ class Formation extends AbstractDataObject
     private ?bool $conventionValidee;
     private ?string $dateCreationConvention;
     private ?string $dateTransmissionConvention;
-    private ?bool $retourSigne;
+    private ?string $dateRetourSigne;
     private ?string $assurance;
     private ?string $avenant;
     private ?int $idEtudiant;
@@ -60,7 +60,7 @@ class Formation extends AbstractDataObject
      * @param bool|null $conventionValidee
      * @param string|null $dateCreationConvention
      * @param string|null $dateTransmissionConvention
-     * @param bool|null $retourSigne
+     * @param string|null $dateRetourSigne
      * @param string|null $assurance
      * @param string|null $avenant
      * @param int|null $idEtudiant
@@ -68,7 +68,7 @@ class Formation extends AbstractDataObject
      * @param float $idEntreprise
      * @param int|null $idTuteurUM
      */
-    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?bool $retourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?int $idTuteurUM)
+    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?int $idTuteurUM)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -94,7 +94,7 @@ class Formation extends AbstractDataObject
         $this->conventionValidee = $conventionValidee;
         $this->dateCreationConvention = $dateCreationConvention;
         $this->dateTransmissionConvention = $dateTransmissionConvention;
-        $this->retourSigne = $retourSigne;
+        $this->dateRetourSigne = $dateRetourSigne;
         $this->assurance = $assurance;
         $this->avenant = $avenant;
         $this->idEtudiant = $idEtudiant;
@@ -487,20 +487,14 @@ class Formation extends AbstractDataObject
         $this->dateTransmissionConvention = $dateTransmissionConvention;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getRetourSigne(): ?bool
+    public function getDateRetourSigne(): ?string
     {
-        return $this->retourSigne;
+        return $this->dateRetourSigne;
     }
 
-    /**
-     * @param bool|null $retourSigne
-     */
-    public function setRetourSigne(?bool $retourSigne): void
+    public function setDateRetourSigne(?string $dateRetourSigne): void
     {
-        $this->retourSigne = $retourSigne;
+        $this->dateRetourSigne = $dateRetourSigne;
     }
 
     /**
@@ -628,7 +622,7 @@ class Formation extends AbstractDataObject
             'conventionValidee'=>$this->conventionValidee?1:0,
             'dateCreationConvention'=>$this->dateCreationConvention,
             'dateTransmissionConvention'=>$this->dateTransmissionConvention,
-            'retourSigne'=>$this->retourSigne,
+            'dateRetourSigne'=>$this->dateRetourSigne,
             'assurance'=>$this->assurance,
             'avenant'=>$this->avenant,
             'idEtudiant'=>$this->idEtudiant,

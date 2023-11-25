@@ -168,7 +168,7 @@ class ControleurEntrMain extends ControleurMain
                             $_REQUEST["conventionValidee"] = 0;
                             $_REQUEST["dateCreationConvention"] = null;
                             $_REQUEST["dateTransmissionConvention"] = null;
-                            $_REQUEST["retourSigne"] = null;
+                            $_REQUEST["dateRetourSigne"] = null;
                             $_REQUEST["assurance"] = null;
                             $_REQUEST["avenant"] = null;
                             $_REQUEST["idEtudiant"] = null;
