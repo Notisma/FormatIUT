@@ -8,14 +8,13 @@
 
 
 body {
-    min-height: 96vh;
+    height: 200vh;
     /* background légèrement crême */
     background-color: #e8e8e8;
 }
 
 
 #center {
-    margin: auto;
     width: 80%;
     height: 80%;
     min-width: 300px;

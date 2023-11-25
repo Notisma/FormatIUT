@@ -192,7 +192,7 @@ form {
     align-items: center;
     width: 100%;
     /* la hauteur est égale à la hauteur de la page - la hauteur du header - la hauteur du footer */
-    height : 90%;
+    height: 90%;
     margin: 0;
 }
 
@@ -221,7 +221,8 @@ form {
     height: 87vh;
     margin-left: 1%;
     background-color: #ff5660;
-    top: 42px;
+    /* doit être au centre l'écran verticalement */
+    top: 7%;
     bottom: -300px;
     display: flex;
     flex-direction: column;
@@ -303,9 +304,10 @@ form {
     z-index: 900;
     width: 20vw;
     position: fixed;
-    top: 0;
     margin: 0;
-    transform: translate(0, 50px);
+    /* doit être à la motié verticale de l'écran */
+    top: 8%;
+
 }
 
 .bandeau:hover > a {
@@ -686,7 +688,7 @@ form {
     }
 
     .bandeau:hover {
-        width : 65px;
+        width: 65px;
         cursor: pointer;
         top: 0;
     }
