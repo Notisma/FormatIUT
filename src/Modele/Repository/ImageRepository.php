@@ -15,7 +15,7 @@ class ImageRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["img_id", "img_nom", "img_taille", "img_type", "img_blob"];
+        return ["img_id", "img_nom", "img_taille", "img_type", "img_link"];
     }
 
     protected function getClePrimaire(): string
@@ -53,7 +53,7 @@ class ImageRepository extends AbstractRepository
             "'" . $values["img_nom"] . "', " .
             "'" . $values["img_taille"] . "', " .
             "'" . $values["img_type"] . "', " .
-            "'" . addslashes($values["img_blob"]) . "') ";
+            "'" . addslashes($values["img_link"]) . "') ";
         $pdpoStatement = ConnexionBaseDeDonnee::getPdo()->query($req);
 
     }
