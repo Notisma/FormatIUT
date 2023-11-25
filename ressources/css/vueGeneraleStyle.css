@@ -500,10 +500,42 @@ form {
 
 @media (max-width: 1050px) {
 
+    .centrePage {
+        margin-top: 6%;
+    }
+
+
+    #corpsPage {
+        width: 100%;
+    }
+
+    .wrapBandeau {
+        height: 70px;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        top: 1%;
+        left: 1%;
+    }
+
+    .wrapBandeau:hover {
+        transform: translate(0, 0);
+    }
+
     .bandeau {
         height: 65px;
         width: 65px;
         position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .bandeau:hover {
+        /* on ne veut pas que le bandeau se déplace */
+        transform: translate(0, 0);
     }
 
     .bandeau > a {
@@ -544,7 +576,6 @@ form {
     }
 
     .flash {
-        /* une sorte de popup un peu en haut de la page, qui prend 70% de la largeur de la page */
         width: 63%;
         height: 55%;
         margin: 0;
@@ -554,7 +585,6 @@ form {
         left: 50%;
         opacity: 1;
         border-radius: 10px;
-        /* doit rester en haut de la page, quelque soit la dimension de la page */
         transform: translate(-50%, -50%);
 
     }
@@ -654,8 +684,9 @@ form {
     }
 
     .bandeau:hover {
-        width: 70px;
+        width : 65px;
         cursor: pointer;
+        top: 0;
     }
 
     .menuBurger > span {
