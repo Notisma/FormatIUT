@@ -502,6 +502,8 @@ form {
 
     .centrePage {
         margin-top: 6%;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
 

@@ -1,21 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
 body {
-    height: 300vh;
-    /* défilement smooth */
+    height: 100vh;
     scroll-behavior: smooth;
     background-color: #e8e8e8;
 
 }
 
 .wrapComplet {
-    position: absolute;
-    top: 160%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
     width: 92%;
-    height: 280vh;
+    height: 100%;
     min-width: 300px;
     text-align: left;
     line-height: 2em;
@@ -28,6 +22,7 @@ body {
     align-content: center;
     justify-items: center;
     justify-content: center;
+    overflow-y: hidden;
 }
 
 
