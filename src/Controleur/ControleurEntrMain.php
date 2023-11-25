@@ -68,7 +68,7 @@ class ControleurEntrMain extends ControleurMain
     /**
      * @return void affiche le profil de l'entreprise connecté
      */
-    public static function afficherProfilEntr(): void
+    public static function afficherProfil(): void
     {
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
@@ -299,7 +299,7 @@ class ControleurEntrMain extends ControleurMain
     public static function mettreAJour(): void
     {
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
-        self::afficherProfilEntr();
+        self::afficherProfil();
     }
 
     /**
@@ -359,8 +359,8 @@ class ControleurEntrMain extends ControleurMain
         if ($ancienId["img_id"] != 0) {
             (new ImageRepository())->supprimer($ancienId["img_id"]);
         }
-        $_REQUEST["action"] = "afficherProfilEntr()";
+        $_REQUEST["action"] = "afficherProfil()";
         MessageFlash::ajouter("success", "Image modifiée avec succès.");
-        self::afficherProfilEntr();
+        self::afficherProfil();
     }
 }
