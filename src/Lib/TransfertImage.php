@@ -11,7 +11,7 @@ class TransfertImage
     public static function transfert($nom)
     {
         $ret = false;
-        $img_blob = '';
+        $img_link = '';
         $img_taille = 0;
         $img_type = '';
         $img_nom = '';
@@ -33,12 +33,12 @@ class TransfertImage
             $img_type = $_FILES['pdp']['type'];
             $img_nom = $_FILES['pdp']['name'];
 
-            $img_blob = file_get_contents($_FILES['pdp']['tmp_name']);
+            $img_link = file_get_contents($_FILES['pdp']['tmp_name']);
             if ($_REQUEST["controleur"] == "EtuMain") {
-                $image = self::img_ronde($img_blob);
-                $img_blob = self::image_data($image);
+                $image = self::img_ronde($img_link);
+                $img_link = self::image_data($image);
             }
-            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_blob" => $img_blob]);
+            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_link" => $img_link]);
         }
         return true;
     }
