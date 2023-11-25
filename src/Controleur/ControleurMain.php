@@ -472,20 +472,49 @@ class ControleurMain
      * @param string $message le message à envoyer
      * @return void redirige en envoyant un messageFlash
      */
-    public static function redirectionFlash(string $action, string $type, string $message): void
+    protected static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
         (Configuration::getCheminControleur())::$action();
-
     }
 
     /**
      * @param string $nom nom de l'image à enregistrer
      * @return bool insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
      */
-    public static function insertImage(string $nom): bool
+    protected static function insertImage(string $nom): bool
     {
         return TransfertImage::transfert($nom);
     }
 
+    /**
+     * Récupère, stocke et renvoie la position de fichiers (par ex, CV et LM).
+     * @return array contenant par ex 'cv' et 'lm', et leurs positions
+     */
+    public static function uploadFichiers(array $fileNames, string $actionInErrorCase): array
+    {
+        $locationsArray = [];
+        $uploadsLocation = "../ressources/uploads/";
+
+        foreach ($fileNames as $fileName) {
+            if (!isset($_FILES[$fileName])) {
+                self::redirectionFlash($actionInErrorCase, "warning", "Fichiers non-fournis");
+                die();
+            }
+            $file = $_FILES[$fileName];
+            if ($file['error'] == 1 || $file['error'] == 2) {
+                self::redirectionFlash($actionInErrorCase, "warning", "Fichier " . strtoupper($fileName) . " trop lourd (si le fichier est normal, merci de reporter ce problème)");
+                die();
+            }
+            $fileLocation = null;
+            if ($file["tmp_name"] != null) {
+                $fileLocation = $uploadsLocation . basename($file['name']);
+                if (!move_uploaded_file($file['tmp_name'], $fileLocation))
+                    self::redirectionFlash($actionInErrorCase, "danger", "Problem uploading file");
+            }
+            $locationsArray[$fileName] = $fileLocation;
+        }
+
+        return $locationsArray;
+    }
 }

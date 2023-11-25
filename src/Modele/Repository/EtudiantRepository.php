@@ -83,7 +83,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function nbPostulations($idFormation): mixed
     {
-        $sql = "SELECT COUNT(numEtudiant)as nb FROM Postuler WHERE idFormation=:Tag";
+        $sql = "SELECT COUNT(numEtudiant) AS nb FROM Postuler WHERE idFormation=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idFormation);
         $pdoStatement->execute($values);

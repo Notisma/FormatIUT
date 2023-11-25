@@ -50,7 +50,7 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
         }
         if (self::$titrePageActuelleEtu == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilEtu&controleur=EtuMain");
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfil&controleur=EtuMain");
         }
 
         $convention = (new ConventionRepository())->aUneConvention(self::getCleEtudiant());
@@ -106,7 +106,7 @@ class ControleurEtuMain extends ControleurMain
     /**
      * @return void affiche le profil de l'étudiant connecté
      */
-    public static function afficherProfilEtu(): void
+    public static function afficherProfil(): void
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
         self::$titrePageActuelleEtu = "Mon Compte";
@@ -270,7 +270,7 @@ class ControleurEtuMain extends ControleurMain
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            $emplacementsFichiers = self::obtenirCVetLM();
+            $emplacementsFichiers = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeidFormations());
@@ -361,7 +361,7 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function modifierFichiers(): void
     {
-        $emplacementsFichiers = self::obtenirCVetLM();
+        $emplacementsFichiers = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
         (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $emplacementsFichiers['cv'], $emplacementsFichiers['lm']));
         self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
     }
@@ -423,55 +423,10 @@ class ControleurEtuMain extends ControleurMain
     public static function mettreAJour(): void
     {
         (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-        self::afficherProfilEtu();
+        self::afficherProfil();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Récupère, stocke et renvoie la position de fichiers (dans ce cas, CV et LM).
-     * @return array contenant 'cv' et 'lm', leurs positions
-     */
-    private static function obtenirCVetLM(): array
-    {
-        if (!isset($_FILES['fileCV'], $_FILES['fileLM'])) {
-            self::redirectionFlash("afficherMesOffres", "warning", "Fichiers non-fournis");
-            die();
-        }
-
-        $cv = $_FILES['fileCV'];
-        $lm = $_FILES['fileLM'];
-
-        if ($cv['error'] == 1 || $cv['error'] == 2) {
-            self::redirectionFlash("afficherMesOffres", "warning", "Fichier CV trop lourd (si le fichier est normal, merci de reporter ce problème)");
-            die();
-        }
-        if ($lm['error'] == 1 || $lm['error'] == 2) {
-            self::redirectionFlash("afficherMesOffres", "warning", "Fichier LM trop lourd (si le fichier est normal, merci de reporter ce problème)");
-            die();
-        }
-
-        $cvLocation = null;
-        $lmLocation = null;
-
-        $uploadsLocation = "../ressources/uploads/";
-
-        if ($_FILES['fileCV']["tmp_name"] != null) {
-            $cvLocation = $uploadsLocation . basename($_FILES['fileCV']['name']);
-            if (!move_uploaded_file($_FILES['fileCV']['tmp_name'], $cvLocation))
-                self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
-        }
-        if ($_FILES['fileLM']["tmp_name"] != null) {
-            $lmLocation = $uploadsLocation . basename($_FILES['fileLM']['name']);
-            if (!move_uploaded_file($_FILES['fileLM']['tmp_name'], $lmLocation))
-                self::redirectionFlash("afficherMesOffres", "danger", "Problem uploading file");
-        }
-
-        return [
-            'cv' => $cvLocation,
-            'lm' => $lmLocation
-        ];
-    }
 
     /**
      * @return void met à jour l'image de profil d'un étudiant
@@ -502,13 +457,13 @@ class ControleurEtuMain extends ControleurMain
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
             } else {
-                self::redirectionFlash("afficherProfilEtu", "success", "Image modifiée");
+                self::redirectionFlash("afficherProfil", "success", "Image modifiée");
             }
         } else {
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
             } else {
-                self::redirectionFlash("afficherProfilEtu", "warning", "Aucune image selectionnée");
+                self::redirectionFlash("afficherProfil", "warning", "Aucune image selectionnée");
             }
         }
     }

@@ -45,14 +45,14 @@ use App\FormatIUT\Configuration\Configuration;
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                             $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                            $liaison = "?controleur=entrMain&action=afficherProfilEntr";
+                            $liaison = "?controleur=entrMain&action=afficherProfil";
                             break;
                         }
                         case "Etudiants" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
                             $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                            $liaison = "?controleur=etuMain&action=afficherProfilEtu";
+                            $liaison = "?controleur=etuMain&action=afficherProfil";
                             break;
                         }
                         case "Administrateurs" :
