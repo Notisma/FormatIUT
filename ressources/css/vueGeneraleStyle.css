@@ -84,12 +84,12 @@ body {
 #corpsPage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     z-index: 0;
     margin: 0;
     width: 92%;
-    height: 90%;
+    height: 97%;
     flex-shrink: 0;
 }
 
