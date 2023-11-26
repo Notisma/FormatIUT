@@ -423,7 +423,6 @@ input {
 /* RESPONSIVE TÉLÉPHONE */
 
 @media (max-width: 500px) {
-    /* Styles pour les smartphones */
     body {
         height: 120vh;
     }

@@ -12,6 +12,7 @@ use App\FormatIUT\Configuration\Configuration;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body
     <?php
