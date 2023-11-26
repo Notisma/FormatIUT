@@ -420,168 +420,34 @@ input {
     }
 }
 
-
-/* ----------------------------------------------------------------------------*/
-/* Ici le deuxième palier, on bascule #form en dessous de #desc */
-@media (max-width: 1050px) {
+@media (max-width: 500px) {
+    /* Styles pour les smartphones */
     body {
         height: 120vh;
     }
 
     #center {
-        align-content: center;
-        justify-content: center;
-        width: 90%;
-        height: 100%;
+        background-color: white;
         border-radius: 10px;
-    }
-
-    #center > #desc {
-        float: none;
-        width: 100%;
-        border-radius: 10px 10px 0 0;
-    }
-
-    #center > #formulaire {
-        float: none;
-        width: 100%;
-        height: 70%;
-        border-radius: 0 0 10px 10px;
-        box-shadow: 0 0 10px #466069;
-
-    }
-
-    #form {
-        margin-top: 22%;
-    }
-
-    #form > h2 {
-        padding: 8% 0 0 0;
-        margin-bottom: 1%;
-    }
-
-    #zoneLogo {
-        margin-top: 0;
-    }
-
-    #desc > h1 {
-        font-size: 3em;
-    }
-
-    #premiereLigne {
-        margin-top: 2%;
-    }
-
-    #desc > h2 {
-        font-size: 1.5em;
-    }
-
-    #texteCentre > p {
-        font-size: 1.5em;
-        text-align: center;
-        padding: 0;
-    }
-
-    #texteCentre {
-        margin-top: 0;
-    }
-
-    #attention {
-        margin-top: 0;
-    }
-
-    #imageErreur {
-        margin-top: auto;
-        margin-bottom: auto;
-
-    }
-
-    input {
-        width: 90%;
-    }
-
-    #bouton {
-        width: 50%;
-    }
-
-    #boutonCentre {
-        margin-top: -3%;
-    }
-}
-
-/* ----------------------------------------------------------------------------*/
-/* Ici le troisième palier, on réduit la taille du formulaire */
-@media (max-width: 700px) {
-
-    body {
-        min-height: 130vh;
-    }
-
-    #logo {
-        width: 70%;
-    }
-
-    #center {
-        height: 70%;
-        margin-top: 0;
-    }
-
-
-    #center > #formulaire {
-        float: none;
-        width: 100%;
-        height: 60%;
-    }
-
-    #center > desc {
-        float: none;
-        width: 100%;
-        height: 10%;
-    }
-
-
-    #desc > h1 {
-        font-size: 2em;
-        line-height: 1.5em;
-    }
-
-    #desc > h2 {
-        font-size: 1.5em;
-    }
-
-    #desc > p {
-        font-size: 1em;
-    }
-
-    input {
-        width: 90%;
-    }
-
-    #bouton {
-        width: 50%;
-    }
-}
-
-/* ----------------------------------------------------------------------------*/
-@media (max-device-width: 500px) {
-    /* Styles pour les smartphones */
-    body {
-        height: 100vh;
-    }
-
-    #center {
+        box-shadow: 0 0 10px 0 #466069;
         height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     #center > #desc {
         float: none;
         width: 100%;
         height: 50%;
+        border-radius: 10px;
     }
 
 
     #center > #formulaire {
+        border-radius: 10px;
         float: none;
         width: 100%;
         height: 50%;
@@ -591,7 +457,9 @@ input {
         align-items: center;
     }
 
-    #form {
+    #formulaire > #form {
+        height: 60%;
+        width: 100%;
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -599,21 +467,45 @@ input {
     #form > h2 {
         padding: 0 0 0 0;
         margin-bottom: 1%;
-        font-size: 3em;
+        font-size: 1.5em;
     }
 
-    form {
-        margin-bottom: 5%;
+    form > * {
+        margin: 0;
+    }
+
+    #wrapInput {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #wrapInput > div {
+        width: 90%;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #wrapInput > div > input {
+        width: 80%;
+        height: 50%;
+        font-size: 1em;
+    }
+
+    #wrapInput > div > img {
+        margin: 0;
+        height: 30%;
     }
 
 
     #desc > p {
         font-size: 10em;
-    }
-
-    #wrapInput {
-        width: 100%;
-        margin-right: 30%;
     }
 
     #erreur > p {
@@ -660,9 +552,13 @@ input {
 
     #bouton {
         width: 60%;
+        padding: 0;
         margin-top: 5%;
-        height: 80px;
-        font-size: 2em;
+        height: 40px;
+        font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #boutonRedirect {
@@ -689,6 +585,30 @@ input {
         cursor: pointer;
         text-decoration: underline;
     }
+
+    /*quand un input est en focus*/
+    input > #formulaire {
+        position: absolute;
+        z-index: 800;
+        border: 1px solid black;
+    }
+
+    #popupMdp {
+        flex-direction: column-reverse;
+        width: 90%;
+        height: 80%;
+    }
+
+    .mainForget {
+        width: 100%;
+        height: 50%;
+    }
+
+    .imgForget {
+        width: 100%;
+        height: 50%;
+    }
+
 }
 
 
