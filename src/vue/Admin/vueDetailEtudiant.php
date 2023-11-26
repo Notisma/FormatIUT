@@ -40,9 +40,12 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             ?>
         </div>
 
+        <?php
+        if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
         <div class="wrapBoutons">
             <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
         </div>
+        <?php } ?>
 
     </div>
 

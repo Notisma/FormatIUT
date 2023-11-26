@@ -33,15 +33,17 @@
 
         <div class="wrapBoutons">
             <?php
-            if (!$offre->getEstValide()) {
-                echo "
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+                if (!$offre->getEstValide()) {
+                    echo "
                 <a href='?action=rejeterOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>REJETER</a>
             <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>ACCEPTER</a>
                 ";
-            } else {
-                echo "
+                } else {
+                    echo "
                 <a href='?action=supprimerOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>SUPPRIMER</a>
                 ";
+                }
             }
 
             ?>

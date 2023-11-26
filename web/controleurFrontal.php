@@ -33,9 +33,12 @@ if (class_exists($nomClasseControleur)) {
         } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
             $nonConnecte=true;
         } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
-            $nonConnecte=true;
-        }
-        else {
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Personnels") {
+                $nonConnecte = true;
+            }else {
+                $nomClasseControleur::$action();
+            }
+        }else {
             $nomClasseControleur::$action();
         }
         if ($nonConnecte){
