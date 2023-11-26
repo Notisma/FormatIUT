@@ -420,6 +420,8 @@ input {
     }
 }
 
+/* RESPONSIVE TÉLÉPHONE */
+
 @media (max-width: 500px) {
     /* Styles pour les smartphones */
     body {
@@ -584,13 +586,6 @@ input {
     .oublié:hover {
         cursor: pointer;
         text-decoration: underline;
-    }
-
-    /*quand un input est en focus*/
-    input > #formulaire {
-        position: absolute;
-        z-index: 800;
-        border: 1px solid black;
     }
 
     #popupMdp {
