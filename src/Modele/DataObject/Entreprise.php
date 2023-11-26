@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\DataObject;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
-use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
 

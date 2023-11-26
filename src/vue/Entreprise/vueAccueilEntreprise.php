@@ -67,13 +67,16 @@
             -->
             <!-- exemple d'annonce publiée -->
             <?php
+
+            use App\FormatIUT\Configuration\Configuration;
+
             for ($i = 0; $i < sizeof($listeOffre); $i++) {
                 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($listeOffre[$i]->getIdEntreprise());
                 $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
                 $lien = "?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $listeOffre[$i]->getIdFormation();
                 echo '<a href="' . $lien . '" class="annonceEntreprise">
                 <div class="imgAnnonce">
-                    <img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">
+                    <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" class="imageEntr" alt="icone entreprise">
                 </div>
                 <div class="wrapTexte">
                     <h4>';

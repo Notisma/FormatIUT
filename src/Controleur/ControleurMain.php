@@ -18,6 +18,7 @@ use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class ControleurMain
 {
@@ -480,41 +481,44 @@ class ControleurMain
 
     /**
      * @param string $nom nom de l'image à enregistrer
-     * @return bool insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
+     * @return int|false insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
      */
-    protected static function insertImage(string $nom): bool
+    protected static function insertImage(string $nom): int|false
     {
         return TransfertImage::transfert($nom);
     }
 
     /**
-     * Récupère, stocke et renvoie la position de fichiers (par ex, CV et LM).
-     * @return array contenant par ex 'cv' et 'lm', et leurs positions
+     * Récupère et stocke les fichiers (par ex, CV et LM).
      */
-    public static function uploadFichiers(array $fileNames, string $actionInErrorCase): array
+    public static function uploadFichiers(array $fileTags, string $actionInErrorCase): array
     {
-        $locationsArray = [];
+        $ids = array();
         $uploadsLocation = "../ressources/uploads/";
 
-        foreach ($fileNames as $fileName) {
+        foreach ($fileTags as $fileName) {
             if (!isset($_FILES[$fileName])) {
-                self::redirectionFlash($actionInErrorCase, "warning", "Fichiers non-fournis");
+                self::redirectionFlash($actionInErrorCase, "danger", "Fichier non fourni");
                 die();
             }
+            $ids[$fileName] = null;
             $file = $_FILES[$fileName];
+
             if ($file['error'] == 1 || $file['error'] == 2) {
                 self::redirectionFlash($actionInErrorCase, "warning", "Fichier " . strtoupper($fileName) . " trop lourd (si le fichier est normal, merci de reporter ce problème)");
                 die();
             }
             $fileLocation = null;
             if ($file["tmp_name"] != null) {
-                $fileLocation = $uploadsLocation . basename($file['name']);
+                $idFile = (new UploadsRepository())->insert($file['name']);
+                $ids[$fileName] = $idFile;
+
+                $fileLocation = $uploadsLocation . $idFile . '-' . basename($file['name']);
                 if (!move_uploaded_file($file['tmp_name'], $fileLocation))
                     self::redirectionFlash($actionInErrorCase, "danger", "Problem uploading file");
             }
-            $locationsArray[$fileName] = $fileLocation;
         }
 
-        return $locationsArray;
+        return $ids;
     }
 }

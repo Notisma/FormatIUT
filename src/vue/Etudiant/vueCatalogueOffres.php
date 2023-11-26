@@ -55,7 +55,7 @@
                             </div>
                             <div class='partieDroite'>
                             <div class='divInfo'>
-                            <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                            <img src=\"" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                             </div>
                             <div class='divInfo'>
                             <img src='../ressources/images/recherche-demploi.png' alt='postulations'>

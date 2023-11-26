@@ -9,6 +9,8 @@ define('DB_NAME', 'loyet'); //Nom de la base de données4
 
 namespace App\FormatIUT\Configuration;
 
+use App\FormatIUT\Modele\Repository\UploadsRepository;
+
 class Configuration
 {
 
@@ -82,13 +84,24 @@ class Configuration
         return self::getConfig()['port'];
     }
 
-    public static function getAbsoluteURL()
+    public static function getAbsoluteURL(): string
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
             return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
         }
         return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+    }
 
+
+    /**
+     * @param $id
+     * @return string
+     * Pour l'instant ne sert qu'à DRY, mais pourra être utilisée pour gérer la sécu des uploads
+     */
+    public static function getUploadPathFromId($id): string
+    {
+        $name = (new UploadsRepository())->getFileNameFromId($id);
+        return "../ressources/uploads/$id-$name";
     }
 
 

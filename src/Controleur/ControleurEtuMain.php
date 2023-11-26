@@ -14,7 +14,7 @@ use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
@@ -270,7 +270,6 @@ class ControleurEtuMain extends ControleurMain
         $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
         if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            $emplacementsFichiers = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
             //TODO vérifier les vérifs
             if (isset($_REQUEST['idFormation'])) {
                 $liste = ((new FormationRepository())->getListeidFormations());
@@ -281,8 +280,11 @@ class ControleurEtuMain extends ControleurMain
                             if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idFormation'])) {
                                 self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
                             } else {
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $emplacementsFichiers['cv'], $emplacementsFichiers['lm']);
+                                $ids = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
+
+                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $ids['cv'], $ids['lm']);
                                 (new PostulerRepository())->creerObjet($postuler);
+
                                 $_REQUEST['action'] = "afficherMesOffres";
                                 self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
                             }
@@ -361,8 +363,8 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function modifierFichiers(): void
     {
-        $emplacementsFichiers = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
-        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $emplacementsFichiers['cv'], $emplacementsFichiers['lm']));
+        $ids = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
+        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $ids['cv'], $ids['lm']));
         self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
     }
 
@@ -435,8 +437,6 @@ class ControleurEtuMain extends ControleurMain
     {
         //si un fichier a été passé en paramètre
         if (!empty($_FILES['pdp']['name'])) {
-
-            $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
             //TODO vérif de doublons d'image
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
             $nom = "";
@@ -449,10 +449,16 @@ class ControleurEtuMain extends ControleurMain
                 }
             }
             $nom .= "_logo";
-            $estPasse = parent::insertImage($nom);
-            $ancienId = (new ImageRepository())->imageParEtudiant(self::getCleEtudiant());
-            (new EtudiantRepository())->updateImage(self::getCleEtudiant(), $id);
-            if ($ancienId["img_id"] != 1 && $ancienId["img_id"] != 0) (new ImageRepository())->supprimer($ancienId["img_id"]);
+
+            $ancienneImage = (new UploadsRepository())->imageParEtudiant(self::getCleEtudiant());
+
+            $ai_id = self::insertImage($nom);
+
+            $etu = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+            $etu->setImg($ai_id);
+            (new EtudiantRepository())->modifierObjet($etu);
+
+            if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
 
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
