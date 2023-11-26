@@ -441,4 +441,11 @@ body {
         width: 98%;
     }
 
+    @media (max-height: 660px) {
+        /* quand le clavier s'affiche, on cache tout sauf le formulaire */
+        .partie2, .partie3, .partie4, .partieDroitePE {
+            display: none;
+        }
+    }
+
 }

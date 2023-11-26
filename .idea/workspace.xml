@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa14421b-3229-4194-8337-874cf03d3c24" name="Changes" comment="fix : correction (vient de me sauver la vie, je suis heureux)">
+    <list default="true" id="aa14421b-3229-4194-8337-874cf03d3c24" name="Changes" comment="fix : finalisation responsive vue connexion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701023646438</updated>
-      <workItem from="1701023651200" duration="3229000" />
+      <workItem from="1701023651200" duration="3456000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction (vient de me sauver la vie, je suis heureux)">
       <option name="closed" value="true" />
@@ -63,7 +63,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701032194192</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix : finalisation responsive vue connexion">
+      <option name="closed" value="true" />
+      <created>1701032917884</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701032917884</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -71,6 +79,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix : correction (vient de me sauver la vie, je suis heureux)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : correction (vient de me sauver la vie, je suis heureux)" />
+    <MESSAGE value="fix : finalisation responsive vue connexion" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : finalisation responsive vue connexion" />
   </component>
 </project>
