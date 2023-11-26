@@ -44,21 +44,20 @@ use App\FormatIUT\Configuration\Configuration;
                         case "Entreprise" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $src = Configuration::getUploadPathFromId($image->getImg());
                             $liaison = "?controleur=entrMain&action=afficherProfil";
                             break;
                         }
                         case "Etudiants" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
+                            $src = Configuration::getUploadPathFromId($image->getImg());
                             $liaison = "?controleur=etuMain&action=afficherProfil";
                             break;
                         }
                         case "Administrateurs" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            //$src = "data:image/jpeg;base64," . base64_encode($image->getImg());
                             $src = "../ressources/images/admin.png";
                             $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
                             break;

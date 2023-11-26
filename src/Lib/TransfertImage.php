@@ -4,12 +4,12 @@ namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use GdImage;
 
 class TransfertImage
 {
-    public static function transfert($nom): bool
+    public static function transfert($nom): int|false
     {
         $ret = false;
         $img_link = '';
@@ -22,8 +22,7 @@ class TransfertImage
         if (!$ret) {
             echo "Problème de transfert";
             return false;
-        } else {
-            // Le fichier a bien été reçu
+        } else { // Le fichier a bien été reçu
             $img_taille = $_FILES['pdp']['size'];
 
             if ($img_taille > $taille_max) {
@@ -31,18 +30,14 @@ class TransfertImage
                 return false;
             }
 
-            $img_type = $_FILES['pdp']['type'];
-            $img_nom = $_FILES['pdp']['name'];
-
-            $img_link = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
+            $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
             /*$img_link = file_get_contents($_FILES['pdp']['tmp_name']);
             if ($_REQUEST["controleur"] == "EtuMain") {
                 $image = self::img_ronde($img_link);
                 $img_link = self::image_data($image);
             }*/
-            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $img_nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_link" => $img_link]);
+            return $ai_id;
         }
-        return true;
     }
 
     public static function img_ronde(string $image): bool|GdImage

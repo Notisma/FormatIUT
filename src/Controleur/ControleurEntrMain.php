@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Entreprise;
@@ -9,7 +10,7 @@ use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use DateTime;
@@ -314,7 +315,7 @@ class ControleurEntrMain extends ControleurMain
             $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename=CV_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
-            readfile($cv);
+            readfile(Configuration::getUploadPathFromId($cv));
         }
     }
 
@@ -330,7 +331,7 @@ class ControleurEntrMain extends ControleurMain
             $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename=Lettre_de_motivation_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
-            readfile($lm);
+            readfile(Configuration::getUploadPathFromId($lm));
         }
     }
 
@@ -341,7 +342,6 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
         $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
@@ -353,11 +353,15 @@ class ControleurEntrMain extends ControleurMain
             }
         }
         $nom .= "_logo";
-        parent::insertImage($nom);
-        $ancienId = (new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $id);
+
+        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+
+        $ai_id = self::insertImage($nom);
+        $entreprise->setImg($ai_id);
+        (new EntrepriseRepository())->modifierObjet($entreprise);
+
         if ($ancienId["img_id"] != 0) {
-            (new ImageRepository())->supprimer($ancienId["img_id"]);
+            (new UploadsRepository())->supprimer($ancienId["img_id"]);
         }
         $_REQUEST["action"] = "afficherProfil()";
         MessageFlash::ajouter("success", "Image modifiée avec succès.");

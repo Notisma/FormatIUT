@@ -8,6 +8,9 @@
             <div class="formulairesDeTri">
                 <form>
                     <?php
+
+                    use App\FormatIUT\Configuration\Configuration;
+
                     echo '<input type="submit" name="type" value="Tous" class="offre" ';
                     if ($type == "Tous") echo 'id="typeActuel" disabled';
                     echo '><input type="submit" name="type" value="Stage" class="stage" ';
@@ -65,7 +68,7 @@
                     echo "</div>";
                     echo "<div class='partieDroite'>";
                     echo "<div class='divInfo' id='wrapLogo'>";
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="logo">';
+                    echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="logo">';
                     echo "</div>";
                     echo "<div class='divInfo' id='nbPostu'>";
                     echo "<img src='../ressources/images/recherche-demploi.png' alt='postulations'>";

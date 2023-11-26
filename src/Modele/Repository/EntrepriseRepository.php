@@ -45,21 +45,6 @@ class EntrepriseRepository extends AbstractRepository
         return "numSiret";
     }
 
-    /***
-     * @param $Siret
-     * @param $idImage
-     * @return void
-     * remplace l'image de l'entreprise avec une nouvelle donc l'id est donnée en paramètre
-     */
-
-    public function updateImage($Siret, $idImage): void
-    {
-        $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:TagSiret";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagImage" => $idImage, "TagSiret" => $Siret);
-        $pdoStatement->execute($values);
-    }
-
     public function getEntrepriseParMail(string $mail): ?Entreprise
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE  email=:Tag ";

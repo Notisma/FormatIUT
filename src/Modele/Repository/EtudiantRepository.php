@@ -25,7 +25,6 @@ class EtudiantRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
         return new Etudiant(
             $dataObjectTableau["numEtudiant"],
             $dataObjectTableau["prenomEtudiant"],
@@ -39,7 +38,7 @@ class EtudiantRepository extends AbstractRepository
             $dataObjectTableau["parcours"],
             $dataObjectTableau["validationPedagogique"],
             $dataObjectTableau["presenceForumIUT"],
-            $image["img_link"]
+            $dataObjectTableau['img_id']
         );
     }
 
@@ -126,7 +125,7 @@ class EtudiantRepository extends AbstractRepository
      * @return void
      * permet à un étudiant d'update son image de profil
      */
-
+/*
     public function updateImage($numEtudiant, $idImage): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:Tag";
@@ -134,7 +133,7 @@ class EtudiantRepository extends AbstractRepository
         $values = array("TagImage" => $idImage, "Tag" => $numEtudiant);
         $pdoStatement->execute($values);
     }
-
+*/
     /**
      * @param $idFormation
      * @return array

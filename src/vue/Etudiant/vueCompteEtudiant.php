@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div class="imageEtu">
-                <?= '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '" alt="profile_pic etudiant">'; ?>
+                <?= '<img src="' . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="profile_pic etudiant">'; ?>
             </div>
         </div>
     </div>
