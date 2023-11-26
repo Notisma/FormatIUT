@@ -88,7 +88,7 @@ class InsertionCSV
         (new VilleRepository())->creerObjet($ville2);
     }
 
-    public static function insererSuiviSecretariat($ligne): void {
+    public static function insererSuiviSecretariat($ligne, $idFormation): void {
         $groupe = $ligne[4][0];
         $groupe .= $ligne[4][1];
         $parcours = "";
@@ -110,7 +110,7 @@ class InsertionCSV
         $type = "Alternance";
         if($ligne[6] == "/")
             $type = "Stage";
-        $formation = new Formation("", null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], null, null, null, null, null, $ligne[12], $ligne[17]);
+        $formation = new Formation($idFormation, null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], $ligne[9], null, null, null, null, $ligne[12], $ligne[17]);
         (new FormationRepository())->creerObjet($formation);
     }
 

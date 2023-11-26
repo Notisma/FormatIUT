@@ -144,7 +144,9 @@ class ControleurAdminMain extends ControleurMain
             } else if ($taille == 143) {
                 InsertionCSV::insererStudea($ligne);
             } else if ($taille == 18) {
-                InsertionCSV::insererSuiviSecretariat($ligne);
+                $listeId = (new FormationRepository())->getListeidFormations();
+                $idFormation = self::autoIncrement($listeId, "idFormation");
+                InsertionCSV::insererSuiviSecretariat($ligne, $idFormation);
             } else {
                 self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
                 return;
