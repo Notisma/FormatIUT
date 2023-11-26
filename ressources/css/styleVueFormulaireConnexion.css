@@ -425,7 +425,7 @@ input {
 /* Ici le deuxième palier, on bascule #form en dessous de #desc */
 @media (max-width: 1050px) {
     body {
-        min-height: 190vh;
+        height: 120vh;
     }
 
     #center {
@@ -434,7 +434,6 @@ input {
         width: 90%;
         height: 100%;
         border-radius: 10px;
-        margin-top: 5%;
     }
 
     #center > #desc {
@@ -567,11 +566,11 @@ input {
 @media (max-device-width: 500px) {
     /* Styles pour les smartphones */
     body {
-        min-height: 99vh;
+        height: 100vh;
     }
 
     #center {
-        height: 92%;
+        height: 100%;
         width: 100%;
     }
 

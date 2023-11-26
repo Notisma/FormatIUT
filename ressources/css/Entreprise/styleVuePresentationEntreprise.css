@@ -315,14 +315,12 @@ body {
 
 @media (max-width: 500px) {
     body {
-        height: 410vh;
+        height: 505vh;
     }
 
     .wrapComplet {
-        height: 400vh;
-        top: 212%;
+        height: 100%;
         width: 100%;
-        left: 50%;
     }
 
     .partie1 {
