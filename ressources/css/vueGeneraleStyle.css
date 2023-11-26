@@ -303,10 +303,7 @@ form {
 .bandeau:hover {
     z-index: 900;
     width: 20vw;
-    position: fixed;
-    margin: 0;
-    /* doit être à la motié verticale de l'écran */
-    top: 8%;
+
 
 }
 
