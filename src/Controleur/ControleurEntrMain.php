@@ -150,7 +150,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"],$_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"],$_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
@@ -242,7 +242,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function modifierOffre(): void
     {
-        if (isset($_REQUEST["idFormation"], $_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"],$_REQUEST['objectifOffre'], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST["idFormation"], $_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["sujet"], $_REQUEST["detailProjet"],$_REQUEST['objectifOffre'], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
@@ -253,8 +253,12 @@ class ControleurEntrMain extends ControleurMain
                             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
-                                $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
-                                $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                if(isset($_REQUEST['dateDebut'])){
+                                    $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
+                                }
+                                if(isset($_REQUEST['dateFin'])){
+                                    $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                }
                                 $offre->setSujet($_REQUEST['sujet']);
                                 $offre->setDetailProjet($_REQUEST['detailProjet']);
                                 $offre->setObjectifOffre($_REQUEST["objectifOffre"]);
