@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa14421b-3229-4194-8337-874cf03d3c24" name="Changes" comment="">
+    <list default="true" id="aa14421b-3229-4194-8337-874cf03d3c24" name="Changes" comment="fix : correction (vient de me sauver la vie, je suis heureux)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +53,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701023646438</updated>
-      <workItem from="1701023651200" duration="2465000" />
+      <workItem from="1701023651200" duration="3229000" />
     </task>
+    <task id="LOCAL-00001" summary="fix : correction (vient de me sauver la vie, je suis heureux)">
+      <option name="closed" value="true" />
+      <created>1701032193879</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701032194192</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix : correction (vient de me sauver la vie, je suis heureux)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : correction (vient de me sauver la vie, je suis heureux)" />
   </component>
 </project>
