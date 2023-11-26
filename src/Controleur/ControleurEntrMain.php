@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Entreprise;
@@ -9,7 +10,7 @@ use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\ImageRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use DateTime;
@@ -68,7 +69,7 @@ class ControleurEntrMain extends ControleurMain
     /**
      * @return void affiche le profil de l'entreprise connecté
      */
-    public static function afficherProfilEntr(): void
+    public static function afficherProfil(): void
     {
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
@@ -150,7 +151,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"],$_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
@@ -168,7 +169,7 @@ class ControleurEntrMain extends ControleurMain
                             $_REQUEST["conventionValidee"] = 0;
                             $_REQUEST["dateCreationConvention"] = null;
                             $_REQUEST["dateTransmissionConvention"] = null;
-                            $_REQUEST["retourSigne"] = null;
+                            $_REQUEST["dateRetourSigne"] = null;
                             $_REQUEST["assurance"] = null;
                             $_REQUEST["avenant"] = null;
                             $_REQUEST["idEtudiant"] = null;
@@ -242,7 +243,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function modifierOffre(): void
     {
-        if (isset($_REQUEST["idFormation"], $_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"],$_REQUEST['objectifOffre'], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST["idFormation"], $_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST['objectifOffre'], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
@@ -253,8 +254,12 @@ class ControleurEntrMain extends ControleurMain
                             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
-                                $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
-                                $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                if(isset($_REQUEST['dateDebut'])){
+                                    $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
+                                }
+                                if(isset($_REQUEST['dateFin'])){
+                                    $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                }
                                 $offre->setSujet($_REQUEST['sujet']);
                                 $offre->setDetailProjet($_REQUEST['detailProjet']);
                                 $offre->setObjectifOffre($_REQUEST["objectifOffre"]);
@@ -299,7 +304,7 @@ class ControleurEntrMain extends ControleurMain
     public static function mettreAJour(): void
     {
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
-        self::afficherProfilEntr();
+        self::afficherProfil();
     }
 
     /**
@@ -308,22 +313,30 @@ class ControleurEntrMain extends ControleurMain
     public static function telechargerCV(): void
     {
         $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idFormation']);
-        $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=CV de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
-        echo $cv;
+        if (empty($cv))
+            self::redirectionFlash("afficherVueDetailOffre", "warning", "Cet étudiant n'a pas fourni de CV.");
+        else {
+            $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename=CV_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
+            readfile(Configuration::getUploadPathFromId($cv));
+        }
     }
 
     /**
      * @return void télécharge la lettre de motivation d'un étudiant sur une offre
      */
-    public static function telechargerLettre(): void
+    public static function telechargerLM(): void
     {
-        $lettre = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idFormation']);
-        $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename=Lettre de motivation de ' . $etu->getPrenomEtudiant() . ' ' . $etu->getNomEtudiant() . '.pdf');
-        echo $lettre;
+        $lm = (new PostulerRepository())->recupererLettre($_REQUEST['etudiant'], $_REQUEST['idFormation']);
+        if (empty($lm))
+            self::redirectionFlash("afficherVueDetailOffre", "warning", "Cet étudiant n'a pas fourni de lettre de motivation.");
+        else {
+            $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename=Lettre_de_motivation_de_' . $etu->getPrenomEtudiant() . '_' . $etu->getNomEtudiant() . '.pdf');
+            readfile(Configuration::getUploadPathFromId($lm));
+        }
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -333,7 +346,6 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $id = self::autoIncrement((new ImageRepository())->listeID(), "img_id");
         $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
@@ -345,14 +357,18 @@ class ControleurEntrMain extends ControleurMain
             }
         }
         $nom .= "_logo";
-        parent::insertImage($nom);
-        $ancienId = (new ImageRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        (new EntrepriseRepository())->updateImage(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $id);
+
+        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+
+        $ai_id = self::insertImage($nom);
+        $entreprise->setImg($ai_id);
+        (new EntrepriseRepository())->modifierObjet($entreprise);
+
         if ($ancienId["img_id"] != 0) {
-            (new ImageRepository())->supprimer($ancienId["img_id"]);
+            (new UploadsRepository())->supprimer($ancienId["img_id"]);
         }
-        $_REQUEST["action"] = "afficherProfilEntr()";
+        $_REQUEST["action"] = "afficherProfil()";
         MessageFlash::ajouter("success", "Image modifiée avec succès.");
-        self::afficherProfilEntr();
+        self::afficherProfil();
     }
 }

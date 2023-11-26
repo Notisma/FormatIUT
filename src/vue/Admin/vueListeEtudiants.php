@@ -13,7 +13,7 @@
                     echo"
                     <a class='etudiant' href=?action=afficherDetailEtudiant&numEtu=" . $etudiant['etudiant']->getNumEtudiant() . "&controleur=AdminMain>
                             <div class='etudiantGauche'>
-                               <img src='data:image/jpeg;base64," . base64_encode($etudiant['etudiant']->getImg()) . "' alt='etudiant'>
+                               <img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant['etudiant']->getImg()) . "' alt='etudiant'>
                             </div>
                             <div class='etudiantDroite'>
                                 <h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . " - ";

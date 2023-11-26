@@ -6,6 +6,7 @@
             <label class="labelFormulaire" for="typeOffre">Type d'Offre</label>
             <div class="inputCentre">
                 <select name="typeOffre" id="typeOffre">
+                    <option value="Stage/Alternance" <?php if ($offre->getTypeOffre() == "Stage/Alternance") echo 'selected' ?>> Stage et alternance</option>
                     <option value="Stage" <?php if ($offre->getTypeOffre() == "Stage") echo 'selected' ?>>
                         Stage
                     </option>
@@ -36,13 +37,13 @@
             <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id"
-                       value="<?= $offre->getDateDebut()->format("Y-m-d"); ?>" required>
+                       value="<?= $offre->getDateDebut()->format("Y-m-d"); ?>">
             </div>
 
             <label class="labelFormulaire" for="dateFin_id">Date de fin de l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id"
-                       value="<?= $offre->getDateFin()->format("Y-m-d"); ?>" required>
+                       value="<?= $offre->getDateFin()->format("Y-m-d"); ?>">
             </div>
 
             <label class="labelFormulaire" for="sujet_id">Sujet bref de l'offre</label>

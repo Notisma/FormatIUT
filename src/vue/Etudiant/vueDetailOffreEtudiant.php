@@ -1,16 +1,9 @@
-<html>
-<head>
-    <link rel="stylesheet" href="./../ressources/css/styleVueDetailEtudiant.css">
-    <script src="../ressources/javaScript/mesFonctions.js"></script>
-</head>
-<body>
 <div class="boiteMain" id="aGriser">
-
-
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
-            <h2><?php use App\FormatIUT\Controleur\ControleurEtuMain;
+            <h2><?php use App\FormatIUT\Configuration\Configuration;
+                use App\FormatIUT\Controleur\ControleurEtuMain;
                 use App\FormatIUT\Modele\DataObject\Postuler;
                 use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -44,7 +37,7 @@
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">';
+                                echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" class="imageEntr">';
                                 ?>
                             </div>
                             <div class="right">
@@ -159,7 +152,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
-                    <input type="file" id="fd1" name="fileCV" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
+                    <input type="file" id="fd1" name="cv" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
@@ -171,7 +164,7 @@
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
-                    <input type="file" id="fd2" name="fileLM" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
+                    <input type="file" id="fd2" name="lm" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
@@ -217,7 +210,7 @@
                         }*/
                     ?>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
-                    <input type="file" id="fd3" name="fileCV" onchange="updateImage(3)" accept=".odt, .pdf, .txt" size=500/>
+                    <input type="file" id="fd3" name="cv" onchange="updateImage(3)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
@@ -238,7 +231,7 @@
                         }*/
                     ?>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
-                    <input type="file" id="fd4" name="fileLM" onchange="updateImage(4)" accept=".odt, .pdf, .txt" size=500/>
+                    <input type="file" id="fd4" name="lm" onchange="updateImage(4)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
@@ -262,7 +255,3 @@
         <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
     </div>
 </div>
-
-
-</body>
-</html>

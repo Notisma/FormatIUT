@@ -11,7 +11,7 @@
 
     <div class="gaucheEntr">
         <div class="wrapImgEntr">
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($entreprise->getImg()) ?>" alt="entreprise">
+            <img src="<?= App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) ?>" alt="entreprise">
             <h2 class="titre" id="rouge"><?php echo $nomEntrHTML ?></h2>
         </div>
 
@@ -61,7 +61,7 @@
                         $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>" .
                             "<div class='imgOffre'>" .
-                            "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
+                            "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
                             "<h3 class='titre'>" . $nomOffreHTML . " - " . $offre->getTypeOffre() . "</h3>" .

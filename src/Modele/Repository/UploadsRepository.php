@@ -5,27 +5,41 @@ namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Ville;
 
-class ImageRepository extends AbstractRepository
+class UploadsRepository extends AbstractRepository
 {
 
     protected function getNomTable(): string
     {
-        return "Images";
+        return "Uploads";
     }
 
     protected function getNomsColonnes(): array
     {
-        return ["img_id", "img_nom", "img_taille", "img_type", "img_blob"];
+        return ["idUpload", "fileName"];
     }
 
     protected function getClePrimaire(): string
     {
-        return "img_id";
+        return "idUpload";
     }
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new Ville("", "", "");
+    }
+
+
+    public function getFileNameFromId($id): ?string
+    {
+        $sql = "SELECT fileName FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $id);
+        $pdoStatement->execute($values);
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
+            return null;
+        }
+        return $objet['fileName'];
     }
 
     public function getImage($img_if): mixed
@@ -42,20 +56,16 @@ class ImageRepository extends AbstractRepository
     }
 
     /**
-     * @param array $values
-     * @return void
-     * créer une image dans la base de donnée
+     * @param string $fileName
+     * @return int l'auto increment
+     * crée un fichier dans la base de donnée
      */
-    public function insert(array $values): void
+    public function insert(string $fileName): int
     {
-        $req = "INSERT INTO Images VALUES (" .
-            "'" . $values["img_id"] . "', " .
-            "'" . $values["img_nom"] . "', " .
-            "'" . $values["img_taille"] . "', " .
-            "'" . $values["img_type"] . "', " .
-            "'" . addslashes($values["img_blob"]) . "') ";
-        $pdpoStatement = ConnexionBaseDeDonnee::getPdo()->query($req);
-
+        $req = "INSERT INTO Uploads (fileName) VALUES ('$fileName');";
+        $pdo = ConnexionBaseDeDonnee::getPdo();
+        $pdpoStatement = $pdo->query($req);
+        return $pdo->lastInsertId();
     }
 
     /**
@@ -64,11 +74,11 @@ class ImageRepository extends AbstractRepository
      */
     public function listeID(): array
     {
-        $sql = "SELECT img_id FROM Images";
+        $sql = "SELECT idUpload FROM Uploads";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $listeID = array();
-        foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["img_id"];
+        foreach ($pdoStatement as $value) {
+            $listeID[] = $value["idUpload"];
         }
         return $listeID;
     }

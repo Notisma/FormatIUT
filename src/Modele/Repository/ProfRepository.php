@@ -25,13 +25,13 @@ class ProfRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
+        $image = ((new UploadsRepository()))->getImage($dataObjectTableau["img_id"]);
         return new Prof(
             $dataObjectTableau["idProf"],
             $dataObjectTableau["nomProf"],
             $dataObjectTableau["prenomProf"],
             $dataObjectTableau["mailUniversitaire"],
-            $image["img_blob"]
+            $image["img_link"]
         );
     }
 

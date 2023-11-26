@@ -40,8 +40,9 @@
 
                 <div class="inputCentre">
                     <select name="typeOffre">
-                        <option value="Stage" name="typeOffre" id="type_id">Stage</option>
-                        <option value="Alternance" name="typeOffre" id="type_id">Alternance</option>
+                        <option value="Stage/Alternance" name="typeOffre" id="type_id"> Stage et alternance</option>
+                        <option value="Stage" name="typeOffre" id="type_id">Seuelement stage</option>
+                        <option value="Alternance" name="typeOffre" id="type_id">Seulement alternance</option>
                     </select>
                 </div>
                 <!--
@@ -54,14 +55,14 @@
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
                            placeholder="Développeur Web" maxlength="24">
                 </div>
-                <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
+                <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre (non obligatoire)</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" required>
+                    <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" >
                 </div>
 
-                <label class="labelFormulaire" for="dateFin_id">Date de fin de l'offre</label>
+                <label class="labelFormulaire" for="dateFin_id">Date de fin de l'offre (non obligatoire)</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id" required>
+                    <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id" >
                 </div>
 
                 <label class="labelFormulaire" for="anneeMin_id">Année d'étude minimale pour postuler</label>
@@ -102,7 +103,7 @@
                 <label class="labelFormulaire" for="uniteGratification_id">Devise utilisée pour la rémunération</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="uniteGratification" id="uniteGratification_id"
-                           placeholder="Euros" required>
+                           value="Euros" required>
                 </div>
 
                 <label class="labelFormulaire" for="uniteDureeGratification_id">Rémunération par heure</label>

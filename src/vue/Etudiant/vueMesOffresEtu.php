@@ -1,7 +1,3 @@
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleVueMesOffresEtu.css">
-</head>
-<body>
 <div id="center">
 
     <div class="presentation">
@@ -143,4 +139,3 @@
 
 
 </div>
-</body>
