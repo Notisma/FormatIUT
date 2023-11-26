@@ -8,15 +8,15 @@
 
 
 body {
-    height: 200vh;
+    height: 100vh;
     /* background légèrement crême */
     background-color: #e8e8e8;
 }
 
 
 #center {
-    width: 80%;
-    height: 80%;
+    width: 97%;
+    height: 97%;
     min-width: 300px;
     border-radius: 10px;
     text-align: left;
