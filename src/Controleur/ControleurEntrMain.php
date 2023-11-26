@@ -314,7 +314,7 @@ class ControleurEntrMain extends ControleurMain
     {
         $cv = (new PostulerRepository())->recupererCV($_REQUEST['etudiant'], $_REQUEST['idFormation']);
         if (empty($cv))
-            MessageFlash::ajouter("warning", "Cet étudiant n'a pas fourni de CV.");
+            self::redirectionFlash("afficherVueDetailOffre", "warning", "Cet étudiant n'a pas fourni de CV.");
         else {
             $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['etudiant']);
             header('Content-Type: application/pdf');

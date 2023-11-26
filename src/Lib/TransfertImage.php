@@ -30,15 +30,13 @@ class TransfertImage
                 return false;
             }
 
-            $img_type = $_FILES['pdp']['type'];
-            $img_nom = $_FILES['pdp']['name'];
-
-            $img_link = file_get_contents($_FILES['pdp']['tmp_name']);
+            $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
+            /*$img_link = file_get_contents($_FILES['pdp']['tmp_name']);
             if ($_REQUEST["controleur"] == "EtuMain") {
                 $image = self::img_ronde($img_link);
                 $img_link = self::image_data($image);
-            }
-            (new ImageRepository())->insert(["img_id" => $_REQUEST["img_id"], "img_nom" => $nom, "img_taille" => $img_taille, "img_type" => $img_type, "img_link" => $img_link]);
+            }*/
+            return $ai_id;
         }
     }
 
