@@ -39,7 +39,7 @@ class EtudiantRepository extends AbstractRepository
             $dataObjectTableau["parcours"],
             $dataObjectTableau["validationPedagogique"],
             $dataObjectTableau["presenceForumIUT"],
-            $image["img_blob"]
+            $image["img_link"]
         );
     }
 
