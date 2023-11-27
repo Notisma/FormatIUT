@@ -31,7 +31,7 @@ class ProfRepository extends AbstractRepository
             $dataObjectTableau["nomProf"],
             $dataObjectTableau["prenomProf"],
             $dataObjectTableau["mailUniversitaire"],
-            $image["img_link"]
+            $image["fileName"]
         );
     }
 
