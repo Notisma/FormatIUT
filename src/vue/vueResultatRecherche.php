@@ -4,8 +4,9 @@ use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
+if (!is_null($offres) && !is_null($entreprises)) {
 $count = count($offres) + count($entreprises);
+}
 ?>
 <div class="center">
 
@@ -30,7 +31,7 @@ $count = count($offres) + count($entreprises);
             foreach ($entreprises as $entr) {
                 $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
                 $telHTML=htmlspecialchars($entr->getTel());
-                $adresseHTML=htmlspecialchars($entr->getAdresse());
+                $adresseHTML=htmlspecialchars($entr->getAdresseEntreprise());
                 echo '
                     <div class="resultat" id="petitRouge">
                         <div class="partieGauche">

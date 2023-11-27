@@ -55,6 +55,7 @@ class ControleurMain
      * @param array $parametres des paramètres supplémentaire pour des informations spécifiques aux pages
      * @return void fonctions à appeler pour afficher une vue
      */
+
     public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         $cssPath = str_replace('vue', 'styleVue', $cheminVue);
@@ -70,7 +71,6 @@ class ControleurMain
         ));
         require __DIR__ . "/../vue/vueGenerale.php"; // Charge la vue
     }
-
 
     /***
      * @return void Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
@@ -389,7 +389,8 @@ class ControleurMain
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-        if (count($res['offres']) == 0 && count($res['entreprises']) == 0) {
+
+        if (is_null($res)) {
             MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
             self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,

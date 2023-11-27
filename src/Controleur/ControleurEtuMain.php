@@ -322,7 +322,7 @@ class ControleurEtuMain extends ControleurMain
                     $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
                     if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
                         $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
-                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresse()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
+                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
                             if ($offreVerif->getDateDebut() == new \DateTime($_REQUEST['dateDebut']) && $offreVerif->getDateFin() == new \DateTime($_REQUEST['dateFin'])) {
                                 $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
                                 $convention = (new ConventionRepository())->construireDepuisTableau(["idConvention" => $clefPrimConv,

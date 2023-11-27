@@ -5,10 +5,6 @@ body {
 }
 
 #center {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: white;
     margin: auto;
     width: 80%;

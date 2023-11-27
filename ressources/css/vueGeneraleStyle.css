@@ -11,28 +11,28 @@ body {
     height: 100vh;
 }
 
-.container {
-    max-width: 1050px;
-    width: 90%;
-    margin: auto;
-}
-
-.navbar {
-    width: 100%;
-    background: linear-gradient(to right, #FF5660, #4bc2bc 90%);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* HORS ANIMATIONS */
 
+
+.wrapHead {
+    display: flex;
+    /* l'ordre des éléments doit être inversé */
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    float: right;
+    z-index: 0;
+}
+
 #search {
     margin-left: 35%;
+}
+
+.rechercheResp {
+    display: none;
 }
 
 #searchField {
@@ -83,15 +83,28 @@ body {
 
 #corpsPage {
     display: flex;
-    background-color: #ecf0f1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 0;
     margin: 0;
+    width: 92%;
+    height: 97%;
+    flex-shrink: 0;
+}
+
+.main {
     width: 100%;
+    height: 100%;
 }
 
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* BANDEAU */
+
+.sousMenu {
+    display: none;
+}
 
 #headerContent {
     background-color: #ecf0f1;
@@ -100,7 +113,6 @@ body {
     margin-top: 0;
     z-index: 0;
     position: relative;
-
 }
 
 #texteAccueil {
@@ -130,7 +142,7 @@ body {
     margin-top: 70px;
 }
 
-#Gestionrecherche {
+#gestionRecherche {
     float: right;
     width: 60%;
     margin-top: 0;
@@ -173,16 +185,45 @@ form {
     display: none;
 }
 
+.centrePage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* la hauteur est égale à la hauteur de la page - la hauteur du header - la hauteur du footer */
+    height: 90%;
+    margin: 0;
+}
+
+
+.wrapBandeau {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 70px;
+    flex-shrink: 0;
+    /*doit conserver cette taille même si il n'y a pas de contenu*/
+    background-color: transparent;
+    z-index: 900;
+    position: relative;
+    margin-left: 1%;
+
+
+}
+
 .bandeau {
+    position: sticky;
     z-index: 90;
     width: 70px;
-    height: 92vh;
+    height: 87vh;
     margin-left: 1%;
-    margin-top: -5px;
     background-color: #ff5660;
-    position: sticky;
-    top: 20px;
-    /* doit s'arrêter juste avant le footer */
+    /* doit être au centre l'écran verticalement */
+    top: 7%;
+    bottom: -300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -260,7 +301,10 @@ form {
 }
 
 .bandeau:hover {
-    width: 19%;
+    z-index: 900;
+    width: 20vw;
+
+
 }
 
 .bandeau:hover > a {
@@ -381,16 +425,8 @@ form {
     margin-top: 5%;
 }
 
-.wrapHead {
-    display: flex;
-    /* l'ordre des éléments doit être inversé */
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    float: right;
-    z-index: 0;
-}
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* MESSAGES FLASH */
 
 .flash {
     display: flex;
@@ -462,12 +498,179 @@ form {
 /* RESPONSIVE */
 
 @media (max-width: 1050px) {
+
+    .centrePage {
+        margin-top: 6%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+
+    #corpsPage {
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+    }
+
+    .wrapBandeau {
+        height: 70px;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        top: 1%;
+        left: 1%;
+    }
+
+    .wrapBandeau:hover {
+        transform: translate(0, 0);
+    }
+
     .bandeau {
-        height: 10%;
-        margin-top: -8%;
+        height: 65px;
+        width: 65px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .bandeau:hover {
+        /* on ne veut pas que le bandeau se déplace */
+        transform: translate(0, 0);
     }
 
     .bandeau > a {
+        display: none;
+    }
+
+    #headerContent {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-left: 20%;
+        height: 70px;
+    }
+
+    #texteAccueil {
+        width: 70%;
+        height: 90%;
+        margin: 0;
+    }
+
+    #texteAccueil > h1 {
+        margin: 0;
+    }
+
+    head {
+        height: 30px;
+        width: 100%;
+    }
+
+    .wrapHead {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .flash {
+        width: 63%;
+        height: 55%;
+        margin: 0;
+        position: absolute;
+        z-index: 200;
+        top: 100%;
+        left: 50%;
+        opacity: 1;
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+
+    }
+
+    #gestionRecherche {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    #gestionRecherche > .rechercheResp {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 1%;
+        border-radius: 10px;
+        background-color: #ff9095;
+        width: 35px;
+        height: 35px;
+    }
+
+    .sousMenu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80%;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        left: 0;
+        border-radius: 0 0 10px 10px;
+        background: linear-gradient(to bottom, #FF5660, white 200%);
+        transform: translate(0%, 0%);
+        flex-shrink: 0;
+    }
+
+    .sousMenu > * {
+        z-index: 2001;
+        flex-shrink: 0;
+    }
+
+    .sousMenu > a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        height: 15%;
+        margin-bottom: 2%;
+        padding: 1%;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    .sousMenu > a > p {
+        width: 85%;
+        padding-left: 5%;
+        font-size: 1.3em;
+        color: black;
+        font-weight: bolder;
+        text-decoration: none;
+    }
+
+    .sousMenu > a > img {
+        height: 70%;
+    }
+
+    #active {
+        background-color: #ffb2b7;
+        border-radius: 10px;
+    }
+
+
+    .rechercheResp > img {
+        width: 25px;
+        padding: 2%;
+    }
+
+    #gestionRecherche > form {
         display: none;
     }
 
@@ -484,8 +687,9 @@ form {
     }
 
     .bandeau:hover {
-        width: 70px;
+        width: 65px;
         cursor: pointer;
+        top: 0;
     }
 
     .menuBurger > span {
@@ -496,5 +700,36 @@ form {
         background-color: #fff;
         border-radius: 10px;
         transition: 0.4s;
+    }
+
+    #footerContent {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #footerLogo {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 70%;
+        height: 20%;
+    }
+
+    #footerText {
+        text-align: left;
+    }
+
+    #footerText > p {
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+        text-align: center;
+    }
+}
+
+@media (max-height: 640px) {
+    footer {
+        display: none;
     }
 }

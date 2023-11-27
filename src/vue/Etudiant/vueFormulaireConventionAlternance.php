@@ -58,7 +58,7 @@
                     <input type="text" name="nomEntreprise" value="<?= htmlspecialchars($entreprise->getNomEntreprise());?>" id="nomEntr_id" required>
                 </p>
                 <p><label for="adrEntr_id">Adresse Entreprise</label>
-                    <input type="text" name="adresseEntr" value="<?= htmlspecialchars($entreprise->getAdresse());?>" id="adrEntr_id" required></p>
+                    <input type="text" name="adresseEntr" value="<?= htmlspecialchars($entreprise->getAdresseEntreprise());?>" id="adrEntr_id" required></p>
                 <p><label for="villeEntr_id"> Ville </label>
                     <input type="text" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille());?>" id="villeEntr_id" required>
                 <p><label for="cpEntr_id">Code postal </label>

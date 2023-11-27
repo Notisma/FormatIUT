@@ -446,7 +446,7 @@ class studea extends AbstractDataObject
         return $this->email2;
     }
 
-    public function getAdresse(): string
+    public function getAdresseEntreprise(): string
     {
         return $this->adresse;
     }

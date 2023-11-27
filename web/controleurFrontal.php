@@ -11,7 +11,7 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Configuration\Configuration;
 
-if (isset($_REQUEST['controleur'])) {
+if (isset($_REQUEST['controleur'])) { //
     $controleur = ucfirst($_REQUEST["controleur"]);
 } else {
     $controleur = "Main";

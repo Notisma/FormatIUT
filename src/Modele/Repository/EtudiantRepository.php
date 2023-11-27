@@ -77,7 +77,7 @@ class EtudiantRepository extends AbstractRepository
     /**
      * @param $idFormation
      * @return mixed
-     * retourne le nombre de postulation faites au total pour cet offre
+     * retourne le nombre de postulations faites au total pour cette offre
      */
 
     public function nbPostulations($idFormation): mixed

@@ -1,18 +1,14 @@
-const myButton = document.getElementById("my-button");
-
-myButton.addEventListener("click", afficherPopupDepotCV_LM);
-
 function afficherPopupDepotCV_LM() {
     document.getElementById("popup").style.display = "flex";
     document.getElementById("aGriser").style.opacity = "0.3";
 }
 
 function fermerPopupDepotCV_LM() {
-        document.getElementById("popup").style.display = "none";
-        document.getElementById("aGriser").style.opacity = "1";
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("aGriser").style.opacity = "1";
 }
 
-function afficherPopupInfosEtu()  {
+function afficherPopupInfosEtu() {
     document.getElementById("infosEtuCandidat").style.display = "flex";
     document.getElementById("aGriser").style.opacity = "0.3";
 }
@@ -21,6 +17,7 @@ function fermerPopupInfosEtu() {
     document.getElementById("infosEtuCandidat").style.display = "none";
     document.getElementById("aGriser").style.opacity = "1";
 }
+
 function updateImage(inputNumber) {
     const fileInput = document.getElementById("fd" + inputNumber);
     const noFileImage = document.getElementById("imageNonDepose" + inputNumber);
@@ -34,10 +31,12 @@ function updateImage(inputNumber) {
         fileSelectedImage.style.display = "none";
     }
 }
-function afficherPopupModifCV_LM(){
+
+function afficherPopupModifCV_LM() {
     document.getElementById("popupModif").style.display = "flex";
     document.getElementById("aGriser").style.opacity = "0.3";
 }
+
 function fermerPopupModifCV_LM() {
     document.getElementById("popupModif").style.display = "none";
     document.getElementById("aGriser").style.opacity = "1";
@@ -83,4 +82,14 @@ function supprimerElement(id) {
     } else {
         alert("L'élément n'existe pas")
     }
+}
+
+function afficherSousMenu() {
+    let sousMenu = document.getElementById("sousMenu");
+    sousMenu.style.display = "flex";
+}
+
+function fermerSousMenu() {
+    let sousMenu = document.getElementById("sousMenu");
+    sousMenu.style.display = "none";
 }
