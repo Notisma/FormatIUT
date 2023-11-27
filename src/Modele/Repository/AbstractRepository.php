@@ -189,7 +189,7 @@ abstract class AbstractRepository
         }
 
         foreach ($pdoStatement as $row)
-            $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
+            $res['offres'][] = (new FormationRepository())->construireDepuisTableau($row);
 
         $sql = "";
         $tags = [];
