@@ -51,7 +51,6 @@ class EntrepriseRepository extends AbstractRepository
      * @return void
      * remplace l'image de l'entreprise avec une nouvelle donc l'id est donnée en paramètre
      */
-
     public function updateImage($Siret, $idImage): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:TagSiret";

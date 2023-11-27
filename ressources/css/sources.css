@@ -26,3 +26,21 @@ body {
 #rouge {
     color: #e74c3c;
 }
+
+@media (max-width: 500px) {
+    body {
+        height: 400vh;
+    }
+
+    .titre {
+        text-align: center;
+    }
+
+    .main > div {
+        width: 96%;
+    }
+
+    .main > div > * {
+        text-align: center;
+    }
+}

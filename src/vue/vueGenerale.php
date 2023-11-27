@@ -164,7 +164,7 @@ use App\FormatIUT\Configuration\Configuration;
                         </ul>
                     </div>
                 </div>
-                <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a></p>
+                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources">ICI</a></p>
             </div>
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
