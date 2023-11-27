@@ -12,7 +12,7 @@ class TransfertImage
     public static function transfert($nom): int|false
     {
         $ret = false;
-        $img_link = '';
+        $fileName = '';
         $img_taille = 0;
         $img_type = '';
         $img_nom = '';
@@ -31,10 +31,10 @@ class TransfertImage
             }
 
             $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
-            /*$img_link = file_get_contents($_FILES['pdp']['tmp_name']);
+            /*$fileName = file_get_contents($_FILES['pdp']['tmp_name']);
             if ($_REQUEST["controleur"] == "EtuMain") {
-                $image = self::img_ronde($img_link);
-                $img_link = self::image_data($image);
+                $image = self::img_ronde($fileName);
+                $fileName = self::image_data($image);
             }*/
             return $ai_id;
         }

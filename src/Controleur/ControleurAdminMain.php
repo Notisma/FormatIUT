@@ -138,10 +138,15 @@ class ControleurAdminMain extends ControleurMain
         fgetcsv($csvFile);
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
-            if (sizeof($ligne) == 82) {
+            $taille = sizeof($ligne);
+            if ($taille == 82) {
                 InsertionCSV::insererPstage($ligne);
-            } else if (sizeof($ligne) == 143) {
+            } else if ($taille == 143) {
                 InsertionCSV::insererStudea($ligne);
+            } else if ($taille == 18) {
+                $listeId = (new FormationRepository())->getListeidFormations();
+                $idFormation = self::autoIncrement($listeId, "idFormation");
+                InsertionCSV::insererSuiviSecretariat($ligne, $idFormation);
             } else {
                 self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
                 return;

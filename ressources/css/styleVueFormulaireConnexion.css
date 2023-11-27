@@ -569,7 +569,7 @@ input {
 }
 
 /* ----------------------------------------------------------------------------*/
-@media (max-device-width: 500px) {
+@media (max-width: 500px) {
     /* Styles pour les smartphones */
     body {
         min-height: 99vh;
