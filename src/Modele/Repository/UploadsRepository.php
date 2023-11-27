@@ -62,7 +62,7 @@ class UploadsRepository extends AbstractRepository
      */
     public function insert(string $fileName): int
     {
-        $req = "INSERT INTO Uploads (fileName) VALUES (':fileNameTag');";
+        $req = "INSERT INTO Uploads (fileName) VALUES (:fileNameTag);";
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $pdo->prepare($req)->execute(['fileNameTag'=>$fileName]);
         return $pdo->lastInsertId();

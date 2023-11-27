@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ressources/css/sources.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ressources/images/rechercher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/sources.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/sources.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueResultatRecherche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueResultatRecherche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
-    </list>
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +20,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2YX4JRSm4pKBqe67hl71MPNe1o9" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -78,6 +61,8 @@
       <workItem from="1700824954492" duration="2069000" />
       <workItem from="1701091365725" duration="695000" />
       <workItem from="1701093689332" duration="425000" />
+      <workItem from="1701119554775" duration="977000" />
+      <workItem from="1701124547436" duration="149000" />
     </task>
     <servers />
   </component>
