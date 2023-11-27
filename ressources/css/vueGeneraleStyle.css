@@ -727,3 +727,9 @@ form {
         text-align: center;
     }
 }
+
+@media (max-height: 640px) {
+    footer {
+        display: none;
+    }
+}

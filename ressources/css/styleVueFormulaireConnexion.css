@@ -605,7 +605,7 @@ input {
 
 }
 
-@media (max-height: 660px) {
+@media (max-height: 640px) {
     /* quand le clavier s'affiche, on cache tout sauf le formulaire */
     #desc {
         display: none;
