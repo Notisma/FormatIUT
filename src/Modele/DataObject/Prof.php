@@ -86,7 +86,7 @@ class Prof extends AbstractDataObject
             "nomProf" => $this->nomProf,
             "prenomProf" => $this->prenomProf,
             "mailUniversitaire" => $this->mailUniversitaire,
-            "img" => $this->img,
+            "img_id" => $this->img,
         );
     }
 }
