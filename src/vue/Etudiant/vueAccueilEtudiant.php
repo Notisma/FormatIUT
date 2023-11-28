@@ -92,7 +92,10 @@
                 }
 
                 if (empty($listeStage)) {
-                    echo "Vide";
+                    echo "<div class='wrapErreur'>
+            <img src='../ressources/images/erreur.png' alt='image d'erreur' class='imageErreur'>
+            <h4>Aucune offre pour le moment.</h4>
+        </div>";
                 } else list($i, $entreprise, $lien) = extracted($listeStage);
                 ?>
 
@@ -102,7 +105,10 @@
             <h4>Nouveautés Alternances de la semaine :</h4>
             <div class="conteneurAnnonces">
                 <?php if (empty($listeAlternance)) {
-                    echo "Vide";
+                    echo "<div class='wrapErreur'>
+            <img src='../ressources/images/erreur.png' alt='image d'erreur' class='imageErreur'>
+            <h4>Aucune offre pour le moment.</h4>
+        </div>";
                 } else list($i, $entreprise, $lien) = extracted($listeAlternance);
                 ?>
             </div>

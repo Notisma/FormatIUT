@@ -40,10 +40,11 @@
     <div class="offresEtu">
         <div class="contenuOffresEtu">
             <?php
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant());
             $compteurOffres = 0;
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
-                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant->getId());
                     if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->estValide()) {
                         $compteurOffres++;
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());

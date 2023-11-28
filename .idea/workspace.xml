@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : tentative de mettre les images en rond">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : j'ai pas réussi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/TransfertImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/TransfertImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Etudiant/styleVueAccueilEtudiant.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Etudiant/styleVueAccueilEtudiant.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/FormationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/FormationRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueAccueilEtudiant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Etudiant/vueCatalogueOffres.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701173681109</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat : j'ai pas réussi">
+      <option name="closed" value="true" />
+      <created>1701174613038</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701174613038</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +111,8 @@
     <MESSAGE value="fix : correction des images dans AccueilAdmin" />
     <MESSAGE value="Tentative de réparation de crash" />
     <MESSAGE value="feat : tentative de mettre les images en rond" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : tentative de mettre les images en rond" />
+    <MESSAGE value="feat : j'ai pas réussi" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : j'ai pas réussi" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
