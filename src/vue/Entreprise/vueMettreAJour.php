@@ -42,7 +42,7 @@
 
                 <label for="adresse_id">Adresse</label> :
                 <div class="inputCentre">
-                    <input type="text" value=<?= htmlspecialchars($entreprise->getAdresse()); ?> name="adresse"
+                    <input type="text" value=<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?> name="adresse"
                            id="adresse_id" required maxlength="255"/>
                 </div class="inputCentre">
 

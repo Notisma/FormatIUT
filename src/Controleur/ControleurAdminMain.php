@@ -29,8 +29,8 @@ class ControleurAdminMain extends ControleurMain
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
-            array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
-            array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
+            //array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
+            //array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
             array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
         );
 
@@ -150,10 +150,15 @@ class ControleurAdminMain extends ControleurMain
         fgetcsv($csvFile);
 
         while (($ligne = fgetcsv($csvFile)) !== FALSE) {
-            if (sizeof($ligne) == 82) {
+            $taille = sizeof($ligne);
+            if ($taille == 82) {
                 InsertionCSV::insererPstage($ligne);
-            } else if (sizeof($ligne) == 143) {
+            } else if ($taille == 143) {
                 InsertionCSV::insererStudea($ligne);
+            } else if ($taille == 18) {
+                $listeId = (new FormationRepository())->getListeidFormations();
+                $idFormation = self::autoIncrement($listeId, "idFormation");
+                InsertionCSV::insererSuiviSecretariat($ligne, $idFormation);
             } else {
                 self::redirectionFlash("afficherVueCSV", "warning", "le fichier csv est incompatible pour l'instant (n'accepte que pstage/studea).");
                 return;

@@ -14,7 +14,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             $nomHTML=htmlspecialchars($etudiant->getNomEtudiant());
             $parcoursHTML=htmlspecialchars($etudiant->getParcours());
             $groupeHTML=htmlspecialchars($etudiant->getGroupe());
-            echo "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>";
+            echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
             echo "<h1 id='rouge' class='titre'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($etudiant->getGroupe() != null && $etudiant->getParcours() != null) {
                 echo "<h3 class='titre'>" . $groupeHTML . " - " . $parcoursHTML . "</h3>";
@@ -70,7 +70,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
                         $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getidFormation() . "'>" .
                             "<div class='imgOffre'>" .
-                            "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
+                            "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
                             "<h3 class='titre'>" . $nomOffreHTML . "</h3>" .

@@ -2,7 +2,9 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
-            <h2><?php $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
+            <h2><?php use App\FormatIUT\Configuration\Configuration;
+
+                $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomOffreHTML . " - " . $offre->getTypeOffre() ?></h2>
             <h4><?php echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
             <p><?php echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
@@ -68,7 +70,7 @@
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                     echo '</div>
                 <div class="nomEtuPostulant">
                     <h4>';
@@ -89,7 +91,7 @@
                     foreach ($listeEtu as $etudiant) {
                         echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
                         <div class="illuPostulant">';
-                        echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                         echo '</div>
                         <div class="nomEtuPostulant">
                             <h4>';
@@ -139,7 +141,7 @@
     <div class="detailsEtu">
         <div class="PPEtu">
             <?php
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
             ?>
         </div>
 
@@ -161,7 +163,7 @@
         echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
-        <a href=?action=telechargerLettre&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'>
+        <a href=?action=telechargerLM&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER LETTRE</button>
         </a>' ?>
     </div>

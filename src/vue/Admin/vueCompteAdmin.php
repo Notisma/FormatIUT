@@ -16,7 +16,7 @@
             <div class="imageProf">
                 <?php
                 $prof=(new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($prof->getImg()) . '" alt="profile_pic etudiant">'; ?>
+                echo '<img src="' . Configuration::getUploadPathFromId($prof->getImg()) . '" alt="profile_pic etudiant">'; ?>
             </div>
         </div>
     </div>

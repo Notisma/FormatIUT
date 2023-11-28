@@ -67,7 +67,7 @@ class FormationRepository extends AbstractRepository
     {
         $values = array();
         $sql = "SELECT * FROM " . $this->getNomTable() . " o ";
-        $sql .= " WHERE NOT EXISTS (SELECT idFormation FROM Formations f WHERE f.idFormation=o.idFormation)";
+        $sql .= " WHERE idEtudiant is null AND estValide=1";
         if ($type == "Stage" || $type == "Alternance") {
             $sql .= " AND typeOffre=:TypeTag";
             $values["TypeTag"] = $type;

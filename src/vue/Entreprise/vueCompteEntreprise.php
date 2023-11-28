@@ -14,13 +14,13 @@
             </div>
             <div class="imageEtu">
                 <?php
-                //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
+                //echo ((new \App\FormatIUT\Modele\Repository\UploadsRepository())->getImage(1));
                 //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'" >';
-                //on affiche le logo de l'entreprise depuis ImageRepository
+                //on affiche le logo de l'entreprise depuis UploadsRepository
+                use App\FormatIUT\Configuration\Configuration;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
-                use App\FormatIUT\Modele\Repository\OffreRepository;
 
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="profilePic" >';
+                echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="profilePic" >';
                 ?>
                 <!--
                 <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">

@@ -1,10 +1,12 @@
 <?php
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
+if (!is_null($offres) && !is_null($entreprises)) {
 $count = count($offres) + count($entreprises);
+}
 ?>
 <div class="center">
 
@@ -29,11 +31,11 @@ $count = count($offres) + count($entreprises);
             foreach ($entreprises as $entr) {
                 $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
                 $telHTML=htmlspecialchars($entr->getTel());
-                $adresseHTML=htmlspecialchars($entr->getAdresse());
+                $adresseHTML=htmlspecialchars($entr->getAdresseEntreprise());
                 echo '
                     <div class="resultat" id="petitRouge">
                         <div class="partieGauche">
-                            <img src = "data:image/jpeg;base64,' . base64_encode($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
+                            <img src="' . Configuration::getUploadPathFromId($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
                         </div>
                         <div class="partieDroite">
                             <h3 class="titre">' . $nomEntrepriseHTML . ' - Entreprise</h3>
@@ -48,9 +50,9 @@ $count = count($offres) + count($entreprises);
         if (!empty($offres)) {
             foreach ($offres as $offre) {
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                echo "<a href='?controleur=" . \App\FormatIUT\Configuration\Configuration::getControleur() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
+                echo "<a href='?controleur=" . Configuration::getControleur() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
                     <div class='partieGauche'>
-                            <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                            <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                         </div>
                         <div class='partieDroite'>
                         <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>

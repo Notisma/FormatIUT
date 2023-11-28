@@ -8,20 +8,15 @@
 
 
 body {
-    min-height: 96vh;
+    height: 100vh;
     /* background légèrement crême */
     background-color: #e8e8e8;
 }
 
 
 #center {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     min-width: 300px;
     border-radius: 10px;
     text-align: left;
@@ -425,19 +420,15 @@ input {
     }
 }
 
+/* RESPONSIVE TÉLÉPHONE */
 
-/* ----------------------------------------------------------------------------*/
-/* Ici le deuxième palier, on bascule #form en dessous de #desc */
-@media (max-width: 1050px) {
+@media (max-width: 500px) {
     body {
-        min-height: 190vh;
+        height: 120vh;
     }
 
     #center {
-        align-content: center;
-        justify-content: center;
-        width: 90%;
-        height: 100%;
+        background-color: white;
         border-radius: 10px;
         margin-top: 5%;
     }
@@ -569,7 +560,7 @@ input {
 }
 
 /* ----------------------------------------------------------------------------*/
-@media (max-device-width: 500px) {
+@media (max-width: 500px) {
     /* Styles pour les smartphones */
     body {
         min-height: 99vh;
@@ -577,17 +568,25 @@ input {
 
     #center {
         height: 92%;
+        box-shadow: 0 0 10px 0 #466069;
+        height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     #center > #desc {
         float: none;
         width: 100%;
         height: 50%;
+        border-radius: 10px;
     }
 
 
     #center > #formulaire {
+        border-radius: 10px;
         float: none;
         width: 100%;
         height: 50%;
@@ -597,7 +596,9 @@ input {
         align-items: center;
     }
 
-    #form {
+    #formulaire > #form {
+        height: 60%;
+        width: 100%;
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -605,21 +606,45 @@ input {
     #form > h2 {
         padding: 0 0 0 0;
         margin-bottom: 1%;
-        font-size: 3em;
+        font-size: 1.5em;
     }
 
-    form {
-        margin-bottom: 5%;
+    form > * {
+        margin: 0;
+    }
+
+    #wrapInput {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #wrapInput > div {
+        width: 90%;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #wrapInput > div > input {
+        width: 80%;
+        height: 50%;
+        font-size: 1em;
+    }
+
+    #wrapInput > div > img {
+        margin: 0;
+        height: 30%;
     }
 
 
     #desc > p {
         font-size: 10em;
-    }
-
-    #wrapInput {
-        width: 100%;
-        margin-right: 30%;
     }
 
     #erreur > p {
@@ -666,9 +691,13 @@ input {
 
     #bouton {
         width: 60%;
+        padding: 0;
         margin-top: 5%;
-        height: 80px;
-        font-size: 2em;
+        height: 40px;
+        font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #boutonRedirect {
@@ -694,6 +723,30 @@ input {
     .oublié:hover {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    #popupMdp {
+        flex-direction: column-reverse;
+        width: 90%;
+        height: 80%;
+    }
+
+    .mainForget {
+        width: 100%;
+        height: 50%;
+    }
+
+    .imgForget {
+        width: 100%;
+        height: 50%;
+    }
+
+}
+
+@media (max-height: 640px) {
+    /* quand le clavier s'affiche, on cache tout sauf le formulaire */
+    #desc {
+        display: none;
     }
 }
 

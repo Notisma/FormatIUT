@@ -2,6 +2,9 @@
     <div class="wrapBonjour">
         <div class="texteBonjour">
             <h3>Bonjour, <?php
+
+                use App\FormatIUT\Configuration\Configuration;
+
                 $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 $prenomHTML=htmlspecialchars($prof->getPrenomProf());
                 echo $prenomHTML;
@@ -81,8 +84,7 @@
                 <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>" class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 
@@ -111,8 +113,7 @@
                    class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 
@@ -147,8 +148,7 @@
                 <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu= <?php echo $etudiant->getNumEtudiant() ?>" class="alerteEntr" id="hoverRose">
                     <div class="imageAlerte">
                         <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 

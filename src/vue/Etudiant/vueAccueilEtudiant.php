@@ -2,6 +2,9 @@
     <div class="conteneurBienvenue">
         <div class="texteBienvenue">
             <h3>Bonjour, <?php
+
+                use App\FormatIUT\Configuration\Configuration;
+
                 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
                 echo htmlspecialchars($etudiant->getPrenomEtudiant());
                 ?></h3>
@@ -30,6 +33,7 @@
                 <?php /**
                  * @param $listeStage
                  * @return array
+                 * @throws Exception
                  */
                 function extracted($listeStage): array
                 {
@@ -42,7 +46,7 @@
                             $lien = "?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $listeStage[$i]->getIdFormation();
                             echo '<a href ="' . $lien . '">
                     <div class="imagesAnnonce" >';
-                            echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="pp entreprise">
+                            echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
                     </div>
                     <div class="texteAnnonce" >
                         <h4 >';
@@ -88,7 +92,10 @@
                 }
 
                 if (empty($listeStage)) {
-                    echo "Vide";
+                    echo "<div class='wrapErreur'>
+            <img src='../ressources/images/erreur.png' alt='image d'erreur' class='imageErreur'>
+            <h4>Aucune offre pour le moment.</h4>
+        </div>";
                 } else list($i, $entreprise, $lien) = extracted($listeStage);
                 ?>
 
@@ -98,7 +105,10 @@
             <h4>Nouveautés Alternances de la semaine :</h4>
             <div class="conteneurAnnonces">
                 <?php if (empty($listeAlternance)) {
-                    echo "Vide";
+                    echo "<div class='wrapErreur'>
+            <img src='../ressources/images/erreur.png' alt='image d'erreur' class='imageErreur'>
+            <h4>Aucune offre pour le moment.</h4>
+        </div>";
                 } else list($i, $entreprise, $lien) = extracted($listeAlternance);
                 ?>
             </div>

@@ -13,7 +13,7 @@
             $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
             $detailHTML=htmlspecialchars($offre->getDetailProjet());
 
-            $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
+            $src = App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg());
             echo '<img src=' . $src . 'alt="image">';
             echo "<h2 class='titre' id='rouge'>" . $nomEntrHTML . "</h2>";
             echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
@@ -92,7 +92,7 @@
                         $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
                         echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
-                            "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
+                            "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
                             "<h3 class='titre' id='rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .

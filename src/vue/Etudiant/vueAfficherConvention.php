@@ -62,7 +62,7 @@
                            required>
                 </p>
                 <p><label for="adrEntr_id">Adresse Entreprise</label>
-                    <input type="text"  value="<?= htmlspecialchars($entreprise->getAdresse()) ?>" name="adresseEntr" id="adrEntr_id" readonly
+                    <input type="text"  value="<?= htmlspecialchars($entreprise->getAdresseEntreprise()) ?>" name="adresseEntr" id="adrEntr_id" readonly
                            required></p>
                 <p><label for="villeEntr_id"> Ville </label>
                     <input type="text"  value="<?= htmlspecialchars($villeEntr->getNomVille()) ?>" name="villeEntr" id="villeEntr_id" readonly

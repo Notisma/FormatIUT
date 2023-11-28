@@ -40,10 +40,11 @@
     <div class="offresEtu">
         <div class="contenuOffresEtu">
             <?php
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant());
             $compteurOffres = 0;
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
-                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant->getId());
                     if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->estValide()) {
                         $compteurOffres++;
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
@@ -55,7 +56,7 @@
                             </div>
                             <div class='partieDroite'>
                             <div class='divInfo'>
-                            <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                            <img src=\"" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                             </div>
                             <div class='divInfo'>
                             <img src='../ressources/images/recherche-demploi.png' alt='postulations'>

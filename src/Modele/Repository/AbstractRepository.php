@@ -189,7 +189,7 @@ abstract class AbstractRepository
         }
 
         foreach ($pdoStatement as $row)
-            $res['offres'][] = (new OffreRepository())->construireDepuisTableau($row);
+            $res['offres'][] = (new FormationRepository())->construireDepuisTableau($row);
 
         $sql = "";
         $tags = [];
@@ -205,12 +205,12 @@ abstract class AbstractRepository
 
         $sql = substr($sql, 0, -9);
 
-        try {
+        //try {
             $pdoStatement = $pdo->prepare($sql);
             $pdoStatement->execute($tags);
-        } catch (\PDOException $e) {
-            return null;
-        }
+        //} catch (\PDOException $e) {
+        //    return null;
+        //}
         foreach ($pdoStatement as $row)
             $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
 

@@ -19,6 +19,7 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class ControleurMain
 {
@@ -55,6 +56,7 @@ class ControleurMain
      * @param array $parametres des paramètres supplémentaire pour des informations spécifiques aux pages
      * @return void fonctions à appeler pour afficher une vue
      */
+
     public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
     {
         $cssPath = str_replace('vue', 'styleVue', $cheminVue);
@@ -70,7 +72,6 @@ class ControleurMain
         ));
         require __DIR__ . "/../vue/vueGenerale.php"; // Charge la vue
     }
-
 
     /***
      * @return void Affiche la page d'acceuil du site sans qu'aucune connexion n'aie été faite
@@ -404,7 +405,8 @@ class ControleurMain
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-        if (count($res['offres']) == 0 && count($res['entreprises']) == 0) {
+
+        if (is_null($res)) {
             MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
             self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
@@ -488,20 +490,52 @@ class ControleurMain
      * @param string $message le message à envoyer
      * @return void redirige en envoyant un messageFlash
      */
-    public static function redirectionFlash(string $action, string $type, string $message): void
+    protected static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
         (Configuration::getCheminControleur())::$action();
-
     }
 
     /**
      * @param string $nom nom de l'image à enregistrer
-     * @return bool insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
+     * @return int|false insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
      */
-    public static function insertImage(string $nom): bool
+    protected static function insertImage(string $nom): int|false
     {
         return TransfertImage::transfert($nom);
     }
 
+    /**
+     * Récupère et stocke les fichiers (par ex, CV et LM).
+     */
+    public static function uploadFichiers(array $fileTags, string $actionInErrorCase): array
+    {
+        $ids = array();
+        $uploadsLocation = "../ressources/uploads/";
+
+        foreach ($fileTags as $fileName) {
+            if (!isset($_FILES[$fileName])) {
+                self::redirectionFlash($actionInErrorCase, "danger", "Fichier non fourni");
+                die();
+            }
+            $ids[$fileName] = null;
+            $file = $_FILES[$fileName];
+
+            if ($file['error'] == 1 || $file['error'] == 2) {
+                self::redirectionFlash($actionInErrorCase, "warning", "Fichier " . strtoupper($fileName) . " trop lourd (si le fichier est normal, merci de reporter ce problème)");
+                die();
+            }
+            $fileLocation = null;
+            if ($file["tmp_name"] != null) {
+                $idFile = (new UploadsRepository())->insert($file['name']);
+                $ids[$fileName] = $idFile;
+
+                $fileLocation = $uploadsLocation . $idFile . '-' . basename($file['name']);
+                if (!move_uploaded_file($file['tmp_name'], $fileLocation))
+                    self::redirectionFlash($actionInErrorCase, "danger", "Problem uploading file");
+            }
+        }
+
+        return $ids;
+    }
 }
