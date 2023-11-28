@@ -65,14 +65,15 @@ class UploadsRepository extends AbstractRepository
     public function insert(string $fileName): int
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Etudiant") {
-            //on rend ronde l'image avant de l'importer
-            $image = file_get_contents($fileName);
-            $image = TransfertImage::img_ronde($image);
-            //on enregistre l'image dans le dossier
-            $fileName = TransfertImage::image_data($image);
+            //si le fichier est une image
+            if (exif_imagetype($fileName)) {
+                //on rend ronde l'image avant de l'importer
+                $image = file_get_contents($fileName);
+                $image = TransfertImage::img_ronde($image);
+                //on enregistre l'image dans le dossier
+                $fileName = TransfertImage::image_data($image);
+            }
         }
-
-
         $req = "INSERT INTO Uploads (fileName) VALUES (:fileNameTag);";
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $pdo->prepare($req)->execute(['fileNameTag' => $fileName]);

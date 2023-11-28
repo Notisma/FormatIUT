@@ -42,6 +42,7 @@ class TransfertImage
 
     public static function img_ronde(string $image): bool|GdImage
     {
+
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
