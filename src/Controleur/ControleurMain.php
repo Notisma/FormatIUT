@@ -18,6 +18,7 @@ use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class ControleurMain
@@ -226,9 +227,17 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
+                $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+                if (!is_null($prof)){
+                    if ($prof->isEstAdmin()){
+                        ConnexionUtilisateur::connecter($_REQUEST["login"],"Administrateurs");
+                    }
+                }
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                    header("Location : controleurFrontal.php?action=afficherAccueilAdminacontroleur=AdminMain");
-                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                    header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnels") {
+                    header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                }else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
@@ -239,10 +248,17 @@ class ControleurMain
                 exit();
             } else if ($_REQUEST["login"] == "ProfTest") {
                 if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnels");
                     MessageFlash::ajouter("success", "Connexion Réussie");
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
+                }
+            }else if ($_REQUEST["login"] == "AdminTest") {
+                if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
+                ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                MessageFlash::ajouter("success", "Connexion Réussie");
+                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                exit();
                 }
             }
         }

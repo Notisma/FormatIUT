@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\InsertionCSV;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
@@ -20,8 +21,13 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function getMenu(): array
     {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
+            $accueil = "Personnels";
+        } else if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            $accueil = "Administrateurs";
+        }
         $menu = array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Administrateurs", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
+            array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
             //array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             //array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
@@ -62,9 +68,14 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
+        $accueil = "Administrateurs";
+        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
+            $accueil = "Personnels";
+        }
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil Administrateurs", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
+
 
     /**
      * @return void affiche le profil de l'administrateur connecté
@@ -121,7 +132,8 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
-    public static function afficherListeOffres(): void{
+    public static function afficherListeOffres(): void
+    {
         self::$pageActuelleAdmin = "Liste des Offres";
         self::afficherVue("Liste des offres", "Admin/vueListeOffres.php", self::getMenu());
     }
@@ -168,7 +180,7 @@ class ControleurAdminMain extends ControleurMain
         $filename = "sae-data_" . date('Y-m-d') . ".csv";
         $f = fopen('php://memory', 'w');
 
-        $champs = array( 'prenomEtudiant', 'nomEtudiant','numEtudiant', 'EmailEtu', 'groupe', 'parcours', 'validationPedagogique', 'Type de formation', 'Date creation de la convention', 'Date de transmission de la convention',
+        $champs = array('prenomEtudiant', 'nomEtudiant', 'numEtudiant', 'EmailEtu', 'groupe', 'parcours', 'validationPedagogique', 'Type de formation', 'Date creation de la convention', 'Date de transmission de la convention',
             'Date début de stage', 'Date fin de stage', 'Structure accueil', 'Tuteur email', 'Avenant/Remarque', 'Présence au forum de l IUT', 'Tuteur univ');
         fputcsv($f, $champs, $delimiter);
 
@@ -189,11 +201,19 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function accepterOffre(): void
     {
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-        $offre->setEstValide(true);
-        (new FormationRepository())->modifierObjet($offre);
-        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idFormation=" . $offre->getidFormation());
-        MessageFlash::ajouter("success", "L'offre a bien été validée");
+        if (isset($_REQUEST["idFormation"])) {
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+            if (!is_null($offre)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    if (!$offre->getEstValide()) {
+                        $offre->setEstValide(true);
+                        (new FormationRepository())->modifierObjet($offre);
+                        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain&idFormation=" . $offre->getidFormation());
+                        MessageFlash::ajouter("success", "L'offre a bien été validée");
+                    } else self::redirectionFlash("afficherVueDetailOffre", "warning", "L'offre est déjà valider");
+                } else self::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeOffres", "warning", "L'offre n'existe pas");
+        } else self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
     }
 
     /**
@@ -201,9 +221,17 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function rejeterOffre(): void
     {
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-        (new FormationRepository())->supprimer($offre->getidFormation());
-        self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
+        if (isset($_REQUEST["idFormation"])) {
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+            if (!is_null($offre)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    if (!$offre->getEstValide()) {
+                        (new FormationRepository())->supprimer($offre->getidFormation());
+                        self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été rejetée");
+                    } else self::redirectionFlash("afficherVueDetailOffre", "warning", "L'offre est déjà accepter");
+                } else self::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeOffres", "warning", "L'offre n'existe pas");
+        } else self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
     }
 
     /**
@@ -211,10 +239,15 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function supprimerOffre(): void
     {
-        //TODO : FAIRE LES VERIFICATIONS
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-        (new FormationRepository())->supprimer($_REQUEST['idFormation']);
-        self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
+        if (isset($_REQUEST["idFormation"])) {
+            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+            if (!is_null($offre)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    (new FormationRepository())->supprimer($_REQUEST['idFormation']);
+                    self::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
+                } else self::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeOffres", "warning", "L'offre n'existe pas");
+        } else self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
     }
 
     /**
@@ -222,10 +255,16 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function supprimerEtudiant(): void
     {
-        //TODO : FAIRE LES VERIFICATIONS
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
-        (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
-        self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été supprimé");
+        if (isset($_REQUEST["idFormation"])) {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
+            if (!is_null($etudiant)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
+                    self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été supprimé");
+                } else self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeEtudiant", "warning", "L'étudiant n'existe pas");
+        } else self::redirectionFlash("afficherListeEtudiant", "danger", "L'étudiant n'est pas renseigné");
+
     }
 
     /**
@@ -233,17 +272,18 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function refuserEntreprise(): void
     {
-        //TODO : rajouter des éléments
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                if (!$entreprise->estValide()) {
-                    (new EntrepriseRepository())->supprimer($entreprise->getSiret());
-                    MessageFlash::ajouter("success", "L'entreprise a bien été refusée");
-                } else MessageFlash::ajouter("info", "L'entreprise est déjà validée");
-            } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
-        } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
-        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+
+                    if (!$entreprise->isEstValide()) {
+                        (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+                        self::redirectionFlash("afficherListeEntreprises", "success", "L'entreprise a bien été refusée");
+                    } else self::redirectionFlash("afficherDetailEntreprise", "warning", "L'entreprise est déjà validé");
+                } else self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeEntreprises", "warning", "L'entreprise n'existe pas");
+        } else self::redirectionFlash("afficherListeEntreprises", "danger", "L'entreprise n'est pas renseignée");
 
     }
 
@@ -252,19 +292,18 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function validerEntreprise(): void
     {
-        //TODO : rajouter des vérifications
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                if (!$entreprise->isEstValide()) {
-                    $entreprise->setEstValide(true);
-                    (new EntrepriseRepository())->modifierObjet($entreprise);
-                    MessageFlash::ajouter("success", "L'entreprise a bien été validée");
-                } else MessageFlash::ajouter("info", "L'entreprise est déjà valider");
-            } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
-        } else MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
-        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
-
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    if (!$entreprise->isEstValide()) {
+                        $entreprise->setEstValide(true);
+                        (new EntrepriseRepository())->modifierObjet($entreprise);
+                        self::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été validée");
+                    } else self::redirectionFlash("afficherDetailEntreprise", "warning", "L'entreprise est déjà valider");
+                } else self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherListeEntreprises", "warning", "L'entreprise n'existe pas");
+        } else self::redirectionFlash("afficherListeEntreprises", "danger", "L'entreprise n'est pas renseignée");
     }
 
     /**
@@ -272,17 +311,15 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function supprimerEntreprise(): void
     {
-        //TODO : FAIRE LES VERIFICATIONS
         if (isset($_REQUEST["siret"])) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
-                (new EntrepriseRepository())->supprimer($_REQUEST['siret']);
-                MessageFlash::ajouter("success", "L'entreprise a bien été supprimée");
-            } else MessageFlash::ajouter("info", "L'entreprise n'existe pas");
-        } else {
-            MessageFlash::ajouter("danger", "L'entreprise n'est pas renseigné");
-        }
-        header("Location: ?action=afficherAccueilAdmin&controleur=AdminMain");
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    (new EntrepriseRepository())->supprimer($_REQUEST['siret']);
+                    self::redirectionFlash("afficherListeEntreprises", "success", "L'entreprise a bien été supprimé");
+                } else self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous n'avez pas les drois requis");
+            } else self::redirectionFlash("afficherListeEntreprises", "warning", "L'entreprise n'existe pas");
+        } else self::redirectionFlash("afficherListeEntreprises", "danger", "L'entreprise n'est pas renseignée");
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

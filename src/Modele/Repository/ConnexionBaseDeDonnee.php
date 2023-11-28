@@ -1,12 +1,12 @@
 <?php
 
 namespace App\FormatIUT\Modele\Repository;
-
 use App\FormatIUT\Configuration\Configuration;
 use PDO;
 
 class ConnexionBaseDeDonnee
 {
+
     private PDO $pdo;
     private static ?ConnexionBaseDeDonnee $instance = null;
 

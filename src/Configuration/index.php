@@ -103,6 +103,7 @@ class ControleurConnexionLdap
         $search = ldap_search(self::getConn(), self::getBasedn(), "(objectClass=person)");
 //On recupere toutes les entres de la recherche effectuees auparavant
         $resultats = ldap_get_entries(self::getConn(), $search);
+        var_dump($resultats);
 //Pour chaque utilisateur, on recupere les informations utiles
         for ($i = 0; $i < count($resultats) - 1; $i++) {
 //On stocke le login, nom/prnom, la classe et la promotion de l’utilisateur courant

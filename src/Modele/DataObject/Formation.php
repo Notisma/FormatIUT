@@ -33,7 +33,7 @@ class Formation extends AbstractDataObject
     private ?int $idEtudiant;
     private ?string $idTuteurPro;
     private float $idEntreprise;
-    private ?int $idTuteurUM;
+    private ?string $loginTuteurUM;
 
     /**
      * @param string $idFormation
@@ -66,9 +66,9 @@ class Formation extends AbstractDataObject
      * @param int|null $idEtudiant
      * @param string|null $idTuteurPro
      * @param float $idEntreprise
-     * @param int|null $idTuteurUM
+     * @param string|null $loginTuteurUM
      */
-    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?int $idTuteurUM)
+    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?bool $retourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $loginTuteurUM)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -100,7 +100,7 @@ class Formation extends AbstractDataObject
         $this->idEtudiant = $idEtudiant;
         $this->idTuteurPro = $idTuteurPro;
         $this->idEntreprise = $idEntreprise;
-        $this->idTuteurUM = $idTuteurUM;
+        $this->loginTuteurUM = $loginTuteurUM;
     }
 
     /**
@@ -578,19 +578,19 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getIdTuteurUM(): ?int
+    public function getloginTuteurUM(): ?string
     {
-        return $this->idTuteurUM;
+        return $this->loginTuteurUM;
     }
 
     /**
-     * @param int|null $idTuteurUM
+     * @param string|null $loginTuteurUM
      */
-    public function setIdTuteurUM(?int $idTuteurUM): void
+    public function setloginTuteurUM(?string $loginTuteurUM): void
     {
-        $this->idTuteurUM = $idTuteurUM;
+        $this->loginTuteurUM = $loginTuteurUM;
     }
 
 
@@ -628,7 +628,7 @@ class Formation extends AbstractDataObject
             'idEtudiant'=>$this->idEtudiant,
             'idTuteurPro'=>$this->idTuteurPro,
             'idEntreprise'=>$this->idEntreprise,
-            'idTuteurUM'=>$this->idTuteurUM
+            'loginTuteurUM'=>$this->loginTuteurUM
         );
     }
 
