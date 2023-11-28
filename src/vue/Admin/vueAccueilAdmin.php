@@ -84,8 +84,7 @@
                 <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>" class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
-                        $src = Configuration::getUploadPathFromId($entreprise->getImg());
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 
@@ -114,8 +113,7 @@
                    class="alerteEntr">
                     <div class="imageAlerte">
                         <?php
-                        $src = Configuration::getUploadPathFromId($entreprise->getImg());
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 
@@ -150,8 +148,7 @@
                 <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu= <?php echo $etudiant->getNumEtudiant() ?>" class="alerteEntr" id="hoverRose">
                     <div class="imageAlerte">
                         <?php
-                        $src = Configuration::getUploadPathFromId($etudiant->getImg());
-                        echo '<img src=' . $src . 'alt="image">';
+                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
                         ?>
                     </div>
 
