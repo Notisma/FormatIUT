@@ -27,14 +27,13 @@ class ProfRepository extends AbstractRepository
     {
         $estAdmin=false;
 
-        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
         return new Prof(
             $dataObjectTableau["loginProf"],
             $dataObjectTableau["nomProf"],
             $dataObjectTableau["prenomProf"],
             $dataObjectTableau["mailUniversitaire"],
             $dataObjectTableau["estAdmin"],
-            $image["img_blob"]
+            $dataObjectTableau["img_id"]
         );
     }
 
