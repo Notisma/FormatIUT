@@ -75,7 +75,7 @@ class UploadsRepository extends AbstractRepository
 
         $req = "INSERT INTO Uploads (fileName) VALUES (:fileNameTag);";
         $pdo = ConnexionBaseDeDonnee::getPdo();
-        $pdo->prepare($req)->execute(['fileNameTag'=>$fileName]);
+        $pdo->prepare($req)->execute(['fileNameTag' => $fileName]);
         return $pdo->lastInsertId();
     }
 

@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : correction des images dans AccueilAdmin">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="Tentative de réparation de crash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/TransfertImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/TransfertImage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +74,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701172671703</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tentative de réparation de crash">
+      <option name="closed" value="true" />
+      <created>1701173538152</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701173538152</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,7 +90,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix : correction des images dans AccueilAdmin" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : correction des images dans AccueilAdmin" />
+    <MESSAGE value="Tentative de réparation de crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tentative de réparation de crash" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
