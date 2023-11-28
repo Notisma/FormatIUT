@@ -36,7 +36,7 @@ class ConnexionUtilisateur
         // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            if (self::getTypeConnecte() == "Etudiant") {
+            if (self::getTypeConnecte() == "Etudiants") {
                 ConnexionLdap::deconnexion();
             }
             $session->supprimer(self::$cleConnexion);

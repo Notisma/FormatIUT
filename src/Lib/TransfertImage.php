@@ -67,7 +67,7 @@ class TransfertImage
         return $image_ronde;
     }
 
-    private static function image_data($gdimage): bool|string
+    public static function image_data($gdimage): bool|string
     {
         ob_start();
         imagepng($gdimage);
