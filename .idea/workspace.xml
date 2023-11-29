@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : corrections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Sprint3",
+    "git-widget-placeholder": "feature/AdminAjoutEtudiants",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

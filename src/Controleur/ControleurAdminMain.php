@@ -6,6 +6,7 @@ use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\InsertionCSV;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -32,6 +33,7 @@ class ControleurAdminMain extends ControleurMain
             //array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             //array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
             array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
+            array("image" => "../ressources/images/document.png", "label" => "Ajouter étudiant", "lien" => "?action=afficherFormulaireCreationEtudiant&controleur=AdminMain"),
         );
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
@@ -136,6 +138,16 @@ class ControleurAdminMain extends ControleurMain
     {
         self::$pageActuelleAdmin = "Liste des Offres";
         self::afficherVue("Liste des offres", "Admin/vueListeOffres.php", self::getMenu());
+    }
+
+    /**
+     * @return void affiche la page d'ajout d'un étudiant
+     */
+
+    public static function afficherFormulaireCreationEtudiant(): void
+    {
+        self::$pageActuelleAdmin = "Ajouter un étudiant";
+        self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php", self::getMenu());
     }
 
     //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -248,6 +260,24 @@ class ControleurAdminMain extends ControleurMain
                 } else self::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");
             } else self::redirectionFlash("afficherListeOffres", "warning", "L'offre n'existe pas");
         } else self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
+    }
+
+    /**
+     * @return void permet à l'admin connecté d'ajouter un étudiant avec ses informations primordiales
+     */
+
+    public static function ajouterEtudiant(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            $_REQUEST['sexeEtu'] = null;
+            $_REQUEST['mailPerso'] = null;
+            $_REQUEST['telephone'] = null;
+            $_REQUEST['validationPedagogique'] = 0;
+            $_REQUEST['presenceForumIUT'] = 0;
+            $_REQUEST['img_id'] = 1;
+            (new EtudiantRepository())->construireDepuisTableau($_REQUEST);
+            self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été ajouté");
+        }
     }
 
     /**
