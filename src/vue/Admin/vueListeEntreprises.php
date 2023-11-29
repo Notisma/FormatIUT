@@ -6,8 +6,17 @@
             <?php
             if (sizeof($listeEntreprises) > 0) {
 
-            } else {
+                foreach ($listeEntreprises as $entreprise) {
+                    echo "
+                        <a href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=".$entreprise->getSiret()."' class='entreprise'>
+                        <h3 id='rouge' class='titre'>".$entreprise->getNomEntreprise()."</h3>                            
+                        </a>
+                        
+                    ";
+                }
 
+            } else {
+                echo "<p>Aucune entreprise n'a été enregistrée</p>";
             }
             ?>
         </div>

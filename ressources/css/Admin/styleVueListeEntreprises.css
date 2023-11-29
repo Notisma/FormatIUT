@@ -100,6 +100,23 @@ body {
     border-radius: 10px;
 }
 
+.entreprise {
+    width: 95%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1%;
+    flex-shrink: 0;
+    text-decoration: none;
+
+}
+
 .droite {
     width: 40%;
     height: 100%;
