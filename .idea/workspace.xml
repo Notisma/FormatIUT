@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : corrections">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : merge OK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/DataObject/Formation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/ProfRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeEntreprises.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeEntreprises.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="bugfix/mergeReparation" />
+        <entry key="$PROJECT_DIR$" value="Sprint3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,6 +30,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2YX4JRSm4pKBqe67hl71MPNe1o9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -37,20 +41,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Sprint3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "Errors",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/vuesAdmin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,6 +70,10 @@
       <workItem from="1700824954492" duration="2069000" />
       <workItem from="1701091365725" duration="695000" />
       <workItem from="1701093689332" duration="425000" />
+      <workItem from="1701182092210" duration="2000" />
+      <workItem from="1701194175707" duration="613000" />
+      <workItem from="1701255818253" duration="1496000" />
+      <workItem from="1701257349470" duration="465000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction des images dans AccueilAdmin">
       <option name="closed" value="true" />
@@ -107,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701179187693</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix : merge OK">
+      <option name="closed" value="true" />
+      <created>1701182012665</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701182012665</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,7 +146,8 @@
     <MESSAGE value="feat : tentative de mettre les images en rond" />
     <MESSAGE value="feat : j'ai pas réussi" />
     <MESSAGE value="fix : corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : corrections" />
+    <MESSAGE value="fix : merge OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : merge OK" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
