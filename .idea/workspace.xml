@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ressources/css/sources.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ressources/images/rechercher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Entreprise/styleVuePresentationEntreprise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleFormulaireCreationOffre.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueFormulaireConnexion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/styleVueIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/vueGeneraleStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurMain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/AbstractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EntrepriseRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/EtudiantRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/sources.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/sources.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueGenerale.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueGenerale.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/vueResultatRecherche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/vueResultatRecherche.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/MessageFlash.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/MessageFlash.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/HTTP/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/HTTP/Session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modele/Repository/UploadsRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/controleurFrontal.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/controleurFrontal.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +22,20 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Sprint3" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2YX4JRSm4pKBqe67hl71MPNe1o9" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -54,7 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Sprint3&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Decconexion__Delai&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,6 +73,12 @@
       <workItem from="1700824954492" duration="2069000" />
       <workItem from="1701091365725" duration="695000" />
       <workItem from="1701093689332" duration="425000" />
+      <workItem from="1701116077700" duration="9000" />
+      <workItem from="1701116200181" duration="1629000" />
+      <workItem from="1701174593374" duration="1901000" />
+      <workItem from="1701255809192" duration="20000" />
+      <workItem from="1701271808609" duration="9000" />
+      <workItem from="1701295152364" duration="349000" />
     </task>
     <servers />
   </component>

@@ -123,5 +123,17 @@ class ConnexionUtilisateur
         return false;
     }
 
+    public static function verifConnecte(string $controleur):bool{
+        $bool=false;
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+            $bool=true;
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
+            $bool=true;
+        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
+            $bool=true;
+        }
+        return $bool;
+    }
+
 
 }

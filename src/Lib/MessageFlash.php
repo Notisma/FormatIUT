@@ -71,4 +71,13 @@ class MessageFlash
 
     }
 
+    public static function verifDeconnexion() : bool{
+        $message=self::lireMessages("info");
+        if (!str_contains($message["info"],"Vous avez été déconnecté")){
+            self::ajouter("danger", "Veuillez vous connecter");
+        }
+        MessageFlash::ajouter("info",$message["info"]);
+        return true;
+    }
+
 }
