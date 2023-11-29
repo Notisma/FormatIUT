@@ -44,10 +44,10 @@
             $compteurOffres = 0;
             if (!empty($offres)) {
                 foreach ($offres as $offre) {
-                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant->getId());
-                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->estValide()) {
+                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
+                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->getEstValide()) {
                         $compteurOffres++;
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                         echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>
                             <div class='partieGauche'>
                             <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
