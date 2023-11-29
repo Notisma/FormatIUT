@@ -2,19 +2,21 @@
     <?php
     $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+    use App\FormatIUT\Configuration\Configuration;
     ?>
 
     <div class="wrapGauche">
         <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise= <?php echo rawurlencode($entreprise->getSiret()) ?>"
            class="presentationPrincipale">
             <?php
+
+
             $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
             $sujetHTML=htmlspecialchars($offre->getSujet());
             $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
             $detailHTML=htmlspecialchars($offre->getDetailProjet());
 
-            $src = App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg());
-            echo '<img src=' . $src . 'alt="image">';
+            echo '<img src="' .Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
             echo "<h2 class='titre' id='rouge'>" . $nomEntrHTML . "</h2>";
             echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
             ?>
