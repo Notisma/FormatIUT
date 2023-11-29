@@ -497,15 +497,6 @@ class ControleurMain
     }
 
     /**
-     * @param string $nom nom de l'image à enregistrer
-     * @return int|false insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
-     */
-    protected static function insertImage(string $nom): int|false
-    {
-        return TransfertImage::transfert($nom);
-    }
-
-    /**
      * Récupère et stocke les fichiers (par ex, CV et LM).
      */
     public static function uploadFichiers(array $fileTags, string $actionInErrorCase): array
@@ -525,7 +516,6 @@ class ControleurMain
                 self::redirectionFlash($actionInErrorCase, "warning", "Fichier " . strtoupper($fileName) . " trop lourd (si le fichier est normal, merci de reporter ce problème)");
                 die();
             }
-            $fileLocation = null;
             if ($file["tmp_name"] != null) {
                 $idFile = (new UploadsRepository())->insert($file['name']);
                 $ids[$fileName] = $idFile;

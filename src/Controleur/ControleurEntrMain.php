@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
@@ -360,7 +361,7 @@ class ControleurEntrMain extends ControleurMain
 
         $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
 
-        $ai_id = self::insertImage($nom);
+        $ai_id = TransfertImage::transfert();
         $entreprise->setImg($ai_id);
         (new EntrepriseRepository())->modifierObjet($entreprise);
 

@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Configuration\ConfigurationLdap;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
@@ -452,7 +453,7 @@ class ControleurEtuMain extends ControleurMain
 
             $ancienneImage = (new UploadsRepository())->imageParEtudiant(self::getCleEtudiant());
 
-            $ai_id = self::insertImage($nom);
+            $ai_id = TransfertImage::transfert();
 
             $etu = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $etu->setImg($ai_id);
