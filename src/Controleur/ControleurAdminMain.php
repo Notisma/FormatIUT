@@ -301,7 +301,7 @@ class ControleurAdminMain extends ControleurMain
                     if (!$entreprise->isEstValide()) {
                         $entreprise->setEstValide(true);
                         (new EntrepriseRepository())->modifierObjet($entreprise);
-                        self::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été validée");
+                        self::redirectionFlash("afficherAccueilAdmin", "success", "L'entreprise a bien été validée");
                     } else self::redirectionFlash("afficherDetailEntreprise", "warning", "L'entreprise est déjà valider");
                 } else self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous n'avez pas les droits requis");
             } else self::redirectionFlash("afficherListeEntreprises", "warning", "L'entreprise n'existe pas");

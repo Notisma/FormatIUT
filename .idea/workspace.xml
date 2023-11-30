@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : squelette front + back vueListeOffres.php">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : vueListeOffres.php terminée">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueListeOffres.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueListeOffres.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/ControleurAdminMain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueDetailOffreAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +83,7 @@
       <workItem from="1701255809192" duration="20000" />
       <workItem from="1701271808609" duration="9000" />
       <workItem from="1701295152364" duration="349000" />
-      <workItem from="1701355836333" duration="2951000" />
+      <workItem from="1701355836333" duration="4559000" />
     </task>
     <task id="LOCAL-00001" summary="feat : commit initial vue ListeOffres">
       <option name="closed" value="true" />
@@ -101,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701380001790</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat : vueListeOffres.php terminée">
+      <option name="closed" value="true" />
+      <created>1701380710583</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701380710583</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,7 +118,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat : commit initial vue ListeOffres" />
     <MESSAGE value="feat : squelette front + back vueListeOffres.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : squelette front + back vueListeOffres.php" />
+    <MESSAGE value="feat : vueListeOffres.php terminée" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : vueListeOffres.php terminée" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -6,7 +6,7 @@
     ?>
 
     <div class="wrapGauche">
-        <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise= <?php echo rawurlencode($entreprise->getSiret()) ?>"
+        <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise=<?php echo rawurlencode($entreprise->getSiret()) ?>"
            class="presentationPrincipale">
             <?php
 
@@ -38,12 +38,19 @@
             if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
                 if (!$offre->getEstValide()) {
                     echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>ACCEPTER</a>
-                ";
+                <a href='?action=rejeterOffre&controleur=AdminMain&idFormation= ".$offre->getIdFormation()."'>REJETER</a>";
+
+                    if ($entreprise->isEstValide()) {
+                        echo "<a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>ACCEPTER</a>";
+                    } else {
+                        echo "<a id='vert' href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=".$entreprise->getSiret()."'>ACCEPTER</a>";
+                        \App\FormatIUT\Lib\MessageFlash::ajouter("warning", "Validez l'entreprise avant de valider l'offre");
+                    }
+
+
                 } else {
                     echo "
-                <a href='?action=supprimerOffre&controleur=AdminMain&idFormation= " . $offre->getIdFormation() . "'>SUPPRIMER</a>
+                <a href='?action=supprimerOffre&controleur=AdminMain&idFormation= ".$offre->getIdFormation()."'>SUPPRIMER</a>
                 ";
                 }
             }
