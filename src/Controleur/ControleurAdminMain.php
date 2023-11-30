@@ -135,8 +135,9 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherListeOffres(): void
     {
+        $listeOffres = (new FormationRepository())->getListeObjet();
         self::$pageActuelleAdmin = "Liste des Offres";
-        self::afficherVue("Liste des offres", "Admin/vueListeOffres.php", self::getMenu());
+        self::afficherVue("Liste des Offres", "Admin/vueListeOffres.php", self::getMenu(), ["listeOffres" => $listeOffres]);
     }
 
     //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
