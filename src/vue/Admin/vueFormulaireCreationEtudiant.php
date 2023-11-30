@@ -10,22 +10,22 @@
                     id="numEtudiant_id" required/>
                 </div>
 
-                <label for="nom_id">Nom</label> :
+                <label for="nomEtudiant_id">Nom</label> :
                 <div class="inputCentre">
-                    <input type="text" placeholder="Smith" name="nom"
-                           id="nom_id" required maxlength="32"/>
+                    <input type="text" placeholder="Smith" name="nomEtudiant"
+                           id="nomEtudiant_id" required maxlength="32"/>
                 </div class="inputCentre">
 
-                <label for="prenom_id">Prénom</label> :
+                <label for="prenomEtudiant_id">Prénom</label> :
                 <div class="inputCentre">
-                    <input type="text" placeholder="John" name="prenom"
-                           id="prenom_id" required maxlength="32"/>
+                    <input type="text" placeholder="John" name="prenomEtudiant"
+                           id="prenomEtudiant_id" required maxlength="32"/>
                 </div class="inputCentre">
 
-                <label for="login_id">Login</label> :
+                <label for="loginEtudiant_id">Login</label> :
                 <div class="inputCentre">
-                    <input type="text" placeholder="smithj" name="login"
-                           id="login_id" required maxlength="32"/>
+                    <input type="text" placeholder="smithj" name="loginEtudiant"
+                           id="loginEtudiant_id" required maxlength="32"/>
                 </div class="inputCentre">
 
                 <label for="mailUniversitaire_id">Mail universitaire</label> :
