@@ -1,6 +1,9 @@
 <div class="wrapCentreOffres">
     <div class="gauche">
-
+        <img src="../ressources/images/listeOffreAdmin.png" alt="admin">
+        <h3 class="titre" id="rouge">Toutes les offres de la base de données</h3>
+        <h4 class="titre">Consultez le statut de chaque offre en un coup d'oeil</h4>
+        <p>Cliquez sur une offre pour voir ses détails</p>
     </div>
 
     <div class="droite">
@@ -20,9 +23,16 @@
                         </div>
                         
                         <div class='offreDroite'>
-                            <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - " . htmlspecialchars($offre->getTypeOffre()) . "</h3>
-                            <h5 class='titre'>Postée par " . htmlspecialchars($entreprise->getNomEntreprise()) . "</h5>
-                            <p>Le " . htmlspecialchars($offre->getDateCreationOffre()) . "</p>
+                            <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - " . htmlspecialchars($offre->getTypeOffre()) . " - Par ". htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
+                            <p>Le " . htmlspecialchars($offre->getDateCreationOffre()) . "</p>";
+
+                            if ($offre->getEstValide()) {
+                                echo "<div id='valide' class='statutOffre'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
+                            } else {
+                                echo "<div id='nonValide' class='statutOffre'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
+                            }
+
+                        echo"
                         </div>                        
                         </a>
                         

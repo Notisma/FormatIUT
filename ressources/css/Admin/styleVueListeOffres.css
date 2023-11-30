@@ -32,11 +32,15 @@ body {
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-content: center;
     -webkit-border-bottom-left-radius: 10px;
     -webkit-border-top-left-radius: 10px;
+}
+
+.gauche > img {
+    width: 80%;
 }
 
 .droite {
@@ -76,7 +80,7 @@ body {
 
 .offre {
     width: 98%;
-    height: 120px;
+    height: 130px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -86,6 +90,7 @@ body {
     border-radius: 10px;
     background-color: white;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .offre:hover {
@@ -117,5 +122,49 @@ body {
     justify-content: space-around;
     align-items: flex-start;
     align-content: center;
+}
+
+.statutOffre {
+    width: 80%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 3%;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+.statutOffre > img {
+    width: 35px;
+    max-height: 90%;
+    padding-right: 2%;
+}
+
+#valide {
+    background-color: #24942b;
+    color: #0d4e00;
+    border: 2px solid #0d4e00;
+}
+
+
+#nonValide {
+    background-color: #ffb700;
+    color: #814900;
+    border: 2px solid #fa7506;
+}
+
+.wrapErreur {
+    width: 60%;
+}
+
+.wrapErreur > img {
+    width: 50%;
+}
+
+.wrapErreur > h3 {
+    text-decoration: none;
+    color: black;
 }
 
