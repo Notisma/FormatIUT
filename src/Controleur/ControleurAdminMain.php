@@ -271,14 +271,21 @@ class ControleurAdminMain extends ControleurMain
     public static function ajouterEtudiant(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            $_REQUEST['sexeEtu'] = null;
-            $_REQUEST['mailPerso'] = null;
-            $_REQUEST['telephone'] = null;
-            $_REQUEST['validationPedagogique'] = 0;
-            $_REQUEST['presenceForumIUT'] = 0;
-            $_REQUEST['img_id'] = 1;
-            (new EtudiantRepository())->construireDepuisTableau($_REQUEST);
-            self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été ajouté");
+            if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) != null) {
+                self::redirectionFlash("afficherFormulaireCreationEtudiant", "warning", "Un étudiant avec ce numéro existe déjà");
+            }
+            else {
+                $_REQUEST['loginEtudiant'] = strtolower($_REQUEST['loginEtudiant']);
+                $_REQUEST['sexeEtu'] = null;
+                $_REQUEST['mailPerso'] = null;
+                $_REQUEST['telephone'] = null;
+                $_REQUEST['validationPedagogique'] = 0;
+                $_REQUEST['presenceForumIUT'] = 0;
+                $_REQUEST['img_id'] = 1;
+                $etudiant = (new EtudiantRepository())->construireDepuisTableau($_REQUEST);
+                (new EtudiantRepository())->creerObjet($etudiant);
+                self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été ajouté");
+            }
         }
     }
 
