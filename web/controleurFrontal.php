@@ -24,26 +24,15 @@ if (isset($_REQUEST['action'])) {
 }
 
 $nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
-$nonConnecte=false;
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
-        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
-           $nonConnecte=true;
-        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
-            $nonConnecte=true;
-        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
-            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Personnels") {
-                $nonConnecte = true;
-            }else {
-                $nomClasseControleur::$action();
-            }
-        }else {
-            $nomClasseControleur::$action();
-        }
+        $nonConnecte =\App\FormatIUT\Lib\ConnexionUtilisateur::verifConnecte($controleur);
         if ($nonConnecte){
             header("Location: ?controleur=Main&action=afficherPageConnexion");
-            \App\FormatIUT\Lib\MessageFlash::ajouter("danger", "Veuillez vous connecter");
+            \App\FormatIUT\Lib\MessageFlash::verifDeconnexion();
+        }else {
+            $nomClasseControleur::$action();
         }
     } else
         $nomClasseControleur::afficherErreur('L\'action : "' . $action . '" n\'existe pas dans le contrôleur : "' . $nomClasseControleur . '"');

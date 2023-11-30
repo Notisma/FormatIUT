@@ -126,4 +126,9 @@ class Configuration
     {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
     }
+
+    public static function getDelai()
+    {
+        return 30*60;
+    }
 }
