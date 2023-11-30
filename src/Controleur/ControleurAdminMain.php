@@ -29,8 +29,8 @@ class ControleurAdminMain extends ControleurMain
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
-            //array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
-            //array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
+            array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
+            array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
             array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
         );
 
@@ -119,8 +119,9 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherListeEntreprises(): void
     {
+        $listeEntreprises = (new EntrepriseRepository())->getListeObjet();
         self::$pageActuelleAdmin = "Liste Entreprises";
-        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu());
+        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises]);
     }
 
     /**
@@ -134,8 +135,9 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherListeOffres(): void
     {
+        $listeOffres = (new FormationRepository())->getListeObjet();
         self::$pageActuelleAdmin = "Liste des Offres";
-        self::afficherVue("Liste des offres", "Admin/vueListeOffres.php", self::getMenu());
+        self::afficherVue("Liste des Offres", "Admin/vueListeOffres.php", self::getMenu(), ["listeOffres" => $listeOffres]);
     }
 
     //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -255,12 +257,12 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function supprimerEtudiant(): void
     {
-        if (isset($_REQUEST["idFormation"])) {
+        if (isset($_REQUEST["numEtu"])) {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
             if (!is_null($etudiant)) {
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                     (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
-                    self::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été supprimé");
+                    self::redirectionFlash("afficherListeEtudiant", "success", "L'étudiant a bien été supprimé");
                 } else self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous n'avez pas les droits requis");
             } else self::redirectionFlash("afficherListeEtudiant", "warning", "L'étudiant n'existe pas");
         } else self::redirectionFlash("afficherListeEtudiant", "danger", "L'étudiant n'est pas renseigné");
@@ -299,7 +301,7 @@ class ControleurAdminMain extends ControleurMain
                     if (!$entreprise->isEstValide()) {
                         $entreprise->setEstValide(true);
                         (new EntrepriseRepository())->modifierObjet($entreprise);
-                        self::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été validée");
+                        self::redirectionFlash("afficherAccueilAdmin", "success", "L'entreprise a bien été validée");
                     } else self::redirectionFlash("afficherDetailEntreprise", "warning", "L'entreprise est déjà valider");
                 } else self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous n'avez pas les droits requis");
             } else self::redirectionFlash("afficherListeEntreprises", "warning", "L'entreprise n'existe pas");
