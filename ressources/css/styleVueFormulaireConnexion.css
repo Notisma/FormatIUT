@@ -276,16 +276,17 @@ input {
     align-items: center;
     align-content: center;
     text-align: center;
-    position: fixed;
-    z-index: 90;
+    position: absolute;
+    z-index: 900;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 60%;
     left: 50%;
     width: 50%;
     height: 50%;
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid black;
+    /* ne doit pas passer sous le footer */
 }
 
 .mainForget {
@@ -298,6 +299,8 @@ input {
     width: 60%;
     height: 100%;
 }
+
+
 
 .closeForget {
     display: flex;
