@@ -159,58 +159,58 @@ abstract class AbstractRepository
             'entreprises' => array(),
         ];
 
-        $sql = "";
+        $sqlFormations = "";
+        $sqlEntreprises = "";
+
         $tags = [];
+
         for ($i = 0; $i < count($motsclefs); $i++) {
             $mot = $motsclefs[$i];
-            $sql .= "
+            $motsclefs[$i] = strtolower($mot);
+
+            $sqlFormations .= "
             SELECT *
             FROM Formations
-            WHERE (LOWER(sujet) LIKE LOWER(:tag$i)
-                OR LOWER(nomOffre) LIKE LOWER(:tag$i)
-                OR LOWER(typeOffre) LIKE LOWER(:tag$i)
-                OR LOWER(detailProjet) LIKE LOWER(:tag$i))";
-
+            WHERE (LOWER(sujet) LIKE :tag$i
+                OR LOWER(nomOffre) LIKE :tag$i
+                OR LOWER(typeOffre) LIKE :tag$i
+                OR LOWER(detailProjet) LIKE :tag$i
+                OR 'offre' LIKE :tag$i
+                OR 'formation' LIKE :tag$i
+            )";
             if (Configuration::controleurIs("EtuMain"))
-                $sql .= "AND  $anneeEtu >= anneeMin
+                $sqlFormations .= "AND  $anneeEtu >= anneeMin
                          AND  $anneeEtu <= anneeMax";
+            $sqlFormations .= "\nINTERSECT";
 
-            $sql .= "INTERSECT";
+            $sqlEntreprises .= "
+            SELECT *
+            FROM Entreprises
+            WHERE LOWER(nomEntreprise) LIKE :tag$i
+            INTERSECT";
+
             $tags["tag$i"] = "%$mot%";
         }
 
-        $sql = substr($sql, 0, -9);
+        $sqlFormations = substr($sqlFormations, 0, -9);
+        $sqlEntreprises = substr($sqlEntreprises, 0, -9);
 
+    //    echo "<pre>";var_dump($sqlEntreprises);echo "</pre>";
         try {
-            $pdoStatement = $pdo->prepare($sql);
+            $pdoStatement = $pdo->prepare($sqlFormations);
             $pdoStatement->execute($tags);
         } catch (\PDOException $e) {
             return null;
         }
-
         foreach ($pdoStatement as $row)
             $res['offres'][] = (new FormationRepository())->construireDepuisTableau($row);
 
-        $sql = "";
-        $tags = [];
-        for ($i = 0; $i < count($motsclefs); $i++) {
-            $mot = $motsclefs[$i];
-            $sql .= "
-            SELECT *
-            FROM Entreprises
-            WHERE LOWER(nomEntreprise) LIKE LOWER(:tag$i)
-            INTERSECT";
-            $tags["tag$i"] = "%$mot%";
-        }
-
-        $sql = substr($sql, 0, -9);
-
-        //try {
-            $pdoStatement = $pdo->prepare($sql);
+        try {
+            $pdoStatement = $pdo->prepare($sqlEntreprises);
             $pdoStatement->execute($tags);
-        //} catch (\PDOException $e) {
-        //    return null;
-        //}
+        } catch (\PDOException $e) {
+            return null;
+        }
         foreach ($pdoStatement as $row)
             $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
 
