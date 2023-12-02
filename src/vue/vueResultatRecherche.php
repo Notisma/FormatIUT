@@ -45,7 +45,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
         if (!empty($offres)) {
             foreach ($offres as $offre) {
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                echo "<a href='?controleur=" . Configuration::getControleur() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
+                echo "<a href='?controleur=" . Configuration::getControleurName() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
                     <div class='partieGauche'>
                             <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                         </div>

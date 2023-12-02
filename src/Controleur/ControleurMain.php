@@ -6,6 +6,7 @@ use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Configuration\index;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\TransfertImage;
@@ -94,6 +95,9 @@ class ControleurMain
      */
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+
         if (Configuration::controleurIs("EtuMain")) {
             $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
@@ -387,7 +391,7 @@ class ControleurMain
             die();
         } //si la recherche contient des chiffres
         if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Pas de nombres.");
+
             die();
         } //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
@@ -398,12 +402,11 @@ class ControleurMain
         $recherche = $_REQUEST['recherche'];
         $morceaux = explode(" ", $recherche);
 
-        var_dump($morceaux);
+//        var_dump($morceaux);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
 
-        echo "<br>";
-//        var_dump($res);
+//        echo "<br>"; var_dump($res);
 
         if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
             MessageFlash::ajouter("danger", "Crash de recherche");
@@ -487,7 +490,7 @@ class ControleurMain
      * @param string $message le message à envoyer
      * @return void redirige en envoyant un messageFlash
      */
-    protected static function redirectionFlash(string $action, string $type, string $message): void
+    public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
         (Configuration::getCheminControleur())::$action();

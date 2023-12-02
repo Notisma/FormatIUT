@@ -25,7 +25,7 @@ class Session
     {
         if (is_null(Session::$instance))
             Session::$instance = new Session();
-            self::verifierDerniereActivite();
+        self::verifierDerniereActivite();
         return Session::$instance;
     }
 
@@ -58,20 +58,20 @@ class Session
     }
 
 
-    public static function verifierDerniereActivite():void{
-
+    public static function verifierDerniereActivite(): void
+    {
         if (isset($_SESSION['derniereActivite'])) {
-            if (isset($_SESSION["_utilisateurConnecte"])){
+            if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
-            if ($time > (Configuration::getDelai())) {
-                //$test=time() - $_SESSION['derniereActivite'];
-                $bool = false;
-                if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
-                session_unset();     // unset $_SESSION variable for the run-time
-                if ($bool)
-                    MessageFlash::ajouter("info", "Vous avez été déconnecté(e) : $time secondes");
+                if ($time > (Configuration::getDelai())) {
+                    //$test=time() - $_SESSION['derniereActivite'];
+                    $bool = false;
+                    if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
+                    session_unset();     // unset $_SESSION variable for the run-time
+                    if ($bool)
+                        MessageFlash::ajouter("info", "Vous avez été déconnecté(e) : $time secondes");
+                }
             }
-        }
         }
         $_SESSION['derniereActivite'] = time(); // update last activity time stamp
     }

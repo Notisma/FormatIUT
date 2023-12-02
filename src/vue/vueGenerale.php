@@ -73,7 +73,7 @@ use App\FormatIUT\Configuration\Configuration;
                     if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                     $codeRecherche .=
                         ">
-                            <input type='hidden' name='controleur' value='" . Configuration::getControleur() . "'>
+                            <input type='hidden' name='controleur' value='" . Configuration::getControleurName() . "'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                 }
