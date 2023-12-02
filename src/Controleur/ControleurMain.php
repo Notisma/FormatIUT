@@ -384,41 +384,38 @@ class ControleurMain
 
         if (!isset($_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
-            return;
+            die();
         } //si la recherche contient des chiffres
         if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
-            return;
+            MessageFlash::ajouter("warning", "Pas de nombres.");
+            die();
         } //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
-            return;
+            die();
         }
 
         $recherche = $_REQUEST['recherche'];
         $morceaux = explode(" ", $recherche);
 
+        var_dump($morceaux);
+
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
 
-        if (is_null($res)) {
-            MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
-            self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
-                "recherche" => $recherche,
-                "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
-            ]);
+        echo "<br>";
+//        var_dump($res);
+
+        if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
+            MessageFlash::ajouter("danger", "Crash de recherche");
+            die();
         } else {
-            MessageFlash::ajouter("success", count($res['offres']) + count($res['entreprises']) . " Résultats trouvés.");
+            $count = count($res['offres']) + count($res['entreprises']);
+            MessageFlash::ajouter("success", "$count résultats trouvés.");
             $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
                 "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
+                "entreprises" => $res['entreprises'],
+                "nbResults" => $count
             ]);
         }
     }

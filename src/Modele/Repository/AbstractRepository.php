@@ -165,7 +165,7 @@ abstract class AbstractRepository
             $mot = $motsclefs[$i];
             $sql .= "
             SELECT *
-            FROM Offre
+            FROM Formations
             WHERE (LOWER(sujet) LIKE LOWER(:tag$i)
                 OR LOWER(nomOffre) LIKE LOWER(:tag$i)
                 OR LOWER(typeOffre) LIKE LOWER(:tag$i)
@@ -197,7 +197,7 @@ abstract class AbstractRepository
             $mot = $motsclefs[$i];
             $sql .= "
             SELECT *
-            FROM Entreprise
+            FROM Entreprises
             WHERE LOWER(nomEntreprise) LIKE LOWER(:tag$i)
             INTERSECT";
             $tags["tag$i"] = "%$mot%";

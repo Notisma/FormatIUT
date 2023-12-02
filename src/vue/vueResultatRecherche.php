@@ -1,12 +1,8 @@
 <?php
-
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-if (!is_null($offres) && !is_null($entreprises)) {
-$count = count($offres) + count($entreprises);
-}
 ?>
 <div class="center">
 
@@ -15,10 +11,9 @@ $count = count($offres) + count($entreprises);
         <?= $codeRecherche ?>
     </div>
 
-
     <div class="results">
         <?php
-        if ($count == 0) {
+        if ($nbResults == 0) {
             echo "<div class='erreur'>
                 <img src='../ressources/images/erreur.png' alt='erreur'>
                 <h2 class='titre'>Aucun résultat trouvé</h2>
@@ -26,7 +21,7 @@ $count = count($offres) + count($entreprises);
         }
 
 
-        echo "<h3 class='titre'>" . $count . " Résultats trouvés :</h3>";
+        echo "<h3 class='titre'>" . $nbResults . " Résultats trouvés :</h3>";
         if (!empty($entreprises)) {
             foreach ($entreprises as $entr) {
                 $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
@@ -49,7 +44,7 @@ $count = count($offres) + count($entreprises);
 
         if (!empty($offres)) {
             foreach ($offres as $offre) {
-                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                 echo "<a href='?controleur=" . Configuration::getControleur() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
                     <div class='partieGauche'>
                             <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
