@@ -490,7 +490,7 @@ class ControleurMain
      * @param string $message le message à envoyer
      * @return void redirige en envoyant un messageFlash
      */
-    public static function redirectionFlash(string $action, string $type, string $message): void
+    protected static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
         (Configuration::getCheminControleur())::$action();
