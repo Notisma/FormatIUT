@@ -231,17 +231,17 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
-                if (!is_null($prof)){
-                    if ($prof->isEstAdmin()){
-                        ConnexionUtilisateur::connecter($_REQUEST["login"],"Administrateurs");
+                $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+                if (!is_null($prof)) {
+                    if ($prof->isEstAdmin()) {
+                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
                     }
                 }
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnels") {
+                } else if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
@@ -257,12 +257,12 @@ class ControleurMain
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
                 }
-            }else if ($_REQUEST["login"] == "AdminTest") {
+            } else if ($_REQUEST["login"] == "AdminTest") {
                 if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                MessageFlash::ajouter("success", "Connexion Réussie");
-                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                exit();
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                    MessageFlash::ajouter("success", "Connexion Réussie");
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                    exit();
                 }
             }
         }
@@ -388,25 +388,24 @@ class ControleurMain
 
         if (!isset($_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            die();
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
         } //si la recherche contient des chiffres
         if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-
-            die();
+            MessageFlash::ajouter("warning", "On évite les nombres stp (à régler plus tard)");
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
         } //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            die();
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
         }
 
         $recherche = $_REQUEST['recherche'];
         $morceaux = explode(" ", $recherche);
 
-//        var_dump($morceaux);
-
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-
-//        echo "<br>"; var_dump($res);
 
         if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
             MessageFlash::ajouter("danger", "Crash de recherche");
