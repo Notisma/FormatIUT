@@ -1,6 +1,8 @@
 # Format'IUT
 
-Ce projet regroupe les différents fichiers qui composeront le site web : Format'IUT. Un site pour référencer et gérer les offres de stages et d'alternance.
+![Logo format'iut](https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/formatiutRemoved.png)
+
+Ce projet regroupe les différents fichiers qui composeront le site web : Format'IUT. Un site pour référencer et gérer les offres de stages et d'alternance de l'IUT Montpellier - Sète.
 
 ## Participation
 
@@ -45,6 +47,10 @@ D'autres branches sont utilisées tout au long des sprints. Elles sont dédiées
   - Efforts Réalisés : 
   - Efforts Validés : 
 
-## Detail de la branche
+## Identité Viuelle
 
-Main du projet, mis à jour à la fin de chaque sprint
+L'aspect visuel du site a été développé de façon à prendre en compte les aspects UI et UX de l'expérience utilisateur des différents acteurs du site internet.
+
+Ce développement respecte dûment la charte graphique de L'Université de Montpellier en sa version de janvier 2023 (couleurs, police, logos...).
+
+Le Logo de Format'IUT est inspiré de celui de l'Université de Montpellier. Il Reprend les lettres 'F', 'I', 'U' et 'T', tirées du nom de notre application, Format'IUT.
