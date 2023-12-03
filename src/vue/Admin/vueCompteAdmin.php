@@ -1,10 +1,23 @@
 <div class="centreCompte">
-    <p></p>
-    <div class="menu">
+    <div class="menuAdmin">
+        <div class="sousMenuAdmin">
+            <h3 class="titre">Mon Compte</h3>
+        </div>
 
+        <div class="sousMenuAdmin">
+            <h3 class="titre">Mes Notifications</h3>
+        </div>
+
+        <div class="sousMenuAdmin">
+            <h3 class="titre">Mes Collègues</h3>
+        </div>
+
+        <div class="sousMenuAdmin">
+            <h3 class="titre">Mes Étudiants</h3>
+        </div>
     </div>
 
-    <div class="main">
+    <div class="mainAdmins">
 
     </div>
 

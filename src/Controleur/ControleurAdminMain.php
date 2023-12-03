@@ -309,7 +309,7 @@ class ControleurAdminMain extends ControleurMain
     }
 
     /**
-     * @return void permet à l'entreprise de supprimer(archiver) une entreprise
+     * @return void permet à l'entreprise de supprimer (archiver) une entreprise
      */
     public static function supprimerEntreprise(): void
     {
