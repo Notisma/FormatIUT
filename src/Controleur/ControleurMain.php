@@ -3,15 +3,11 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Configuration\index;
-use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
-use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
@@ -38,13 +34,11 @@ class ControleurMain
      */
     public static function getMenu(): array
     {
-        $value = array(
+        return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
-
-        return $value;
     }
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +94,8 @@ class ControleurMain
             if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
                 if ($offre->getEstValide()) {
                     self::$pageActuelle = "Détails de l'offre";
-                    $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                    /** @var ControleurMain $menu */
+                    $menu = Configuration::getCheminControleur();
                     $liste = (new FormationRepository())->getListeidFormations();
                     if ($idFormation || isset($_REQUEST["idFormation"])) {
                         if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -126,7 +121,8 @@ class ControleurMain
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
-                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                /** @var ControleurMain $menu */
+                $menu = Configuration::getCheminControleur();
                 $liste = (new FormationRepository())->getListeidFormations();
                 if ($idFormation || isset($_REQUEST["idFormation"])) {
                     if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -147,7 +143,8 @@ class ControleurMain
             }
         } else {
             self::$pageActuelle = "Détails de l'offre";
-            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+            /** @var ControleurMain $menu */
+            $menu = Configuration::getCheminControleur();
             $liste = (new FormationRepository())->getListeidFormations();
             if ($idFormation || isset($_REQUEST["idFormation"])) {
                 if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -172,6 +169,7 @@ class ControleurMain
      */
     public static function afficherErreur(string $error): void
     {
+        /** @var ControleurMain $menu */
         $menu = Configuration::getCheminControleur();
 
         self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
@@ -227,17 +225,17 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
-                if (!is_null($prof)){
-                    if ($prof->isEstAdmin()){
-                        ConnexionUtilisateur::connecter($_REQUEST["login"],"Administrateurs");
+                $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+                if (!is_null($prof)) {
+                    if ($prof->isEstAdmin()) {
+                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
                     }
                 }
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnels") {
+                } else if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
@@ -253,12 +251,12 @@ class ControleurMain
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
                 }
-            }else if ($_REQUEST["login"] == "AdminTest") {
+            } else if ($_REQUEST["login"] == "AdminTest") {
                 if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                MessageFlash::ajouter("success", "Connexion Réussie");
-                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                exit();
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                    MessageFlash::ajouter("success", "Connexion Réussie");
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                    exit();
                 }
             }
         }
@@ -380,6 +378,7 @@ class ControleurMain
      */
     public static function rechercher(): void
     {
+        /** @var ControleurMain $controleur */
         $controleur = Configuration::getCheminControleur();
 
         if (!isset($_REQUEST['recherche'])) {

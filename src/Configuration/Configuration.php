@@ -9,11 +9,11 @@ define('DB_NAME', 'loyet'); //Nom de la base de données4
 
 namespace App\FormatIUT\Configuration;
 
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class Configuration
 {
-
     static private array $configLocal = array(
 
         'hostname' => 'localhost',
@@ -122,6 +122,9 @@ class Configuration
         self::$controleur = $controleur;
     }
 
+    /**
+     * @return class-string<ControleurMain>
+     */
     public static function getCheminControleur(): string
     {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
@@ -129,6 +132,6 @@ class Configuration
 
     public static function getDelai()
     {
-        return 30*60;
+        return 30 * 60;
     }
 }

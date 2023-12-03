@@ -2,11 +2,9 @@
 
 namespace App\FormatIUT\Controleur;
 
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\InsertionCSV;
 use App\FormatIUT\Lib\MessageFlash;
-use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -21,6 +19,7 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function getMenu(): array
     {
+        $accueil = "";
         if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
             $accueil = "Personnels";
         } else if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
@@ -50,9 +49,7 @@ class ControleurAdminMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise");
         }
 
-
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
-
 
         return $menu;
     }
