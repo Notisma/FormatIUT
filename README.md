@@ -47,7 +47,7 @@ D'autres branches sont utilisées tout au long des sprints. Elles sont dédiées
   - Efforts Réalisés : 
   - Efforts Validés : 
 
-## Identité Viuelle
+## Identité Visuelle
 
 L'aspect visuel du site a été développé de façon à prendre en compte les aspects UI et UX de l'expérience utilisateur des différents acteurs du site internet.
 
