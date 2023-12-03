@@ -39,7 +39,7 @@ class ControleurAdminMain extends ControleurMain
         }
 
         if (self::$pageActuelleAdmin == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/mon-compte.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
         }
 
         if (self::$pageActuelleAdmin == "Détails d'un Étudiant") {
@@ -83,7 +83,7 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherProfilAdmin(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
-        self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
+        self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php", self::getMenu());
     }
 
     /**
