@@ -33,7 +33,6 @@ class ControleurAdminMain extends ControleurMain
             //array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             //array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
             array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
-            array("image" => "../ressources/images/document.png", "label" => "Ajouter étudiant", "lien" => "?action=afficherFormulaireCreationEtudiant&controleur=AdminMain"),
         );
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
