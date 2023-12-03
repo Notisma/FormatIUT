@@ -10,6 +10,7 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\Historique;
 
 if (isset($_REQUEST['controleur'])) { //
     $controleur = ucfirst($_REQUEST["controleur"]);

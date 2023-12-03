@@ -107,11 +107,6 @@ class Configuration
 
     private static string $controleur;
 
-    public static function getControleur(): string
-    {
-        return self::$controleur;
-    }
-
     public static function controleurIs(string $contr): bool
     {
         return self::$controleur == $contr;
@@ -122,6 +117,11 @@ class Configuration
         self::$controleur = $controleur;
     }
 
+    public static function getControleurName(): string
+    {
+        return self::$controleur;
+    }
+
     /**
      * @return class-string<ControleurMain>
      */
@@ -129,7 +129,11 @@ class Configuration
     {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
     }
-
+/*    public static function getControleurClass(): string
+    {
+        return "Controleur" . self::$controleur;
+    }
+*/
     public static function getDelai()
     {
         return 30 * 60;

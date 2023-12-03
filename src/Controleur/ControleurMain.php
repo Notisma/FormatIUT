@@ -4,6 +4,7 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\VerificationEmail;
@@ -88,6 +89,9 @@ class ControleurMain
      */
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+
         if (Configuration::controleurIs("EtuMain")) {
             $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
@@ -383,20 +387,17 @@ class ControleurMain
 
         if (!isset($_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         } //si la recherche contient des chiffres
         if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            MessageFlash::ajouter("warning", "On évite les nombres stp (à régler plus tard)");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         } //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         }
 
@@ -405,19 +406,17 @@ class ControleurMain
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
 
-        if (is_null($res)) {
-            MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
-            self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
-                "recherche" => $recherche,
-                "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
-            ]);
+        if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
+            MessageFlash::ajouter("danger", "Crash de recherche");
+            die();
         } else {
-            MessageFlash::ajouter("success", count($res['offres']) + count($res['entreprises']) . " Résultats trouvés.");
+            $count = count($res['offres']) + count($res['entreprises']);
+            MessageFlash::ajouter("success", "$count résultats trouvés.");
             $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
                 "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
+                "entreprises" => $res['entreprises'],
+                "nbResults" => $count
             ]);
         }
     }
