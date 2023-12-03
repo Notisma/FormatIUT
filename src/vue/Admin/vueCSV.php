@@ -11,7 +11,7 @@
         <form class="formulaire" enctype="multipart/form-data" action="?action=ajouterCSV&controleur=AdminMain" method="post" >
             <img src="../ressources/images/upload.png" alt="csv">
             <h5 class="titre">Glissez - Déposez ici votre fichier</h5>
-            <h5 class="titre">Ou :</h5>
+            <h5 class="titre">ou :</h5>
             <input class="survol" type="file" name="file"/>
             <input class="survol" type="submit" value="Envoyer"/>
         </form>
