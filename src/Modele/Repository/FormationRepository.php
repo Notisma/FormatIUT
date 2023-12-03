@@ -251,7 +251,7 @@ class FormationRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
     }
-    public function trouverOffreValide($numEtu, $typeOffre): Formation
+    public function trouverOffreValide($numEtu, $typeOffre): ?Formation
     {
         $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND etat='Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);

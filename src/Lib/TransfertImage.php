@@ -9,13 +9,8 @@ use GdImage;
 
 class TransfertImage
 {
-    public static function transfert($nom): int|false
+    public static function transfert(): int|false
     {
-        $ret = false;
-        $fileName = '';
-        $img_taille = 0;
-        $img_type = '';
-        $img_nom = '';
         $taille_max = 1000000;
         $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
 
@@ -29,20 +24,23 @@ class TransfertImage
                 echo "Trop gros !";
                 return false;
             }
+            // si l'upload est une nouvelle PP étudiant, on la rend ronde avant de l'importer
+            if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
+                $tmp_filename = $_FILES['pdp']['tmp_name'];
+                if (exif_imagetype($tmp_filename)) {
+                    $img = file_get_contents($tmp_filename);
+                    $img_arrondie = self::getImageArrondieData($img);
+                    file_put_contents($tmp_filename, $img_arrondie);
+                }
+            }
 
             $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
-            /*$fileName = file_get_contents($_FILES['pdp']['tmp_name']);
-            if ($_REQUEST["controleur"] == "EtuMain") {
-                $image = self::img_ronde($fileName);
-                $fileName = self::image_data($image);
-            }*/
             return $ai_id;
         }
     }
 
-    public static function img_ronde(string $image): bool|GdImage
+    public static function getImageArrondieData(string $image): false|string
     {
-
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
         $hauteur = imagesy($image);
@@ -65,13 +63,10 @@ class TransfertImage
         imagecolortransparent($image_ronde, $red);
         imagefill($image_ronde, 0, 0, $red);
 
-        return $image_ronde;
-    }
+        if (!$image_ronde) return false;
 
-    public static function image_data($gdimage): bool|string
-    {
         ob_start();
-        imagepng($gdimage);
+        imagepng($image_ronde);
         return (ob_get_clean());
     }
 }

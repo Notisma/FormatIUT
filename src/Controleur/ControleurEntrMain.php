@@ -5,9 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
-use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\Formation;
-use App\FormatIUT\Modele\Repository\ConnexionBaseDeDonnee;
+use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
@@ -32,7 +30,6 @@ class ControleurEntrMain extends ControleurMain
             array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=afficherFormulaireCreationOffre&controleur=EntrMain"),
             array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&type=Tous&controleur=EntrMain"),
             array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter")
-
         );
     }
 
@@ -114,34 +111,34 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST["idEtudiant"], $_REQUEST["idFormation"])) {
             $idFormation = $_REQUEST["idFormation"];
-            $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]));
+            $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["idEtudiant"]));
             if (!is_null($offre) && !is_null($etudiant)) {
-                if (((new FormationRepository())->estFormation($_REQUEST["idFormation"]))) {
+                if (((new FormationRepository())->estFormation($idFormation))) {
                     MessageFlash::ajouter("danger", "L'offre est déjà assignée à un étudiant");
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
+                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $idFormation);
                 } else {
-                    if (((new EtudiantRepository())->aUneFormation($_REQUEST["idFormation"]))) {
+                    if (((new EtudiantRepository())->aUneFormation($idFormation))) {
                         MessageFlash::ajouter("danger", "Cet étudiant a déjà une formation");
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
+                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $idFormation);
                     } else {
-                        if (((new EtudiantRepository())->etudiantAPostule($_REQUEST["idEtudiant"], $_REQUEST["idFormation"]))) {
-                            (new FormationRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $_REQUEST["idFormation"]);
+                        if (((new EtudiantRepository())->etudiantAPostule($_REQUEST["idEtudiant"], $idFormation))) {
+                            (new FormationRepository())->mettreAChoisir($_REQUEST['idEtudiant'], $idFormation);
                             $_REQUEST["action"] = "afficherAccueilEntr()";
                             self::redirectionFlash("afficherAccueilEntr", "success", "Etudiant assigné avec succès");
                         } else {
-                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
+                            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $idFormation);
                             MessageFlash::ajouter("danger", "Cet étudiant n'a pas postulé à cette offre");
                         }
 
                     }
                 }
             } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
+                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $idFormation);
                 MessageFlash::ajouter("danger", "Cet étudiant n'existe pas");
             }
         } else {
-            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
+            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherMesOffres");
             MessageFlash::ajouter("danger", "Des données sont manquantes");
         }
     }
@@ -254,10 +251,10 @@ class ControleurEntrMain extends ControleurMain
                             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
-                                if(isset($_REQUEST['dateDebut'])){
+                                if (isset($_REQUEST['dateDebut'])) {
                                     $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
                                 }
-                                if(isset($_REQUEST['dateFin'])){
+                                if (isset($_REQUEST['dateFin'])) {
                                     $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
                                 }
                                 $offre->setSujet($_REQUEST['sujet']);
@@ -356,11 +353,10 @@ class ControleurEntrMain extends ControleurMain
                 $nom .= $nomEntreprise[$i];
             }
         }
-        $nom .= "_logo";
 
         $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
 
-        $ai_id = self::insertImage($nom);
+        $ai_id = TransfertImage::transfert();
         $entreprise->setImg($ai_id);
         (new EntrepriseRepository())->modifierObjet($entreprise);
 

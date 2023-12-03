@@ -333,7 +333,7 @@ class EtudiantRepository extends AbstractRepository
 
     public function getOffreValidee($numEtu, $typeOffre)
     {
-        $sql = "Select * FROM Postuler r JOIN Offre o ON o.idFormation = r.idFormation WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND etat = 'Validée'";
+        $sql = "Select * FROM Postuler r JOIN Formations o ON o.idFormation = r.idFormation WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND etat = 'Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagType" => $typeOffre, "tagEtu" => $numEtu);
         $pdoStatement->execute($values);

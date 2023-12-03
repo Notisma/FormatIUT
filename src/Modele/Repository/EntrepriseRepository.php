@@ -86,11 +86,37 @@ class EntrepriseRepository extends AbstractRepository
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
         $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
-        FROM Formations f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
+        FROM Formations f JOIN Entreprises e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
 
+    }
+
+    public function getOffresNonValidesDeEntreprise(int $idEntreprise): array
+    {
+        $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 0";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagId" => $idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[] = (new FormationRepository())->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
+    }
+
+    public function getOffresValidesDeEntreprise(int $idEntreprise): array
+    {
+        $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagId" => $idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[] = (new FormationRepository())->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
     }
 }

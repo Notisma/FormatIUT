@@ -3,15 +3,12 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Configuration\index;
-use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
-use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\Offre;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
@@ -38,13 +35,11 @@ class ControleurMain
      */
     public static function getMenu(): array
     {
-        $value = array(
+        return array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil", "lien" => "?controleur=Main&action=afficherIndex"),
             array("image" => "../ressources/images/profil.png", "label" => "Se Connecter", "lien" => "?controleur=Main&action=afficherPageConnexion"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Accueil Entreprise", "lien" => "?controleur=Main&action=afficherVuePresentation")
         );
-
-        return $value;
     }
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,13 +89,17 @@ class ControleurMain
      */
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+
         if (Configuration::controleurIs("EtuMain")) {
             $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
             if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
                 if ($offre->getEstValide()) {
                     self::$pageActuelle = "Détails de l'offre";
-                    $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                    /** @var ControleurMain $menu */
+                    $menu = Configuration::getCheminControleur();
                     $liste = (new FormationRepository())->getListeidFormations();
                     if ($idFormation || isset($_REQUEST["idFormation"])) {
                         if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -126,7 +125,8 @@ class ControleurMain
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
-                $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+                /** @var ControleurMain $menu */
+                $menu = Configuration::getCheminControleur();
                 $liste = (new FormationRepository())->getListeidFormations();
                 if ($idFormation || isset($_REQUEST["idFormation"])) {
                     if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -147,7 +147,8 @@ class ControleurMain
             }
         } else {
             self::$pageActuelle = "Détails de l'offre";
-            $menu = "App\FormatIUT\Controleur\Controleur" . $_REQUEST['controleur'];
+            /** @var ControleurMain $menu */
+            $menu = Configuration::getCheminControleur();
             $liste = (new FormationRepository())->getListeidFormations();
             if ($idFormation || isset($_REQUEST["idFormation"])) {
                 if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
@@ -156,7 +157,7 @@ class ControleurMain
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $client = "Admin";
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
                     self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
                 }
@@ -172,6 +173,7 @@ class ControleurMain
      */
     public static function afficherErreur(string $error): void
     {
+        /** @var ControleurMain $menu */
         $menu = Configuration::getCheminControleur();
 
         self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
@@ -227,17 +229,17 @@ class ControleurMain
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
-                if (!is_null($prof)){
-                    if ($prof->isEstAdmin()){
-                        ConnexionUtilisateur::connecter($_REQUEST["login"],"Administrateurs");
+                $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+                if (!is_null($prof)) {
+                    if ($prof->isEstAdmin()) {
+                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
                     }
                 }
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::getTypeConnecte()=="Personnels") {
+                } else if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
                     header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                }else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
+                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
                     MessageFlash::ajouter('info', "Veuillez compléter votre profil");
                     header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
                 } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
@@ -253,12 +255,12 @@ class ControleurMain
                     header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
                     exit();
                 }
-            }else if ($_REQUEST["login"] == "AdminTest") {
+            } else if ($_REQUEST["login"] == "AdminTest") {
                 if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                MessageFlash::ajouter("success", "Connexion Réussie");
-                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                exit();
+                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                    MessageFlash::ajouter("success", "Connexion Réussie");
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                    exit();
                 }
             }
         }
@@ -380,24 +382,22 @@ class ControleurMain
      */
     public static function rechercher(): void
     {
+        /** @var ControleurMain $controleur */
         $controleur = Configuration::getCheminControleur();
 
         if (!isset($_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         } //si la recherche contient des chiffres
         if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            MessageFlash::ajouter("warning", "On évite les nombres stp (à régler plus tard)");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         } //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            ConnexionUtilisateur::deconnecter();
-            header("Location: controleurFrontal.php?controleur=Main&action=afficherIndex");
+            header("Location: $_SERVER[HTTP_REFERER]");
             return;
         }
 
@@ -406,19 +406,17 @@ class ControleurMain
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
 
-        if (is_null($res)) {
-            MessageFlash::ajouter("warning", "Aucun résultat trouvé.");
-            self::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
-                "recherche" => $recherche,
-                "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
-            ]);
+        if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
+            MessageFlash::ajouter("danger", "Crash de recherche");
+            die();
         } else {
-            MessageFlash::ajouter("success", count($res['offres']) + count($res['entreprises']) . " Résultats trouvés.");
+            $count = count($res['offres']) + count($res['entreprises']);
+            MessageFlash::ajouter("success", "$count résultats trouvés.");
             $controleur::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $controleur::getMenu(), [
                 "recherche" => $recherche,
                 "offres" => $res['offres'],
-                "entreprises" => $res['entreprises']
+                "entreprises" => $res['entreprises'],
+                "nbResults" => $count
             ]);
         }
     }
@@ -497,15 +495,6 @@ class ControleurMain
     }
 
     /**
-     * @param string $nom nom de l'image à enregistrer
-     * @return int|false insert l'image dans la base de donnée et renvoie si l'insertion a eu lieu
-     */
-    protected static function insertImage(string $nom): int|false
-    {
-        return TransfertImage::transfert($nom);
-    }
-
-    /**
      * Récupère et stocke les fichiers (par ex, CV et LM).
      */
     public static function uploadFichiers(array $fileTags, string $actionInErrorCase): array
@@ -525,7 +514,6 @@ class ControleurMain
                 self::redirectionFlash($actionInErrorCase, "warning", "Fichier " . strtoupper($fileName) . " trop lourd (si le fichier est normal, merci de reporter ce problème)");
                 die();
             }
-            $fileLocation = null;
             if ($file["tmp_name"] != null) {
                 $idFile = (new UploadsRepository())->insert($file['name']);
                 $ids[$fileName] = $idFile;
