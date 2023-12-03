@@ -139,3 +139,41 @@ body {
     -webkit-border-bottom-right-radius: 10px;
     -webkit-border-top-right-radius: 10px;
 }
+
+.export > h2 {
+    margin-bottom: 10%;
+}
+
+.export > img {
+    width: 70px;
+}
+
+.export > form {
+    width: 80%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.export > form > input {
+    width: 150px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+}
+
+.export > form > input:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+}
