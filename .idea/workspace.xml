@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : début implémentation front csv">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : corrections visuelles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueCSV.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCSV.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueCSV.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCSV.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +81,7 @@
       <workItem from="1701420507983" duration="940000" />
       <workItem from="1701432249085" duration="604000" />
       <workItem from="1701457516195" duration="1264000" />
-      <workItem from="1701546195266" duration="1102000" />
+      <workItem from="1701546195266" duration="2833000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
@@ -114,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701546341420</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix : corrections visuelles">
+      <option name="closed" value="true" />
+      <created>1701612631966</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701612631966</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +145,8 @@
     <MESSAGE value="feat : Accueil Admin respecte validité offres" />
     <MESSAGE value="fix : correction du responsive pour les tests" />
     <MESSAGE value="feat : début implémentation front csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : début implémentation front csv" />
+    <MESSAGE value="fix : corrections visuelles" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : corrections visuelles" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
