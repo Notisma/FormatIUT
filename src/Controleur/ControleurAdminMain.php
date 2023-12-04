@@ -32,7 +32,7 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
         );
         if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
-            $menu[] = array("image" => "../ressources/images/csv.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
+            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
         }
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
