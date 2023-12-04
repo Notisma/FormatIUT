@@ -31,8 +31,10 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
-            array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
         );
+        if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+            $menu[] = array("image" => "../ressources/images/csv.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
+        }
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");

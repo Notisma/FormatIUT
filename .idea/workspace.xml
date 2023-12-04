@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="rebase : départ à zéro pour vue Compte Admin (ajout des paramètres)">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : début implémentation vueMonCompte ADMIN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lib/ConnexionUtilisateur.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Sprint3" />
+        <entry key="$PROJECT_DIR$" value="feature/AdminAjoutEtudiants" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,6 +81,7 @@
       <workItem from="1701432249085" duration="604000" />
       <workItem from="1701457516195" duration="1264000" />
       <workItem from="1701546195266" duration="6113000" />
+      <workItem from="1701684771065" duration="338000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
