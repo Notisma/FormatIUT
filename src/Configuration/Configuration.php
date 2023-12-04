@@ -109,14 +109,8 @@ class Configuration
             if (file_exists("../ressources/uploads/$id-$fileName")) {
                 return "../ressources/uploads/$id-$fileName";
             }
-        } else {
-            if ($type == "Etudiants") {
-                return "../ressources/images/1-baseetuprofil.png";
-            } else if ($type == "Entreprises") {
-                return "../ressources/images/0-baseentrprofil.png";
-            }
         }
-        return "../ressources/images/profil.png";
+        return "../ressources/images/danger.png";
     }
 
 
