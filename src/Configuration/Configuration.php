@@ -10,6 +10,7 @@ define('DB_NAME', 'loyet'); //Nom de la base de données4
 namespace App\FormatIUT\Configuration;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class Configuration
@@ -100,8 +101,22 @@ class Configuration
      */
     public static function getUploadPathFromId($id): string
     {
-        $name = (new UploadsRepository())->getFileNameFromId($id);
-        return "../ressources/uploads/$id-$name";
+        $type = ConnexionUtilisateur::getTypeConnecte();
+        $uploadsRepository = new UploadsRepository();
+        $fileName = $uploadsRepository->getFileNameFromId($id);
+
+        if ($fileName) {
+            if (file_exists("../ressources/uploads/$id-$fileName")) {
+                return "../ressources/uploads/$id-$fileName";
+            }
+        } else {
+            if ($type == "Etudiants") {
+                return "../ressources/images/1-baseetuprofil.png";
+            } else if ($type == "Entreprises") {
+                return "../ressources/images/0-baseentrprofil.png";
+            }
+        }
+        return "../ressources/images/profil.png";
     }
 
 
@@ -129,11 +144,12 @@ class Configuration
     {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
     }
-/*    public static function getControleurClass(): string
-    {
-        return "Controleur" . self::$controleur;
-    }
-*/
+
+    /*    public static function getControleurClass(): string
+        {
+            return "Controleur" . self::$controleur;
+        }
+    */
     public static function getDelai()
     {
         return 30 * 60;
