@@ -30,15 +30,17 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
-            array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain"),
         );
+        if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+            $menu[] = array("image" => "../ressources/images/csv.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
+        }
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
         }
 
         if (self::$pageActuelleAdmin == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/mon-compte.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
         }
 
         if (self::$pageActuelleAdmin == "Détails d'un Étudiant") {
@@ -80,7 +82,7 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherProfilAdmin(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
-        self::afficherVue("Mon Compe", "Admin/vueCompteAdmin.php", self::getMenu());
+        self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php", self::getMenu());
     }
 
     /**
@@ -306,7 +308,7 @@ class ControleurAdminMain extends ControleurMain
     }
 
     /**
-     * @return void permet à l'entreprise de supprimer(archiver) une entreprise
+     * @return void permet à l'entreprise de supprimer (archiver) une entreprise
      */
     public static function supprimerEntreprise(): void
     {

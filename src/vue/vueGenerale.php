@@ -37,7 +37,7 @@ use App\FormatIUT\Configuration\Configuration;
                 $liaison = "";
                 $src = "../ressources/images/profil.png";
                 $liaison = "?controleur=Main&action=afficherPageConnexion";
-                $codeRecherche = "<a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                $codeRecherche = "<div class='rechercheResp'><img src='../ressources/images/rechercher.png' alt='img'></div>
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
                 </form>";

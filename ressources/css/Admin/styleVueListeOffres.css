@@ -124,6 +124,10 @@ body {
     align-content: center;
 }
 
+.offreDroite > p {
+    color: black;
+}
+
 .statutOffre {
     width: 80%;
     height: 40px;

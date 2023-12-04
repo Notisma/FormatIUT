@@ -130,6 +130,7 @@ class ConnexionUtilisateur
         } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
             $bool=true;
         } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
+            if (ConnexionUtilisateur::getTypeConnecte()!="Personnels")
             $bool=true;
         }
         return $bool;

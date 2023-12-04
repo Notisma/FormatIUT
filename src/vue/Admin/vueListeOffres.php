@@ -24,7 +24,7 @@
                         
                         <div class='offreDroite'>
                             <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - " . htmlspecialchars($offre->getTypeOffre()) . " - Par ". htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
-                            <p>Le " . htmlspecialchars($offre->getDateCreationOffre()) . "</p>";
+                            <p>Créée le : " . htmlspecialchars($offre->getDateCreationOffre()) . "</p>";
 
                             if ($offre->getEstValide()) {
                                 echo "<div id='valide' class='statutOffre'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";

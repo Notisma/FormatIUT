@@ -103,7 +103,14 @@
                             <div class="dureeAnnonce">
                                 <img src="../ressources/images/histoire.png" alt="image" class="imagesPuces">
                                 <p class="petitTexte">';
-                echo (new DateTime($listeOffre[$i]->getDateDebut()))->diff((new DateTime($listeOffre[$i]->getDateFin())))->format('%m mois');
+                if ($listeOffre[$i]->getDateDebut() != null && $listeOffre[$i]->getDateFin() != null) {
+                    $dateDebut = DateTime::createFromFormat("Y-m-d", $listeOffre[$i]->getDateDebut());
+                    $dateFin = DateTime::createFromFormat("Y-m-d", $listeOffre[$i]->getDateFin());
+                    echo $dateDebut->diff($dateFin)->format("%a jours");
+                } else {
+                    echo "Durée non renseignée";
+                }
+                //echo ' (' . $dateDebut->diff($dateFin)->format("%a jours") . ')';
                 echo '</p>
                             </div>
                             <div class="libelleAnnonce">
@@ -116,11 +123,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="statutAnnonceEntr">
+                <div class="statutAnnonceEntr">';
+
+                if ($listeOffre[$i]->getEstValide()) {
+
+                    echo '
                     <div class="valide">
                         <img src="../ressources/images/verifie.png" alt="image" class="imagesStatut">
                         <p class="petitTexte">Offre publiée.</p>
-                    </div>
+                    </div>';
+                } else {
+                    echo '<div class="valide" id="refuse">
+                        <img src="../ressources/images/sablier.png" alt="image" class="imagesStatut">
+                        <p class="petitTexte">En attente de validation</p>
+                    </div>';
+                } echo '
+                    
+
                 </div>
             </a>';
             }

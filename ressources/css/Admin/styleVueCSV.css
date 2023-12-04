@@ -16,13 +16,8 @@ body {
 }
 
 #center {
-    position: absolute;
-    top: 56%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -32,142 +27,153 @@ body {
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
 }
 
-.gauche {
-    float: left;
+.import {
     width: 60%;
     height: 100%;
-    display: flex;
+    display:flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    background-color: white;
-    padding: 1%;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    padding: 0.5%;
 }
 
-.wrapEtudiants {
-    width: 90%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    overflow-y: auto;
-}
-
-.wrapEtudiants::-webkit-scrollbar {
-    border-radius: 10px;
-    background-color: #ffd0d4;
-    width: 10px;
-}
-
-.wrapEtudiants::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #ff5660;
-}
-
-
-.etudiant {
-    width: 96%;
-    height: 20%;
-    border-radius: 10px;
-    background-color: #ff9095;
-    margin-bottom: 3%;
-    text-decoration: none;
-    flex-shrink: 0;
-    display: flex;
+.information {
+    width: 80%;
+    height: 120px;
+    display:flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     align-content: center;
+    background-color: #ffc1c4;
+    border-radius: 10px;
+    padding: 1%;
 }
 
-.etudiant:hover {
-    background-color: #ffbcbf;
+.information > img {
+    width: 70px;
+    max-height: 100px;
+}
+
+.formulaire {
+    width: 80%;
+    height: 300px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    background-color: #cbdaff;
+    border-radius: 10px;
+    border: 2px dashed #5686ff;
+}
+
+.formulaire > img {
+    width: 40%;
+    max-height: 40%;
+}
+
+.formulaire > * {
+    margin: 0;
+}
+
+.formulaire > input {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+::-webkit-file-upload-button {
+    background-color: #5686ff;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 23px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
     cursor: pointer;
 }
 
-.etudiantGauche {
+.formulaire > input[type="submit"] {
+    background-color: #5686ff;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.formulaire > input[type="submit"]:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+
+
+.export {
+    width: 40%;
     height: 100%;
-    width: 17%;
-    display: flex;
+    background-color: #ff9095;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+}
+
+.export > h2 {
+    margin-bottom: 10%;
+}
+
+.export > img {
+    width: 70px;
+}
+
+.export > form {
+    width: 80%;
+    display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-content: center;
 }
 
-.etudiantGauche > img {
-    width: 80%;
-}
-
-.etudiantDroite {
-    height: 100%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: center;
-}
-
-.etudiantDroite > p {
-    color: black;
-}
-
-.statutEtu {
-    width: 70%;
-    height: 40%;
+.export > form > input {
+    width: 150px;
+    height: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-content: center;
-    border-radius: 5px;
-    opacity: 0.8;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
 }
 
-.statutEtu > * {
-    margin: 0;
-}
-
-#valide {
-    background-color: #24942b;
-    color: #0d4e00;
-    border: 2px solid #0d4e00;
-}
-
-#nonValide {
-    background-color: #ffb700;
-    color: #814900;
-    border: 2px solid #fa7506;
-}
-
-.statutEtu > img {
-    height: 80%;
-}
-
-
-
-
-.droite {
-    float: right;
-    width: 40%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #aadcda;
-    padding: 1%;
-}
-
-.droite > img {
-    width: 80%;
+.export > form > input:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
 }
