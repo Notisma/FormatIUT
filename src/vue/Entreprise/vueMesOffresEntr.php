@@ -14,9 +14,9 @@
                     echo '<input type="submit" name="type" value="Tous" class="offre" ';
                     if ($type == "Tous") echo 'id="typeActuel" disabled';
                     echo '><input type="submit" name="type" value="Stage" class="stage" ';
-                    if ($type == "Stage" || $type == "Stage/Alternance") echo 'id="typeActuel" disabled';
+                    if ($type == "Stage") echo 'id="typeActuel" disabled';
                     echo '><input type="submit" name="type" value="Alternance" class="alternance" ';
-                    if ($type == "Alternance" || $type == "Stage/Alternance") echo 'id="typeActuel" disabled';
+                    if ($type == "Alternance") echo 'id="typeActuel" disabled';
                     echo '>';
                     echo '<input type="hidden" name="etat" value="' . $_REQUEST["etat"] . '">'
                     ?>
