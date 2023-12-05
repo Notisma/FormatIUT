@@ -113,7 +113,7 @@ class FormationRepository extends AbstractRepository
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
         if ($type == "Stage" || $type == "Alternance") {
-            $sql .= " AND typeOffre=:TypeTag";
+            $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage/Alternance'";
             $values["TypeTag"] = $type;
         }
         if ($etat == "Dispo") {
