@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : les images d'un étudiant/entr sont remplacées si elles n'existent pas">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : correction de bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Configuration/Configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration/Configuration.php" afterDir="false" />
     </list>
@@ -82,6 +82,7 @@
       <workItem from="1701457516195" duration="1264000" />
       <workItem from="1701546195266" duration="6113000" />
       <workItem from="1701684771065" duration="338000" />
+      <workItem from="1701763272814" duration="400000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
@@ -163,7 +164,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701726840864</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="merge : Merge OK">
+      <option name="closed" value="true" />
+      <created>1701727348662</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1701727348662</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix : correction de bug">
+      <option name="closed" value="true" />
+      <created>1701727480037</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701727480039</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,7 +207,9 @@
     <MESSAGE value="feat : vueCSV (Admins) terminée." />
     <MESSAGE value="rebase : départ à zéro pour vue Compte Admin (ajout des paramètres)" />
     <MESSAGE value="feat : les images d'un étudiant/entr sont remplacées si elles n'existent pas" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : les images d'un étudiant/entr sont remplacées si elles n'existent pas" />
+    <MESSAGE value="merge : Merge OK" />
+    <MESSAGE value="fix : correction de bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : correction de bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

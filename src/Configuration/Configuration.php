@@ -108,6 +108,10 @@ class Configuration
         if ($fileName) {
             if (file_exists("../ressources/uploads/$id-$fileName")) {
                 return "../ressources/uploads/$id-$fileName";
+            } else {
+                if (file_exists("https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/uplaods/$id-$fileName")) {
+                    return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/uplaods/$id-$fileName";
+                }
             }
         }
         return "../ressources/images/danger.png";
