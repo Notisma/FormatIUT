@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : correction de crash">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : ajout du menu compte Admin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/javaScript/mesFonctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +87,7 @@
       <workItem from="1701763272814" duration="1407000" />
       <workItem from="1701784091010" duration="170000" />
       <workItem from="1701784288632" duration="1699000" />
-      <workItem from="1701801392096" duration="1349000" />
+      <workItem from="1701801392096" duration="2680000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
@@ -200,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701764051039</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat : ajout du menu compte Admin">
+      <option name="closed" value="true" />
+      <created>1701802799147</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1701802799148</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +240,8 @@
     <MESSAGE value="fix : correction de bug" />
     <MESSAGE value="fix : corrections images locales" />
     <MESSAGE value="fix : correction de crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : correction de crash" />
+    <MESSAGE value="feat : ajout du menu compte Admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : ajout du menu compte Admin" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

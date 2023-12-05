@@ -93,3 +93,19 @@ function fermerSousMenu() {
     let sousMenu = document.getElementById("sousMenu");
     sousMenu.style.display = "none";
 }
+
+function afficherPageCompte(page) {
+    if (page) {
+        //tous les éléments de la classe mainAdmins n'ayant pas l'id page sont cachés
+        let elements = document.getElementsByClassName("mainAdmins");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].id !== page) {
+                elements[i].style.display = "none";
+            } else {
+                elements[i].style.display = "flex";
+            }
+        }
+    } else {
+        alert("La page n'existe pas");
+    }
+}
