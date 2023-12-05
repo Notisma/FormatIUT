@@ -96,7 +96,6 @@ function fermerSousMenu() {
 
 function afficherPageCompte(page) {
     if (page) {
-        //tous les éléments de la classe mainAdmins n'ayant pas l'id page sont cachés
         let elements = document.getElementsByClassName("mainAdmins");
         for (var i = 0; i < elements.length; i++) {
             if (elements[i].id !== page) {
@@ -105,7 +104,14 @@ function afficherPageCompte(page) {
                 elements[i].style.display = "flex";
             }
         }
-    } else {
-        alert("La page n'existe pas");
+
+        let elements2 = document.getElementsByClassName("sousMenuAdmin");
+        for (var j = 0; j < elements.length; j++) {
+            if (elements2[j].className === "sousMenuAdmin " + page + "M") {
+                elements2[j].id = "selection";
+            } else {
+                elements2[j].id = "";
+            }
+        }
     }
 }
