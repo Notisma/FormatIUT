@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="feat : menu &quot;mon Compte&quot; (FRONT) terminé">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : corrections">
       <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +85,7 @@
       <workItem from="1701784091010" duration="170000" />
       <workItem from="1701784288632" duration="1699000" />
       <workItem from="1701801392096" duration="2831000" />
-      <workItem from="1701809911832" duration="3077000" />
+      <workItem from="1701809911832" duration="3242000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
@@ -233,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701812933630</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix : corrections">
+      <option name="closed" value="true" />
+      <created>1701813039485</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1701813039485</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +274,8 @@
     <MESSAGE value="feat : ajout de l'affichage des menus avec JS" />
     <MESSAGE value="feat : JS pour compte admin terminé." />
     <MESSAGE value="feat : menu &quot;mon Compte&quot; (FRONT) terminé" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : menu &quot;mon Compte&quot; (FRONT) terminé" />
+    <MESSAGE value="fix : corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : corrections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
