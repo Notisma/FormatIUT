@@ -160,6 +160,7 @@ body {
     justify-content: center;
     align-items: center;
     align-content: center;
+    margin-bottom: 5%;
 }
 
 .inputCentre > input[type="text"] {

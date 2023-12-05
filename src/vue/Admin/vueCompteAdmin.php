@@ -46,7 +46,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
             <div class="avatar">
                 <img src="../ressources/images/admin.png" alt="avatar">
                 <div>
-                    <input type="file" name="avatar" id="avatar_id" accept="image/png/jpeg, image/jpeg">
+                    <input disabled type="file" name="avatar" id="avatar_id" accept="image/png/jpeg, image/jpeg">
                     <p>Glissez-déposez un fichier ou parcourez vos fichiers. JPEG et PNG uniquement</p>
                 </div>
             </div>
