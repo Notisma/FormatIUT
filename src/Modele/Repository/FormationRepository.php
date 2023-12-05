@@ -117,9 +117,9 @@ class FormationRepository extends AbstractRepository
             $values["TypeTag"] = $type;
         }
         if ($etat == "Dispo") {
-            $sql .= " AND NOT EXISTS (SELECT idFormation FROM Formations f WHERE o.idFormation=f.idFormation)";
+            $sql .= " AND idEtudiant IS null";
         } else if ($etat == "Assigné") {
-            $sql .= " AND EXISTS (SELECT idFormation FROM Formations f WHERE f.idFormation=o.idFormation)";
+            $sql .= " AND idEtudiant IS not null";
         }
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"] = $idEntreprise;
