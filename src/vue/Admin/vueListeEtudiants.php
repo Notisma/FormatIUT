@@ -6,29 +6,29 @@
             <?php
             if (sizeof($listeEtudiants) > 0) {
                 foreach ($listeEtudiants as $etudiant) {
-                    $prenomEtuHTML=htmlspecialchars($etudiant['etudiant']->getPrenomEtudiant());
-                    $nomEtuHTML=htmlspecialchars($etudiant['etudiant']->getNomEtudiant());
-                    $groupeHTML=htmlspecialchars($etudiant["etudiant"]->getGroupe());
-                    $parcoursHTML=htmlspecialchars($etudiant["etudiant"]->getParcours());
-                    echo"
+                    $prenomEtuHTML = htmlspecialchars($etudiant['etudiant']->getPrenomEtudiant());
+                    $nomEtuHTML = htmlspecialchars($etudiant['etudiant']->getNomEtudiant());
+                    $groupeHTML = htmlspecialchars($etudiant["etudiant"]->getGroupe());
+                    $parcoursHTML = htmlspecialchars($etudiant["etudiant"]->getParcours());
+                    echo "
                     <a class='etudiant' href=?action=afficherDetailEtudiant&numEtu=" . $etudiant['etudiant']->getNumEtudiant() . "&controleur=AdminMain>
                             <div class='etudiantGauche'>
                                <img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant['etudiant']->getImg()) . "' alt='etudiant'>
                             </div>
                             <div class='etudiantDroite'>
                                 <h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . " - ";
-                    if ($etudiant['etudiant']->getGroupe() != ""){
-                        echo $groupeHTML  . " - " . $parcoursHTML;
+                    if ($etudiant['etudiant']->getGroupe() != "") {
+                        echo $groupeHTML . " - " . $parcoursHTML;
                     } else {
                         echo "Des informations sont manquantes";
                     }
                     echo "</h3>";
-                            if ($etudiant["aUneFormation"]) {
-                                echo "<div id='valide' class='statutEtu'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
-                            } else {
-                                echo "<div id='nonValide' class='statutEtu'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
-                            }
-                            echo "
+                    if ($etudiant["aUneFormation"]) {
+                        echo "<div id='valide' class='statutEtu'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
+                    } else {
+                        echo "<div id='nonValide' class='statutEtu'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
+                    }
+                    echo "
                             </div>
                         </a>
                     
@@ -40,6 +40,9 @@
     </div>
 
     <div class="droite">
+        <div class="wrapBoutons">
+            <a href="?action=afficherFormulaireCreationEtudiant&controleur=AdminMain">Ajouter un étudiant</a>
+        </div>
         <img src="../ressources/images/adminRemove.png" alt="admin">
         <h3 class="titre" id="rouge">Gestion des Étudiants de la Base de Données</h3>
         <h4 class="titre">Consultez le statut de chaque étudiant en un coup d'oeil</h4>
