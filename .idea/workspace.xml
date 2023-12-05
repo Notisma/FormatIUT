@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : corrections images locales">
+    <list default="true" id="d10e196f-fb7a-49e4-b7b0-083618d4a9cd" name="Changes" comment="fix : correction de crash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueListeOffres.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/css/Admin/styleVueCompteAdmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Admin/vueCompteAdmin.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/vuesAdmin&amp;amp;corrections" />
+        <entry key="$PROJECT_DIR$" value="Sprint3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,20 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Sprint3&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;discord-project&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "rebase/vueCompteAdmin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\farmi\AppData\Roaming\Subversion</configuration>
@@ -82,7 +83,10 @@
       <workItem from="1701457516195" duration="1264000" />
       <workItem from="1701546195266" duration="6113000" />
       <workItem from="1701684771065" duration="338000" />
-      <workItem from="1701763272814" duration="738000" />
+      <workItem from="1701763272814" duration="1407000" />
+      <workItem from="1701784091010" duration="170000" />
+      <workItem from="1701784288632" duration="1699000" />
+      <workItem from="1701801392096" duration="1349000" />
     </task>
     <task id="LOCAL-00001" summary="fix : correction de crash AccueilEntr">
       <option name="closed" value="true" />
@@ -188,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701763711279</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix : correction de crash">
+      <option name="closed" value="true" />
+      <created>1701764051039</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701764051039</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +230,8 @@
     <MESSAGE value="merge : Merge OK" />
     <MESSAGE value="fix : correction de bug" />
     <MESSAGE value="fix : corrections images locales" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : corrections images locales" />
+    <MESSAGE value="fix : correction de crash" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : correction de crash" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
