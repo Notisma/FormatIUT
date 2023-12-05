@@ -113,13 +113,13 @@ class FormationRepository extends AbstractRepository
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
         if ($type == "Stage" || $type == "Alternance") {
-            $sql .= " AND typeOffre=:TypeTag";
+            $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage/Alternance'";
             $values["TypeTag"] = $type;
         }
         if ($etat == "Dispo") {
-            $sql .= " AND NOT EXISTS (SELECT idFormation FROM Formations f WHERE o.idFormation=f.idFormation)";
+            $sql .= " AND idEtudiant IS null";
         } else if ($etat == "Assigné") {
-            $sql .= " AND EXISTS (SELECT idFormation FROM Formations f WHERE f.idFormation=o.idFormation)";
+            $sql .= " AND idEtudiant IS not null";
         }
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"] = $idEntreprise;

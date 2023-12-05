@@ -68,7 +68,7 @@ class Formation extends AbstractDataObject
      * @param float $idEntreprise
      * @param string|null $loginTuteurUM
      */
-    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $DateretourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $loginTuteurUM)
+    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $loginTuteurUM)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -94,7 +94,7 @@ class Formation extends AbstractDataObject
         $this->conventionValidee = $conventionValidee;
         $this->dateCreationConvention = $dateCreationConvention;
         $this->dateTransmissionConvention = $dateTransmissionConvention;
-        $this->retourSigne = $DateretourSigne;
+        $this->dateRetourSigne = $dateRetourSigne;
         $this->assurance = $assurance;
         $this->avenant = $avenant;
         $this->idEtudiant = $idEtudiant;

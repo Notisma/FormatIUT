@@ -148,7 +148,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function creerOffre(): void
     {
-        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
+        if (isset($_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST["objectifOffre"], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
             if (!($anneeMin < 2 || $anneeMin > 3 || $anneeMax < 2 || $anneeMax > 3 || $anneeMax < $anneeMin)) {
@@ -171,7 +171,7 @@ class ControleurEntrMain extends ControleurMain
                             $_REQUEST["avenant"] = null;
                             $_REQUEST["idEtudiant"] = null;
                             $_REQUEST["idTuteurPro"] = null;
-                            $_REQUEST["idTuteurUM"] = null;
+                            $_REQUEST["loginTuteurUM"] = null;
                             $offre = (new FormationRepository())->construireDepuisTableau($_REQUEST);
                             (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "afficherMesOffres";
