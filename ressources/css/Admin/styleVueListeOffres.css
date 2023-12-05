@@ -126,6 +126,7 @@ body {
 
 .offreDroite > p {
     color: black;
+    margin: 0;
 }
 
 .statutOffre {
