@@ -93,3 +93,25 @@ function fermerSousMenu() {
     let sousMenu = document.getElementById("sousMenu");
     sousMenu.style.display = "none";
 }
+
+function afficherPageCompte(page) {
+    if (page) {
+        let elements = document.getElementsByClassName("mainAdmins");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].id !== page) {
+                elements[i].style.display = "none";
+            } else {
+                elements[i].style.display = "flex";
+            }
+        }
+
+        let elements2 = document.getElementsByClassName("sousMenuAdmin");
+        for (var j = 0; j < elements.length; j++) {
+            if (elements2[j].className === "sousMenuAdmin " + page + "M") {
+                elements2[j].id = "selection";
+            } else {
+                elements2[j].id = "";
+            }
+        }
+    }
+}
