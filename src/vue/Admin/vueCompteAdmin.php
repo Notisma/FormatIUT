@@ -143,7 +143,12 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
     </div>
 
     <div class="mainAdmins" id="etu">
-        <p>etudiants</p>
+        <h2 class="titre" id="rouge">Ajouter un Étudiant sur le site</h2>
+
+        <div class="ajoutEtu">
+
+        </div>
+
     </div>
 
 
