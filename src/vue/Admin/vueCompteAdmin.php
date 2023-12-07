@@ -81,6 +81,63 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
 
         <div class="wrapPerms">
             <h3 class="titre">Mes collègues</h3>
+            <div>
+                <?php
+                $listeProfs = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getListeObjet();
+
+                if ($listeProfs != null) {
+                    foreach ($listeProfs as $prof) {
+                        if ($prof->getLoginProf() != $admin->getLoginProf()) {
+
+                            echo '
+                    <div class="prof">
+                        <div class="permImg">
+                            <img src="../ressources/images/admin.png" alt="avatar">
+                        </div>
+                        <div class="perms">
+                            <h3 class="titre" id="rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>
+                            <p>Login : ' . htmlspecialchars($prof->getLoginProf()) . '</p>
+                            ';
+
+                            if ($prof->isEstAdmin()) {
+                                echo '
+                        <p>Grade : Administrateur</p>
+                        <div class="wrapBoutons">
+                            <a href="?action=retrograderProf&controleur=AdminMain&loginProf="' . $prof->getLoginProf() . '>Rétrograder</a>
+                        </div>
+                        ';
+
+                            } else {
+                                echo '
+                        <p>Grade : Enseignant</p>
+                        <div class="wrapBoutons">
+                            <a href="?action=promouvoirProf&controleur=AdminMain&loginProf="' . $prof->getLoginProf() . '>Promouvoir</a>
+                        </div>
+                        ';
+                            }
+                            echo '
+                            
+                        </div>
+                    </div>';
+                        }
+                    }
+                } else {
+                    echo '
+                    <div class="wrapErreur">
+                    <img src="../ressources/images/erreur.png" alt="erreur">
+                    <h3 class="titre">Aucun Enseignant ou Administrateur trouvé.</h3>
+                    </div>
+
+                ';
+                }
+                ?>
+            </div>
+
+
+            <div>
+
+            </div>
+
         </div>
 
     </div>
