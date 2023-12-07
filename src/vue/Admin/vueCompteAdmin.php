@@ -73,7 +73,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
     </div>
 
     <div class="mainAdmins" id="notifs">
-        <p>notifs</p>
+        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
     </div>
 
     <div class="mainAdmins" id="profs">
