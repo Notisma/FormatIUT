@@ -20,21 +20,21 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
         <div class="sousMenuAdmin notifsM" onclick="afficherPageCompte('notifs')">
             <img src="../ressources/images/notif.png" alt="profil">
             <div>
-                <h3 class="titre">Mes Notifications</h3>
+                <h3 class="titre">Notifications</h3>
             </div>
         </div>
 
         <div class="sousMenuAdmin profsM" onclick="afficherPageCompte('profs')">
             <img src="../ressources/images/professeur.png" alt="profil">
             <div>
-                <h3 class="titre">Mes Collègues</h3>
+                <h3 class="titre">Permissions/Rôles</h3>
             </div>
         </div>
 
         <div class="sousMenuAdmin etuM" onclick="afficherPageCompte('etu')">
             <img src="../ressources/images/etudiants.png" alt="profil">
             <div>
-                <h3 class="titre">Mes Étudiants</h3>
+                <h3 class="titre">Ajout d'Étudiants</h3>
             </div>
         </div>
     </div>
