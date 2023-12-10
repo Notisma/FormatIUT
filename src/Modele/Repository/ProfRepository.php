@@ -15,7 +15,7 @@ class ProfRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("loginProf", "nomProf", "prenomProf", "mailUniversitaire", "img_id");
+        return array("loginProf", "nomProf", "prenomProf", "mailUniversitaire", "estAdmin", "img_id");
     }
 
     protected function getClePrimaire(): string
