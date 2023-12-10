@@ -33,7 +33,7 @@ class ControleurAdminMain extends ControleurMain
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
         );
-        if (ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
         }
 
@@ -272,8 +272,7 @@ class ControleurAdminMain extends ControleurMain
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) != null) {
                 self::redirectionFlash("afficherFormulaireCreationEtudiant", "warning", "Un étudiant avec ce numéro existe déjà");
-            }
-            else {
+            } else {
                 $_REQUEST['loginEtudiant'] = strtolower($_REQUEST['loginEtudiant']);
                 $_REQUEST['sexeEtu'] = null;
                 $_REQUEST['mailPerso'] = null;
@@ -361,7 +360,8 @@ class ControleurAdminMain extends ControleurMain
     }
 
 
-    public static function promouvoirProf() : void {
+    public static function promouvoirProf(): void
+    {
         if (isset($_REQUEST["loginProf"])) {
             $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($_REQUEST['loginProf']);
             if (!is_null($prof)) {
@@ -371,6 +371,23 @@ class ControleurAdminMain extends ControleurMain
                         (new \App\FormatIUT\Modele\Repository\ProfRepository())->modifierObjet($prof);
                         self::redirectionFlash("afficherProfilAdmin", "success", "Permissions mises à jour");
                     } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur est déjà administrateur");
+                } else self::redirectionFlash("afficherProfilAdmin", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur n'existe pas");
+        } else self::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
+    }
+
+
+    public static function retrograderProf(): void
+    {
+        if (isset($_REQUEST["loginProf"])) {
+            $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($_REQUEST['loginProf']);
+            if (!is_null($prof)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    if ($prof->isEstAdmin()) {
+                        $prof->setEstAdmin(false);
+                        (new \App\FormatIUT\Modele\Repository\ProfRepository())->modifierObjet($prof);
+                        self::redirectionFlash("afficherProfilAdmin", "success", "Permissions mises à jour");
+                    } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur n'est pas administrateur");
                 } else self::redirectionFlash("afficherProfilAdmin", "danger", "Vous n'avez pas les droits requis");
             } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur n'existe pas");
         } else self::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
