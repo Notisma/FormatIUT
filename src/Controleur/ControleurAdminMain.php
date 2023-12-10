@@ -360,6 +360,22 @@ class ControleurAdminMain extends ControleurMain
         } else self::redirectionFlash("afficherListeEntreprises", "danger", "L'entreprise n'est pas renseignée");
     }
 
+
+    public static function promouvoirProf() : void {
+        if (isset($_REQUEST["loginProf"])) {
+            $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($_REQUEST['loginProf']);
+            if (!is_null($prof)) {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                    if (!$prof->isEstAdmin()) {
+                        $prof->setEstAdmin(true);
+                        (new \App\FormatIUT\Modele\Repository\ProfRepository())->modifierObjet($prof);
+                        self::redirectionFlash("afficherProfilAdmin", "success", "Permissions mises à jour");
+                    } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur est déjà administrateur");
+                } else self::redirectionFlash("afficherProfilAdmin", "danger", "Vous n'avez pas les droits requis");
+            } else self::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur n'existe pas");
+        } else self::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
+    }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
 }

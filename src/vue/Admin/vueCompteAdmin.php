@@ -111,7 +111,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                                 echo '
                         <p>Grade : Enseignant</p>
                         <div class="wrapBoutons">
-                            <a href="?action=promouvoirProf&controleur=AdminMain&loginProf="' . $prof->getLoginProf() . '>Promouvoir</a>
+                            <a href="?action=promouvoirProf&controleur=AdminMain&loginProf=' . $prof->getLoginProf() . '">Promouvoir</a>
                         </div>
                         ';
                             }
