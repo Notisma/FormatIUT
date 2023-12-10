@@ -100,7 +100,7 @@ class Prof extends AbstractDataObject
             "prenomProf" => $this->prenomProf,
             "mailUniversitaire" => $this->mailUniversitaire,
             "estAdmin"=>$this->estAdmin,
-            "img" => $this->img,
+            "img_id" => $this->img,
         );
     }
 }

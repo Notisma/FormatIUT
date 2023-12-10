@@ -47,7 +47,6 @@ class ProfRepository extends AbstractRepository
         if ($count > 0) return true;
         else return false;
     }
-
     public function getParNom(String $nomProf): ?Prof{
         $sql="SELECT * FROM ".$this->getNomTable(). " WHERE nomProf=:Tag";
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
