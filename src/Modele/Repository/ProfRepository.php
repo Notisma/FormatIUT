@@ -25,14 +25,17 @@ class ProfRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $estAdmin=false;
+        $estAdmin=0;
+        if ($dataObjectTableau["estAdmin"]){
+            $estAdmin=1;
+        }
 
         return new Prof(
             $dataObjectTableau["loginProf"],
             $dataObjectTableau["nomProf"],
             $dataObjectTableau["prenomProf"],
             $dataObjectTableau["mailUniversitaire"],
-            $dataObjectTableau["estAdmin"],
+            $estAdmin,
             $dataObjectTableau["img_id"]
         );
     }

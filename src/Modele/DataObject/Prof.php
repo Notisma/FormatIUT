@@ -94,12 +94,16 @@ class Prof extends AbstractDataObject
 
     public function formatTableau(): array
     {
+        $estAdmin=0;
+        if ($this->estAdmin){
+            $estAdmin=1;
+        }
         return array(
             "loginProf" => $this->loginProf,
             "nomProf" => $this->nomProf,
             "prenomProf" => $this->prenomProf,
             "mailUniversitaire" => $this->mailUniversitaire,
-            "estAdmin"=>$this->estAdmin,
+            "estAdmin"=>$estAdmin,
             "img_id" => $this->img,
         );
     }
