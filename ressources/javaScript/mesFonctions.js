@@ -94,7 +94,7 @@ function fermerSousMenu() {
     sousMenu.style.display = "none";
 }
 
-function afficherPageCompte(page) {
+function afficherPageCompteAdmin(page) {
     if (page) {
         let elements = document.getElementsByClassName("mainAdmins");
         for (var i = 0; i < elements.length; i++) {
@@ -108,6 +108,28 @@ function afficherPageCompte(page) {
         let elements2 = document.getElementsByClassName("sousMenuAdmin");
         for (var j = 0; j < elements.length; j++) {
             if (elements2[j].className === "sousMenuAdmin " + page + "M") {
+                elements2[j].id = "selection";
+            } else {
+                elements2[j].id = "";
+            }
+        }
+    }
+}
+
+function afficherPageCompteEtu(page) {
+    if (page) {
+        let elements = document.getElementsByClassName("mainEtu");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].id !== page) {
+                elements[i].style.display = "none";
+            } else {
+                elements[i].style.display = "flex";
+            }
+        }
+
+        let elements2 = document.getElementsByClassName("sousMenuEtu");
+        for (var j = 0; j < elements.length; j++) {
+            if (elements2[j].className === "sousMenuEtu " + page + "M") {
                 elements2[j].id = "selection";
             } else {
                 elements2[j].id = "";

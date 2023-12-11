@@ -1,104 +1,85 @@
-<div class="boiteMain">
-    <div class="etudiantInfos">
-        <div class="h3centre">
-            <h3>Votre Photo de Profil</h3>
+<?php
+
+use App\FormatIUT\Configuration\Configuration;
+$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+?>
+
+<div class="centreCompte">
+    <script>window.onload = function () {
+            afficherPageCompteEtu("compte");
+        };</script>
+    <div class="menuEtu">
+        <div class="sousMenuEtu compteM" onclick="afficherPageCompteEtu('compte')">
+            <img src="../ressources/images/profil.png" alt="profil">
+            <div>
+                <h3 class="titre">Mon Compte</h3>
+            </div>
         </div>
-        <div class="petiteDiv">
-            <div class="texteAGauche">
-                <p>Changez votre photo ici :</p>
-                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post">
+
+        <div class="sousMenuEtu notifsM" onclick="afficherPageCompteEtu('notifs')">
+            <img src="../ressources/images/notif.png" alt="profil">
+            <div>
+                <h3 class="titre">Notifications</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mainEtu" id="compte">
+
+        <h2 class="titre" id="rouge">Modifier mon Profil</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <h3 class="titre">Mon Avatar</h3>
+            <div class="avatar">
+                <?php
+                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
+                ?>
+                <div>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
                     <input type="file" name="pdp" size="500">
-                    <input type="submit" value="Envoyer">
-                </form>
+                    <p>Glissez-déposez un fichier ou parcourez vos fichiers. JPEG et PNG uniquement</p>
+                </div>
             </div>
-            <div class="imageEtu">
-                <?= '<img src="' . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="profile_pic etudiant">'; ?>
+
+            <h3 class="titre">Nom</h3>
+            <div class="inputCentre">
+                <input disabled type="text" value='<?= htmlspecialchars($etudiant->getNomEtudiant()); ?>' name="nom"
+                       id="nom_id"
+                       required maxlength="50"/>
             </div>
-        </div>
+
+            <h3 class="titre">Prénom</h3>
+            <div class="inputCentre">
+                <input disabled type="text" value='<?= htmlspecialchars($etudiant->getPrenomEtudiant()); ?>'
+                       name="prenom"
+                       id="prenom_id" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Mail Personnel</h3>
+            <div class="inputCentre">
+                <input type="text" value='<?= htmlspecialchars($etudiant->getMailPerso()); ?>' name="mailPerso"
+                       id="mailPerso_id" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Numéro de téléphone</h3>
+            <div class="inputCentre">
+                <input type="text" value='<?= htmlspecialchars($etudiant->getTelephone()); ?>' name="numTel"
+                       id="numTel_id" required maxlength="11" />
+            </div>
+
+            <div class="inputCentre">
+                <input type='hidden' name='numEtu' value='<?= htmlspecialchars($etudiant->getNumEtudiant()) ?>'>
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EtuMain"/>
+            </div>
+
+
+        </form>
+
     </div>
 
-    <div class="conteneurBienvenueEtu">
-        <div class="texteBienvenue">
-            <h3>Bonjour, bienvenue sur votre compte étudiant</h3>
-            <p>Visualisez les données de votre compte en un coup d'oeil</p>
-            <br>
-        </div>
-        <div class="imageBienvenue">
-            <img src="../ressources/images/compteEtu.png" alt="image de bienvenue">
-        </div>
+    <div class="mainEtu" id="notifs">
+        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
     </div>
 
 
-    <div class="informationsActuellesEtu">
-        <h3>Vos Informations Actuelles</h3>
-        <div class="infosActu">
-            <ul id="infosEtu">
-                <?php
-                echo "
-            <li>Prénom : ".htmlspecialchars($etudiant->getPrenomEtudiant())."</li>
-            <li>Nom : ".htmlspecialchars($etudiant->getNomEtudiant())."</li>
-            <li>Login : ".htmlspecialchars($etudiant->getLogin())."</li>
-            <li>Numéro Etudiant : ".$etudiant->getNumEtudiant()."</li>
-            <li>Mail universitaire : ".htmlspecialchars($etudiant->getMailUniersitaire())."</li>
-            <li>Mail personnel : ".htmlspecialchars($etudiant->getMailPerso())."</li>
-            <li>Téléphone : ".htmlspecialchars($etudiant->getTelephone())."</li>
-            <li>Groupe : ".htmlspecialchars($etudiant->getGroupe())."</li>
-            <li>Parcours : ".htmlspecialchars($etudiant->getParcours())."</li>
-            " ?>
-                <a href="?action=afficherFormulaireModification&controleur=EtuMain">Modifier vos informations</a>
-            </ul>
-
-            <img src="../ressources/images/donneesEtu.png" alt="illu">
-
-        </div>
-    </div>
-
-
-    <div class="detailsDeEntreprise">
-        <h3>Vos Statistiques</h3>
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/postulation.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4><?php
-                    $nb = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(), "En Attente"));
-                    echo $nb . " Postulation";
-                    if ($nb != 1) echo "s";
-                    ?>
-
-                    en attente d'assignation</h4>
-            </div>
-
-        </div>
-
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/choix.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4><?php
-                    $nb = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbEnEtat($etudiant->getNumEtudiant(), "A Choisir"));
-                    echo $nb . " assignation";
-                    if ($nb != 1) echo "s";
-                    ?> en attente de choix</h4>
-            </div>
-
-        </div>
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/archiver.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4>0 documents ou contrats archivés</h4>
-            </div>
-        </div>
-    </div>
 </div>

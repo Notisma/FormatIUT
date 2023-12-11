@@ -7,7 +7,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
 
 <div class="centreCompte">
     <script>window.onload = function () {
-            afficherPageCompte("compte");
+            afficherPageCompteAdmin("compte");
         };</script>
     <div class="menuAdmin">
         <div class="sousMenuAdmin compteM" onclick="afficherPageCompte('compte')">

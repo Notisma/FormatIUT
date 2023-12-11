@@ -329,7 +329,7 @@ class ControleurEtuMain extends ControleurMain
                                 if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
                                     $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ('F' . $offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
                                         "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => self::getCleEtudiant(), "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
-                                        ]);
+                                    ]);
                                     (new FormationRepository())->creerObjet($formation);
                                 } else {
                                     (new FormationRepository())->ajouterConvention(self::getCleEtudiant(), $convention->getIdConvention());
@@ -421,8 +421,19 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function mettreAJour(): void
     {
-        (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-        self::afficherProfil();
+        if (isset($_REQUEST['numEtu'])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                if (!empty($_FILES['pdp']['name'])) {
+                    self::updateImage();
+                }
+                (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
+                self::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
+            } else {
+                self::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+            }
+        } else {
+            self::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
+        }
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
