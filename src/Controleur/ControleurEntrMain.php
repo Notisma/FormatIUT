@@ -300,8 +300,19 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function mettreAJour(): void
     {
-        (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
-        self::afficherProfil();
+        if (isset($_REQUEST['siret'])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                if (!empty($_FILES['pdp']['name'])) {
+                    self::updateImage();
+                }
+                (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
+                self::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
+            } else {
+                self::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+            }
+        } else {
+            self::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
+        }
     }
 
     /**

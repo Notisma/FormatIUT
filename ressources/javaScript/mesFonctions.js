@@ -137,3 +137,25 @@ function afficherPageCompteEtu(page) {
         }
     }
 }
+
+function afficherPageCompteEntr(page) {
+    if (page) {
+        let elements = document.getElementsByClassName("mainEntr");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].id !== page) {
+                elements[i].style.display = "none";
+            } else {
+                elements[i].style.display = "flex";
+            }
+        }
+
+        let elements2 = document.getElementsByClassName("sousMenuEntr");
+        for (var j = 0; j < elements.length; j++) {
+            if (elements2[j].className === "sousMenuEntr " + page + "M") {
+                elements2[j].id = "selection";
+            } else {
+                elements2[j].id = "";
+            }
+        }
+    }
+}

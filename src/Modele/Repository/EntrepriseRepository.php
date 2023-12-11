@@ -71,7 +71,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse)
     {
-        $sql = "UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, adresseEntreprise = :adTag WHERE numSiret = :siretTag";
+        $sql = "UPDATE Entreprises SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, adresseEntreprise = :adTag WHERE numSiret = :siretTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("nomTag" => $nom,
             "statutTag" => $statut,
