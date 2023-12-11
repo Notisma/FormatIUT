@@ -24,19 +24,31 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
             </div>
         </div>
 
-        <div class="sousMenuAdmin profsM" onclick="afficherPageCompte('profs')">
-            <img src="../ressources/images/professeur.png" alt="profil">
+        <?php
+        if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+            $prof = "profs";
+            echo'
+            <div class="sousMenuAdmin profsM" onclick="afficherPageCompte(\'profs\')" >
+            <img src = "../ressources/images/professeur.png" alt = "profil" >
+            <div >
+                <h3 class="titre" > Permissions / Rôles</h3 >
+            </div >
+        </div >
+        
+        <div class="sousMenuAdmin etuM" onclick="afficherPageCompte(\'etu\')">
+            <img src="../ressources/images/etudiants.png" alt="profil">
             <div>
-                <h3 class="titre">Permissions/Rôles</h3>
+                <h3 class="titre">Ajout d\'Étudiants</h3>
             </div>
         </div>
 
-        <div class="sousMenuAdmin etuM" onclick="afficherPageCompte('etu')">
-            <img src="../ressources/images/etudiants.png" alt="profil">
-            <div>
-                <h3 class="titre">Ajout d'Étudiants</h3>
-            </div>
-        </div>
+
+        ';
+        }
+
+        ?>
+
+        
     </div>
 
     <div class="mainAdmins" id="compte">

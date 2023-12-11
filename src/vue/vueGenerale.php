@@ -41,6 +41,7 @@ use App\FormatIUT\Configuration\Configuration;
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
                 </form>";
+
                 if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
                     switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
                         case "Entreprise" :
@@ -58,6 +59,13 @@ use App\FormatIUT\Configuration\Configuration;
                             break;
                         }
                         case "Administrateurs" :
+                        {
+                            $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                            $src = "../ressources/images/admin.png";
+                            $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
+                            break;
+                        }
+                        case "Personnels" :
                         {
                             $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
                             $src = "../ressources/images/admin.png";
