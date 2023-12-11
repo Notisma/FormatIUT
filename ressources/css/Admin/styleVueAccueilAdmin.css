@@ -52,10 +52,14 @@ body {
 .texteBonjour {
     height: 95%;
     width: 60%;
+    padding: 1%;
+}
+
+.texteBonjour > * {
+    text-align: left;
 }
 
 .imageBonjour {
-    height: 95%;
     width: 40%;
 }
 

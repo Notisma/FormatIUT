@@ -9,7 +9,14 @@
                 $prenomHTML=htmlspecialchars($prof->getPrenomProf());
                 echo $prenomHTML;
                 ?></h3>
-            <p>Retrouvez les dernières informations :</p>
+            <?php
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+               echo"<p>Retrouvez les informations de votre tableau de bord Administrateur :</p>";
+            } else {
+                echo"<p>Retrouvez les informations de votre tableau de bord Enseignant :</p>";
+            }
+            ?>
+
         </div>
 
         <div class="imageBonjour">
