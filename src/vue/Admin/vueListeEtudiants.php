@@ -40,9 +40,6 @@
     </div>
 
     <div class="droite">
-        <div class="wrapBoutons">
-            <a href="?action=afficherFormulaireCreationEtudiant&controleur=AdminMain">Ajouter un étudiant</a>
-        </div>
         <img src="../ressources/images/adminRemove.png" alt="admin">
         <h3 class="titre" id="rouge">Gestion des Étudiants de la Base de Données</h3>
         <h4 class="titre">Consultez le statut de chaque étudiant en un coup d'oeil</h4>
