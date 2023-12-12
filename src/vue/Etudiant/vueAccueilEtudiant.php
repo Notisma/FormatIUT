@@ -54,6 +54,12 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         </div>
 
         <h3 class="titre" id="sep">Vos Notifications :</h3>
+        <div class="notifs">
+            <div class="erreur">
+                <img src="../ressources/images/erreur.png" alt="erreur">
+                <h4 class="titre">Vous n'avez aucune notification</h4>
+            </div>
+        </div>
 
     </div>
 
