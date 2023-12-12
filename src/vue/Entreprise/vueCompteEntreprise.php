@@ -23,6 +23,13 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             </div>
         </div>
 
+        <div class="sousMenuEntr mdpM" onclick="afficherPageCompteEntr('mdp')">
+            <img src="../ressources/images/cadenas.png" alt="profil">
+            <div>
+                <h3 class="titre">Mon Mot de Passe</h3>
+            </div>
+        </div>
+
     </div>
 
     <div class="mainEntr" id="compte">
@@ -44,7 +51,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             <h3 class="titre">Siret</h3>
             <div class="inputCentre">
                 <input disabled type="text" value='<?= htmlspecialchars($entreprise->getSiret()); ?>' name="siret"
-                       id="nom_id"
                        required maxlength="50"/>
             </div>
 
@@ -96,6 +102,30 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
     <div class="mainEntr" id="notifs">
         <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
+    </div>
+
+    <div class="mainEntr" id="mdp">
+        <h2 class="titre" id="rouge">Modifier le Mot de Passe</h2>
+        <form method="post">
+            <h3 class="titre">Ancien Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="ancienMdp" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Nouveau Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="nouveauMdp" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Confirmer le Nouveau Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="confirmerMdp" required maxlength="50"/>
+            </div>
+
+            <div class="inputCentre">
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&controleur=EntrMain"/>
+            </div>
+        </form>
     </div>
 
 
