@@ -10,18 +10,21 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
     <div class="gaucheAcc">
         <h3 class="titre" id="rouge">Les Dernières Offres sorties :</h3>
         <?php
-        $data = $listeStage + $listeAlternance;
+        $data = $listeStage;
+        $data = array_merge($data, $listeAlternance);
 
-        echo '<table>';
+        echo '<div class="grille">';
         for ($i = 0; $i < count($data); $i++) {
             $offre = $data[$i];
             $red = "";
             $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-            if ($i % 2 == 0) {
-                echo '<tr>';
+            $n = 2;
+            $row = intdiv($i, $n);
+            $col = $i % $n;
+            if (($row + $col) % 2 == 0) {
                 $red = "demi";
             }
-            echo '<td> <a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
+            echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
            <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
@@ -30,12 +33,9 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
            <h5 class="titre">' . $offre->getSujet() . '</h5>
            
             </div>
-            </td></div>';
-            if ($i % 2 == 1) {
-                echo '</tr>';
-            }
+            </a>';
         }
-        echo '</table>';
+        echo '</div>';
         ?>
     </div>
 

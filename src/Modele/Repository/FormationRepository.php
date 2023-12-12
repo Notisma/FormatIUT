@@ -211,6 +211,7 @@ class FormationRepository extends AbstractRepository
     }
     public function offresNonValides(): array
     {
+        $listeOffres = array();
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estValide=0";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         foreach ($pdoStatement as $offre) {
