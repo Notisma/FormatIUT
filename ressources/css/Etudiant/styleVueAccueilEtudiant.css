@@ -43,8 +43,14 @@ table {
     height: 90%;
 }
 
+table > * {
+    flex-shrink: 0;
+}
+
 td {
     vertical-align: top;
+    /* doit jamais changer de width */
+    width: 50%;
 }
 
 .offre {
@@ -58,21 +64,17 @@ td {
     border-radius: 10px;
     transition: background-color 0.5s ease;
     text-decoration: none;
-    background-color: #aadcda;
+    background-color: #c8e7e4;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .demi {
-    background-color: #ff9ca3;
+    background-color: #ffc4c8;
 }
 
 .offre:hover {
-    background-color: #ff9ca3;
-    cursor: pointer;
-    border: 1px solid black;
-}
-
-.demi:hover {
-    background-color: #aadcda;
+    background-color: white;
     cursor: pointer;
     border: 1px solid black;
 }

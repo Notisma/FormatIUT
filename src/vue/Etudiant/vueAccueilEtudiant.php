@@ -25,6 +25,9 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
            <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
+           <h4 class="titre">' . $offre->getNomOffre() . '</h4>
+           <h4 class="titre">' . $offre->getTypeOffre() . '</h4>
+           <h5 class="titre">' . $offre->getSujet() . '</h5>
            
             </div>
             </td></div>';
