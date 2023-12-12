@@ -15,14 +15,17 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         echo '<table>';
         for ($i = 0; $i < count($data); $i++) {
             $offre = $data[$i];
+            $red = "";
             $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             if ($i % 2 == 0) {
                 echo '<tr>';
+                $red = "demi";
             }
-            echo '<td> <a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre">
+            echo '<td> <a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
            <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
+           
             </div>
             </td></div>';
             if ($i % 2 == 1) {

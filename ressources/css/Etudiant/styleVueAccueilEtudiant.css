@@ -58,12 +58,23 @@ td {
     border-radius: 10px;
     transition: background-color 0.5s ease;
     text-decoration: none;
-    background-color: #eeeeee;
+    background-color: #aadcda;
+}
+
+.demi {
+    background-color: #ff9ca3;
 }
 
 .offre:hover {
+    background-color: #ff9ca3;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.demi:hover {
     background-color: #aadcda;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 .offre > img {
