@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -377,5 +378,32 @@ class ControleurEntrMain extends ControleurMain
         $_REQUEST["action"] = "afficherProfil()";
         MessageFlash::ajouter("success", "Image modifiée avec succès.");
         self::afficherProfil();
+    }
+
+    public static function mettreAJourMdp() : void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
+            if (isset($_POST['ancienMdp'], $_POST['nouveauMdp'], $_POST['confirmerMdp'])) {
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+
+                if (MotDePasse::verifier($_POST['ancienMdp'], $entreprise->getMdpHache())) {
+
+                    if ($_POST['nouveauMdp'] === $_POST['confirmerMdp']) {
+                        $hashedPassword = MotDePasse::hacher($_POST['nouveauMdp']);
+                        $entreprise->setMdpHache($hashedPassword);
+                        (new EntrepriseRepository())->modifierObjet($entreprise);
+                        self::redirectionFlash("afficherProfil", "success", "Mot de passe mis à jour");
+                    } else {
+                        self::redirectionFlash("afficherProfil", "warning", "Les mots de passe ne correspondent pas");
+                    }
+                } else {
+                    self::redirectionFlash("afficherProfil", "warning", "Ancien mot de passe incorrect");
+                }
+            } else {
+                self::redirectionFlash("afficherProfil", "danger", "Des données sont manquantes");
+            }
+        } else {
+            self::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+        }
     }
 }
