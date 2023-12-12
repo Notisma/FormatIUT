@@ -198,59 +198,6 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
     }
 
-    //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
-
-
-    /**
-     * @return void modifie le numéroEtudiant et le sexe lors de la Première Connexion
-     */
-    public static function setNumEtuSexe(): void
-    {
-        $ancienNumEtu = $_REQUEST['oldNumEtu'];
-        $numEtu = $_REQUEST['numEtu'];
-        $sexe = $_REQUEST['sexe'];
-
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($ancienNumEtu);
-        $etudiant->setNumEtudiant($numEtu);
-        $etudiant->setSexeEtu($sexe);
-        (new EtudiantRepository())->modifierNumEtuSexe($etudiant, $ancienNumEtu);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(2)</script>";
-    }
-
-    /**
-     * @return void modifie le téléphone et le mail perso lors de la Première Connexion
-     */
-    public static function setTelMailPerso(): void
-    {
-        $numEtu = $_REQUEST['numEtu'];
-        $tel = $_REQUEST['telephone'];
-        $mailPerso = $_REQUEST['mailPerso'];
-
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
-        $etudiant->setTelephone($tel);
-        $etudiant->setMailPerso($mailPerso);
-        (new EtudiantRepository())->modifierTelMailPerso($etudiant);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(3)</script>";
-    }
-
-    /**
-     * @return void modifie le groupe et le parcours lors de la Première Connexion
-     */
-    public static function setGroupeParcours(): void
-    {
-        $numEtu = $_REQUEST['numEtu'];
-        $groupe = $_REQUEST['groupe'];
-        $parcours = $_REQUEST['parcours'];
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
-        $etudiant->setGroupe($groupe);
-        $etudiant->setParcours($parcours);
-        (new EtudiantRepository())->modifierGroupeParcours($etudiant);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(4)</script>";
-    }
-
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
