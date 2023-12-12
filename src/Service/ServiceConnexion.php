@@ -128,4 +128,13 @@ class ServiceConnexion
         }
     }
 
+    /**
+     * @return void valide l'email grâce au lien envoyé par mail
+     */
+    public static function validerEmail(): void
+    {
+        VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
+        ControleurMain::redirectionFlash("afficherPageConnexion", "success", "Email validé");
+    }
+
 }

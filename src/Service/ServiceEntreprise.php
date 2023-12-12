@@ -4,7 +4,10 @@ namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEntrMain;
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\VerificationEmail;
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 
 class ServiceEntreprise
@@ -72,7 +75,49 @@ class ServiceEntreprise
     public static function mettreAJour(): void
     {
         //TODO vérifier utilité fonction mettreAJourInfos
+        //TODO faire les vérifs
         (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
         ControleurEntrMain::afficherProfil();
+    }
+
+    /**
+     * @return void créeer une entreprise dans la BD et envoie un mail de validation
+     */
+    public static function creerCompteEntreprise(): void
+    {
+        //vérification des nombres négatifs
+        if ($_REQUEST["siret"] > 0 && $_REQUEST["codePostal"] > 0 && $_REQUEST["tel"] > 0 && $_REQUEST["effectif"] > 0) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
+            //vérification de doublon de Siret
+            if (is_null($entreprise)) {
+                $liste = ((new EntrepriseRepository())->getListeObjet());
+                $listeMail = null;
+                foreach ($liste as $entreprise) {
+                    $listeMail[] = $entreprise->getEmail();
+                }
+                //vérification de doublon de mail
+                if (!in_array($_REQUEST["email"], $listeMail)) {
+                    //concordance des mots de passe
+                    if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
+                        if (strlen($_REQUEST["mdp"]) >= 8) {
+                            $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
+                            (new EntrepriseRepository())->creerObjet($entreprise);
+                            VerificationEmail::envoiEmailValidation($entreprise);
+                            ControleurMain::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
+                        } else {
+                            ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
+                        }
+                    } else {
+                        ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
+                    }
+                } else {
+                    ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "L'adresse mail est déjà utilisée");
+                }
+            } else {
+                ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
+            }
+        } else {
+            ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
+        }
     }
 }
