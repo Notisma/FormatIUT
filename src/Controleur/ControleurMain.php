@@ -108,7 +108,7 @@ class ControleurMain
                             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                             $client = "Etudiant";
                             $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                            self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                            self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                         } else {
                             self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
                         }
@@ -428,11 +428,11 @@ class ControleurMain
      * @return array|null
      * retourne les 3 éléments avec la valeur les plus hautes
      */
-    protected static function getTroisMax(array $liste): ?array
+    protected static function getSixMax(array $liste): ?array
     {
         $list = array();
         if (!empty($liste)) {
-            $min = min(3, sizeof($liste));
+            $min = min(6, sizeof($liste));
             for ($i = 0; $i < $min; $i++) {
                 $id = max($liste);
                 $key = null;

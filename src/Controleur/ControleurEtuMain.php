@@ -55,12 +55,16 @@ class ControleurEtuMain extends ControleurMain
             if ($offreValidee) {
                 $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
                 if ($offre->getTypeOffre() == "Stage")
-                    $menu[] = array("image" => "", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
+                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
                 else if ($offre->getTypeOffre() == "Alternance")
-                    $menu[] = array("image" => "", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
+                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
             }
         } else {
-            $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+        }
+
+        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
+            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?action=afficherCatalogue&controleur=EtuMain");
         }
 
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
@@ -74,8 +78,8 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function afficherAccueilEtu(): void
     {
-        $listeIdAlternance = self::getTroisMax((new FormationRepository())->listeIdTypeOffre("Alternance"));
-        $listeIdStage = self::getTroisMax((new FormationRepository())->listeIdTypeOffre("Stage"));
+        $listeIdAlternance = self::getSixMax((new FormationRepository())->listeIdTypeOffre("Alternance"));
+        $listeIdStage = self::getSixMax((new FormationRepository())->listeIdTypeOffre("Stage"));
         $listeStage = array();
         for ($i = 0; $i < sizeof($listeIdStage); $i++) {
             $listeStage[] = (new FormationRepository())->getObjectParClePrimaire($listeIdStage[$i]);

@@ -41,7 +41,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherAccueilEntr(): void
     {
-        $listeidFormation = self::getTroisMax((new FormationRepository())->listeidFormationEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $listeidFormation = self::getSixMax((new FormationRepository())->listeidFormationEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
         for ($i = 0; $i < sizeof($listeidFormation); $i++) {
             $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
