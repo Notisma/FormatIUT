@@ -44,7 +44,7 @@
                         <input type="password" name="mdp" id="mdp" required>
                     </div>
                 </div>
-                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
+                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&service=Connexion">
                 <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>

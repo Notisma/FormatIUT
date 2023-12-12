@@ -130,7 +130,7 @@
             <p>En quelques clics, complétez votre profil, puis démarrez l'aventure Format'IUT !</p>
 
             <div class="wrapBoutons">
-                <a href="?action=seDeconnecter">RETOUR</a>
+                <a href="?action=seDeconnecter&service=Connexion">RETOUR</a>
                 <a onclick="afficherPopupPremiereCo(1)">SUIVANT</a>
             </div>
         </div>

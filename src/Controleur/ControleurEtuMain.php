@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
@@ -63,7 +64,7 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
         return $menu;
     }
 
@@ -407,7 +408,6 @@ class ControleurEtuMain extends ControleurMain
         $numEtu = $_REQUEST['numEtu'];
         $groupe = $_REQUEST['groupe'];
         $parcours = $_REQUEST['parcours'];
-        echo "BlaBla";
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
         $etudiant->setGroupe($groupe);
         $etudiant->setParcours($parcours);
@@ -416,14 +416,6 @@ class ControleurEtuMain extends ControleurMain
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
 
-    /**
-     * @return void met à jour les informations de l'étudiant connecté
-     */
-    public static function mettreAJour(): void
-    {
-        (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-        self::afficherProfil();
-    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -478,6 +470,18 @@ class ControleurEtuMain extends ControleurMain
     {
         self::updateImage();
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");
+    }
+
+    /**
+     * @param string $action le nom de la fonction sur laquelle rediriger
+     * @param string $type le type de message Flash
+     * @param string $message le message à envoyer
+     * @return void redirige en envoyant un messageFlash
+     */
+    public static function redirectionFlash(string $action, string $type, string $message): void
+    {
+        MessageFlash::ajouter($type, $message);
+        header("Location : ?controleur=EtuMain&action=$action");
     }
 
 }

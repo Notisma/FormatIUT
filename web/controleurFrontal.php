@@ -11,11 +11,16 @@ $loader->addNamespace('App\FormatIUT', __DIR__ . '/../src');
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\Historique;
-
+$classe="Controleur";
 if (isset($_REQUEST['controleur'])) { //
     $controleur = ucfirst($_REQUEST["controleur"]);
 } else {
-    $controleur = "Main";
+    if (isset($_REQUEST["service"])){
+        $controleur=ucfirst($_REQUEST["service"]);
+        $classe="Service";
+    }else {
+        $controleur = "Main";
+    }
 }
 
 if (isset($_REQUEST['action'])) {
@@ -23,8 +28,7 @@ if (isset($_REQUEST['action'])) {
 } else {
     $action = "afficherIndex";
 }
-
-$nomClasseControleur = "App\FormatIUT\Controleur\Controleur$controleur";
+$nomClasseControleur = "App\FormatIUT\\$classe\\$classe".$controleur;
 if (class_exists($nomClasseControleur)) {
     Configuration::setControleur($controleur);
     if (in_array($action, get_class_methods($nomClasseControleur))) {
@@ -35,9 +39,10 @@ if (class_exists($nomClasseControleur)) {
         }else {
             $nomClasseControleur::$action();
         }
-    } else
-        $nomClasseControleur::afficherErreur('L\'action : "' . $action . '" n\'existe pas dans le contrôleur : "' . $nomClasseControleur . '"');
+    } else {
+        $nomClasseControleur::afficherErreur("L'action : ' $action ' n'existe pas dans le $classe : ' $nomClasseControleur '");
+    }
 } else {
     Configuration::setControleur("Main");
-    ControleurMain::afficherErreur('Le contrôleur : ' . $nomClasseControleur . ' n\'existe pas');
+    ControleurMain::afficherErreur("Le $classe : ' $nomClasseControleur ' n'existe pas");
 }

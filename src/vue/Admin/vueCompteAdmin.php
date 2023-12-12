@@ -203,7 +203,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                 </div class="inputCentre">
 
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=ajouterEtudiant&controleur=AdminMain"/>
+                    <input type="submit" value="Envoyer" formaction="?action=ajouterEtudiant&service=Etudiant"/>
                 </div>
             </form>
         </div>

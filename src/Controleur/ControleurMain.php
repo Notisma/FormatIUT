@@ -123,6 +123,7 @@ class ControleurMain
             }
         } else if (Configuration::controleurIs("EntrMain")) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+            //if offre existe
             if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                 self::$pageActuelle = "Détails de l'offre";
                 /** @var ControleurMain $menu */
@@ -210,72 +211,6 @@ class ControleurMain
 
     //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @return void action connectant l'utilisateur
-     */
-    public static function seConnecter(): void
-    {
-        if (isset($_REQUEST["login"], $_REQUEST["mdp"])) {
-            $user = ((new EntrepriseRepository())->getEntrepriseParMail($_REQUEST["login"]));
-            if (!is_null($user)) {
-                if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
-                    if (VerificationEmail::aValideEmail($user)) {
-                        ConnexionUtilisateur::connecter($user->getSiret(), "Entreprise");
-                        MessageFlash::ajouter("success", "Connexion Réussie");
-                        header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
-                        exit();
-                    }
-                }
-            } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
-                ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
-                MessageFlash::ajouter("success", "Connexion Réussie");
-                $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
-                if (!is_null($prof)) {
-                    if ($prof->isEstAdmin()) {
-                        ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                    }
-                }
-                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                    header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                } else if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-                    header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                } else if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
-                    MessageFlash::ajouter('info', "Veuillez compléter votre profil");
-                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
-                } elseif (!ConnexionUtilisateur::profilEstComplet($_REQUEST["login"])) {
-                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
-                } else {
-                    header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
-                }
-                exit();
-            } else if ($_REQUEST["login"] == "ProfTest") {
-                if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnels");
-                    MessageFlash::ajouter("success", "Connexion Réussie");
-                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                    exit();
-                }
-            } else if ($_REQUEST["login"] == "AdminTest") {
-                if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-                    ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                    MessageFlash::ajouter("success", "Connexion Réussie");
-                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-                    exit();
-                }
-            }
-        }
-        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
-    }
-
-    /**
-     * @return void déconnecte l'utilisateur
-     */
-    public static function seDeconnecter(): void
-    {
-        ConnexionUtilisateur::deconnecter();
-        Session::getInstance()->detruire();
-        self::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
-    }
 
     /**
      * @return void valide l'email grâce au lien envoyé par mail
@@ -451,7 +386,7 @@ class ControleurMain
      * @param string $get le nom du Request à envoyer
      * @return int envoie en $_REQUEST une id auto-incrémentée
      */
-    protected static function autoIncrement(array $listeId, string $get): int
+    public static function autoIncrement(array $listeId, string $get): int
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
@@ -488,10 +423,10 @@ class ControleurMain
      * @param string $message le message à envoyer
      * @return void redirige en envoyant un messageFlash
      */
-    protected static function redirectionFlash(string $action, string $type, string $message): void
+    public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        (Configuration::getCheminControleur())::$action();
+        self::$action();
     }
 
     /**

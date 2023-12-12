@@ -47,7 +47,7 @@
                 echo '
             <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
         
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerFormation&service=Formation">SUPPRIMER L\'OFFRE</button>
             
             <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
         ';
@@ -99,7 +99,7 @@
                         $idFormationURl = rawurlencode($offre->getidFormation());
                         $idURL = rawurlencode($etudiant->getNumEtudiant());
                         echo '</h4>
-                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
+                            <a href="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
                         echo '<button id="petit" class="boutonAssigner" ';
                         if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                             echo ' id="disabled" disabled';
@@ -160,10 +160,10 @@
 
     <div class="wrapBoutonsDoc">
         <?php
-        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
+        echo '<a href=?action=telechargerCV&service=Fichier&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
-        <a href=?action=telechargerLM&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
+        <a href=?action=telechargerLM&service=Fichier&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER LETTRE</button>
         </a>' ?>
     </div>
