@@ -99,6 +99,7 @@ class ServiceConnexion
         }else {
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
         }
+        exit();
 
     }
 
@@ -112,6 +113,7 @@ class ServiceConnexion
             }else {
                 header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             }
+            exit();
         }
     }
 
@@ -124,7 +126,6 @@ class ServiceConnexion
         }else {
             self::connexionPersonnel();
         }
-        exit();
     }
 
 }
