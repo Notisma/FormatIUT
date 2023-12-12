@@ -6,8 +6,12 @@
 
                 $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomOffreHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4><?php echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
-            <p><?php echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h4>
+                <?php echo 'Sujet : '.htmlspecialchars($offre->getSujet())?>
+            </h4>
+            <h4>
+                <?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
+            <p><?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -21,6 +25,7 @@
                 <div class="overflowListe">
                     <div class="overflowListe2">
                         <div id="liseInfosOffreEntr">
+                            <p><span>Année universitaire requise : </span><?php if($offre->getAnneeMin() != $offre->getAnneeMax()) echo $offre->getAnneeMin(). ' année - ' . $offre->getAnneeMax(). ' année'; else echo $offre->getAnneeMin(). ' année' ;?> </p>
                             <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
                             <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
                             <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?>
