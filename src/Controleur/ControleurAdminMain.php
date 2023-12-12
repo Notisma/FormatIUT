@@ -360,6 +360,9 @@ class ControleurAdminMain extends ControleurMain
     }
 
 
+    /**
+     * @return void permet à l'admin connecté de promouvoir un professeur en administrateur
+     */
     public static function promouvoirProf(): void
     {
         if (isset($_REQUEST["loginProf"])) {
@@ -377,6 +380,9 @@ class ControleurAdminMain extends ControleurMain
     }
 
 
+    /**
+     * @return void permet à l'admin connecté de rétrograder un administrateur en simple professeur
+     */
     public static function retrograderProf(): void
     {
         if (isset($_REQUEST["loginProf"])) {

@@ -10,14 +10,14 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
             afficherPageCompteAdmin("compte");
         };</script>
     <div class="menuAdmin">
-        <div class="sousMenuAdmin compteM" onclick="afficherPageCompte('compte')">
+        <div class="sousMenuAdmin compteM" onclick="afficherPageCompteAdmin('compte')">
             <img src="../ressources/images/profil.png" alt="profil">
             <div>
                 <h3 class="titre">Mon Compte</h3>
             </div>
         </div>
 
-        <div class="sousMenuAdmin notifsM" onclick="afficherPageCompte('notifs')">
+        <div class="sousMenuAdmin notifsM" onclick="afficherPageCompteAdmin('notifs')">
             <img src="../ressources/images/notif.png" alt="profil">
             <div>
                 <h3 class="titre">Notifications</h3>
@@ -28,14 +28,14 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
         if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
             $prof = "profs";
             echo'
-            <div class="sousMenuAdmin profsM" onclick="afficherPageCompte(\'profs\')" >
+            <div class="sousMenuAdmin profsM" onclick="afficherPageCompteAdmin(\'profs\')" >
             <img src = "../ressources/images/professeur.png" alt = "profil" >
             <div >
                 <h3 class="titre" > Permissions / Rôles</h3 >
             </div >
         </div >
         
-        <div class="sousMenuAdmin etuM" onclick="afficherPageCompte(\'etu\')">
+        <div class="sousMenuAdmin etuM" onclick="afficherPageCompteAdmin(\'etu\')">
             <img src="../ressources/images/etudiants.png" alt="profil">
             <div>
                 <h3 class="titre">Ajout d\'Étudiants</h3>
