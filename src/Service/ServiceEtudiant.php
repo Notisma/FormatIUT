@@ -48,7 +48,7 @@ class ServiceEtudiant
     /**
      * @return void met à jour les informations de l'étudiant connecté
      */
-    public static function mettreAJour(): void
+    public static function mettreAJourEtudiant(): void
     {
     //TODO vérifier utilisé fonction mettreAJourInfos
         (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);

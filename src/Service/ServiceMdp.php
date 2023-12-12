@@ -62,7 +62,7 @@ class ServiceMdp
     /**
      * @return void affiche la vue pour réinitialiser le mot de passe
      */
-    public static function afficherMotDePasseARemplir(): void
+    public static function motDePasseARemplir(): void
     {
         if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
             ControleurMain::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");

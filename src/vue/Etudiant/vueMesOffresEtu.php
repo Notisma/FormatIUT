@@ -46,7 +46,7 @@
                         echo '<div class="conteneurBouton">';
                         echo '<form method="get">
                              <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
-                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="service" value="Postuler">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
                               </form>';
@@ -97,13 +97,13 @@
                         } else {
                             echo '<form method="get">
                              <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
-                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="service" value="Postuler">
                               <input type="hidden" name="action" value="validerOffre">
                               <button class="boutonOffre" id="accepter">ACCEPTER</button>
                               </form>';
                             echo '<form method="get">
                              <input type="hidden" name="idFormation" value= ' . $offre->getIdFormation() . '>
-                              <input type="hidden" name="controleur" value="EtuMain">
+                              <input type="hidden" name="service" value="Postuler">
                               <input type="hidden" name="action" value="annulerOffre">
                               <button class="boutonOffre" id="refuser">ANNULER</button>
                               </form>';

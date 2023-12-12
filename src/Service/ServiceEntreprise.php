@@ -72,7 +72,7 @@ class ServiceEntreprise
     /**
      * @return void met à jour les informations de l'entreprise connecté
      */
-    public static function mettreAJour(): void
+    public static function mettreAJourEntreprise(): void
     {
         //TODO vérifier utilité fonction mettreAJourInfos
         //TODO faire les vérifs

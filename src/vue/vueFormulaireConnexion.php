@@ -62,7 +62,7 @@
         </div>
         <div class="conteneurForget">
             <h2>MOT DE PASSE OUBLIÉ ?</h2>
-            <form action="?action=mdpOublie" method="post">
+            <form action="?action=mdpOublie&service=Mdp" method="post">
                 <label for="mail">Saisissez votre adresse mail :</label>
                 <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
                 <input type="submit" value="ENVOYER">

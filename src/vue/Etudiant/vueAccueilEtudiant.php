@@ -163,7 +163,7 @@
                     <a onclick="afficherPopupPremiereCo(0)">RETOUR</a>
                     <input type="hidden" name="oldNumEtu" value="<?php echo $ancienNumEtu ?>">
                     <input type="hidden" name="controleur" value="EtuMain">
-                    <input type="submit" value="SUIVANT" formaction="?action=setNumEtuSexe">
+                    <input type="submit" value="SUIVANT" formaction="?action=setNumEtuSexe&service=Etudiant">
                 </div>
             </form>
         </div>
@@ -192,7 +192,7 @@
                     <a onclick="afficherPopupPremiereCo(1)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
                     <input type="hidden" name="controleur" value="EtuMain">
-                    <input type="submit" value="SUIVANT" formaction="?action=setTelMailPerso">
+                    <input type="submit" value="SUIVANT" formaction="?action=setTelMailPerso&service=Etudiant">
                 </div>
             </form>
         </div>
@@ -217,7 +217,7 @@
                     <a onclick="afficherPopupPremiereCo(2)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
                     <input type="hidden" name="controleur" value="EtuMain">
-                    <input type="submit" value="SUIVANT" formaction="?action=setGroupeParcours">
+                    <input type="submit" value="SUIVANT" formaction="?action=setGroupeParcours&service=Etudiant">
                 </div>
             </form>
         </div>

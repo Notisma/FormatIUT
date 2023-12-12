@@ -115,7 +115,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                                 echo '
                         <p>Grade : Administrateur</p>
                         <div class="wrapBoutons">
-                            <a href="?action=retrograderProf&controleur=AdminMain&loginProf=' . $prof->getLoginProf() . '">Rétrograder</a>
+                            <a href="?action=retrograderProf&service=Personnel&loginProf=' . $prof->getLoginProf() . '">Rétrograder</a>
                         </div>
                         ';
 
@@ -123,7 +123,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                                 echo '
                         <p>Grade : Enseignant</p>
                         <div class="wrapBoutons">
-                            <a href="?action=promouvoirProf&controleur=AdminMain&loginProf=' . $prof->getLoginProf() . '">Promouvoir</a>
+                            <a href="?action=promouvoirProf&service=Personnel&loginProf=' . $prof->getLoginProf() . '">Promouvoir</a>
                         </div>
                         ';
                             }
