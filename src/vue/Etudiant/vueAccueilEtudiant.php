@@ -41,6 +41,20 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
 
     <div class="droiteAcc">
 
+        <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue">
+        <h2 class="titre">Bonjour, <?php echo $etudiant->getPrenomEtudiant() . " !"?></h2>
+
+        <div class="tips">
+            <img src="../ressources/images/astuces.png" alt="astuces">
+            <div>
+                <h5 class="titre">Astuces :</h5>
+                <h6 class="titre">Cliquez sur une offre pour afficher plus de détails.</h6>
+                <h6 class="titre">Rendez-vous dans l'onglet dédié pour afficher plus d'offres.</h6>
+            </div>
+        </div>
+
+        <h3 class="titre" id="sep">Vos Notifications :</h3>
+
     </div>
 
 </div>

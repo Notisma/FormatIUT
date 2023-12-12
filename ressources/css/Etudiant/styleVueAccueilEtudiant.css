@@ -90,6 +90,56 @@ body {
     padding: 2%;
 }
 
+.droiteAcc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    width: 35%;
+    height: 100%;
+    background-color: #aadcda;
+    border-radius: 10px;
+    padding: 1%;
+    text-align: center;
+}
+
+.droiteAcc > img {
+    width: 90%;
+    max-height: 34%;
+}
+
+.tips {
+    width: 98%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding: 2%;
+    overflow: hidden;
+}
+
+.tips > img {
+    max-height: 90%;
+}
+
+.tips > div {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+    padding-left: 2%;
+}
+
 
 
 
