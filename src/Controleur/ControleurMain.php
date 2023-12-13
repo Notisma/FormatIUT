@@ -519,7 +519,7 @@ class ControleurMain
                 $idFile = (new UploadsRepository())->insert($file['name']);
                 $ids[$fileName] = $idFile;
 
-                $fileLocation = $uploadsLocation . $idFile . '-' . basename($file['name']);
+                $fileLocation = $uploadsLocation . $idFile . '-' . StringUtils::filter_filename(basename($file['name']));
                 if (!move_uploaded_file($file['tmp_name'], $fileLocation))
                     self::redirectionFlash($actionInErrorCase, "danger", "Problem uploading file");
             }
