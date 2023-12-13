@@ -106,9 +106,15 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                         <div class="permImg">
                             <img src="../ressources/images/admin.png" alt="avatar">
                         </div>
-                        <div class="perms">
-                            <h3 class="titre" id="rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>
-                            <p>Login : ' . htmlspecialchars($prof->getLoginProf()) . '</p>
+                        <div class="perms">';
+                                if ($prof->getPrenomProf() == null)
+                                    echo '<h3 class="titre" id="rouge">Prenom inconnu</h3>';
+                                else
+                                    echo '<h3 class="titre" id="rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>';
+                                if ($prof->getLoginProf() == null || $prof->getLoginProf() == "")
+                                    echo '<h3 class="titre" id="rouge">Login inconnu</h3>';
+                                else
+                                    echo '<p>Login : ' . htmlspecialchars($prof->getLoginProf()) . '</p>
                             ';
 
                             if ($prof->isEstAdmin()) {

@@ -17,6 +17,9 @@ use DateTimeZone;
 
 class ControleurEntrMain extends ControleurMain
 {
+
+    private static string $page = "Accueil Entreprise";
+
     public static function getCleEntreprise(): int
     {
         return ConnexionUtilisateur::getNumEtudiantConnecte();
@@ -27,12 +30,21 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function getMenu(): array
     {
-        return array(
+        $menu =  array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
             array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=afficherFormulaireCreationOffre&controleur=EntrMain"),
             array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&type=Tous&controleur=EntrMain"),
-            array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter")
         );
+
+        if (self::$page == "Compte Entreprise") {
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Compte Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
+        }
+
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter");
+
+        return $menu;
+
+
     }
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +82,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherProfil(): void
     {
+        self::$page = "Compte Entreprise";
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
@@ -146,7 +159,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
     /**
-     * @return void permet à l'entreprise connecté de créer une offre
+     * @return void permet à l'entreprise connectée de créer une offre
      */
     public static function creerOffre(): void
     {
@@ -159,7 +172,7 @@ class ControleurEntrMain extends ControleurMain
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
                             $listeId = (new FormationRepository())->getListeidFormations();
                             self::autoIncrement($listeId, "idFormation");
-                            $_REQUEST["dateCreationOffre"] = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('d-m-Y');
+                            $_REQUEST["dateCreationOffre"] = (new DateTime("now", new DateTimeZone("Europe/Paris")))->format("Y-d-m");
                             $_REQUEST["estValide"] = 0;
                             $_REQUEST["offreValidee"] = 0;
                             $_REQUEST["validationPedagogique"] = 0;

@@ -61,10 +61,15 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
                     echo "Assignée";
                 }
                 $sujetHTML=htmlspecialchars($offre->getSujet());
-                echo "</p>
-                        <p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . " pour " . $sujetHTML . "</p>               
-                        </div>
-                </a>";
+                echo "</p>";
+                if ($offre->getDateDebut() != null && $offre->getDateFin() != null)
+                    echo "<p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin();
+                else{
+                    echo "<p> Date non disponible ";
+                }
+                echo " pour " . $sujetHTML . "</p>" .
+                    "</div>
+                    </a>";
             }
         }
         ?>
