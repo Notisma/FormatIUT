@@ -71,7 +71,7 @@
                 echo '<p><label for="debut_id"> Alternance : Date début </label>
                     <input type="date" name="dateDebut" value="'.$dateD.'" id="debut_id" required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" name="dateFin" value="'.$dateF.'" id="fin_id" required></p>
+                    <input type="date" name="dateFin" value="'.$dateF.'git fetch" id="fin_id" required></p>
                 <p>'
                 ?>
                     <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
