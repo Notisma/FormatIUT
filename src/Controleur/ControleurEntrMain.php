@@ -159,7 +159,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
     /**
-     * @return void permet à l'entreprise connecté de créer une offre
+     * @return void permet à l'entreprise connectée de créer une offre
      */
     public static function creerOffre(): void
     {
