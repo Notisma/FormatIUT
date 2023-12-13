@@ -7,6 +7,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
+use App\FormatIUT\Lib\StringUtils;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
@@ -517,6 +518,9 @@ class ControleurMain
             if ($file["tmp_name"] != null) {
                 $idFile = (new UploadsRepository())->insert($file['name']);
                 $ids[$fileName] = $idFile;
+                var_dump($file['name']);
+                echo "<br>";
+                var_dump(StringUtils::filter_filename(basename($file['name'])));
 
                 $fileLocation = $uploadsLocation . $idFile . '-' . basename($file['name']);
                 if (!move_uploaded_file($file['tmp_name'], $fileLocation))
