@@ -35,12 +35,13 @@ use App\FormatIUT\Configuration\Configuration;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
+                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
                     $codeRecherche = "<div class='rechercheResp'><img src='../ressources/images/rechercher.png' alt='img'></div>
                 <form action='?action=nothing' method='post'>            
-                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
+                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher dans $type' disabled>
                 </form>";
 
                     if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {

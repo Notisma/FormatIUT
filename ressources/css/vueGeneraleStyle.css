@@ -108,29 +108,33 @@ body {
 
 #headerContent {
     background-color: #ecf0f1;
-    height: 30px;
+    height: 60px;
     width: 100%;
     margin-top: 0;
     z-index: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
 }
 
 #texteAccueil {
     *font-family: "Oswald", sans-serif;
-    margin-left: 10%;
     color: #ff5660;
-    width: 10%;
+    width: 20%;
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 #texteAccueil {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: left;
-    width: 10%;
-    height: 20px;
+    width: 30%;
+    height: 100%;
 }
 
 #texteAccueil > h1 {
@@ -139,7 +143,15 @@ body {
     letter-spacing: 0.06em;
     z-index: 1;
     font-size: 1.5em;
-    margin-top: 70px;
+    margin: 0;
+}
+
+#texteAccueil > h5 {
+    font-family: "Oswald", sans-serif;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    z-index: 1;
+    margin: 0;
 }
 
 #gestionRecherche {

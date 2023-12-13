@@ -7,7 +7,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 <div class="mainAcc">
 
     <div class="gaucheAcc">
-        <h3 class="titre" id="rouge">Les Dernières Offres sorties :</h3>
+        <h3 class="titre" id="rouge">Vos Offres récentes :</h3>
         <?php
         $data = $listeOffre;
 

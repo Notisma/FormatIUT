@@ -32,6 +32,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
                 <?php
+                //echo App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg());
                 echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
                 ?>
                 <div>
