@@ -34,18 +34,6 @@
                 <p><label for="tel_id"> N° tel </label>
                     <input type="text" value="<?= htmlspecialchars($etudiant->getTelephone()) ?>" name="telephone" id="tel_id" readonly
                            required></p>
-                <p><label for="adr_id"> Adresse </label>
-                    <input type="text" value="<?php if($residence) $residence->getVoie(); ?>" name="adresseEtu" id="ard_id" readonly
-                           required>
-                </p>
-                <p><label for="post_id"> Code postal </label>
-                    <input type="number" value="<?php if($residence) $residence->getLibCedex(); ?>" name="codePostalEtu" id="post_id"
-                           readonly required>
-                </p>
-                <p><label for="ville_id"> Ville </label>
-                    <input type="text" value="<?php if($ville) htmlspecialchars($ville->getNomVille()); ?>" name="villeEtu" id="ville_id" readonly
-                           required>
-                </p>
                 <p><label for="mail_id">Mail</label>
                     <input type="text" value="<?= htmlspecialchars($etudiant->getMailPerso()); ?>" name="mailEtu" id="mail_id" readonly
                            required></p>
@@ -65,19 +53,17 @@
                     <input type="text" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>" id="cpEntr_id" required></p>
                 <?php
                 $dateDebut = $offre->getDateDebut();
-                $dateD = $dateDebut->format('Y-m-d');
                 $dateFin = $offre->getDateFin();
-                $dateF = $dateFin->format('Y-m-d');
                 echo '<p><label for="debut_id"> Alternance : Date début </label>
-                    <input type="date" name="dateDebut" value="'.$dateD.'" id="debut_id" required>
+                    <input type="date" name="dateDebut" value="'.$dateDebut.'" id="debut_id" required>
                     <label for="fin_id"> Date fin </label>
-                    <input type="date" name="dateFin" value="'.$dateF.'" id="fin_id" required></p>
+                    <input type="date" name="dateFin" value="'.$dateFin.'" id="fin_id" required></p>
                 <p>'
                 ?>
                     <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
                 <div class="grandInputCentre">
                     <textarea class="inputFormulaire" name="objfOffre" id="objStage_id"
-                              required maxlength="255"></textarea>
+                              required maxlength="255"><?php echo $offre->getObjectifOffre() ?></textarea>
                 </div>
                 </p>
 

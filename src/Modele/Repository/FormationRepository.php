@@ -250,7 +250,13 @@ class FormationRepository extends AbstractRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
+        $offre = $pdoStatement->fetch();
+        if ($offre == false){
+            return null;
+        }
+        else{
+            return $this->construireDepuisTableau($offre);
+        }
     }
     public function trouverOffreValide($numEtu, $typeOffre): ?Formation
     {

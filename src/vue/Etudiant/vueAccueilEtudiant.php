@@ -1,4 +1,5 @@
 <?php
+
 use App\FormatIUT\Configuration\Configuration;
 
 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
@@ -24,7 +25,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             if (($row + $col) % 2 == 0) {
                 $red = "demi";
             }
-            echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
+            echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
            <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
@@ -42,7 +43,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
     <div class="droiteAcc">
 
         <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue">
-        <h2 class="titre">Bonjour, <?php echo $etudiant->getPrenomEtudiant() . " !"?></h2>
+        <h2 class="titre">Bonjour, <?php echo $etudiant->getPrenomEtudiant() . " !" ?></h2>
 
         <div class="tips">
             <img src="../ressources/images/astuces.png" alt="astuces">

@@ -82,7 +82,7 @@ class Entreprise extends AbstractDataObject
             "emailAValider"=>$this->emailAValider,
             "nonce"=>$this->nonce,
             "estValide"=>$valide,
-            "dateCreationCompte"=>$this->dateCreationCompte,
+            "dateCreationCompte"=>$this->dateCreationCompte
         ];
     }
 

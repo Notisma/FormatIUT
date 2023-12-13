@@ -23,6 +23,7 @@ class EntrepriseRepository extends AbstractRepository
         if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
             $valide = 1;
         }
+
         return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
@@ -85,7 +86,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
-        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
+        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,e.estValide, dateCreationCompte
         FROM Formations f JOIN Entreprises e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
