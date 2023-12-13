@@ -13,6 +13,7 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use DateTime;
+use DateTimeZone;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -158,7 +159,7 @@ class ControleurEntrMain extends ControleurMain
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
                             $listeId = (new FormationRepository())->getListeidFormations();
                             self::autoIncrement($listeId, "idFormation");
-                            $_REQUEST["dateCreationOffre"] = (new DateTime())->format('d-m-Y');
+                            $_REQUEST["dateCreationOffre"] = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('d-m-Y');
                             $_REQUEST["estValide"] = 0;
                             $_REQUEST["offreValidee"] = 0;
                             $_REQUEST["validationPedagogique"] = 0;
@@ -253,10 +254,10 @@ class ControleurEntrMain extends ControleurMain
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
                                 if (isset($_REQUEST['dateDebut'])) {
-                                    $offre->setDateDebut(date_create_from_format("Y-m-d", $_REQUEST['dateDebut']));
+                                    $offre->setDateDebut($_REQUEST['dateDebut']);
                                 }
                                 if (isset($_REQUEST['dateFin'])) {
-                                    $offre->setDateFin(date_create_from_format("Y-m-d", $_REQUEST['dateFin']));
+                                    $offre->setDateFin( $_REQUEST['dateFin']);
                                 }
                                 $offre->setSujet($_REQUEST['sujet']);
                                 $offre->setDetailProjet($_REQUEST['detailProjet']);

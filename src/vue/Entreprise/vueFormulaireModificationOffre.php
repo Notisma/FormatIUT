@@ -37,13 +37,13 @@
             <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id"
-                       value="<?= $offre->getDateDebut()->format("Y-m-d"); ?>">
+                       value="<?= $offre->getDateDebut(); ?>">
             </div>
 
             <label class="labelFormulaire" for="dateFin_id">Date de fin de l'offre</label>
             <div class="inputCentre">
                 <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id"
-                       value="<?= $offre->getDateFin()->format("Y-m-d"); ?>">
+                       value="<?= $offre->getDateFin(); ?>">
             </div>
 
             <label class="labelFormulaire" for="sujet_id">Sujet bref de l'offre</label>
