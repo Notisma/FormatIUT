@@ -22,7 +22,6 @@ class ServiceEntreprise
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
             if (!is_null($entreprise)) {
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-
                     if (!$entreprise->isEstValide()) {
                         (new EntrepriseRepository())->supprimer($entreprise->getSiret());
                         ControleurAdminMain::redirectionFlash("afficherListeEntreprises", "success", "L'entreprise a bien été refusée");
@@ -82,7 +81,7 @@ class ServiceEntreprise
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
                     ControleurEntrMain::afficherProfil();
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
-            } else ControleurMain::redirectionFlash("afficherIndex","");
+            } else ControleurMain::redirectionFlash("afficherIndex","danger","Vous n'avez pas les droits requis");
         }else ControleurEntrMain::redirectionFlash("afficherProfil","danger","Les informations ne sont pas renseignées");
     }
 
