@@ -215,8 +215,8 @@ class pstageRepository extends AbstractRepository
 
     public function exportCSV(): array
     {
-        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours,nomOffre, dateDebut, dateFin ,sujet, gratification, dureeHeure, typeOffre, etat, entr.numSiret, nomEntreprise, statutJuridique, effectif, codeNAF, tel, vEntr.nomVille, vEntr.codePostal
-        FROM Etudiants etu LEFT JOIN Postuler r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Formations offr ON offr.idFormation = r.idFormation LEFT JOIN Entreprises entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Villes vEntr ON vEntr.idVille = entr.idVille";
+        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, etu.mailUniversitaire, groupe, parcours,offr.validationPedagogique, typeOffre, dateCreationConvention ,dateDebut, dateFin, nomEntreprise, mailTuteurPro, nomProf 
+        FROM Etudiants etu LEFT JOIN Postuler r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Formations offr ON offr.idFormation = r.idFormation LEFT JOIN Entreprises entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Villes vEntr ON vEntr.idVille = entr.idVille LEFT JOIN TuteursPro tp ON offr.idTuteurPro = tp.idTuteurPro LEFT JOIN Profs prof ON prof.loginProf= offr.loginTuteurUM";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
         $listeObjet = array();

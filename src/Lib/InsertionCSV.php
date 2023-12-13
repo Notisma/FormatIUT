@@ -92,19 +92,19 @@ class InsertionCSV
         $groupe = $ligne[4][0];
         $groupe .= $ligne[4][1];
         $parcours = "";
-        for($i = 5; $i < sizeof($ligne[4]); $i++){
+        for($i = 5; $i < strlen($ligne[4]); $i++){
             $parcours .= $ligne[4][$i];
         }
-        $etu = new Etudiant($ligne[2], $ligne[1], null, null, null, null, null, null, $groupe, $parcours, 1, $ligne[16], 1);
+        $etu = new Etudiant($ligne[2], $ligne[1], "", "", null, null, null, null, $groupe, $parcours, 1, $ligne[16], 1);
         (new EtudiantRepository())->creerObjet($etu);
 
-        $entreprise = new Entreprise($ligne[12], null, null, null, null, null, null, null, 0, null, null ,null, null, 0, null);
+        $entreprise = new Entreprise($ligne[12], "", null, null, null, null, "", "V0", 0, "", "" , "", "", 1, null);
         (new EntrepriseRepository())->creerObjet($entreprise);
 
-        $prof = new Prof($ligne[17], null, null, null, 1);
+        $prof = new Prof($ligne[17], "", "", "", 0, 1);
         (new ProfRepository())->creerObjet($prof);
 
-        $tuteur = new TuteurPro($ligne[13], $ligne[14], null, null, null, null, $ligne[12]);
+        $tuteur = new TuteurPro($ligne[13], $ligne[14], "", "", "", "", $ligne[12]);
         (new TuteurProRepository())->creerObjet($tuteur);
 
         $type = "Alternance";

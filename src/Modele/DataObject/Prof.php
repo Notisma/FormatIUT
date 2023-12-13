@@ -5,20 +5,20 @@ namespace App\FormatIUT\Modele\DataObject;
 class Prof extends AbstractDataObject
 {
     private string $loginProf;
-    private string $nomProf;
-    private string $prenomProf;
-    private string $mailUniversitaire;
+    private ?string $nomProf;
+    private ?string $prenomProf;
+    private ?string $mailUniversitaire;
     private bool $estAdmin;
     private string $img;
 
     /**
      * @param string $loginProf
-     * @param string $nomProf
-     * @param string $prenomProf
-     * @param string $mailUniversitaire
+     * @param ?string $nomProf
+     * @param ?string $prenomProf
+     * @param ?string $mailUniversitaire
      * @param string $img
      */
-    public function __construct(string $loginProf, string $nomProf, string $prenomProf, string $mailUniversitaire,bool $estAdmin, string $img)
+    public function __construct(string $loginProf, ?string $nomProf, ?string $prenomProf, ?string $mailUniversitaire,bool $estAdmin, string $img)
     {
         $this->loginProf = $loginProf;
         $this->nomProf = $nomProf;
@@ -39,12 +39,12 @@ class Prof extends AbstractDataObject
     }
 
 
-    public function getMailUniversitaire(): string
+    public function getMailUniversitaire(): ?string
     {
         return $this->mailUniversitaire;
     }
 
-    public function setMailUniversitaire(string $mailUniversitaire): void
+    public function setMailUniversitaire(?string $mailUniversitaire): void
     {
         $this->mailUniversitaire = $mailUniversitaire;
     }
@@ -61,22 +61,22 @@ class Prof extends AbstractDataObject
     }
 
 
-    public function getNomProf(): string
+    public function getNomProf(): ?string
     {
         return $this->nomProf;
     }
 
-    public function setNomProf(string $nomProf): void
+    public function setNomProf(?string $nomProf): void
     {
         $this->nomProf = $nomProf;
     }
 
-    public function getPrenomProf(): string
+    public function getPrenomProf(): ?string
     {
         return $this->prenomProf;
     }
 
-    public function setPrenomProf(string $prenomProf): void
+    public function setPrenomProf(?string $prenomProf): void
     {
         $this->prenomProf = $prenomProf;
     }

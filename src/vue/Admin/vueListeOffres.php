@@ -11,7 +11,9 @@
 
         <div class="wrapOffres">
             <?php
+
             use App\FormatIUT\Configuration\Configuration;
+
             if (sizeof($listeOffres) > 0) {
 
                 foreach ($listeOffres as $offre) {
@@ -23,16 +25,28 @@
                         </div>
                         
                         <div class='offreDroite'>
-                            <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - " . htmlspecialchars($offre->getTypeOffre()) . " - Par ". htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
-                            <p>Créée le : " . htmlspecialchars($offre->getDateCreationOffre()) . "</p>";
+                        ";
+                    $nomOffre = $offre->getNomOffre();
+                    $typeOffre = $offre->getTypeOffre();
+                    $nomEntreprise = $entreprise->getNomEntreprise();
+                    if ($nomOffre == null || $typeOffre == null || $nomEntreprise == null)
+                        echo "<h3 class='titre' id='rouge'>Offre anonyme !</h3>";
+                    else
+                        echo "<h3 class='titre' id='rouge'>" . htmlspecialchars($nomOffre) . " - " . htmlspecialchars($typeOffre) . " - Par " . htmlspecialchars($nomEntreprise) . "</h3>";
 
-                            if ($offre->getEstValide()) {
-                                echo "<div id='valide' class='statutOffre'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
-                            } else {
-                                echo "<div id='nonValide' class='statutOffre'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
-                            }
+                    $dateoffre = $offre->getDateCreationOffre();
+                    if ($dateoffre == null)
+                        echo "<p>Date de création inconnue</p>";
+                    else
+                        echo "<p>Créée le : " . htmlspecialchars($dateoffre) . "</p>";
 
-                        echo"
+                    if ($offre->getEstValide()) {
+                        echo "<div id='valide' class='statutOffre'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
+                    } else {
+                        echo "<div id='nonValide' class='statutOffre'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
+                    }
+
+                    echo "
                         </div>                        
                         </a>
                         
