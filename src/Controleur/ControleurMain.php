@@ -391,11 +391,11 @@ class ControleurMain
             header("Location: $_SERVER[HTTP_REFERER]");
             return;
         } //si la recherche contient des chiffres
-        if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "On évite les nombres stp (à régler plus tard)");
-            header("Location: $_SERVER[HTTP_REFERER]");
-            return;
-        } //si la recherche ne contient que un ou des espaces
+        //if (preg_match('/[0-9]/', $_REQUEST['recherche'])) {
+          //  MessageFlash::ajouter("warning", "On évite les nombres stp (à régler plus tard)");
+            //header("Location: $_SERVER[HTTP_REFERER]");
+            //return;
+        //} //si la recherche ne contient que un ou des espaces
         if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
             MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
             header("Location: $_SERVER[HTTP_REFERER]");
