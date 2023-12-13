@@ -220,7 +220,7 @@ class Etudiant extends AbstractDataObject
             "groupe" => $this->groupe,
             "parcours" => $this->parcours,
             "validationPedagogique" => $this->validationPedagogique,
-            "presenceForumIUT"=> $this->presenceForumIUT,
+            "presenceForumIUT"=> $this->presenceForumIUT ? 1 : 0,
             "img_id" => $this->img_id
         );
     }

@@ -328,17 +328,17 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getDateCreationOffre(): string
+    public function getDateCreationOffre(): null|string
     {
         return $this->dateCreationOffre;
     }
 
     /**
-     * @param string $dateCreationOffre
+     * @param null|string $dateCreationOffre
      */
-    public function setDateCreationOffre(string $dateCreationOffre): void
+    public function setDateCreationOffre(null|string $dateCreationOffre): void
     {
         $this->dateCreationOffre = $dateCreationOffre;
     }
