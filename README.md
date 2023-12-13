@@ -1,6 +1,6 @@
 # Format'IUT
 
-![Logo format'iut](https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/formatiutRemoved.png)
+![Logo format'iut](https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/Logo_bleu.png)
 
 Ce projet regroupe les différents fichiers qui composeront le site web : Format'IUT. Un site pour référencer et gérer les offres de stages et d'alternance de l'IUT Montpellier - Sète.
 
