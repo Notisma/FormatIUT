@@ -21,7 +21,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             if (($row + $col) % 2 == 0) {
                 $red = "demi";
             }
-            echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
+            echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
            <h3 class="titre" id="rouge">' . $offre->getNomOffre() . '</h3>

@@ -243,7 +243,7 @@ class ControleurEtuMain extends ControleurMain
                             $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
                             $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->listeIdTypeFormation()), "idFormation");
                             $formation = (new FormationRepository())->construireDepuisTableau([
-                                "idFormation" => $idFormation, "dateDebut" => date_format($offre->getDateDebut(), "Y-m-d"), "dateFin" => date_format($offre->getDateFin(), 'Y-m-d'), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getIdEntreprise(), "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
+                                "idFormation" => $idFormation, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getIdEntreprise(), "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
                             (new FormationRepository())->creerObjet($formation);
                             self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
                         } else {
