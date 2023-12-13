@@ -1,20 +1,22 @@
 <div class="wrapCentreOffre">
     <?php
-    $offre = (new App\FormatIUT\Modele\Repository\OffreRepository())->getObjectParClePrimaire($_REQUEST["idOffre"]);
-    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+    $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+    use App\FormatIUT\Configuration\Configuration;
     ?>
 
     <div class="wrapGauche">
-        <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise= <?php echo rawurlencode($entreprise->getSiret()) ?>"
+        <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise=<?php echo rawurlencode($entreprise->getSiret()) ?>"
            class="presentationPrincipale">
             <?php
+
+
             $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
             $sujetHTML=htmlspecialchars($offre->getSujet());
             $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
             $detailHTML=htmlspecialchars($offre->getDetailProjet());
 
-            $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
-            echo '<img src=' . $src . 'alt="image">';
+            echo '<img src="' .Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
             echo "<h2 class='titre' id='rouge'>" . $nomEntrHTML . "</h2>";
             echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
             ?>
@@ -25,7 +27,7 @@
             <h4 class="titre"> <?php echo $nomOffreHTML . " - " . $sujetHTML ?></h4>
             <p>- Description de l'offre : <?php echo $detailHTML ?></p>
             <p>- Offre
-                de <?php echo "" . $offre->getTypeOffre() . " du : " . date_format($offre->getDateDebut(), "d/m/Y") . " au : " . date_format($offre->getDateFin(), "d/m/Y") ?></p>
+                de <?php echo "" . $offre->getTypeOffre() . " du : " . $offre->getDateDebut() . " au : " . $offre->getDateFin() ?></p>
             <p>- Rémunation : <?php echo $offre->getGratification() ?> €</p>
             <p>- Offre publiée le 17/11/2023</p>
         </div>
@@ -33,15 +35,24 @@
 
         <div class="wrapBoutons">
             <?php
-            if (!$offre->estValide()) {
-                echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>REJETER</a>
-            <a id='vert' href='?action=accepterOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>ACCEPTER</a>
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+                if (!$offre->getEstValide()) {
+                    echo "
+                <a href='?action=rejeterOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>REJETER</a>";
+
+                    if ($entreprise->isEstValide()) {
+                        echo "<a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>ACCEPTER</a>";
+                    } else {
+                        echo "<a id='vert' href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=".$entreprise->getSiret()."'>ACCEPTER</a>";
+                        \App\FormatIUT\Lib\MessageFlash::ajouter("warning", "Validez l'entreprise avant de valider l'offre");
+                    }
+
+
+                } else {
+                    echo "
+                <a href='?action=supprimerOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>SUPPRIMER</a>
                 ";
-            } else {
-                echo "
-                <a href='?action=supprimerOffre&controleur=AdminMain&idOffre= " . $offre->getIdOffre() . "'>SUPPRIMER</a>
-                ";
+                }
             }
 
             ?>
@@ -56,7 +67,7 @@
         <h4 class="titre">Statut de l'offre :</h4>
 
         <?php
-        if ($offre->estValide()) {
+        if ($offre->getEstValide()) {
             echo "<div class='statutOffre' id='valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
             echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
@@ -73,9 +84,9 @@
 
         <div class="detailsEtudiants">
             <?php
-            if ($offre->estValide()) {
+            if ($offre->getEstValide()) {
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
-                $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdOffre());
+                $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdFormation());
 
                 if (sizeof($listeEtudiants) == 0  ) {
                     echo "<div class='erreur'>";
@@ -86,13 +97,15 @@
                     foreach ($listeEtudiants as $etudiant) {
                         $parcoursHTML=htmlspecialchars($etudiant->getParcours());
                         $groupeHTML=htmlspecialchars($etudiant->getGroupe());
+                        $prenomEtuHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
+                        $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
                         echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
-                            "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>" .
+                            "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
-                            "<h3 class='titre' id='rouge'>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h3>" .
-                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant()) ."</p>" .
+                            "<h3 class='titre' id='rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
+                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdFormation(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";
                     }

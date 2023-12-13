@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\Entreprise;
+use DateTime;
 
 class EntrepriseRepository extends AbstractRepository
 {
@@ -13,7 +14,7 @@ class EntrepriseRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "Adresse_Entreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte","typeStructure","fax","siteWeb"];
+        return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "adresseEntreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte"];
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
@@ -22,13 +23,13 @@ class EntrepriseRepository extends AbstractRepository
         if (isset($entrepriseFormatTableau["estValide"]) && $entrepriseFormatTableau["estValide"]) {
             $valide = 1;
         }
-        $date=new \DateTime($entrepriseFormatTableau["dateCreationEntreprise"]);
+
         return new Entreprise($entrepriseFormatTableau['numSiret'], $entrepriseFormatTableau['nomEntreprise'],
             $entrepriseFormatTableau['statutJuridique'],
             $entrepriseFormatTableau['effectif'],
             $entrepriseFormatTableau['codeNAF'],
             $entrepriseFormatTableau['tel'],
-            $entrepriseFormatTableau['Adresse_Entreprise'],
+            $entrepriseFormatTableau['adresseEntreprise'],
             $entrepriseFormatTableau['idVille'],
             $entrepriseFormatTableau["img_id"],
             $entrepriseFormatTableau["mdpHache"],
@@ -36,31 +37,13 @@ class EntrepriseRepository extends AbstractRepository
             $entrepriseFormatTableau["emailAValider"],
             $entrepriseFormatTableau["nonce"],
             $valide,
-            $date,
-            $entrepriseFormatTableau["typeStructure"],
-            $entrepriseFormatTableau["fax"],
-            $entrepriseFormatTableau["siteWeb"]
+            $entrepriseFormatTableau["dateCreationCompte"]
         );
     }
 
     protected function getClePrimaire(): string
     {
         return "numSiret";
-    }
-
-    /***
-     * @param $Siret
-     * @param $idImage
-     * @return void
-     * remplace l'image de l'entreprise avec une nouvelle donc l'id est donnée en paramètre
-     */
-
-    public function updateImage($Siret, $idImage): void
-    {
-        $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:TagSiret";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagImage" => $idImage, "TagSiret" => $Siret);
-        $pdoStatement->execute($values);
     }
 
     public function getEntrepriseParMail(string $mail): ?Entreprise
@@ -89,7 +72,7 @@ class EntrepriseRepository extends AbstractRepository
 
     public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse)
     {
-        $sql = "UPDATE Entreprise SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, Adresse_Entreprise = :adTag WHERE numSiret = :siretTag";
+        $sql = "UPDATE Entreprises SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, adresseEntreprise = :adTag WHERE numSiret = :siretTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("nomTag" => $nom,
             "statutTag" => $statut,
@@ -103,12 +86,38 @@ class EntrepriseRepository extends AbstractRepository
 
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
-        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,Adresse_Entreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,estValide
-        FROM Formation f JOIN Entreprise e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
+        $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,e.estValide, dateCreationCompte
+        FROM Formations f JOIN Entreprises e ON f.idEntreprise = e.numSiret WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
 
+    }
+
+    public function getOffresNonValidesDeEntreprise(int $idEntreprise): array
+    {
+        $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 0";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagId" => $idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[] = (new FormationRepository())->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
+    }
+
+    public function getOffresValidesDeEntreprise(int $idEntreprise): array
+    {
+        $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagId" => $idEntreprise);
+        $pdoStatement->execute($values);
+        $listeOffres = array();
+        foreach ($pdoStatement as $offre) {
+            $listeOffres[] = (new FormationRepository())->construireDepuisTableau($offre);
+        }
+        return $listeOffres;
     }
 }

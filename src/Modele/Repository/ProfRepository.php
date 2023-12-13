@@ -15,34 +15,51 @@ class ProfRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idProf", "nomProf", "prenomProf", "mailUniversitaire", "img_id");
+        return array("loginProf", "nomProf", "prenomProf", "mailUniversitaire", "estAdmin", "img_id");
     }
 
     protected function getClePrimaire(): string
     {
-        return "nomProf";
+        return "loginProf";
     }
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $image = ((new ImageRepository()))->getImage($dataObjectTableau["img_id"]);
+        $estAdmin=0;
+        if ($dataObjectTableau["estAdmin"]){
+            $estAdmin=1;
+        }
+
         return new Prof(
-            $dataObjectTableau["idProf"],
+            $dataObjectTableau["loginProf"],
             $dataObjectTableau["nomProf"],
             $dataObjectTableau["prenomProf"],
             $dataObjectTableau["mailUniversitaire"],
-            $image["img_blob"]
+            $estAdmin,
+            $dataObjectTableau["img_id"]
         );
     }
 
     public function estProf(string $login): bool
     {
-        $sql = "SELECT COUNT(*) FROM " . $this->getNomTable() . " WHERE nomProf=:Tag";
+        $sql = "SELECT COUNT(*) FROM " . $this->getNomTable() . " WHERE loginProf=:Tag";
         $pdoStetement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $login);
         $pdoStetement->execute($values);
         $count = $pdoStetement->fetch();
         if ($count > 0) return true;
         else return false;
+    }
+    public function getParNom(String $nomProf): ?Prof{
+        $sql="SELECT * FROM ".$this->getNomTable(). " WHERE nomProf=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$nomProf);
+        $pdoStatement->execute($values);
+        $prof=$pdoStatement->fetch();
+        if (!$prof){
+            return null;
+        }else{
+            return $prof;
+        }
     }
 }

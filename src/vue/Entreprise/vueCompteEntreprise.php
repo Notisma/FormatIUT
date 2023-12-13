@@ -1,118 +1,132 @@
-<div class="boiteMain">
-    <div class="etudiantInfos">
-        <div class="h3centre">
-            <h3>Votre Identité Visuelle</h3>
-        </div>
-        <div class="petiteDiv">
-            <div class="texteAGauche">
-                <p>Changez votre logo ici :</p>
-                <form enctype="multipart/form-data" action="?action=updateImage&controleur=EntrMain" method="post">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000" >
-                    <input type="file" name="pdp" size=50 >
-                    <input type="submit" value="Envoyer" >
-                </form>
-            </div>
-            <div class="imageEtu">
-                <?php
-                //echo ((new \App\FormatIUT\Modele\Repository\ImageRepository())->getImage(1));
-                //echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['IMAGE'] ).'" >';
-                //on affiche le logo de l'entreprise depuis ImageRepository
-                use App\FormatIUT\Modele\Repository\OffreRepository;
+<?php
 
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" alt="profilePic" >';
+use App\FormatIUT\Configuration\Configuration;
+$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+?>
+
+<div class="centreCompte">
+    <script>window.onload = function () {
+            afficherPageCompteEntr("compte");
+        };</script>
+    <div class="menuEntr">
+        <div class="sousMenuEntr compteM" onclick="afficherPageCompteEntr('compte')">
+            <img src="../ressources/images/profil.png" alt="profil">
+            <div>
+                <h3 class="titre">Mon Compte</h3>
+            </div>
+        </div>
+
+        <div class="sousMenuEntr notifsM" onclick="afficherPageCompteEntr('notifs')">
+            <img src="../ressources/images/notif.png" alt="profil">
+            <div>
+                <h3 class="titre">Notifications</h3>
+            </div>
+        </div>
+
+        <div class="sousMenuEntr mdpM" onclick="afficherPageCompteEntr('mdp')">
+            <img src="../ressources/images/cadenas.png" alt="profil">
+            <div>
+                <h3 class="titre">Mon Mot de Passe</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mainEntr" id="compte">
+
+        <h2 class="titre" id="rouge">Modifier mon Profil</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <h3 class="titre">Mon Avatar</h3>
+            <div class="avatar">
+                <?php
+                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='etudiant'>";
                 ?>
-                <!--
-                <img src="../ressources/images/logo_CA.png" alt="logoEntreprise">
-                -->
+                <div>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                    <input type="file" name="pdp" size="500">
+                    <p>Glissez-déposez un fichier ou parcourez vos fichiers. JPEG et PNG uniquement</p>
+                </div>
             </div>
-        </div>
+
+            <h3 class="titre">Siret</h3>
+            <div class="inputCentre">
+                <input disabled type="text" value='<?= htmlspecialchars($entreprise->getSiret()); ?>' name="siret"
+                       required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Nom</h3>
+            <div class="inputCentre">
+                <input type="text" value=<?= htmlspecialchars($entreprise->getNomEntreprise()); ?> name="nom"
+                       id="nom_id" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Statut Juridique</h3>
+            <div class="inputCentre">
+                <input type="text" value=<?= htmlspecialchars($entreprise->getStatutJuridique()); ?> name="statutJ"
+                       id="statutJ_id" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Effectif</h3>
+            <div class="inputCentre">
+                <input type="number" value=<?= htmlspecialchars($entreprise->getEffectif()); ?> name="effectif"
+                       id="effectif_id" required maxlength="11"/>
+            </div>
+
+            <h3 class="titre">Code NAF</h3>
+            <div class="inputCentre">
+                <input type="text" value=<?= htmlspecialchars($entreprise->getCodeNAF()); ?> name="codeNAF"
+                       id="codeNAF_id" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Numéro de Téléphone</h3>
+            <div class="inputCentre">
+                <input type="text" value=<?= htmlspecialchars($entreprise->getTel()); ?> name="tel"
+                       id="tel_id" required maxlength="11"/>
+            </div>
+
+            <h3 class="titre">Adresse</h3>
+            <div class="inputCentre">
+                <input type="text" value=<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?> name="adresse"
+                       id="adresse_id" required maxlength="255"/>
+            </div>
+
+            <div class="inputCentre">
+                <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>"/>
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EntrMain"/>
+            </div>
+
+
+        </form>
+
     </div>
 
-    <div class="conteneurBienvenueEtu">
-        <div class="texteBienvenue">
-            <h3>Bonjour, bienvenue sur votre compte entreprise</h3>
-            <p>Voici toutes les informations de votre compte :</p>
-        </div>
-        <div class="imageBienvenue">
-            <img src="../ressources/images/parametresEntr.png" alt="image de bienvenue">
-        </div>
+    <div class="mainEntr" id="notifs">
+        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
+    </div>
+
+    <div class="mainEntr" id="mdp">
+        <h2 class="titre" id="rouge">Modifier le Mot de Passe</h2>
+        <form method="post">
+            <h3 class="titre">Ancien Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="ancienMdp" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Nouveau Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="nouveauMdp" required maxlength="50"/>
+            </div>
+
+            <h3 class="titre">Confirmer le Nouveau Mot de Passe</h3>
+            <div class="inputCentre">
+                <input type="password" name="confirmerMdp" required maxlength="50"/>
+            </div>
+
+            <div class="inputCentre">
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&controleur=EntrMain"/>
+            </div>
+        </form>
     </div>
 
 
-    <div class="informationsActuellesEtu">
-        <h3>Vos Informations Actuelles</h3>
-        <div class="infosActu">
-            <ul id="infosEntr">
-                <?php
-                $ville = (new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                echo "<li>Siret : " . $entreprise->getSiret() . "</li>
-            <li>Nom : " . $entreprise->getNomEntreprise() . "</li>
-            <li>Statut juridique : " . $entreprise->getStatutJuridique() . "</li>
-            <li>Effectif : " . $entreprise->getEffectif() . "</li>
-            <li>CodeNAF : " . $entreprise->getCodeNaf() . "</li>
-            <li>Téléphone : " . $entreprise->getTel() . "</li>
-            <li>Adresse : " . $entreprise->getAdresse() . "</li>
-            <li>Ville : " . $ville->getNomVille() . "</li>
-            " ?>
-                <a href="?action=afficherFormulaireModification&controleur=EntrMain">Modifier vos informations</a>
-            </ul>
-
-            <img src="../ressources/images/infosEntre.png" alt="illu">
-
-        </div>
-    </div>
-
-
-    <div class="detailsDeEntreprise">
-        <h3>Vos Statistiques</h3>
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/offres.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4><?php
-                    $OffresEnLigne = ((new OffreRepository())->offresParEntrepriseDispo(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                    $nbOffresEnLigne = sizeof($OffresEnLigne);
-                    echo $nbOffresEnLigne . " Offre";
-                    if ($nbOffresEnLigne != 1) echo "s";
-                    ?> en ligne
-                </h4>
-            </div>
-
-        </div>
-
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/etudiant.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4><?php
-                    $nbEtudiant = 0;
-                    foreach ($OffresEnLigne as $item) {
-                        $nbEtudiant += ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($item->getIdOffre()));
-                    }
-                    $s = "";
-                    if ($nbEtudiant != 1) $s = "s";
-                    echo $nbEtudiant . " étudiant" . $s . " postultant" . $s;
-                    ?> </h4>
-            </div>
-
-        </div>
-
-        <div class="statistiques">
-            <div class="illustrationStat">
-                <img src="../ressources/images/archiver.png" alt="illustration postuler">
-            </div>
-
-            <div class="descStat">
-                <h4>0 offres ou contrats archivés</h4>
-            </div>
-
-        </div>
-
-    </div>
 </div>

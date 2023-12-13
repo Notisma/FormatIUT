@@ -2,10 +2,21 @@
     <div class="wrapBonjour">
         <div class="texteBonjour">
             <h3>Bonjour, <?php
+
+                use App\FormatIUT\Configuration\Configuration;
+
                 $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
-                echo $prof->getPrenomProf();
+                $prenomHTML = htmlspecialchars($prof->getPrenomProf());
+                echo $prenomHTML;
                 ?></h3>
-            <p>Retrouvez les dernières informations :</p>
+            <?php
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                echo "<p>Retrouvez les informations de votre tableau de bord Administrateur :</p>";
+            } else {
+                echo "<p>Retrouvez les informations de votre tableau de bord Enseignant :</p>";
+            }
+            ?>
+
         </div>
 
         <div class="imageBonjour">
@@ -73,61 +84,67 @@
     <div class="wrapAdminEntr">
         <h3 class="titre">Alertes - Entreprises</h3>
         <div class="wrapAlertes">
-            <!-- exemple d'alerte - compte créé -->
-            <?php foreach ($listeEntreprises as $entreprise) {
+            <?php
+            if ($listeEntreprises == null && $listeOffres == null) {
+                echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune alerte à afficher ici</h3> </div>';
+            } else {
+                foreach ($listeEntreprises as $entreprise) {
 
-                ?>
-                <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>" class="alerteEntr">
-                    <div class="imageAlerte">
-                        <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
-                        ?>
-                    </div>
-
-                    <div class="contenuAlerte">
-                        <h3 class="titre" id="rouge">
+                    ?>
+                    <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>"
+                       class="alerteEntr">
+                        <div class="imageAlerte">
                             <?php
-                            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-                            echo $nomEntrHTML;
+                            echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
                             ?>
-
-                            - Demande de création de compte</h3>
-                        <div class="sujetAlerte">
-                            <img src="../ressources/images/attention.png" alt="image">
-                            <p>Demande de création de compte le 11/11/2023</p>
                         </div>
-                    </div>
-                </a>
-            <?php } ?>
 
-            <!-- exemple d'alerte - offre postée -->
-            <?php foreach ($listeOffres as $offre) {
-                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        <div class="contenuAlerte">
+                            <h3 class="titre" id="rouge">
+                                <?php
+                                $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
+                                echo $nomEntrHTML;
+                                ?>
+
+                                - Demande de création de compte</h3>
+                            <div class="sujetAlerte">
+                                <img src="../ressources/images/attention.png" alt="image">
+                                <p>Demande de création de compte le 11/11/2023</p>
+                            </div>
+                        </div>
+                    </a>
+                <?php }
                 ?>
 
-                <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=<?php echo $offre->getIdOffre() ?>"
-                   class="alerteEntr">
-                    <div class="imageAlerte">
-                        <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
-                        ?>
-                    </div>
 
-                    <div class="contenuAlerte">
-                        <h3 class="titre" id="rouge">
+                <!-- exemple d'alerte - offre postée -->
+                <?php
+                foreach ($listeOffres as $offre) {
+                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                    ?>
+
+                    <a href="?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=<?php echo $offre->getidFormation() ?>"
+                       class="alerteEntr">
+                        <div class="imageAlerte">
                             <?php
-                            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-                            echo $nomEntrHTML;
-                            ?> - Offre en attente</h3>
-                        <div class="sujetAlerte">
-                            <img src="../ressources/images/attention.png" alt="image">
-                            <p>Demande d'envoi d'une offre le 13/11/2023</p>
+                            echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
+                            ?>
                         </div>
-                    </div>
-                </a>
-            <?php } ?>
+
+                        <div class="contenuAlerte">
+                            <h3 class="titre" id="rouge">
+                                <?php
+                                $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
+                                echo $nomEntrHTML;
+                                ?> - Offre en attente</h3>
+                            <div class="sujetAlerte">
+                                <img src="../ressources/images/attention.png" alt="image">
+                                <p>Demande d'envoi d'une offre le 13/11/2023</p>
+                            </div>
+                        </div>
+                    </a>
+                <?php }
+            } ?>
 
         </div>
         <div class="wrapBoutons">
@@ -141,39 +158,48 @@
         <div class="wrapAlertes">
 
             <!-- exemple d'alerte - compte créé -->
-            <?php foreach ($listeEtudiants as $etudiant) { ?>
+            <?php
 
-                <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu= <?php echo $etudiant->getNumEtudiant() ?>" class="alerteEntr" id="hoverRose">
-                    <div class="imageAlerte">
-                        <?php
-                        $src = '"data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"';
-                        echo '<img src=' . $src . 'alt="image">';
-                        ?>
-                    </div>
+            if ($listeEtudiants == null) {
+                echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune anomalie à afficher ici</h3> </div>';
+            } else {
 
-                    <div class="contenuAlerte">
-                        <h3 class="titre" id="rouge">
+                foreach ($listeEtudiants as $etudiant) { ?>
+
+                    <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu= <?php echo $etudiant->getNumEtudiant() ?>"
+                       class="alerteEntr" id="hoverRose">
+                        <div class="imageAlerte">
                             <?php
-                            echo $etudiant->getPrenomEtudiant() . " " . strtoupper($etudiant->getNomEtudiant());
-                            ?></h3>
-                        <p>
-                            <?php
-                            if ($etudiant->getParcours() == "") {
-                                echo "Données non renseignées";
-                            } else {
-
-                                $parcoursHTML=htmlspecialchars($etudiant->getParcours());
-                                $groupeHTML=htmlspecialchars($etudiant->getGroupe());
-                                echo $parcoursHTML . " - " . $groupeHTML;
-                            }
-                            ?></p>
-                        <div class="sujetAlerte">
-                            <img src="../ressources/images/attention.png" alt="image">
-                            <p>Aucun Stage/Alternance</p>
+                            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
+                            ?>
                         </div>
-                    </div>
-                </a>
-            <?php } ?>
+
+                        <div class="contenuAlerte">
+                            <h3 class="titre" id="rouge">
+                                <?php
+                                $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                                $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                                echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                                ?></h3>
+                            <p>
+                                <?php
+                                if ($etudiant->getParcours() == "") {
+                                    echo "Données non renseignées";
+                                } else {
+
+                                    $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                                    $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                                    echo $parcoursHTML . " - " . $groupeHTML;
+                                }
+                                ?></p>
+                            <div class="sujetAlerte">
+                                <img src="../ressources/images/attention.png" alt="image">
+                                <p>Aucun Stage/Alternance</p>
+                            </div>
+                        </div>
+                    </a>
+                <?php }
+            } ?>
 
 
             <!-- un exemple différent -->

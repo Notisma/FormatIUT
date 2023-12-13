@@ -9,7 +9,7 @@ class ConventionRepository extends AbstractRepository
 {
     public function getNomTable(): string
     {
-        return "Convention";
+        return "Formations";
     }
 
     public function getClePrimaire(): string
@@ -35,7 +35,7 @@ class ConventionRepository extends AbstractRepository
 
     public function getNbConvention()
     {
-        $sql = "SELECT COUNT(idConvention) as nb FROM Convention";
+        $sql = "SELECT COUNT(idConvention) as nb FROM Formations";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute();
         $resultat = $pdoStatement->fetch();
@@ -47,7 +47,7 @@ class ConventionRepository extends AbstractRepository
 
     public function aUneConvention($numEtu): bool
     {
-        $sql = "Select * FROM Convention c JOIN Formation f ON f.idConvention = c.idConvention WHERE idEtudiant=:tagEtu";
+        $sql = "Select * FROM Formations WHERE idEtudiant=:tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
@@ -59,7 +59,7 @@ class ConventionRepository extends AbstractRepository
     public function trouverConventionDepuisForm($numEtu): Convention
     {
         $sql = "Select c.idConvention, conventionValidee, dateCreation, dateTransmission, retourSigne, assurance, objectifOffre, typeConvention
-        FROM Formation f JOIN Convention c ON c.idConvention = f.idConvention WHERE idEtudiant = :tagEtu";
+        FROM Formations f JOIN Convention c ON c.idConvention = f.idConvention WHERE idEtudiant = :tagEtu";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);

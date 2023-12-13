@@ -9,9 +9,12 @@ define('DB_NAME', 'loyet'); //Nom de la base de données4
 
 namespace App\FormatIUT\Configuration;
 
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
+
 class Configuration
 {
-
     static private array $configLocal = array(
 
         'hostname' => 'localhost',
@@ -82,22 +85,40 @@ class Configuration
         return self::getConfig()['port'];
     }
 
-    public static function getAbsoluteURL()
+    public static function getAbsoluteURL(): string
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
             return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/web/controleurFrontal.php";
         }
         return "http://localhost/SAE_DEV/web/controleurFrontal.php";
+    }
 
+
+    /**
+     * @param $id
+     * @return string
+     * Pour l'instant ne sert qu'à DRY, mais pourra être utilisée pour gérer la sécu des uploads
+     */
+    public static function getUploadPathFromId($id): string
+    {
+        $type = ConnexionUtilisateur::getTypeConnecte();
+        $uploadsRepository = new UploadsRepository();
+        $fileName = $uploadsRepository->getFileNameFromId($id);
+
+        if ($fileName) {
+            if (file_exists("../ressources/uploads/$id-$fileName")) {
+                return "../ressources/uploads/$id-$fileName";
+            } else {
+                if (file_exists("https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/uplaods/$id-$fileName")) {
+                    return "https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/uplaods/$id-$fileName";
+                }
+            }
+        }
+        return "../ressources/images/danger.png";
     }
 
 
     private static string $controleur;
-
-    public static function getControleur(): string
-    {
-        return self::$controleur;
-    }
 
     public static function controleurIs(string $contr): bool
     {
@@ -109,8 +130,26 @@ class Configuration
         self::$controleur = $controleur;
     }
 
+    public static function getControleurName(): string
+    {
+        return self::$controleur;
+    }
+
+    /**
+     * @return class-string<ControleurMain>
+     */
     public static function getCheminControleur(): string
     {
         return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
+    }
+
+    /*    public static function getControleurClass(): string
+        {
+            return "Controleur" . self::$controleur;
+        }
+    */
+    public static function getDelai()
+    {
+        return 30 * 60;
     }
 }

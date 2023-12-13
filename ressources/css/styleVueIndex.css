@@ -6,14 +6,15 @@ body {
 
 
 #center {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     background-color: white;
     margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     min-width: 300px;
     border-radius: 10px;
     text-align: left;
@@ -133,4 +134,87 @@ body {
     margin: auto;
 }
 
+
+
+/* ---------------------------------------------------------------------------------- */
+/* ----------------------------------- RESPONSIVE ----------------------------------- */
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 160vh;
+    }
+
+    #center {
+        flex-direction: column;
+        width: 100%;
+        height: 123%;
+        background-color: transparent;
+        box-shadow: none;
+        top: 75%;
+    }
+
+    #presentation {
+        float: none;
+        width: 100%;
+        height: 50%;
+        justify-content: space-between;
+    }
+
+    #wrapDetails {
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    #illustrationPresentation {
+        height: 70%;
+        width: 90%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #illustrationPresentation > img {
+        height: 300px;
+        width: 350px;
+        margin: 0;
+    }
+
+    #textePresentation {
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    #textePresentation > h1 {
+        margin: 0;
+    }
+
+    #textePresentation > p {
+        padding: 0;
+        /* margin juste sur les cotés */
+        margin: 0 0.5%;
+    }
+
+
+    .conteneurDetails {
+        height: 30%;
+        width: 98%;
+        border-radius: 10px;
+    }
+
+    .conteneurTexte {
+        justify-content: space-around;
+    }
+
+    .conteneurTexte > * {
+        margin: 0;
+        line-height: 1.4em;
+    }
+
+}
 

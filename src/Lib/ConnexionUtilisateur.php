@@ -36,7 +36,7 @@ class ConnexionUtilisateur
         // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            if (self::getTypeConnecte() == "Etudiant") {
+            if (self::getTypeConnecte() == "Etudiants") {
                 ConnexionLdap::deconnexion();
             }
             $session->supprimer(self::$cleConnexion);
@@ -121,6 +121,19 @@ class ConnexionUtilisateur
             return true;
         }
         return false;
+    }
+
+    public static function verifConnecte(string $controleur):bool{
+        $bool=false;
+        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
+            $bool=true;
+        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
+            $bool=true;
+        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
+            if (ConnexionUtilisateur::getTypeConnecte()!="Personnels")
+            $bool=true;
+        }
+        return $bool;
     }
 
 

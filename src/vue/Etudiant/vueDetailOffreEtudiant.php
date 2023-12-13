@@ -1,16 +1,9 @@
-<html>
-<head>
-    <link rel="stylesheet" href="./../ressources/css/styleVueDetailEtudiant.css">
-    <script src="../ressources/javaScript/mesFonctions.js"></script>
-</head>
-<body>
 <div class="boiteMain" id="aGriser">
-
-
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affichage des informations principales de l'offre -->
-            <h2><?php use App\FormatIUT\Controleur\ControleurEtuMain;
+            <h2><?php use App\FormatIUT\Configuration\Configuration;
+                use App\FormatIUT\Controleur\ControleurEtuMain;
                 use App\FormatIUT\Modele\DataObject\Postuler;
                 use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -18,8 +11,8 @@
 
                 $nomHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
-            <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h4><?php echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
+            <p><?php echo (new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -33,7 +26,7 @@
                 <div class="overflowListe2">
                     <div id="liseInfosOffreEntr">
                         <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
-                        <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
+                        <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
                         <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?> jours
                         </p>
                         <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?> heures
@@ -44,13 +37,13 @@
                         <div class="infosSurEntreprise">
                             <div class="left">
                                 <?php
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($entreprise->getImg()) . '" class="imageEntr">';
+                                echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" class="imageEntr">';
                                 ?>
                             </div>
                             <div class="right">
-                                <h3><?php echo $entreprise->getNomEntreprise(); ?></h3>
-                                <p><span>Téléphone : </span><?php echo $entreprise->getTel(); ?></p>
-                                <p><span>Adresse : </span><?php echo $entreprise->getAdresse(); ?></p>
+                                <h3><?php echo htmlspecialchars($entreprise->getNomEntreprise()); ?></h3>
+                                <p><span>Téléphone : </span><?php echo htmlspecialchars($entreprise->getTel()); ?></p>
+                                <p><span>Adresse : </span><?php echo htmlspecialchars($entreprise->getAdresseEntreprise()); ?></p>
                             </div>
                         </div>
                     </div>
@@ -69,10 +62,10 @@
         echo '<a id="my-button">
                 <button class="boutonAssigner" onclick="afficherPopupDepotCV_LM()" ';
         $bool = false;
-        $formation = ((new FormationRepository())->estFormation($_GET['idOffre']));
+        $formation = ((new FormationRepository())->estFormation($_GET['idFormation']));
         if (is_null($formation)) {
             if (!(new EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idOffre'])) {
+                if (!(new EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idFormation'])) {
                     $bool = true;
                 }
             }
@@ -104,7 +97,7 @@
         <div class="wrapPostulants">
             <?php
 
-            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
             if ($formation) {
                 if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
                     echo "<div class='nbPostulants'>
@@ -116,7 +109,7 @@
                 <h4>L'offre est déjà occupée </h4></div>";
                 }
             } else {
-                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+                $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
                 if (empty($listeEtu)) {
                     echo "
                 <div class='erreur'>
@@ -129,7 +122,7 @@
                 <div class='nbPostulants'>
                 <img src='../ressources/images/equipe.png' alt='postulants'>
                 <h4>";
-                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdOffre()));
+                    $nbEtudiants = ((new EtudiantRepository())->nbPostulations($offre->getIdFormation()));
                     echo $nbEtudiants . " étudiant";
                     if ($nbEtudiants == 1) echo " a";
                     else echo "s ont";
@@ -153,13 +146,13 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=postuler&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              action="?action=postuler&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd1" name="fic" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd1" name="cv" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
@@ -170,8 +163,8 @@
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre lettre de Motivation :</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd2" name="ficLM" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd2" name="lm" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
@@ -202,13 +195,13 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=modifierFichiers&controleur=EtuMain&idOffre=<?php echo $offre->getIdOffre() ?>"
+              action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
                     <label>Déposez votre CV :</label>
                     <?php
-                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdOffre()));
+                        /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdFormation()));
                         if($postuler->formatTableau()["cv"] != null){
                             echo "<p> Vous avez déjà déposé un CV </p>";
                         }
@@ -216,8 +209,8 @@
                             echo "<p> Vous n'avez pas encore déposé de CV</p>";
                         }*/
                     ?>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd3" name="fic" onchange="updateImage(3)" accept=".pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd3" name="cv" onchange="updateImage(3)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
@@ -237,8 +230,8 @@
                             echo "<p> Vous n'avez pas encore déposé de lettre de motivation</p>";
                         }*/
                     ?>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                    <input type="file" id="fd4" name="ficLM" onchange="updateImage(4)" accept=".odt, .docx, .pdf, .txt" size=500/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd4" name="lm" onchange="updateImage(4)" accept=".odt, .pdf, .txt" size=500/>
                 </div>
                 <div class="imagesDepot">
                     <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
@@ -262,7 +255,3 @@
         <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
     </div>
 </div>
-
-
-</body>
-</html>

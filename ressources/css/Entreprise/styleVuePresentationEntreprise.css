@@ -2,20 +2,14 @@
 
 body {
     height: 300vh;
-    /* défilement smooth */
     scroll-behavior: smooth;
     background-color: #e8e8e8;
 
 }
 
 .wrapComplet {
-    position: absolute;
-    top: 160%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
     width: 92%;
-    height: 280vh;
+    height: 100%;
     min-width: 300px;
     text-align: left;
     line-height: 2em;
@@ -28,6 +22,7 @@ body {
     align-content: center;
     justify-items: center;
     justify-content: center;
+    overflow-y: hidden;
 }
 
 
@@ -196,7 +191,7 @@ body {
     height: 98%;
 }
 
-.partie4  > div {
+.partie4 > div {
     float: left;
     width: 45%;
 }
@@ -204,20 +199,6 @@ body {
 .partie4 > div > img {
     width: 95%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .wrapFormulaireCreationPE {
@@ -326,4 +307,144 @@ body {
 
 .partieDroitePE > img {
     width: 80%;
+}
+
+
+
+/* RESPONSIVE */
+
+@media (max-width: 500px) {
+    body {
+        height: 505vh;
+    }
+
+    .wrapComplet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .partie1 {
+        flex-direction: column-reverse;
+        background-color: transparent;
+    }
+
+    .partie1 > img {
+        width: 300px;
+    }
+
+    .partie1 > div {
+        width: 100%;
+        margin: 0;
+    }
+
+    .partie1 > div > h1, .partie1 > div > h3 {
+        text-align: center;
+    }
+
+
+    .partie2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+
+    .sousCategorie {
+        justify-content: center;
+        margin-bottom: 2%;
+        flex-shrink: 0;
+        height: 190px;
+    }
+
+    .partie3 {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .partie3 > div {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .partie3 > div > img {
+        width: 350px;
+    }
+
+    .partie3 > .textePartie3 {
+        margin: 0;
+        padding: 0;
+        width: 97%;
+    }
+
+    .partie3 > .textePartie3 > * {
+        text-align: center;
+    }
+
+    .partie4 {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .partie4 > div {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .partie4 > .textePartie3 {
+        margin: 0;
+        padding: 0;
+        width: 97%;
+    }
+
+    .partie4 > .textePartie3 > * {
+        text-align: center;
+    }
+
+    .wrapFormulaireCreationPE {
+        flex-direction: column;
+        width: 95%;
+        border: none;
+        box-shadow: none;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .partieDroitePE {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .partieDroitePE > img {
+        width: 300px;
+    }
+
+    .partieDroitePE > h2 {
+        text-align: center;
+    }
+
+    .formulaireGauchePE {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .formulaireGauchePE > form > h1{
+        text-align: center;
+    }
+
+    .formulaireGauchePE > form >input[type='text'], input[type='password'], input[type='number'], input[type='email'] {
+        width: 98%;
+    }
+
+    @media (max-height: 640px) {
+        .partie2, .partie3, .partie4, .partieDroitePE {
+            display: none;
+        }
+    }
+
 }

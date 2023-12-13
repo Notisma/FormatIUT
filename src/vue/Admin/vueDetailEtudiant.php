@@ -14,7 +14,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             $nomHTML=htmlspecialchars($etudiant->getNomEtudiant());
             $parcoursHTML=htmlspecialchars($etudiant->getParcours());
             $groupeHTML=htmlspecialchars($etudiant->getGroupe());
-            echo "<img src='data:image/jpeg;base64," . base64_encode($etudiant->getImg()) . "' alt='etudiant'>";
+            echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
             echo "<h1 id='rouge' class='titre'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($etudiant->getGroupe() != null && $etudiant->getParcours() != null) {
                 echo "<h3 class='titre'>" . $groupeHTML . " - " . $parcoursHTML . "</h3>";
@@ -28,19 +28,24 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             <?php
             $mailHTML=htmlspecialchars($etudiant->getMailPerso());
             $telHTML=htmlspecialchars($etudiant->getTelephone());
+            $loginHTML=htmlspecialchars($etudiant->getLogin());
+            $mailEtuHTML=htmlspecialchars($etudiant->getMailUniersitaire());
             echo "<h3 class='titre'>Informations :</h3>";
             echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
-            echo "<p>Login : " . $etudiant->getLogin() . "</p>";
-            echo "<p>Mail Universitaire : " . $etudiant->getMailUniersitaire() . "</p>";
+            echo "<p>Login : " . $loginHTML . "</p>";
+            echo "<p>Mail Universitaire : " . $mailEtuHTML . "</p>";
             echo "<p>Mail Personnel : " . $mailHTML . "</p>";
             echo "<p>Téléphone : " . $telHTML . "</p>";
             echo "<p>Groupe : " . $groupeHTML . "</p>";
             ?>
         </div>
 
+        <?php
+        if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
         <div class="wrapBoutons">
             <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
         </div>
+        <?php } ?>
 
     </div>
 
@@ -50,7 +55,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
         <div class="wrapAllEtu">
             <?php
             //on affiche toutes les offres auxquelles l'étudiant a postulé, ou toutes les offres auxquelles il est assigné
-            $listeOffres = (new App\FormatIUT\Modele\Repository\OffreRepository())->offresPourEtudiant($etudiant->getNumEtudiant());
+            $listeOffres = (new App\FormatIUT\Modele\Repository\FormationRepository())->offresPourEtudiant($etudiant->getNumEtudiant());
 
             if (sizeof($listeOffres) < 1) {
                 echo "<div class='erreur'>";
@@ -60,17 +65,17 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             } else {
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
-                        $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
+                        $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                         $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
                         $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idOffre=" . $offre->getIdOffre() . "'>" .
+                        echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getidFormation() . "'>" .
                             "<div class='imgOffre'>" .
-                            "<img src='data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "' alt='offre'>" .
+                            "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='offre'>" .
                             "</div>" .
                             "<div class='infosOffre'>" .
                             "<h3 class='titre'>" . $nomOffreHTML . "</h3>" .
                             "<h4 class='titre'>" . $nomEntrHTML . "</h4>" .
-                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdOffre(), $etudiant->getNumEtudiant() ) . "</h5> " .
+                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant() ) . "</h5> " .
                             "</div>" .
                             "</a>";
                     }

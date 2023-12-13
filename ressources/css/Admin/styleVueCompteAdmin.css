@@ -4,320 +4,395 @@ body {
     height: 100vh;
 }
 
-.boiteMain {
-    position: absolute;
-    top: 57%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 92%;
-    height: 87%;
-    min-width: 300px;
-    text-align: left;
-    line-height: 2em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-    grid-auto-columns: 1fr;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-}
-
-
-
-.ProfInfos {
-    grid-column: 1/3;
-    grid-row: 1;
-    float: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 70%;
-    height: 95%;
-    background-color: #ff9095;
-    margin-right: 25%;
-}
-
-.h3centre {
-    width: 100%;
-    text-align: center;
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
     margin: 0;
 }
 
-.h3centre > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    margin-top: 3%;
-    letter-spacing: 0.04em;
+#rouge {
+    color: #ff5660;
 }
 
-.petiteDiv {
-    width: 100%;
+.centreCompte {
+    width: 98%;
     height: 90%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
-    justify-content: center;
-    text-align: center;
 }
 
-.texteAGauche {
-    float: left;
-    width: 70%;
-    height: 80%;
+.menuAdmin {
+    box-shadow: 10px 0 15px -10px rgba(0, 0, 0, 0.25);
+    width: 230px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.texteAGauche > p {
-    font-family: "Open Sans extra", sans-serif;
-    margin: 0 0 0 3%;
-}
-
-.texteAGauche > form {
-    display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    background-color: #ffb4b7;
+    padding-top: 1%;
+    padding-right: 1%;
+}
+
+.sousMenuAdmin {
     width: 98%;
-    margin-left: 2%;
-    height: 90%;
-    padding: 2%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-radius: 50px;
+    padding-left: 5%;
+    margin-bottom: 6%;
+}
+
+.sousMenuAdmin > img {
+    width: 30px;
+    max-height: 90%;
+}
+
+.sousMenuAdmin > div {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.sousMenuAdmin:hover {
+    border: 2px solid #ff9095;
+    cursor: pointer;
+}
+
+#selection {
+    border: 2px solid #ff5660;
+}
+
+#selection > h3 {
+    text-decoration: underline;
+}
+
+.sousMenu:hover {
+    background-color: #31485F;
 
 }
 
-.texteAGauche > form > * {
+.mainAdmins {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
     padding: 1%;
 }
 
-.texteAGauche > form > input[type="submit"] {
-    border-radius: 50px;
-    border: none;
-    width: 30%;
-    height: 50%;
-    background-color: #ff5660;
-    color: white;
-}
-
-.texteAGauche > form > input[type="submit"]:hover {
-    border-radius: 50px;
-    border: none;
-    width: 30%;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-
-::-webkit-file-upload-button {
-    border-radius: 50px;
-    border: none;
-    width: 50%;
-    height: 100%;
-    background-color: #ff5660;
-    color: white;
-}
-
-::-webkit-file-upload-button:hover {
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-
-.imageProf {
-    float: right;
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.imageProf > img {
-    width: 70%;
-}
-
-.conteneurBienvenueProf {
-    float: right;
-    grid-column: 2/5;
-    grid-row: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 80%;
-    height: 95%;
-    margin-left: 17%;
-    background-color: #aadcda;
-}
-
-.texteBienvenue {
-    float: left;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.texteBienvenue > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    margin-left: 5%;
-    letter-spacing: 0.04em;
-}
-
-.texteBienvenue > p {
-    font-family: "Open Sans extra", sans-serif;
-    margin-left: 5%;
-    line-height: 1em;
-}
-
-.imageBienvenue {
-    float: right;
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.imageBienvenue > img {
-    width: 90%;
-}
-
-.informationsActuellesProf {
-    grid-column: 1/3;
-    grid-row: 2/5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
+.mainAdmins > form {
     width: 95%;
-    height: 95%;
-    margin: 0;
-    background-color: #aadcda;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
-.informationsActuellesProf > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin-bottom: 0;
+#compte {
+    display: none;
 }
 
-.infosActu {
+.avatar {
     width: 100%;
+    height: 50%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.avatar > img {
+    width: 120px;
+}
+
+.avatar > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.avatar > div > input {
+    width : 60%;
+}
+
+.avatar > div > input::-webkit-file-upload-button {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #5686ff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.avatar > div > input::-webkit-file-upload-button:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.inputCentre {
+    width: 100%;
+    height: 13%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 5%;
+}
+
+.inputCentre > input[type="text"] {
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff9095;
+    color: black;
+    padding-left: 10px;
+}
+
+.inputCentre > input[type="submit"] {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+
+.inputCentre > input[type="submit"]:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.wrapPerms {
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.wrapPerms > div {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    overflow-y: auto;
+    margin-top: 5%;
+}
+
+.wrapPerms > div::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.wrapPerms > div::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.prof {
+    width: 98%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    background-color: #aadcda;
+    margin-bottom: 3%;
+    flex-shrink: 0;
+}
+
+.prof:hover {
+    cursor: pointer;
+}
+
+.permImg {
+    width: 20%;
     height: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     align-content: center;
-    justify-content: center;
 }
 
-.infosActu > img {
+.permImg > img {
+    width: 100px;
+    max-height: 98%;
+}
+
+.perms {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding-left: 10px;
+    flex-shrink: 0;
+}
+
+.perms > p {
+    margin: 0;
+}
+
+.wrapBoutons {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapBoutons > a {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.5s ease;
+}
+
+.wrapBoutons > a:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.wrapErreur {
+    width: 50%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapErreur > img {
     width: 50%;
 }
 
-.infosActu > li {
-    margin-top: 0;
-}
-
-
-.detailsDeProf {
-    grid-column: 3/5 ;
-    grid-row: 2/5;
+.ajoutEtu {
+    width: 95%;
+    height: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
+    overflow-y: auto;
+}
+
+.ajoutEtu::-webkit-scrollbar {
+    width: 10px;
     border-radius: 10px;
-    width: 60%;
-    height: 95%;
-    margin: 0;
-    background-color: #ff9095;
+    background-color: #ffbfc2;
 }
 
-
-
-.detailsDeProf > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
+.ajoutEtu::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
 }
 
-.detailsDeProf > form {
-    display: flex;
-    flex-direction: column;
+.ajoutEtu > form > .inputCentre {
+    height: 40px;
+    width: 90%;
+    margin-bottom: 3%;
 }
 
-.statistiques {
+.ajoutEtu > form > .inputCentre > input {
+    height: 30px;
+    width: 98%;
+}
+
+.boutonsForm {
+    width: 100%;
+    height: 50px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
-    width: 90%;
-    height: 20%;
-    margin: 0;
-    padding: 0;
-    border-radius: 10px;
+}
+
+.boutonsForm > input {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+
+.boutonsForm > input:hover {
+    border: 1px solid black;
     background-color: white;
-}
-
-.illustrationStat {
-    float: left;
-    width: 25%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.illustrationStat > img {
-    width: 70%;
-}
-
-.descStat {
-    float: right;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.descStat > h4 {
-    font-family: "Oswald", sans-serif;
     color: black;
-    margin: 0;
-    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+
+
+
+
+
+#notifs {
+    display: none;
+}
+
+#profs {
+    display: none;
+}
+
+#etu {
+    display: none;
 }

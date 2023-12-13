@@ -9,7 +9,7 @@ class VilleRepository extends AbstractRepository
 {
     protected function getNomTable(): string
     {
-        return "Ville";
+        return "Villes";
     }
 
     protected function getNomsColonnes(): array
@@ -55,7 +55,7 @@ class VilleRepository extends AbstractRepository
 
     public function getVilleParIdVilleEntr($siret): Ville
     {
-        $sql = "Select v.idVille, nomVille, codePostal From Ville v JOIN Entreprise e ON v.idVille = e.idVille WHERE numSiret =:Tag";
+        $sql = "Select v.idVille, nomVille, codePostal From Villes v JOIN Entreprises e ON v.idVille = e.idVille WHERE numSiret =:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $siret);
         $pdoStatement->execute($values);

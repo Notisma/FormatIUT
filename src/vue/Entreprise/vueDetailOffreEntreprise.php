@@ -2,10 +2,16 @@
     <div class="conteneurBienvenueDetailEntr">
         <div class="texteBienvenue">
             <!-- affhichage des informations principales de l'offre -->
-            <h2><?php $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
+            <h2><?php use App\FormatIUT\Configuration\Configuration;
+
+                $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
                 echo $nomOffreHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4><?php echo "Du " . date_format($offre->getDateDebut(), 'd F Y') . " au " . date_format($offre->getDateFin(), 'd F Y') ?></h4>
-            <p><?php echo ($offre->getDateDebut()->diff($offre->getDateFin()))->format('Durée : %m mois, %d jours.'); ?></p>
+            <h4>
+                <?php echo 'Sujet : '.htmlspecialchars($offre->getSujet())?>
+            </h4>
+            <h4>
+                <?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
+            <p><?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
         </div>
         <div class="imageBienvenue">
             <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
@@ -19,8 +25,9 @@
                 <div class="overflowListe">
                     <div class="overflowListe2">
                         <div id="liseInfosOffreEntr">
+                            <p><span>Année universitaire requise : </span><?php if($offre->getAnneeMin() != $offre->getAnneeMax()) echo $offre->getAnneeMin(). ' année - ' . $offre->getAnneeMax(). ' année'; else echo $offre->getAnneeMin(). ' année' ;?> </p>
                             <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
-                            <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeures() ?> heures au total</p>
+                            <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
                             <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?>
                                 jours
                             </p>
@@ -43,7 +50,7 @@
             <?php
             if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                 echo '
-            <input type="hidden" name="idOffre" value="' . rawurlencode($offre->getIdOffre()) . '">
+            <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
         
             <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerOffre&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
             
@@ -51,7 +58,7 @@
         ';
             }
             ?>
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=mesOffres&controleur=EntrMain">RETOUR</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherMesOffres&controleur=EntrMain">RETOUR</button>
         </form>
     </div>
 
@@ -61,18 +68,18 @@
 
         <div class="wrapPostulants">
             <?php
-            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdOffre()));
+            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
             if (empty($listeEtu)) {
-                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
                 if ($formation) {
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                     echo '</div>
                 <div class="nomEtuPostulant">
                     <h4>';
-                    echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h4>";
+                    echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h4>";
                     echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button>
                     </a>
                     </div> </div>";
@@ -89,23 +96,23 @@
                     foreach ($listeEtu as $etudiant) {
                         echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
                         <div class="illuPostulant">';
-                        echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                         echo '</div>
                         <div class="nomEtuPostulant">
                             <h4>';
-                        echo $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant();
-                        $idOffreURl = rawurlencode($offre->getIdOffre());
+                        echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant());
+                        $idFormationURl = rawurlencode($offre->getidFormation());
                         $idURL = rawurlencode($etudiant->getNumEtudiant());
                         echo '</h4>
-                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idOffre=' . $idOffreURl . '&idEtudiant=' . $idURL . '">';
+                            <a href="?controleur=EntrMain&action=assignerEtudiantOffre&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
                         echo '<button id="petit" class="boutonAssigner" ';
                         if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                             echo ' id="disabled" disabled';
                         }
-                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getIdOffre()) == "A Choisir") {
+                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
                             echo 'id="disabled" disabled>Envoyée';
                         } else {
-                            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdOffre());
+                            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
                             if (!is_null($formation)) {
                                 echo ' id="disabled" disabled';
                                 if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
@@ -139,29 +146,29 @@
     <div class="detailsEtu">
         <div class="PPEtu">
             <?php
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($etudiant->getImg()) . '"/>';
+            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
             ?>
         </div>
 
         <div class="infosEtu">
             <?php
-            echo "<h2>" . $etudiant->getPrenomEtudiant() . " " . $etudiant->getNomEtudiant() . "</h2>";
+            echo "<h2>" . htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h2>";
             echo "<p><span>Numéro Etudiant :</span> " . $etudiant->getNumEtudiant() . "</p>";
-            echo "<p><span>Mail Universitaire :</span> " . $etudiant->getMailUniersitaire() . "</p>";
-            echo "<p><span>Mail Personnel :</span> " . $etudiant->getMailPerso() . "</p>";
-            echo "<p><span>Téléphone :</span> " . $etudiant->getTelephone() . "</p>";
-            echo "<p><span>Groupe :</span> " . $etudiant->getGroupe() . "</p>";
-            echo "<p><span>Parcours :</span> " . $etudiant->getParcours() . "</p>";
+            echo "<p><span>Mail Universitaire :</span> " . htmlspecialchars($etudiant->getMailUniersitaire()) . "</p>";
+            echo "<p><span>Mail Personnel :</span> " . htmlspecialchars($etudiant->getMailPerso()) . "</p>";
+            echo "<p><span>Téléphone :</span> " . htmlspecialchars($etudiant->getTelephone()) . "</p>";
+            echo "<p><span>Groupe :</span> " . htmlspecialchars($etudiant->getGroupe()) . "</p>";
+            echo "<p><span>Parcours :</span> " . htmlspecialchars($etudiant->getParcours()) . "</p>";
             ?>
         </div>
     </div>
 
     <div class="wrapBoutonsDoc">
         <?php
-        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idOffre='.$_REQUEST['idOffre'].'>
+        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
-        <a href=?action=telechargerLettre&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'>
+        <a href=?action=telechargerLM&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER LETTRE</button>
         </a>' ?>
     </div>

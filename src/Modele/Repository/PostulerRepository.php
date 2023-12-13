@@ -14,82 +14,82 @@ class PostulerRepository extends AbstractRepository
 
     public function getNomsColonnes(): array
     {
-        return ["numEtudiant", "idOffre", "Etat", "cv", "lettre"];
+        return ["numEtudiant", "idFormation", "etat", "cv", "lettre"];
     }
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Postuler($dataObjectTableau['numEtudiant'], $dataObjectTableau['idOffre'], $dataObjectTableau['Etat'], $dataObjectTableau['cv'], $dataObjectTableau['lettre']);
+        return new Postuler($dataObjectTableau['numEtudiant'], $dataObjectTableau['idFormation'], $dataObjectTableau['etat'], $dataObjectTableau['cv'], $dataObjectTableau['lettre']);
     }
 
     public function getClePrimaire(): string
     {
-        return ("(numEtudiant, idOffre)");
+        return ("(numEtudiant, idFormation)");
     }
 
-    public function getEtatEtudiantOffre($numEtudiant, $idOffre)
+    public function getEtatEtudiantOffre($numEtudiant, $idFormation)
     {
-        $sql = "SELECT * FROM Postuler WHERE numEtudiant =:etuTag AND idOffre =:offreTag";
+        $sql = "SELECT * FROM Postuler WHERE numEtudiant =:etuTag AND idFormation =:offreTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("etuTag" => $numEtudiant, "offreTag" => $idOffre);
+        $values = array("etuTag" => $numEtudiant, "offreTag" => $idFormation);
         $pdoStatement->execute($values);
-        return ($pdoStatement->fetch())["Etat"];
+        return ($pdoStatement->fetch())["etat"];
 
     }
 
-    public function supprimerOffreDansPostuler($idOffre): void
+    public function supprimerOffreDansPostuler($idFormation): void
     {
-        $sql = "DELETE FROM Postuler WHERE idOffre=:Tag";
+        $sql = "DELETE FROM Postuler WHERE idFormation=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $idOffre);
-        $pdoStatement->execute($values);
-    }
-
-    public function supprimerOffreEtudiant($numEtudiant, $idOffre): void
-    {
-        $sql = "DELETE FROM Postuler WHERE $numEtudiant=:TagEtu AND idOffre=:TagOffre";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idOffre);
+        $values = array("Tag" => $idFormation);
         $pdoStatement->execute($values);
     }
 
-    public function validerOffreEtudiant($numEtudiant, $idOffre): void
+    public function supprimerOffreEtudiant($numEtudiant, $idFormation): void
     {
-        $this->annulerAutresOffre($numEtudiant, $idOffre);
-        $this->annulerAutresEtudiant($numEtudiant, $idOffre);
-        $this->validerOffre($numEtudiant, $idOffre);
+        $sql = "DELETE FROM Postuler WHERE $numEtudiant=:TagEtu AND idFormation=:TagOffre";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
+        $pdoStatement->execute($values);
+    }
+
+    public function validerOffreEtudiant($numEtudiant, $idFormation): void
+    {
+        $this->annulerAutresOffre($numEtudiant, $idFormation);
+        $this->annulerAutresEtudiant($numEtudiant, $idFormation);
+        $this->validerOffre($numEtudiant, $idFormation);
 
     }
 
-    public function annulerAutresOffre($numEtudiant, $idOffre): void
+    public function annulerAutresOffre($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Annulé' WHERE numEtudiant=:tagEtu AND idOffre!=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant=:tagEtu AND idFormation!=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
-            "tagOffre" => $idOffre
+            "tagOffre" => $idFormation
         );
         $pdoStatement->execute($values);
     }
 
-    public function annulerAutresEtudiant($numEtudiant, $idOffre): void
+    public function annulerAutresEtudiant($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Annulé' WHERE numEtudiant!=:tagEtu AND idOffre=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant!=:tagEtu AND idFormation=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
-            "tagOffre" => $idOffre
+            "tagOffre" => $idFormation
         );
         $pdoStatement->execute($values);
     }
 
-    public function validerOffre($numEtudiant, $idOffre): void
+    public function validerOffre($numEtudiant, $idFormation): void
     {
-        $sql = "UPDATE " . $this->getNomTable() . " SET Etat='Validée' WHERE numEtudiant=:tagEtu AND idOffre=:tagOffre ";
+        $sql = "UPDATE " . $this->getNomTable() . " SET etat='Validée' WHERE numEtudiant=:tagEtu AND idFormation=:tagOffre ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "tagEtu" => $numEtudiant,
-            "tagOffre" => $idOffre
+            "tagOffre" => $idFormation
         );
         $pdoStatement->execute($values);
     }
@@ -110,27 +110,34 @@ class PostulerRepository extends AbstractRepository
         }
     }
 
-    public function recupererCV($numEtudiant, $idOffre)
+    public function recupererCV($numEtudiant, $idFormation)
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idFormation =:offreTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "etudiantTag" => $numEtudiant,
-            "offreTag" => $idOffre
+            "offreTag" => $idFormation
         );
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["cv"];
     }
 
-    public function recupererLettre($numEtudiant, $idOffre)
+    public function recupererLettre($numEtudiant, $idFormation)
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idOffre =:offreTag";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idFormation =:offreTag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array(
             "etudiantTag" => $numEtudiant,
-            "offreTag" => $idOffre
+            "offreTag" => $idFormation
         );
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["lettre"];
+    }
+    public function mettreAChoisir($numEtudiant, $idFormation): void
+    {
+        $sql = "UPDATE Postuler SET etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
+        $pdoStatement->execute($values);
     }
 }

@@ -215,9 +215,8 @@ class pstageRepository extends AbstractRepository
 
     public function exportCSV(): array
     {
-        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, sexeEtu, mailUniversitaire, mailPerso, telephone, groupe, parcours, etuV.nomVille, etuV.codePostal ,nomOffre, dateDebut, dateFin ,sujet, gratification, dureeHeures, typeOffre, Etat, entr.numSiret, nomEntreprise, statutJuridique, effectif, codeNAF, tel, vEntr.nomVille, vEntr.codePostal
-        FROM Etudiants etu LEFT JOIN Postuler r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Offre offr ON offr.idOffre = r.idOffre LEFT JOIN Entreprise entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Ville vEntr ON vEntr.idVille = entr.idVille
-        LEFT JOIN Residence etuRes ON etuRes.idResidence = etu.idResidence LEFT JOIN Ville etuV ON etuV.idVille = etuRes.idVille";
+        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, etu.mailUniversitaire, groupe, parcours,offr.validationPedagogique, typeOffre, dateCreationConvention ,dateDebut, dateFin, nomEntreprise, mailTuteurPro, nomProf 
+        FROM Etudiants etu LEFT JOIN Postuler r ON r.numEtudiant = etu.numEtudiant LEFT JOIN Formations offr ON offr.idFormation = r.idFormation LEFT JOIN Entreprises entr ON entr.numSiret = offr.idEntreprise LEFT JOIN Villes vEntr ON vEntr.idVille = entr.idVille LEFT JOIN TuteursPro tp ON offr.idTuteurPro = tp.idTuteurPro LEFT JOIN Profs prof ON prof.loginProf= offr.loginTuteurUM";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
         $listeObjet = array();

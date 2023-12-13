@@ -12,6 +12,7 @@ use App\FormatIUT\Configuration\Configuration;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body
     <?php
@@ -31,98 +32,127 @@ use App\FormatIUT\Configuration\Configuration;
         </div>
 
         <div class="wrapHead">
-            <div id="Gestionrecherche">
-                <?php
-                $liaison = "";
-                $src = "../ressources/images/profil.png";
-                $liaison = "?controleur=Main&action=afficherPageConnexion";
-                $codeRecherche = "<form action='?action=nothing' method='post'>            
-            <input class='searchField' id='hide' name='recherche' placeholder='Rechercher...' disabled>
-        </form>";
-                if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                    switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
-                        case "Entreprise" :
-                        {
-                            $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                            $liaison = "?controleur=entrMain&action=afficherProfilEntr";
-                            break;
-                        }
-                        case "Etudiants" :
-                        {
-                            $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                            $src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                            $liaison = "?controleur=etuMain&action=afficherProfilEtu";
-                            break;
-                        }
-                        case "Administrateurs" :
-                        {
-                            $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                            //$src = "data:image/jpeg;base64," . base64_encode($image->getImg());
-                            $src = "../ressources/images/admin.png";
-                            $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                            break;
-                        }
-                    }
+            <div class="separator">
+                <div id="gestionRecherche">
+                    <?php
+                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
+                    $liaison = "";
+                    $src = "../ressources/images/profil.png";
+                    $liaison = "?controleur=Main&action=afficherPageConnexion";
+                    $codeRecherche = "<div class='rechercheResp'><img src='../ressources/images/rechercher.png' alt='img'></div>
+                <form action='?action=nothing' method='post'>            
+                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
+                </form>";
 
-                    $codeRecherche = "
+                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+                        switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
+                            case "Entreprise" :
+                            {
+                                $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                                $src = Configuration::getUploadPathFromId($image->getImg());
+                                $liaison = "?controleur=entrMain&action=afficherProfil";
+                                break;
+                            }
+                            case "Etudiants" :
+                            {
+                                $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
+                                $src = Configuration::getUploadPathFromId($image->getImg());
+                                $liaison = "?controleur=etuMain&action=afficherProfil";
+                                break;
+                            }
+                            case "Administrateurs" :
+                            {
+                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                                $src = "../ressources/images/admin.png";
+                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
+                                break;
+                            }
+                            case "Personnels" :
+                            {
+                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                                $src = "../ressources/images/admin.png";
+                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
+                                break;
+                            }
+                        }
+
+                        $codeRecherche = "
+                        <a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
-                            <input class='searchField' name='recherche' placeholder='Rechercher...' required";
-                    if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
-                    $codeRecherche .=
+                            <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
+                        if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
+                        $codeRecherche .=
                             ">
-                            <input type='hidden' name='controleur' value='" . Configuration::getControleur() . "'>
+                            <input type='hidden' name='controleur' value='" . Configuration::getControleurName() . "'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
-                }
-                echo $codeRecherche;
-                echo "</div>
+                    }
+                    echo $codeRecherche;
+                    echo "</div>
         <div id='profil'>
         <a href='{$liaison}'>";
 
-                echo '<img id="petiteIcone" src="' . $src . '" alt="petite icone"></a>
+                    echo '<img id="petiteIcone" src="' . $src . '" alt="petite icone"></a>
         </div>'; ?>
+                </div>
 
-                <div class="flash">
+                <div class="flash" id="flash">
                     <?php
                     foreach (\App\FormatIUT\Lib\MessageFlash::lireTousMessages() as $type => $lireMessage) {
-                        echo "<div onclick='supprimerElement(\"flash\")' id='flash' class='alert alert-" . $type . "'>";
+                        echo "<div onclick='supprimerElement(\"flash\")' class='alert alert-" . $type . "'>";
                         echo "<img src='../ressources/images/" . $type . ".png' alt='icone'>";
                         echo '<p>' . $lireMessage . '</p></div>';
                     }
                     ?>
                 </div>
             </div>
-
         </div>
 
 
-        <div class="bandeau">
-            <div class="menuBurger">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="centrePage">
+            <div class="wrapBandeau">
+                <div class="bandeau">
+                    <div class="menuBurger" onclick="afficherSousMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <?php
+                    foreach ($menu as $item) {
+                        $actuel = "";
+                        if ($item['label'] == $titrePage) {
+                            $actuel = "id='active'";
+                        }
+                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+                    }
+                    ?>
+                </div>
             </div>
 
-            <?php
-            foreach ($menu as $item) {
-                $actuel = "";
-                if ($item['label'] == $titrePage) {
-                    $actuel = "id='active'";
-                }
-                echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
-            }
-            ?>
-        </div>
 
-        <div id="corpsPage">
-            <div id="main">
+            <div id="corpsPage">
                 <?php
                 require __DIR__ . "/{$chemin}";
                 ?>
             </div>
         </div>
     </div>
+
+
+    <div class="sousMenu" id="sousMenu">
+        <?php
+        foreach ($menu as $item) {
+            $actuel = "";
+            if ($item['label'] == $titrePage) {
+                $actuel = "id='active'";
+            }
+            echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
+        }
+        echo "<a onclick='fermerSousMenu()'><img src='../ressources/images/fermer.png' alt=\"imgmenu\"><p>Fermer le Menu</p></a>";
+        ?>
+    </div>
+
 
     <footer>
         <div id="footerContent">
@@ -144,7 +174,7 @@ use App\FormatIUT\Configuration\Configuration;
                         </ul>
                     </div>
                 </div>
-                <p>Sources : <a href="controleurFrontal.php?action=afficherSources">Cliquer ICI</a></p>
+                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
             </div>
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
@@ -153,5 +183,6 @@ use App\FormatIUT\Configuration\Configuration;
             </div>
         </div>
     </footer>
+</div>
 </body>
 </html>

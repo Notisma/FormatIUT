@@ -1,10 +1,8 @@
 <?php
-
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
-$count = count($offres) + count($entreprises);
 ?>
 <div class="center">
 
@@ -13,10 +11,9 @@ $count = count($offres) + count($entreprises);
         <?= $codeRecherche ?>
     </div>
 
-
     <div class="results">
         <?php
-        if ($count == 0) {
+        if ($nbResults == 0) {
             echo "<div class='erreur'>
                 <img src='../ressources/images/erreur.png' alt='erreur'>
                 <h2 class='titre'>Aucun résultat trouvé</h2>
@@ -24,18 +21,21 @@ $count = count($offres) + count($entreprises);
         }
 
 
-        echo "<h3 class='titre'>" . $count . " Résultats trouvés :</h3>";
+        echo "<h3 class='titre'>" . $nbResults . " Résultats trouvés :</h3>";
         if (!empty($entreprises)) {
             foreach ($entreprises as $entr) {
+                $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
+                $telHTML=htmlspecialchars($entr->getTel());
+                $adresseHTML=htmlspecialchars($entr->getAdresseEntreprise());
                 echo '
                     <div class="resultat" id="petitRouge">
                         <div class="partieGauche">
-                            <img src = "data:image/jpeg;base64,' . base64_encode($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
+                            <img src="' . Configuration::getUploadPathFromId($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
                         </div>
                         <div class="partieDroite">
-                            <h3 class="titre">' . $entr->getNomEntreprise() . ' - Entreprise</h3>
-                            <p><span>Téléphone : </span>' . $entr->getTel() . '</p>
-                            <p><span>Adresse : </span>' . $entr->getAdresse() . '</p>
+                            <h3 class="titre">' . $nomEntrepriseHTML . ' - Entreprise</h3>
+                            <p><span>Téléphone : </span>' . $telHTML . '</p>
+                            <p><span>Adresse : </span>' . $adresseHTML . '</p>
                         </div>
                     </div>';
             }
@@ -44,26 +44,32 @@ $count = count($offres) + count($entreprises);
 
         if (!empty($offres)) {
             foreach ($offres as $offre) {
-                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getSiret());
-                echo "<a href='?controleur=" . \App\FormatIUT\Configuration\Configuration::getControleur() . "&action=afficherVueDetailOffre&idOffre=" . $offre->getIdOffre() . "' class='resultat'>
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                echo "<a href='?controleur=" . Configuration::getControleurName() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
                     <div class='partieGauche'>
-                            <img src=\"data:image/jpeg;base64," . base64_encode($entreprise->getImg()) . "\" alt='logo'>
+                            <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                         </div>
                         <div class='partieDroite'>
                         <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>
                         <p>
                        ";
-                if (!(new FormationRepository())->estFormation($offre->getIdOffre())) {
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getIdOffre());
+                if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
+                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
                     echo $nb . " postulation";
                     if ($nb > 1) echo "s";
                 } else {
                     echo "Assignée";
                 }
-                echo "</p>
-                        <p> Du " . date_format($offre->getDateDebut(), 'd/m/Y') . " au " . date_format($offre->getDateFin(), 'd/m/Y') . " pour " . $offre->getSujet() . "</p>               
-                        </div>
-                </a>";
+                $sujetHTML=htmlspecialchars($offre->getSujet());
+                echo "</p>";
+                if ($offre->getDateDebut() != null && $offre->getDateFin() != null)
+                    echo "<p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin();
+                else{
+                    echo "<p> Date non disponible ";
+                }
+                echo " pour " . $sujetHTML . "</p>" .
+                    "</div>
+                    </a>";
             }
         }
         ?>

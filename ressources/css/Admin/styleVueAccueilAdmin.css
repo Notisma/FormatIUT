@@ -52,10 +52,14 @@ body {
 .texteBonjour {
     height: 95%;
     width: 60%;
+    padding: 1%;
+}
+
+.texteBonjour > * {
+    text-align: left;
 }
 
 .imageBonjour {
-    height: 95%;
     width: 40%;
 }
 
@@ -219,7 +223,7 @@ body {
 
 .alerteEntr {
     width: 95%;
-    height: 40%;
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -314,6 +318,20 @@ body {
 
 #hoverRose:hover {
     background-color: #ff9095;
+}
+
+.erreur {
+    width: 60%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.erreur > img {
+    width: 50%;
 }
 
 
