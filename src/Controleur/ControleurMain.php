@@ -518,9 +518,6 @@ class ControleurMain
             if ($file["tmp_name"] != null) {
                 $idFile = (new UploadsRepository())->insert($file['name']);
                 $ids[$fileName] = $idFile;
-                var_dump($file['name']);
-                echo "<br>";
-                var_dump(StringUtils::filter_filename(basename($file['name'])));
 
                 $fileLocation = $uploadsLocation . $idFile . '-' . basename($file['name']);
                 if (!move_uploaded_file($file['tmp_name'], $fileLocation))
