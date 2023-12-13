@@ -12,7 +12,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         <h3 class="titre" id="rouge">Les Dernières Offres sorties :</h3>
         <?php
         $data = $listeStage;
-        $data = array_merge($data, $listeAlternance);
+        //$data = array_merge($data, $listeAlternance);
 
         echo '<div class="grille">';
         for ($i = 0; $i < count($data); $i++) {

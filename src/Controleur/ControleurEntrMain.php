@@ -172,7 +172,7 @@ class ControleurEntrMain extends ControleurMain
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
                             $listeId = (new FormationRepository())->getListeidFormations();
                             self::autoIncrement($listeId, "idFormation");
-                            $_REQUEST["dateCreationOffre"] = (new DateTime("now", new DateTimeZone("Europe/Paris")))->format("Y-d-m");
+                            $_REQUEST["dateCreationOffre"] = "2023-11-13";
                             $_REQUEST["estValide"] = 0;
                             $_REQUEST["offreValidee"] = 0;
                             $_REQUEST["validationPedagogique"] = 0;

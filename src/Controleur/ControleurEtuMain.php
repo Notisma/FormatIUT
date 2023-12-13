@@ -54,12 +54,13 @@ class ControleurEtuMain extends ControleurMain
             if ($offreValidee) {
                 $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
                 if ($offre->getTypeOffre() == "Stage")
-                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention stage", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
+                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention"
+                    , "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
                 else if ($offre->getTypeOffre() == "Alternance")
                     $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
             }
         } else if ($offre!= false && $offre->getDateCreationConvention() != null) {
-            $menu[] = array("image" => "", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
@@ -73,18 +74,15 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function afficherAccueilEtu(): void
     {
-        $listeIdAlternance = self::getSixMax((new FormationRepository())->listeIdTypeOffre("Alternance"));
+        $listeIdOffres = self::getSixMax((new FormationRepository())->getListeidFormations());
         $listeIdStage = self::getSixMax((new FormationRepository())->listeIdTypeOffre("Stage"));
         $listeStage = array();
-        for ($i = 0; $i < sizeof($listeIdStage); $i++) {
-            $listeStage[] = (new FormationRepository())->getObjectParClePrimaire($listeIdStage[$i]);
-        }
-        $listeAlternance = array();
-        for ($i = 0; $i < sizeof($listeIdAlternance); $i++) {
-            $listeAlternance[] = (new FormationRepository())->getObjectParClePrimaire($listeIdAlternance[$i]);
+        $listeOffres = array();
+        for ($i = 0; $i < sizeof($listeIdOffres); $i++) {
+            $listeOffres[] = (new FormationRepository())->getObjectParClePrimaire($listeIdOffres[$i]);
         }
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(), ["listeStage" => $listeStage, "listeAlternance" => $listeAlternance]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(), ["listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
     }
 
     /**

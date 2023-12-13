@@ -151,11 +151,6 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                 ?>
             </div>
 
-
-            <div>
-
-            </div>
-
         </div>
 
     </div>
