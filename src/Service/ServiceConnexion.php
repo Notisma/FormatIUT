@@ -133,8 +133,10 @@ class ServiceConnexion
      */
     public static function validerEmail(): void
     {
-        VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
-        ControleurMain::redirectionFlash("afficherPageConnexion", "success", "Email validé");
+        if(isset($_REQUEST["login"],$_REQUEST["nonce"])) {
+            VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
+            ControleurMain::redirectionFlash("afficherPageConnexion", "success", "Email validé");
+        }else ControleurMain::redirectionFlash("afficherIndex","danger","Données non renseignées");
     }
 
 }

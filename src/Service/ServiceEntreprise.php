@@ -76,8 +76,14 @@ class ServiceEntreprise
     {
         //TODO vérifier utilité fonction mettreAJourInfos
         //TODO faire les vérifs
-        (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
-        ControleurEntrMain::afficherProfil();
+        if (isset($_REQUEST["siret"],$_REQUEST["nom"],$_REQUEST["statutJ"],$_REQUEST["effectif"],$_REQUEST['codeNAF'],$_REQUEST["tel"],$_REQUEST["adresse"])) {
+            if (ConnexionUtilisateur::getTypeConnecte()=="Entreprises") {
+                if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+                    (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
+                    ControleurEntrMain::afficherProfil();
+                } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
+            } else ControleurMain::redirectionFlash("afficherIndex","");
+        }else ControleurEntrMain::redirectionFlash("afficherProfil","danger","Les informations ne sont pas renseignées");
     }
 
     /**

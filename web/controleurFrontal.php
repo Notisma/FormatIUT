@@ -40,7 +40,7 @@ if (class_exists($nomClasseControleur)) {
             $nomClasseControleur::$action();
         }
     } else {
-        $nomClasseControleur::afficherErreur("L'action : ' $action ' n'existe pas dans le $classe : ' $nomClasseControleur '");
+        ControleurMain::afficherErreur("L'action : ' $action ' n'existe pas dans le $classe : ' $nomClasseControleur '");
     }
 } else {
     Configuration::setControleur("Main");
