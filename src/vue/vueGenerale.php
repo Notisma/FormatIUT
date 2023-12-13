@@ -41,7 +41,7 @@ use App\FormatIUT\Configuration\Configuration;
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
                     $codeRecherche = "<div class='rechercheResp'><img src='../ressources/images/rechercher.png' alt='img'></div>
                 <form action='?action=nothing' method='post'>            
-                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher dans $type' disabled>
+                <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
 
                     if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
@@ -79,7 +79,7 @@ use App\FormatIUT\Configuration\Configuration;
                         $codeRecherche = "
                         <a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
-                            <input class='searchField' name='recherche' placeholder='Rechercher...' required";
+                            <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
