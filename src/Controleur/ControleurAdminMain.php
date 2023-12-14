@@ -17,6 +17,7 @@ class ControleurAdminMain extends ControleurMain
 {
     private static string $pageActuelleAdmin = "Accueil Admin";
 
+
     /**
      * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
      */
