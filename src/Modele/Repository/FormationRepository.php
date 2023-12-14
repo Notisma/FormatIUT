@@ -151,11 +151,40 @@ class FormationRepository extends AbstractRepository
         return $listOffre;
 
     }
+
+
+    /**
+     * @param $type
+     * @return array
+     * Retourne la liste des id des offres disponibles pour un étudiant, en respectant l'année de l'étudiant
+     */
+    public function getListeIDFormationsPourEtudiant($type, $etudiant): array {
+        $anneeEtudiant = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
+        $sql = "";
+        if ($type == "all") {
+            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL";
+        } else {
+            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL AND typeOffre=:Tag";
+        }
+        $sql.=" AND anneeMin <= :TagAnnee AND anneeMax >= :TagAnnee AND estValide=1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagAnnee" => $anneeEtudiant);
+        if ($type != "all") {
+            $values["Tag"] = $type;
+        }
+        $pdoStatement->execute($values);
+        $listeId = array();
+        foreach ($pdoStatement as $item => $value) {
+            $listeId[] = $value["idFormation"];
+        }
+        return $listeId;
+    }
+
+
     /**
      * @return array
      * retourne la liste des id des offres
      */
-
     public function getListeidFormations(): array
     {
         $sql = "SELECT idFormation FROM Formations";

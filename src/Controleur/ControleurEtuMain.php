@@ -75,7 +75,8 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function afficherAccueilEtu(): void
     {
-        $listeIdOffres = self::getSixMax((new FormationRepository())->getListeidFormations());
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        $listeIdOffres = self::getSixMax((new FormationRepository())->getListeIDFormationsPourEtudiant("all", $etudiant));
         $listeOffres = array();
         for ($i = 0; $i < sizeof($listeIdOffres); $i++) {
             $listeOffres[] = (new FormationRepository())->getObjectParClePrimaire($listeIdOffres[$i]);
