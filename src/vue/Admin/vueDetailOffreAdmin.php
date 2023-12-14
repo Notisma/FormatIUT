@@ -38,10 +38,10 @@
             if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
                 if (!$offre->getEstValide()) {
                     echo "
-                <a href='?action=rejeterOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>REJETER</a>";
+                <a href='?action=rejeterFormation&service=Formation&idFormation=".$offre->getIdFormation()."'>REJETER</a>";
 
                     if ($entreprise->isEstValide()) {
-                        echo "<a id='vert' href='?action=accepterOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>ACCEPTER</a>";
+                        echo "<a id='vert' href='?action=accepterFormation&service=Formation&idFormation=".$offre->getIdFormation()."'>ACCEPTER</a>";
                     } else {
                         echo "<a id='vert' href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=".$entreprise->getSiret()."'>ACCEPTER</a>";
                         \App\FormatIUT\Lib\MessageFlash::ajouter("warning", "Validez l'entreprise avant de valider l'offre");
@@ -50,7 +50,7 @@
 
                 } else {
                     echo "
-                <a href='?action=supprimerOffre&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>SUPPRIMER</a>
+                <a href='?action=supprimerFormation&service=Formation&idFormation=".$offre->getIdFormation()."'>SUPPRIMER</a>
                 ";
                 }
             }

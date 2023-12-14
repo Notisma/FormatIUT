@@ -1,6 +1,8 @@
 <?php
 
 namespace App\FormatIUT\Modele\DataObject;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+
 class Formation extends AbstractDataObject
 {
     private string $idFormation;
@@ -629,6 +631,44 @@ class Formation extends AbstractDataObject
             'idTuteurPro'=>$this->idTuteurPro,
             'idEntreprise'=>$this->idEntreprise,
             'loginTuteurUM'=>$this->loginTuteurUM
+        );
+    }
+
+    public static function creerFormation(array $formation) : Formation
+    {
+        return new Formation(
+            null,
+            $formation["nomOffre"],
+            $formation["dateDebut"],
+            $formation["dateFin"],
+            $formation["sujet"],
+            $formation["detailProjet"],
+            $formation["dureeHeure"],
+            $formation["joursParSemaine"],
+            $formation["gratification"],
+            $formation["uniteGratification"],
+            $formation["uniteDureeGratification"],
+            $formation["nbHeuresHebdo"],
+            0,
+            $formation["objectifOffre"],
+            (new \DateTime())->format('d-m-Y'),
+            $formation["typeOffre"],
+            $formation["anneeMax"],
+            $formation["anneeMin"],
+            0,
+            0,
+            null,
+            0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            ConnexionUtilisateur::getLoginUtilisateurConnecte(),
+            null
+            
         );
     }
 

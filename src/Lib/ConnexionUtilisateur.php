@@ -102,6 +102,10 @@ class ConnexionUtilisateur
             (new EtudiantRepository())->premiereConnexion($value);
             return true;
         }
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getNumEtudiantConnecte());
+        if ($etudiant->getGroupe() == "" || $etudiant->getParcours() == "") {
+            return true;
+        }
         return false;
     }
 
@@ -116,10 +120,7 @@ class ConnexionUtilisateur
 
     public static function profilEstComplet(string $login): bool
     {
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getNumEtudiantConnecte());
-        if ($etudiant->getGroupe() != "" && $etudiant->getParcours() != "") {
-            return true;
-        }
+
         return false;
     }
 

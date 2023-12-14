@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
@@ -63,7 +64,7 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
         return $menu;
     }
 
@@ -181,234 +182,6 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
     }
 
-    //FONCTIONS D'ACTIONS ---------------------------------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * @return void permet à l'étudiant connecté d'annuler sa postulation à une offre
-     */
-    public static function annulerOffre(): void
-    {
-        if (isset($_REQUEST["idFormation"])) {
-            $listeId = ((new FormationRepository())->getListeidFormations());
-            if (in_array($_REQUEST["idFormation"], $listeId)) {
-                if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST["idFormation"])) {
-                    (new PostulerRepository())->supprimerOffreEtudiant(self::getCleEtudiant(), $_REQUEST['idFormation']);
-                    self::redirectionFlash("afficherMesOffres", "success", "Offre annulée");
-                } else {
-                    self::redirectionFlash("afficherMesOffres", "warning", "Vous n'avez pas postulé à cette offre");
-                }
-            } else {
-                self::afficherErreur("L'offre n'existe pas");
-                self::redirectionFlash("afficherMesOffres", "danger", "L'offre n'existe pas");
-            }
-        } else {
-            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
-        }
-    }
-
-    /**
-     * @return void permet à l'étudiant connecté de valider une offre
-     */
-    public static function validerOffre(): void
-    {
-        if (isset($_REQUEST['idFormation'])) {
-            $listeId = ((new FormationRepository())->getListeidFormations());
-            $idFormation = $_REQUEST['idFormation'];
-            if (in_array($idFormation, $listeId)) {
-                $formation = ((new FormationRepository())->estFormation($idFormation));
-                if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
-                    if (is_null($formation)) {
-                        if ((new PostulerRepository())->getEtatEtudiantOffre(self::getCleEtudiant(), $idFormation) == "A Choisir") {
-                            (new PostulerRepository())->validerOffreEtudiant(self::getCleEtudiant(), $idFormation);
-                            $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
-                            $offre->setIdEtudiant(self::getCleEtudiant());
-                            (new FormationRepository())->modifierObjet($offre);
-                            self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
-                        } else {
-                            self::redirectionFlash("afficherMesOffres", "danger", "Vous n'êtes pas en état de choisir pour cette offre");
-                        }
-                    } else {
-                        self::redirectionFlash("afficherMesOffres", "danger", "Cette Offre est déjà assignée");
-                    }
-                } else {
-                    self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une Offre assignée");
-                }
-            } else {
-                self::redirectionFlash("afficherMesOffres", "danger", "Offre non existante");
-            }
-        } else {
-            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
-        }
-    }
-
-    /**
-     * @return void permet à l'utilisateur connecté de postuler à une offre
-     */
-    public static function postuler(): void
-    {
-        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
-        if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-            //TODO vérifier les vérifs
-            if (isset($_REQUEST['idFormation'])) {
-                $liste = ((new FormationRepository())->getListeidFormations());
-                if (in_array($_REQUEST["idFormation"], $liste)) {
-                    $formation = ((new FormationRepository())->estFormation($_REQUEST['idFormation']));
-                    if (is_null($formation)) {
-                        if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
-                            if ((new EtudiantRepository())->aPostule(self::getCleEtudiant(), $_REQUEST['idFormation'])) {
-                                self::redirectionFlash("afficherMesOffres", "warning", "Vous avez déjà postulé");
-                            } else {
-                                $ids = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
-
-                                $postuler = new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $ids['cv'], $ids['lm']);
-                                (new PostulerRepository())->creerObjet($postuler);
-
-                                $_REQUEST['action'] = "afficherMesOffres";
-                                self::redirectionFlash("afficherMesOffres", "success", "Candidature effectuée");
-                            }
-                        } else {
-                            self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une formation");
-                        }
-                    } else {
-                        if ($formation->getIdEtudiant() == self::getCleEtudiant()) {
-                            self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà cette Formation");
-                        } else {
-                            self::redirectionFlash("afficherMesOffres", "danger", "Cette offre est déjà assignée");
-                        }
-                    }
-                } else {
-                    self::redirectionFlash("afficherMesOffres", "danger", "Offre inexistante");
-                }
-            } else {
-                self::redirectionFlash("afficherMesOffres", "danger", "Données Manquantes");
-            }
-        } else {
-            self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas postuler à cette offre");
-        }
-    }
-
-    /**
-     * @return void permet à l'étudiant connecté de créer sa convention
-     * @throws Exception
-     */
-    public static function creerConvention(): void
-    {
-        if ($_REQUEST['idOff'] != "aucune") {
-            if ($_REQUEST['codePostalEntr'] > 0 && $_REQUEST['siret'] > 0) {
-                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-                if (isset($entrepriseVerif)) {
-                    $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
-                    if ($entrepriseVerif->getSiret() == $offreVerif->getIdEntreprise()) {
-                        $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
-                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
-                            if ($offreVerif->getDateDebut() == $_REQUEST['dateDebut'] && $offreVerif->getDateFin() == $_REQUEST['dateFin']) {
-                                $offreVerif->setAssurance($_REQUEST['assurance']);
-                                $offreVerif->setDateCreationConvention($_REQUEST['dateCreation']);
-                                $offreVerif->setDateTransmissionConvention($_REQUEST['dateCreation']);
-                                $offreVerif->setAssurance($_REQUEST['assurance']);
-                                (new FormationRepository())->modifierObjet($offreVerif);
-                                self::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
-                            } else {
-                                self::afficherErreur("Erreur sur les dates");
-                            }
-                        } else {
-                            self::afficherErreur("Erreur sur les informations de l'entreprise");
-                        }
-                    } else {
-                        self::afficherErreur("L'entreprise n'a jamais créé cette offre");
-                    }
-                } else {
-                    self::afficherErreur("Erreur l'entreprise n'existe pas");
-                }
-            } else {
-                self::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
-            }
-        } else {
-            self::afficherErreur("Aucune offre est liée à votre convention");
-        }
-    }
-
-    /**
-     * @return void modifie les Cv et Lettres de motivations de l'étudiant connecté pour une offre
-     */
-    public static function modifierFichiers(): void
-    {
-        $ids = self::uploadFichiers(['cv', 'lm'], "afficherMesOffres");
-        (new PostulerRepository())->modifierObjet(new Postuler(self::getCleEtudiant(), $_REQUEST["idFormation"], "En attente", $ids['cv'], $ids['lm']));
-        self::redirectionFlash("afficherMesOffres", "success", "Fichiers modifiés");
-    }
-
-    /**
-     * @return void modifie le numéroEtudiant et le sexe lors de la Première Connexion
-     */
-    public static function setNumEtuSexe(): void
-    {
-        $ancienNumEtu = $_REQUEST['oldNumEtu'];
-        $numEtu = $_REQUEST['numEtu'];
-        $sexe = $_REQUEST['sexe'];
-
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($ancienNumEtu);
-        $etudiant->setNumEtudiant($numEtu);
-        $etudiant->setSexeEtu($sexe);
-        (new EtudiantRepository())->modifierNumEtuSexe($etudiant, $ancienNumEtu);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(2)</script>";
-    }
-
-    /**
-     * @return void modifie le téléphone et le mail perso lors de la Première Connexion
-     */
-    public static function setTelMailPerso(): void
-    {
-        $numEtu = $_REQUEST['numEtu'];
-        $tel = $_REQUEST['telephone'];
-        $mailPerso = $_REQUEST['mailPerso'];
-
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
-        $etudiant->setTelephone($tel);
-        $etudiant->setMailPerso($mailPerso);
-        (new EtudiantRepository())->modifierTelMailPerso($etudiant);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(3)</script>";
-    }
-
-    /**
-     * @return void modifie le groupe et le parcours lors de la Première Connexion
-     */
-    public static function setGroupeParcours(): void
-    {
-        $numEtu = $_REQUEST['numEtu'];
-        $groupe = $_REQUEST['groupe'];
-        $parcours = $_REQUEST['parcours'];
-        echo "BlaBla";
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
-        $etudiant->setGroupe($groupe);
-        $etudiant->setParcours($parcours);
-        (new EtudiantRepository())->modifierGroupeParcours($etudiant);
-        self::afficherAccueilEtu();
-        echo "<script>afficherPopupPremiereCo(4)</script>";
-    }
-
-    /**
-     * @return void met à jour les informations de l'étudiant connecté
-     */
-    public static function mettreAJour(): void
-    {
-        if (isset($_REQUEST['numEtu'])) {
-            if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                if (!empty($_FILES['pdp']['name'])) {
-                    self::updateImage();
-                }
-                (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-                self::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
-            } else {
-                self::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
-            }
-        } else {
-            self::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
-        }
-    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -463,6 +236,18 @@ class ControleurEtuMain extends ControleurMain
     {
         self::updateImage();
         self::redirectionFlash("afficherAcueilEtu", "success", "Informations enregistrées");
+    }
+
+    /**
+     * @param string $action le nom de la fonction sur laquelle rediriger
+     * @param string $type le type de message Flash
+     * @param string $message le message à envoyer
+     * @return void redirige en envoyant un messageFlash
+     */
+    public static function redirectionFlash(string $action, string $type, string $message): void
+    {
+        MessageFlash::ajouter($type, $message);
+        header("Location : ?controleur=EtuMain&action=$action");
     }
 
 }

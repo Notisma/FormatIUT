@@ -224,4 +224,23 @@ class Etudiant extends AbstractDataObject
             "img_id" => $this->img_id
         );
     }
+
+    public static function creerEtudiant(array $etu) : Etudiant
+    {
+        return new Etudiant(
+            $etu["numEtudiant"],
+            $etu["prenomEtudiant"],
+            $etu["nomEtudiant"],
+            strtolower($etu["loginEtudiant"]),
+            null,
+            $etu["mailUniversitaire"],
+            null,
+            null,
+            $etu["groupe"],
+            $etu["parcours"],
+            0,
+            0,
+            1
+        );
+    }
 }

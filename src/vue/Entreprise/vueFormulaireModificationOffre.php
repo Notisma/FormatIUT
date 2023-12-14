@@ -106,7 +106,7 @@
                 <input type="hidden" name="idFormation" value="<?= $offre->getidFormation() ?>">
                 <input type="submit" value="Réinitialiser"
                        formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">
-                <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain">
+                <input type="submit" value="Envoyer" formaction="?action=modifierOffre&service=Formation">
             </div>
         </form>
     </div>
