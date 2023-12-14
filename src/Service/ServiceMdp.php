@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Service;
 
+use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -70,4 +72,35 @@ class ServiceMdp
             //TODO créer fonction afficherMdpOublie
             ControleurMain::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
     }
+
+    /**
+     * @return void met à jour le mot de passe pour une entreprise
+     */
+    public static function mettreAJourMdp() : void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
+            if (isset($_POST['ancienMdp'], $_POST['nouveauMdp'], $_POST['confirmerMdp'])) {
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+
+                if (MotDePasse::verifier($_POST['ancienMdp'], $entreprise->getMdpHache())) {
+
+                    if ($_POST['nouveauMdp'] === $_POST['confirmerMdp']) {
+                        $hashedPassword = MotDePasse::hacher($_POST['nouveauMdp']);
+                        $entreprise->setMdpHache($hashedPassword);
+                        (new EntrepriseRepository())->modifierObjet($entreprise);
+                        ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Mot de passe mis à jour");
+                    } else {
+                        ControleurEntrMain::redirectionFlash("afficherProfil", "warning", "Les mots de passe ne correspondent pas");
+                    }
+                } else {
+                    ControleurEntrMain::redirectionFlash("afficherProfil", "warning", "Ancien mot de passe incorrect");
+                }
+            } else {
+                ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Des données sont manquantes");
+            }
+        } else {
+            ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+        }
+    }
+
 }

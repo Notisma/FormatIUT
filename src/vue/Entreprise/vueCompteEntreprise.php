@@ -123,7 +123,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             </div>
 
             <div class="inputCentre">
-                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&controleur=EntrMain"/>
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&service=Mdp"/>
             </div>
         </form>
     </div>

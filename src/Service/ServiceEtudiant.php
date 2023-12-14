@@ -46,14 +46,25 @@ class ServiceEtudiant
     }
 
     /**
-     * @return void met à jour les informations de l'étudiant connecté
-     */
-    public static function mettreAJourEtudiant(): void
-    {
-    //TODO vérifier utilisé fonction mettreAJourInfos
-        (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-        ControleurEtuMain::afficherProfil();
+    * @return void met à jour les informations de l'étudiant connecté
+    */
+public static function mettreAJour(): void
+{
+    if (isset($_REQUEST['numEtu'])) {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            if (!empty($_FILES['pdp']['name'])) {
+                ControleurEtuMain::updateImage();
+            }
+            (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
+            ControleurEtuMain::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
+        } else {
+            ControleurEtuMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+        }
+    } else {
+        ControleurEtuMain::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
     }
+}
+
 
     /**
      * @return void modifie le numéroEtudiant et le sexe lors de la Première Connexion

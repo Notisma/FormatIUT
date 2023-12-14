@@ -85,6 +85,7 @@ class ServiceEntreprise
         }else ControleurEntrMain::redirectionFlash("afficherProfil","danger","Les informations ne sont pas renseignées");
     }
 
+
     /**
      * @return void créeer une entreprise dans la BD et envoie un mail de validation
      */

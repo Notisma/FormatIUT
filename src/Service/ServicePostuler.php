@@ -136,10 +136,8 @@ class ServicePostuler
                         if ((new PostulerRepository())->getEtatEtudiantOffre(ControleurEtuMain::getCleEtudiant(), $idFormation) == "A Choisir") {
                             (new PostulerRepository())->validerOffreEtudiant(ControleurEtuMain::getCleEtudiant(), $idFormation);
                             $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
-                            $idFormation = "F" . ControleurEtuMain::autoIncrementF(((new FormationRepository())->listeIdTypeFormation()), "idFormation");
-                            $formation = (new FormationRepository())->construireDepuisTableau([
-                                "idFormation" => $idFormation, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => ControleurEtuMain::getCleEtudiant(), "idEntreprise" => $offre->getIdEntreprise(), "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
-                            (new FormationRepository())->creerObjet($formation);
+                            $offre->setIdEtudiant(ControleurEtuMain::getCleEtudiant());
+                            (new FormationRepository())->modifierObjet($offre);
                             ControleurEtuMain::redirectionFlash("afficherMesOffres", "success", "Offre validée");
                         } else {
                             ControleurEtuMain::redirectionFlash("afficherMesOffres", "danger", "Vous n'êtes pas en état de choisir pour cette offre");
@@ -157,4 +155,5 @@ class ServicePostuler
             ControleurEtuMain::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
         }
     }
+
 }
