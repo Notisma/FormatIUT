@@ -748,7 +748,7 @@ input {
 @media (max-height: 600px) {
     /* quand le clavier s'affiche, on cache tout sauf le formulaire */
     #desc {
-        display: none;
+        display: flex;
     }
 }
 
