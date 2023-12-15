@@ -4,16 +4,7 @@ body {
     height: 100vh;
 }
 
-.titre {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.04em;
-    color: black;
-    margin: 0;
-}
 
-#rouge {
-    color: #ff5660;
-}
 
 .mainAcc {
     width: 95%;
