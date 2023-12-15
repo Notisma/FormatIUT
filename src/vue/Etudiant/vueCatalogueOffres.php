@@ -12,6 +12,10 @@ $type = $_REQUEST["type"] ?? "all";
 
 <div class="mainCatalogue">
 
+    <div class="descCatalogue">
+        <p></p>
+    </div>
+
     <div class="wrapMosaique">
         <h2 class="titre" id="rouge">Liste des offres de Stage et d'Alternance :</h2>
 
@@ -37,7 +41,7 @@ $type = $_REQUEST["type"] ?? "all";
            <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
            <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
            <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
-           <div><img src="../ressources/images/equipe.png" alt="candidats"> <h5 class="titre">';
+           <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
 
                 $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
                 if ($nb == 0) {
@@ -50,17 +54,13 @@ $type = $_REQUEST["type"] ?? "all";
                 if ($nb > 1) {
                     echo "s";
                 } echo
-                '</h5> </div>
+                '</h4> </div>
             </div>
             </a>';
             }
 
             ?>
         </div>
-
-    </div>
-
-    <div class="descCatalogue">
 
     </div>
 
