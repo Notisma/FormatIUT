@@ -38,12 +38,14 @@ class ServiceRecherche
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
         $liste=array();
+        $count=0;
         foreach (PrivilegesUtilisateursRecherche::getInstance()->getPrivileges() as $user =>$privilege){
             if ($user==ConnexionUtilisateur::getTypeConnecte()){
                 foreach ($privilege as $repository) {
                     $nomDeClasseRepository="App\FormatIUT\Modele\Repository\\".$repository."Repository";
                     $re="recherche";
                     $liste[$repository]= (new $nomDeClasseRepository)->$re($morceaux);
+                    $count+=sizeof($liste[$repository]);
                 }
             }
         }
@@ -52,14 +54,11 @@ class ServiceRecherche
             MessageFlash::ajouter("danger", "Crash de recherche");
             die();
         } else {
-            $count = count($res['offres']);
             MessageFlash::ajouter("success", "$count résultats trouvés.");
-            ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", ControleurMain::getMenu(), [
-                "recherche" => $recherche,
-                "offres" => $liste["Formation"],
-                "entreprises" => array(),
-                "nbResults" => $count
-            ]);
+            $_REQUEST["recherche"]=$recherche;
+            $_REQUEST["liste"]=$liste;
+            $_REQUEST["count"]=$count;
+            ControleurMain::afficherRecherche();
         }
     }
 }

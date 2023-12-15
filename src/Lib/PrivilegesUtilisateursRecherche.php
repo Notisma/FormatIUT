@@ -47,6 +47,7 @@ class PrivilegesUtilisateursRecherche
         return array(
             "Formation",
             "Entreprise",
+            "Etudiant",
         );
     }
     private function getPrivilegesProfs():array
