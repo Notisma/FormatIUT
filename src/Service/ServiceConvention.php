@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -28,12 +29,10 @@ class ServiceConvention
                         if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
                             if ($offreVerif->getDateDebut() == new DateTime($_REQUEST['dateDebut']) && $offreVerif->getDateFin() == new DateTime($_REQUEST['dateFin'])) {
                                 $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
-                                $convention = (new ConventionRepository())->construireDepuisTableau(["idConvention" => $clefPrimConv,
-                                    "conventionValidee" => 0, "dateCreation" => $_REQUEST['dateCreation'], "dateTransmission" => $_REQUEST['dateCreation'],
-                                    "retourSigne" => 1, "assurance" => $_REQUEST['assurance'], "objectifOffre" => $_REQUEST['objfOffre'], "typeConvention" => $offreVerif->getTypeOffre()]);
+                                $convention = Convention::creerConvention($_REQUEST,$clefPrimConv,$offreVerif->getTypeOffre());
                                 (new ConventionRepository())->creerObjet($convention);
                                 if (!(new EtudiantRepository())->aUneFormation(ControleurEtuMain::getCleEtudiant())) {
-                                    $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ('F' . $offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
+                                    $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ($offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
                                         "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => ControleurEtuMain::getCleEtudiant(), "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
                                     ]);
                                     (new FormationRepository())->creerObjet($formation);
@@ -60,5 +59,6 @@ class ServiceConvention
             ControleurEtuMain::afficherErreur("Aucune offre est liée à votre convention");
         }
     }
+
 
 }

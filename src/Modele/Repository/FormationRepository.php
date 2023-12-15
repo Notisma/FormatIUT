@@ -6,7 +6,7 @@ use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Formation;
 use DateTime;
 
-class FormationRepository extends AbstractRepository
+class FormationRepository extends RechercheRepository
 {
 
     protected function getNomTable(): string
@@ -17,6 +17,10 @@ class FormationRepository extends AbstractRepository
     protected function getNomsColonnes(): array
     {
         return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet","detailProjet","dureeHeure","joursParSemaine","gratification","uniteGratification","uniteDureeGratification","nbHeuresHebdo","offreValidee","objectifOffre","dateCreationOffre","typeOffre","anneeMax","anneeMin","estValide","validationPedagogique","convention","conventionValidee","dateCreationConvention","dateTransmissionConvention","dateRetourSigne","assurance","avenant","idEtudiant","idTuteurPro","idEntreprise","loginTuteurUM");
+    }
+    protected function getColonnesRecherche(): array
+    {
+        return array("nomOffre","sujet","typeOffre","detailProjet");
     }
 
     protected function getClePrimaire(): string
@@ -266,4 +270,5 @@ class FormationRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
     }
+
 }

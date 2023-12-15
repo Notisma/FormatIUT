@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 
-class EtudiantRepository extends AbstractRepository
+class EtudiantRepository extends  RechercheRepository
 {
 
     protected function getNomTable(): string
@@ -16,6 +16,10 @@ class EtudiantRepository extends AbstractRepository
     protected function getNomsColonnes(): array
     {
         return array("numEtudiant", "prenomEtudiant", "nomEtudiant", "loginEtudiant", "sexeEtu", "mailUniversitaire", "mailPerso", "telephone", "groupe", "parcours", "validationPedagogique", "presenceForumIUT", "img_id");
+    }
+    protected function getColonnesRecherche(): array
+    {
+        return array("prenomEtudiant","prenomEtudiant","loginEtudiant","mailUniversitaire","groupe","parcours");
     }
 
     protected function getClePrimaire(): string
@@ -339,5 +343,6 @@ class EtudiantRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $pdoStatement->fetch();
     }
+
 
 }

@@ -129,5 +129,19 @@ class Convention extends AbstractDataObject
         $this->typeCovention = $typeCovention;
     }
 
+    public static function creerConvention(array $convention,string $idConvention,string $typeConvention ):Convention
+    {
+        return new Convention(
+            $idConvention,
+            0,
+            $convention["dateCreation"],
+            $convention["dateCreation"],
+            1,
+            $convention["assurance"],
+            $convention["objfOffre"],
+            $typeConvention
+        );
+    }
+
 
 }
