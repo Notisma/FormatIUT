@@ -9,6 +9,18 @@ body {
     background-color: #ecf0f1;
     margin: 0;
     height: 100vh;
+    scroll-behavior: smooth;
+}
+
+.titre {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    color: black;
+    margin: 0;
+}
+
+#rouge {
+    color: #ff5660;
 }
 
 
