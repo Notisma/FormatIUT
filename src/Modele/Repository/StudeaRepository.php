@@ -4,7 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\studea;
 
-class StudeaRepository extends AbstractRepository
+class StudeaRepository extends RechercheRepository
 {
     public function getNomTable(): string
     {

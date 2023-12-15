@@ -19,7 +19,7 @@ class EtudiantRepository extends  RechercheRepository
     }
     protected function getColonnesRecherche(): array
     {
-        return array("prenomEtudiant","prenomEtudiant","loginEtudiant","mailUniversitaire","groupe","parcours");
+        return array("prenomEtudiant","nomEtudiant","loginEtudiant","groupe","parcours");
     }
 
     protected function getClePrimaire(): string
