@@ -762,7 +762,14 @@ form {
 }
 
 @media (max-height: 600px) {
-    footer {
-        display: none;
+
+    * {
+        flex-shrink: 0;
+        overflow-y: auto;
+    }
+
+    body {
+        overflow-y: scroll;
+        flex-shrink: 0;
     }
 }
