@@ -246,7 +246,7 @@ class ControleurEtuMain extends ControleurMain
     public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        header("Location : ?controleur=EtuMain&action=$action");
+        self::$action();
     }
 
 }
