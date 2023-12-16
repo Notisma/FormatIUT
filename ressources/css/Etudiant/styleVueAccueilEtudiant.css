@@ -4,19 +4,10 @@ body {
     height: 100vh;
 }
 
-.titre {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.04em;
-    color: black;
-    margin: 0;
-}
 
-#rouge {
-    color: #ff5660;
-}
 
 .mainAcc {
-    width: 90%;
+    width: 95%;
     height: 90%;
     display:flex;
     flex-direction: row;
@@ -26,7 +17,7 @@ body {
 }
 
 .gaucheAcc {
-    width: 60%;
+    width: 64%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -169,6 +160,41 @@ body {
 
 .erreur > img {
     width: 50%;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        min-height: 250vh;
+        /* s'agrandit en fonction du contenu */
+
+    }
+
+    .mainAcc {
+        flex-direction: column-reverse;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .droiteAcc {
+        width: 100%;
+        height: 40%;
+    }
+
+    .gaucheAcc {
+        width: 100%;
+        height: 60%;
+    }
+
+    .grille {
+        /* une seule colonne, 6 lignes */
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    }
+
 }
 
 

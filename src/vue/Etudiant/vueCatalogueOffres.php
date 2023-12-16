@@ -1,85 +1,69 @@
-<div id="center">
-    <div class="presentation">
-        <div class="texteGauche">
-            <h3>CATALOGUE DES OFFRES</h3>
-            <p>Consultez et postulez sur toutes les offres disponibles en quelques clics</p>
+<?php
 
-            <form>
-                <input type="hidden" name="controleur" value="EtuMain">
-                <input type="hidden" name="action" value="afficherCatalogue">
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 
-                <input type="submit" name="type" value="Tous" class="offre"
-                    <?php use App\FormatIUT\Controleur\ControleurEtuMain;
-                    use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-                    use App\FormatIUT\Modele\Repository\EtudiantRepository;
-                    use App\FormatIUT\Modele\Repository\FormationRepository;
+$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
 
-                    if ($type == "Tous") echo 'id="typeActuel" disabled'; ?>
-                >
-                <input type="submit" name="type" value="Stage" class="stage"
-                    <?php if ($type == "Stage") echo 'id="typeActuel" disabled'; ?>
-                >
-                <input type="submit" name="type" value="Alternance" class="alternance"
-                    <?php if ($type == "Alternance") echo 'id="typeActuel" disabled'; ?>
-                >
-            </form>
-        </div>
+$type = $_REQUEST["type"] ?? "all";
 
-        <div class="imageDroite">
-            <img src="../ressources/images/vueCatalogueEtu.png" alt="illustration">
-        </div>
+?>
 
+<div class="mainCatalogue">
+
+    <div class="descCatalogue">
+        <img src="../ressources/images/vueCatalogueEtu.png" alt="image de bienvenue">
+        <h3 class="titre">Catalogue des Offres</h3>
+        <h4 class="titre">Retrouvez ici toutes les offres de stage et d'alternance disponibles sur Format'IUT !</h4>
     </div>
 
-    <div class="assistance">
-        <h3>ASTUCES</h3>
-        <p>Visualisez en un coup d'oeil les informations d'une offre, et cliquez sur cette dernière pour en savoir
-            plus</p>
-    </div>
+    <div class="wrapMosaique">
+        <h2 class="titre" id="rouge">Liste des offres de Stage et d'Alternance :</h2>
 
-    <div class="offresEtu">
-        <div class="contenuOffresEtu">
+        <div class="mosaique">
             <?php
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant());
-            $compteurOffres = 0;
-            if (!empty($offres)) {
-                foreach ($offres as $offre) {
-                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
-                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->getEstValide()) {
-                        $compteurOffres++;
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                        echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>
-                            <div class='partieGauche'>
-                            <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
-                            <p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . " pour " . htmlspecialchars($offre->getSujet()) . "</p>
-                            <p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
-                            </div>
-                            <div class='partieDroite'>
-                            <div class='divInfo'>
-                            <img src=\"" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
-                            </div>
-                            <div class='divInfo'>
-                            <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
-                            <p>";
-                        if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
-                            $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
-                            echo $nb . " postulation";
-                            if ($nb > 1) echo "s";
-                        } else {
-                            echo "Assignée";
-                        }
-                        echo "</p>
-                        </div>
-                        </div>
-                        </a>";
-                    }
+            $data = (new FormationRepository())->getListeIDFormationsPourEtudiant($type, $etudiant);
+
+            for ($i = 0; $i < count($data); $i++) {
+                $offre = $data[$i];
+                $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($offre);
+                $red = "";
+                $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                $n = 2;
+                $row = intdiv($i, $n);
+                $col = $i % $n;
+                if (($row + $col) % 2 == 0) {
+                    $red = "demi";
                 }
-                if($compteurOffres == 0){
-                    echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
+                echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
+            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
+           <div>
+           <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
+           <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
+           <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
+           <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
+
+                $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
+                if ($nb == 0) {
+                    echo "Aucun";
+                } else {
+                    echo $nb;
                 }
-            } else {
-                echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
-            } ?>
+
+                echo " candidat";
+                if ($nb > 1) {
+                    echo "s";
+                } echo
+                '</h4> </div>
+            </div>
+            </a>';
+            }
+
+            ?>
         </div>
+
     </div>
+
 </div>
