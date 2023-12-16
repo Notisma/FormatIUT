@@ -165,15 +165,15 @@ class FormationRepository extends RechercheRepository
     public function getListeIDFormationsPourEtudiant($type, $etudiant): array {
         $anneeEtudiant = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
         $sql = "";
-        if ($type == "all") {
+        if ($type == "all" || $type == "Tous") {
             $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL";
         } else {
-            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL AND typeOffre=:Tag";
+            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL AND typeOffre=:Tag OR typeOffre='Stage/Alternance'";
         }
         $sql.=" AND anneeMin <= :TagAnnee AND anneeMax >= :TagAnnee AND estValide=1";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("TagAnnee" => $anneeEtudiant);
-        if ($type != "all") {
+        if ($type != "all" || $type != "Tous") {
             $values["Tag"] = $type;
         }
         $pdoStatement->execute($values);

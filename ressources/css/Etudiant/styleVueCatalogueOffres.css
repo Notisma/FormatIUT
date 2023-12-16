@@ -7,7 +7,7 @@ body {
 .mainCatalogue {
     width: 95%;
     height: 98%;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     background-color: #ffc4c8;
@@ -28,13 +28,129 @@ body {
     padding: 1%;
 }
 
-.descCatalogue > * {
+.descCatalogue > .wrap {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.descCatalogue > .wrap > * {
     text-align: center;
 }
 
-.descCatalogue > img {
-    height: 40%;
+.descCatalogue > .wrap > img {
+    height: 60%;
     max-width: 98%;
+}
+
+.tips {
+    width: 98%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.tips > img {
+    max-height: 90%;
+}
+
+.tips > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.wrapForm {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapForm > form {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-bottom: 10px;
+}
+
+.wrapForm > form > input {
+    width: 90px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+}
+
+.inputOffre {
+    border-radius: 0 50px 50px 0;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.inputOffre:hover {
+    background-color: #ff9095;
+}
+
+.stage {
+    border-radius: 0;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.stage:hover {
+    background-color: #ff9095;
+}
+
+.alternance {
+    border-radius: 50px 0 0 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.alternance:hover {
+    background-color: #ff9095;
+}
+
+
+#typeActuel {
+    background-color: white;
+    color: black;
+    cursor: not-allowed;
 }
 
 
@@ -52,14 +168,30 @@ body {
 .mosaique {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fill, minmax(180px, 1fr));
-    grid-auto-rows: 1fr;
+    grid-template-rows: repeat(3, minmax(180px, auto));
+    grid-auto-rows: minmax(180px, auto);
     grid-auto-columns: 1fr;
     grid-gap: 1%;
     width: 98%;
     height: 90%;
     flex-shrink: 0;
     overflow: auto;
+}
+
+.erreurGrid {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.erreurGrid > img {
+    height: 100px;
 }
 
 .mosaique::-webkit-scrollbar {
