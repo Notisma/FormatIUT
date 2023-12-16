@@ -77,12 +77,13 @@ use App\FormatIUT\Configuration\Configuration;
                         }
 
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?service=Recherche&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
+                            <input type='hidden' name='menu' value='".serialize($menu)."'>
                             <input type='hidden' name='service' value='Recherche'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
