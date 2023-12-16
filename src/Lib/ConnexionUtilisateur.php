@@ -113,7 +113,14 @@ class ConnexionUtilisateur
     {
         if (!(new ProfRepository())->estProf($login)) {
             $infos = ConnexionLdap::getInfoPersonne();
-            $prof = new Prof(2, $infos["nom"], $infos["prenom"], $infos["mail"]);
+            $prof = new Prof($infos["login"], $infos["nom"], $infos["prenom"], $infos["mail"],0,0);
+            (new ProfRepository())->creerObjet($prof);
+        }
+    }
+    public static function premiereConnexionProfTest(string $login)
+    {
+        if (!(new ProfRepository())->estProf($login)) {
+            $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail",0,1);
             (new ProfRepository())->creerObjet($prof);
         }
     }

@@ -77,6 +77,7 @@ class ServiceConnexion
     private static function connexionPersonnel():void
     {
         $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+        ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
         if (!is_null($prof)) {
             if ($prof->isEstAdmin()) {
                 ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
@@ -92,6 +93,7 @@ class ServiceConnexion
     {
         ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
         MessageFlash::ajouter("success", "Connexion Réussie");
+
         if (ConnexionUtilisateur::getTypeConnecte()=="Etudiants"){
             self::connexionEtudiant();
         }else {
@@ -114,6 +116,7 @@ class ServiceConnexion
                     $type="Secretariat";
                     break;
             }
+            ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
             ConnexionUtilisateur::connecter($_REQUEST["login"], $type);
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
