@@ -40,7 +40,7 @@ D'autres branches sont utilisées tout au long des sprints. Elles sont dédiées
 - Sprint 2
   - Efforts Estimés : 275
   - Efforts Réalisés : 250
-  - Efforts Validés : 140
+  - Efforts Validés : 250
 
 - Sprint 3
   - Efforts Estimés : 256
