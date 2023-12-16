@@ -24,6 +24,7 @@ abstract class RechercheRepository extends AbstractRepository
         }
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
+        $liste=array();
         foreach ($pdoStatement as $item) {
             $liste[]=$this->construireDepuisTableau($item);
         }

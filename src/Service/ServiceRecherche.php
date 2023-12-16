@@ -37,17 +37,14 @@ class ServiceRecherche
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
-        $liste=array();
-        $count=0;
-        foreach (PrivilegesUtilisateursRecherche::getInstance()->getPrivileges() as $user =>$privilege){
-            if ($user==ConnexionUtilisateur::getTypeConnecte()){
-                foreach ($privilege as $repository) {
-                    $nomDeClasseRepository="App\FormatIUT\Modele\Repository\\".$repository."Repository";
-                    $re="recherche";
-                    $liste[$repository]= (new $nomDeClasseRepository)->$re($morceaux);
-                    $count+=sizeof($liste[$repository]);
-                }
-            }
+        $liste = array();
+        $count = 0;
+        $privilege=PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
+        foreach ($privilege as $repository) {
+            $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
+            $re = "recherche";
+            $liste[$repository] = (new $nomDeClasseRepository)->$re($morceaux);
+            $count += sizeof($liste[$repository]);
         }
 
         if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
@@ -55,9 +52,9 @@ class ServiceRecherche
             die();
         } else {
             MessageFlash::ajouter("success", "$count résultats trouvés.");
-            $_REQUEST["recherche"]=$recherche;
-            $_REQUEST["liste"]=$liste;
-            $_REQUEST["count"]=$count;
+            $_REQUEST["recherche"] = $recherche;
+            $_REQUEST["liste"] = $liste;
+            $_REQUEST["count"] = $count;
             ControleurMain::afficherRecherche();
         }
     }
