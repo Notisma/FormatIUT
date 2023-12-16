@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use DateTime;
 
-class EntrepriseRepository extends AbstractRepository
+class EntrepriseRepository extends RechercheRepository
 {
     protected function getNomTable(): string
     {
@@ -15,6 +15,10 @@ class EntrepriseRepository extends AbstractRepository
     protected function getNomsColonnes(): array
     {
         return ["numSiret", "nomEntreprise", "statutJuridique", "effectif", "codeNAF", "tel", "adresseEntreprise", "idVille", "img_id", "mdpHache", "email", "emailAValider", "nonce", "estValide","dateCreationCompte"];
+    }
+    protected function getColonnesRecherche(): array
+    {
+        return array("nomEntreprise");
     }
 
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise

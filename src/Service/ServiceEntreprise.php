@@ -74,7 +74,6 @@ class ServiceEntreprise
     public static function mettreAJourEntreprise(): void
     {
         //TODO vérifier utilité fonction mettreAJourInfos
-        //TODO faire les vérifs
         if (isset($_REQUEST["siret"],$_REQUEST["nom"],$_REQUEST["statutJ"],$_REQUEST["effectif"],$_REQUEST['codeNAF'],$_REQUEST["tel"],$_REQUEST["adresse"])) {
             if (ConnexionUtilisateur::getTypeConnecte()=="Entreprises") {
                 if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {

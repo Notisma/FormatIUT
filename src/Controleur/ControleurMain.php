@@ -199,6 +199,16 @@ class ControleurMain
         self::afficherVue("Sources", "sources.php", Configuration::getCheminControleur()::getMenu());
     }
 
+    public static function afficherRecherche()
+    {
+        $liste=$_REQUEST["liste"];
+        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php",unserialize($_REQUEST["menu"]), [
+            "recherche" => $_REQUEST["recherche"],
+            "offres" => $liste["Formation"],
+            "entreprises" => $liste["Entreprise"],
+            "nbResults" => $_REQUEST["count"]
+        ]);
+    }
 
 
 
