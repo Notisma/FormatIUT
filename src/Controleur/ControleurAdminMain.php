@@ -22,12 +22,8 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function getMenu(): array
     {
-        $accueil = "";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        } else if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            $accueil = "Administrateurs";
-        }
+
+        $accueil=ConnexionUtilisateur::getTypeConnecte();
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
@@ -70,10 +66,7 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
-        $accueil = "Administrateurs";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        }
+        $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
         self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
