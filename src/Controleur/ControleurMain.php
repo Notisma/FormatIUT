@@ -202,7 +202,7 @@ class ControleurMain
     public static function afficherRecherche()
     {
         $liste=$_REQUEST["liste"];
-        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", ControleurMain::getMenu(), [
+        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php",unserialize($_REQUEST["menu"]), [
             "recherche" => $_REQUEST["recherche"],
             "offres" => $liste["Formation"],
             "entreprises" => $liste["Entreprise"],
