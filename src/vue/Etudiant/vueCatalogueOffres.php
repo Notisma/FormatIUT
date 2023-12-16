@@ -13,7 +13,9 @@ $type = $_REQUEST["type"] ?? "all";
 <div class="mainCatalogue">
 
     <div class="descCatalogue">
-        <p></p>
+        <img src="../ressources/images/vueCatalogueEtu.png" alt="image de bienvenue">
+        <h3 class="titre">Catalogue des Offres</h3>
+        <h4 class="titre">Retrouvez ici toutes les offres de stage et d'alternance disponibles sur Format'IUT !</h4>
     </div>
 
     <div class="wrapMosaique">

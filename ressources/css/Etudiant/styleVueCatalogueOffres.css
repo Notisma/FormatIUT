@@ -28,6 +28,15 @@ body {
     padding: 1%;
 }
 
+.descCatalogue > * {
+    text-align: center;
+}
+
+.descCatalogue > img {
+    height: 40%;
+    max-width: 98%;
+}
+
 
 .wrapMosaique {
     width: 64%;
