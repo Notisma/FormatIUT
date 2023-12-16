@@ -132,7 +132,8 @@ class ConnexionUtilisateur
             $bool=true;
         } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
             if (ConnexionUtilisateur::getTypeConnecte()!="Personnels")
-            $bool=true;
+                if (ConnexionUtilisateur::getTypeConnecte()!="Secretariat")
+                    $bool=true;
         }
         return $bool;
     }

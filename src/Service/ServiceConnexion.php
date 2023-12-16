@@ -26,10 +26,8 @@ class ServiceConnexion
                 self::connexionEntreprise($user);
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 self::connexionLDAP();
-            } else if ($_REQUEST["login"] == "ProfTest") {
-                self::connexionProfTest();
-            } else if ($_REQUEST["login"] == "AdminTest") {
-                self::connexionAdminTest();
+            } else {
+                self::connexionTest();
             }
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
@@ -44,33 +42,6 @@ class ServiceConnexion
         ConnexionUtilisateur::deconnecter();
         Session::getInstance()->detruire();
         ControleurMain::redirectionFlash("afficherIndex", "info", "Vous êtes déconnecté");
-    }
-
-    /**
-     * @return void gère la connexion pour le ProfTest
-     */
-
-    private static function connexionProfTest() :void
-    {
-        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnels");
-            MessageFlash::ajouter("success", "Connexion Réussie");
-            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            exit();
-        }
-    }
-
-    /**
-     * @return void gère la connexion pour l'AdminTest
-     */
-    private static function connexionAdminTest() : void
-    {
-        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-            MessageFlash::ajouter("success", "Connexion Réussie");
-            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            exit();
-        }
     }
 
     /**
@@ -109,10 +80,10 @@ class ServiceConnexion
         if (!is_null($prof)) {
             if ($prof->isEstAdmin()) {
                 ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            }else {
-                header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+            }else if (strpbrk($_REQUEST["login"],"secretariat")) {
+                ConnexionUtilisateur::connecter($_REQUEST["login"],"Secretariat");
             }
+            header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
         }
     }
@@ -126,6 +97,29 @@ class ServiceConnexion
         }else {
             self::connexionPersonnel();
         }
+    }
+
+    private static function connexionTest()
+    {
+        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
+            $type="";
+            switch ($_REQUEST["login"]){
+                case "ProfTest" :
+                    $type="Personnels";
+                    break;
+                case "AdminTest" :
+                    $type="Administrateurs";
+                    break;
+                case "SecretariatTest":
+                    $type="Secretariat";
+                    break;
+            }
+            ConnexionUtilisateur::connecter($_REQUEST["login"], $type);
+            MessageFlash::ajouter("success", "Connexion Réussie");
+            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+            exit();
+        }
+
     }
 
     /**
