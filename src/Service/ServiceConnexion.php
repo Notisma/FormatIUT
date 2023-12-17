@@ -31,7 +31,7 @@ class ServiceConnexion
                 self::connexionTest();
             }
         }
-        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
 
 
@@ -84,9 +84,9 @@ class ServiceConnexion
         ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
         if (!is_null($prof)) {
             if ($prof->isEstAdmin()) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+                ConnexionUtilisateur::connecter($prof, "Administrateurs");
             }else if (strpbrk($_REQUEST["login"],"secretariat")) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"],"Secretariat");
+                ConnexionUtilisateur::connecter($prof,"Secretariat");
             }
             header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
@@ -119,8 +119,9 @@ class ServiceConnexion
                     $type="Secretariat";
                     break;
             }
+            $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
-            ConnexionUtilisateur::connecter($_REQUEST["login"], $type);
+            ConnexionUtilisateur::connecter($prof);
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
