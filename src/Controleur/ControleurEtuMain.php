@@ -22,7 +22,7 @@ class ControleurEtuMain extends ControleurMain
 
     public static function getCleEtudiant(): int
     {
-        return ConnexionUtilisateur::getNumEtudiantConnecte();
+        return ConnexionUtilisateur::getUtilisateurConnecte()->getNumEtudiant();
     }
 
     public static function getTitrePageActuelleEtu(): string

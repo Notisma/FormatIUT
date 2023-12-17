@@ -4,7 +4,7 @@ use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 
-$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+$etudiant = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
 
 $type = $_REQUEST["type"] ?? "all";
 

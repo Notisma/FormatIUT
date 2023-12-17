@@ -75,7 +75,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche le profil de l'administrateur connecté
      */
-    public static function afficherProfilAdmin(): void
+    public static function afficherProfil(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
         self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php", self::getMenu());
