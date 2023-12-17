@@ -13,7 +13,7 @@
                 else{
                     echo '<p><label for="offre_id">Votre stage : </label>';
                 } ?>
-                    <input type="text" value="<?=htmlspecialchars($offre->getNomOffre()) ?>" name="nomOffre" id="offre_id"  readonly required>
+                <input type="text" value="<?=htmlspecialchars($offre->getNomOffre()) ?>" name="nomOffre" id="offre_id"  readonly required>
                 </p>
                 <p> Informations de l'étudiant :</p>
                 <p><label for="num_id"> N° étudiant </label>
@@ -35,7 +35,7 @@
                     <input type="text" value="<?= htmlspecialchars($etudiant->getMailPerso()); ?>" name="mailEtu" id="mail_id" readonly
                            required></p>
                 <p><label for="assu_id">Assurance</label>
-                    <input type="text" value="<?=htmlspecialchars($offre->getAssurance()); ?>" name="assurance" id="assu_id" readonly
+                    <input type="text" value="<?=htmlspecialchars($offre->getAssurance()); ?>" name="assurance" id="assu_id"
                            required></p>
                 <p>Informations de l'entreprise :</p>
                 <p><label for="sir_id">Siret</label>
@@ -55,7 +55,7 @@
                     <input type="text" value="<?= $villeEntr->getCodePostal(); ?>" name="codePostalEntr" id="cpEntr_id" readonly
                            required></p>
                 <?php if($offre->getTypeOffre() == "Alternance"){
-                echo '<p><label for="debut_id"> Alternance : Date début </label>
+                    echo '<p><label for="debut_id"> Alternance : Date début </label>
                     <input type="date" value="'. $offre->getDateDebut() .'" name="dateDebut" id="debut_id" readonly
                            required>
                     <label for="fin_id"> Date fin </label>
@@ -78,9 +78,8 @@
                               readonly required>
                 </p>';
                 }?>
-                <input type="submit" value="Modifier" formaction="?action=afficherFormulaireModifierConvention&controleur=EtuMain">
-
-
+                <input type="hidden" value="<?=date("d-m-Y");?>" name="dateCreation">
+                <input type="submit" value="Confirmer" formaction="?action=">
             </fieldset>
         </form>
     </div>

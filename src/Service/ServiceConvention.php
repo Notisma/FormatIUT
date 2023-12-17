@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -19,46 +20,42 @@ class ServiceConvention
      */
     public static function creerConvention(): void
     {
-        if ($_REQUEST['idOff'] != "aucune") {
-            if ($_REQUEST['codePostalEntr'] > 0 && $_REQUEST['siret'] > 0) {
-                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-                if (isset($entrepriseVerif)) {
-                    $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
-                    if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
-                        $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
-                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
-                            if ($offreVerif->getDateDebut() == new DateTime($_REQUEST['dateDebut']) && $offreVerif->getDateFin() == new DateTime($_REQUEST['dateFin'])) {
-                                $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
-                                $convention = Convention::creerConvention($_REQUEST,$clefPrimConv,$offreVerif->getTypeOffre());
-                                (new ConventionRepository())->creerObjet($convention);
-                                if (!(new EtudiantRepository())->aUneFormation(ControleurEtuMain::getCleEtudiant())) {
-                                    $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ($offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
-                                        "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => ControleurEtuMain::getCleEtudiant(), "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
-                                    ]);
-                                    (new FormationRepository())->creerObjet($formation);
-                                } else {
-                                    (new FormationRepository())->ajouterConvention(ControleurEtuMain::getCleEtudiant(), $convention->getIdConvention());
-                                }
-                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
-                            } else {
-                                ControleurEtuMain::afficherErreur("Erreur sur les dates");
-                            }
+        if (isset($_REQUEST['idFormation'])) {
+            $listeId = ((new FormationRepository())->getListeidFormations());
+            $idFormation = $_REQUEST['idFormation'];
+            if (in_array($idFormation, $listeId)) {
+                $formation = ((new FormationRepository())->estFormation($idFormation));
+                if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
+                    if (is_null($formation)) {
+                        if ((new PostulerRepository())->getEtatEtudiantOffre(self::getCleEtudiant(), $idFormation) == "A Choisir") {
+                            (new PostulerRepository())->validerOffreEtudiant(self::getCleEtudiant(), $idFormation);
+                            $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
+                            $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->listeIdTypeFormation()), "idFormation");
+                            $formation = (new FormationRepository())->construireDepuisTableau([
+                                "idFormation" => $idFormation, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getIdEntreprise(), "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
+                            (new FormationRepository())->creerObjet($formation);
+                            self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
                         } else {
-                            ControleurEtuMain::afficherErreur("Erreur sur les informations de l'entreprise");
+                            self::redirectionFlash("afficherMesOffres", "danger", "Vous n'êtes pas en état de choisir pour cette offre");
                         }
                     } else {
-                        ControleurEtuMain::afficherErreur("L'entreprise n'a jamais créé cette offre");
+                        self::redirectionFlash("afficherMesOffres", "danger", "Cette Offre est déjà assignée");
                     }
                 } else {
-                    ControleurEtuMain::afficherErreur("Erreur l'entreprise n'existe pas");
+                    self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une Offre assignée");
                 }
             } else {
-                ControleurEtuMain::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
+                self::redirectionFlash("afficherMesOffres", "danger", "Offre non existante");
             }
         } else {
-            ControleurEtuMain::afficherErreur("Aucune offre est liée à votre convention");
+            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
         }
     }
 
+    public static function modifierConvention(): void{
+        if(isset($_REQUEST['numEtudiant']) == ConnexionUtilisateur::getNumEtudiantConnecte()){
+
+        }
+    }
 
 }
