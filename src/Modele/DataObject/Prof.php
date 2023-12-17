@@ -124,7 +124,10 @@ class Prof extends AbstractDataObject implements UtilisateurObject
     {
         if ($this->estAdmin){
             return "Administrateurs";
-        }else {
+        }else if ($this->loginProf=="SecretariatTest"){
+            return "Secretariat";
+        }
+        else {
             return "Personnels";
         }
     }

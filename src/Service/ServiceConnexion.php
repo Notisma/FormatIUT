@@ -107,18 +107,6 @@ class ServiceConnexion
     private static function connexionTest()
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            $type="";
-            switch ($_REQUEST["login"]){
-                case "ProfTest" :
-                    $type="Personnels";
-                    break;
-                case "AdminTest" :
-                    $type="Administrateurs";
-                    break;
-                case "SecretariatTest":
-                    $type="Secretariat";
-                    break;
-            }
             $prof=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
             ConnexionUtilisateur::connecter($prof);
