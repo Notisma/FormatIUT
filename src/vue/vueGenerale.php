@@ -45,36 +45,9 @@ use App\FormatIUT\Configuration\Configuration;
                 </form>";
 
                     if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
-                            case "Entreprise" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=entrMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Etudiants" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=etuMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Administrateurs" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                            case "Personnels" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                        }
+                        $user=\App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+                        $src=$user->getImageProfil();
+                        $liaison="?controleur=".$user->getControleur()."&action=afficherProfil";
 
                         $codeRecherche = "
                         <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>

@@ -2,7 +2,7 @@
 
 use App\FormatIUT\Configuration\Configuration;
 
-$admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
+$admin = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
 ?>
 
 <div class="centreCompte">

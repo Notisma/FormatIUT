@@ -11,6 +11,7 @@ use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ServiceConnexion
@@ -32,7 +33,7 @@ class ServiceConnexion
                 self::connexionAdminTest();
             }
         }
-        header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
+        //header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
 
 
@@ -53,7 +54,8 @@ class ServiceConnexion
     private static function connexionProfTest() :void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnels");
+            $user=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+            ConnexionUtilisateur::connecter($user);
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
@@ -66,7 +68,9 @@ class ServiceConnexion
     private static function connexionAdminTest() : void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
+
+            $user=(new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+            ConnexionUtilisateur::connecter($user);
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
@@ -80,7 +84,7 @@ class ServiceConnexion
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
             if (VerificationEmail::aValideEmail($user)) {
-                ConnexionUtilisateur::connecter($user->getSiret(), "Entreprise");
+                ConnexionUtilisateur::connecter($user);
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                 exit();
@@ -93,6 +97,9 @@ class ServiceConnexion
      */
     private static function connexionEtudiant():void
     {
+        $etudiant=((new EtudiantRepository())->getNumEtudiantParLogin($_REQUEST["login"]));
+        $etu=(new EtudiantRepository())->getObjectParClePrimaire($etudiant);
+        ConnexionUtilisateur::connecter($etu);
         if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
             MessageFlash::ajouter('info', "Veuillez compléter votre profil");
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
@@ -119,9 +126,9 @@ class ServiceConnexion
 
     private static function connexionLDAP():void
     {
-        ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
+        //ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
         MessageFlash::ajouter("success", "Connexion Réussie");
-        if (ConnexionUtilisateur::getTypeConnecte()=="Etudiants"){
+        if (ConnexionLdap::getInfoPersonne()["type"]=="Etudiants"){
             self::connexionEtudiant();
         }else {
             self::connexionPersonnel();
