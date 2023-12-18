@@ -80,7 +80,7 @@ class ServiceMdp
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
             if (isset($_POST['ancienMdp'], $_POST['nouveauMdp'], $_POST['confirmerMdp'])) {
-                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+                $entreprise = ConnexionUtilisateur::getUtilisateurConnecte();
 
                 if (MotDePasse::verifier($_POST['ancienMdp'], $entreprise->getMdpHache())) {
 

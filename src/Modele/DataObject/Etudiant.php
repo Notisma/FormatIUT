@@ -2,7 +2,11 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-class Etudiant extends AbstractDataObject
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
+
+class Etudiant extends AbstractDataObject implements UtilisateurObject
 {
     private float $numEtudiant;
     private string $prenomEtudiant;
@@ -243,4 +247,26 @@ class Etudiant extends AbstractDataObject
             1
         );
     }
+
+    public function getControleur():string
+    {
+        return "etuMain";
+    }
+
+    public function getImageProfil():string
+    {
+        return Configuration::getUploadPathFromId($this->img_id);
+    }
+
+    public function getTypeConnecte(): string
+    {
+        return "Etudiants";
+    }
+
+    public function getLoginConnecte(): string
+    {
+        return $this->loginEtudiant;
+    }
+
+
 }

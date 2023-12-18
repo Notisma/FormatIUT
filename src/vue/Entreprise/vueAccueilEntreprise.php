@@ -1,7 +1,7 @@
 <?php
 use App\FormatIUT\Configuration\Configuration;
 
-$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+$entreprise = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
 ?>
 
 <div class="mainAcc">
