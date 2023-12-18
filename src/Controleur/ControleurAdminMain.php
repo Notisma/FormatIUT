@@ -23,7 +23,7 @@ class ControleurAdminMain extends ControleurMain
     public static function getMenu(): array
     {
 
-        $accueil=ConnexionUtilisateur::getTypeConnecte();
+        $accueil = ConnexionUtilisateur::getTypeConnecte();
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
@@ -149,6 +149,30 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php", self::getMenu());
     }
 
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            parent::afficherErreur("Il faut préciser la formation");
+
+        self::$pageActuelleAdmin = "Détails de l'offre";
+        /** @var ControleurMain $menu */
+        $menu = Configuration::getCheminControleur();
+        $liste = (new FormationRepository())->getListeidFormations();
+        if ($idFormation || isset($_REQUEST["idFormation"])) {
+            if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+            if (in_array($idFormation, $liste)) {
+                $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                $client = "Admin";
+                $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+            }
+        } else {
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+        }
+    }
 
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
