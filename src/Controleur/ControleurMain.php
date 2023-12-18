@@ -199,6 +199,10 @@ class ControleurMain
         self::afficherVue("Sources", "sources.php", Configuration::getCheminControleur()::getMenu());
     }
 
+    /**
+     * @return void affiche le résultat de la recherche
+     */
+
     public static function afficherRecherche()
     {
         $liste=$_REQUEST["liste"];

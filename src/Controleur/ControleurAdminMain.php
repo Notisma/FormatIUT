@@ -128,6 +128,10 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
+    /**
+     * @return void affiche la liste des offresc
+     */
+
     public static function afficherListeOffres(): void
     {
         $listeOffres = (new FormationRepository())->getListeObjet();
