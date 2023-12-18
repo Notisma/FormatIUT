@@ -178,7 +178,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Modifier Convention", "Etudiant/vueFormulaireModifierConvention", self::getMenu(), ["etudiant" => $etudiant, "offre" => $formation, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Modifier Convention", "Etudiant/vueFormulaireModifierConvention.php", self::getMenu(), ["etudiant" => $etudiant, "offre" => $formation, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         }
         else{
             self::afficherErreur("Convention inexistante");

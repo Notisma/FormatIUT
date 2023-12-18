@@ -12,6 +12,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
 
+
 class ServiceConvention
 {
     /**
@@ -20,41 +21,67 @@ class ServiceConvention
      */
     public static function creerConvention(): void
     {
-        if (isset($_REQUEST['idFormation'])) {
-            $listeId = ((new FormationRepository())->getListeidFormations());
-            $idFormation = $_REQUEST['idFormation'];
-            if (in_array($idFormation, $listeId)) {
-                $formation = ((new FormationRepository())->estFormation($idFormation));
-                if (!(new EtudiantRepository())->aUneFormation(self::getCleEtudiant())) {
-                    if (is_null($formation)) {
-                        if ((new PostulerRepository())->getEtatEtudiantOffre(self::getCleEtudiant(), $idFormation) == "A Choisir") {
-                            (new PostulerRepository())->validerOffreEtudiant(self::getCleEtudiant(), $idFormation);
-                            $offre = ((new FormationRepository())->getObjectParClePrimaire($idFormation));
-                            $idFormation = "F" . self::autoIncrementF(((new FormationRepository())->listeIdTypeFormation()), "idFormation");
-                            $formation = (new FormationRepository())->construireDepuisTableau([
-                                "idFormation" => $idFormation, "dateDebut" => $offre->getDateDebut(), "dateFin" => $offre->getDateFin(), "idEtudiant" => self::getCleEtudiant(), "idEntreprise" => $offre->getIdEntreprise(), "idTuteurPro" => null, "idConvention" => null, "idTuteurUM" => null]);
-                            (new FormationRepository())->creerObjet($formation);
-                            self::redirectionFlash("afficherMesOffres", "success", "Offre validée");
+        if ($_REQUEST['idOff'] != "aucune") {
+            if ($_REQUEST['codePostalEntr'] > 0 && $_REQUEST['siret'] > 0) {
+                $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+                if (isset($entrepriseVerif)) {
+                    $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
+                    if ($entrepriseVerif->getSiret() == $offreVerif->getIdEntreprise()) {
+                        $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
+                        if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
+                            if ($offreVerif->getDateDebut() == $_REQUEST['dateDebut'] && $offreVerif->getDateFin() == $_REQUEST['dateFin']) {
+                                $offreVerif->setAssurance($_REQUEST['assurance']);
+                                $offreVerif->setDateCreationConvention($_REQUEST['dateCreation']);
+                                $offreVerif->setDateTransmissionConvention($_REQUEST['dateCreation']);
+                                $offreVerif->setAssurance($_REQUEST['assurance']);
+                                (new FormationRepository())->modifierObjet($offreVerif);
+                                self::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
+                            } else {
+                                self::afficherErreur("Erreur sur les dates");
+                            }
                         } else {
-                            self::redirectionFlash("afficherMesOffres", "danger", "Vous n'êtes pas en état de choisir pour cette offre");
+                            self::afficherErreur("Erreur sur les informations de l'entreprise");
                         }
                     } else {
-                        self::redirectionFlash("afficherMesOffres", "danger", "Cette Offre est déjà assignée");
+                        self::afficherErreur("L'entreprise n'a jamais créé cette offre");
                     }
                 } else {
-                    self::redirectionFlash("afficherMesOffres", "danger", "Vous avez déjà une Offre assignée");
+                    self::afficherErreur("Erreur l'entreprise n'existe pas");
                 }
             } else {
-                self::redirectionFlash("afficherMesOffres", "danger", "Offre non existante");
+                self::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
             }
         } else {
-            self::redirectionFlash("afficherMesOffres", "danger", "Des données sont manquantes");
+            self::afficherErreur("Aucune offre est liée à votre convention");
         }
     }
 
-    public static function modifierConvention(): void{
-        if(isset($_REQUEST['numEtudiant']) == ConnexionUtilisateur::getNumEtudiantConnecte()){
+    public static function modifierConvention(): void
+    {
 
+        if (isset($_REQUEST['numEtudiant']) == ConnexionUtilisateur::getNumEtudiantConnecte()) {
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            if($formation){
+                if($formation->getDateCreationConvention() != null){
+                    if(isset($_REQUEST["assurance"])){
+                        $formation->setAssurance($_REQUEST['assurance']);
+                        $formation->setDateCreationConvention($_REQUEST['dateCreation']);
+                        (new FormationRepository())->modifierObjet($formation);
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
+                    }
+                    else{
+                        ControleurEtuMain::redirectionFlash("AfficherAccueilEtu", "danger", "L'utilisateur n'a changé l'assurance");
+                    }
+                }
+                else{
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de convention");
+                }
+            }
+            else{
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de formation");
+            }
+        } else {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur ne correspond pas");
         }
     }
 
