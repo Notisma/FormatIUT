@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\Users\Utilisateur;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
@@ -15,13 +16,12 @@ class ConnexionUtilisateur
 {
     // L'utilisateur connecté sera enregistré en session associé à la clé suivante
     private static string $cleConnexion = "_utilisateurConnecte";
-    private static string $cleTypeConnexion = "_typeUtilisateurConnecte";
 
-    public static function connecter(string $loginUtilisateur, string $typeUtilisateur): void
+    public static function connecter(Utilisateur $user): void
     {
         $session = Session::getInstance();
-        $session->enregistrer(self::$cleConnexion, $loginUtilisateur);
-        $session->enregistrer(self::$cleTypeConnexion, $typeUtilisateur);
+
+        $session->enregistrer(self::$cleConnexion, $user);
     }
 
     public static function estConnecte(): bool
@@ -40,9 +40,18 @@ class ConnexionUtilisateur
                 ConnexionLdap::deconnexion();
             }
             $session->supprimer(self::$cleConnexion);
-            $session->supprimer(self::$cleTypeConnexion);
         }
 
+    }
+
+    public static function getUtilisateurConnecte():?Utilisateur
+    {
+        if (self::estConnecte()) {
+            $session = Session::getInstance();
+            $user= $session->lire(self::$cleConnexion);
+            return $user;
+        }
+        return null;
     }
 
     public static function getLoginUtilisateurConnecte(): ?string
@@ -50,7 +59,8 @@ class ConnexionUtilisateur
         // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            return $session->lire(self::$cleConnexion);
+            $user= $session->lire(self::$cleConnexion);
+            return $user->getLogin();
         }
         return null;
     }
@@ -60,7 +70,7 @@ class ConnexionUtilisateur
         if (self::estConnecte()) {
             $session = Session::getInstance();
             $Loginetu = $session->lire(self::$cleConnexion);
-            return (new EtudiantRepository())->getNumEtudiantParLogin($Loginetu);
+            return (new EtudiantRepository())->getNumEtudiantParLogin($Loginetu->getLogin());
         }
         return null;
     }
@@ -70,7 +80,7 @@ class ConnexionUtilisateur
         if (self::estConnecte()) {
             $session = Session::getInstance();
             $loginentr = $session->lire(self::$cleConnexion);
-            return $loginentr;
+            return $loginentr->getLogin();
         }
         return null;
     }
@@ -79,7 +89,8 @@ class ConnexionUtilisateur
     {
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            return $session->lire(self::$cleTypeConnexion);
+            $user=$session->lire(self::$cleConnexion);
+            return $user->getTypeConnecte();
         }
         return null;
     }

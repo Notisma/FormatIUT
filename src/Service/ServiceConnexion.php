@@ -4,6 +4,7 @@ namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\Users\Etudiants;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\VerificationEmail;
@@ -64,6 +65,7 @@ class ServiceConnexion
      */
     private static function connexionEtudiant():void
     {
+        ConnexionUtilisateur::connecter(new Etudiants($_REQUEST["login"]));
         if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
             MessageFlash::ajouter('info', "Veuillez compléter votre profil");
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
@@ -91,10 +93,9 @@ class ServiceConnexion
 
     private static function connexionLDAP():void
     {
-        ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
         MessageFlash::ajouter("success", "Connexion Réussie");
 
-        if (ConnexionUtilisateur::getTypeConnecte()=="Etudiants"){
+        if (ConnexionLdap::getInfoPersonne()["type"]=="Etudiants"){
             self::connexionEtudiant();
         }else {
             self::connexionPersonnel();
