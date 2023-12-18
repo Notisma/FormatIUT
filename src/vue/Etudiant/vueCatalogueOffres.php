@@ -3,9 +3,7 @@
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
-$etudiant = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
-
+$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
 $type = $_REQUEST["type"] ?? "all";
 
 ?>

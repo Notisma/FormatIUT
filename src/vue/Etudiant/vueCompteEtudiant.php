@@ -1,7 +1,9 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
-$etudiant = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
+
+$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
 ?>
 
 <div class="centreCompte">
