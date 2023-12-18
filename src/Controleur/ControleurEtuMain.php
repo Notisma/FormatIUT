@@ -171,6 +171,9 @@ class ControleurEtuMain extends ControleurMain
             self::afficherErreur("offre non valide");
         }
     }
+    /**
+     * @return void affiche le formulaire pour modifier la convention de l'étudiant
+     */
 
     public static function afficherFormulaireModifierConvention(){
         $formation = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());

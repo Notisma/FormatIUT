@@ -35,27 +35,30 @@ class ServiceConvention
                                 $offreVerif->setDateTransmissionConvention($_REQUEST['dateCreation']);
                                 $offreVerif->setAssurance($_REQUEST['assurance']);
                                 (new FormationRepository())->modifierObjet($offreVerif);
-                                self::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
+                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
                             } else {
-                                self::afficherErreur("Erreur sur les dates");
+                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les dates");
                             }
                         } else {
-                            self::afficherErreur("Erreur sur les informations de l'entreprise");
+                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les informations de l'entreprise");
                         }
                     } else {
-                        self::afficherErreur("L'entreprise n'a jamais créé cette offre");
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","L'entreprise n'a jamais créé cette offre");
                     }
                 } else {
-                    self::afficherErreur("Erreur l'entreprise n'existe pas");
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur l'entreprise n'existe pas");
                 }
             } else {
-                self::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur nombre(s) négatif(s) présent(s)");
             }
         } else {
-            self::afficherErreur("Aucune offre est liée à votre convention");
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Aucune offre est liée à votre convention");
         }
     }
-
+    /**
+     * @return void permet à l'étudiant de modifier sa convention
+     * @throws Exception
+     */
     public static function modifierConvention(): void
     {
 
