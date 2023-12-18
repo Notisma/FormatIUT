@@ -149,6 +149,11 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php", self::getMenu());
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
         if (!isset($_REQUEST['idFormation']) && is_null($idFormation))

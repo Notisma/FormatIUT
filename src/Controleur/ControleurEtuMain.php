@@ -182,6 +182,11 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
         if (!isset($_REQUEST['idFormation']) && is_null($idFormation))

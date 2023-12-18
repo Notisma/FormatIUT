@@ -113,6 +113,11 @@ class ControleurEntrMain extends ControleurMain
         $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
     public static function afficherVueDetailOffre(string $idFormation = null): void
     {
         if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
