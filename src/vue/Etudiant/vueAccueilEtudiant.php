@@ -2,7 +2,7 @@
 
 use App\FormatIUT\Configuration\Configuration;
 
-$etudiant = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
 
 ?>
 

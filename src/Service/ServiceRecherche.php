@@ -39,7 +39,7 @@ class ServiceRecherche
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
         $liste = array();
         $count = 0;
-        $privilege=PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
+        $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
         foreach ($privilege as $repository) {
             $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
             $re = "recherche";

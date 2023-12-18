@@ -5,7 +5,7 @@
 
                 use App\FormatIUT\Configuration\Configuration;
 
-                $prof = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+                $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
                 $prenomHTML = htmlspecialchars($prof->getPrenomProf());
                 echo $prenomHTML;
                 ?></h3>

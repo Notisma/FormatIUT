@@ -34,8 +34,8 @@ if (class_exists($nomClasseControleur)) {
     if (in_array($action, get_class_methods($nomClasseControleur))) {
         $nonConnecte =\App\FormatIUT\Lib\ConnexionUtilisateur::verifConnecte($controleur);
         if ($nonConnecte){
-            //header("Location: ?controleur=Main&action=afficherPageConnexion");
-            //\App\FormatIUT\Lib\MessageFlash::verifDeconnexion();
+            header("Location: ?controleur=Main&action=afficherPageConnexion");
+            App\FormatIUT\Lib\MessageFlash::verifDeconnexion();
         }else {
             $nomClasseControleur::$action();
         }

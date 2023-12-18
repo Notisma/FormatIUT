@@ -124,7 +124,7 @@ class ServiceFormation
             if (in_array($_REQUEST["idFormation"], $listeOffre)) {
                 if (!((new FormationRepository())->estFormation($_REQUEST["idFormation"]))) {
                     $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]));
-                    if ($offre->getIdEntreprise() == ConnexionUtilisateur::getUtilisateurConnecte()->getSiret()) {
+                    if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                         (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idFormation"]);
                         (new FormationRepository())->supprimer($_REQUEST["idFormation"]);
                         $_REQUEST["action"] = "afficherAccueilEntr()";
@@ -163,7 +163,7 @@ class ServiceFormation
                     $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
                     if ($offre) {
                         if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
-                            if ($offre->getIdEntreprise() == ConnexionUtilisateur::getUtilisateurConnecte()->getSiret()) {
+                            if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                                 $offre->setTypeOffre($_REQUEST['typeOffre']);
                                 $offre->setNomOffre($_REQUEST['nomOffre']);
                                 if (isset($_REQUEST['dateDebut'])) {

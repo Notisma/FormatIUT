@@ -4,7 +4,7 @@ namespace App\FormatIUT\Modele\DataObject;
 
 use App\FormatIUT\Configuration\Configuration;
 
-class Prof extends AbstractDataObject implements UtilisateurObject
+class Prof extends AbstractDataObject
 {
     private string $loginProf;
     private ?string $nomProf;
@@ -110,26 +110,5 @@ class Prof extends AbstractDataObject implements UtilisateurObject
         );
     }
 
-    public function getControleur(): string
-    {
-        return "AdminMain";
-    }
-
-    public function getImageProfil(): string
-    {
-        return "../ressources/images/admin.png";
-    }
-
-    public function getTypeConnecte(): string
-    {
-        if ($this->estAdmin){
-            return "Administrateurs";
-        }else if ($this->loginProf=="SecretariatTest"){
-            return "Secretariat";
-        }
-        else {
-            return "Personnels";
-        }
-    }
 
 }

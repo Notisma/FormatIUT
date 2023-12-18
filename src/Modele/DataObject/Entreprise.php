@@ -10,7 +10,7 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
 
-class Entreprise extends AbstractDataObject implements UtilisateurObject
+class Entreprise extends AbstractDataObject
 {
     private float $siret;
     private string $nomEntreprise;
@@ -275,21 +275,6 @@ class Entreprise extends AbstractDataObject implements UtilisateurObject
     public function setDateCreationCompte(DateTime $dateCreationCompte): void
     {
         $this->dateCreationCompte = $dateCreationCompte;
-    }
-
-    public function getControleur(): string
-    {
-        return "entrMain";
-    }
-
-    public function getImageProfil(): string
-    {
-        return Configuration::getUploadPathFromId($this->img);
-    }
-
-    public function getTypeConnecte(): string
-    {
-        return "Entreprise";
     }
 
 }

@@ -49,6 +49,7 @@ class ConnexionUtilisateur
         if (self::estConnecte()) {
             $session = Session::getInstance();
             $user= $session->lire(self::$cleConnexion);
+
             return $user;
         }
         return null;
@@ -80,7 +81,7 @@ class ConnexionUtilisateur
         if (self::estConnecte()) {
             $session = Session::getInstance();
             $loginentr = $session->lire(self::$cleConnexion);
-            return $loginentr->getLogin();
+            return (new EntrepriseRepository())->getEntrepriseParMail($loginentr->getLogin())->getSiret();
         }
         return null;
     }

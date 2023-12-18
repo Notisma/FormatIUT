@@ -76,7 +76,7 @@ class ServiceEntreprise
         //TODO vérifier utilité fonction mettreAJourInfos
         if (isset($_REQUEST["siret"],$_REQUEST["nom"],$_REQUEST["statutJ"],$_REQUEST["effectif"],$_REQUEST['codeNAF'],$_REQUEST["tel"],$_REQUEST["adresse"])) {
             if (ConnexionUtilisateur::getTypeConnecte()=="Entreprises") {
-                if ($_REQUEST["siret"] == ConnexionUtilisateur::getUtilisateurConnecte()->getSiret()) {
+                if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
                     ControleurEntrMain::afficherProfil();
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");

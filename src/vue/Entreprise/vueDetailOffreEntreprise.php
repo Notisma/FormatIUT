@@ -48,7 +48,7 @@
         <h3>Actions Rapides</h3>
         <form method="post">
             <?php
-            if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte()->getSiret()) {
+            if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
                 echo '
             <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
         

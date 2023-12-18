@@ -51,7 +51,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherAccueilEntr(): void
     {
-        $listeidFormation = self::getSixMax((new FormationRepository())->listeidFormationEntreprise(ConnexionUtilisateur::getUtilisateurConnecte()->getSiret()));
+        $listeidFormation = self::getSixMax((new FormationRepository())->listeidFormationEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $listeOffre = array();
         for ($i = 0; $i < sizeof($listeidFormation); $i++) {
             $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
@@ -70,7 +70,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_REQUEST["etat"])) {
             $_REQUEST["etat"] = "Tous";
         }
-        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin(), $_REQUEST["type"], $_REQUEST["etat"]);
+        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["etat"]);
         self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
     }
 
@@ -80,7 +80,7 @@ class ControleurEntrMain extends ControleurMain
     public static function afficherProfil(): void
     {
         self::$page = "Compte Entreprise";
-        $entreprise = ConnexionUtilisateur::getUtilisateurConnecte();
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
         self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
@@ -110,8 +110,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModification(): void
     {
-        $entreprise = ConnexionUtilisateur::getUtilisateurConnecte();
-        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,7 +120,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $entreprise = ConnexionUtilisateur::getUtilisateurConnecte();
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
         for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
@@ -132,7 +131,7 @@ class ControleurEntrMain extends ControleurMain
             }
         }
 
-        $ancienId = (new UploadsRepository())->imageParEntreprise($entreprise->getImg());
+        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
 
         $ai_id = TransfertImage::transfert();
         $entreprise->setImg($ai_id);
