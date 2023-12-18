@@ -20,10 +20,6 @@ class ControleurEntrMain extends ControleurMain
 
     private static string $page = "Accueil Entreprise";
 
-    public static function getCleEntreprise(): int
-    {
-        return ConnexionUtilisateur::getNumEtudiantConnecte();
-    }
 
     /**
      * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
