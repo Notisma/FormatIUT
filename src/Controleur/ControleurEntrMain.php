@@ -20,10 +20,6 @@ class ControleurEntrMain extends ControleurMain
 
     private static string $page = "Accueil Entreprise";
 
-    public static function getCleEntreprise(): int
-    {
-        return ConnexionUtilisateur::getNumEtudiantConnecte();
-    }
 
     /**
      * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
@@ -114,8 +110,43 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModification(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+    }
+
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        //if offre existe
+        if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+            self::$page = "Détails de l'offre";
+            /** @var ControleurMain $menu */
+            $menu = Configuration::getCheminControleur();
+            $liste = (new FormationRepository())->getListeidFormations();
+            if ($idFormation || isset($_REQUEST["idFormation"])) {
+                if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+                if (in_array($idFormation, $liste)) {
+                    $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                    $client = "Entreprise";
+                    $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                } else {
+                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                }
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+            }
+        } else {
+            self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
+        }
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

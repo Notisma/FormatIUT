@@ -4,6 +4,8 @@ namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\Users\Administrateurs;
+use App\FormatIUT\Lib\Users\Etudiants;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\VerificationEmail;
@@ -26,10 +28,8 @@ class ServiceConnexion
                 self::connexionEntreprise($user);
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 self::connexionLDAP();
-            } else if ($_REQUEST["login"] == "ProfTest") {
-                self::connexionProfTest();
-            } else if ($_REQUEST["login"] == "AdminTest") {
-                self::connexionAdminTest();
+            } else {
+                self::connexionTest();
             }
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
@@ -47,40 +47,13 @@ class ServiceConnexion
     }
 
     /**
-     * @return void gère la connexion pour le ProfTest
-     */
-
-    private static function connexionProfTest() :void
-    {
-        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Personnels");
-            MessageFlash::ajouter("success", "Connexion Réussie");
-            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            exit();
-        }
-    }
-
-    /**
-     * @return void gère la connexion pour l'AdminTest
-     */
-    private static function connexionAdminTest() : void
-    {
-        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-            MessageFlash::ajouter("success", "Connexion Réussie");
-            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            exit();
-        }
-    }
-
-    /**
      * @return void gère la connexion pour les entreprises
      */
     private static function connexionEntreprise(Entreprise $user) :void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
             if (VerificationEmail::aValideEmail($user)) {
-                ConnexionUtilisateur::connecter($user->getSiret(), "Entreprise");
+                ConnexionUtilisateur::connecter(new \App\FormatIUT\Lib\Users\Entreprise($_REQUEST["login"]));
                 MessageFlash::ajouter("success", "Connexion Réussie");
                 header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
                 exit();
@@ -93,6 +66,7 @@ class ServiceConnexion
      */
     private static function connexionEtudiant():void
     {
+        ConnexionUtilisateur::connecter(new Etudiants($_REQUEST["login"]));
         if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
             MessageFlash::ajouter('info', "Veuillez compléter votre profil");
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
@@ -106,26 +80,40 @@ class ServiceConnexion
     private static function connexionPersonnel():void
     {
         $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
+        ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
         if (!is_null($prof)) {
             if ($prof->isEstAdmin()) {
                 ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-                header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            }else {
-                header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+            }else if (strpbrk($_REQUEST["login"],"secretariat")) {
+                ConnexionUtilisateur::connecter($_REQUEST["login"],"Secretariat");
             }
+            header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
         }
     }
 
     private static function connexionLDAP():void
     {
-        ConnexionUtilisateur::connecter($_REQUEST['login'], ConnexionLdap::getInfoPersonne()["type"]);
         MessageFlash::ajouter("success", "Connexion Réussie");
-        if (ConnexionUtilisateur::getTypeConnecte()=="Etudiants"){
+
+        if (ConnexionLdap::getInfoPersonne()["type"]=="Etudiants"){
             self::connexionEtudiant();
         }else {
             self::connexionPersonnel();
         }
+    }
+
+    private static function connexionTest()
+    {
+        if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
+
+            ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
+            ConnexionUtilisateur::connecter(new Administrateurs($_REQUEST["login"]));
+            MessageFlash::ajouter("success", "Connexion Réussie");
+            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+            exit();
+        }
+
     }
 
     /**

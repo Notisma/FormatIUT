@@ -22,12 +22,8 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function getMenu(): array
     {
-        $accueil = "";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        } else if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            $accueil = "Administrateurs";
-        }
+
+        $accueil = ConnexionUtilisateur::getTypeConnecte();
         $menu = array(
             array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
             array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
@@ -70,10 +66,7 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
-        $accueil = "Administrateurs";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        }
+        $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
         self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
@@ -82,7 +75,7 @@ class ControleurAdminMain extends ControleurMain
     /**
      * @return void affiche le profil de l'administrateur connecté
      */
-    public static function afficherProfilAdmin(): void
+    public static function afficherProfil(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
         self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php", self::getMenu());
@@ -135,6 +128,10 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
     }
 
+    /**
+     * @return void affiche la liste des offresc
+     */
+
     public static function afficherListeOffres(): void
     {
         $listeOffres = (new FormationRepository())->getListeObjet();
@@ -152,6 +149,35 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php", self::getMenu());
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            parent::afficherErreur("Il faut préciser la formation");
+
+        self::$pageActuelleAdmin = "Détails de l'offre";
+        /** @var ControleurMain $menu */
+        $menu = Configuration::getCheminControleur();
+        $liste = (new FormationRepository())->getListeidFormations();
+        if ($idFormation || isset($_REQUEST["idFormation"])) {
+            if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+            if (in_array($idFormation, $liste)) {
+                $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                $client = "Admin";
+                $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+            }
+        } else {
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+        }
+    }
 
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

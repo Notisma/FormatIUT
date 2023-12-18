@@ -2,6 +2,10 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
+
 class Etudiant extends AbstractDataObject
 {
     private float $numEtudiant;
@@ -243,4 +247,6 @@ class Etudiant extends AbstractDataObject
             1
         );
     }
+
+
 }
