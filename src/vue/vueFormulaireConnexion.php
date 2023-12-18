@@ -1,3 +1,11 @@
+<?php
+if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+    \App\FormatIUT\Lib\ConnexionUtilisateur::deconnecter();
+    header("Location: ?action=afficherPageConnexion&controleur=Main");
+    \App\FormatIUT\Lib\MessageFlash::ajouter("info","Vous avez été déconnecté avec succès.");
+}
+?>
+
 
 <div id="center">
 

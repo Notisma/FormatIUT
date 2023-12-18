@@ -125,7 +125,7 @@ class ControleurMain
         } else if (Configuration::controleurIs("EntrMain")) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
             //if offre existe
-            if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+            if ($offre->getIdEntreprise() == (ConnexionUtilisateur::getUtilisateurConnecte())->getSiret()) {
                 self::$pageActuelle = "Détails de l'offre";
                 /** @var ControleurMain $menu */
                 $menu = Configuration::getCheminControleur();
