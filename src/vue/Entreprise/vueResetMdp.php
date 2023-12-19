@@ -27,7 +27,7 @@
                 </label>
 
                 <input type="submit" value="Enregistrer"
-                       formaction= <?php echo '"?action=resetMdp&service=Mdp&login=' . rawurlencode($login) . '&nonce=' . $nonce . '"' ?>
+                       formaction= <?php echo '"?action=resetMDP&controleur=EntrMain&login=' . rawurlencode($login) . '&nonce=' . $nonce . '"' ?>
                 >
 
             </form>

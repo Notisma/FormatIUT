@@ -12,6 +12,11 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
+use App\FormatIUT\Service\ServiceEntreprise;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServiceFormation;
+use App\FormatIUT\Service\ServicePersonnel;
 
 class ControleurAdminMain extends ControleurMain
 {
@@ -50,7 +55,7 @@ class ControleurAdminMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
 
         return $menu;
     }
@@ -178,7 +183,58 @@ class ControleurAdminMain extends ControleurMain
             self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
         }
     }
+    public static function afficherFormulaireModifEtudiant(): void{
+        self::$pageActuelleAdmin = "Modifier un étudiant";
+        self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
+    }
 
+    //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function modifierEtudiant(): void{
+        ServiceEtudiant::modifierEtudiant();
+    }
+
+    public static function ajouterEtudiant(): void{
+        ServiceEtudiant::ajouterEtudiant();
+    }
+
+    public static function rejeterFormation(): void{
+        ServiceFormation::rejeterFormation();
+    }
+
+    public static function accepterFormation(): void{
+        ServiceFormation::accepterFormation();
+    }
+
+    public static function supprimerFormation(): void{
+        ServiceFormation::supprimerFormation();
+    }
+
+    public static function ajouterCSV(): void{
+        ServiceFichier::ajouterCSV();
+    }
+
+    public static function refuserEntreprise(): void{
+        ServiceEntreprise::refuserEntreprise();
+    }
+    public static function supprimerEntreprise(): void{
+        ServiceEntreprise::supprimerEntreprise();
+    }
+    public static function validerEntreprise(): void{
+        ServiceEntreprise::validerEntreprise();
+    }
+
+    public static function supprimerEtudiant(): void{
+        ServiceEtudiant::supprimerEtudiant();
+    }
+
+    public static function promouvoirProf(): void{
+        ServicePersonnel::promouvoirProf();
+    }
+
+    public static function retrograderProf(): void{
+        ServicePersonnel::retrograderProf();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

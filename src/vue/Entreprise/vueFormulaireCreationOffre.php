@@ -130,7 +130,7 @@
                            placeholder="32" required maxlength="2">
                 </div>
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=creerFormation&service=Formation">
+                    <input type="submit" value="Envoyer" formaction="?action=creerFormation&controleur=EntrMain">
                 </div>
             </form>
         </div>

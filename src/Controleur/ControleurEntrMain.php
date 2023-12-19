@@ -12,6 +12,10 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Service\ServiceEntreprise;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServiceFormation;
+use App\FormatIUT\Service\ServiceMdp;
 use DateTime;
 use DateTimeZone;
 
@@ -37,7 +41,7 @@ class ControleurEntrMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Compte Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter&service=Connexion");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter&controleur=Main");
 
         return $menu;
 
@@ -147,6 +151,40 @@ class ControleurEntrMain extends ControleurMain
         } else {
             self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
         }
+    }
+
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function resetMDP(): void{
+        ServiceMdp::resetMdp();
+    }
+
+    public static function supprimerFormation(): void{
+        ServiceFormation::supprimerFormation();
+    }
+
+    public static function mettreAJourEntreprise(): void{
+        ServiceEntreprise::mettreAJourEntreprise();
+    }
+
+    public static function telechargerCV(): void{
+        ServiceFichier::telechargerCV();
+    }
+
+    public static function telechargerLM(): void{
+        ServiceFichier::telechargerLM();
+    }
+
+    public static function mettreAJourMdp(): void{
+        ServiceMdp::mettreAJourMdp();
+    }
+
+    public static function creerFormation(): void{
+        ServiceFormation::creerFormation();
+    }
+
+    public static function modifierOffre(): void{
+        ServiceFormation::modifierOffre();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -146,7 +146,7 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=postuler&service=Postuler&idFormation=<?php echo $offre->getIdFormation() ?>"
+              action="?action=postuler&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">
@@ -195,7 +195,7 @@
         <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
-              action="?action=modifierFichiers&service=Fichier&idFormation=<?php echo $offre->getIdFormation() ?>"
+              action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"
               method="post">
             <div>
                 <div class="contenuDepot">

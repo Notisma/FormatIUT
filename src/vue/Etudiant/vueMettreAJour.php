@@ -24,7 +24,7 @@
                 </div class="inputCentre">
 
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=mettreAJourEtudiant&service=Etudiant"/>
+                    <input type="submit" value="Envoyer" formaction="?action=mettreAJourEtudiant&controleur=EtuMain"/>
                 </div>
             </fieldset>
         </form>

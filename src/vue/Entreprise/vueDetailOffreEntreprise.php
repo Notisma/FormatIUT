@@ -52,7 +52,7 @@
                 echo '
             <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
         
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerFormation&service=Formation">SUPPRIMER L\'OFFRE</button>
+            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerFormation&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
             
             <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
         ';
@@ -165,10 +165,10 @@
 
     <div class="wrapBoutonsDoc">
         <?php
-        echo '<a href=?action=telechargerCV&service=Fichier&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
+        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER CV</button>
         </a>
-        <a href=?action=telechargerLM&service=Fichier&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
+        <a href=?action=telechargerLM&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
             <button class="boutonDoc">TELECHARGER LETTRE</button>
         </a>' ?>
     </div>
