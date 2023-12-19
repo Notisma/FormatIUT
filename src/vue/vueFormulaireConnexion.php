@@ -52,7 +52,7 @@ if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
                         <input type="password" name="mdp" id="mdp" required>
                     </div>
                 </div>
-                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&service=Connexion">
+                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
                 <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>
@@ -70,7 +70,7 @@ if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
         </div>
         <div class="conteneurForget">
             <h2>MOT DE PASSE OUBLIÉ ?</h2>
-            <form action="?action=mdpOublie&service=Mdp" method="post">
+            <form action="?action=mdpOublie&controleur=Main" method="post">
                 <label for="mail">Saisissez votre adresse mail :</label>
                 <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
                 <input type="submit" value="ENVOYER">

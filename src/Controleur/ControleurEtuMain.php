@@ -14,6 +14,10 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
+use App\FormatIUT\Service\ServiceConvention;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServicePostuler;
 use DateTime;
 use Exception;
 
@@ -65,7 +69,7 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
         return $menu;
     }
 
@@ -221,6 +225,22 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function postuler(): void{
+        ServicePostuler::postuler();
+    }
+
+    public static function mettreAJour(): void{
+        ServiceEtudiant::mettreAJour();
+    }
+    public static function creerConvention(): void{
+        ServiceConvention::creerConvention();
+    }
+
+    public static function modifierFichiers(): void{
+        ServiceFichier::modifierFichiers();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

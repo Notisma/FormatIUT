@@ -2,7 +2,7 @@
 
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
-$etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"]);
+$etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEtu"]);
 ?>
 
 <div class="wrapCentreEtu">
@@ -43,7 +43,8 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
         <?php
         if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
         <div class="wrapBoutons">
-            <a href="?action=supprimerEtudiant&service=Etudiant&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
+            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
+            <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
         </div>
         <?php } ?>
 

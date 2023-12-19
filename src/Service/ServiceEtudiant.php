@@ -27,6 +27,19 @@ class ServiceEtudiant
         }
     }
 
+    public static function modifierEtudiant(): void{
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+            if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) == null){
+                ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "L'étudiant n'existe pas");
+            }
+            else{
+                $etu = Etudiant::creerEtudiant($_REQUEST);
+                (new EtudiantRepository())->modifierObjet($etu);
+                ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "success", "L'étudiant à bien été modifié");
+            }
+        }
+    }
+
 
     /**
      * @return void permet à l'admin connecté de supprimer(archiver) un étudiant

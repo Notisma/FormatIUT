@@ -18,6 +18,8 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
+use App\FormatIUT\Service\ServiceConnexion;
+use App\FormatIUT\Service\ServiceMdp;
 
 class ControleurMain
 {
@@ -130,7 +132,27 @@ class ControleurMain
         ]);
     }
 
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
 
+    public static function seConnecter(): void{
+        ServiceConnexion::seConnecter();
+    }
+
+    public static function seDeconnecter():void{
+        ServiceConnexion::seDeconnecter();
+    }
+
+    public static function validerEmail(): void{
+        ServiceConnexion::validerEmail();
+    }
+
+    public static function motDePasseARemplir(): void{
+        ServiceMdp::motDePasseARemplir();
+    }
+
+    public static function mdpOublie(): void{
+        ServiceMdp::mdpOublie();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
