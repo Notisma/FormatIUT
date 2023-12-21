@@ -74,3 +74,105 @@ body {
     background-color: #ffc4c8;
     border-radius: 10px;
 }
+
+.actionsOffre > div > img {
+    height: 150px;
+}
+
+.actionsOffre > .first {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.astucesDetails {
+    width: 95%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.astucesDetails > img {
+    max-height: 60%;
+}
+
+.astucesDetails > .contenuAstuce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    width: 75%;
+    height: 98%;
+}
+
+.wrapActionsCandidat {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+
+}
+
+.candidature {
+    height: 130px;
+    width: 95%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+}
+
+.candidature > img {
+    height: 85px;
+}
+
+.boutonCandidater {
+    width: 98%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.boutonCandidater > a {
+    width: 250px;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.5s ease;
+}
+
+.boutonCandidater > a:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
