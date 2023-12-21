@@ -62,10 +62,10 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                 if ($formation) {
                     if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
                         echo "
-                <h4 class='titre'>Vous avez l'offre</h4></div>";
+                <h4 class='titre'>Vous avez l'offre</h4>";
                     } else {
                         echo "
-                <h4 class='titre'>L'offre est déjà occupée </h4></div>";
+                <h4 class='titre'>L'offre est déjà occupée </h4>";
                     }
                 } else {
                     $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
@@ -94,12 +94,18 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
             <div class="boutonCandidater">
                 <?php
-                //<a id="my-button" class="boutonAssigner" onclick="afficherPopupDepotCV_LM()
-
                 $listeAVerifier = ((new \App\FormatIUT\Modele\Repository\FormationRepository())->offresPourEtudiant($etudiant->getNumEtudiant()));
-                //si $listeAVerifier est vide ou ne contient pas l'id de l'offre, on affiche le bouton
+
                 if (empty($listeAVerifier) || !in_array($offre->getIdFormation(), $listeAVerifier)) {
-                    echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupDepotCV_LM()'>Postuler à cette Offre</a>";
+                    if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
+                        if ($offre->getIdEtudiant() == $etudiant->getNumEtudiant()) {
+                            echo "<a id='desac' class='boutonAssigner'>Vous avez cette formation</a>";
+                        } else {
+                            echo "<a id='desac' class='boutonAssigner'>Vous avez déjà une formation</a>";
+                        }
+                    } else {
+                        echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupDepotCV_LM()'>Postuler à cette Offre</a>";
+                    }
                 } else {
                     echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupModifCV_LM()'>Modifier les Fichiers</a>";
                 }

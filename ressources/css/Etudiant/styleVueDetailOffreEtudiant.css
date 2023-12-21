@@ -189,6 +189,18 @@ body {
     cursor: pointer;
 }
 
+#desac {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#desac:hover {
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    cursor: not-allowed;
+}
+
 
 .popup {
     display: none;
