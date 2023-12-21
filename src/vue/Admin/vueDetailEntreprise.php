@@ -32,6 +32,7 @@
             if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
                 if ($entreprise->isEstValide()) {
                     echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">SUPPRIMER</a>';
+                    echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">MODIFIER</a>';
                 } else {
                     echo '<a href="?action=refuserEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">REFUSER</a>';
                     echo '<a id="vert" href="?action=validerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">ACCEPTER</a>';

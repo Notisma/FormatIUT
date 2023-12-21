@@ -267,14 +267,35 @@ class Entreprise extends AbstractDataObject
         $this->estValide = $estValide;
     }
 
-    public function getDateCreationCompte(): DateTime
+    public function getDateCreationCompte(): string
     {
         return $this->dateCreationCompte;
     }
 
-    public function setDateCreationCompte(DateTime $dateCreationCompte): void
+    public function setDateCreationCompte(string $dateCreationCompte): void
     {
         $this->dateCreationCompte = $dateCreationCompte;
+    }
+
+    public static function creerEntreprise(array $entreprise) : Entreprise
+    {
+        return new Entreprise(
+            $entreprise["siret"],
+            $entreprise["nomEntreprise"],
+            $entreprise["statutJuridique"],
+            $entreprise["effectif"],
+            $entreprise['codeNAF'],
+            $entreprise["tel"],
+            $entreprise["adresseEntreprise"],
+            $entreprise["idVille"],
+            $entreprise["img"],
+            $entreprise["mdpHache"],
+            $entreprise["email"],
+            $entreprise["emailAValider"],
+            $entreprise["nonce"],
+            1,
+            $entreprise['dateCreationCompte']
+        );
     }
 
 }

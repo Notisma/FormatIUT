@@ -188,6 +188,11 @@ class ControleurAdminMain extends ControleurMain
         self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
     }
 
+    public static function afficherFormulaireModifEntreprise(): void{
+        self::$pageActuelleAdmin = "Modifier une entreprise";
+        self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+    }
+
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static function modifierEtudiant(): void{
@@ -234,6 +239,10 @@ class ControleurAdminMain extends ControleurMain
 
     public static function retrograderProf(): void{
         ServicePersonnel::retrograderProf();
+    }
+
+    public static function modifierEntreprise(): void{
+        ServiceEntreprise::modifierEntreprise();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

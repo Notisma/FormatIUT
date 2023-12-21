@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 200vh;
+}
+
+#center {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    min-width: 300px;
+    border-radius: 10px;
+    text-align: left;
+    line-height: 2em;
+    box-shadow: 0 0 10px 0 #2c3e50;
+    padding: 5px;
+    background-color: #ff9095;
+}
+
+.wrapDroite {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    overflow-y: scroll;
+    background-color: #ff9095;
+}
+
+.wrapDroite::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.wrapDroite::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+
+.wrapDroite > form > label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: "Open Sans extra", sans-serif;
+    margin-left: 5%;
+}
+
+
+.wrapDroite > form > p {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.wrapDroite > form > select {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.wrapDroite > form > h1 {
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.04em;
+    line-height: 1.5em;
+    text-align: center;
+    color: black;
+    margin-bottom: 5%;
+}
+
+.inputCentre {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3%;
+    padding-top: 1%;
+    width: 100%;
+    height: 8%;
+}
+
+.inputCentre > * {
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    padding-left: 3%;
+    background-color: #aadcda;
+}
+.boutonsForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.boutonsForm > input , .boutonsForm > a {
+    border-radius: 50px;
+    background-color: #ff5660;
+    color: #ffffff;
+    padding: 2%;
+    width: 40%;
+    height: 50%;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.boutonsForm > a > * {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+
+
+
+.boutonsForm > *:hover {
+    background-color: #ff797f;
+}
