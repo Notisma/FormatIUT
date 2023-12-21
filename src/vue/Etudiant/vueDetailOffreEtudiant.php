@@ -113,3 +113,121 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     </div>
 
 </div>
+
+
+<div id="popup" class="popup">
+    <div class="mainPopup">
+        <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
+        <p>Les documents doivent être au format PDF</p>
+
+        <form enctype="multipart/form-data"
+              action="?action=postuler&service=Postuler&idFormation=<?php echo $offre->getIdFormation() ?>"
+              method="post">
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre CV :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd1" name="cv" onchange="updateImage(1)" accept=".pdf, .txt" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose1" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose1" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre lettre de Motivation :</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd2" name="lm" onchange="updateImage(2)" accept=".pdf, .txt" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose2" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose2" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" value="Postuler">
+        </form>
+
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupDepotCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="descPopup">
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
+    </div>
+</div>
+
+<div id="popupModif" class="popup">
+    <div class="mainPopup">
+        <h2>MODIFIEZ VOS DOCUMENTS !</h2>
+        <p>Les documents doivent être au format PDF</p>
+
+        <form enctype="multipart/form-data"
+              action="?action=modifierFichiers&service=Fichier&idFormation=<?php echo $offre->getIdFormation() ?>"
+              method="post">
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre CV :</label>
+                    <?php
+                    /*$postuler = (new PostulerRepository())->getObjectParClesPrimaires(array(ControleurEtuMain::getCleEtudiant(), $offre->getIdFormation()));
+                    if($postuler->formatTableau()["cv"] != null){
+                        echo "<p> Vous avez déjà déposé un CV </p>";
+                    }
+                    else{
+                        echo "<p> Vous n'avez pas encore déposé de CV</p>";
+                    }*/
+                    ?>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd3" name="cv" onchange="updateImage(3)" accept=".odt, .pdf, .txt" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose3" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose3" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <div>
+                <div class="contenuDepot">
+                    <label>Déposez votre lettre de Motivation :</label>
+                    <?php
+                    /*$postuler = (new PostulerRepository())->getObjectParClePrimaire();
+                    if($postuler->formatTableau()["lettre"] != null){
+                        echo "<p> Vous avez déjà déposé une lettre de motivation </p>";
+                    }
+                    else{
+                        echo "<p> Vous n'avez pas encore déposé de lettre de motivation</p>";
+                    }*/
+                    ?>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                    <input type="file" id="fd4" name="lm" onchange="updateImage(4)" accept=".odt, .pdf, .txt" size=500/>
+                </div>
+                <div class="imagesDepot">
+                    <img id="imageNonDepose4" src="../ressources/images/rejete.png" alt="image">
+                    <img id="imageDepose4" src="../ressources/images/verifie.png" alt="image" style="display: none;">
+                </div>
+
+            </div>
+            <input type="submit" value="Modifier vos documents">
+        </form>
+
+        <div class="conteneurBoutonPopup">
+            <a onclick="fermerPopupModifCV_LM()">
+                <button class="boutonAssignerPopup">RETOUR</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="descPopup">
+        <img src="../ressources/images/déposerCV.png" alt="image">
+        <h2>DEPOSEZ VOS DOCUMENTS POUR AVOIR UN PROFIL COMPLET ET AVOIR PLUS DE CHANCES !</h2>
+    </div>
+</div>
+
