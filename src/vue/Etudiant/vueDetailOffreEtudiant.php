@@ -94,28 +94,16 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
             <div class="boutonCandidater">
                 <?php
+                //<a id="my-button" class="boutonAssigner" onclick="afficherPopupDepotCV_LM()
 
-                echo '<a id="my-button" class="boutonAssigner" onclick="afficherPopupDepotCV_LM()" ';
-                $bool = false;
-                $formation = ((new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($_GET['idFormation']));
-                if (is_null($formation)) {
-                    if (!(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant())) {
-                        if (!(new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aPostule(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant(), $_GET['idFormation'])) {
-                            $bool = true;
-                        }
-                    }
+                $listeAVerifier = ((new \App\FormatIUT\Modele\Repository\FormationRepository())->offresPourEtudiant($etudiant->getNumEtudiant()));
+                //si $listeAVerifier est vide ou ne contient pas l'id de l'offre, on affiche le bouton
+                if (empty($listeAVerifier) || !in_array($offre->getIdFormation(), $listeAVerifier)) {
+                    echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupDepotCV_LM()'>Postuler à cette Offre</a>";
+                } else {
+                    echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupModifCV_LM()'>Modifier les Fichiers</a>";
                 }
-                if (!$bool) {
-                    echo 'id="disabled" disabled';
-                }
-                echo ">POSTULER</a>";
 
-                echo '<a id="my-button" class="boutonAssigner" onclick="afficherPopupModifCV_LM()" ';
-
-                if ($bool) {
-                    echo 'id="disabled" disabled';
-                }
-                echo ">MODIFIER VOS FICHIERS</a>";
                 ?>
 
             </div>
