@@ -63,17 +63,21 @@ class Session
         if (isset($_SESSION['derniereActivite'])) {
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
+
+                if ($time > (Configuration::getDelai() - 600)) {
+                    echo "<scipt>decoAuto()</scipt>";
+                }
+
                 if ($time > (Configuration::getDelai())) {
-                    //$test=time() - $_SESSION['derniereActivite'];
                     $bool = false;
                     if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
-                    session_unset();     // unset $_SESSION variable for the run-time
+                    session_unset();
                     if ($bool)
-                        MessageFlash::ajouter("info", "Vous avez été déconnecté(e) : $time secondes");
+                        MessageFlash::ajouter("info", "Vous avez été déconnecté pour inactivité");
                 }
             }
         }
-        $_SESSION['derniereActivite'] = time(); // update last activity time stamp
+        $_SESSION['derniereActivite'] = time();
     }
 
 }

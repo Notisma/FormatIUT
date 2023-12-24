@@ -528,6 +528,52 @@ form {
     border-color: #ebccd1;
 }
 
+.decoAuto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    height: 45%;
+    border-radius: 10px;
+    background-color: #fdc4c7;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+.decoAuto > img {
+    width: 150px
+}
+
+.boutonFermer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 250px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    margin-top: 2%;
+}
+
+.boutonFermer:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* RESPONSIVE */

@@ -77,13 +77,13 @@ use App\FormatIUT\Configuration\Configuration;
                         }
 
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?service=Recherche&menu=" . serialize($menu) . "&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='menu' value='".serialize($menu)."'>
+                            <input type='hidden' name='menu' value='" . serialize($menu) . "'>
                             <input type='hidden' name='service' value='Recherche'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
@@ -175,7 +175,9 @@ use App\FormatIUT\Configuration\Configuration;
                         </ul>
                     </div>
                 </div>
-                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
+                <p>Sources : Cliquer <a
+                            href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                </p>
             </div>
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
@@ -185,5 +187,20 @@ use App\FormatIUT\Configuration\Configuration;
         </div>
     </footer>
 </div>
+
+<div class="decoAuto" id="decoAuto">
+    <img src="../ressources/images/warning.png" alt="warning">
+    <h2 class="titre" id="rouge">AVERTISSEMENT</h2>
+    <h3 class="titre">Vous serez déconnecté automatiquement à
+        <?php
+        date_default_timezone_set('Europe/Paris');
+        $date = date("H:i");
+        $time = strtotime($date . " +10 minutes");
+        echo date("H:i", $time);
+        ?>
+    </h3>
+    <a class="boutonFermer" onclick="supprimerElement('decoAuto')">J'ai Compris</a>
+</div>
+
 </body>
 </html>
