@@ -161,6 +161,6 @@ function afficherPageCompteEntr(page) {
 }
 
 function decoAuto() {
-    let element = document.getElementsByClassName("decoAuto");
+    let element = document.getElementById("decoAuto");
     element.style.display = "flex";
 }

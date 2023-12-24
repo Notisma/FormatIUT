@@ -202,5 +202,14 @@ use App\FormatIUT\Configuration\Configuration;
     <a class="boutonFermer" onclick="supprimerElement('decoAuto')">J'ai Compris</a>
 </div>
 
+<?php
+
+if (isset($_SESSION['script'])) {
+    echo $_SESSION['script'];
+    unset($_SESSION['script']);
+}
+
+?>
+
 </body>
 </html>

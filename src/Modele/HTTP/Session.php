@@ -64,7 +64,7 @@ class Session
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
                 if ($time > (Configuration::getDelai() - 600)) {
-                    echo "<scipt>decoAuto()</scipt>";
+                    $_SESSION['script'] = '<script type="text/javascript">decoAuto();</script>';
                 }
 
                 if ($time > (Configuration::getDelai())) {
