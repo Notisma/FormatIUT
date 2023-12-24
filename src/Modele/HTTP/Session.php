@@ -64,16 +64,19 @@ class Session
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
 
-                if ($time > (Configuration::getDelai() - 600)) {
-                    echo "<scipt>decoAuto()</scipt>";
-                }
+                if (ConnexionUtilisateur::estConnecte()) {
 
-                if ($time > (Configuration::getDelai())) {
-                    $bool = false;
-                    if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
-                    session_unset();
-                    if ($bool)
-                        MessageFlash::ajouter("info", "Vous avez été déconnecté pour inactivité");
+                    if ($time > (Configuration::getDelai() - 600)) {
+                        echo "<scipt>decoAuto()</scipt>";
+                    }
+
+                    if ($time > (Configuration::getDelai())) {
+                        $bool = false;
+                        if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
+                        session_unset();
+                        if ($bool)
+                            MessageFlash::ajouter("info", "Vous avez été déconnecté pour inactivité");
+                    }
                 }
             }
         }
