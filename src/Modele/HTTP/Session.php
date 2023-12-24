@@ -11,6 +11,8 @@ class Session
 {
     private static ?Session $instance = null;
 
+    private static int $nbRefresh = 0;
+
     /**
      * @throws Exception
      */
@@ -63,8 +65,11 @@ class Session
         if (isset($_SESSION['derniereActivite'])) {
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
-                if ($time > (Configuration::getDelai() - 600)) {
+                if ($time > (Configuration::getDelai() - 600) && !isset($_SESSION['refreshedByDecoAuto']) && self::$nbRefresh < 1) {
                     $_SESSION['script'] = '<script type="text/javascript">decoAuto();</script>';
+                    $_SESSION['refreshedByDecoAuto'] = true;
+                    echo "<script type='text/javascript'>window.location.reload();</script>";
+                    self::$nbRefresh++;
                 }
 
                 if ($time > (Configuration::getDelai())) {
@@ -76,7 +81,11 @@ class Session
                 }
             }
         }
-        $_SESSION['derniereActivite'] = time();
+        if (!isset($_SESSION['refreshedByDecoAuto'])) {
+            $_SESSION['derniereActivite'] = time();
+        } else {
+            unset($_SESSION['refreshedByDecoAuto']);
+        }
     }
 
 }

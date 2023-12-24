@@ -162,5 +162,7 @@ function afficherPageCompteEntr(page) {
 
 function decoAuto() {
     let element = document.getElementById("decoAuto");
-    element.style.display = "flex";
+    if (element.style.display !== "flex") {
+        element.style.display = "flex";
+    }
 }
