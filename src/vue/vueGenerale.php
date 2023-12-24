@@ -203,9 +203,15 @@ use App\FormatIUT\Configuration\Configuration;
 </div>
 
 <?php
+$int = 0;
 
 if (isset($_SESSION['script'])) {
     echo $_SESSION['script'];
+
+    if ($int == 0) {
+        //echo $_SESSION['doitRefresh'];
+        unset($_SESSION['doitRefresh']);
+    }
     unset($_SESSION['script']);
 }
 
