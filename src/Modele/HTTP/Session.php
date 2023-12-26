@@ -65,36 +65,18 @@ class Session
         if (isset($_SESSION['derniereActivite'])) {
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
-
-                if ($time < (Configuration::getDelai() - 600) && isset($_SESSION['refreshedByDecoAuto'])) {
-                    echo "<script type='text/javascript'>supprimerElement('decoAuto');</script>";
-                    unset($_SESSION['refreshedByDecoAuto']);
-                    unset($_SESSION['script']);
-                    unset($_SESSION['doitRefresh']);
-                    self::$nbRefresh = 0;
-                }
-
-                if ($time == (Configuration::getDelai() - 600) && !isset($_SESSION['refreshedByDecoAuto']) && self::$nbRefresh < 1) {
-                    $_SESSION['refreshedByDecoAuto'] = true;
-                    $_SESSION['script'] = '<script type="text/javascript">decoAuto();</script>';
-                    $_SESSION['doitRefresh'] = '<script type="text/javascript">window.location.reload();</script>';
-                    self::$nbRefresh++;
-                }
-
                 if ($time > (Configuration::getDelai())) {
                     $bool = false;
                     if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
                     session_unset();
                     if ($bool)
-                        MessageFlash::ajouter("info", "Vous avez été déconnecté pour inactivité");
+                        MessageFlash::ajouter("info", "Vous avez été déconnecté(e) : $time secondes");
                 }
             }
         }
-        if (!isset($_SESSION['refreshedByDecoAuto'])) {
-            $_SESSION['derniereActivite'] = time();
-        } else {
-            unset($_SESSION['refreshedByDecoAuto']);
-        }
+        $_SESSION['derniereActivite'] = time();
+
     }
+
 
 }
