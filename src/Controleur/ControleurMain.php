@@ -121,7 +121,7 @@ class ControleurMain
      * @return void affiche le résultat de la recherche
      */
 
-    public static function afficherRecherche()
+    public static function afficherRecherche() :void
     {
         $liste=$_REQUEST["liste"];
         ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php",unserialize($_REQUEST["menu"]), [
@@ -130,6 +130,14 @@ class ControleurMain
             "entreprises" => $liste["Entreprise"],
             "nbResults" => $_REQUEST["count"]
         ]);
+    }
+
+    /**
+     * @return void afficher les mentions légales du site
+     */
+    public static function afficherMentionsLegales() :void
+    {
+        self::afficherVue("Mentions Légales", "vueMentionsLegales.php",Configuration::getCheminControleur()::getMenu());
     }
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
@@ -153,6 +161,8 @@ class ControleurMain
     public static function mdpOublie(): void{
         ServiceMdp::mdpOublie();
     }
+
+
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

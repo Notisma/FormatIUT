@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body{
+    height: 100vh;
+}
+
+#center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: white;
+    margin: auto;
+    width: 90%;
+    height: 90%;
+    min-width: 300px;
+    border-radius: 10px;
+    text-align: left;
+    line-height: 2em;
+    box-shadow: 0 0 10px 0 #2c3e50;
+}
+.UlConteneur {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    width: 50%;
+    margin-left: 0;
+}
+#cgu{
+    display: none;
+}

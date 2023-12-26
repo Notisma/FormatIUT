@@ -130,26 +130,10 @@ use App\FormatIUT\Configuration\Configuration;
 
     <footer>
         <div id="footerContent">
-            <div id="footerText">
-                <h4>Equipe de Développement :</h4>
-                <div class="UlConteneur">
-                    <div>
-                        <ul>
-                            <li>Romain TOUZE</li>
-                            <li>Raphaël IZORET</li>
-                            <li>Matteo TORDEUX</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>Enzo GUILHOT</li>
-                            <li>Noé FUERTES-TORREDEME</li>
-                            <li>Thomas LOYE</li>
-                        </ul>
-                    </div>
-                </div>
                 <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
-            </div>
+
+            <p>Mentions Légales : Cliquer <a href="controleurFrontal.php?action=afficherMentionsLegales&controleur=<?= Configuration::getControleurName() ?>">ICI</a> </p>
+
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
                      alt="grand logo footer">
