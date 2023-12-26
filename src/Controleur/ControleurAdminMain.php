@@ -12,6 +12,7 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceFichier;
@@ -37,6 +38,10 @@ class ControleurAdminMain extends ControleurMain
         );
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
+        }
+
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+            $menu[]= array("image" => "../ressources/images/document.png", "label"=> "Liste des conventions", "lien" =>"?action=afficherConventionAValider&controleur=AdminMain");
         }
 
         if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
@@ -187,6 +192,31 @@ class ControleurAdminMain extends ControleurMain
         self::$pageActuelleAdmin = "Modifier un étudiant";
         self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
     }
+
+    /**
+     * @return void
+     * Affiche la liste des conventions à valider au secrétariat/admin
+     */
+    public static function afficherConventionAValider(): void {
+        $listeFormations = (new FormationRepository())->getListeObjet();
+        self::$pageActuelleAdmin = "Liste des conventions";
+        self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations"=> $listeFormations]);
+    }
+
+    /**
+     * @return void
+     * Affiche en détail la convention de l'étudiant au secrétariat/admin
+     */
+    public static function afficherDetailConvention(): void {
+        $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
+        $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+        self::afficherVue("Convention à valider", "Admin/vueAfficherDetailConvention.php", self::getMenu(),
+            ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                "offre" => $formation]);
+    }
+
 
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
 
