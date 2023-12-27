@@ -1,4 +1,11 @@
 <div id="cgu">
+        <div class="mainForget">
+            <div class="closeForget">
+                <a onclick="fermerPopupCGU()" id="fermer">
+                    <img src="../ressources/images/fermer.png" alt="fermer" id="fermer">
+                </a>
+            </div>
+            <div class="conteneurForget">
     Article 1 - Objet
 
     Les présentes conditions générales d'utilisation (ci-après "CGU") ont pour objet de définir les conditions dans lesquelles l'utilisateur (ci-après "l'utilisateur") peut utiliser le site internet Format'IUT (ci-après "le site").
@@ -63,4 +70,6 @@
     L'éditeur se réserve le droit de modifier les présentes CGU à tout moment.
 
     L'utilisateur est invité à consulter régulièrement les présentes CGU afin de prendre connaissance des modifications qui y sont apportées.
+            </div>
+        </div>
 </div>

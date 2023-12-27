@@ -40,5 +40,5 @@
     <div>
         <p>Voir les CGU : Cliquer <a onclick="afficherPopupCGU()">ICI</a> </p>
     </div>
-    <?php require __DIR__ . "/CGU.php"; ?>
 </div>
+<?php require __DIR__ . "/CGU.php"; ?>
