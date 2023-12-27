@@ -212,7 +212,7 @@ class ControleurAdminMain extends ControleurMain
         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
         $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-        self::afficherVue("Convention à valider", "Admin/vueAfficherDetailConvention.php", self::getMenu(),
+        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
             ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                 "offre" => $formation]);
     }
