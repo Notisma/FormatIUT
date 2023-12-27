@@ -6,10 +6,16 @@ body {
 
 .mainMesOffres {
     width: 98%;
-    height: 95%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1%;
+    grid-auto-columns: 1fr;
+}
+
+.mainMesOffres > div {
+    height: 98%;
+    width: 99%;
+    border-radius: 10px;
 }
