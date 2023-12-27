@@ -8,6 +8,8 @@ use App\FormatIUT\Lib\Users\Administrateurs;
 use App\FormatIUT\Lib\Users\Etudiants;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
+use App\FormatIUT\Lib\Users\Personnels;
+use App\FormatIUT\Lib\Users\Secretariat;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
@@ -108,7 +110,22 @@ class ServiceConnexion
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
 
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
-            ConnexionUtilisateur::connecter(new Administrateurs($_REQUEST["login"]));
+            switch ($_REQUEST["login"]){
+                case "SecretariatTest":
+                {
+                    $user = new Secretariat($_REQUEST["login"]);
+                    break;
+                }
+                case "ProfTest":{
+                    $user = new Personnels($_REQUEST["login"]);
+                    break;
+                }
+                case "AdminTest":{
+                    $user = new Administrateurs($_REQUEST["login"]);
+                    break;
+                }
+            }
+            ConnexionUtilisateur::connecter($user);
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
