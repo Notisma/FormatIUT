@@ -29,7 +29,7 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
 
     <div class="mainEtu" id="compte">
 
-        <h2 class="titre" id="rouge">Modifier mon Profil</h2>
+        <h2 class="titre rouge">Modifier mon Profil</h2>
         <form method="POST" enctype="multipart/form-data">
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
@@ -48,31 +48,31 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
             <div class="inputCentre">
                 <input disabled type="text" value='<?= htmlspecialchars($etudiant->getNomEtudiant()); ?>' name="nom"
                        id="nom_id"
-                       required maxlength="50"/>
+                       required maxlength="50">
             </div>
 
             <h3 class="titre">Prénom</h3>
             <div class="inputCentre">
                 <input disabled type="text" value='<?= htmlspecialchars($etudiant->getPrenomEtudiant()); ?>'
                        name="prenom"
-                       id="prenom_id" required maxlength="50"/>
+                       id="prenom_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Mail Personnel</h3>
             <div class="inputCentre">
                 <input type="text" value='<?= htmlspecialchars($etudiant->getMailPerso()); ?>' name="mailPerso"
-                       id="mailPerso_id" required maxlength="50"/>
+                       id="mailPerso_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Numéro de téléphone</h3>
             <div class="inputCentre">
                 <input type="text" value='<?= htmlspecialchars($etudiant->getTelephone()); ?>' name="numTel"
-                       id="numTel_id" required maxlength="11" />
+                       id="numTel_id" required maxlength="11" >
             </div>
 
             <div class="inputCentre">
                 <input type='hidden' name='numEtu' value='<?= htmlspecialchars($etudiant->getNumEtudiant()) ?>'>
-                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EtuMain"/>
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EtuMain">
             </div>
 
 
@@ -81,7 +81,7 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
     </div>
 
     <div class="mainEtu" id="notifs">
-        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
+        <h2 class="titre rouge">Gérer les paramètres de Notifications</h2>
     </div>
 
 

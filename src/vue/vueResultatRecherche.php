@@ -7,7 +7,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 <div class="center">
 
     <div class="intro">
-        <h2 class="titre" id="rouge">Effectuer une recherche sur FORMAT'IUT :</h2>
+        <h2 class="titre rouge">Effectuer une recherche sur FORMAT'IUT :</h2>
         <?= $codeRecherche ?>
     </div>
 
@@ -50,7 +50,7 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
                             <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
                         </div>
                         <div class='partieDroite'>
-                        <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>
+                        <h3 class='titre rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>
                         <p>
                        ";
                 if (!(new FormationRepository())->estFormation($offre->getidFormation())) {

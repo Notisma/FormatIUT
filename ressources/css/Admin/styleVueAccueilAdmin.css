@@ -29,7 +29,7 @@ body {
     letter-spacing: 0.04em;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -91,7 +91,7 @@ body {
     width: 95%;
 }
 
-#boutonsGO {
+.boutonsGO {
     padding: 2%;
     width: 40%;
 }
@@ -117,7 +117,7 @@ body {
     cursor: pointer;
 }
 
-#boutonsGO > * {
+.boutonsGO > * {
     width: 90%;
 }
 
@@ -316,7 +316,7 @@ body {
 }
 
 
-#hoverRose:hover {
+.hoverRose:hover {
     background-color: #ff9095;
 }
 

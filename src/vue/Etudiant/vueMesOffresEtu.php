@@ -35,11 +35,10 @@
                 foreach ($listOffre as $offre) {
                     if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "En attente") {
                         $countAttente++;
-                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '  class=wrapOffres>';
+                        echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class=wrapOffres>';
                         echo "<div class='partieGauche'>";
-                        echo '<p>';
                         $nomHTML = htmlspecialchars($offre->getNomOffre());
-                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
+                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3>';
                         echo '<p> Du ' . $offre->getDateDebut() . " au " . $offre->getDateFin() . '</p>';
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre: " . $sujetHTML . '</p>';
@@ -83,12 +82,11 @@
                 foreach ($listOffre as $offre) {
                     if ((new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "A Choisir" || (new PostulerRepository())->getEtatEtudiantOffre($numEtu, $offre->getIdFormation()) == "Validée") {
                         $countChoisirValider++;
-                        echo '<a href=?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '  class=wrapOffres>';
+                        echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class=wrapOffres>';
                         echo "<div class='partieGauche'>";
-                        echo '<p>';
                         $nomHTML = htmlspecialchars($offre->getNomOffre());
-                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3> </p>';
-                        echo '<p> Du ' .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . '</p>';
+                        echo '<h3>' . $nomHTML . " - " . $offre->getTypeOffre() . '</h3>';
+                        echo '<p> Du ' . $offre->getDateDebut() . " au " . $offre->getDateFin() . '</p>';
                         $sujetHTML = htmlspecialchars($offre->getSujet());
                         echo "<p>Sujet de l'offre :" . $sujetHTML . '</p>';
                         echo '<div class="conteneurBouton">';
