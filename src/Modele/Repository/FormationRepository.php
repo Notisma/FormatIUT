@@ -137,7 +137,7 @@ class FormationRepository extends RechercheRepository
     /**
      * @param $numEtudiant
      * @return array
-     * retourne la liste des offres auquel à déjà postuler un étudiant
+     * retourne la liste des offres auxquelles a déjà postulé un étudiant
      */
 
     public function listeOffresEtu($numEtudiant): array
