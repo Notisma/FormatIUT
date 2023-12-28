@@ -95,6 +95,18 @@ body {
     background-color: #ffc4c8;
 }
 
+.offre {
+    width: 98%;
+    height: 130px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
 .presMesOffres {
     background-color: #aadcda;
 }

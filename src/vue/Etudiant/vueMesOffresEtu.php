@@ -32,7 +32,7 @@ foreach ($listeOffres as $offre) {
         <div class="front">
             <h2 class="titre">Mes offres postulées</h2>
             <div class="circle">
-                <span class="number"><?php echo count($listeOffresEnAttente)?></span>
+                <span class="number"><?php echo count($listeOffresEnAttente) ?></span>
             </div>
         </div>
 
@@ -40,9 +40,11 @@ foreach ($listeOffres as $offre) {
             <?php
             if (count($listeOffresEnAttente) == 0) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
-            }
-            foreach ($listeOffresEnAttente as $offre) {
-                echo "null";
+            } else {
+                foreach ($listeOffresEnAttente as $offreAttente) {
+                    echo "<a href='?action=afficherVueDetailOffre&idFormation=>".$offreAttente->getIdFormation()."' class='offre'>";
+                    echo "</a>";
+                }
             }
             ?>
         </div>
@@ -54,17 +56,19 @@ foreach ($listeOffres as $offre) {
         <div class="front">
             <h2 class="titre">Mes offres validées</h2>
             <div class="circle">
-                <span class="number"><?php echo count($listeOffresAChoisirEtValidees)?></span>
+                <span class="number"><?php echo count($listeOffresAChoisirEtValidees) ?></span>
             </div>
         </div>
 
         <div class="wrapCandidat">
             <?php
-            if (count($listeOffresEnAttente) == 0) {
+            if (count($listeOffresAChoisirEtValidees) == 0) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
-            }
-            foreach ($listeOffresEnAttente as $offre) {
-                echo "null";
+            } else {
+                foreach ($listeOffresAChoisirEtValidees as $offreValider) {
+                    echo "<a href='?action=afficherVueDetailOffre&idFormation=>".$offreValider->getIdFormation()."' class='offre'>";
+                    echo "</a>";
+                }
             }
             ?>
         </div>
