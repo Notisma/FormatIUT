@@ -43,7 +43,7 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresEnAttente as $offreAttente) {
-                    echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=".$offreAttente->getIdFormation()."' class='offre'>";
+                    echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreAttente->getIdFormation() . "' class='offre'>";
                     echo "</a>";
                 }
             }
@@ -68,19 +68,37 @@ foreach ($listeOffres as $offre) {
             } else {
                 foreach ($listeOffresAChoisirEtValidees as $offreValider) {
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offreValider->getIdEntreprise());
-                    echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=".$offreValider->getIdFormation()."' class='offre'>";
-                    echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="">';
+                    echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreValider->getIdFormation() . "' class='offre'>";
+                    echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
+                    echo '
+                    <div>
+                        <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                        <h4 class="titre">' . htmlspecialchars($offreValider->getNomOffre()) . ' - ' . htmlspecialchars($offreValider->getTypeOffre()) . '</h4>
+                        <h5 class="titre">' . htmlspecialchars($offreValider->getSujet()) . '</h5>
+           
+                        <div class="wrapBoutons">';
+
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreValider->getIdFormation()) == "A Choisir") {
+                        echo '<a href="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '">ANNULER</a>';
+                        echo '<a href="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '">ACCEPTER</a>';
+                    } else {
+                        echo '<a class="disabled" href="?action=afficherMesOffres&controleur=EtuMain">Acceptée</a>';
+                    }
+
+                    echo '
+                        </div>
+ 
+                    </div>';
                     echo "</a>";
                 }
             }
             ?>
         </div>
-
-
     </div>
 
-    <div class="presMesOffres">
 
+    <div class="presMesOffres">
+<p>tt</p>
     </div>
 
 </div>

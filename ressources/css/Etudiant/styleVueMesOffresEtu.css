@@ -106,12 +106,56 @@ body {
     align-items: center;
     align-content: center;
     padding: 2%;
+    text-decoration: none;
 }
 
 .offre > img {
     width: 25%;
     max-height: 90%;
+}
 
+.offre > div {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.wrapBoutons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapBoutons > a {
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    transition: background-color 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-decoration: none;
+}
+
+.wrapBoutons > a:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+a .disabled {
+    opacity: 0.6;
 }
 
 .presMesOffres {
