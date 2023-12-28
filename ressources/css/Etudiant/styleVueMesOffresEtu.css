@@ -63,6 +63,19 @@ body {
     flex-direction: row;
 }
 
+.wrapError {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapError > img {
+    width: 60%;
+}
+
 .estCandidat {
     background-color: #c8e7e4;
 }
