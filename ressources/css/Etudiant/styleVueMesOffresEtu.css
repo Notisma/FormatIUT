@@ -105,6 +105,13 @@ body {
     justify-content: space-between;
     align-items: center;
     align-content: center;
+    padding: 2%;
+}
+
+.offre > img {
+    width: 25%;
+    max-height: 90%;
+
 }
 
 .presMesOffres {

@@ -28,10 +28,10 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
-           <h4 class="titre">' . $offre->getNomOffre() . '</h4>
-           <h4 class="titre">' . $offre->getTypeOffre() . '</h4>
-           <h5 class="titre">' . $offre->getSujet() . '</h5>
+           <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
+           <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
+           <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
            
             </div>
             </a>';
@@ -43,7 +43,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
     <div class="droiteAcc">
 
         <img src="../ressources/images/bienvenueRemoved.png" alt="image de bienvenue">
-        <h2 class="titre">Bonjour, <?php echo $etudiant->getPrenomEtudiant() . " !" ?></h2>
+        <h2 class="titre">Bonjour, <?php echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " !" ?></h2>
 
         <div class="tips">
             <img src="../ressources/images/astuces.png" alt="astuces">
