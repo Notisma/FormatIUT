@@ -77,8 +77,9 @@
                               readonly required>
                 </p>';
                 }?>
-
-
+                <input type="hidden" value="<?=date("d-m-Y");?>" name="dateTransmission">
+                <input type="submit" value="Valider" formaction="?action=validerConvention&controleur=adminMain">
+                <input type="submit" value="Rejeter" formaction="?action=rejeterConvention&controleur=adminMain">
             </fieldset>
         </form>
     </div>

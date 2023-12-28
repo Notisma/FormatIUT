@@ -2,7 +2,10 @@
 
 namespace App\FormatIUT\Service;
 
+use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -60,5 +63,32 @@ class ServiceConvention
         }
     }
 
+
+    /**
+     * @return void
+     * Permet au secréteriat de valider une convention
+     */
+
+    public static function validerConvention() : void{
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            $formation->setConventionValidee(true);
+            $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
+            (new FormationRepository())->modifierObjet($formation);
+            ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
+        }
+        else{
+            ControleurMain::redirectionFlash("afficherIndex","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+        }
+    }
+
+    /**
+     * @return void
+     * Permet au secréteriat de rejeter une convention
+     */
+    public static function rejeterConvention(): void{
+        //Todo quand la modification d'une convention sera accepté dans les tests
+        echo "Todo quand la modification d'une convention sera accepté dans les tests";
+    }
 
 }

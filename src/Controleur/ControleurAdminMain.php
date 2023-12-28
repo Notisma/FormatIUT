@@ -13,6 +13,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
+use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceFichier;
@@ -264,6 +265,14 @@ class ControleurAdminMain extends ControleurMain
 
     public static function retrograderProf(): void{
         ServicePersonnel::retrograderProf();
+    }
+
+    public static function validerConvention(): void{
+        ServiceConvention::validerConvention();
+    }
+
+    public static function rejeterConvention(): void{
+        ServiceConvention::rejeterConvention();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
