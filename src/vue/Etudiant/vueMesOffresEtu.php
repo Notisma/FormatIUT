@@ -88,8 +88,7 @@ foreach ($listeOffres as $offre) {
                     echo '
                         </div>
  
-                    </div>';
-                    echo "</a>";
+                    </div></a>';
                 }
             }
             ?>
