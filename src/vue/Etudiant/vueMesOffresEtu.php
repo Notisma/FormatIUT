@@ -42,7 +42,7 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresEnAttente as $offreAttente) {
-                    echo "<a href='?action=afficherVueDetailOffre&idFormation=>".$offreAttente->getIdFormation()."' class='offre'>";
+                    echo "<a href='?action=afficherVueDetailOffre&idFormation=".$offreAttente->getIdFormation()."' class='offre'>";
                     echo "</a>";
                 }
             }
@@ -66,7 +66,7 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresAChoisirEtValidees as $offreValider) {
-                    echo "<a href='?action=afficherVueDetailOffre&idFormation=>".$offreValider->getIdFormation()."' class='offre'>";
+                    echo "<a href='?action=afficherVueDetailOffre&idFormation=".$offreValider->getIdFormation()."' class='offre'>";
                     echo "</a>";
                 }
             }
