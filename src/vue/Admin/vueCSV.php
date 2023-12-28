@@ -1,6 +1,6 @@
 <div id="center">
     <div class="import">
-        <h2 class="titre" id="rouge">Importer un fichier CSV</h2>
+        <h2 class="titre rouge">Importer un fichier CSV</h2>
         <div class="information">
             <img src="../ressources/images/attention.png" alt="csv">
             <div>
@@ -12,8 +12,8 @@
             <img src="../ressources/images/upload.png" alt="csv">
             <h5 class="titre">Glissez - Déposez ici votre fichier</h5>
             <h5 class="titre">ou :</h5>
-            <input class="survol" type="file" name="file"/>
-            <input class="survol" type="submit" value="Envoyer"/>
+            <input class="survol" type="file" name="file">
+            <input class="survol" type="submit" value="Envoyer">
         </form>
     </div>
 
@@ -22,7 +22,7 @@
         <img src="../ressources/images/csvIcone.png" alt="export">
         <p>Exportez les données de Format'IUT en format CSV</p>
         <form method="post" action="?service=Fichier&action=exporterCSV">
-            <input type="submit" value="Télécharger"/>
+            <input type="submit" value="Télécharger">
         </form>
     </div>
 

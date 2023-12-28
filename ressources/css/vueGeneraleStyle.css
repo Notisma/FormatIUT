@@ -19,7 +19,7 @@ body {
     margin: 0;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -302,7 +302,7 @@ form {
 
 }
 
-#active {
+.active {
     background-color: #ff9095;
 }
 
@@ -695,7 +695,7 @@ form {
         height: 70%;
     }
 
-    #active {
+    .active {
         background-color: #ffb2b7;
         border-radius: 10px;
     }

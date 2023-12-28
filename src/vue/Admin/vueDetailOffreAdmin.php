@@ -17,7 +17,7 @@
             $detailHTML=htmlspecialchars($offre->getDetailProjet());
 
             echo '<img src="' .Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
-            echo "<h2 class='titre' id='rouge'>" . $nomEntrHTML . "</h2>";
+            echo "<h2 class='titre rouge'>" . $nomEntrHTML . "</h2>";
             echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
             ?>
         </a>
@@ -68,12 +68,12 @@
 
         <?php
         if ($offre->getEstValide()) {
-            echo "<div class='statutOffre' id='valide' >";
+            echo "<div class='statutOffre valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
             echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
             echo "</div>";
         } else {
-            echo "<div class='statutOffre' id='attente'>";
+            echo "<div class='statutOffre attente'>";
             echo "<img src='../ressources/images/sablier.png' alt='entreprise'>";
             echo "<h3 class='titre'>En Attente de Validation</h3>";
             echo "</div>";
@@ -104,7 +104,7 @@
                             "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
-                            "<h3 class='titre' id='rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
+                            "<h3 class='titre rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
                             "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdFormation(), $etudiant->getNumEtudiant()) ."</p>" .
                             "</div>" .
                             "</a>";

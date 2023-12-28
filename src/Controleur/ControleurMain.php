@@ -3,23 +3,13 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
-use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\StringUtils;
-use App\FormatIUT\Lib\VerificationEmail;
-use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\HTTP\Session;
-use App\FormatIUT\Modele\Repository\ConnexionLdap;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\FormationRepository;
-use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Service\ServiceConnexion;
 use App\FormatIUT\Service\ServiceMdp;
+use App\FormatIUT\Service\ServiceRecherche;
 
 class ControleurMain
 {
@@ -121,10 +111,13 @@ class ControleurMain
      * @return void affiche le résultat de la recherche
      */
 
-    public static function afficherRecherche()
+    public static function afficherRecherche(): void
     {
-        $liste=$_REQUEST["liste"];
-        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php",unserialize($_REQUEST["menu"]), [
+        $liste = $_REQUEST["liste"];
+
+        /** @var ControleurMain $contr */
+        $contr = Configuration::getCheminControleur();
+        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $contr::getMenu(), [
             "recherche" => $_REQUEST["recherche"],
             "offres" => $liste["Formation"],
             "entreprises" => $liste["Entreprise"],
@@ -134,24 +127,34 @@ class ControleurMain
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
 
-    public static function seConnecter(): void{
+    public static function seConnecter(): void
+    {
         ServiceConnexion::seConnecter();
     }
 
-    public static function seDeconnecter():void{
+    public static function seDeconnecter(): void
+    {
         ServiceConnexion::seDeconnecter();
     }
 
-    public static function validerEmail(): void{
+    public static function validerEmail(): void
+    {
         ServiceConnexion::validerEmail();
     }
 
-    public static function motDePasseARemplir(): void{
+    public static function motDePasseARemplir(): void
+    {
         ServiceMdp::motDePasseARemplir();
     }
 
-    public static function mdpOublie(): void{
+    public static function mdpOublie(): void
+    {
         ServiceMdp::mdpOublie();
+    }
+
+    public static function rechercher(): void
+    {
+        ServiceRecherche::rechercher();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

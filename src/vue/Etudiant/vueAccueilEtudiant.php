@@ -9,7 +9,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
 <div class="mainAcc">
 
     <div class="gaucheAcc">
-        <h3 class="titre" id="rouge">Les Dernières Offres sorties :</h3>
+        <h3 class="titre rouge">Les Dernières Offres sorties :</h3>
         <?php
         $data = $listeStage;
         //$data = array_merge($data, $listeAlternance);
@@ -28,7 +28,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . $entreprise->getNomEntreprise() . '</h3>
+           <h3 class="titre rouge">' . $entreprise->getNomEntreprise() . '</h3>
            <h4 class="titre">' . $offre->getNomOffre() . '</h4>
            <h4 class="titre">' . $offre->getTypeOffre() . '</h4>
            <h5 class="titre">' . $offre->getSujet() . '</h5>
