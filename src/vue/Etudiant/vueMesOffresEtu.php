@@ -71,24 +71,19 @@ foreach ($listeOffres as $offre) {
                     echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreValider->getIdFormation() . "' class='offre'>";
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
                     echo '
-                    <div>
-                        <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
-                        <h4 class="titre">' . htmlspecialchars($offreValider->getNomOffre()) . ' - ' . htmlspecialchars($offreValider->getTypeOffre()) . '</h4>
-                        <h5 class="titre">' . htmlspecialchars($offreValider->getSujet()) . '</h5>
+                            <div>
+                                <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                                <h4 class="titre">' . htmlspecialchars($offreValider->getNomOffre()) . ' - ' . htmlspecialchars($offreValider->getTypeOffre()) . '</h4>
+                                <h5 class="titre">' . htmlspecialchars($offreValider->getSujet()) . '</h5>
            
-                        <div class="wrapBoutons">';
+                                <div class="wrapBoutons">';
 
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreValider->getIdFormation()) == "A Choisir") {
-                        echo '<a href="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '">ANNULER</a>';
-                        echo '<a href="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '">ACCEPTER</a>';
+                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres" value="ANNULER"></form>';
+                        echo '<form action="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres" value="ACCEPTER"></form></div></div></a>';
                     } else {
-                        echo '<a class="disabled" href="?action=afficherMesOffres&controleur=EtuMain">Acceptée</a>';
+                        echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres" value="Acceptée"></form></div></div></a>';
                     }
-
-                    echo '
-                        </div>
- 
-                    </div></a>';
                 }
             }
             ?>
@@ -97,7 +92,7 @@ foreach ($listeOffres as $offre) {
 
 
     <div class="presMesOffres">
-<p>tt</p>
+        <p>tt</p>
     </div>
 
 </div>

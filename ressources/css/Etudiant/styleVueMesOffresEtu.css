@@ -107,11 +107,19 @@ body {
     align-content: center;
     padding: 2%;
     text-decoration: none;
+    transition: background-color 0.5s ease;
+}
+
+.offre:hover {
+    background-color: #ff9095;
+    cursor: pointer;
 }
 
 .offre > img {
     width: 25%;
     max-height: 90%;
+    padding: 2%;
+    border-radius: 10px;
 }
 
 .offre > div {
@@ -127,14 +135,23 @@ body {
 .wrapBoutons {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-top: 1%;
+}
+
+.wrapBoutons > form {
+    width: 49%;
+    display: flex;
+    justify-content: center;
     align-items: center;
     align-content: center;
 }
 
-.wrapBoutons > a {
+.boutonOffres {
     width: 100px;
-    height: 30px;
+    height: 25px;
     border-radius: 50px;
     border: none;
     background-color: #ff5660;
@@ -147,15 +164,22 @@ body {
     text-decoration: none;
 }
 
-.wrapBoutons > a:hover {
+.boutonOffres:hover {
     background-color: white;
     border: 1px solid black;
     color: black;
     cursor: pointer;
 }
 
-a .disabled {
+.disabled {
     opacity: 0.6;
+    cursor: default;
+}
+
+.disabled:hover {
+    background-color: #ff5660;
+    border: none;
+    color: white;
 }
 
 .presMesOffres {
