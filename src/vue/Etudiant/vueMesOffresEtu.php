@@ -67,6 +67,7 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresAChoisirEtValidees as $offreValider) {
+
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offreValider->getIdEntreprise());
                     echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreValider->getIdFormation() . "' class='offre'>";
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
@@ -85,6 +86,7 @@ foreach ($listeOffres as $offre) {
                         echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres" value="Acceptée"></form></div></div></a>';
                     }
                 }
+
             }
             ?>
         </div>

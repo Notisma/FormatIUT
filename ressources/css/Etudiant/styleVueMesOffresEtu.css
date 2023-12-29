@@ -12,6 +12,7 @@ body {
     grid-template-rows: 1fr;
     grid-gap: 1%;
     grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
 }
 
 .circle {
@@ -41,12 +42,13 @@ body {
     align-items: center;
     align-content: center;
     padding: 1%;
+    overflow-y: hidden;
 }
 
 .mainMesOffres > div > div::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;
-    background-color: #ffbfc2;
+    background-color: #fda9ad;
 }
 
 .mainMesOffres > div > div::-webkit-scrollbar-thumb {
@@ -108,10 +110,12 @@ body {
     padding: 2%;
     text-decoration: none;
     transition: background-color 0.5s ease;
+    flex-shrink: 0;
+    margin-bottom: 2%;
 }
 
 .offre:hover {
-    background-color: #ff9095;
+    background-color: #dcdcdc;
     cursor: pointer;
 }
 
