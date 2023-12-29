@@ -180,8 +180,16 @@ body {
     cursor: default;
 }
 
-.disabled:hover {
+.acceptee, .accept {
+    background-color: #13964d;
+}
+
+.undo {
     background-color: #ff5660;
+}
+
+.disabled:hover {
+    background-color: #13964d;
     border: none;
     color: white;
 }
