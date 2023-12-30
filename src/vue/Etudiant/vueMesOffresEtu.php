@@ -43,8 +43,23 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresEnAttente as $offreAttente) {
+                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offreAttente->getIdEntreprise());
                     echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreAttente->getIdFormation() . "' class='offre'>";
-                    echo "</a>";
+                    echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
+                    echo '
+                            <div>
+                                <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                                <h4 class="titre">' . htmlspecialchars($offreAttente->getNomOffre()) . ' - ' . htmlspecialchars($offreAttente->getTypeOffre()) . '</h4>
+                                <h5 class="titre">' . htmlspecialchars($offreAttente->getSujet()) . '</h5>
+           
+                                <div class="wrapBoutons">';
+
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "A Choisir") {
+                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
+                        echo '<form action="?action=validerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres accept" value="ACCEPTER"></form></div></div></a>';
+                    } else {
+                        echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres acceptee" value="Acceptée"></form></div></div></a>';
+                    }
                 }
             }
             ?>
