@@ -197,3 +197,44 @@ body {
 .presMesOffres {
     background-color: #aadcda;
 }
+
+.firstStep {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+
+.firstStep > img {
+    width: 250px;
+}
+
+.astucesMesOffres {
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 120px;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 30%;
+}
+
+.astucesMesOffres > img {
+    width: 20%;
+}
+
+.astucesMesOffres > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 80%;
+}

@@ -106,7 +106,22 @@ foreach ($listeOffres as $offre) {
 
 
     <div class="presMesOffres">
-        <p>tt</p>
+        <div class="firstStep">
+            <img src="../ressources/images/etudiantsMesOffres.png" alt="imageEtudiant">
+            <h2 class="titre" id="rouge">Consultez l'état de vos offres</h2>
+            <h4 class="titre">Toutes les offres qui vous concernent, au même endroit</h4>
+            <h4 class="titre">Gérez toutes vos demandes, en annulant vos candidatures, et en acceptant vos offres en attentes.</h4>
+        </div>
+
+
+        <div class="astucesMesOffres">
+            <img src="../ressources/images/astuces.png" alt="astuces">
+            <div>
+                <h4 class="titre">Astuces :</h4>
+                <h5 class="titre">Cliquez sur une offre pour afficher plus de détails.</h5>
+                <h5 class="titre">Valider une offre dans laquelle vous êtes assigné annule toutes les autres offres.</h5>
+            </div>
+        </div>
     </div>
 
 </div>
