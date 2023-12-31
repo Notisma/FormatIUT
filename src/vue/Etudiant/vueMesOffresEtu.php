@@ -54,11 +54,8 @@ foreach ($listeOffres as $offre) {
            
                                 <div class="wrapBoutons">';
 
-                    if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "A Choisir") {
+                    if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "En attente") {
                         echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
-                        echo '<form action="?action=validerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres accept" value="ACCEPTER"></form></div></div></a>';
-                    } else {
-                        echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres acceptee" value="Acceptée"></form></div></div></a>';
                     }
                 }
             }
@@ -95,7 +92,7 @@ foreach ($listeOffres as $offre) {
                                 <div class="wrapBoutons">';
 
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreValider->getIdFormation()) == "A Choisir") {
-                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
+                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="REJETER"></form>';
                         echo '<form action="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres accept" value="ACCEPTER"></form></div></div></a>';
                     } else {
                         echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres acceptee" value="Acceptée"></form></div></div></a>';
