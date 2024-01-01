@@ -238,3 +238,27 @@ body {
     align-content: flex-start;
     width: 80%;
 }
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 250vh;
+    }
+
+    .mainMesOffres {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .mainMesOffres > div:nth-child(1) {
+        order: 3;
+    }
+
+    .mainMesOffres > div:nth-child(2) {
+        order: 2;
+    }
+
+    .mainMesOffres > div:nth-child(3) {
+        order: 1;
+    }
+}
