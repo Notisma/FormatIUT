@@ -42,7 +42,7 @@ class ControleurEtuMain extends ControleurMain
         );
 
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
-        if ($formation) {
+        if ($formation && ControleurMain::getPageActuelle() != "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
         }
         if (self::$titrePageActuelleEtu == "Mon Compte") {
