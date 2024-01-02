@@ -66,6 +66,11 @@ p {
     align-content: center;
 }
 
+.trierPar > form {
+    width: 50%;
+    margin-left: 3%;
+}
+
 .parametresRecherche {
     height: 100%;
     width: 30%;
