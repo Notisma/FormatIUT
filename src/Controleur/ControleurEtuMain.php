@@ -54,7 +54,7 @@ class ControleurEtuMain extends ControleurMain
         }
 
         $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
-        if ($offre != false && $offre->getDateCreationConvention() == null) {
+        if ($offre && $offre->getDateCreationConvention() == null) {
             $offreValidee = (new PostulerRepository())->getOffreValider(self::getCleEtudiant());
             if ($offreValidee) {
                 $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
