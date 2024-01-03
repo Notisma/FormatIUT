@@ -1,4 +1,5 @@
 <?php
+
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -58,11 +59,46 @@ if (!isset($_REQUEST['triPar'])) {
         </div>
 
         <div class="allOptions">
-            <form method="get">
+            <form method="get" id="options">
+
                 <div>
                     <h4 class="titre">Entreprises</h4>
-                    <label for="entreprise"></label><input class="switch" type="checkbox" name="entreprise" id="entreprise" value="on">
+                    <span>
+                        <label for="entreprise"></label><input class="switch" type="checkbox" name="entreprise"
+                                                               id="entreprise" value="on" onchange="this.form.submit()">
+                    </span>
                 </div>
+
+                <div>
+                    <h4 class="titre">Étudiants</h4>
+                    <span>
+                    <label for="etudiants"></label><input class="switch" type="checkbox" name="etudiants" id="etudiants"
+                                                          value="on" onchange="this.form.submit()">
+                    </span>
+                </div>
+
+                <div>
+                    <h4 class="titre">Offres</h4>
+                    <span>
+                    <label for="offres"></label><input class="switch" type="checkbox" name="offres" id="offres"
+                                                       value="on" onchange="this.form.submit()">
+                    </span>
+                </div>
+
+                <div>
+                    <h4 class="titre">Personnels</h4>
+                    <span>
+                    <label for="personnels"></label><input class="switch" type="checkbox" name="personnels"
+                                                           id="personnels" value="on">
+                        </span>
+                </div>
+
+
+
+
+                <input type="hidden" name="service" value="Recherche">
+                <input type="hidden" name="action" value="rechercher">
+                <input type="hidden" name="recherche" value="<?php echo $url ?>">
             </form>
         </div>
     </div>
