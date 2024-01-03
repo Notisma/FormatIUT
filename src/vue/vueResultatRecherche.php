@@ -1,6 +1,8 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -61,36 +63,29 @@ if (!isset($_REQUEST['triPar'])) {
         <div class="allOptions">
             <form method="get" id="options">
 
-                <div>
-                    <h4 class="titre">Entreprises</h4>
-                    <span>
-                        <label for="entreprise"></label><input class="switch" type="checkbox" name="entreprise"
-                                                               id="entreprise" value="on" onchange="this.form.submit()">
-                    </span>
-                </div>
 
-                <div>
-                    <h4 class="titre">Étudiants</h4>
+                <?php
+                $privilege=PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
+                foreach ($privilege as $name) {
+                    $name = ucfirst($name) . "s";
+                    echo '<div>
+                    <h4 class="titre">'. $name .'</h4>
                     <span>
-                    <label for="etudiants"></label><input class="switch" type="checkbox" name="etudiants" id="etudiants"
-                                                          value="on" onchange="this.form.submit()">
+                        <label for="'.$name.'"></label><input class="switch" type="checkbox" name="'.$name.'"
+                                                               id="'.$name.'" value="on" onchange="this.form.submit()">
                     </span>
-                </div>
+                </div>';
+                }
+                ?>
 
-                <div>
-                    <h4 class="titre">Offres</h4>
-                    <span>
-                    <label for="offres"></label><input class="switch" type="checkbox" name="offres" id="offres"
-                                                       value="on" onchange="this.form.submit()">
-                    </span>
-                </div>
+                <div class="filtresDetail">
+                    <?php
+                    //si l'utilisateur est un admin, et qu'il a sélectionné uniquement les entreprises
+                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs" && isset($_REQUEST['entreprise']) && !isset($_REQUEST['etudiants']) && !isset($_REQUEST['offres']) && !isset($_REQUEST['personnels'])) {
+                        echo "entreprises sélectionnées";
+                    }
 
-                <div>
-                    <h4 class="titre">Personnels</h4>
-                    <span>
-                    <label for="personnels"></label><input class="switch" type="checkbox" name="personnels"
-                                                           id="personnels" value="on">
-                        </span>
+                    ?>
                 </div>
 
 
