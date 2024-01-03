@@ -65,14 +65,18 @@ if (!isset($_REQUEST['triPar'])) {
 
 
                 <?php
-                $privilege=PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
+                $privilege = PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
                 foreach ($privilege as $name) {
-                    $name = ucfirst($name) . "s";
+                    $name2 = ucfirst($name) . "s";
                     echo '<div>
-                    <h4 class="titre">'. $name .'</h4>
+                    <h4 class="titre">' . $name2 . '</h4>
                     <span>
-                        <label for="'.$name.'"></label><input class="switch" type="checkbox" name="'.$name.'"
-                                                               id="'.$name.'" value="on" onchange="this.form.submit()">
+                        <label for="' . $name . '"></label><input class="switch" type="checkbox" name="' . $name . '"
+                                                               id="' . $name . '" value="on" onchange="this.form.submit()"';
+                    if (isset($_REQUEST[$name])) {
+                        echo 'checked';
+                    }
+                    echo '>
                     </span>
                 </div>';
                 }
@@ -81,14 +85,12 @@ if (!isset($_REQUEST['triPar'])) {
                 <div class="filtresDetail">
                     <?php
                     //si l'utilisateur est un admin, et qu'il a sélectionné uniquement les entreprises
-                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs" && isset($_REQUEST['entreprise']) && !isset($_REQUEST['etudiants']) && !isset($_REQUEST['offres']) && !isset($_REQUEST['personnels'])) {
+                    if (isset($_REQUEST['entreprise']) && !isset($_REQUEST['etudiants']) && !isset($_REQUEST['offres']) && !isset($_REQUEST['personnels'])) {
                         echo "entreprises sélectionnées";
                     }
 
                     ?>
                 </div>
-
-
 
 
                 <input type="hidden" name="service" value="Recherche">
