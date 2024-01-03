@@ -44,10 +44,27 @@ if (!isset($_REQUEST['triPar'])) {
 
         </div>
 
+        <div class="resultatsRecherche">
+
+        </div>
+
     </div>
 
     <div class="parametresRecherche">
-        <p></p>
+
+        <div class="vitrine">
+            <img src="../ressources/images/recherchez.png" alt="">
+            <h3 class="titre" id="rouge">Paramètres de Recherche</h3>
+        </div>
+
+        <div class="allOptions">
+            <form method="get">
+                <div>
+                    <h4 class="titre">Entreprises</h4>
+                    <label for="entreprise"></label><input class="switch" type="checkbox" name="entreprise" id="entreprise" value="on">
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>
