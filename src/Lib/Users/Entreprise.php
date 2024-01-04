@@ -12,7 +12,8 @@ class Entreprise extends Utilisateur
     public function getRecherche(): array
     {
         return array(
-            "Formation"
+            "Formation",
+            "Etudiant"
         );
     }
 
@@ -30,5 +31,10 @@ class Entreprise extends Utilisateur
     public function getTypeConnecte(): string
     {
         return "Entreprise";
+    }
+
+    public function getFiltresRecherche(): array
+    {
+        return array("");
     }
 }

@@ -34,4 +34,11 @@ class Etudiants extends Utilisateur
     {
         return "Etudiants";
     }
+
+    public function getFiltresRecherche(): array
+    {
+        return array(
+            "filtre1"=>"stage"
+        );
+    }
 }
