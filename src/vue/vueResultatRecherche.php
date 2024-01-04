@@ -92,8 +92,7 @@ if (!isset($_REQUEST['triPar'])) {
                     ?>
                 </div>
 
-
-                <input type="hidden" name="service" value="Recherche">
+                <input type="hidden" name="controleur" value="<?php echo Configuration::getControleurName() ?>">
                 <input type="hidden" name="action" value="rechercher">
                 <input type="hidden" name="recherche" value="<?php echo $url ?>">
             </form>
