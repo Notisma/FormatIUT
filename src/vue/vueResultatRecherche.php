@@ -18,7 +18,7 @@ if (!isset($_REQUEST['triPar'])) {
     <div class="bodyRecherche">
 
         <div class="controleRech">
-            <h2 class="titre" id="rouge">Effectuez une recherche sur Format'IUT</h2>
+            <h2 class="titre rouge">Effectuez une recherche sur Format'IUT</h2>
             <?php
             echo $codeRecherche
             ?>
@@ -57,7 +57,7 @@ if (!isset($_REQUEST['triPar'])) {
 
         <div class="vitrine">
             <img src="../ressources/images/recherchez.png" alt="">
-            <h3 class="titre" id="rouge">Paramètres de Recherche</h3>
+            <h3 class="titre rouge">Paramètres de Recherche</h3>
         </div>
 
         <div class="allOptions">
