@@ -124,6 +124,7 @@ p {
 .allOptions::-webkit-scrollbar {
     width: 10px;
     background-color: #ffdfe0;
+    border-radius: 10px;
 }
 
 .allOptions::-webkit-scrollbar-thumb {
