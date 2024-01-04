@@ -3,10 +3,8 @@
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
-$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
-
-$type = $_REQUEST["type"] ?? "Tous";
+$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
+$type = $_REQUEST["type"] ?? "all";
 
 ?>
 
@@ -57,7 +55,7 @@ $type = $_REQUEST["type"] ?? "Tous";
     </div>
 
     <div class="wrapMosaique">
-        <h2 class="titre" id="rouge">Liste des offres de Stage et d'Alternance :</h2>
+        <h2 class="titre rouge">Liste des offres de Stage et d'Alternance :</h2>
 
         <div class="mosaique">
             <?php
@@ -81,7 +79,7 @@ $type = $_REQUEST["type"] ?? "Tous";
                     echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
            <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
            <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
            <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>

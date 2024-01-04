@@ -1,6 +1,7 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ use App\FormatIUT\Configuration\Configuration;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body
     <?php
@@ -35,7 +36,7 @@ use App\FormatIUT\Configuration\Configuration;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
-                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
+                    $type = ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -44,37 +45,10 @@ use App\FormatIUT\Configuration\Configuration;
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
 
-                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
-                            case "Entreprise" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=entrMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Etudiants" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=etuMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Administrateurs" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                            case "Personnels" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                        }
+                    if (ConnexionUtilisateur::estConnecte()) {
+                        $user = ConnexionUtilisateur::getUtilisateurConnecte();
+                        $src = $user->getImageProfil();
+                        $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
 
                         $codeRecherche = "
                         <a class='rechercheResp' href='?service=Recherche&menu=" . serialize($menu) . "&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
@@ -123,7 +97,7 @@ use App\FormatIUT\Configuration\Configuration;
                     foreach ($menu as $item) {
                         $actuel = "";
                         if ($item['label'] == $titrePage) {
-                            $actuel = "id='active'";
+                            $actuel = "class='active'";
                         }
                         echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
@@ -146,7 +120,7 @@ use App\FormatIUT\Configuration\Configuration;
         foreach ($menu as $item) {
             $actuel = "";
             if ($item['label'] == $titrePage) {
-                $actuel = "id='active'";
+                $actuel = "class='active'";
             }
             echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
         }

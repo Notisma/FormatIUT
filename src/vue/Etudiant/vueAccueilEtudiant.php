@@ -9,7 +9,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
 <div class="mainAcc">
 
     <div class="gaucheAcc">
-        <h3 class="titre" id="rouge">Les Dernières Offres sorties :</h3>
+        <h3 class="titre rouge">Les Dernières Offres sorties :</h3>
         <?php
         $data = $listeStage;
         //$data = array_merge($data, $listeAlternance);

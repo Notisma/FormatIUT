@@ -11,7 +11,7 @@ body {
     margin: 0;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -242,21 +242,21 @@ body {
     line-height: 1.5em;
 }
 
-#valide {
+.valide {
     background-color: #9efc8d;
     border: 1px solid #127002;
 }
 
-#valide > p {
+.valide > p {
     color: #0b4801;
 }
 
-#attente {
+.attente {
     background-color: #f9f9a3;
     border: 1px solid #b5b500;
 }
 
-#attente > p {
+.attente > p {
     color: #5e5e00;
 }
 

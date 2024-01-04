@@ -15,7 +15,7 @@ class VerificationEmail
         $siretURL = rawurlencode($entreprise->getSiret());
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
-        $lienValidationEmail = "$absoluteURL?action=validerEmail&service=Connexion&login=$siretURL&nonce=$nonceURL";
+        $lienValidationEmail = "$absoluteURL?action=validerEmail&controleur=Main&login=$siretURL&nonce=$nonceURL";
         $corpsEmail = "<h2>Vous avez demandé la création de votre compte sur l'application Format'IUT.</h2><p>Cliquez sur le lien ci-dessous pour valider votre adresse mail.</p><a style='color: blue; text-decoration: underline;'  href=\"$lienValidationEmail\">VALIDER</a> <p>L'équipe de Format'IUT vous souhaite une bonne journée !</p>";
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
@@ -46,7 +46,7 @@ class VerificationEmail
         $mailURL = rawurlencode($entreprise->getEmail());
         $nonceURL = rawurlencode($entreprise->getNonce());
         $absoluteURL = Configuration::getAbsoluteURL();
-        $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&service=Mdp&login=$mailURL&nonce=$nonceURL";
+        $lienValidationEmail = "$absoluteURL?action=motDePasseARemplir&controleur=Main&login=$mailURL&nonce=$nonceURL";
         $corpsEmail = "<h2>Vous avez demandé la réinitialisation de votre mot de passe de l'application Format'IUT.</h2><p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe.</p><a style='color: blue; text-decoration: underline;'  href=\"$lienValidationEmail\">MODIFIER LE MOT DE PASSE</a> <p>L'équipe de Format'IUT vous souhaite une bonne journée !</p>";
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';

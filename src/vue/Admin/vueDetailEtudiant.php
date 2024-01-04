@@ -2,7 +2,7 @@
 
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
-$etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"]);
+$etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEtu"]);
 ?>
 
 <div class="wrapCentreEtu">
@@ -15,7 +15,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
             $parcoursHTML=htmlspecialchars($etudiant->getParcours());
             $groupeHTML=htmlspecialchars($etudiant->getGroupe());
             echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
-            echo "<h1 id='rouge' class='titre'>" . $prenomHTML . " " . $nomHTML . "</h1>";
+            echo "<h1 class='titre rouge'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($etudiant->getGroupe() != null && $etudiant->getParcours() != null) {
                 echo "<h3 class='titre'>" . $groupeHTML . " - " . $parcoursHTML . "</h3>";
             } else {
@@ -43,7 +43,8 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_GET["numEtu"])
         <?php
         if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
         <div class="wrapBoutons">
-            <a href="?action=supprimerEtudiant&service=Etudiant&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
+            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
+            <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
         </div>
         <?php } ?>
 

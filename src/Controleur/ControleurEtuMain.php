@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\DataObject\Postuler;
@@ -13,6 +14,10 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
+use App\FormatIUT\Service\ServiceConvention;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServicePostuler;
 use DateTime;
 use Exception;
 
@@ -68,7 +73,7 @@ class ControleurEtuMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         }
 
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
+        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
         return $menu;
     }
 
@@ -185,6 +190,61 @@ class ControleurEtuMain extends ControleurMain
         self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+            if ($offre->getEstValide()) {
+                self::$titrePageActuelleEtu = "Détails de l'offre";
+                /** @var ControleurMain $menu */
+                $menu = Configuration::getCheminControleur();
+                $liste = (new FormationRepository())->getListeidFormations();
+                if ($idFormation || isset($_REQUEST["idFormation"])) {
+                    if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+                    if (in_array($idFormation, $liste)) {
+                        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                        $client = "Etudiant";
+                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                        self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    } else {
+                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    }
+                } else {
+                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                }
+            } else {
+                self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
+            }
+        } else {
+            self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
+        }
+    }
+
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function postuler(): void{
+        ServicePostuler::postuler();
+    }
+
+    public static function mettreAJour(): void{
+        ServiceEtudiant::mettreAJour();
+    }
+    public static function creerConvention(): void{
+        ServiceConvention::creerConvention();
+    }
+
+    public static function modifierFichiers(): void{
+        ServiceFichier::modifierFichiers();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

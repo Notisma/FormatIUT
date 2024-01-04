@@ -27,7 +27,7 @@ body {
     color: black;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -148,13 +148,13 @@ body {
     width: 15%;
 }
 
-#attente {
+.attente {
     background-color: #ffcf32;
     color: #814900;
     border: 2px solid #fa7506;
 }
 
-#valide {
+.valide {
     background-color: #329438;
     color: #0d4e00;
     border: 2px solid #0d4e00;

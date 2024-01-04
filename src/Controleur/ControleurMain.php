@@ -3,21 +3,13 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\Historique;
 use App\FormatIUT\Lib\MessageFlash;
-use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\StringUtils;
-use App\FormatIUT\Lib\VerificationEmail;
-use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\HTTP\Session;
-use App\FormatIUT\Modele\Repository\ConnexionLdap;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\FormationRepository;
-use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
+use App\FormatIUT\Service\ServiceConnexion;
+use App\FormatIUT\Service\ServiceMdp;
+use App\FormatIUT\Service\ServiceRecherche;
 
 class ControleurMain
 {
@@ -85,90 +77,6 @@ class ControleurMain
         self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
     }
 
-    /***
-     * @return void Affiche la page de detail d'une offre qui varie selon le client
-     */
-    public static function afficherVueDetailOffre(string $idFormation = null): void
-    {
-        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
-            self::afficherErreur("Il faut préciser la formation");
-
-        if (Configuration::controleurIs("EtuMain")) {
-            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
-            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
-            if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
-                if ($offre->getEstValide()) {
-                    self::$pageActuelle = "Détails de l'offre";
-                    /** @var ControleurMain $menu */
-                    $menu = Configuration::getCheminControleur();
-                    $liste = (new FormationRepository())->getListeidFormations();
-                    if ($idFormation || isset($_REQUEST["idFormation"])) {
-                        if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
-                        if (in_array($idFormation, $liste)) {
-                            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-                            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                            $client = "Etudiant";
-                            $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                            self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
-                        } else {
-                            self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
-                        }
-                    } else {
-                        self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
-                    }
-                } else {
-                    self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
-                }
-            } else {
-                self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
-            }
-        } else if (Configuration::controleurIs("EntrMain")) {
-            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
-            //if offre existe
-            if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
-                self::$pageActuelle = "Détails de l'offre";
-                /** @var ControleurMain $menu */
-                $menu = Configuration::getCheminControleur();
-                $liste = (new FormationRepository())->getListeidFormations();
-                if ($idFormation || isset($_REQUEST["idFormation"])) {
-                    if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
-                    if (in_array($idFormation, $liste)) {
-                        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                        $client = "Entreprise";
-                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                        self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
-                    } else {
-                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
-                    }
-                } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
-                }
-            } else {
-                self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
-            }
-        } else {
-            self::$pageActuelle = "Détails de l'offre";
-            /** @var ControleurMain $menu */
-            $menu = Configuration::getCheminControleur();
-            $liste = (new FormationRepository())->getListeidFormations();
-            if ($idFormation || isset($_REQUEST["idFormation"])) {
-                if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
-                if (in_array($idFormation, $liste)) {
-                    $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                    $client = "Admin";
-                    $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
-                } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
-                }
-            } else {
-                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
-            }
-        }
-    }
-
     /**
      * @param string $error le message que l'erreur va afficher
      * @return void fonctions pour afficher la page d'erreur
@@ -199,10 +107,17 @@ class ControleurMain
         self::afficherVue("Sources", "sources.php", Configuration::getCheminControleur()::getMenu());
     }
 
-    public static function afficherRecherche()
+    /**
+     * @return void affiche le résultat de la recherche
+     */
+
+    public static function afficherRecherche(): void
     {
-        $liste=$_REQUEST["liste"];
-        ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php",unserialize($_REQUEST["menu"]), [
+        $liste = $_REQUEST["liste"];
+
+        /** @var ControleurMain $contr */
+        $contr = Configuration::getCheminControleur();
+        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $contr::getMenu(), [
             "recherche" => $_REQUEST["recherche"],
             "offres" => $liste["Formation"],
             "entreprises" => $liste["Entreprise"],
@@ -210,7 +125,37 @@ class ControleurMain
         ]);
     }
 
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
 
+    public static function seConnecter(): void
+    {
+        ServiceConnexion::seConnecter();
+    }
+
+    public static function seDeconnecter(): void
+    {
+        ServiceConnexion::seDeconnecter();
+    }
+
+    public static function validerEmail(): void
+    {
+        ServiceConnexion::validerEmail();
+    }
+
+    public static function motDePasseARemplir(): void
+    {
+        ServiceMdp::motDePasseARemplir();
+    }
+
+    public static function mdpOublie(): void
+    {
+        ServiceMdp::mdpOublie();
+    }
+
+    public static function rechercher(): void
+    {
+        ServiceRecherche::rechercher();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
