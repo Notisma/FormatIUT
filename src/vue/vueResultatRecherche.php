@@ -22,9 +22,6 @@ if (!isset($_REQUEST['triPar'])) {
             <?php
             echo $codeRecherche
             ?>
-            <div class="filtresRech">
-
-            </div>
 
             <div class="trierPar">
                 <h4 class="titre">Trier Par :</h4>
@@ -67,8 +64,9 @@ if (!isset($_REQUEST['triPar'])) {
                 <?php
                 $privilege = ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
                 foreach ($privilege as $name) {
+                    $name = strtolower($name);
                     $name2 = ucfirst($name) . "s";
-                    echo '<div>
+                    echo '<div class="generique">
                     <h4 class="titre">' . $name2 . '</h4>
                     <span>
                         <label for="' . $name . '"></label><input class="switch" type="checkbox" name="' . $name . '"
@@ -84,9 +82,18 @@ if (!isset($_REQUEST['triPar'])) {
 
                 <div class="filtresDetail">
                     <?php
-                    //si l'utilisateur est un admin, et qu'il a sélectionné uniquement les entreprises
-                    if (isset($_REQUEST['entreprise']) && !isset($_REQUEST['etudiants']) && !isset($_REQUEST['offres']) && !isset($_REQUEST['personnels'])) {
-                        echo "entreprises sélectionnées";
+                    if (isset($_REQUEST['entreprise'])) {
+                        echo '
+                        <span class="filtre">
+                            <label for="entreprise_validee">Validées</label>
+                            <input class="filter" type="checkbox" name="filtre1" id="entreprise_validee" value="entreprise_validee" onchange="this.form.submit()" '; if (isset($_REQUEST['filtre1'])) { echo 'checked'; } echo '>
+                        </span>
+                        
+                        <span class="filtre">
+                            <label for="entreprise_non_validee">Non Validées</label>
+                            <input class="filter" type="checkbox" name="filtre2" id="entreprise_non_validee" value="entreprise_non_validee" onchange="this.form.submit()" '; if (isset($_REQUEST['filtre2'])) {echo 'checked';} echo '>
+                        </span>
+                        ';
                     }
 
                     ?>
