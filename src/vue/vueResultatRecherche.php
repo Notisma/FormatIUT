@@ -65,7 +65,7 @@ if (!isset($_REQUEST['triPar'])) {
 
 
                 <?php
-                $privilege = PrivilegesUtilisateursRecherche::getInstance()->getPrivileges()[ConnexionUtilisateur::getTypeConnecte()];
+                $privilege = ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
                 foreach ($privilege as $name) {
                     $name2 = ucfirst($name) . "s";
                     echo '<div>
