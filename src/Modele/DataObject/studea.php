@@ -616,11 +616,6 @@ class studea extends AbstractDataObject
         return $this->effectifTotal;
     }
 
-    public function getAdresseEntreprise(): string
-    {
-        return $this->adresseEntreprise;
-    }
-
     public function getComplementAdresse(): string
     {
         return $this->complementAdresse;

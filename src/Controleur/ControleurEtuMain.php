@@ -47,15 +47,19 @@ class ControleurEtuMain extends ControleurMain
         );
 
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
-        if ($formation) {
+        if ($formation && ControleurMain::getPageActuelle() != "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
         }
         if (self::$titrePageActuelleEtu == "Mon Compte") {
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfil&controleur=EtuMain");
         }
 
+        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
+            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?afficherVueDetailOffre&controleur=EtuMain&idFormation=".$_REQUEST['idFormation']);
+        }
+
         $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
-        if ($offre != false && $offre->getDateCreationConvention() == null) {
+        if ($offre && $offre->getDateCreationConvention() == null) {
             $offreValidee = (new PostulerRepository())->getOffreValider(self::getCleEtudiant());
             if ($offreValidee) {
                 $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());

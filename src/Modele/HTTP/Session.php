@@ -11,6 +11,8 @@ class Session
 {
     private static ?Session $instance = null;
 
+    private static int $nbRefresh = 0;
+
     /**
      * @throws Exception
      */
@@ -64,16 +66,17 @@ class Session
             if (isset($_SESSION["_utilisateurConnecte"])) {
                 $time = time() - $_SESSION['derniereActivite'];
                 if ($time > (Configuration::getDelai())) {
-                    //$test=time() - $_SESSION['derniereActivite'];
                     $bool = false;
                     if (isset($_SESSION["_utilisateurConnecte"])) $bool = true;
-                    session_unset();     // unset $_SESSION variable for the run-time
+                    session_unset();
                     if ($bool)
                         MessageFlash::ajouter("info", "Vous avez été déconnecté(e) : $time secondes");
                 }
             }
         }
-        $_SESSION['derniereActivite'] = time(); // update last activity time stamp
+        $_SESSION['derniereActivite'] = time();
+
     }
+
 
 }

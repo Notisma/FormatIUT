@@ -51,12 +51,14 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
 
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?service=Recherche&menu=" . serialize($menu) . "&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
+                            <input type='hidden' name='menu' value='" . serialize($menu) . "'>
+                            <input type='hidden' name='service' value='Recherche'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                     }
@@ -158,6 +160,30 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
             </div>
         </div>
     </footer>
+</div>
+
+<div class="decoAuto" id="decoAuto">
+    <img src="../ressources/images/warning.png" alt="warning">
+    <h2 class="titre" id="rouge">AVERTISSEMENT</h2>
+    <h3 class="titre">Vous serez déconnecté automatiquement à
+        <?php
+        date_default_timezone_set('Europe/Paris');
+        $date = date("H:i");
+        $time = strtotime($date . " +10 minutes");
+        echo date("H:i", $time);
+        ?>
+    </h3>
+    <a class="boutonFermer" onclick="supprimerElement('decoAuto')">J'ai Compris</a>
+</div>
+
+<?php
+
+if (isset($_SESSION['script'])) {
+    echo $_SESSION['script'];
+    unset($_SESSION['script']);
+}
+
+?>
 
 </body>
 </html>
