@@ -90,7 +90,50 @@ if (!isset($_REQUEST['triPar'])) {
                                 echo '
                                 <span class="filtre">
                                     <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
-                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" '; if (isset($_REQUEST[$filtre["value"]])) { echo 'checked'; } echo '>
+                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
+                                if (isset($_REQUEST[$filtre["value"]])) {
+                                    echo 'checked';
+                                }
+                                echo '>
+                                </span>
+                                ';
+                            }
+                        } else if (isset($_REQUEST['entreprise'])) {
+                            if (str_contains($filtre['value'], 'entreprise')) {
+                                echo '
+                                <span class="filtre">
+                                    <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
+                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
+                                if (isset($_REQUEST[$filtre["value"]])) {
+                                    echo 'checked';
+                                }
+                                echo '>
+                                </span>
+                                ';
+                            }
+                        } else if (isset($_REQUEST['etudiant'])) {
+                            if (str_contains($filtre['value'], 'etudiant')) {
+                                echo '
+                                <span class="filtre">
+                                    <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
+                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
+                                if (isset($_REQUEST[$filtre["value"]])) {
+                                    echo 'checked';
+                                }
+                                echo '>
+                                </span>
+                                ';
+                            }
+                        } else if (isset($_REQUEST['personnel'])) {
+                            if (str_contains($filtre['value'], 'personnel')) {
+                                echo '
+                                <span class="filtre">
+                                    <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
+                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
+                                if (isset($_REQUEST[$filtre["value"]])) {
+                                    echo 'checked';
+                                }
+                                echo '>
                                 </span>
                                 ';
                             }
