@@ -123,12 +123,12 @@ p {
 
 .allOptions::-webkit-scrollbar {
     width: 10px;
-    background-color: #ff5660;
+    background-color: #ffdfe0;
 }
 
 .allOptions::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #ffdfe0;
+    background-color: #ff5660;
 }
 
 .allOptions > form {

@@ -82,22 +82,21 @@ if (!isset($_REQUEST['triPar'])) {
 
                 <div class="filtresDetail">
                     <?php
-                    if (isset($_REQUEST['entreprise'])) {
-                        echo '
-                        <span class="filtre">
-                            <label for="entreprise_validee">Validées</label>
-                            <input class="filter" type="checkbox" name="filtre1" id="entreprise_validee" value="entreprise_validee" onchange="this.form.submit()" '; if (isset($_REQUEST['filtre1'])) { echo 'checked'; } echo '>
-                        </span>
-                        
-                        <span class="filtre">
-                            <label for="entreprise_non_validee">Non Validées</label>
-                            <input class="filter" type="checkbox" name="filtre2" id="entreprise_non_validee" value="entreprise_non_validee" onchange="this.form.submit()" '; if (isset($_REQUEST['filtre2'])) {echo 'checked';} echo '>
-                        </span>
-                        ';
-                    }
+                    $liste = ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
+                    //exemple de liste :  ["filtre1"]=> string(18) "entreprise_validee"
 
-                    if (isset($_REQUEST['formation']) && (ConnexionUtilisateur::getTypeConnecte()=='Administrateurs' || ConnexionUtilisateur::getTypeConnecte()=='Etudiants' )) {
-                        //on affiche ici les deux filtres : stage et alternance
+                    foreach ($liste as $filtre) {
+                        if (isset($_REQUEST['formation'])) {
+                            //on echo tous les $filtre qui contiennent "formation"
+                            if (str_contains($filtre, 'formation')) {
+                                echo '
+                                <span class="filtre">
+                                    <label for="' . $filtre . '">' . ucfirst($filtre) . '</label>
+                                    <input class="filter" type="checkbox" name="' . $filtre . '" id="' . $filtre . '" value="' . $filtre . '" onchange="this.form.submit()" '; if (isset($_REQUEST[$filtre])) { echo 'checked'; } echo '>
+                                </span>
+                                ';
+                            }
+                        }
                     }
 
                     ?>
