@@ -39,8 +39,8 @@ class ServiceRecherche
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
         $liste = array();
         $count = 0;
-        $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
-        foreach ($privilege as $repository) {
+        $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
+        foreach ($privilege as $repository=>$filtres) {
             $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
             $re = "recherche";
             $liste[$repository] = (new $nomDeClasseRepository)->$re($morceaux);
