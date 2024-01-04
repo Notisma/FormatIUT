@@ -36,15 +36,15 @@ class Entreprise extends Utilisateur
     public function getFiltresRecherche(): array
     {
         return array(
-            "filtre1"=>"formation_stage",
-            "filtre2"=>"formation_alternance",
-            "filtre3"=>"formation_validee",
-            "filtre4"=>"formation_non_validee",
-            "filtre5"=>"formation_entreprise",
-            "filtre6"=>"etudiant_A1",
-            "filtre7"=>"etudiant_A2",
-            "filtre8"=>"etudiant_A3",
-            "filtre9"=>"etudiant_concernes"
+            "filtre1"=>array("label"=>"Stage","value"=>"formation_stage"),
+            "filtre2"=>array("label"=>"Alternance","value"=>"formation_alternance"),
+            "filtre3"=>array("label"=>"Formations Validées","value"=>"formation_validee"),
+            "filtre4"=>array("label"=>"Formations Non Validées","value"=>"formation_non_validee"),
+            "filtre5"=>array("label"=>"Mes Formations","value"=>"formation_entreprise"),
+            "filtre6"=>array("label"=>"Etudiants A1","value"=>"etudiant_A1"),
+            "filtre7"=>array("label"=>"Etudiants A2","value"=>"etudiant_A2"),
+            "filtre8"=>array("label"=>"Etudiants A3","value"=>"etudiant_A3"),
+            "filtre9"=>array("label"=>"Etudiants","value"=>"etudiant_concernes")
         );
     }
 }
