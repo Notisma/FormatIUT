@@ -39,12 +39,7 @@ class Personnels extends Utilisateur
     public function getFiltresRecherche(): array
     {
         return array(
-            "Formation"=>array(
-                "filtre10"=>array("label"=>"Stages","value"=>"formation_stage"),
-                "filtre11"=>array("label"=>"Alternances","value"=>"formation_alternance"),
-                "filtre12"=>array("label"=>"Formations Validées","value"=>"formation_validee"),
-                "filtre13"=>array("label"=>"Formations Non Validées","value"=>"formation_non_validee"),
-            ),
+
             "Entreprise"=>array(
                 "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee"),
                 "filtre2"=>array("label"=>"Entreprises Non Validées","value"=>"entreprise_non_validee"),
@@ -57,6 +52,12 @@ class Personnels extends Utilisateur
                 "filtre7"=>array("label"=>"Etudiants Sans Formation","value"=>"etudiant_sans_formation"),
                 "filtre8"=>array("label"=>"Stagiaires","value"=>"etudiant_stage"),
                 "filtre9"=>array("label"=>"Alternants","value"=>"etudiant_alternance"),
+            ),
+            "Formation"=>array(
+                "filtre10"=>array("label"=>"Stages","value"=>"formation_stage"),
+                "filtre11"=>array("label"=>"Alternances","value"=>"formation_alternance"),
+                "filtre12"=>array("label"=>"Formations Validées","value"=>"formation_validee"),
+                "filtre13"=>array("label"=>"Formations Non Validées","value"=>"formation_non_validee"),
             ),
             "Prof"=>array(
                 "filtre14"=>array("label"=>"Profs","value"=>"personnel_prof"),

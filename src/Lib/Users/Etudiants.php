@@ -38,10 +38,15 @@ class Etudiants extends Utilisateur
     public function getFiltresRecherche(): array
     {
         return array(
-            "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee"),
-            "filtre2"=>array("label"=>"Stages","value"=>"formation_stage"),
-            "filtre3"=>array("label"=>"Alternances","value"=>"formation_alternance"),
-            "filtre4"=>array("label"=>"Formations Validées","value"=>"formation_validee")
+            "Entreprise"=>array(
+                "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee"),
+            ),
+            "Formation"=>array(
+                "filtre2"=>array("label"=>"Stages","value"=>"formation_stage"),
+                "filtre3"=>array("label"=>"Alternances","value"=>"formation_alternance"),
+                "filtre4"=>array("label"=>"Formations Validées","value"=>"formation_validee")
+            ),
+
         );
     }
 }
