@@ -96,6 +96,10 @@ if (!isset($_REQUEST['triPar'])) {
                         ';
                     }
 
+                    if (isset($_REQUEST['formation']) && (ConnexionUtilisateur::getTypeConnecte()=='Administrateurs' || ConnexionUtilisateur::getTypeConnecte()=='Etudiants' )) {
+                        //on affiche ici les deux filtres : stage et alternance
+                    }
+
                     ?>
                 </div>
 
