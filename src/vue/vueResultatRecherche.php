@@ -83,16 +83,14 @@ if (!isset($_REQUEST['triPar'])) {
                 <div class="filtresDetail">
                     <?php
                     $liste = ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
-                    //exemple de liste :  ["filtre1"]=> string(18) "entreprise_validee"
 
                     foreach ($liste as $filtre) {
                         if (isset($_REQUEST['formation'])) {
-                            //on echo tous les $filtre qui contiennent "formation"
-                            if (str_contains($filtre, 'formation')) {
+                            if (str_contains($filtre['value'], 'formation')) {
                                 echo '
                                 <span class="filtre">
-                                    <label for="' . $filtre . '">' . ucfirst($filtre) . '</label>
-                                    <input class="filter" type="checkbox" name="' . $filtre . '" id="' . $filtre . '" value="' . $filtre . '" onchange="this.form.submit()" '; if (isset($_REQUEST[$filtre])) { echo 'checked'; } echo '>
+                                    <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
+                                    <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" '; if (isset($_REQUEST[$filtre["value"]])) { echo 'checked'; } echo '>
                                 </span>
                                 ';
                             }

@@ -209,6 +209,7 @@ p {
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .filtre {
@@ -221,5 +222,6 @@ p {
     color: #ff5660;
     font-size: 0.9em;
     margin: 1%;
+    flex-shrink: 0;
 }
 
