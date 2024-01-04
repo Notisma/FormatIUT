@@ -35,6 +35,16 @@ class Entreprise extends Utilisateur
 
     public function getFiltresRecherche(): array
     {
-        return array("");
+        return array(
+            "filtre1"=>"formation_stage",
+            "filtre2"=>"formation_alternance",
+            "filtre3"=>"formation_validee",
+            "filtre4"=>"formation_non_validee",
+            "filtre5"=>"formation_entreprise",
+            "filtre6"=>"etudiant_A1",
+            "filtre7"=>"etudiant_A2",
+            "filtre8"=>"etudiant_A3",
+            "filtre9"=>"etudiant_concernes"
+        );
     }
 }
