@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Prof;
 
-class ProfRepository extends AbstractRepository
+class ProfRepository extends RechercheRepository
 {
 
     protected function getNomTable(): string
@@ -16,6 +16,10 @@ class ProfRepository extends AbstractRepository
     protected function getNomsColonnes(): array
     {
         return array("loginProf", "nomProf", "prenomProf", "mailUniversitaire", "estAdmin", "img_id");
+    }
+    protected function getColonnesRecherche(): array
+    {
+        return array("loginProf","nomProf","prenomProf");
     }
 
     protected function getClePrimaire(): string
@@ -62,4 +66,5 @@ class ProfRepository extends AbstractRepository
             return $prof;
         }
     }
+
 }
