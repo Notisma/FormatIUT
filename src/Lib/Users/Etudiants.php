@@ -38,7 +38,10 @@ class Etudiants extends Utilisateur
     public function getFiltresRecherche(): array
     {
         return array(
-            "filtre1"=>"stage"
+            "filtre1"=>"entreprise_validee",
+            "filtre2"=>"formation_stage",
+            "filtre3"=>"formation_alternance",
+            "filtre4"=>"formation_validee"
         );
     }
 }
