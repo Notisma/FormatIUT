@@ -41,16 +41,18 @@ class ServiceRecherche
         $count = 0;
         $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
         foreach ($privilege as $repository=>$filtres) {
-            $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
-            $re = "recherche";
-            $nomAffichageRecherche="App\FormatIUT\Lib\AffichagesRecherche\\".$repository."Recherche";
-            $element = (new $nomDeClasseRepository)->$re($morceaux);
-            $arrayRecherche=array();
-            foreach ($element as $objet) {
-                $arrayRecherche[] = new $nomAffichageRecherche($objet);
-            }
-            $liste[$repository]=$arrayRecherche;
+            if (isset($_REQUEST[$repository.'s'])) {
+                $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
+                $re = "recherche";
+                $nomAffichageRecherche = "App\FormatIUT\Lib\AffichagesRecherche\\" . $repository . "Recherche";
+                $element = (new $nomDeClasseRepository)->$re($morceaux);
+                $arrayRecherche = array();
+                foreach ($element as $objet) {
+                    $arrayRecherche[] = new $nomAffichageRecherche($objet);
+                }
+                $liste[$repository] = $arrayRecherche;
                 $count += sizeof($liste[$repository]);
+            }
         }
 
         if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat

@@ -66,18 +66,6 @@ if (!isset($_REQUEST['triPar'])) {
                                 <h3 class="titre rouge">'.$objet->getTitreRouge() .'</h3>';
                         echo $objet->getTitres();
                         echo '</div></a>';
-                        /*
-                        } elseif ($type == 'Prof') {
-                            $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($elements[$i]->getLoginProf());
-                            echo '<div class="element ' . $red . '" href="?action=afficherDetailProf&controleur=' . Configuration::getControleurName() . '&loginProf=' . $prof->getLoginProf() . '">
-                                <img src="' . Configuration::getUploadPathFromId($prof->getImg()) . '" alt="pp prof">
-                                <div>
-                                    <h3 class="titre rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>
-                                    <h4 class="titre">'; if ($prof->isEstAdmin()) {echo 'Administrateur';} else {echo 'Professeur';} echo'</h4>
-                                    <h5 class="titre">' . htmlspecialchars($prof->getMailUniversitaire()) . '</h5>
-                                </div>
-                            </div>';
-                        } */
                     }
                 }
             }
