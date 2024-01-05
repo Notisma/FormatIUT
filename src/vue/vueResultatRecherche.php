@@ -82,6 +82,33 @@ if (!isset($_REQUEST['triPar'])) {
 
                         } elseif ($type == 'Formation') {
                             $formation = (new FormationRepository())->getObjectParClePrimaire($elements[$i]->getIdFormation());
+                            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
+                            echo '<a class="element ' . $red . '" href="?action=afficherVueDetailOffre&controleur=' . Configuration::getControleurName() . '&idFormation=' . $formation->getIdFormation() . '">
+                            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
+                            <div>
+                                <h3 class="titre rouge">' . htmlspecialchars($formation->getNomOffre()) . '</h3>
+                                <h4 class="titre">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h4>
+                                <h4 class="titre">' . htmlspecialchars($formation->getTypeOffre()) . ' - '; if (Configuration::getControleurName() == "AdminMain") { if ($formation->getEstValide()) {echo 'VALIDÉE';} else {echo 'NON VALIDÉE';}}  echo'</h4>
+                                <h5 class="titre">' . htmlspecialchars($formation->getSujet()) . '</h5>
+                                <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
+                            if (!$formation->estAssignee()) {
+                                $nb = (new EtudiantRepository())->nbPostulations($formation->getidFormation());
+                                if ($nb == 0) {
+                                    echo "Aucun";
+                                } else {
+                                    echo $nb;
+                                }
+                                echo " candidat";
+                                if ($nb > 1) {
+                                    echo "s";
+                                }
+                            } else {
+                                echo "Assignée";
+                            }
+                            echo
+                            '</h4> </div>
+                            </div>  
+                               </a>';
                         } elseif ($type == 'Entreprise') {
                             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($elements[$i]->getSiret());
                         } elseif ($type == 'Prof') {
