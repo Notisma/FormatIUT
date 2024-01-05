@@ -24,29 +24,14 @@ class ControleurEntrMain extends ControleurMain
 
     private static string $page = "Accueil Entreprise";
 
-
     /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     * @return string
      */
-    public static function getMenu(): array
+    public static function getPage(): string
     {
-        $menu =  array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
-            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=afficherFormulaireCreationOffre&controleur=EntrMain"),
-            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&type=Tous&controleur=EntrMain"),
-
-        );
-
-        if (self::$page == "Compte Entreprise") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Compte Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
-        }
-
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter&controleur=Main");
-
-        return $menu;
-
-
+        return self::$page;
     }
+
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +45,7 @@ class ControleurEntrMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeidFormation); $i++) {
             $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
         }
-        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
+        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", ["listeOffre" => $listeOffre]);
     }
 
     /**
@@ -75,7 +60,7 @@ class ControleurEntrMain extends ControleurMain
             $_REQUEST["etat"] = "Tous";
         }
         $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["etat"]);
-        self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
+        self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
     }
 
     /**
@@ -85,7 +70,7 @@ class ControleurEntrMain extends ControleurMain
     {
         self::$page = "Compte Entreprise";
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
+        self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", ["entreprise" => $entreprise]);
     }
 
     /**
@@ -93,7 +78,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireCreationOffre(): void
     {
-        self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php", self::getMenu());
+        self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php");
     }
 
     /**
@@ -103,7 +88,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST['idFormation'])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-            self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
+            self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", ["offre" => $offre]);
         } else {
             self::afficherErreur("Une offre devrait être renseignée");
         }
@@ -114,7 +99,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModification(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", ["entreprise" => $entreprise]);
     }
 
     /**

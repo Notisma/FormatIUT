@@ -70,7 +70,7 @@ class ServiceMdp
             ControleurMain::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
         else
             //TODO créer fonction afficherMdpOublie
-            ControleurMain::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
+            ControleurMain::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php");
     }
 
     /**
