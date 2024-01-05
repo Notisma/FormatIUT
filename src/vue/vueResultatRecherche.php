@@ -111,6 +111,24 @@ if (!isset($_REQUEST['triPar'])) {
                                </a>';
                         } elseif ($type == 'Entreprise') {
                             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($elements[$i]->getSiret());
+                            $countValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresValidesDeEntreprise($entreprise->getSiret()));
+                            $countNonValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresNonValidesDeEntreprise($entreprise->getSiret()));
+                            echo '<a class="element ' . $red . '" href="?action=afficherDetailEntreprise&controleur=' . Configuration::getControleurName() . '&siret=' . $entreprise->getSiret() . '">
+                            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
+                            <div>
+                                <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                                <h4 class="titre">' . htmlspecialchars($entreprise->getAdresseEntreprise()) . ', '. htmlspecialchars((new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille())->getNomVille()) .'</h4>
+                                <h5 class="titre">' . htmlspecialchars($entreprise->getEmail()) . '</h5>';
+                               if (Configuration::getControleurName() == 'AdminMain') {
+                                   echo '<h5 class="titre">' . $countNonValide . ' offres non validées et ' . $countValide . ' offres validées.</h5>';
+                                   if ($entreprise->isEstValide()) {
+                                       echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
+                                   } else {
+                                       echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
+                                   }
+                               }
+                            echo '</div>
+                            </a>';
                         } elseif ($type == 'Prof') {
                             $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($elements[$i]->getLoginProf());
                         }
