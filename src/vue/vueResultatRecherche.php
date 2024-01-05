@@ -88,7 +88,15 @@ if (!isset($_REQUEST['triPar'])) {
                             <div>
                                 <h3 class="titre rouge">' . htmlspecialchars($formation->getNomOffre()) . '</h3>
                                 <h4 class="titre">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h4>
-                                <h4 class="titre">' . htmlspecialchars($formation->getTypeOffre()) . ' - '; if (Configuration::getControleurName() == "AdminMain") { if ($formation->getEstValide()) {echo 'VALIDÉE';} else {echo 'NON VALIDÉE';}}  echo'</h4>
+                                <h4 class="titre">' . htmlspecialchars($formation->getTypeOffre()) . ' - ';
+                            if (Configuration::getControleurName() == "AdminMain") {
+                                if ($formation->getEstValide()) {
+                                    echo 'VALIDÉE';
+                                } else {
+                                    echo 'NON VALIDÉE';
+                                }
+                            }
+                            echo '</h4>
                                 <h5 class="titre">' . htmlspecialchars($formation->getSujet()) . '</h5>
                                 <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
                             if (!$formation->estAssignee()) {
@@ -117,20 +125,30 @@ if (!isset($_REQUEST['triPar'])) {
                             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
                             <div>
                                 <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
-                                <h4 class="titre">' . htmlspecialchars($entreprise->getAdresseEntreprise()) . ', '. htmlspecialchars((new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille())->getNomVille()) .'</h4>
+                                <h4 class="titre">' . htmlspecialchars($entreprise->getAdresseEntreprise()) . ', ' . htmlspecialchars((new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille())->getNomVille()) . '</h4>
                                 <h5 class="titre">' . htmlspecialchars($entreprise->getEmail()) . '</h5>';
-                               if (Configuration::getControleurName() == 'AdminMain') {
-                                   echo '<h5 class="titre">' . $countNonValide . ' offres non validées et ' . $countValide . ' offres validées.</h5>';
-                                   if ($entreprise->isEstValide()) {
-                                       echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
-                                   } else {
-                                       echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
-                                   }
-                               }
+                            if (Configuration::getControleurName() == 'AdminMain') {
+                                echo '<h5 class="titre">' . $countNonValide . ' offres non validées et ' . $countValide . ' offres validées.</h5>';
+                                if ($entreprise->isEstValide()) {
+                                    echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
+                                } else {
+                                    echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
+                                }
+                            } else {
+                                echo '<h5 class="titre">' . $entreprise->getTel() . '</h5>';
+                            }
                             echo '</div>
                             </a>';
                         } elseif ($type == 'Prof') {
                             $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($elements[$i]->getLoginProf());
+                            echo '<div class="element ' . $red . '" href="?action=afficherDetailProf&controleur=' . Configuration::getControleurName() . '&loginProf=' . $prof->getLoginProf() . '">
+                                <img src="' . Configuration::getUploadPathFromId($prof->getImg()) . '" alt="pp prof">
+                                <div>
+                                    <h3 class="titre rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>
+                                    <h4 class="titre">'; if ($prof->isEstAdmin()) {echo 'Administrateur';} else {echo 'Professeur';} echo'</h4>
+                                    <h5 class="titre">' . htmlspecialchars($prof->getMailUniversitaire()) . '</h5>
+                                </div>
+                            </div>';
                         }
                     }
                 }
