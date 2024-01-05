@@ -48,6 +48,10 @@ class ControleurAdminMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
         }
 
+        if (ControleurMain::getPageActuelle() == "Résultats de la recherche") {
+            $menu[] = array("image" => "../ressources/images/rechercher.png", "label" => "Résultats de la recherche", "lien" => "?action=rechercher&controleur=AdminMain");
+        }
+
         if (self::$pageActuelleAdmin == "Mon Compte") {
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
         }
