@@ -70,12 +70,17 @@ class ServiceConvention
      */
 
     public static function validerConvention() : void{
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
             $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            $formation->setConventionValidee(true);
-            $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
-            (new FormationRepository())->modifierObjet($formation);
-            ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
+            if(!$formation->getConventionValidee()) {
+                $formation->setConventionValidee(true);
+                $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
+                (new FormationRepository())->modifierObjet($formation);
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
+            }
+            else{
+                ControleurMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
+            }
         }
         else{
             ControleurMain::redirectionFlash("afficherIndex","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
@@ -89,6 +94,7 @@ class ServiceConvention
     public static function rejeterConvention(): void{
         //Todo quand la modification d'une convention sera accepté dans les tests
         echo "Todo quand la modification d'une convention sera accepté dans les tests";
+        echo ConnexionUtilisateur::getTypeConnecte();
     }
 
 }

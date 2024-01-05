@@ -7,7 +7,7 @@
             $erreur = 0;
 
             foreach ($listeFormations as $convention) {
-                if ($convention->getDateCreationConvention() != null && !$convention->getConventionValidee()) {
+                if ($convention->getIdEtudiant() != null && $convention->getDateCreationConvention() != null && !$convention->getConventionValidee()) {
                     $erreur++;
                     echo "
                         <a href='?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=" . $convention->getIdEtudiant() . "' class='entreprise'>

@@ -41,7 +41,7 @@ class ControleurAdminMain extends ControleurMain
             $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
         }
 
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
             $menu[]= array("image" => "../ressources/images/document.png", "label"=> "Liste des conventions", "lien" =>"?action=afficherConventionAValider&controleur=AdminMain");
         }
 
@@ -77,9 +77,10 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
+        $listeFomations = (new FormationRepository())->getListeObjet();
         $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeFormations" => $listeFomations ,"listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
 
 
@@ -198,10 +199,15 @@ class ControleurAdminMain extends ControleurMain
      * @return void
      * Affiche la liste des conventions à valider au secrétariat/admin
      */
-    public static function afficherConventionAValider(): void {
-        $listeFormations = (new FormationRepository())->getListeObjet();
-        self::$pageActuelleAdmin = "Liste des conventions";
-        self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations"=> $listeFormations]);
+    public static function afficherConventionAValider(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
+            $listeFormations = (new FormationRepository())->getListeObjet();
+            self::$pageActuelleAdmin = "Liste des conventions";
+            self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations" => $listeFormations]);
+        }else{
+            self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'avez pas accès à la liste des conventions à valider");
+        }
     }
 
     /**
@@ -209,13 +215,28 @@ class ControleurAdminMain extends ControleurMain
      * Affiche en détail la convention de l'étudiant au secrétariat/admin
      */
     public static function afficherDetailConvention(): void {
-        $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
-        $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
-        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
-            ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                "offre" => $formation]);
+        if(isset($_REQUEST['numEtudiant'])) {
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            if ($formation->getDateCreationConvention() != null) {
+                if(!$formation->getConventionValidee()) {
+                    $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
+                    $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
+                    $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                    self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
+                        ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                            "offre" => $formation]);
+                }
+                else{
+                    self::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
+                }
+            }
+            else{
+                self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de convention");
+            }
+        }
+        else{
+            self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de formation");
+        }
     }
 
 

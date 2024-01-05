@@ -8,6 +8,8 @@ use App\FormatIUT\Lib\Users\Administrateurs;
 use App\FormatIUT\Lib\Users\Etudiants;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\MotDePasse;
+use App\FormatIUT\Lib\Users\Personnels;
+use App\FormatIUT\Lib\Users\Secretariat;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\HTTP\Session;
@@ -49,7 +51,7 @@ class ServiceConnexion
     /**
      * @return void gère la connexion pour les entreprises
      */
-    private static function connexionEntreprise(Entreprise $user) :void
+    private static function connexionEntreprise(Entreprise $user): void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], $user->getMdpHache())) {
             if (VerificationEmail::aValideEmail($user)) {
@@ -64,41 +66,41 @@ class ServiceConnexion
     /**
      * @return void gère la connexion pour les étudiants
      */
-    private static function connexionEtudiant():void
+    private static function connexionEtudiant(): void
     {
         ConnexionUtilisateur::connecter(new Etudiants($_REQUEST["login"]));
         if (ConnexionUtilisateur::premiereConnexionEtu($_REQUEST["login"])) {
             MessageFlash::ajouter('info', "Veuillez compléter votre profil");
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain&premiereConnexion=true");
-        }else {
+        } else {
             header("Location: controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
         }
         exit();
 
     }
 
-    private static function connexionPersonnel():void
+    private static function connexionPersonnel(): void
     {
         $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
         ConnexionUtilisateur::premiereConnexionProf($_REQUEST["login"]);
         if (!is_null($prof)) {
             if ($prof->isEstAdmin()) {
                 ConnexionUtilisateur::connecter($_REQUEST["login"], "Administrateurs");
-            }else if (strpbrk($_REQUEST["login"],"secretariat")) {
-                ConnexionUtilisateur::connecter($_REQUEST["login"],"Secretariat");
+            } else if (strpbrk($_REQUEST["login"], "secretariat")) {
+                ConnexionUtilisateur::connecter($_REQUEST["login"], "Secretariat");
             }
             header("Location : controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
         }
     }
 
-    private static function connexionLDAP():void
+    private static function connexionLDAP(): void
     {
         MessageFlash::ajouter("success", "Connexion Réussie");
 
-        if (ConnexionLdap::getInfoPersonne()["type"]=="Etudiants"){
+        if (ConnexionLdap::getInfoPersonne()["type"] == "Etudiants") {
             self::connexionEtudiant();
-        }else {
+        } else {
             self::connexionPersonnel();
         }
     }
@@ -108,12 +110,19 @@ class ServiceConnexion
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
 
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
-            ConnexionUtilisateur::connecter(new Administrateurs($_REQUEST["login"]));
+            ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
+            if ($_REQUEST["login"] == "secretariatTest") {
+                ConnexionUtilisateur::connecter(new Secretariat($_REQUEST["login"]));
+            } else if ($_REQUEST["login"] == "profTest") {
+                ConnexionUtilisateur::connecter(new Personnels($_REQUEST["login"]));
+            } else if ($_REQUEST["login"] == "adminTest") {
+                ConnexionUtilisateur::connecter(new Administrateurs($_REQUEST["login"]));
+            }
+            // ConnexionUtilisateur::connecter(new Administrateurs($_REQUEST["login"]));
             MessageFlash::ajouter("success", "Connexion Réussie");
             header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
             exit();
         }
-
     }
 
     /**
@@ -121,10 +130,10 @@ class ServiceConnexion
      */
     public static function validerEmail(): void
     {
-        if(isset($_REQUEST["login"],$_REQUEST["nonce"])) {
+        if (isset($_REQUEST["login"], $_REQUEST["nonce"])) {
             VerificationEmail::traiterEmailValidation($_REQUEST["login"], $_REQUEST["nonce"]);
             ControleurMain::redirectionFlash("afficherPageConnexion", "success", "Email validé");
-        }else ControleurMain::redirectionFlash("afficherIndex","danger","Données non renseignées");
+        } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Données non renseignées");
     }
 
 }
