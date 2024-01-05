@@ -36,6 +36,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
+                    $menu=\App\FormatIUT\Controleur\ControleurMain::getMenu();
                     $type = ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
@@ -45,8 +46,11 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
 
+
                     if (ConnexionUtilisateur::estConnecte()) {
+
                         $user = ConnexionUtilisateur::getUtilisateurConnecte();
+                        $menu=$user->getMenu();
                         $src = $user->getImageProfil();
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
                         $controleur=$user->getControleur();
@@ -149,7 +153,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                     </div>
                 </div>
                 <p>Sources : Cliquer <a
-                            href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                            href="controleurFrontal.php?action=afficherSources&controleur=Main">ICI</a>
                 </p>
             </div>
             <div id="footerLogo">

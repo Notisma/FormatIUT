@@ -35,47 +35,6 @@ class ControleurEtuMain extends ControleurMain
         return self::$titrePageActuelleEtu;
     }
 
-    /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
-     */
-    public static function getMenu(): array
-    {
-        $menu = array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Etudiants", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain"),
-            array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
-            array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
-        );
-
-        $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
-        if ($formation && ControleurMain::getPageActuelle() != "Détails de l'offre") {
-            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
-        }
-        if (self::$titrePageActuelleEtu == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfil&controleur=EtuMain");
-        }
-
-        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
-            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?afficherVueDetailOffre&controleur=EtuMain&idFormation=".$_REQUEST['idFormation']);
-        }
-
-        $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
-        if ($offre && $offre->getDateCreationConvention() == null) {
-            $offreValidee = (new PostulerRepository())->getOffreValider(self::getCleEtudiant());
-            if ($offreValidee) {
-                $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
-                if ($offre->getTypeOffre() == "Stage")
-                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention"
-                    , "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
-                else if ($offre->getTypeOffre() == "Alternance")
-                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
-            }
-        } else if ($offre!= false && $offre->getDateCreationConvention() != null) {
-            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
-        }
-
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
-        return $menu;
-    }
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +50,7 @@ class ControleurEtuMain extends ControleurMain
             $listeOffres[] = (new FormationRepository())->getObjectParClePrimaire($listeIdOffres[$i]);
         }
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(), ["listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
     }
 
     /**
@@ -102,7 +61,7 @@ class ControleurEtuMain extends ControleurMain
         $type = $_REQUEST["type"] ?? "Tous";
         $offres = (new FormationRepository())->getListeOffresDispoParType($type);
         self::$titrePageActuelleEtu = "Offres de Stage/Alternance";
-        self::afficherVue("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffres.php", self::getMenu(), ["offres" => $offres, "type" => $type]);
+        self::afficherVue("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffres.php", ["offres" => $offres, "type" => $type]);
     }
 
     /**
@@ -112,7 +71,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
         self::$titrePageActuelleEtu = "Mon Compte";
-        self::afficherVue("Mon Compte", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant" => $etudiant]);
+        self::afficherVue("Mon Compte", "Etudiant/vueCompteEtudiant.php", ["etudiant" => $etudiant]);
     }
 
     /**
@@ -122,7 +81,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $listOffre = (new FormationRepository())->listeOffresEtu(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Mes Offres";
-        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
+        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
     }
 
     /**
@@ -139,7 +98,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::getCleEtudiant());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
           //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
-            self::afficherVue("Ma convention", "Etudiant/vueAfficherConvention.php", self::getMenu(),
+            self::afficherVue("Ma convention", "Etudiant/vueAfficherConvention.php",
                 ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                     "offre" => $offre]);
         } else {
@@ -159,7 +118,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         }
     }
 
@@ -175,7 +134,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Alternance", "Etudiant/vueFormulaireConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Convention Alternance", "Etudiant/vueFormulaireConventionAlternance.php", ["etudiant" => $etudiant, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         } else {
             self::afficherErreur("offre non valide");
         }
@@ -187,7 +146,7 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherFormulaireModification(): void
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
-        self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
+        self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", ["etudiant" => $etudiant]);
     }
 
     /**

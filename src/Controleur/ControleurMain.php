@@ -45,7 +45,7 @@ class ControleurMain
      * @return void fonctions à appeler pour afficher une vue
      */
 
-    public static function afficherVue(string $titrePage, string $cheminVue, array $menu, array $parametres = []): void
+    public static function afficherVue(string $titrePage, string $cheminVue, array $parametres = []): void
     {
         $cssPath = str_replace('vue', 'styleVue', $cheminVue);
         $cssPath = str_replace('.php', '.css', $cssPath);
@@ -53,7 +53,6 @@ class ControleurMain
             [
                 'titrePage' => $titrePage,
                 'chemin' => $cheminVue,
-                'menu' => $menu,
                 'css' => $cssPath
             ],
             $parametres
@@ -66,7 +65,7 @@ class ControleurMain
      */
     public static function afficherIndex(): void
     {
-        self::afficherVue("Accueil", "vueIndex.php", self::getMenu());
+        self::afficherVue("Accueil", "vueIndex.php");
     }
 
     /***
@@ -74,7 +73,7 @@ class ControleurMain
      */
     public static function afficherVuePresentation(): void
     {
-        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php", self::getMenu());
+        self::afficherVue("Accueil Entreprise", "Entreprise/vuePresentationEntreprise.php");
     }
 
     /**
@@ -96,7 +95,7 @@ class ControleurMain
      */
     public static function afficherPageConnexion(): void
     {
-        self::afficherVue("Se Connecter", "vueFormulaireConnexion.php", self::getMenu());
+        self::afficherVue("Se Connecter", "vueFormulaireConnexion.php");
     }
 
     /**
