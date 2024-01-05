@@ -48,7 +48,7 @@ if (!isset($_REQUEST['triPar'])) {
         <div class="resultatsRecherche">
             <?php
             if (!empty($liste)) {
-                var_dump($liste);
+
                 foreach ($liste as $type => $elements) {
                     for ($i = 0; $i < count($elements); $i++) {
                         $red = "";
@@ -60,15 +60,16 @@ if (!isset($_REQUEST['triPar'])) {
                         }
 
                         if ($type == 'Etudiant') {
-                            // Traitez l'élément comme un étudiant
+                            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($elements[$i]->getNumEtudiant());
+                            echo '<a class="element '. $red .'" href="?action=afficherDetailEtudiant&controleur='. Configuration::getControleurName() . '&idEtudiant=' . $etudiant->getNumEtudiant() . '"></a>';
+
                         } elseif ($type == 'Formation') {
-                            // Traitez l'élément comme une formation
+                            $formation = (new FormationRepository())->getObjectParClePrimaire($elements[$i]->getIdFormation());
                         } elseif ($type == 'Entreprise') {
-
+                            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($elements[$i]->getSiret());
                         } elseif ($type == 'Prof') {
-
+                            $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($elements[$i]->getLoginProf());
                         }
-                        // Ajoutez d'autres conditions pour d'autres types d'éléments
                     }
                 }
             }

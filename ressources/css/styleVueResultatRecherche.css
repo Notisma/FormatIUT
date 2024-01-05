@@ -84,7 +84,7 @@ p {
     height: 68%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, minmax(180px, auto));
+    grid-template-rows: repeat(2, minmax(180px, auto));
     grid-auto-rows: minmax(180px, auto);
     grid-auto-columns: 1fr;
     grid-gap: 1%;
