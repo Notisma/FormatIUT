@@ -48,6 +48,7 @@ if (!isset($_REQUEST['triPar'])) {
         <div class="resultatsRecherche">
             <?php
             if (!empty($liste)) {
+                var_dump($liste);
                 foreach ($liste as $type => $elements) {
                     for ($i = 0; $i < count($elements); $i++) {
                         $red = "";
@@ -58,10 +59,14 @@ if (!isset($_REQUEST['triPar'])) {
                             $red = "demi";
                         }
 
-                        if ($type == 'etudiants') {
+                        if ($type == 'Etudiant') {
                             // Traitez l'élément comme un étudiant
-                        } elseif ($type == 'formations') {
+                        } elseif ($type == 'Formation') {
                             // Traitez l'élément comme une formation
+                        } elseif ($type == 'Entreprise') {
+
+                        } elseif ($type == 'Prof') {
+
                         }
                         // Ajoutez d'autres conditions pour d'autres types d'éléments
                     }
