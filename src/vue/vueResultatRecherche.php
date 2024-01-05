@@ -61,17 +61,19 @@ if (!isset($_REQUEST['triPar'])) {
 
                         if ($type == 'Etudiant') {
                             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($elements[$i]->getNumEtudiant());
-                            echo '<a class="element '. $red .'" href="?action=afficherDetailEtudiant&controleur='. Configuration::getControleurName() . '&numEtu=' . $etudiant->getNumEtudiant() . '">
+                            echo '<a class="element ' . $red . '" href="?action=afficherDetailEtudiant&controleur=' . Configuration::getControleurName() . '&numEtu=' . $etudiant->getNumEtudiant() . '">
                             <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp etudiant">
                             <div>
                                 <h3 class="titre rouge">' . htmlspecialchars($etudiant->getPrenomEtudiant()) . ' ' . htmlspecialchars($etudiant->getNomEtudiant()) . '</h3>
                                 <h4 class="titre">' . htmlspecialchars($etudiant->getParcours()) . '</h4>
                                 <h4 class="titre">' . htmlspecialchars($etudiant->getGroupe()) . '</h4>
                                 <h5 class="titre">' . htmlspecialchars($etudiant->getMailUniersitaire()) . '</h5>';
-                            if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
-                                echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
-                            } else {
-                                echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
+                            if (Configuration::getControleurName() == 'AdminMain') {
+                                if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
+                                    echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
+                                } else {
+                                    echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
+                                }
                             }
                             echo '</div>
 
