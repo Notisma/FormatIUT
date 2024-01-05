@@ -40,8 +40,12 @@ class ServiceRecherche
         $liste = array();
         $count = 0;
         $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
+        $sansfiltres=true;
+        foreach ($privilege as $item=>$value) {
+            if (isset($_REQUEST[$item."s"])){$sansfiltres=false;}
+        }
         foreach ($privilege as $repository=>$filtres) {
-            if (isset($_REQUEST[$repository.'s'])) {
+            if (isset($_REQUEST[$repository.'s']) || $sansfiltres) {
                 $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
                 $re = "recherche";
                 $nomAffichageRecherche = "App\FormatIUT\Lib\AffichagesRecherche\\" . $repository . "Recherche";
