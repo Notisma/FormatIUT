@@ -58,87 +58,15 @@ if (!isset($_REQUEST['triPar'])) {
                         if (($row + $col) % 2 != 0) {
                             $red = "demi";
                         }
+                        $objet=$elements[$i];
+                        echo '<a class="element ' . $red . '" href="'.$objet->getLienAction().'">
+                            <img src="' . $objet->getImage() . '" alt="pp">
 
-                        if ($type == 'Etudiant') {
-                            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($elements[$i]->getNumEtudiant());
-                            echo '<a class="element ' . $red . '" href="?action=afficherDetailEtudiant&controleur=' . Configuration::getControleurName() . '&numEtu=' . $etudiant->getNumEtudiant() . '">
-                            <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp etudiant">
                             <div>
-                                <h3 class="titre rouge">' . htmlspecialchars($etudiant->getPrenomEtudiant()) . ' ' . htmlspecialchars($etudiant->getNomEtudiant()) . '</h3>
-                                <h4 class="titre">' . htmlspecialchars($etudiant->getParcours()) . '</h4>
-                                <h4 class="titre">' . htmlspecialchars($etudiant->getGroupe()) . '</h4>
-                                <h5 class="titre">' . htmlspecialchars($etudiant->getMailUniersitaire()) . '</h5>';
-                            if (Configuration::getControleurName() == 'AdminMain') {
-                                if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
-                                    echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";
-                                } else {
-                                    echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Aucun stage/alternance</p></div>";
-                                }
-                            }
-                            echo '</div>
-
-
-                            </a>';
-
-                        } elseif ($type == 'Formation') {
-                            $formation = (new FormationRepository())->getObjectParClePrimaire($elements[$i]->getIdFormation());
-                            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
-                            echo '<a class="element ' . $red . '" href="?action=afficherVueDetailOffre&controleur=' . Configuration::getControleurName() . '&idFormation=' . $formation->getIdFormation() . '">
-                            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
-                            <div>
-                                <h3 class="titre rouge">' . htmlspecialchars($formation->getNomOffre()) . '</h3>
-                                <h4 class="titre">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h4>
-                                <h4 class="titre">' . htmlspecialchars($formation->getTypeOffre()) . ' - ';
-                            if (Configuration::getControleurName() == "AdminMain") {
-                                if ($formation->getEstValide()) {
-                                    echo 'VALIDÉE';
-                                } else {
-                                    echo 'NON VALIDÉE';
-                                }
-                            }
-                            echo '</h4>
-                                <h5 class="titre">' . htmlspecialchars($formation->getSujet()) . '</h5>
-                                <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
-                            if (!$formation->estAssignee()) {
-                                $nb = (new EtudiantRepository())->nbPostulations($formation->getidFormation());
-                                if ($nb == 0) {
-                                    echo "Aucun";
-                                } else {
-                                    echo $nb;
-                                }
-                                echo " candidat";
-                                if ($nb > 1) {
-                                    echo "s";
-                                }
-                            } else {
-                                echo "Assignée";
-                            }
-                            echo
-                            '</h4> </div>
-                            </div>  
-                               </a>';
-                        } elseif ($type == 'Entreprise') {
-                            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($elements[$i]->getSiret());
-                            $countValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresValidesDeEntreprise($entreprise->getSiret()));
-                            $countNonValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresNonValidesDeEntreprise($entreprise->getSiret()));
-                            echo '<a class="element ' . $red . '" href="?action=afficherDetailEntreprise&controleur=' . Configuration::getControleurName() . '&siret=' . $entreprise->getSiret() . '">
-                            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
-                            <div>
-                                <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
-                                <h4 class="titre">' . htmlspecialchars($entreprise->getAdresseEntreprise()) . ', ' . htmlspecialchars((new \App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille())->getNomVille()) . '</h4>
-                                <h5 class="titre">' . htmlspecialchars($entreprise->getEmail()) . '</h5>';
-                            if (Configuration::getControleurName() == 'AdminMain') {
-                                echo '<h5 class="titre">' . $countNonValide . ' offres non validées et ' . $countValide . ' offres validées.</h5>';
-                                if ($entreprise->isEstValide()) {
-                                    echo "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
-                                } else {
-                                    echo "<div class='statutEtu nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
-                                }
-                            } else {
-                                echo '<h5 class="titre">' . $entreprise->getTel() . '</h5>';
-                            }
-                            echo '</div>
-                            </a>';
+                                <h3 class="titre rouge">'.$objet->getTitreRouge() .'</h3>';
+                        echo $objet->getTitres();
+                        echo '</div></a>';
+                        /*
                         } elseif ($type == 'Prof') {
                             $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($elements[$i]->getLoginProf());
                             echo '<div class="element ' . $red . '" href="?action=afficherDetailProf&controleur=' . Configuration::getControleurName() . '&loginProf=' . $prof->getLoginProf() . '">
@@ -149,7 +77,7 @@ if (!isset($_REQUEST['triPar'])) {
                                     <h5 class="titre">' . htmlspecialchars($prof->getMailUniversitaire()) . '</h5>
                                 </div>
                             </div>';
-                        }
+                        } */
                     }
                 }
             }
