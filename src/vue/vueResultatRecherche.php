@@ -46,7 +46,29 @@ if (!isset($_REQUEST['triPar'])) {
         </div>
 
         <div class="resultatsRecherche">
+            <?php
+            if (!empty($liste)) {
+                foreach ($liste as $type => $elements) {
+                    for ($i = 0; $i < count($elements); $i++) {
+                        $red = "";
+                        $n = 2;
+                        $row = intdiv($i, $n);
+                        $col = $i % $n;
+                        if (($row + $col) % 2 == 0) {
+                            $red = "demi";
+                        }
 
+                        if ($type == 'etudiants') {
+                            // Traitez l'élément comme un étudiant
+                        } elseif ($type == 'formations') {
+                            // Traitez l'élément comme une formation
+                        }
+                        // Ajoutez d'autres conditions pour d'autres types d'éléments
+                    }
+                }
+            }
+
+            ?>
         </div>
 
     </div>
@@ -64,7 +86,7 @@ if (!isset($_REQUEST['triPar'])) {
 
                 <?php
                 $privilege = ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
-                foreach ($privilege as $name=>$filtres) {
+                foreach ($privilege as $name => $filtres) {
                     $name2 = ucfirst($name) . "s";
                     echo '<div class="generique">
                     <h4 class="titre">' . $name2 . '</h4>
@@ -84,11 +106,12 @@ if (!isset($_REQUEST['triPar'])) {
                     <?php
                     $liste = ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
 
-                    foreach ($liste as $recherchables=>$filtres) {
-                        if (isset($_REQUEST[$recherchables."s"])){;
+                    foreach ($liste as $recherchables => $filtres) {
+                        if (isset($_REQUEST[$recherchables . "s"])) {
+                            ;
                             foreach ($filtres as $filtre) {
 
-                            echo '
+                                echo '
                                 <span class="filtre">
                                     <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
                                     <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
@@ -98,8 +121,8 @@ if (!isset($_REQUEST['triPar'])) {
                                 echo '>
                                 </span>
                                 ';
-                                }
                             }
+                        }
                     }
 
                     ?>
