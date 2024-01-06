@@ -79,11 +79,11 @@ class ServiceConvention
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
             }
             else{
-                ControleurMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
             }
         }
         else{
-            ControleurMain::redirectionFlash("afficherIndex","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
         }
     }
 

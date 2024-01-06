@@ -215,27 +215,28 @@ class ControleurAdminMain extends ControleurMain
      * Affiche en détail la convention de l'étudiant au secrétariat/admin
      */
     public static function afficherDetailConvention(): void {
-        if(isset($_REQUEST['numEtudiant'])) {
-            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            if ($formation->getDateCreationConvention() != null) {
-                if(!$formation->getConventionValidee()) {
-                    $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
-                    $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
-                    $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                    self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
-                        ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                            "offre" => $formation]);
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
+            if (isset($_REQUEST['numEtudiant'])) {
+                $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+                if ($formation->getDateCreationConvention() != null) {
+                    if (!$formation->getConventionValidee()) {
+                        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
+                        $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
+                        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
+                            ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                                "offre" => $formation]);
+                    } else {
+                        self::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
+                    }
+                } else {
+                    self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de convention");
                 }
-                else{
-                    self::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
-                }
+            } else {
+                self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de formation");
             }
-            else{
-                self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de convention");
-            }
-        }
-        else{
-            self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de formation");
+        }else{
+            self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'êtes pas du secrétariat");
         }
     }
 
