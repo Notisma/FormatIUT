@@ -41,9 +41,9 @@
 
     <div class="droite">
         <img src="../ressources/images/entrepriseAdmins.png" alt="admin">
-        <h3 class="titre" id="rouge">Toutes les entreprises de la base de données</h3>
-        <h4 class="titre">Consultez le statut de chaque entreprise en un coup d'oeil</h4>
-        <p>Cliquez sur une entreprise pour voir ses détails</p>
+        <h3 class="titre" id="rouge">Toutes les conventions de la base de données</h3>
+        <h4 class="titre">Consultez le statut de chaque convention en un coup d'oeil</h4>
+        <p>Cliquez sur une convention pour voir ses détails</p>
     </div>
 
 
