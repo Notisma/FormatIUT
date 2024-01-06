@@ -139,6 +139,22 @@ class ControleurEtuMain extends ControleurMain
             self::afficherErreur("offre non valide");
         }
     }
+    /**
+     * @return void affiche le formulaire pour modifier la convention de l'étudiant
+     */
+
+    public static function afficherFormulaireModifierConvention(){
+        $formation = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
+        if($formation->getDateCreationConvention() != null){
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
+            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+            self::afficherVue("Modifier Convention", "Etudiant/vueFormulaireModifierConvention.php", self::getMenu(), ["etudiant" => $etudiant, "offre" => $formation, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+        }
+        else{
+            self::afficherErreur("Convention inexistante");
+        }
+    }
 
     /**
      * @return void affiche le formulaire de modification de l'étudiant connecté

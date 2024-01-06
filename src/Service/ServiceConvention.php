@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -10,6 +11,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
+
 
 class ServiceConvention
 {
@@ -24,41 +26,66 @@ class ServiceConvention
                 $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
                 if (isset($entrepriseVerif)) {
                     $offreVerif = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idOff']);
-                    if ($entrepriseVerif->getSiret() == $offreVerif->getSiret()) {
+                    if ($entrepriseVerif->getSiret() == $offreVerif->getIdEntreprise()) {
                         $villeEntr = (new VilleRepository())->getVilleParIdVilleEntr($entrepriseVerif->getSiret());
                         if ((trim($entrepriseVerif->getNomEntreprise()) == trim($_REQUEST['nomEntreprise'])) && (trim($entrepriseVerif->getAdresseEntreprise()) == trim($_REQUEST['adresseEntr'])) && (trim($villeEntr->getNomVille()) == trim($_REQUEST['villeEntr'])) && ($villeEntr->getCodePostal() == $_REQUEST['codePostalEntr'])) {
-                            if ($offreVerif->getDateDebut() == new DateTime($_REQUEST['dateDebut']) && $offreVerif->getDateFin() == new DateTime($_REQUEST['dateFin'])) {
-                                $clefPrimConv = 'C' . (new ConventionRepository())->getNbConvention() + 1;
-                                $convention = Convention::creerConvention($_REQUEST,$clefPrimConv,$offreVerif->getTypeOffre());
-                                (new ConventionRepository())->creerObjet($convention);
-                                if (!(new EtudiantRepository())->aUneFormation(ControleurEtuMain::getCleEtudiant())) {
-                                    $formation = (new FormationRepository())->construireDepuisTableau(['idFormation' => ($offreVerif->getidFormation()), "dateDebut" => date_format($offreVerif->getDateDebut(), "Y-m-d"),
-                                        "dateFin" => date_format($offreVerif->getDateFin(), "Y-m-d"), "idEtudiant" => ControleurEtuMain::getCleEtudiant(), "idTuteurPro" => null, "idEntreprise" => $entrepriseVerif->getSiret(), "idConvention" => $convention->getIdConvention(), "idTuteurUM" => null,
-                                    ]);
-                                    (new FormationRepository())->creerObjet($formation);
-                                } else {
-                                    (new FormationRepository())->ajouterConvention(ControleurEtuMain::getCleEtudiant(), $convention->getIdConvention());
-                                }
+                            if ($offreVerif->getDateDebut() == $_REQUEST['dateDebut'] && $offreVerif->getDateFin() == $_REQUEST['dateFin']) {
+                                $offreVerif->setAssurance($_REQUEST['assurance']);
+                                $offreVerif->setDateCreationConvention($_REQUEST['dateCreation']);
+                                $offreVerif->setDateTransmissionConvention($_REQUEST['dateCreation']);
+                                $offreVerif->setAssurance($_REQUEST['assurance']);
+                                (new FormationRepository())->modifierObjet($offreVerif);
                                 ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
                             } else {
-                                ControleurEtuMain::afficherErreur("Erreur sur les dates");
+                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les dates");
                             }
                         } else {
-                            ControleurEtuMain::afficherErreur("Erreur sur les informations de l'entreprise");
+                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les informations de l'entreprise");
                         }
                     } else {
-                        ControleurEtuMain::afficherErreur("L'entreprise n'a jamais créé cette offre");
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","L'entreprise n'a jamais créé cette offre");
                     }
                 } else {
-                    ControleurEtuMain::afficherErreur("Erreur l'entreprise n'existe pas");
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur l'entreprise n'existe pas");
                 }
             } else {
-                ControleurEtuMain::afficherErreur("Erreur nombre(s) négatif(s) présent(s)");
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur nombre(s) négatif(s) présent(s)");
             }
         } else {
-            ControleurEtuMain::afficherErreur("Aucune offre est liée à votre convention");
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Aucune offre est liée à votre convention");
         }
     }
+    /**
+     * @return void permet à l'étudiant de modifier sa convention
+     * @throws Exception
+     */
+    public static function modifierConvention(): void
+    {
 
+        if (isset($_REQUEST['numEtudiant']) == ConnexionUtilisateur::getNumEtudiantConnecte()) {
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            if($formation){
+                if($formation->getDateCreationConvention() != null){
+                    if(isset($_REQUEST["assurance"])){
+                        $formation->setAssurance($_REQUEST['assurance']);
+                        $formation->setDateCreationConvention($_REQUEST['dateCreation']);
+                        (new FormationRepository())->modifierObjet($formation);
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
+                    }
+                    else{
+                        ControleurEtuMain::redirectionFlash("AfficherAccueilEtu", "danger", "L'utilisateur n'a changé l'assurance");
+                    }
+                }
+                else{
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de convention");
+                }
+            }
+            else{
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de formation");
+            }
+        } else {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur ne correspond pas");
+        }
+    }
 
 }
