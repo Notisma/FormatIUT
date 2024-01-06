@@ -12,53 +12,25 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\pstageRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
+use App\FormatIUT\Service\ServiceEntreprise;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServiceFormation;
+use App\FormatIUT\Service\ServicePersonnel;
 
 class ControleurAdminMain extends ControleurMain
 {
     private static string $pageActuelleAdmin = "Accueil Admin";
 
+
     /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     * @return string
      */
-    public static function getMenu(): array
+    public static function getPageActuelleAdmin(): string
     {
-        $accueil = "";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        } else if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            $accueil = "Administrateurs";
-        }
-        $menu = array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil $accueil", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain"),
-            array("image" => "../ressources/images/etudiants.png", "label" => "Liste Étudiants", "lien" => "?action=afficherListeEtudiant&controleur=AdminMain"),
-            array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
-            array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
-        );
-        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
-        }
-
-        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
-            $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
-        }
-
-        if (self::$pageActuelleAdmin == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
-        }
-
-        if (self::$pageActuelleAdmin == "Détails d'un Étudiant") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherDetailEtudiant");
-        }
-
-        if (self::$pageActuelleAdmin == "Détails d'une Entreprise") {
-            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise");
-        }
-
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
-
-        return $menu;
+        return self::$pageActuelleAdmin;
     }
-
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,22 +42,19 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
-        $accueil = "Administrateurs";
-        if (ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
-            $accueil = "Personnels";
-        }
+        $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
     }
 
 
     /**
      * @return void affiche le profil de l'administrateur connecté
      */
-    public static function afficherProfilAdmin(): void
+    public static function afficherProfil(): void
     {
         self::$pageActuelleAdmin = "Mon Compte";
-        self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php", self::getMenu());
+        self::afficherVue("Mon Compte", "Admin/vueCompteAdmin.php");
     }
 
     /**
@@ -94,7 +63,7 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherDetailEtudiant(): void
     {
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
-        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", self::getMenu());
+        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php");
     }
 
     /**
@@ -104,7 +73,7 @@ class ControleurAdminMain extends ControleurMain
     {
         $listeEtudiants = (new EtudiantRepository())->etudiantsEtats();
         self::$pageActuelleAdmin = "Liste Étudiants";
-        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", self::getMenu(), ["listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Liste Étudiants", "Admin/vueListeEtudiants.php", ["listeEtudiants" => $listeEtudiants]);
     }
 
     /**
@@ -113,7 +82,7 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherDetailEntreprise(): void
     {
         self::$pageActuelleAdmin = "Détails d'une Entreprise";
-        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", self::getMenu());
+        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php");
     }
 
     /**
@@ -123,7 +92,7 @@ class ControleurAdminMain extends ControleurMain
     {
         $listeEntreprises = (new EntrepriseRepository())->getListeObjet();
         self::$pageActuelleAdmin = "Liste Entreprises";
-        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", self::getMenu(), ["listeEntreprises" => $listeEntreprises]);
+        self::afficherVue("Liste Entreprises", "Admin/vueListeEntreprises.php", ["listeEntreprises" => $listeEntreprises]);
     }
 
     /**
@@ -132,14 +101,18 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherVueCSV(): void
     {
         self::$pageActuelleAdmin = "Mes CSV";
-        self::afficherVue("Mes CSV", "Admin/vueCSV.php", self::getMenu());
+        self::afficherVue("Mes CSV", "Admin/vueCSV.php");
     }
+
+    /**
+     * @return void affiche la liste des offresc
+     */
 
     public static function afficherListeOffres(): void
     {
         $listeOffres = (new FormationRepository())->getListeObjet();
         self::$pageActuelleAdmin = "Liste des Offres";
-        self::afficherVue("Liste des Offres", "Admin/vueListeOffres.php", self::getMenu(), ["listeOffres" => $listeOffres]);
+        self::afficherVue("Liste des Offres", "Admin/vueListeOffres.php", ["listeOffres" => $listeOffres]);
     }
 
     /**
@@ -149,10 +122,115 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherFormulaireCreationEtudiant(): void
     {
         self::$pageActuelleAdmin = "Ajouter un étudiant";
-        self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php", self::getMenu());
+        self::afficherVue("Ajouter un étudiant", "Admin/vueFormulaireCreationEtudiant.php");
+    }
+
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            parent::afficherErreur("Il faut préciser la formation");
+
+        self::$pageActuelleAdmin = "Détails de l'offre";
+        /** @var ControleurMain $menu */
+        $menu = Configuration::getCheminControleur();
+        $liste = (new FormationRepository())->getListeidFormations();
+        if ($idFormation || isset($_REQUEST["idFormation"])) {
+            if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+            if (in_array($idFormation, $liste)) {
+                $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                $client = "Admin";
+                $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+            }
+        } else {
+            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+        }
+    }
+    public static function afficherFormulaireModifEtudiant(): void{
+        self::$pageActuelleAdmin = "Modifier un étudiant";
+        self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php");
+    }
+
+    /**
+     * @return void
+     * Affiche la liste des conventions à valider au secrétariat/admin
+     */
+    public static function afficherConventionAValider(): void {
+        $listeFormations = (new FormationRepository())->getListeObjet();
+        self::$pageActuelleAdmin = "Liste des conventions";
+        self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", ["listeFormations"=> $listeFormations]);
+    }
+
+    /**
+     * @return void
+     * Affiche en détail la convention de l'étudiant au secrétariat/admin
+     */
+    public static function afficherDetailConvention(): void {
+        $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
+        $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+        self::afficherVue("Convention à valider", "Admin/vueAfficherDetailConvention.php",
+            ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
+                "offre" => $formation]);
     }
 
 
+    //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function modifierEtudiant(): void{
+        ServiceEtudiant::modifierEtudiant();
+    }
+
+    public static function ajouterEtudiant(): void{
+        ServiceEtudiant::ajouterEtudiant();
+    }
+
+    public static function rejeterFormation(): void{
+        ServiceFormation::rejeterFormation();
+    }
+
+    public static function accepterFormation(): void{
+        ServiceFormation::accepterFormation();
+    }
+
+    public static function supprimerFormation(): void{
+        ServiceFormation::supprimerFormation();
+    }
+
+    public static function ajouterCSV(): void{
+        ServiceFichier::ajouterCSV();
+    }
+
+    public static function refuserEntreprise(): void{
+        ServiceEntreprise::refuserEntreprise();
+    }
+    public static function supprimerEntreprise(): void{
+        ServiceEntreprise::supprimerEntreprise();
+    }
+    public static function validerEntreprise(): void{
+        ServiceEntreprise::validerEntreprise();
+    }
+
+    public static function supprimerEtudiant(): void{
+        ServiceEtudiant::supprimerEtudiant();
+    }
+
+    public static function promouvoirProf(): void{
+        ServicePersonnel::promouvoirProf();
+    }
+
+    public static function retrograderProf(): void{
+        ServicePersonnel::retrograderProf();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

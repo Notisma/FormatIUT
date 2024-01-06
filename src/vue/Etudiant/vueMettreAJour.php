@@ -8,23 +8,23 @@
                 <label for="login_id">Login</label> :
                 <div class="inputCentre">
                     <input type="text" value='<?= htmlspecialchars($etudiant->getLogin()); ?>' readonly="readonly"
-                           name="login" id="login_id" required/>
+                           name="login" id="login_id" required>
                 </div>
 
                 <label for="mailPerso_id">Mail Personnel</label> :
                 <div class="inputCentre">
                     <input type="text" value='<?= htmlspecialchars($etudiant->getMailPerso()); ?>' name="mailPerso"
-                           id="mailPerso_id" required maxlength="50"/>
+                           id="mailPerso_id" required maxlength="50">
                 </div class="inputCentre">
 
                 <label for="numTel_id">Numéro de téléphone</label> :
                 <div class="inputCentre">
                     <input type="text" value='<?= htmlspecialchars($etudiant->getTelephone()); ?>' name="numTel"
-                           id="numTel_id" required maxlength="11" />
+                           id="numTel_id" required maxlength="11" >
                 </div class="inputCentre">
 
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=mettreAJourEtudiant&service=Etudiant"/>
+                    <input type="submit" value="Envoyer" formaction="?action=mettreAJourEtudiant&controleur=EtuMain">
                 </div>
             </fieldset>
         </form>

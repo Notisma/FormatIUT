@@ -82,8 +82,6 @@ class ServiceFormation
                 if ($_REQUEST["gratification"] > $_REQUEST["uniteDureeGratification"] && $_REQUEST["uniteDureeGratification"] > 0 && $_REQUEST["dureeHeure"] > 0 && $_REQUEST["joursParSemaine"] > 0 && $_REQUEST["nbHeuresHebdo"] > 0) {
                     if ($_REQUEST["joursParSemaine"] < 8) {
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
-                            $listeId = (new FormationRepository())->getListeidFormations();
-                            ControleurMain::autoIncrement($listeId, "idFormation");
                             $offre=Formation::creerFormation($_REQUEST);
                             (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "afficherMesOffres";

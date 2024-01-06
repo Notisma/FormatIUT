@@ -27,7 +27,7 @@ class EtudiantRepository extends  RechercheRepository
         return "numEtudiant";
     }
 
-    public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
+    public function construireDepuisTableau(array $dataObjectTableau): Etudiant
     {
         return new Etudiant(
             $dataObjectTableau["numEtudiant"],
@@ -342,6 +342,15 @@ class EtudiantRepository extends  RechercheRepository
         $values = array("tagType" => $typeOffre, "tagEtu" => $numEtu);
         $pdoStatement->execute($values);
         return $pdoStatement->fetch();
+    }
+
+    public function getEtudiantParLogin(string $login):Etudiant
+    {
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE loginEtudiant=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        return $this->construireDepuisTableau($pdoStatement->fetch());
     }
 
 

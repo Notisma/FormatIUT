@@ -12,6 +12,10 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Service\ServiceEntreprise;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServiceFormation;
+use App\FormatIUT\Service\ServiceMdp;
 use DateTime;
 use DateTimeZone;
 
@@ -20,33 +24,14 @@ class ControleurEntrMain extends ControleurMain
 
     private static string $page = "Accueil Entreprise";
 
-    public static function getCleEntreprise(): int
-    {
-        return ConnexionUtilisateur::getNumEtudiantConnecte();
-    }
-
     /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     * @return string
      */
-    public static function getMenu(): array
+    public static function getPage(): string
     {
-        $menu =  array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain"),
-            array("image" => "../ressources/images/creer.png", "label" => "Créer une offre", "lien" => "?action=afficherFormulaireCreationOffre&controleur=EntrMain"),
-            array("image" => "../ressources/images/catalogue.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&type=Tous&controleur=EntrMain"),
-
-        );
-
-        if (self::$page == "Compte Entreprise") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Compte Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
-        }
-
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "controleurFrontal.php?action=seDeconnecter&service=Connexion");
-
-        return $menu;
-
-
+        return self::$page;
     }
+
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +45,7 @@ class ControleurEntrMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeidFormation); $i++) {
             $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
         }
-        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", self::getMenu(), ["listeOffre" => $listeOffre]);
+        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", ["listeOffre" => $listeOffre]);
     }
 
     /**
@@ -75,7 +60,7 @@ class ControleurEntrMain extends ControleurMain
             $_REQUEST["etat"] = "Tous";
         }
         $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["etat"]);
-        self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", self::getMenu(), ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
+        self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
     }
 
     /**
@@ -85,7 +70,7 @@ class ControleurEntrMain extends ControleurMain
     {
         self::$page = "Compte Entreprise";
         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
-        self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", self::getMenu(), ["entreprise" => $entreprise]);
+        self::afficherVue("Compte Entreprise", "Entreprise/vueCompteEntreprise.php", ["entreprise" => $entreprise]);
     }
 
     /**
@@ -93,7 +78,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireCreationOffre(): void
     {
-        self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php", self::getMenu());
+        self::afficherVue("Créer une offre", "Entreprise/vueFormulaireCreationOffre.php");
     }
 
     /**
@@ -103,7 +88,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST['idFormation'])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-            self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", self::getMenu(), ["offre" => $offre]);
+            self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", ["offre" => $offre]);
         } else {
             self::afficherErreur("Une offre devrait être renseignée");
         }
@@ -114,8 +99,77 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModification(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", self::getMenu(), ["entreprise" => $entreprise]);
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", ["entreprise" => $entreprise]);
+    }
+
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        //if offre existe
+        if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+            self::$page = "Détails de l'offre";
+            /** @var ControleurMain $menu */
+            $menu = Configuration::getCheminControleur();
+            $liste = (new FormationRepository())->getListeidFormations();
+            if ($idFormation || isset($_REQUEST["idFormation"])) {
+                if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+                if (in_array($idFormation, $liste)) {
+                    $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                    $client = "Entreprise";
+                    $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                } else {
+                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                }
+            } else {
+                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+            }
+        } else {
+            self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
+        }
+    }
+
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function resetMDP(): void{
+        ServiceMdp::resetMdp();
+    }
+
+    public static function supprimerFormation(): void{
+        ServiceFormation::supprimerFormation();
+    }
+
+    public static function mettreAJourEntreprise(): void{
+        ServiceEntreprise::mettreAJourEntreprise();
+    }
+
+    public static function telechargerCV(): void{
+        ServiceFichier::telechargerCV();
+    }
+
+    public static function telechargerLM(): void{
+        ServiceFichier::telechargerLM();
+    }
+
+    public static function mettreAJourMdp(): void{
+        ServiceMdp::mettreAJourMdp();
+    }
+
+    public static function creerFormation(): void{
+        ServiceFormation::creerFormation();
+    }
+
+    public static function modifierOffre(): void{
+        ServiceFormation::modifierOffre();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -48,35 +48,35 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
 
         ?>
 
-        
+
     </div>
 
     <div class="mainAdmins" id="compte">
-        <h2 class="titre" id="rouge">Modifier mon Profil</h2>
+        <h2 class="titre rouge">Modifier mon Profil</h2>
         <form method="POST">
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
                 <img src="../ressources/images/admin.png" alt="avatar">
                 <div>
-                    <input disabled type="file" name="avatar" id="avatar_id" accept="image/png/jpeg, image/jpeg">
+                    <input disabled type="file" name="avatar" id="avatar_id" accept="image/png, image/jpeg">
                     <p>Glissez-déposez un fichier ou parcourez vos fichiers. JPEG et PNG uniquement</p>
                 </div>
             </div>
 
             <h3 class="titre">Nom</h3>
             <div class="inputCentre">
-                <input type="text" value='<?= htmlspecialchars($admin->getNomProf()); ?>' name="nom" id="nom_id"
-                       required maxlength="50"/>
+                <label for="nom_id"></label><input type="text" value='<?= htmlspecialchars($admin->getNomProf()); ?>' name="nom" id="nom_id"
+                                                   required maxlength="50">
             </div>
 
             <h3 class="titre">Prénom</h3>
             <div class="inputCentre">
-                <input type="text" value='<?= htmlspecialchars($admin->getPrenomProf()); ?>' name="prenom"
-                       id="prenom_id" required maxlength="50"/>
+                <label for="prenom_id"></label><input type="text" value='<?= htmlspecialchars($admin->getPrenomProf()); ?>' name="prenom"
+                                                      id="prenom_id" required maxlength="50">
             </div>
 
             <div class="inputCentre">
-                <input type="submit" value="Enregistrer" name="modifier" id="modifier_id"/>
+                <input type="submit" value="Enregistrer" name="modifier" id="modifier_id">
             </div>
 
 
@@ -85,11 +85,11 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
     </div>
 
     <div class="mainAdmins" id="notifs">
-        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
+        <h2 class="titre rouge">Gérer les paramètres de Notifications</h2>
     </div>
 
     <div class="mainAdmins" id="profs">
-        <h2 class="titre" id="rouge">Gérer les Permissions du Site</h2>
+        <h2 class="titre rouge">Gérer les Permissions du Site</h2>
 
         <div class="wrapPerms">
             <h3 class="titre">Mes collègues</h3>
@@ -108,11 +108,11 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                         </div>
                         <div class="perms">';
                                 if ($prof->getPrenomProf() == null)
-                                    echo '<h3 class="titre" id="rouge">Prenom inconnu</h3>';
+                                    echo '<h3 class="titre rouge">Prenom inconnu</h3>';
                                 else
-                                    echo '<h3 class="titre" id="rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>';
+                                    echo '<h3 class="titre rouge">' . htmlspecialchars($prof->getPrenomProf()) . ' ' . htmlspecialchars($prof->getNomProf()) . '</h3>';
                                 if ($prof->getLoginProf() == null || $prof->getLoginProf() == "")
-                                    echo '<h3 class="titre" id="rouge">Login inconnu</h3>';
+                                    echo '<h3 class="titre rouge">Login inconnu</h3>';
                                 else
                                     echo '<p>Login : ' . htmlspecialchars($prof->getLoginProf()) . '</p>
                             ';
@@ -121,7 +121,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                                 echo '
                         <p>Grade : Administrateur</p>
                         <div class="wrapBoutons">
-                            <a href="?action=retrograderProf&service=Personnel&loginProf=' . $prof->getLoginProf() . '">Rétrograder</a>
+                            <a href="?action=retrograderProf&controleur=AdminMain&loginProf=' . $prof->getLoginProf() . '">Rétrograder</a>
                         </div>
                         ';
 
@@ -129,7 +129,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                                 echo '
                         <p>Grade : Enseignant</p>
                         <div class="wrapBoutons">
-                            <a href="?action=promouvoirProf&service=Personnel&loginProf=' . $prof->getLoginProf() . '">Promouvoir</a>
+                            <a href="?action=promouvoirProf&controleur=AdminMain&loginProf=' . $prof->getLoginProf() . '">Promouvoir</a>
                         </div>
                         ';
                             }
@@ -156,7 +156,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
     </div>
 
     <div class="mainAdmins" id="etu">
-        <h2 class="titre" id="rouge">Ajouter un Étudiant sur le site</h2>
+        <h2 class="titre rouge">Ajouter un Étudiant sur le site</h2>
 
         <div class="ajoutEtu">
             <form method="POST">
@@ -164,47 +164,47 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                 <label for="numEtudiant_id">Numéro étudiant</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="22207651" name="numEtudiant"
-                           id="numEtudiant_id" required/>
+                           id="numEtudiant_id" required>
                 </div>
 
                 <label for="nomEtudiant_id">Nom</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="Smith" name="nomEtudiant"
-                           id="nomEtudiant_id" required maxlength="32"/>
-                </div class="inputCentre">
+                           id="nomEtudiant_id" required maxlength="32">
+                </div>
 
                 <label for="prenomEtudiant_id">Prénom</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="John" name="prenomEtudiant"
-                           id="prenomEtudiant_id" required maxlength="32"/>
-                </div class="inputCentre">
+                           id="prenomEtudiant_id" required maxlength="32">
+                </div>
 
                 <label for="loginEtudiant_id">Login</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="smithj" name="loginEtudiant"
-                           id="loginEtudiant_id" required maxlength="32"/>
-                </div class="inputCentre">
+                           id="loginEtudiant_id" required maxlength="32">
+                </div>
 
                 <label for="mailUniversitaire_id">Mail universitaire</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="john.smith@etu.umontpellier.fr" name="mailUniversitaire"
-                           id="mailUniversitaire_id" required maxlength="50"/>
-                </div class="inputCentre">
+                           id="mailUniversitaire_id" required maxlength="50">
+                </div>
 
                 <label for="groupe_id">Groupe de classe</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="Q1" name="groupe"
-                           id="groupe_id" required maxlength="2"/>
-                </div class="inputCentre">
+                           id="groupe_id" required maxlength="2">
+                </div>
 
                 <label for="parcours_id">Parcours du BUT</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="RACDV" name="parcours"
-                           id="parcours_id" required maxlength="5"/>
-                </div class="inputCentre">
+                           id="parcours_id" required maxlength="5">
+                </div>
 
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=ajouterEtudiant&service=Etudiant"/>
+                    <input type="submit" value="Envoyer" formaction="?action=ajouterEtudiant&controleur=AdminMain">
                 </div>
             </form>
         </div>

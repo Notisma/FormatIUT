@@ -47,7 +47,7 @@ class ProfRepository extends AbstractRepository
         $values = array("Tag" => $login);
         $pdoStetement->execute($values);
         $count = $pdoStetement->fetch();
-        if ($count > 0) return true;
+        if ($count[0] > 0) return true;
         else return false;
     }
     public function getParNom(String $nomProf): ?Prof{

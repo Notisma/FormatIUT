@@ -2,7 +2,7 @@
 
     <div class="resetGauche">
         <img src="../ressources/images/mdpOublié.png" alt="illustration">
-        <h2 class="titres" id="rouge">AIDE FORMAT'IUT - MOT DE PASSE OUBLIÉ</h2>
+        <h2 class="titres rouge">AIDE FORMAT'IUT - MOT DE PASSE OUBLIÉ</h2>
     </div>
 
     <div class="resetDroit">
@@ -27,7 +27,7 @@
                 </label>
 
                 <input type="submit" value="Enregistrer"
-                       formaction= <?php echo '"?action=resetMdp&service=Mdp&login=' . rawurlencode($login) . '&nonce=' . $nonce . '"' ?>
+                       formaction= <?php echo '"?action=resetMDP&controleur=EntrMain&login=' . rawurlencode($login) . '&nonce=' . $nonce . '"' ?>
                 >
 
             </form>

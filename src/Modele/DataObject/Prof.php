@@ -2,6 +2,8 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Configuration\Configuration;
+
 class Prof extends AbstractDataObject
 {
     private string $loginProf;
@@ -107,4 +109,6 @@ class Prof extends AbstractDataObject
             "img_id" => $this->img,
         );
     }
+
+
 }

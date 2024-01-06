@@ -17,13 +17,13 @@
                         </div>
                         
                         <div class='entrepriseDroite'>
-                            <h3 class='titre' id='rouge'>" . htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
+                            <h3 class='titre rouge'>" . htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
                             <p>Possède ". $countNonValide ." offres non validées et ". $countValide ." offres validées.</p>";
 
                         if ($entreprise->isEstValide()) {
-                            echo "<div id='valide' class='statutEntr'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
+                            echo "<div class='statutEntr valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
                         } else {
-                            echo"<div id='nonValide' class='statutEntr'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
+                            echo"<div class='statutEntr nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
                         }
 
                         echo "
@@ -48,7 +48,7 @@
 
     <div class="droite">
         <img src="../ressources/images/entrepriseAdmins.png" alt="admin">
-        <h3 class="titre" id="rouge">Toutes les entreprises de la base de données</h3>
+        <h3 class="titre rouge">Toutes les entreprises de la base de données</h3>
         <h4 class="titre">Consultez le statut de chaque entreprise en un coup d'oeil</h4>
         <p>Cliquez sur une entreprise pour voir ses détails</p>
     </div>

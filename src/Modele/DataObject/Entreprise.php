@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
