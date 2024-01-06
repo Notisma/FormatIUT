@@ -77,7 +77,7 @@ class ControleurAdminMain extends ControleurMain
         $listeEtudiants = (new EtudiantRepository())->etudiantsSansOffres();
         $listeEntreprises = (new EntrepriseRepository())->entreprisesNonValide();
         $listeOffres = (new FormationRepository())->offresNonValides();
-        $listeFomations = (new FormationRepository())->getListeObjet();
+        $listeFomations = (new FormationRepository())->etudiantsSansConventionsValides();
         $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
         self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", self::getMenu(), ["listeFormations" => $listeFomations ,"listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);

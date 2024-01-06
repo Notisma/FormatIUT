@@ -153,46 +153,7 @@
     </div>
 
     <?php
-    if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
-        $conventionVide = 0;
-        echo '<div class="wrapAdminEtu">
-        <h3 class="titre">Alertes - Conventions</h3>
-        <div class="wrapAlertes">';
 
-        // exemple d'alerte - compte créé
-        foreach ($listeFormations as $offre) {
-            if ($offre->getDateCreationConvention() != null && $offre->getIdEtudiant() != null && !$offre->getConventionValidee()) {
-                $conventionVide++;
-                echo '<a href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $offre->getIdEtudiant() . '" class="alerteEntr" id="hoverRose">
-                <div class="contenuAlerte">
-                <h3 class="titre" id="rouge">';
-
-
-                echo $offre->getIdEtudiant();
-                echo '</h3>
-                <p>';
-                echo '</p>
-                <div class="sujetAlerte">
-                <img src="../ressources/images/attention.png" alt="image">
-                <p>Aucun Stage/Alternance</p>
-                </div>
-                </div>
-                </a>';
-            }
-        }
-        if ($conventionVide == 0) {
-            echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune anomalie à afficher ici</h3> </div>';
-        }
-
-
-        // un exemple différent
-        echo '
-        </div>
-        <div class="wrapBoutons">
-        <a href="?action=afficherConventionAValider&controleur=AdminMain">VOIR PLUS</a>
-        </div>
-        </div>';
-    } else {
 
 
         echo '<div class="wrapAdminEtu">
@@ -200,7 +161,7 @@
         <div class="wrapAlertes">';
 
         // exemple d'alerte - compte créé
-        if ($listeEtudiants == null) {
+        if ($listeEtudiants == null && $listeFormations == null) {
             echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune anomalie à afficher ici</h3> </div>';
         } else {
             foreach ($listeEtudiants as $etudiant) {
@@ -230,6 +191,37 @@
                 </div>
                 </a>';
             }
+            if($listeFormations != null){
+                foreach ($listeFormations as $convention){
+                    $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
+                    echo '<a href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '" class="alerteEntr" id="hoverRose">
+                <div class="imageAlerte">
+                <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
+                </div>
+                <div class="contenuAlerte">
+                <h3 class="titre" id="rouge">';
+                    $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                    $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                    echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                    echo '</h3>
+                <p>';
+                    if ($etudiant->getParcours() == "") {
+                        echo "Données non renseignées";
+                    } else {
+                        $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                        $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                        echo $parcoursHTML . " - " . $groupeHTML;
+                    }
+                    echo '</p>
+                <div class="sujetAlerte">
+                <img src="../ressources/images/attention.png" alt="image">
+                <p>Convention modifiée le '.$convention->getDateCreationConvention().'</p>
+                </div>
+                </div>
+                </a>';
+
+                }
+            }
         }
 
         // un exemple différent
@@ -252,7 +244,7 @@
         <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
         </div>';
-    }
+
     ?>
 
 
