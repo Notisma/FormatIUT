@@ -58,12 +58,12 @@ if (!isset($_REQUEST['triPar'])) {
                         if (($row + $col) % 2 != 0) {
                             $red = "demi";
                         }
-                        $objet=$elements[$i];
-                        echo '<a class="element ' . $red . '" href="'.$objet->getLienAction().'">
+                        $objet = $elements[$i];
+                        echo '<a class="element ' . $red . '" href="' . $objet->getLienAction() . '">
                             <img src="' . $objet->getImage() . '" alt="pp">
 
                             <div>
-                                <h3 class="titre rouge">'.$objet->getTitreRouge() .'</h3>';
+                                <h3 class="titre rouge">' . $objet->getTitreRouge() . '</h3>';
                         echo $objet->getTitres();
                         echo '</div></a>';
                     }
