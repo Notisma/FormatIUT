@@ -70,4 +70,17 @@ class ServiceRecherche
             ControleurMain::afficherRecherche();
         }
     }
+
+    /**
+     * @param $tri, le string qui indique le type de tri : "type", "date", "ordre alphabétique"
+     * @param $liste, la liste des résultats de la recherche que l'on doit trier
+     * @return $liste une liste qui contient des tableaux pour chaque type de résultat (entreprise, étudiant) en étant triée selon le paramètre $tri
+     */
+    public static function trierPar($tri, $liste) {
+        //seuls les types entreprise (avec la date de création de compte), les formations (avec date création offre) possèdent des dates que l'on peut trier
+        //à chaque fois, on récupère les éléments de la liste, on crée
+        $liste = null;
+        return $liste;
+    }
+
 }

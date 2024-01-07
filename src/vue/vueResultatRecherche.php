@@ -2,13 +2,12 @@
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 
 if (!isset($_REQUEST['triPar'])) {
-    $_REQUEST['triPar'] = 'type';
+    $_REQUEST['triPar'] = "type";
 }
 
 ?>
