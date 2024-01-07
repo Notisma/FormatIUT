@@ -19,6 +19,8 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ServiceConnexion
 {
+
+    private static bool $avecConnexionTest=false;
     /**
      * @return void action connectant l'utilisateur
      */
@@ -30,7 +32,7 @@ class ServiceConnexion
                 self::connexionEntreprise($user);
             } else if (ConnexionLdap::connexion($_REQUEST["login"], $_REQUEST["mdp"], "connexion")) {
                 self::connexionLDAP();
-            } else {
+            } else if (self::$avecConnexionTest){
                 self::connexionTest();
             }
         }
