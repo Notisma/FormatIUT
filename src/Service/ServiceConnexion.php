@@ -108,27 +108,23 @@ class ServiceConnexion
     private static function connexionTest()
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
-            switch ($_REQUEST["login"]){
-                case "SecretariatTest":
-                {
-                    $user = new Secretariat($_REQUEST["login"]);
-                    break;
-                }
-                case "ProfTest":{
-                    $user = new Personnels($_REQUEST["login"]);
-                    break;
-                }
-                case "AdminTest":{
-                    $user = new Administrateurs($_REQUEST["login"]);
-                    break;
-                }
+            $login=$_REQUEST["login"];
+            if ($login=="ProfTest"){
+                $user = new Personnels($login);
+            }else if ($login=="SecretariatTest"){
+                $user = new Secretariat($login);
+            }else if ($login=="AdminTest"){
+                $user=new Administrateurs($login);
+            }else {
+                $user=null;
             }
-            ConnexionUtilisateur::connecter($user);
-            MessageFlash::ajouter("success", "Connexion Réussie");
-            header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
-            exit();
+            if (!is_null($user)) {
+                ConnexionUtilisateur::connecter($user);
+                MessageFlash::ajouter("success", "Connexion Réussie");
+                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                exit();
+            }
         }
 
     }
