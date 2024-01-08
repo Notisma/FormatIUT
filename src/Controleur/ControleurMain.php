@@ -85,7 +85,7 @@ class ControleurMain
         /** @var ControleurMain $menu */
         $menu = Configuration::getCheminControleur();
 
-        self::afficherVue("Erreur", 'vueErreur.php', $menu::getMenu(), [
+        self::afficherVue("Erreur", 'vueErreur.php', [
             'erreurStr' => $error
         ]);
     }

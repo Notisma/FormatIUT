@@ -99,7 +99,8 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModification(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", ["entreprise" => $entreprise]);
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        self::afficherVue("Modifier vos informations", "Entreprise/vueMettreAJour.php", ["entreprise" => $entreprise]);
     }
 
     /**
@@ -140,35 +141,48 @@ class ControleurEntrMain extends ControleurMain
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static function resetMDP(): void{
-        ServiceMdp::resetMdp();
-    }
-
-    public static function supprimerFormation(): void{
-        ServiceFormation::supprimerFormation();
-    }
-
-    public static function mettreAJourEntreprise(): void{
+    public static function mettreAJour(): void
+    {
         ServiceEntreprise::mettreAJourEntreprise();
     }
 
-    public static function telechargerCV(): void{
+    public static function resetMDP(): void
+    {
+        ServiceMdp::resetMdp();
+    }
+
+    public static function supprimerFormation(): void
+    {
+        ServiceFormation::supprimerFormation();
+    }
+
+    public static function mettreAJourEntreprise(): void
+    {
+        ServiceEntreprise::mettreAJourEntreprise();
+    }
+
+    public static function telechargerCV(): void
+    {
         ServiceFichier::telechargerCV();
     }
 
-    public static function telechargerLM(): void{
+    public static function telechargerLM(): void
+    {
         ServiceFichier::telechargerLM();
     }
 
-    public static function mettreAJourMdp(): void{
+    public static function mettreAJourMdp(): void
+    {
         ServiceMdp::mettreAJourMdp();
     }
 
-    public static function creerFormation(): void{
+    public static function creerFormation(): void
+    {
         ServiceFormation::creerFormation();
     }
 
-    public static function modifierOffre(): void{
+    public static function modifierOffre(): void
+    {
         ServiceFormation::modifierOffre();
     }
 
