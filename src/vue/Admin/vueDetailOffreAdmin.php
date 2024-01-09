@@ -50,7 +50,8 @@
 
                 } else {
                     echo "
-                <a href='?action=supprimerFormation&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>SUPPRIMER</a>
+                <a id='modif' href='?action=afficherFormModificationOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>MODIFIER</a>
+                <a href='?action=supprimerFormation&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>SUPPRIMER</a>
                 ";
                 }
             }
@@ -71,13 +72,12 @@
             echo "<div class='statutOffre valide' >";
             echo "<img src='../ressources/images/success.png' alt='entreprise'>";
             echo "<h3 class='titre'>Validée - cette offre est postée</h3>";
-            echo "</div>";
         } else {
             echo "<div class='statutOffre attente'>";
             echo "<img src='../ressources/images/sablier.png' alt='entreprise'>";
             echo "<h3 class='titre'>En Attente de Validation</h3>";
-            echo "</div>";
         }
+        echo "</div>";
 
         ?>
 
