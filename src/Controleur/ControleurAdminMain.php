@@ -153,8 +153,13 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherFormulaireModifEtudiant(): void
     {
-        self::$pageActuelleAdmin = "Modifier un étudiant";
-        self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php");
+        if(ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+            self::$pageActuelleAdmin = "Modifier un étudiant";
+            self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
+        }
+        else{
+            self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous ne pouvez pas accéder à cette page");
+        }
     }
 
     /**
@@ -171,7 +176,6 @@ class ControleurAdminMain extends ControleurMain
             self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
         }
     }
-
     /**
      * @return void
      * Affiche la liste des conventions à valider au secrétariat/admin
@@ -198,6 +202,11 @@ class ControleurAdminMain extends ControleurMain
                 "offre" => $formation]);
     }
 
+
+    public static function afficherFormulaireModifEntreprise(): void{
+        self::$pageActuelleAdmin = "Modifier une entreprise";
+        self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+    }
 
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -264,6 +273,10 @@ class ControleurAdminMain extends ControleurMain
     public static function retrograderProf(): void
     {
         ServicePersonnel::retrograderProf();
+    }
+
+    public static function modifierEntreprise(): void{
+        ServiceEntreprise::modifierEntreprise();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

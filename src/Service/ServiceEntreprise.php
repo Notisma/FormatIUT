@@ -9,6 +9,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\VilleRepository;
 
 class ServiceEntreprise
 {
@@ -123,6 +124,26 @@ class ServiceEntreprise
             }
         } else {
             ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
+        }
+    }
+
+    public static function modifierEntreprise(): void{
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+            if ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']) == null){
+                ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "L'entreprise n'existe pas");
+            }
+            else{
+                $entr = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+                $_REQUEST['img'] = $entr->getImg();
+                $_REQUEST['mdpHache'] = $entr->getMdpHache();
+                $_REQUEST['emailAValider'] = $entr->getEmailAValider();
+                $_REQUEST['nonce'] = $entr->getNonce();
+                $_REQUEST['dateCreationCompte'] = $entr->getDateCreationCompte();
+                $_REQUEST["idVille"] = (new VilleRepository())->getVilleParNom($_REQUEST["ville"]);
+                $entr = Entreprise::creerEntreprise($_REQUEST);
+                (new EntrepriseRepository())->modifierObjet($entr);
+                ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise à bien été modifiée");
+            }
         }
     }
 }

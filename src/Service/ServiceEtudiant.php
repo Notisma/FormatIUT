@@ -33,10 +33,22 @@ class ServiceEtudiant
                 ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "L'étudiant n'existe pas");
             }
             else{
-                $etu = Etudiant::creerEtudiant($_REQUEST);
+                $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEtudiant"]);
+                $etu->setNomEtudiant($_REQUEST['nomEtudiant']);
+                $etu->setPrenomEtudiant($_REQUEST['prenomEtudiant']);
+                $etu->setLoginEtudiant($_REQUEST['loginEtudiant']);
+                $etu->setSexeEtu($_REQUEST['sexeEtu']);
+                $etu->setMailUniersitaire($_REQUEST['mailUniversitaire']);
+                $etu->setMailPerso($_REQUEST['mailPerso']);
+                $etu->setTelephone($_REQUEST['telephone']);
+                $etu->setGroupe($_REQUEST['groupe']);
+                $etu->setParcours($_REQUEST['parcours']);
                 (new EtudiantRepository())->modifierObjet($etu);
                 ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "success", "L'étudiant à bien été modifié");
             }
+        }
+        else{
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas effectuer cette action");
         }
     }
 
@@ -46,11 +58,11 @@ class ServiceEtudiant
      */
     public static function supprimerEtudiant(): void
     {
-        if (isset($_REQUEST["numEtu"])) {
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtu']);
+        if (isset($_REQUEST["numEtudiant"])) {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
             if (!is_null($etudiant)) {
                 if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                    (new EtudiantRepository())->supprimer($_REQUEST['numEtu']);
+                    (new EtudiantRepository())->supprimer($_REQUEST['numEtudiant']);
                     ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "L'étudiant a bien été supprimé");
                 } else ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "danger", "Vous n'avez pas les droits requis");
             } else ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "warning", "L'étudiant n'existe pas");
