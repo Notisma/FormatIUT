@@ -169,7 +169,7 @@
 
                 foreach ($listeEtudiants as $etudiant) { ?>
 
-                    <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=<?= $etudiant->getNumEtudiant() ?>"
+                    <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=<?= $etudiant->getNumEtudiant() ?>"
                        class="alerteEntr hoverRose">
                         <div class="imageAlerte">
                             <?php

@@ -11,7 +11,7 @@
                     $groupeHTML = htmlspecialchars($etudiant["etudiant"]->getGroupe());
                     $parcoursHTML = htmlspecialchars($etudiant["etudiant"]->getParcours());
                     echo "
-                    <a class='etudiant' href='?action=afficherDetailEtudiant&numEtu=" . $etudiant['etudiant']->getNumEtudiant() . "&controleur=AdminMain'>
+                    <a class='etudiant' href='?action=afficherDetailEtudiant&numEtudiant=" . $etudiant['etudiant']->getNumEtudiant() . "&controleur=AdminMain'>
                             <div class='etudiantGauche'>
                                <img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant['etudiant']->getImg()) . "' alt='etudiant'>
                             </div>

@@ -99,7 +99,7 @@
                         $groupeHTML=htmlspecialchars($etudiant->getGroupe());
                         $prenomEtuHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
                         $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
-                        echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtu=" . $etudiant->getNumEtudiant() . "'>" .
+                        echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
                             "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
