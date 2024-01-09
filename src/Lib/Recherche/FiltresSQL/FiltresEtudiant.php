@@ -20,10 +20,28 @@ class FiltresEtudiant
         return " AND groupe LIKE \"G\"";
     }
 
-    public static function etudiant_concerne()
+    public static function etudiant_concerne():string
     {
         $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
         $idEntreprise=$entreprise->getSiret();
         return " AND numEtudiant IN (SELECT idEtudiant FROM Formations WHERE idEntreprise=76543128904567 )";
+    }
+
+    public static function etudiant_avec_formation():string
+    {
+        return " ";
+    }
+
+    public static function etudiant_sans_formation():string
+    {
+        return "";
+    }
+    public static function etudiant_stage():string
+    {
+        return "";
+    }
+    public static function etudiant_alternance():string
+    {
+        return "";
     }
 }

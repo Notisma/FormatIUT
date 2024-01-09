@@ -9,7 +9,7 @@ class ProfRecherche extends AbstractAffichage
 
     function getTitreRouge()
     {
-        return htmlspecialchars(parent::getObjet()->getPrenomProf()) . ' ProfRecherche.php' . htmlspecialchars(parent::getObjet()->getNomProf());
+        return htmlspecialchars(parent::getObjet()->getPrenomProf()) . ' ' . htmlspecialchars(parent::getObjet()->getNomProf());
     }
 
     function getLienAction()
