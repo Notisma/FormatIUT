@@ -6,7 +6,9 @@
             <label class="labelFormulaire" for="typeOffre">Type d'Offre</label>
             <div class="inputCentre">
                 <select name="typeOffre" id="typeOffre">
-                    <option value="Stage/Alternance" <?php if ($offre->getTypeOffre() == "Stage/Alternance") echo 'selected' ?>> Stage et alternance</option>
+                    <option value="Stage/Alternance" <?php if ($offre->getTypeOffre() == "Stage/Alternance") echo 'selected' ?>>
+                        Stage et alternance
+                    </option>
                     <option value="Stage" <?php if ($offre->getTypeOffre() == "Stage") echo 'selected' ?>>
                         Stage
                     </option>
@@ -55,16 +57,16 @@
             <label class="labelFormulaire" for="detailProjet_id">Détails du projet</label>
             <br>
             <div class="grandInputCentre">
-                    <textarea class="inputFormulaire" name="detailProjet" id="detailProjet_id" required maxlength="255"
-                    ><?= htmlspecialchars($offre->getDetailProjet()) ?>
+                    <textarea class="inputFormulaire" name="detailProjet" id="detailProjet_id" required maxlength="255">
+                        <?= htmlspecialchars($offre->getDetailProjet()) ?>
                     </textarea>
             </div>
 
             <label class="labelFormulaire" for="objectifOffre_id">Objectifs pour l'étudiant</label>
-                <div class="grandInputCentre">
-                    <textarea class="inputFormulaire" name="objectifOffre" id="objectifOffre_id"
-                              <?= $offre->getObjectifOffre() ?>required maxlength="255"></textarea>
-                </div>
+            <div class="grandInputCentre">
+                <textarea class="inputFormulaire" name="objectifOffre" id="objectifOffre_id" required
+                          maxlength="255"><?= $offre->getObjectifOffre() ?></textarea>
+            </div>
 
             <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>
             <div class="inputCentre">
@@ -73,16 +75,17 @@
             </div>
 
             <label class="labelFormulaire" for="uniteGratification_id">Devise utilisée pour la rémunération</label>
-                <div class="inputCentre">
-                    <input class="inputFormulaire" type="text" name="uniteGratification" id="uniteGratification_id"
-                           value="<?= $offre->getUniteGratification() ?>" required>
-                </div>
+            <div class="inputCentre">
+                <input class="inputFormulaire" type="text" name="uniteGratification" id="uniteGratification_id"
+                       value="<?= $offre->getUniteGratification() ?>" required>
+            </div>
 
-                <label class="labelFormulaire" for="uniteDureeGratification_id">Rémunération par heure</label>
-                <div class="inputCentre">
-                    <input class="inputFormulaire" type="number" name="uniteDureeGratification" id="uniteDureeGratification_id"
-                           value="<?= $offre->getUniteDureeGratification() ?>" required maxlength="4">
-                </div>
+            <label class="labelFormulaire" for="uniteDureeGratification_id">Rémunération par heure</label>
+            <div class="inputCentre">
+                <input class="inputFormulaire" type="number" name="uniteDureeGratification"
+                       id="uniteDureeGratification_id"
+                       value="<?= $offre->getUniteDureeGratification() ?>" required maxlength="4">
+            </div>
 
             <label class="labelFormulaire" for="dureeHeure_id">Durée en heure</label>
             <div class="inputCentre">
@@ -105,8 +108,9 @@
             <div class="boutonsForm">
                 <input type="hidden" name="idFormation" value="<?= $offre->getidFormation() ?>">
                 <input type="submit" value="Réinitialiser"
-                       formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">
-                <input type="submit" value="Envoyer" formaction="?action=modifierOffre&controleur=EntrMain">
+                       formaction="?action=afficherFormulaireModificationOffre&controleur=<?= \App\FormatIUT\Configuration\Configuration::getControleurName() ?>">
+                <input type="submit" value="Envoyer"
+                       formaction="?action=modifierOffre&controleur=<?= \App\FormatIUT\Configuration\Configuration::getControleurName() ?>">
             </div>
         </form>
     </div>
