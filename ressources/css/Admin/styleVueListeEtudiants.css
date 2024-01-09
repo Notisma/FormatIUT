@@ -11,7 +11,7 @@ body {
     margin: 0;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -23,13 +23,13 @@ body {
     margin: auto;
     width: 80%;
     height: 80%;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     align-content: center;
     border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
 }
 
 .gauche {
@@ -154,13 +154,13 @@ body {
     margin: 0;
 }
 
-#valide {
+.valide {
     background-color: #24942b;
     color: #0d4e00;
     border: 2px solid #0d4e00;
 }
 
-#nonValide {
+.nonValide {
     background-color: #ffb700;
     color: #814900;
     border: 2px solid #fa7506;
@@ -169,8 +169,6 @@ body {
 .statutEtu > img {
     height: 80%;
 }
-
-
 
 
 .droite {

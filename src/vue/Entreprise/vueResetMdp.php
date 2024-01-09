@@ -2,7 +2,7 @@
 
     <div class="resetGauche">
         <img src="../ressources/images/mdpOublié.png" alt="illustration">
-        <h2 class="titres" id="rouge">AIDE FORMAT'IUT - MOT DE PASSE OUBLIÉ</h2>
+        <h2 class="titres rouge">AIDE FORMAT'IUT - MOT DE PASSE OUBLIÉ</h2>
     </div>
 
     <div class="resetDroit">

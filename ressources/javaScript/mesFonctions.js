@@ -159,3 +159,10 @@ function afficherPageCompteEntr(page) {
         }
     }
 }
+
+function decoAuto() {
+    let element = document.getElementById("decoAuto");
+    if (element.style.display !== "flex") {
+        element.style.display = "flex";
+    }
+}

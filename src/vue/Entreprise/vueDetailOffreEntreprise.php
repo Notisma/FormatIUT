@@ -75,7 +75,7 @@
                     $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
                     echo '<div class="etudiantPostulant">
                 <div class="illuPostulant">';
-                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
                     echo '</div>
                 <div class="nomEtuPostulant">
                     <h4>';
@@ -96,7 +96,7 @@
                     foreach ($listeEtu as $etudiant) {
                         echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
                         <div class="illuPostulant">';
-                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
                         echo '</div>
                         <div class="nomEtuPostulant">
                             <h4>';
@@ -146,7 +146,7 @@
     <div class="detailsEtu">
         <div class="PPEtu">
             <?php
-            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
             ?>
         </div>
 

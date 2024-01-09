@@ -1,18 +1,19 @@
 <div class="wrapCentreDetailEntr">
     <?php
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["idEntreprise"]);
-    $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-    $adresseHTML=htmlspecialchars($entreprise->getAdresseEntreprise());
-    $statutHTML=htmlspecialchars($entreprise->getStatutJuridique());
-    $nafHTML=htmlspecialchars($entreprise->getCodeNAF());
-    $telHTML=htmlspecialchars($entreprise->getTel());
-    $mailHTML=htmlspecialchars($entreprise->getEmail());
+    $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
+    $adresseHTML = htmlspecialchars($entreprise->getAdresseEntreprise());
+    $statutHTML = htmlspecialchars($entreprise->getStatutJuridique());
+    $nafHTML = htmlspecialchars($entreprise->getCodeNAF());
+    $telHTML = htmlspecialchars($entreprise->getTel());
+    $mailHTML = htmlspecialchars($entreprise->getEmail());
     ?>
 
     <div class="gaucheEntr">
         <div class="wrapImgEntr">
-            <img src="<?= App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) ?>" alt="entreprise">
-            <h2 class="titre" id="rouge"><?php echo $nomEntrHTML ?></h2>
+            <img src="<?= App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) ?>"
+                 alt="entreprise">
+            <h2 class="titre rouge"><?php echo $nomEntrHTML ?></h2>
         </div>
 
         <div class="wrapInfosEntr">
@@ -29,7 +30,7 @@
 
         <div class="wrapBoutons">
             <?php
-            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 if ($entreprise->isEstValide()) {
                     echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">SUPPRIMER</a>';
                     echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">MODIFIER</a>';
@@ -61,7 +62,7 @@
             } else {
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
-                        $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
+                        $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='offre'>" .
@@ -71,9 +72,9 @@
                             "<h4 class='titre'>" . $nomEntrHTML . "</h4>";
 
                         if ($offre->getEstValide()) {
-                            echo '<div class="statut" id="valide"> <img src="../ressources/images/success.png" alt="sab"> <p>Offre Postée</p> </div>';
+                            echo '<div class="statut valide"> <img src="../ressources/images/success.png" alt="sab"> <p>Offre Postée</p> </div>';
                         } else {
-                            echo '<div class="statut" id="attente"> <img src="../ressources/images/sablier.png" alt="sab"> <p>En attente de validation</p> </div>';
+                            echo '<div class="statut attente"> <img src="../ressources/images/sablier.png" alt="sab"> <p>En attente de validation</p> </div>';
                         }
 
                         echo
@@ -85,3 +86,4 @@
             ?>
         </div>
     </div>
+</div>

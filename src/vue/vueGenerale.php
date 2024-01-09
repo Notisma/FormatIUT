@@ -1,6 +1,7 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ use App\FormatIUT\Configuration\Configuration;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body
     <?php
@@ -35,7 +36,8 @@ use App\FormatIUT\Configuration\Configuration;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
-                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
+                    $menu=\App\FormatIUT\Controleur\ControleurMain::getMenu();
+                    $type = ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -44,20 +46,22 @@ use App\FormatIUT\Configuration\Configuration;
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
 
-                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        $user=\App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
-                        $src=$user->getImageProfil();
-                        $liaison="?controleur=".$user->getControleur()."&action=afficherProfil";
 
+                    if (ConnexionUtilisateur::estConnecte()) {
+
+                        $user = ConnexionUtilisateur::getUtilisateurConnecte();
+                        $menu=$user->getMenu();
+                        $src = $user->getImageProfil();
+                        $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
+                        $controleur=$user->getControleur();
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='menu' value='".serialize($menu)."'>
-                            <input type='hidden' name='service' value='Recherche'>
+                            <input type='hidden' name='controleur' value='$controleur'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                     }
@@ -96,7 +100,7 @@ use App\FormatIUT\Configuration\Configuration;
                     foreach ($menu as $item) {
                         $actuel = "";
                         if ($item['label'] == $titrePage) {
-                            $actuel = "id='active'";
+                            $actuel = "class='active'";
                         }
                         echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
@@ -119,7 +123,7 @@ use App\FormatIUT\Configuration\Configuration;
         foreach ($menu as $item) {
             $actuel = "";
             if ($item['label'] == $titrePage) {
-                $actuel = "id='active'";
+                $actuel = "class='active'";
             }
             echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
         }
@@ -148,7 +152,9 @@ use App\FormatIUT\Configuration\Configuration;
                         </ul>
                     </div>
                 </div>
-                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
+                <p>Sources : Cliquer <a
+                            href="controleurFrontal.php?action=afficherSources&controleur=Main">ICI</a>
+                </p>
             </div>
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
@@ -158,5 +164,29 @@ use App\FormatIUT\Configuration\Configuration;
         </div>
     </footer>
 </div>
+
+<div class="decoAuto" id="decoAuto">
+    <img src="../ressources/images/warning.png" alt="warning">
+    <h2 class="titre" id="rouge">AVERTISSEMENT</h2>
+    <h3 class="titre">Vous serez déconnecté automatiquement à
+        <?php
+        date_default_timezone_set('Europe/Paris');
+        $date = date("H:i");
+        $time = strtotime($date . " +10 minutes");
+        echo date("H:i", $time);
+        ?>
+    </h3>
+    <a class="boutonFermer" onclick="supprimerElement('decoAuto')">J'ai Compris</a>
+</div>
+
+<?php
+
+if (isset($_SESSION['script'])) {
+    echo $_SESSION['script'];
+    unset($_SESSION['script']);
+}
+
+?>
+
 </body>
 </html>

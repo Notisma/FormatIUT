@@ -7,7 +7,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 <div class="mainAcc">
 
     <div class="gaucheAcc">
-        <h3 class="titre" id="rouge">Vos Offres récentes :</h3>
+        <h3 class="titre rouge">Vos Offres récentes :</h3>
         <?php
         $data = $listeOffre;
 
@@ -24,11 +24,11 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . $offre->getNomOffre() . '</h3>
+           <h3 class="titre rouge">' . $offre->getNomOffre() . '</h3>
            ';
 
             if (!$offre->getEstValide()) {
-                echo '<h4 class="titre" id="rouge">Offre <span>non validée</span></h4>';
+                echo '<h4 class="titre rouge">Offre <span>non validée</span></h4>';
             } else {
                 echo '<h4 class="titre">Offre <span>validée</span></h4>';
             }

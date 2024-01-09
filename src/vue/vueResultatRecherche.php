@@ -1,77 +1,103 @@
 <?php
+
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+
+if (!isset($_REQUEST['triPar'])) {
+    $_REQUEST['triPar'] = 'type';
+}
+
 ?>
-<div class="center">
 
-    <div class="intro">
-        <h2 class="titre" id="rouge">Effectuer une recherche sur FORMAT'IUT :</h2>
-        <?= $codeRecherche ?>
+<div class="mainRecherche">
+
+    <div class="bodyRecherche">
+
+        <div class="controleRech">
+            <h2 class="titre" id="rouge">Effectuez une recherche sur Format'IUT</h2>
+            <?php
+            echo $codeRecherche
+            ?>
+            <div class="filtresRech">
+
+            </div>
+
+            <div class="trierPar">
+                <h4 class="titre">Trier Par :</h4>
+
+                <?php
+                $url = $_REQUEST['recherche'];
+                ?>
+
+                <form method="get" id="formTrierPar">
+                    <select name="triPar" onchange="this.form.submit()">
+                        <option value="type">Type</option>
+                        <option value="date">Date</option>
+                        <option value="asc">Ordre Alphabétique</option>
+                    </select>
+                    <input type="hidden" name="service" value="Recherche">
+                    <input type="hidden" name="action" value="rechercher">
+                    <input type="hidden" name="recherche" value="<?php echo $url ?>">
+                </form>
+            </div>
+
+        </div>
+
+        <div class="resultatsRecherche">
+
+        </div>
+
     </div>
 
-    <div class="results">
-        <?php
-        if ($nbResults == 0) {
-            echo "<div class='erreur'>
-                <img src='../ressources/images/erreur.png' alt='erreur'>
-                <h2 class='titre'>Aucun résultat trouvé</h2>
-            </div>";
-        }
+    <div class="parametresRecherche">
+
+        <div class="vitrine">
+            <img src="../ressources/images/recherchez.png" alt="">
+            <h3 class="titre" id="rouge">Paramètres de Recherche</h3>
+        </div>
+
+        <div class="allOptions">
+            <form method="get" id="options">
 
 
-        echo "<h3 class='titre'>" . $nbResults . " Résultats trouvés :</h3>";
-        if (!empty($entreprises)) {
-            foreach ($entreprises as $entr) {
-                $nomEntrepriseHTML=htmlspecialchars($entr->getNomEntreprise());
-                $telHTML=htmlspecialchars($entr->getTel());
-                $adresseHTML=htmlspecialchars($entr->getAdresseEntreprise());
-                echo '
-                    <div class="resultat" id="petitRouge">
-                        <div class="partieGauche">
-                            <img src="' . Configuration::getUploadPathFromId($entr->getImg()) . '" class="imageEntr" alt = "pp entreprise">
-                        </div>
-                        <div class="partieDroite">
-                            <h3 class="titre">' . $nomEntrepriseHTML . ' - Entreprise</h3>
-                            <p><span>Téléphone : </span>' . $telHTML . '</p>
-                            <p><span>Adresse : </span>' . $adresseHTML . '</p>
-                        </div>
-                    </div>';
-            }
-        }
-
-
-        if (!empty($offres)) {
-            foreach ($offres as $offre) {
-                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                echo "<a href='?controleur=" . Configuration::getControleurName() . "&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='resultat'>
-                    <div class='partieGauche'>
-                            <img src=\"" . Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
-                        </div>
-                        <div class='partieDroite'>
-                        <h3 class='titre' id='rouge'>" . htmlspecialchars($offre->getNomOffre()) . " - Offre de " . $offre->getTypeOffre() . "</h3>
-                        <p>
-                       ";
-                if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
-                    echo $nb . " postulation";
-                    if ($nb > 1) echo "s";
-                } else {
-                    echo "Assignée";
+                <?php
+                $privilege = ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
+                foreach ($privilege as $name) {
+                    $name2 = ucfirst($name) . "s";
+                    echo '<div>
+                    <h4 class="titre">' . $name2 . '</h4>
+                    <span>
+                        <label for="' . $name . '"></label><input class="switch" type="checkbox" name="' . $name . '"
+                                                               id="' . $name . '" value="on" onchange="this.form.submit()"';
+                    if (isset($_REQUEST[$name])) {
+                        echo 'checked';
+                    }
+                    echo '>
+                    </span>
+                </div>';
                 }
-                $sujetHTML=htmlspecialchars($offre->getSujet());
-                echo "</p>";
-                if ($offre->getDateDebut() != null && $offre->getDateFin() != null)
-                    echo "<p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin();
-                else{
-                    echo "<p> Date non disponible ";
-                }
-                echo " pour " . $sujetHTML . "</p>" .
-                    "</div>
-                    </a>";
-            }
-        }
-        ?>
+                ?>
+
+                <div class="filtresDetail">
+                    <?php
+                    //si l'utilisateur est un admin, et qu'il a sélectionné uniquement les entreprises
+                    if (isset($_REQUEST['entreprise']) && !isset($_REQUEST['etudiants']) && !isset($_REQUEST['offres']) && !isset($_REQUEST['personnels'])) {
+                        echo "entreprises sélectionnées";
+                    }
+
+                    ?>
+                </div>
+
+
+                <input type="hidden" name="service" value="Recherche">
+                <input type="hidden" name="action" value="rechercher">
+                <input type="hidden" name="recherche" value="<?php echo $url ?>">
+            </form>
+        </div>
     </div>
+
 </div>

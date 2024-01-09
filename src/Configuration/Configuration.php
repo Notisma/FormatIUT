@@ -11,6 +11,7 @@ namespace App\FormatIUT\Configuration;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class Configuration
@@ -118,21 +119,24 @@ class Configuration
     }
 
 
-    private static string $controleur;
+    public static function controleurIsSet(): bool
+    {
+        return Session::getInstance()->contient('controleur');
+    }
 
     public static function controleurIs(string $contr): bool
     {
-        return self::$controleur == $contr;
+        return Session::getInstance()->lire('controleur') == $contr;
     }
 
     public static function setControleur(string $controleur): void
     {
-        self::$controleur = $controleur;
+        Session::getInstance()->enregistrer('controleur', $controleur);
     }
 
     public static function getControleurName(): string
     {
-        return self::$controleur;
+        return Session::getInstance()->lire('controleur');
     }
 
     /**
@@ -140,16 +144,12 @@ class Configuration
      */
     public static function getCheminControleur(): string
     {
-        return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
+        return "App\FormatIUT\Controleur\Controleur" . Session::getInstance()->lire('controleur');
     }
 
-    /*    public static function getControleurClass(): string
-        {
-            return "Controleur" . self::$controleur;
-        }
-    */
-    public static function getDelai()
+
+    public static function getDelai(): int
     {
-        return 30 * 60;
+        return 11 * 60;
     }
 }
