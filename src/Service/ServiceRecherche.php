@@ -5,6 +5,7 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\FiltresSQL;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
@@ -48,13 +49,15 @@ class ServiceRecherche
             $listeFiltres=array();
             foreach ($filtres as $filtre) {
                 if (in_array("obligatoire",$filtre) ||isset($_REQUEST[$filtre["value"]])){
-                    $listeFiltres[]=$filtre["SQL"];
+                    $fonction=$filtre["value"];
+                    $nomDeClasseFiltre="App\FormatIUT\Lib\Recherche\FiltresSQL\Filtres".$repository;
+                    $listeFiltres[]=$nomDeClasseFiltre::$fonction();
                 }
             }
             if (isset($_REQUEST[$repository.'s']) || $sansfiltres) {
                 $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
                 $re = "recherche";
-                $nomAffichageRecherche = "App\FormatIUT\Lib\AffichagesRecherche\\" . $repository . "Recherche";
+                $nomAffichageRecherche = "App\FormatIUT\Lib\Recherche\AffichagesRecherche\\" . $repository . "Recherche";
                 $element = (new $nomDeClasseRepository)->$re($morceaux,$listeFiltres);
                 $arrayRecherche = array();
                 foreach ($element as $objet) {

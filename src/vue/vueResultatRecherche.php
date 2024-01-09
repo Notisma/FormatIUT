@@ -119,6 +119,9 @@ if (!isset($_REQUEST['triPar'])) {
                                 if (isset($_REQUEST[$filtre["value"]])) {
                                     echo 'checked';
                                 }
+                                if (in_array("obligatoire",$filtre)){
+                                    echo 'checked onclick="return false"';
+                                }
                                 echo '>
                                 </span>
                                 ';
