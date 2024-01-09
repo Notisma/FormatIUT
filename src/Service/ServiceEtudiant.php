@@ -47,6 +47,9 @@ class ServiceEtudiant
                 ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "success", "L'étudiant à bien été modifié");
             }
         }
+        else{
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas effectuer cette action");
+        }
     }
 
 
