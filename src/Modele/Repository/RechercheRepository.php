@@ -9,11 +9,11 @@ abstract class RechercheRepository extends AbstractRepository
 {
     protected abstract function getColonnesRecherche():array;
 
-    public function recherche(array $motsclefs)
+    public function recherche(array $motsclefs,array $filtres)
     {
         foreach ($motsclefs as $mot) {
             $mot=strtolower($mot);
-            $sql="SELECT * FROM ".$this->getNomTable()." WHERE ";
+            $sql="SELECT * FROM ".$this->getNomTable()." WHERE (";
             foreach ($this->getColonnesRecherche() as $colonne) {
                 if ($colonne!=$this->getColonnesRecherche()[0]){
                     $sql.=" OR ";
@@ -22,6 +22,12 @@ abstract class RechercheRepository extends AbstractRepository
                 $values["tag".$colonne]= "%$mot%";
             }
         }
+        $sql.=")";
+        foreach ($filtres as $filtre) {
+            $sql.=$filtre;
+        }
+        var_dump($sql);
+
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $liste=array();

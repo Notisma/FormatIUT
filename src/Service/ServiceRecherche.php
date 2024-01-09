@@ -45,11 +45,17 @@ class ServiceRecherche
             if (isset($_REQUEST[$item."s"])){$sansfiltres=false;}
         }
         foreach ($privilege as $repository=>$filtres) {
+            $listeFiltres=array();
+            foreach ($filtres as $filtre) {
+                if (in_array("obligatoire",$filtre) ||isset($_REQUEST[$filtre["value"]])){
+                    $listeFiltres[]=$filtre["SQL"];
+                }
+            }
             if (isset($_REQUEST[$repository.'s']) || $sansfiltres) {
                 $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
                 $re = "recherche";
                 $nomAffichageRecherche = "App\FormatIUT\Lib\AffichagesRecherche\\" . $repository . "Recherche";
-                $element = (new $nomDeClasseRepository)->$re($morceaux);
+                $element = (new $nomDeClasseRepository)->$re($morceaux,$listeFiltres);
                 $arrayRecherche = array();
                 foreach ($element as $objet) {
                     $arrayRecherche[] = new $nomAffichageRecherche($objet);

@@ -108,8 +108,8 @@ class ServiceConnexion
     private static function connexionTest()
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
+
             switch ($_REQUEST["login"]){
                 case "SecretariatTest":
                 {

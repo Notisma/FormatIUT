@@ -39,12 +39,13 @@ class Etudiants extends Utilisateur
     {
         return array(
             "Entreprise"=>array(
-                "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee"),
+                "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee","obligatoire","SQL"=>" AND estValide=1 "),
             ),
             "Formation"=>array(
-                "filtre2"=>array("label"=>"Stages","value"=>"formation_stage"),
-                "filtre3"=>array("label"=>"Alternances","value"=>"formation_alternance"),
-                "filtre4"=>array("label"=>"Formations Validées","value"=>"formation_validee")
+                "filtre2"=>array("label"=>"Stages","value"=>"formation_stage","SQL"=>" AND typeOffre=\"Stage\" "),
+                "filtre3"=>array("label"=>"Alternances","value"=>"formation_alternance","SQL"=>" AND typeOffre=\"Alternance\" "),
+                "filtre4"=>array("label"=>"Formations Validées","value"=>"formation_validee","obligatoire","SQL"=>" AND estValide=1"),
+                "filtre5"=>array("label"=>"Formations Disponibles","value"=>"formation_disponible","obligatoire","SQL"=>" AND idEtudiant is Null")
             ),
 
         );

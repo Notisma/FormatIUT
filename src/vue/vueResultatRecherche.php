@@ -36,7 +36,7 @@ if (!isset($_REQUEST['triPar'])) {
                         <option value="date">Date</option>
                         <option value="asc">Ordre Alphabétique</option>
                     </select>
-                    <input type="hidden" name="service" value="Recherche">
+                    <input type="hidden" name="controleur" value="AdminMain">
                     <input type="hidden" name="action" value="rechercher">
                     <input type="hidden" name="recherche" value="<?php echo $url ?>">
                 </form>
