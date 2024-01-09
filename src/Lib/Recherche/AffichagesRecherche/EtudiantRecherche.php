@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FormatIUT\Lib\AffichagesRecherche;
+namespace App\FormatIUT\Lib\Recherche\AffichagesRecherche;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
@@ -13,7 +13,7 @@ class EtudiantRecherche extends AbstractAffichage
 
     function getTitreRouge()
     {
-        return htmlspecialchars(parent::getObjet()->getPrenomEtudiant()) . ' ' . htmlspecialchars(parent::getObjet()->getNomEtudiant());
+        return htmlspecialchars(parent::getObjet()->getPrenomEtudiant()) ." ". htmlspecialchars(parent::getObjet()->getNomEtudiant());
     }
 
     public function getLienAction()

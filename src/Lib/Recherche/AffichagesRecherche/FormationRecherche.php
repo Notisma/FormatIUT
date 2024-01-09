@@ -1,9 +1,9 @@
 <?php
 
-namespace App\FormatIUT\Lib\AffichagesRecherche;
+namespace App\FormatIUT\Lib\Recherche\AffichagesRecherche;
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Lib\AffichagesRecherche\AbstractAffichage;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\AbstractAffichage;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;

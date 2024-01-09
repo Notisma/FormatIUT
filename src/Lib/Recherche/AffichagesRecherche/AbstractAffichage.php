@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FormatIUT\Lib\AffichagesRecherche;
+namespace App\FormatIUT\Lib\Recherche\AffichagesRecherche;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Configuration\Configuration;
