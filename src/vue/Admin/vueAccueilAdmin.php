@@ -167,50 +167,51 @@
                 echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune anomalie à afficher ici</h3> </div>';
             } else {
 
-                foreach ($listeEtudiants as $etudiant) { ?>
+            foreach ($listeEtudiants
 
-                    <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=<?= $etudiant->getNumEtudiant() ?>"
-                       class="alerteEntr hoverRose">
-                        <div class="imageAlerte">
-                            <?php
-                            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
-                            ?>
-                        </div>
+            as $etudiant) { ?>
 
-                        <div class="contenuAlerte">
-                            <h3 class="titre rouge">
-                                <?php
-                                $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
-                                $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
-                                echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
-                                ?></h3>
-                            <p>
-                                <?php
-                                if ($etudiant->getParcours() == "") {
-                                    echo "Données non renseignées";
-                                } else {
+            <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=<?= $etudiant->getNumEtudiant() ?>"
+               class="alerteEntr hoverRose">
+                <div class="imageAlerte">
+                    <?php
+                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
+                    ?>
+                </div>
 
-                                    $parcoursHTML = htmlspecialchars($etudiant->getParcours());
-                                    $groupeHTML = htmlspecialchars($etudiant->getGroupe());
-                                    echo $parcoursHTML . " - " . $groupeHTML;
-                                }
-                                ?></p>
-                            <div class="sujetAlerte">
-                                <img src="../ressources/images/attention.png" alt="image">
-                                <p>Aucun Stage/Alternance</p>
-                            </div>
-                        </div>
-                    </a>
-                <?php }
-            } ?>
+                <div class="contenuAlerte">
+                    <h3 class="titre rouge">
+                        <?php
+                        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                        echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                        ?></h3>
+                    <p>
+                        <?php
+                        if ($etudiant->getParcours() == "") {
+                            echo "Données non renseignées";
+                        } else {
 
+                            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                            echo $parcoursHTML . " - " . $groupeHTML;
+                        }
+                        ?></p>
+                    <div class="sujetAlerte">
+                        <img src="../ressources/images/attention.png" alt="image">
+                        <p>Aucun Stage/Alternance</p>
+                    </div>
+                </div>
+            </a>
+<?php }
+}
 
+echo '
             <!-- un exemple différent -->
             <a href="tt" class="alerteEntr hoverRose">
                 <div class="imageAlerte">
-                    <img src="../ressources/images/profil.png" alt="image">
+                    <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
                 </div>
-
                 <div class="contenuAlerte">
                     <h3 class="titre rouge">Thomas LOYE</h3>
                     <p>2e année - RACDV - Q2</p>
@@ -219,16 +220,63 @@
                         <p>A modifié sa convention le 13/11/2023</p>
                     </div>
                 </div>
+            </a>';
+
+if (isset($listeFormations)) {
+    foreach ($listeFormations as $convention) {
+        $etudiant = (new
+        \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
+        echo '<a
+                    href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
+                    class="alerteEntr" id="hoverRose">
+                <div class="imageAlerte">
+                    <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
+                </div>
+                <div class="contenuAlerte">
+                    <h3 class="titre" id="rouge">';
+        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+        echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+        echo '</h3>
+                    <p>';
+        if ($etudiant->getParcours() == "") {
+            echo "Données non renseignées";
+        } else {
+            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+            echo $parcoursHTML . " - " . $groupeHTML;
+        }
+        echo '</p>
+                    <div class="sujetAlerte">
+                        <img src="../ressources/images/attention.png" alt="image">
+                        <p>Convention modifiée le ' . $convention->getDateCreationConvention() . '</p>
+                    </div>
+                </div>
+            </a>';
+
+    }
+}
+
+// un exemple différent
+echo '<a href="tt" class="alerteEntr" id="hoverRose">
+                <div class="imageAlerte">
+                    <img src="../ressources/images/profil.png" alt="image">
+                </div>
+                <div class="contenuAlerte">
+                    <h3 class="titre" id="rouge">Thomas LOYE</h3>
+                    <p>2e année - RACDV - Q2</p>
+                    <div class="sujetAlerte">
+                        <img src="../ressources/images/attention.png" alt="image">
+                        <p>A modifié sa convention le 13/11/2023</p>
+                    </div>
+                </div>
             </a>
 
-
         </div>
-
         <div class="wrapBoutons">
             <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
-
     </div>
+    ';
 
-
-</div>
+?>

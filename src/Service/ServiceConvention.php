@@ -2,7 +2,9 @@
 
 namespace App\FormatIUT\Service;
 
+use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Convention;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
@@ -86,6 +88,40 @@ class ServiceConvention
         } else {
             ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur ne correspond pas");
         }
+    }
+
+
+    /**
+     * @return void
+     * Permet au secréteriat de valider une convention
+     */
+
+    public static function validerConvention() : void{
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            if(!$formation->getConventionValidee()) {
+                $formation->setConventionValidee(true);
+                $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
+                (new FormationRepository())->modifierObjet($formation);
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
+            }
+            else{
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
+            }
+        }
+        else{
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+        }
+    }
+
+    /**
+     * @return void
+     * Permet au secréteriat de rejeter une convention
+     */
+    public static function rejeterConvention(): void{
+        //Todo quand la modification d'une convention sera accepté dans les tests
+        echo "Todo quand la modification d'une convention sera accepté dans les tests";
+        echo ConnexionUtilisateur::getTypeConnecte();
     }
 
 }

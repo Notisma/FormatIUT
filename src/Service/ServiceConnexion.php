@@ -129,7 +129,6 @@ class ServiceConnexion
                 exit();
             }
         }
-
     }
 
     /**

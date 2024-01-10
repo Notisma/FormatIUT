@@ -1,13 +1,13 @@
 <div class="wrapCentreListEntr">
     <div class="gauche">
-        <h2 class="titre">Liste des Entreprises :</h2>
+        <h2 class="titre">Liste des Conventions :</h2>
 
         <div class="wrapEntreprises">
             <?php
             $erreur = 0;
 
             foreach ($listeFormations as $convention) {
-                if ($convention->getDateCreationConvention() != null && !$convention->getConventionValidee()) {
+                if ($convention->getIdEtudiant() != null && $convention->getDateCreationConvention() != null && !$convention->getConventionValidee()) {
                     $erreur++;
                     echo "
                         <a href='?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=" . $convention->getIdEtudiant() . "' class='entreprise'>
@@ -44,6 +44,10 @@
         <h3 class="titre rouge">Toutes les entreprises de la base de données</h3>
         <h4 class="titre">Consultez le statut de chaque entreprise en un coup d'oeil</h4>
         <p>Cliquez sur une entreprise pour voir ses détails</p>
+
+        <h3 class="titre rouge">Toutes les conventions de la base de données</h3>
+        <h4 class="titre">Consultez le statut de chaque convention en un coup d'oeil</h4>
+        <p>Cliquez sur une convention pour voir ses détails</p>
     </div>
 
 
