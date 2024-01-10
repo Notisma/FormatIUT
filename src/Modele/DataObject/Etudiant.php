@@ -118,6 +118,19 @@ class Etudiant extends AbstractDataObject
         $this->mailUniersitaire = $mailUniersitaire;
     }
 
+    public function getAnneeEtu()
+    {
+        //retourne 1 si le groupe commence par un S, 2 si il commence par un Q et 3 si il commence par un G
+        if ($this->groupe == null) return "";
+        else {
+            $groupe = $this->groupe;
+            if (substr($groupe, 0, 1) == "S") return 1;
+            else if (substr($groupe, 0, 1) == "Q") return 2;
+            else if (substr($groupe, 0, 1) == "G") return 3;
+            else return "";
+        }
+    }
+
     public function getMailPerso(): string
     {
         if ($this->mailPerso == null) return "";
