@@ -20,7 +20,7 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 class ServiceConnexion
 {
 
-    private static bool $avecConnexionTest=false;
+    private static bool $avecConnexionTest=true;
     /**
      * @return void action connectant l'utilisateur
      */

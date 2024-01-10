@@ -39,4 +39,11 @@ class ServicePersonnel
             } else ControleurAdminMain::redirectionFlash("afficherProfilAdmin", "warning", "Le professeur n'existe pas");
         } else ControleurAdminMain::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
     }
+
+    public static function devenirTuteur() :void{
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Personnels"){
+            echo ConnexionUtilisateur::getLoginUtilisateurConnecte();
+
+        }
+    }
 }
