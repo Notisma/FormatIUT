@@ -11,7 +11,7 @@
                     $countValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresValidesDeEntreprise($entreprise->getSiret()));
                     $countNonValide = count((new App\FormatIUT\Modele\Repository\EntrepriseRepository)->getOffresNonValidesDeEntreprise($entreprise->getSiret()));
                     echo "
-                        <a href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=" . $entreprise->getSiret() . "' class='entreprise'>
+                        <a href='?action=afficherDetailEntreprise&controleur=AdminMain&siret=" . $entreprise->getSiret() . "' class='entreprise'>
                         <div class='entrepriseGauche'>
                             <img src='" . Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='pp entreprise'>
                         </div>

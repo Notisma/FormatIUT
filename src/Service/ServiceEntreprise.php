@@ -8,6 +8,7 @@ use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
+use App\FormatIUT\Modele\DataObject\Ville;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 
@@ -134,13 +135,22 @@ class ServiceEntreprise
             }
             else{
                 $entr = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+                $entr->setNomEntreprise($_REQUEST['nomEntreprise']);
+                $entr->setAdresseEntreprise($_REQUEST['adresseEntreprise']);
+                $entr->setEmail($_REQUEST["email"]);
+                $entr->setTel($_REQUEST["tel"]);
+                $entr->setStatutJuridique($_REQUEST["statutJuridique"]);
+                $entr->setEffectif($_REQUEST["effectif"]);
+                $entr->setCodeNAF($_REQUEST["codeNAF"]);
                 $_REQUEST['img'] = $entr->getImg();
                 $_REQUEST['mdpHache'] = $entr->getMdpHache();
                 $_REQUEST['emailAValider'] = $entr->getEmailAValider();
                 $_REQUEST['nonce'] = $entr->getNonce();
                 $_REQUEST['dateCreationCompte'] = $entr->getDateCreationCompte();
-                $_REQUEST["idVille"] = (new VilleRepository())->getVilleParNom($_REQUEST["ville"]);
-                $entr = Entreprise::creerEntreprise($_REQUEST);
+                if ((new VilleRepository())->getVilleParNom($_REQUEST["ville"]) == null){
+                    (new VilleRepository())->creerObjet(new Ville(null, $_REQUEST["ville"], $_REQUEST["codePostal"]));
+                }
+                $entr->setIdVille((new VilleRepository())->getVilleParNom($_REQUEST["ville"]));
                 (new EntrepriseRepository())->modifierObjet($entr);
                 ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise à bien été modifiée");
             }

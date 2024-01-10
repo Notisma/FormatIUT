@@ -191,10 +191,10 @@ class ControleurEtuMain extends ControleurMain
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                         self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                     } else {
-                        self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                        self::redirectionFlash("afficherCatalogue", "danger", "Cette offre n'existe pas");
                     }
                 } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                    self::redirectionFlash("afficherCatalogue", "danger", "L'offre n'est pas renseignée");
                 }
             } else {
                 self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");

@@ -129,10 +129,10 @@ class ControleurEntrMain extends ControleurMain
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                     self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
-                    self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                    self::redirectionFlash("afficherMesOffres", "danger", "Cette offre n'existe pas");
                 }
             } else {
-                self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+                self::redirectionFlash("afficherMesOffres", "danger", "L'offre n'est pas renseignée");
             }
         } else {
             self::redirectionFlash("afficherMesOffres", "danger", "Vous ne pouvez pas accéder à cette offre");
