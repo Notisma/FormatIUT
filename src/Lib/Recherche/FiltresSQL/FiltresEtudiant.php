@@ -20,6 +20,7 @@ class FiltresEtudiant
         return " AND groupe LIKE \"G\"";
     }
 
+
     public static function etudiant_concerne():string
     {
         $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
@@ -29,7 +30,7 @@ class FiltresEtudiant
 
     public static function etudiant_avec_formation():string
     {
-        return " ";
+        return "";
     }
 
     public static function etudiant_sans_formation():string

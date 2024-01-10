@@ -22,7 +22,10 @@ class ProfRecherche extends AbstractAffichage
         $titres = '<h4 class="titre">';
         if (parent::getObjet()->isEstAdmin()) {
             $titres.= 'Administrateur';
-        } else {
+        } else if ($this->objet->getNomProf()=="secretariat"){
+            $titres.="Secretariat";
+        }else
+        {
             $titres.= 'Professeur';
         }
         $titres.= '</h4>
