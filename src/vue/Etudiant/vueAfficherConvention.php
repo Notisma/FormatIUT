@@ -10,6 +10,7 @@ if (date("m") >= 9) {
     $anneeUniv = (date("Y") - 1) . "/" . date("Y");
 }
 $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
+$estStage = false;
 ?>
 
 <div class="pageConvention">
@@ -27,13 +28,14 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
                 echo "'alternance";
             } else {
                 echo "e stage";
+                $estStage = true;
             }
             ?></h2>
-        <h5 class="titre">En référence à l'arrêté du 29 décembre 2014 relatif aux conventions de stage</h5>
+        <h5 class="titre">En référence à l'arrêté du 29 décembre 2014 relatif aux conventions de stage et d'alternance</h5>
     </div>
 
     <div class="firstBlock">
-        <h6 class="titre">Nota : pour faciliter la lecture du document, les mots "stagiaire", "enseignant référent",
+        <h6 class="titre">Nota : pour faciliter la lecture du document, les mots "stagiaire", "alternant", "enseignant référent",
             "tuteur de stage", "représentant légal", et "étudiant" sont utilisés au masculin</h6>
 
         <div class="separateur">
@@ -74,7 +76,7 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
     </div>
 
     <div class="secondBlock">
-        <h5 class="titre">3 - LE STAGIAIRE</h5>
+        <h5 class="titre">3 - L'Étudiant</h5>
         <div>
             <h6 class="titre"><strong>Nom :</strong> <?= htmlspecialchars($etudiant->getNomEtudiant()); ?></h6>
             <h6 class="titre"><strong>Prénom :</strong> <?= htmlspecialchars($etudiant->getPrenomEtudiant()); ?></h6>
@@ -91,7 +93,7 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
     </div>
 
     <div class="threeBlock">
-        <h5 class="titre">SUJET DE STAGE : <?= htmlspecialchars($offre->getSujet()) ?> </h5>
+        <h5 class="titre">SUJET D<?php if ($estStage) {echo "E STAGE";} else {echo "' ALTERNANCE";} ?> : <?= htmlspecialchars($offre->getSujet()) ?> </h5>
         <div>
             <h6 class="titre"><strong>Dates :</strong> du <?= htmlspecialchars($offre->getDateDebut()); ?>
                 au <?= htmlspecialchars($offre->getDateFin()) ?></h6>
@@ -110,7 +112,7 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
     <div class="separateur">
 
         <div>
-            <h5 class="titre">Encadrement du stagiaire par l'établissement d'enseignement</h5>
+            <h5 class="titre">Encadrement de l'étudiant par l'établissement d'enseignement</h5>
             <h6 class="titre"><strong>Nom et prénom de l'Enseignant référent :</strong> COLETTA Rémi</h6>
             <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
             <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
@@ -118,9 +120,8 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
         </div>
 
         <div>
-            <h5 class="titre">Encadrement du stagiaire par l'organisme d'accueil</h5>
-            <h6 class="titre"><strong>Nom et prénom du tuteur de
-                    stage</strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()) ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
+            <h5 class="titre">Encadrement de l'étudiant par l'organisme d'accueil</h5>
+            <h6 class="titre"><strong>Nom et prénom du tuteur de l'entreprise </strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()) ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
             </h6>
             <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
             <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
