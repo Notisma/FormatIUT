@@ -59,7 +59,7 @@ class ControleurEntrMain extends ControleurMain
         if (!isset($_REQUEST["etat"])) {
             $_REQUEST["etat"] = "Tous";
         }
-        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte(), $_REQUEST["type"], $_REQUEST["etat"]);
+        $liste = (new FormationRepository())->getListeOffreParEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee(), $_REQUEST["type"], $_REQUEST["etat"]);
         self::afficherVue("Mes Offres", "Entreprise/vueMesOffresEntr.php", ["type" => $_REQUEST["type"], "listeOffres" => $liste, "etat" => $_REQUEST["etat"]]);
     }
 
