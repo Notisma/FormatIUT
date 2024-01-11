@@ -241,11 +241,12 @@ class ControleurAdminMain extends ControleurMain
         }
     }
 
+    //affiche la vue présentant les statistiques
     public static function afficherVueStatistiques(): void
     {
         if(ConnexionUtilisateur::getTypeConnecte()== "Administrateurs") {
             self::$pageActuelleAdmin = "Statistiques";
-            self::afficherVue("Statistiques", "Admin/vueStatistiques.php", self::getMenu());
+            self::afficherVue("Statistiques", "Admin/vueStatistiques.php");
         } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
