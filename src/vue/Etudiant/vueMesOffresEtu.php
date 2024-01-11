@@ -57,6 +57,7 @@ foreach ($listeOffres as $offre) {
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "En attente") {
                         echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
                     }
+                    echo '</div></div></a>';
                 }
             }
             ?>
