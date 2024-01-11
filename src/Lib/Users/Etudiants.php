@@ -81,4 +81,20 @@ class Etudiants extends Utilisateur
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
         return $menu;
     }
+
+    public function getFiltresRecherche(): array
+    {
+        return array(
+            "Entreprise"=>array(
+                "filtre1"=>array("label"=>"Entreprises Validées","value"=>"entreprise_validee","obligatoire"),
+            ),
+            "Formation"=>array(
+                "filtre2"=>array("label"=>"Stages","value"=>"formation_stage",),
+                "filtre3"=>array("label"=>"Alternances","value"=>"formation_alternance"),
+                "filtre4"=>array("label"=>"Formations Validées","value"=>"formation_validee","obligatoire"),
+                "filtre5"=>array("label"=>"Formations Disponibles","value"=>"formation_disponible","obligatoire")
+            ),
+
+        );
+    }
 }

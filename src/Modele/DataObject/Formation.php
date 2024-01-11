@@ -614,6 +614,14 @@ class Formation extends AbstractDataObject
     {
         $this->tuteurUMvalide = $tuteurUMvalide;
     }
+    /**
+     * @return true ssi l'offre possède une idEtudiant, false sinon
+     */
+    public function estAssignee(): bool
+    {
+        return $this->idEtudiant != null;
+    }
+
 
 
     public function formatTableau(): array

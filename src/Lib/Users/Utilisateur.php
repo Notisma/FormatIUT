@@ -25,6 +25,7 @@ abstract class Utilisateur
     public abstract function getImageProfil();
     public abstract function getTypeConnecte() :string;
     public abstract function getMenu():array;
+    public abstract function getFiltresRecherche() : array;
 
 
 }

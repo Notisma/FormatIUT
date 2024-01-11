@@ -11,4 +11,5 @@ class Secretariat extends Personnels
     {
         return "Secretariat";
     }
+
 }

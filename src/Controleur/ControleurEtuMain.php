@@ -118,7 +118,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Remplir ma convention", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         }
     }
 

@@ -112,14 +112,14 @@ class ControleurMain
 
     public static function afficherRecherche(): void
     {
+        self::$pageActuelle = 'Résultats de la recherche';
         $liste = $_REQUEST["liste"];
 
         /** @var ControleurMain $contr */
         $contr = Configuration::getCheminControleur();
-        ControleurMain::afficherVue("Résultat de la recherche", "vueResultatRecherche.php", $contr::getMenu(), [
+        ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php", $contr::getMenu(), [
             "recherche" => $_REQUEST["recherche"],
-            "offres" => $liste["Formation"],
-            "entreprises" => $liste["Entreprise"],
+            "liste"=>$_REQUEST["liste"],
             "nbResults" => $_REQUEST["count"]
         ]);
     }
@@ -161,7 +161,7 @@ class ControleurMain
     /***
      * @param array $liste
      * @return array|null
-     * retourne les 3 éléments avec la valeur les plus hautes
+     * retourne les 6 éléments avec la valeur les plus hautes
      */
     protected static function getSixMax(array $liste): ?array
     {

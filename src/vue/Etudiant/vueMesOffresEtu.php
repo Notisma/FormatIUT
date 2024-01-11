@@ -48,7 +48,7 @@ foreach ($listeOffres as $offre) {
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
                     echo '
                             <div>
-                                <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                                <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
                                 <h4 class="titre">' . htmlspecialchars($offreAttente->getNomOffre()) . ' - ' . htmlspecialchars($offreAttente->getTypeOffre()) . '</h4>
                                 <h5 class="titre">' . htmlspecialchars($offreAttente->getSujet()) . '</h5>
            
@@ -57,6 +57,7 @@ foreach ($listeOffres as $offre) {
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "En attente") {
                         echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
                     }
+                    echo '</div></div></a>';
                 }
             }
             ?>
@@ -85,7 +86,7 @@ foreach ($listeOffres as $offre) {
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
                     echo '
                             <div>
-                                <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+                                <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
                                 <h4 class="titre">' . htmlspecialchars($offreValider->getNomOffre()) . ' - ' . htmlspecialchars($offreValider->getTypeOffre()) . '</h4>
                                 <h5 class="titre">' . htmlspecialchars($offreValider->getSujet()) . '</h5>
            
@@ -108,7 +109,7 @@ foreach ($listeOffres as $offre) {
     <div class="presMesOffres">
         <div class="firstStep">
             <img src="../ressources/images/etudiantsMesOffres.png" alt="imageEtudiant">
-            <h2 class="titre" id="rouge">Consultez l'état de vos offres</h2>
+            <h2 class="titre rouge">Consultez l'état de vos offres</h2>
             <h4 class="titre">Toutes les offres qui vous concernent, au même endroit</h4>
             <h4 class="titre">Gérez toutes vos demandes, en annulant vos candidatures, et en acceptant vos offres en attentes.</h4>
         </div>

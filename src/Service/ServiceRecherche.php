@@ -5,10 +5,12 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\FiltresSQL;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 use DOMDocument;
+use newrelic\DistributedTracePayload;
 
 class ServiceRecherche
 {
@@ -18,20 +20,7 @@ class ServiceRecherche
      */
     public static function rechercher(): void
     {
-        /** @var ControleurMain $controleur */
-        $controleur = Configuration::getCheminControleur();
-
-        if (!isset($_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            header("Location: $_SERVER[HTTP_REFERER]");
-            return;
-        }
-        ////si la recherche ne contient que un ou des espaces
-        if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            header("Location: $_SERVER[HTTP_REFERER]");
-            return;
-        }
+        self::verifRecherche();
 
         $recherche = $_REQUEST['recherche'];
         $morceaux = explode(" ", $recherche);
@@ -39,12 +28,25 @@ class ServiceRecherche
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
         $liste = array();
         $count = 0;
-        $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getRecherche();
-        foreach ($privilege as $repository) {
-            $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
-            $re = "recherche";
-            $liste[$repository] = (new $nomDeClasseRepository)->$re($morceaux);
-            $count += sizeof($liste[$repository]);
+        $privilege=ConnexionUtilisateur::getUtilisateurConnecte()->getFiltresRecherche();
+        $sansfiltres=true;
+        foreach ($privilege as $item=>$value) {
+            if (isset($_REQUEST[$item."s"])){$sansfiltres=false;}
+        }
+        foreach ($privilege as $repository=>$filtres) {
+            $listeFiltres= self::filtresFunction($repository,$filtres);
+            if (isset($_REQUEST[$repository.'s']) || $sansfiltres) {
+                $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
+                $re = "recherche";
+                $nomAffichageRecherche = "App\FormatIUT\Lib\Recherche\AffichagesRecherche\\" . $repository . "Recherche";
+                $element = (new $nomDeClasseRepository)->$re($morceaux,$listeFiltres);
+                $arrayRecherche = array();
+                foreach ($element as $objet) {
+                    $arrayRecherche[] = new $nomAffichageRecherche($objet);
+                }
+                $liste[$repository] = $arrayRecherche;
+                $count += sizeof($liste[$repository]);
+            }
         }
 
         if (is_null($res)) { // jamais censé être null, même en cas de zéro résultat
@@ -58,4 +60,33 @@ class ServiceRecherche
             ControleurMain::afficherRecherche();
         }
     }
+
+    private static function filtresFunction(string $repository,array $filtres)
+    {
+        $listeFiltres=array();
+        foreach ($filtres as $filtre) {
+            if (in_array("obligatoire",$filtre) ||isset($_REQUEST[$filtre["value"]])){
+                $fonction=$filtre["value"];
+                $nomDeClasseFiltre="App\FormatIUT\Lib\Recherche\FiltresSQL\Filtres".$repository;
+                $listeFiltres[]=$nomDeClasseFiltre::$fonction();
+            }
+        }
+        return $listeFiltres;
+    }
+
+    private static function verifRecherche()
+    {
+        if (!isset($_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
+        }
+        ////si la recherche ne contient que un ou des espaces
+        if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
+        }
+    }
+
 }

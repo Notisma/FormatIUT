@@ -1,5 +1,6 @@
 <?php
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
 ?>
@@ -10,7 +11,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
         <h3 class="titre rouge">Vos Offres récentes :</h3>
         <?php
         $data = $listeOffre;
-
         echo '<div class="grille">';
         for ($i = 0; $i < count($data); $i++) {
             $offre = $data[$i];

@@ -57,7 +57,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             <div class="candidature">
                 <img src="../ressources/images/equipe.png" alt="equipe">
                 <?php
-
+                $bool = false;
                 $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
                 if ($formation) {
                     if ($formation->getIdEtudiant() == \App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()) {
@@ -75,16 +75,25 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                
                 ";
                     } else {
-                        echo "
+
+                        //si c'est l'étudiant qui a postulé
+                        if (in_array($etudiant, $listeEtu)) {
+                            echo " <h4 class='titre'>Vous avez postulé à cette offre</h4>";
+                            $bool = true;
+                        } else {
+
+                            echo "
                
-                <img src='../ressources/images/equipe.png' alt='postulants'>
-                <h4 class='titre'>";
-                        $nbEtudiants = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($offre->getIdFormation()));
-                        echo $nbEtudiants . " étudiant";
-                        if ($nbEtudiants == 1) echo " a";
-                        else echo "s ont";
-                        echo " déjà postulé.</h4>
+            
+                                <h4 class='titre'>";
+                            $nbEtudiants = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($offre->getIdFormation()));
+                            echo $nbEtudiants . " étudiant";
+                            if ($nbEtudiants == 1) echo " a";
+                            else echo "s ont";
+                            echo " déjà postulé.</h4>
                     ";
+                        }
+
                     }
                 }
 
@@ -95,19 +104,22 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             <div class="boutonCandidater">
                 <?php
                 $listeAVerifier = ((new \App\FormatIUT\Modele\Repository\FormationRepository())->offresPourEtudiant($etudiant->getNumEtudiant()));
-
-                if (empty($listeAVerifier) || !in_array($offre->getIdFormation(), $listeAVerifier)) {
-                    if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
-                        if ($offre->getIdEtudiant() == $etudiant->getNumEtudiant()) {
-                            echo "<a id='desac' class='boutonAssigner'>Vous avez cette formation</a>";
+                if ($bool) {
+                    echo "<a id='desac' class='boutonAssigner'>Vous avez déjà postulé</a>";
+                } else {
+                    if (empty($listeAVerifier) || !in_array($offre->getIdFormation(), $listeAVerifier)) {
+                        if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
+                            if ($offre->getIdEtudiant() == $etudiant->getNumEtudiant()) {
+                                echo "<a id='desac' class='boutonAssigner'>Vous avez cette formation</a>";
+                            } else {
+                                echo "<a id='desac' class='boutonAssigner'>Vous avez déjà une formation</a>";
+                            }
                         } else {
-                            echo "<a id='desac' class='boutonAssigner'>Vous avez déjà une formation</a>";
+                            echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupDepotCV_LM()'>Postuler à cette Offre</a>";
                         }
                     } else {
-                        echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupDepotCV_LM()'>Postuler à cette Offre</a>";
+                        echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupModifCV_LM()'>Modifier les Fichiers</a>";
                     }
-                } else {
-                    echo "<a id='my-button' class='boutonAssigner' onclick='afficherPopupModifCV_LM()'>Modifier les Fichiers</a>";
                 }
 
                 ?>

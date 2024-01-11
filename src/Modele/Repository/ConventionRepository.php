@@ -33,6 +33,10 @@ class ConventionRepository extends AbstractRepository
         return $creationconv;
     }
 
+    /**
+     * @return int|mixed le nombre de conventions
+     * Retourne le nombre de conventions
+     */
     public function getNbConvention()
     {
         $sql = "SELECT COUNT(idConvention) as nb FROM Formations";
@@ -45,6 +49,11 @@ class ConventionRepository extends AbstractRepository
         return $resultat["nb"];
     }
 
+    /**
+     * @param $numEtu
+     * @return bool true si l'étudiant a une convention, false sinon
+     * Vérifie si l'étudiant a une convention
+     */
     public function aUneConvention($numEtu): bool
     {
         $sql = "Select * FROM Formations WHERE idEtudiant=:tagEtu";
@@ -56,6 +65,11 @@ class ConventionRepository extends AbstractRepository
     }
 
 
+    /**
+     * @param $numEtu
+     * @return Convention
+     * Retourne la convention de l'étudiant depuis son numéro et le formulaire
+     */
     public function trouverConventionDepuisForm($numEtu): Convention
     {
         $sql = "Select c.idConvention, conventionValidee, dateCreation, dateTransmission, retourSigne, assurance, objectifOffre, typeConvention
@@ -64,5 +78,23 @@ class ConventionRepository extends AbstractRepository
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
+    }
+
+    /**
+     * @param $numEtu
+     * @return Convention|null l'id de la convention
+     * Retourne l'id de la convention de l'étudiant depuis son numéro étudiant
+     */
+    public function getConventionEtudiant($numEtu): ?Convention
+    {
+        $sql = "SELECT idConvention FROM Formations WHERE idEtudiant=:tagEtu";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagEtu" => $numEtu);
+        $pdoStatement->execute($values);
+        $resultat = $pdoStatement->fetch();
+        if ($resultat === false) {
+            return null;
+        }
+        return $this->getObjectParClePrimaire($resultat["idConvention"]);
     }
 }
