@@ -193,7 +193,7 @@ class ControleurAdminMain extends ControleurMain
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             $listeFormations = (new FormationRepository())->getListeObjet();
             self::$pageActuelleAdmin = "Liste des conventions";
-            self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations" => $listeFormations]);
+            self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", ["listeFormations" => $listeFormations]);
         } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'avez pas accès à la liste des conventions à valider");
         }
@@ -213,7 +213,7 @@ class ControleurAdminMain extends ControleurMain
                         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
                         $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
                         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
+                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php",
                             ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                                 "offre" => $formation]);
                     } else {
