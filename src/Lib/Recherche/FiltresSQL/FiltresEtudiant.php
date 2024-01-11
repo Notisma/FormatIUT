@@ -20,6 +20,18 @@ class FiltresEtudiant
         return " AND groupe LIKE \"G\"";
     }
 
+    public static function annee_etudiant(string $filtre)
+    {
+        $filtreL=array($filtre);
+        foreach ($_REQUEST as $item) {
+            if (in_array($item,get_class_methods("App\\FormatIUT\\Lib\\Recherche\\FiltresSQL\\FiltresEtudiant")) && $item!=$filtre){
+                if (str_contains($item,"etudiant_A")){
+                    $filtreL[]=$item;
+                }
+            }
+        }
+    }
+
 
     public static function etudiant_concerne():string
     {
