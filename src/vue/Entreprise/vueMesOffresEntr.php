@@ -39,7 +39,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
                 $_GET["etat"] = $_REQUEST["etat"] ?? "Tous";
                 $_GET["type"] = $_REQUEST["type"] ?? "Tous";
-                var_dump($_REQUEST["etat"]);
+
                 $type = $_REQUEST["type"];
                 $etat = $_REQUEST["etat"];
 

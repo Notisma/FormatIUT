@@ -154,6 +154,12 @@ body {
     cursor: not-allowed;
 }
 
+#etatActuel {
+    background-color: white;
+    color: black;
+    cursor: not-allowed;
+}
+
 
 .wrapMosaique {
     width: 64%;
