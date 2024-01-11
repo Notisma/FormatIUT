@@ -155,6 +155,8 @@ class ServiceEntreprise
                 (new EntrepriseRepository())->modifierObjet($entr);
                 ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été modifiée");
             }
+        } else {
+            ControleurAdminMain::redirectionFlash("afficherListeEntreprises", "danger", "Vous ne pouvez pas effectuer cette action" );
         }
     }
 }
