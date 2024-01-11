@@ -11,11 +11,11 @@ class FiltresFormation
 
     public static function formation_stage():string
     {
-        return " AND typeOffre=\"Stage\" ";
+        return " AND (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\") ";
     }
     public static function formation_alternance():string
     {
-        return " AND typeOffre=\" Alternance \" ";
+        return " AND (typeOffre=\"Alternance\"  OR typeOffre=\"Stage/Alternance\")";
     }
     public static function formation_validee():string
     {

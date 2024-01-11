@@ -27,8 +27,9 @@ class FormationRecherche extends AbstractAffichage
     {
         $formation=parent::getObjet();
         $titres = '<h4 class="titre">' . htmlspecialchars($this->entreprise->getNomEntreprise()) . '</h4>
-                                <h4 class="titre">' . htmlspecialchars(parent::getObjet()->getTypeOffre()) . ' - ';
+                                <h4 class="titre">' . htmlspecialchars(parent::getObjet()->getTypeOffre());
         if (Configuration::getControleurName() == "AdminMain") {
+            $titres.= ' - ';
             if (parent::getObjet()->getEstValide()) {
                 $titres .= 'VALIDÉE';
             } else {

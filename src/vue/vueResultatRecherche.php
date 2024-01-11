@@ -111,20 +111,18 @@ if (!isset($_REQUEST['triPar'])) {
                         if (isset($_REQUEST[$recherchables . "s"])) {
                             ;
                             foreach ($filtres as $filtre) {
-
-                                echo '
+                                if (!in_array("obligatoire",$filtre)) {
+                                    echo '
                                 <span class="filtre">
                                     <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
                                     <input class="filter" type="checkbox" name="' . $filtre['value'] . '" id="' . $filtre['value'] . '" value="' . $filtre['value'] . '" onchange="this.form.submit()" ';
-                                if (isset($_REQUEST[$filtre["value"]])) {
-                                    echo 'checked';
-                                }
-                                if (in_array("obligatoire",$filtre)){
-                                    echo 'checked onclick="return false"';
-                                }
-                                echo '>
+                                    if (isset($_REQUEST[$filtre["value"]])) {
+                                        echo 'checked';
+                                    }
+                                    echo '>
                                 </span>
                                 ';
+                                }
                             }
                         }
                     }
