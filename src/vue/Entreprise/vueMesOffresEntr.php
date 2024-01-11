@@ -80,7 +80,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
         <div class="mosaique">
             <?php
-            $listeOffres = (new FormationRepository())->listeidFormationEntreprise($entreprise->getSiret());
+            $listeOffres = (new FormationRepository())->getListeOffreParEntreprise($entreprise->getSiret(), $_REQUEST["type"], $_REQUEST["etat"]);
             $data = $listeOffres;
 
             if ($data == null) {
