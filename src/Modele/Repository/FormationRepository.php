@@ -117,11 +117,11 @@ class FormationRepository extends RechercheRepository
      * @param $type
      * @param $etat
      * @return array
-     * retourne la liste des offres pour une entreprise avec différents filtres
+     * retourne la liste des id offres pour une entreprise avec différents filtres
      */
     public function getListeOffreParEntreprise($idEntreprise, $type, $etat): array
     {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
+        $sql = "SELECT idFormation FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
         if ($type == "Stage" || $type == "Alternance") {
             $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage/Alternance'";
             $values["TypeTag"] = $type;
