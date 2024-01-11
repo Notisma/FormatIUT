@@ -58,6 +58,8 @@ class Personnels extends Utilisateur
                 "filtre11"=>array("label"=>"Alternances","value"=>"formation_alternance"),
                 "filtre12"=>array("label"=>"Formations Validées","value"=>"formation_validee"),
                 "filtre13"=>array("label"=>"Formations Non Validées","value"=>"formation_non_validee"),
+                "filtre17"=>array("label"=>"Formations Disponibles","value"=>"formation_disponible"),
+                "filtre18"=>array("label"=>"Formations Non Disponibles","value"=>"formation_non_disponible")
             ),
             "Prof"=>array(
                 "filtre14"=>array("label"=>"Profs","value"=>"personnel_prof"),

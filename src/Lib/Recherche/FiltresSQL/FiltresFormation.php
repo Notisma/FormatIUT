@@ -9,30 +9,75 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 class FiltresFormation
 {
 
-    public static function formation_stage():string
+    public static function formation_stage(): string
     {
-        return " AND (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\") ";
+        if (self::formation_type()) {
+            return " AND (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\") ";
+        } else return "";
     }
-    public static function formation_alternance():string
+
+    public static function formation_alternance(): string
     {
-        return " AND (typeOffre=\"Alternance\"  OR typeOffre=\"Stage/Alternance\")";
+        if (self::formation_type()) {
+            return " AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\")";
+        } else return "";
     }
-    public static function formation_validee():string
+
+    public static function formation_type(): bool
     {
-        return " AND estValide=1 ";
+        if (isset($_REQUEST["formation_stage"], $_REQUEST["formation_alternance"])) {
+            return false;
+        } else {
+            return true;
+        }
     }
-    public static function formation_non_validee():string
+
+    public static function formation_validee(): string
     {
-        return " AND estValide=0 ";
+        if (self::validite_formation())
+            return " AND estValide=1 ";
+        else return "";
     }
-    public static function formation_disponible():string
+
+    public static function formation_non_validee(): string
     {
+        if (self::validite_formation())
+            return " AND estValide=0 ";
+        else return "";
+    }
+
+    public static function validite_formation(): bool
+    {
+        if (isset($_REQUEST["formation_validee"], $_REQUEST["formation_non_validee"])) {
+            return false;
+        } else return true;
+    }
+
+    public static function formation_disponible(): string
+    {
+        if (self::disponibilite_formation())
         return " AND idEtudiant is null";
+        else return "";
     }
-    public static function formation_entreprise() :string
+
+    public static function formation_non_disponible(): string
     {
-        $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
-        $idEntreprise=$entreprise->getSiret();
+        if (self::disponibilite_formation())
+        return " AND idEtudiant is not null";
+        else return "";
+    }
+
+    public static function disponibilite_formation(): bool
+    {
+        if (isset($_REQUEST["formation_disponible"],$_REQUEST["formation_non_disponible"])){
+            return false;
+        }else return true;
+    }
+
+    public static function formation_entreprise(): string
+    {
+        $entreprise = (new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
+        $idEntreprise = $entreprise->getSiret();
         return " AND idEntreprise=$idEntreprise";
     }
 }
