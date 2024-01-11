@@ -43,15 +43,10 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
         <?php
         if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
         <div class="wrapBoutons">
-<<<<<<< HEAD
-            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtudiant=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
-            <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtudiant=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
-=======
             <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
             <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
             <?php if ($aFormation != null && $aFormation->getloginTuteurUM() == null){
             echo '<a href="?action=devenirTuteur&controleur=AdminMain&numEtu='.$etudiant->getNumEtudiant().'">Devenir tuteur</a>'; }?>
->>>>>>> feature/seProposerTuteur
         </div>
         <?php }
         else if(\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Personnels" && $aFormation != null && $aFormation->getloginTuteurUM() == null) {
