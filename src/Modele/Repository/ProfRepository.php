@@ -25,9 +25,9 @@ class ProfRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $estAdmin=0;
-        if ($dataObjectTableau["estAdmin"]){
-            $estAdmin=1;
+        $estAdmin = 0;
+        if ($dataObjectTableau["estAdmin"]) {
+            $estAdmin = 1;
         }
 
         return new Prof(
@@ -50,16 +50,31 @@ class ProfRepository extends AbstractRepository
         if ($count[0] > 0) return true;
         else return false;
     }
-    public function getParNom(String $nomProf): ?Prof{
-        $sql="SELECT * FROM ".$this->getNomTable(). " WHERE nomProf=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$nomProf);
+
+    public function getParNom(string $nomProf): ?Prof
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomProf=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $nomProf);
         $pdoStatement->execute($values);
-        $prof=$pdoStatement->fetch();
-        if (!$prof){
+        $prof = $pdoStatement->fetch();
+        if (!$prof) {
             return null;
-        }else{
+        } else {
             return $prof;
         }
+    }
+
+
+    /**
+     * @return Prof[]
+     */
+    public function getAdmins(): array
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estAdmin=1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $arr = array();
+        foreach ($pdoStatement as $tuple) $arr[] = $this->construireDepuisTableau($tuple);
+        return $arr;
     }
 }

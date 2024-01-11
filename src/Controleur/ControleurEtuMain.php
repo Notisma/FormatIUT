@@ -97,7 +97,7 @@ class ControleurEtuMain extends ControleurMain
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::getCleEtudiant());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-          //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
+            //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
             self::afficherVue("Ma convention", "Etudiant/vueAfficherConvention.php",
                 ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                     "offre" => $offre]);
@@ -118,7 +118,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", ["etudiant" => $etudiant, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         }
     }
 
@@ -139,19 +139,20 @@ class ControleurEtuMain extends ControleurMain
             self::afficherErreur("offre non valide");
         }
     }
+
     /**
      * @return void affiche le formulaire pour modifier la convention de l'étudiant
      */
 
-    public static function afficherFormulaireModifierConvention(){
+    public static function afficherFormulaireModifierConvention(): void
+    {
         $formation = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
-        if($formation->getDateCreationConvention() != null){
+        if ($formation->getDateCreationConvention() != null) {
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             self::afficherVue("Modifier Convention", "Etudiant/vueFormulaireModifierConvention.php", ["etudiant" => $etudiant, "offre" => $formation, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
-        }
-        else{
+        } else {
             self::afficherErreur("Convention inexistante");
         }
     }
@@ -189,7 +190,7 @@ class ControleurEtuMain extends ControleurMain
                         $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                         $client = "Etudiant";
                         $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                        self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                        self::afficherVue("Détails de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
                     } else {
                         self::redirectionFlash("afficherCatalogue", "danger", "Cette offre n'existe pas");
                     }
@@ -206,19 +207,34 @@ class ControleurEtuMain extends ControleurMain
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static function postuler(): void{
+    public static function postuler(): void
+    {
         ServicePostuler::postuler();
     }
 
-    public static function mettreAJour(): void{
+    public static function mettreAJour(): void
+    {
         ServiceEtudiant::mettreAJour();
     }
-    public static function creerConvention(): void{
+
+    public static function creerConvention(): void
+    {
         ServiceConvention::creerConvention();
     }
 
-    public static function modifierFichiers(): void{
+    public static function modifierConvention(): void
+    {
+        ServiceConvention::modifierConvention();
+    }
+
+    public static function modifierFichiers(): void
+    {
         ServiceFichier::modifierFichiers();
+    }
+
+    public static function faireValiderConvention(): void
+    {
+        ServiceConvention::faireValiderConvention();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

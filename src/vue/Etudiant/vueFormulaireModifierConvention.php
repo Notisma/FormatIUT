@@ -79,7 +79,7 @@
                 </p>';
                 }?>
                 <input type="hidden" value="<?=date("d-m-Y");?>" name="dateCreation">
-                <input type="submit" value="Confirmer" formaction="?action=modifierConvention&service=Convention">
+                <input type="submit" value="Confirmer" formaction="?action=modifierConvention">
             </fieldset>
         </form>
     </div>

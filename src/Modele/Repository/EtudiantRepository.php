@@ -355,6 +355,4 @@ class EtudiantRepository extends RechercheRepository
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
     }
-
-
 }

@@ -114,6 +114,7 @@ class ControleurEntrMain extends ControleurMain
             self::afficherErreur("Il faut préciser la formation");
 
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        
         //if offre existe
         if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
             self::$page = "Détails de l'offre";
@@ -127,7 +128,7 @@ class ControleurEntrMain extends ControleurMain
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $client = "Entreprise";
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    self::afficherVue("Détail de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
                     self::redirectionFlash("afficherMesOffres", "danger", "Cette offre n'existe pas");
                 }
