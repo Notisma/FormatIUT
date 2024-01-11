@@ -32,7 +32,10 @@ class TransfertImage
             }
 
             //convert image to png
-            imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
+            $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
+            imagesavealpha($tempImage, true);
+            imagepng($tempImage, $_FILES['pdp']['tmp_name']);
+            imagedestroy($tempImage);
 
             $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
             //echo $_FILES['pdp']['name']; die();
