@@ -311,7 +311,11 @@ class FormationRepository extends RechercheRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
         $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
+        $test = $pdoStatement->fetch();
+        if($test == false){
+            return null;
+        }
+        return $this->construireDepuisTableau($test);
     }
 
     public function etudiantsSansConventionsValides(): array
