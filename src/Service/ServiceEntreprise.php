@@ -78,6 +78,7 @@ class ServiceEntreprise
         if (isset($_REQUEST["siret"], $_REQUEST["nom"], $_REQUEST["statutJ"], $_REQUEST["effectif"], $_REQUEST['codeNAF'], $_REQUEST["tel"], $_REQUEST["adresse"])) {
             if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
                 if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+                    ControleurEntrMain::updateImage();
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
                     ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Les informations ont bien été modifiées");
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
