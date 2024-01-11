@@ -60,8 +60,9 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherDetailEtudiant(): void
     {
+        $aFormation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtu']);
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
-        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php");
+        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", ["aFormation"=> $aFormation]);
     }
 
     /**
@@ -320,6 +321,9 @@ class ControleurAdminMain extends ControleurMain
     public static function rejeterConvention(): void
     {
         ServiceConvention::rejeterConvention();
+    }
+    public static function devenirTuteur(): void{
+        ServicePersonnel::devenirTuteur();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

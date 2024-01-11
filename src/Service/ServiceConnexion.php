@@ -20,8 +20,12 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 class ServiceConnexion
 {
 
+<<<<<<< HEAD
     private static bool $avecConnexionTest = true;
 
+=======
+    private static bool $avecConnexionTest=true;
+>>>>>>> feature/seProposerTuteur
     /**
      * @return void action connectant l'utilisateur
      */
