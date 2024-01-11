@@ -60,7 +60,7 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherDetailEtudiant(): void
     {
-        $aFormation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtu']);
+        $aFormation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
         self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", ["aFormation"=> $aFormation]);
     }
