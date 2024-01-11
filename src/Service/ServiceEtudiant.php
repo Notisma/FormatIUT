@@ -20,19 +20,19 @@ class ServiceEtudiant
             if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) != null) {
                 ControleurAdminMain::redirectionFlash("afficherFormulaireCreationEtudiant", "warning", "Un étudiant avec ce numéro existe déjà");
             } else {
-                $etudiant=Etudiant::creerEtudiant($_REQUEST);
+                $etudiant = Etudiant::creerEtudiant($_REQUEST);
                 (new EtudiantRepository())->creerObjet($etudiant);
                 ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "success", "L'étudiant a bien été ajouté");
             }
         }
     }
 
-    public static function modifierEtudiant(): void{
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
-            if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) == null){
+    public static function modifierEtudiant(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            if ((new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']) == null) {
                 ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "L'étudiant n'existe pas");
-            }
-            else{
+            } else {
                 $etu = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEtudiant"]);
                 $etu->setNomEtudiant($_REQUEST['nomEtudiant']);
                 $etu->setPrenomEtudiant($_REQUEST['prenomEtudiant']);
@@ -46,8 +46,7 @@ class ServiceEtudiant
                 (new EtudiantRepository())->modifierObjet($etu);
                 ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "success", "L'étudiant à bien été modifié");
             }
-        }
-        else{
+        } else {
             ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas effectuer cette action");
         }
     }
@@ -71,24 +70,22 @@ class ServiceEtudiant
     }
 
     /**
-    * @return void met à jour les informations de l'étudiant connecté
-    */
-public static function mettreAJour(): void
-{
-    if (isset($_REQUEST['numEtu'])) {
-        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-            if (!empty($_FILES['pdp']['name'])) {
+     * @return void met à jour les informations de l'étudiant connecté
+     */
+    public static function mettreAJour(): void
+    {
+        if (isset($_REQUEST['numEtu'])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 ControleurEtuMain::updateImage();
+                (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
+                ControleurEtuMain::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
+            } else {
+                ControleurEtuMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
             }
-            (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
-            ControleurEtuMain::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
         } else {
-            ControleurEtuMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+            ControleurEtuMain::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
         }
-    } else {
-        ControleurEtuMain::redirectionFlash("afficherProfil", "warning", "Des données sont manquantes");
     }
-}
 
 
     /**

@@ -3,9 +3,6 @@
 namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Controleur\ControleurMain;
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-use App\FormatIUT\Modele\Repository\UploadsRepository;
-use GdImage;
 
 class TransfertImage
 {
@@ -15,14 +12,14 @@ class TransfertImage
         $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
 
         if (!$ret) {
-            echo "Problème de transfert";
-            return false;
+            ControleurMain::afficherErreur("Problème de transfert (mauvais type de fichier ?)");
+            die();
         } else { // Le fichier a bien été reçu
             $img_taille = $_FILES['pdp']['size'];
 
             if ($img_taille > $taille_max) {
-                echo "Trop gros !";
-                return false;
+                ControleurMain::afficherErreur("Trop gros !");
+                die();
             }
             // si l'upload est une nouvelle PP étudiant, on la rend ronde avant de l'importer
             if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
@@ -34,6 +31,11 @@ class TransfertImage
                 }
             }
 
+            //convert image to png
+            imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
+
+            $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
+            //echo $_FILES['pdp']['name']; die();
             $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
             return $ai_id;
         }
