@@ -1,6 +1,7 @@
 <?php
 
 namespace App\FormatIUT\Modele\DataObject;
+
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 class Formation extends AbstractDataObject
@@ -36,6 +37,7 @@ class Formation extends AbstractDataObject
     private ?string $idTuteurPro;
     private string $idEntreprise;
     private ?string $loginTuteurUM;
+    private bool $tuteurUMvalide;
 
     /**
      * @param string|null $idFormation
@@ -69,8 +71,9 @@ class Formation extends AbstractDataObject
      * @param string|null $idTuteurPro
      * @param string $idEntreprise
      * @param string|null $loginTuteurUM
+     * @param bool $tuteurUMvalide
      */
-    public function __construct(?string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, string $idEntreprise, ?string $loginTuteurUM)
+    public function __construct(?string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, string $idEntreprise, ?string $loginTuteurUM, bool $tuteurUMvalide)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -103,6 +106,7 @@ class Formation extends AbstractDataObject
         $this->idTuteurPro = $idTuteurPro;
         $this->idEntreprise = $idEntreprise;
         $this->loginTuteurUM = $loginTuteurUM;
+        $this->tuteurUMvalide = $tuteurUMvalide;
     }
 
     /**
@@ -595,6 +599,21 @@ class Formation extends AbstractDataObject
         $this->loginTuteurUM = $loginTuteurUM;
     }
 
+    /**
+     * @return bool
+     */
+    public function isTuteurUMvalide(): bool
+    {
+        return $this->tuteurUMvalide;
+    }
+
+    /**
+     * @param bool $tuteurUMvalide
+     */
+    public function setTuteurUMvalide(bool $tuteurUMvalide): void
+    {
+        $this->tuteurUMvalide = $tuteurUMvalide;
+    }
 
 
     public function formatTableau(): array
@@ -602,39 +621,40 @@ class Formation extends AbstractDataObject
         return array(
             "idFormation" => $this->idFormation,
             'nomOffre' => $this->nomOffre,
-            'dateDebut'=>$this->dateDebut,
-            'dateFin'=>$this->dateFin,
-            'sujet'=>$this->sujet,
-            'detailProjet'=>$this->detailProjet,
-            'dureeHeure'=>$this->dureeHeure,
-            'joursParSemaine'=>$this->joursParSemaine,
-            'gratification'=>$this->gratification,
-            'uniteGratification'=>$this->uniteGratification,
-            'uniteDureeGratification'=>$this->uniteDureeGratification,
-            'nbHeuresHebdo'=>$this->nbHeuresHebdo,
-            'offreValidee'=>$this->offreValidee?1:0,
-            'objectifOffre'=>$this->objectifOffre,
-            'dateCreationOffre'=>$this->dateCreationOffre,
-            'typeOffre'=>$this->typeOffre,
-            'anneeMax'=>$this->anneeMax,
-            'anneeMin'=>$this->anneeMin,
-            'estValide'=>$this->estValide?1:0,
-            'validationPedagogique'=>$this->validationPedagogique?1:0,
-            'convention'=>$this->convention,
-            'conventionValidee'=>$this->conventionValidee?1:0,
-            'dateCreationConvention'=>$this->dateCreationConvention,
-            'dateTransmissionConvention'=>$this->dateTransmissionConvention,
-            'dateRetourSigne'=>$this->dateRetourSigne,
-            'assurance'=>$this->assurance,
-            'avenant'=>$this->avenant,
-            'idEtudiant'=>$this->idEtudiant,
-            'idTuteurPro'=>$this->idTuteurPro,
-            'idEntreprise'=>$this->idEntreprise,
-            'loginTuteurUM'=>$this->loginTuteurUM
+            'dateDebut' => $this->dateDebut,
+            'dateFin' => $this->dateFin,
+            'sujet' => $this->sujet,
+            'detailProjet' => $this->detailProjet,
+            'dureeHeure' => $this->dureeHeure,
+            'joursParSemaine' => $this->joursParSemaine,
+            'gratification' => $this->gratification,
+            'uniteGratification' => $this->uniteGratification,
+            'uniteDureeGratification' => $this->uniteDureeGratification,
+            'nbHeuresHebdo' => $this->nbHeuresHebdo,
+            'offreValidee' => $this->offreValidee ? 1 : 0,
+            'objectifOffre' => $this->objectifOffre,
+            'dateCreationOffre' => $this->dateCreationOffre,
+            'typeOffre' => $this->typeOffre,
+            'anneeMax' => $this->anneeMax,
+            'anneeMin' => $this->anneeMin,
+            'estValide' => $this->estValide ? 1 : 0,
+            'validationPedagogique' => $this->validationPedagogique ? 1 : 0,
+            'convention' => $this->convention,
+            'conventionValidee' => $this->conventionValidee ? 1 : 0,
+            'dateCreationConvention' => $this->dateCreationConvention,
+            'dateTransmissionConvention' => $this->dateTransmissionConvention,
+            'dateRetourSigne' => $this->dateRetourSigne,
+            'assurance' => $this->assurance,
+            'avenant' => $this->avenant,
+            'idEtudiant' => $this->idEtudiant,
+            'idTuteurPro' => $this->idTuteurPro,
+            'idEntreprise' => $this->idEntreprise,
+            'loginTuteurUM' => $this->loginTuteurUM,
+            'tuteurUMvalide' => $this->tuteurUMvalide ? 1 : 0
         );
     }
 
-    public static function creerFormation(array $formation) : Formation
+    public static function creerFormation(array $formation): Formation
     {
         return new Formation(
             null,
@@ -667,8 +687,8 @@ class Formation extends AbstractDataObject
             null,
             null,
             ConnexionUtilisateur::getLoginUtilisateurConnecte(),
-            null
-            
+            null,
+            false
         );
     }
 

@@ -4,8 +4,9 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
+use App\FormatIUT\Modele\DataObject\Formation;
 
-class EtudiantRepository extends  RechercheRepository
+class EtudiantRepository extends RechercheRepository
 {
 
     protected function getNomTable(): string
@@ -17,9 +18,10 @@ class EtudiantRepository extends  RechercheRepository
     {
         return array("numEtudiant", "prenomEtudiant", "nomEtudiant", "loginEtudiant", "sexeEtu", "mailUniversitaire", "mailPerso", "telephone", "groupe", "parcours", "validationPedagogique", "presenceForumIUT", "img_id");
     }
+
     protected function getColonnesRecherche(): array
     {
-        return array("prenomEtudiant","nomEtudiant","loginEtudiant","groupe","parcours");
+        return array("prenomEtudiant", "nomEtudiant", "loginEtudiant", "groupe", "parcours");
     }
 
     protected function getClePrimaire(): string
@@ -129,15 +131,15 @@ class EtudiantRepository extends  RechercheRepository
      * @return void
      * permet à un étudiant d'update son image de profil
      */
-/*
-    public function updateImage($numEtudiant, $idImage): void
-    {
-        $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagImage" => $idImage, "Tag" => $numEtudiant);
-        $pdoStatement->execute($values);
-    }
-*/
+    /*
+        public function updateImage($numEtudiant, $idImage): void
+        {
+            $sql = "UPDATE " . $this->getNomTable() . " SET img_id=:TagImage WHERE " . $this->getClePrimaire() . "=:Tag";
+            $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+            $values = array("TagImage" => $idImage, "Tag" => $numEtudiant);
+            $pdoStatement->execute($values);
+        }
+    */
     /**
      * @param $idFormation
      * @return array
@@ -334,21 +336,22 @@ class EtudiantRepository extends  RechercheRepository
         };
     }
 
-
-    public function getOffreValidee($numEtu, $typeOffre)
+    public function getOffreValidee(int $numEtu): ?Formation
     {
-        $sql = "Select * FROM Postuler r JOIN Formations o ON o.idFormation = r.idFormation WHERE typeOffre=:tagType AND numEtudiant = :tagEtu AND etat = 'Validée'";
+        $sql = "Select * FROM Postuler r JOIN Formations o ON o.idFormation = r.idFormation WHERE numEtudiant = :tagEtu AND etat = 'Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagType" => $typeOffre, "tagEtu" => $numEtu);
+        $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
-        return $pdoStatement->fetch();
+        $arr = $pdoStatement->fetch();
+        if (!$arr) return null;
+        else return (new FormationRepository())->construireDepuisTableau($arr);
     }
 
-    public function getEtudiantParLogin(string $login):Etudiant
+    public function getEtudiantParLogin(string $login): Etudiant
     {
-        $sql="SELECT * FROM ".$this->getNomTable()." WHERE loginEtudiant=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$login);
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE loginEtudiant=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $login);
         $pdoStatement->execute($values);
         return $this->construireDepuisTableau($pdoStatement->fetch());
     }

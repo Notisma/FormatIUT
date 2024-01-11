@@ -16,7 +16,8 @@ class FormationRepository extends RechercheRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet", "detailProjet", "dureeHeure", "joursParSemaine", "gratification", "uniteGratification", "uniteDureeGratification", "nbHeuresHebdo", "offreValidee", "objectifOffre", "dateCreationOffre", "typeOffre", "anneeMax", "anneeMin", "estValide", "validationPedagogique", "convention", "conventionValidee", "dateCreationConvention", "dateTransmissionConvention", "dateRetourSigne", "assurance", "avenant", "idEtudiant", "idTuteurPro", "idEntreprise", "loginTuteurUM");
+
+        return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet", "detailProjet", "dureeHeure", "joursParSemaine", "gratification", "uniteGratification", "uniteDureeGratification", "nbHeuresHebdo", "offreValidee", "objectifOffre", "dateCreationOffre", "typeOffre", "anneeMax", "anneeMin", "estValide", "validationPedagogique", "convention", "conventionValidee", "dateCreationConvention", "dateTransmissionConvention", "dateRetourSigne", "assurance", "avenant", "idEtudiant", "idTuteurPro", "idEntreprise", "loginTuteurUM", "tuteurUMvalide");
     }
 
     protected function getColonnesRecherche(): array
@@ -31,7 +32,8 @@ class FormationRepository extends RechercheRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"]);
+
+        return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"], $dataObjectTableau["tuteurUMvalide"]);
     }
 
     public function listeIdTypeFormation(): array

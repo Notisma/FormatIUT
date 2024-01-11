@@ -1,8 +1,13 @@
 <?php
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\DataObject\Etudiant;
+use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
 $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEtudiant"]);
+
+/** @var Etudiant $etudiant */
 ?>
 
 <div class="wrapCentreEtu">
@@ -10,10 +15,10 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
         <div class="infosEtu">
             <?php
 
-            $prenomHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
-            $nomHTML=htmlspecialchars($etudiant->getNomEtudiant());
-            $parcoursHTML=htmlspecialchars($etudiant->getParcours());
-            $groupeHTML=htmlspecialchars($etudiant->getGroupe());
+            $prenomHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+            $nomHTML = htmlspecialchars($etudiant->getNomEtudiant());
+            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
             echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>";
             echo "<h1 class='titre rouge'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($etudiant->getGroupe() != null && $etudiant->getParcours() != null) {
@@ -26,10 +31,10 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
 
         <div class="detailsEtudiants">
             <?php
-            $mailHTML=htmlspecialchars($etudiant->getMailPerso());
-            $telHTML=htmlspecialchars($etudiant->getTelephone());
-            $loginHTML=htmlspecialchars($etudiant->getLogin());
-            $mailEtuHTML=htmlspecialchars($etudiant->getMailUniersitaire());
+            $mailHTML = htmlspecialchars($etudiant->getMailPerso());
+            $telHTML = htmlspecialchars($etudiant->getTelephone());
+            $loginHTML = htmlspecialchars($etudiant->getLogin());
+            $mailEtuHTML = htmlspecialchars($etudiant->getMailUniersitaire());
             echo "<h3 class='titre'>Informations :</h3>";
             echo "<p>Numéro Étudiant : " . $etudiant->getNumEtudiant() . "</p>";
             echo "<p>Login : " . $loginHTML . "</p>";
@@ -41,19 +46,19 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
         </div>
 
         <?php
-        if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){ ?>
-        <div class="wrapBoutons">
-            <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
-            <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
-            <?php if ($aFormation != null && $aFormation->getloginTuteurUM() == null){
-            echo '<a href="?action=devenirTuteur&controleur=AdminMain&numEtu='.$etudiant->getNumEtudiant().'">Devenir tuteur</a>'; }?>
-        </div>
-        <?php }
-        else if(\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Personnels" && $aFormation != null && $aFormation->getloginTuteurUM() == null) {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") { ?>
+            <div class="wrapBoutons">
+                <a href="?action=supprimerEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">SUPPRIMER</a>
+                <a href="?action=afficherFormulaireModifEtudiant&controleur=AdminMain&numEtu=<?php echo $etudiant->getNumEtudiant() ?>">MODIFIER</a>
+                <?php if ($aFormation != null && $aFormation->getloginTuteurUM() == null) {
+                    echo '<a href="?action=seProposerEnTuteurUM&controleur=AdminMain&numEtu=' . $etudiant->getNumEtudiant() . '">Devenir tuteur</a>';
+                } ?>
+            </div>
+        <?php } else if (ConnexionUtilisateur::getTypeConnecte() == "Personnels" && $aFormation != null && $aFormation->getloginTuteurUM() == null) {
             echo '<div class="wrapBoutons">
-            <a href="?action=devenirTuteur&controleur=AdminMain&numEtu='.$etudiant->getNumEtudiant().'">Devenir tuteur</a>
+            <a href="?action=seProposerEnTuteurUM&controleur=AdminMain&numEtu=' . $etudiant->getNumEtudiant() . '">Devenir tuteur</a>
             </div>';
-        }?>
+        } ?>
 
     </div>
 
@@ -74,8 +79,8 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
                 foreach ($listeOffres as $offre) {
                     if ($offre != null) {
                         $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                        $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
-                        $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
+                        $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
+                        $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
                         echo "<a class='offre' href='?action=afficherVueDetailOffre&controleur=AdminMain&idFormation=" . $offre->getidFormation() . "'>" .
                             "<div class='imgOffre'>" .
                             "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='offre'>" .
@@ -83,7 +88,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
                             "<div class='infosOffre'>" .
                             "<h3 class='titre'>" . $nomOffreHTML . "</h3>" .
                             "<h4 class='titre'>" . $nomEntrHTML . "</h4>" .
-                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant() ) . "</h5> " .
+                            "<h5 class='titre'>Statut : " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant()) . "</h5> " .
                             "</div>" .
                             "</a>";
                     }
@@ -92,6 +97,33 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
             ?>
         </div>
 
+        <?php
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            $formationValidee = (new EtudiantRepository())->getOffreValidee($etudiant->getNumEtudiant());
+            /** @var Formation|bool $formationValidee */
+            $tuteur = $formationValidee ? $formationValidee->getloginTuteurUM() : false;
+
+            echo "<div class='wrapTuteurUM'>
+                    <p>";
+            if (!$tuteur) echo "Cet élève n'a pas encore de tuteur UM.";
+            else {
+                echo "Tuteur UM : ";
+                echo $tuteur;
+                if (!$formationValidee->isTuteurUMvalide()) {
+                    $eleveId = $_GET['numEtu'];
+                    echo "
+                            Acceptez-vous ce tuteur ?
+                            <div class='wrapBoutons'>
+                                <a href='?action=validerTuteurUM&eleveId=$eleveId'>Valider</a>
+                                <a href='?action=refuserTuteurUM&eleveId=$eleveId'>Refuser</a>
+                            </div>
+                        ";
+                }
+            }
+            echo "</p>
+                </div>";
+        }
+        ?>
 
     </div>
 </div>

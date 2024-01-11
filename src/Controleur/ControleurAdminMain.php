@@ -322,8 +322,22 @@ class ControleurAdminMain extends ControleurMain
     {
         ServiceConvention::rejeterConvention();
     }
-    public static function devenirTuteur(): void{
+    public static function devenirTuteur(): void
+    {
         ServicePersonnel::devenirTuteur();
+    }
+    public static function seProposerEnTuteurUM(): void{
+        ServicePersonnel::seProposerEnTuteurUM();
+    }
+    
+    public static function validerTuteurUM(): void
+    {
+        ServicePersonnel::validerTuteurUM();
+    }
+    
+    public static function refuserTuteurUM(): void
+    {
+        ServicePersonnel::refuserTuteurUM();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
