@@ -193,7 +193,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
         for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
