@@ -47,7 +47,7 @@ class ControleurEtuMain extends ControleurMain
         );
 
         $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
-        if ($formation && ControleurMain::getPageActuelle() != "Détails de l'offre") {
+        if ($formation && self::$titrePageActuelleEtu != "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
         }
         if (self::$titrePageActuelleEtu == "Mon Compte") {
@@ -159,7 +159,7 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Remplir ma convention", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
         }
     }
 
