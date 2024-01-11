@@ -152,7 +152,7 @@ class ServiceEntreprise
                 }
                 $entr->setIdVille((new VilleRepository())->getVilleParNom($_REQUEST["ville"]));
                 (new EntrepriseRepository())->modifierObjet($entr);
-                ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise à bien été modifiée");
+                ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été modifiée");
             }
         }
     }
