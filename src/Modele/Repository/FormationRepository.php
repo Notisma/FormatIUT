@@ -121,7 +121,7 @@ class FormationRepository extends RechercheRepository
      */
     public function getListeOffreParEntreprise($idEntreprise, $type, $etat): array
     {
-        $sql = "SELECT idFormation FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
         if ($type == "Stage" || $type == "Alternance") {
             $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage/Alternance'";
             $values["TypeTag"] = $type;
@@ -134,6 +134,7 @@ class FormationRepository extends RechercheRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"] = $idEntreprise;
         $pdoStatement->execute($values);
+
         $listeOffre = array();
         foreach ($pdoStatement as $offre) {
             $listeOffre[] = $this->construireDepuisTableau($offre);
@@ -322,7 +323,7 @@ class FormationRepository extends RechercheRepository
         WHERE dateCreationConvention IS NOT NULL AND conventionValidee = 0 AND idEtudiant IS NOT NULL";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute();
-        foreach ($pdoStatement as $formation){
+        foreach ($pdoStatement as $formation) {
             $listFormations[] = $this->construireDepuisTableau($formation);
         }
         return $listFormations;

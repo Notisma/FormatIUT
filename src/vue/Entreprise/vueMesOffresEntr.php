@@ -80,7 +80,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
         <div class="mosaique">
             <?php
-            $listeOffres = (new FormationRepository())->getListeOffreParEntreprise($entreprise->getSiret(), $_REQUEST["type"], $_REQUEST["etat"]);
             $data = $listeOffres;
 
             if ($data == null) {
@@ -91,7 +90,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                     $offre = $data[$i];
                     $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($offre);
                     $red = "";
-                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $n = 2;
                     $row = intdiv($i, $n);
                     $col = $i % $n;
