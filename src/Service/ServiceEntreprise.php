@@ -81,7 +81,7 @@ class ServiceEntreprise
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
                     ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Les informations ont bien été modifiées");
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
-            } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requis");
+            } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requise");
         } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
     }
 

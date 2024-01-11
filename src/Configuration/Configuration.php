@@ -150,6 +150,6 @@ class Configuration
 
     public static function getDelai(): int
     {
-        return 11 * 60;
+        return 30 * 60;
     }
 }
