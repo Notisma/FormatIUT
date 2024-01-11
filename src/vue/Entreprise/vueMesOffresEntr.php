@@ -88,7 +88,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
                 for ($i = 0; $i < count($data); $i++) {
                     $offre = $data[$i];
-                    $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($offre);
+                    $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($offre->getIDFormation());
                     $red = "";
                     $n = 2;
                     $row = intdiv($i, $n);
