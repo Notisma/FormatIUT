@@ -50,13 +50,6 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
                 </div>
             </div>
 
-            <h3 class="titre">Siret</h3>
-            <div class="inputCentre">
-                <label>
-                    <input disabled type="text" value='<?= htmlspecialchars($entreprise->getSiret()); ?>' name="siret"
-                           required maxlength="50">
-                </label>
-            </div>
 
             <h3 class="titre">Nom</h3>
             <div class="inputCentre">

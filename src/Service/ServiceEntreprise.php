@@ -75,12 +75,11 @@ class ServiceEntreprise
      */
     public static function mettreAJourEntreprise(): void
     {
-        //TODO vérifier utilité fonction mettreAJourInfos
         if (isset($_REQUEST["siret"], $_REQUEST["nom"], $_REQUEST["statutJ"], $_REQUEST["effectif"], $_REQUEST['codeNAF'], $_REQUEST["tel"], $_REQUEST["adresse"])) {
-            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprises") {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
                 if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
-                    ControleurEntrMain::afficherProfil();
+                    ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Les informations ont bien été modifiées");
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
             } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requis");
         } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
