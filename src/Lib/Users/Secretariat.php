@@ -12,4 +12,12 @@ class Secretariat extends Personnels
         return "Secretariat";
     }
 
+    public function getMenu(): array
+    {
+        $menu = parent::getDebutMenu();
+        $menu[]= array("image" => "../ressources/images/document.png", "label"=> "Liste des conventions", "lien" =>"?action=afficherConventionAValider&controleur=AdminMain");
+        $menu[] = parent::getFinMenu();
+        return $menu;
+    }
+
 }
