@@ -85,10 +85,10 @@ abstract class AbstractRepository
 
     /***
      * @param AbstractDataObject $object
-     * @return void
+     * @return string|false last insert ID (for auto-increment)
      * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
      */
-    public function creerObjet(AbstractDataObject $object): void
+    public function creerObjet(AbstractDataObject $object): string|false
     {
         $fields = "";
         $values = "";
@@ -104,8 +104,11 @@ abstract class AbstractRepository
         }
         $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
 
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $pdo = ConnexionBaseDeDonnee::getPdo();
+        $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute($tags);
+
+        return $pdo->lastInsertId();
     }
 
 
