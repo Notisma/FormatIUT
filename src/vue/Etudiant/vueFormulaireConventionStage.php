@@ -120,8 +120,9 @@ $estStage = false;
                     euros par MOIS</h6>
                 <h6 class="titre"><strong>Commentaire :</strong></h6>
                 <h6 class="titre"><strong>Assurance : </strong><label for="assu_id"></label><input class="inputAssur" placeholder="Caisse d'épargne"
-                                                                                                   type="text" name="assurance" <?php if (!empty($offre->getAssurance())) {echo 'value="'. htmlspecialchars($offre->getAssurance()) .'"';} ?> onchange="this.form.submit()" id="assu_id"
-                                                                                                   required></h6>
+                                                                                                   type="text" name="assurance" <?php if (!empty($offre->getAssurance())) {echo 'value="'. htmlspecialchars($offre->getAssurance()) .'"';} ?>
+                                                                                                   onchange="this.form.action='?action=creerConvention&controleur=EtuMain'; this.form.submit();"
+                                                                                                   id="assu_id" required></h6>
             </div>
 
         </div>
@@ -147,8 +148,22 @@ $estStage = false;
         </div>
 
     </div>
+
     <input type="hidden" value="<?= date('d-m-Y'); ?>" name="dateCreation">
     <input type="hidden" value="<?= $entreprise->getSiret() ?>" name="siret">
     <input type="hidden" value="<?= $villeEntr->getCodePostal() ?>" name="codePostalEntr">
     <input type="hidden" value="<?= $offre->getIdFormation() ?>" name="idOff">
+    <input type="hidden" value="<?= $entreprise->getNomEntreprise() ?>" name="nomEntreprise">
+    <input type="hidden" value="<?= $entreprise->getAdresseEntreprise() ?>" name="adresseEntr">
+    <input type="hidden" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille());?>">
+    <input type="hidden" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>">
+    <?php
+    $dateDebut = $offre->getDateDebut();
+    $dateFin = $offre->getDateFin();
+
+    echo '<input type="hidden" name="dateDebut" value="'.$dateDebut.'">
+    <input type="hidden" name="dateFin" value="'.$dateFin.'">';
+    ?>
+
+
 </form>
