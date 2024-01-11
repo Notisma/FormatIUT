@@ -76,14 +76,14 @@ class ServiceEntreprise
     public static function mettreAJourEntreprise(): void
     {
         //TODO vérifier utilité fonction mettreAJourInfos
-        if (isset($_REQUEST["siret"],$_REQUEST["nom"],$_REQUEST["statutJ"],$_REQUEST["effectif"],$_REQUEST['codeNAF'],$_REQUEST["tel"],$_REQUEST["adresse"])) {
-            if (ConnexionUtilisateur::getTypeConnecte()=="Entreprises") {
+        if (isset($_REQUEST["siret"], $_REQUEST["nom"], $_REQUEST["statutJ"], $_REQUEST["effectif"], $_REQUEST['codeNAF'], $_REQUEST["tel"], $_REQUEST["adresse"])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprises") {
                 if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                     (new EntrepriseRepository())->mettreAJourInfos($_REQUEST['siret'], $_REQUEST['nom'], $_REQUEST['statutJ'], $_REQUEST['effectif'], $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresse']);
                     ControleurEntrMain::afficherProfil();
                 } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
-            } else ControleurMain::redirectionFlash("afficherIndex","danger","Vous n'avez pas les droits requis");
-        }else ControleurEntrMain::redirectionFlash("afficherProfil","danger","Les informations ne sont pas renseignées");
+            } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requis");
+        } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
     }
 
 
@@ -128,13 +128,14 @@ class ServiceEntreprise
         }
     }
 
-    public static function modifierEntreprise(): void{
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
-            if ((new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']) == null){
+    public static function modifierEntreprise(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            if ((new EntrepriseRepository())->getObjectParClePrimaire($_GET['siret']) == null) {
                 ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "L'entreprise n'existe pas");
-            }
-            else{
-                $entr = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+            } else {
+                $entr = (new EntrepriseRepository())->getObjectParClePrimaire($_GET['siret']);
+                /** @var Entreprise $entr */
                 $entr->setNomEntreprise($_REQUEST['nomEntreprise']);
                 $entr->setAdresseEntreprise($_REQUEST['adresseEntreprise']);
                 $entr->setEmail($_REQUEST["email"]);
@@ -147,7 +148,7 @@ class ServiceEntreprise
                 $_REQUEST['emailAValider'] = $entr->getEmailAValider();
                 $_REQUEST['nonce'] = $entr->getNonce();
                 $_REQUEST['dateCreationCompte'] = $entr->getDateCreationCompte();
-                if ((new VilleRepository())->getVilleParNom($_REQUEST["ville"]) == null){
+                if ((new VilleRepository())->getVilleParNom($_REQUEST["ville"]) == null) {
                     (new VilleRepository())->creerObjet(new Ville(null, $_REQUEST["ville"], $_REQUEST["codePostal"]));
                 }
                 $entr->setIdVille((new VilleRepository())->getVilleParNom($_REQUEST["ville"]));
