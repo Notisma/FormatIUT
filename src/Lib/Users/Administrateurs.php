@@ -15,9 +15,9 @@ class Administrateurs extends Personnels
 
     public function getMenu(): array
     {
-        $menu=parent::getDebutMenu();
+        $menu = parent::getDebutMenu();
         $menu[] = array("image" => "../ressources/images/document.png", "label" => "Mes CSV", "lien" => "?action=afficherVueCSV&controleur=AdminMain");
-        $menu[]=parent::getFinMenu();
+        $menu[] = parent::getFinMenu();
         return $menu;
     }
 }
