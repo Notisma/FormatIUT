@@ -155,11 +155,10 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherFormulaireModifEtudiant(): void
     {
-        if(ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Modifier un étudiant";
             self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
-        }
-        else{
+        } else {
             self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous ne pouvez pas accéder à cette page");
         }
     }
@@ -169,15 +168,21 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherFormModificationOffre(): void
     {
-        if (isset($_REQUEST['idFormation'])) {
-            $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-            self::afficherVue("Modifier une Offre", "Entreprise/vueFormulaireModificationOffre.php", [
-                'offre' => $offre
-            ]);
-        } else {
-            self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
+        if (ConnexionUtilisateur::getTypeConnecte() != "Administrateurs") {
+            self::redirectionFlash("afficherListeOffres", "danger", "Vous n'avez pas les droits. Cet incident sera reporté.");
+            return;
         }
+        if (!isset($_REQUEST['idFormation'])) {
+            self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
+            return;
+        }
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+        self::afficherVue("Modifier une Offre", "Entreprise/vueFormulaireModificationOffre.php", [
+            'offre' => $offre
+        ]);
+
     }
+
     /**
      * @return void
      * Affiche la liste des conventions à valider au secrétariat/admin
@@ -188,7 +193,7 @@ class ControleurAdminMain extends ControleurMain
             $listeFormations = (new FormationRepository())->getListeObjet();
             self::$pageActuelleAdmin = "Liste des conventions";
             self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations" => $listeFormations]);
-        }else{
+        } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'avez pas accès à la liste des conventions à valider");
         }
     }
@@ -197,8 +202,9 @@ class ControleurAdminMain extends ControleurMain
      * @return void
      * Affiche en détail la convention de l'étudiant au secrétariat/admin
      */
-    public static function afficherDetailConvention(): void {
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
+    public static function afficherDetailConvention(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             if (isset($_REQUEST['numEtudiant'])) {
                 $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
                 if ($formation->getDateCreationConvention() != null) {
@@ -218,13 +224,14 @@ class ControleurAdminMain extends ControleurMain
             } else {
                 self::redirectionFlash("afficherConventionAValider", "danger", "Cet étudiant n'a pas de formation");
             }
-        }else{
+        } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'êtes pas du secrétariat");
         }
     }
 
 
-    public static function afficherFormulaireModifEntreprise(): void{
+    public static function afficherFormulaireModifEntreprise(): void
+    {
         self::$pageActuelleAdmin = "Modifier une entreprise";
         self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
     }
@@ -235,7 +242,7 @@ class ControleurAdminMain extends ControleurMain
     {
         ServiceFormation::modifierOffre();
     }
-    
+
     public static function modifierEtudiant(): void
     {
         ServiceEtudiant::modifierEtudiant();
@@ -296,15 +303,18 @@ class ControleurAdminMain extends ControleurMain
         ServicePersonnel::retrograderProf();
     }
 
-    public static function modifierEntreprise(): void{
+    public static function modifierEntreprise(): void
+    {
         ServiceEntreprise::modifierEntreprise();
     }
 
-    public static function validerConvention(): void{
+    public static function validerConvention(): void
+    {
         ServiceConvention::validerConvention();
     }
 
-    public static function rejeterConvention(): void{
+    public static function rejeterConvention(): void
+    {
         ServiceConvention::rejeterConvention();
     }
 
