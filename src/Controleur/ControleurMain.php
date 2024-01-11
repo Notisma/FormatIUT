@@ -117,7 +117,7 @@ class ControleurMain
 
         /** @var ControleurMain $contr */
         $contr = Configuration::getCheminControleur();
-        ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php", $contr::getMenu(), [
+        ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php", [
             "recherche" => $_REQUEST["recherche"],
             "liste"=>$_REQUEST["liste"],
             "nbResults" => $_REQUEST["count"]
