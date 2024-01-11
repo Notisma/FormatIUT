@@ -6,14 +6,14 @@ class FiltresProf
 {
     public static function personnel_prof():string
     {
-        return " AND estAdmin=0 AND nomProf NOT LIKE \"secretariat\"";
+        return " (estAdmin=0 AND loginProf LIKE \"%ecretariat%\")";
     }
     public static function personnel_admin():string
     {
-        return " AND estAdmin=1";
+        return " estAdmin=1";
     }
     public static function personnel_secretariat():string
     {
-        return " AND nomProf LIKE \"secretariat\" ";
+        return " loginProf LIKE \"%ecretariat%\" ";
     }
 }

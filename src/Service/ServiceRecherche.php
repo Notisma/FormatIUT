@@ -10,6 +10,7 @@ use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 use DOMDocument;
+use newrelic\DistributedTracePayload;
 
 class ServiceRecherche
 {
@@ -19,20 +20,7 @@ class ServiceRecherche
      */
     public static function rechercher(): void
     {
-        /** @var ControleurMain $controleur */
-        $controleur = Configuration::getCheminControleur();
-
-        if (!isset($_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
-            header("Location: $_SERVER[HTTP_REFERER]");
-            return;
-        }
-        ////si la recherche ne contient que un ou des espaces
-        if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
-            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
-            header("Location: $_SERVER[HTTP_REFERER]");
-            return;
-        }
+        self::verifRecherche();
 
         $recherche = $_REQUEST['recherche'];
         $morceaux = explode(" ", $recherche);
@@ -46,14 +34,7 @@ class ServiceRecherche
             if (isset($_REQUEST[$item."s"])){$sansfiltres=false;}
         }
         foreach ($privilege as $repository=>$filtres) {
-            $listeFiltres=array();
-            foreach ($filtres as $filtre) {
-                if (in_array("obligatoire",$filtre) ||isset($_REQUEST[$filtre["value"]])){
-                    $fonction=$filtre["value"];
-                    $nomDeClasseFiltre="App\FormatIUT\Lib\Recherche\FiltresSQL\Filtres".$repository;
-                    $listeFiltres[]=$nomDeClasseFiltre::$fonction();
-                }
-            }
+            $listeFiltres= self::filtresFunction($repository,$filtres);
             if (isset($_REQUEST[$repository.'s']) || $sansfiltres) {
                 $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
                 $re = "recherche";
@@ -77,6 +58,34 @@ class ServiceRecherche
             $_REQUEST["liste"] = $liste;
             $_REQUEST["count"] = $count;
             ControleurMain::afficherRecherche();
+        }
+    }
+
+    private static function filtresFunction(string $repository,array $filtres)
+    {
+        $listeFiltres=array();
+        foreach ($filtres as $filtre) {
+            if (in_array("obligatoire",$filtre) ||isset($_REQUEST[$filtre["value"]])){
+                $fonction=$filtre["value"];
+                $nomDeClasseFiltre="App\FormatIUT\Lib\Recherche\FiltresSQL\Filtres".$repository;
+                $listeFiltres[]=$nomDeClasseFiltre::$fonction();
+            }
+        }
+        return $listeFiltres;
+    }
+
+    private static function verifRecherche()
+    {
+        if (!isset($_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche.");
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
+        }
+        ////si la recherche ne contient que un ou des espaces
+        if (preg_match('/^\s+$/', $_REQUEST['recherche'])) {
+            MessageFlash::ajouter("warning", "Veuillez renseigner une recherche valide.");
+            header("Location: $_SERVER[HTTP_REFERER]");
+            return;
         }
     }
 

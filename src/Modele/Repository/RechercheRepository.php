@@ -13,7 +13,7 @@ abstract class RechercheRepository extends AbstractRepository
     {
         foreach ($motsclefs as $mot) {
             $mot=strtolower($mot);
-            $sql="SELECT * FROM ".$this->getNomTable()." WHERE (";
+            $sql="SELECT * FROM ".$this->getNomTable()." ".strtoupper($this->getNomTable())[0]." WHERE (";
             foreach ($this->getColonnesRecherche() as $colonne) {
                 if ($colonne!=$this->getColonnesRecherche()[0]){
                     $sql.=" OR ";
@@ -24,8 +24,10 @@ abstract class RechercheRepository extends AbstractRepository
         }
         $sql.=")";
         foreach ($filtres as $filtre) {
-            $sql.=$filtre;
+            if(!is_null($filtre))
+            $sql.=" AND ".$filtre;
         }
+        //var_dump($sql);
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $liste=array();

@@ -9,18 +9,18 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 class FiltresFormation
 {
 
-    public static function formation_stage(): string
+    public static function formation_stage(): ?string
     {
         if (self::formation_type()) {
-            return " AND (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\") ";
-        } else return "";
+            return " (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\") ";
+        } else return null;
     }
 
-    public static function formation_alternance(): string
+    public static function formation_alternance(): ?string
     {
         if (self::formation_type()) {
-            return " AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\")";
-        } else return "";
+            return " (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\")";
+        } else return null;
     }
 
     public static function formation_type(): bool
@@ -32,18 +32,18 @@ class FiltresFormation
         }
     }
 
-    public static function formation_validee(): string
+    public static function formation_validee(): ?string
     {
         if (self::validite_formation())
-            return " AND estValide=1 ";
-        else return "";
+            return " estValide=1 ";
+            else return null;
     }
 
-    public static function formation_non_validee(): string
+    public static function formation_non_validee(): ?string
     {
         if (self::validite_formation())
-            return " AND estValide=0 ";
-        else return "";
+            return " estValide=0 ";
+        else return null;
     }
 
     public static function validite_formation(): bool
@@ -53,18 +53,18 @@ class FiltresFormation
         } else return true;
     }
 
-    public static function formation_disponible(): string
+    public static function formation_disponible(): ?string
     {
         if (self::disponibilite_formation())
-        return " AND idEtudiant is null";
-        else return "";
+        return " idEtudiant is null";
+        else return null;
     }
 
-    public static function formation_non_disponible(): string
+    public static function formation_non_disponible(): ?string
     {
         if (self::disponibilite_formation())
-        return " AND idEtudiant is not null";
-        else return "";
+        return " idEtudiant is not null";
+        else return null;
     }
 
     public static function disponibilite_formation(): bool
@@ -78,6 +78,6 @@ class FiltresFormation
     {
         $entreprise = (new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
         $idEntreprise = $entreprise->getSiret();
-        return " AND idEntreprise=$idEntreprise";
+        return " idEntreprise=$idEntreprise";
     }
 }

@@ -9,15 +9,16 @@ class FiltresEtudiant
 {
     public static function etudiant_A1():string
     {
-        return " AND groupe LIKE \"S\"";
+        self::annee_etudiant("etudiant_A1");
+        return " groupe LIKE \"S%\"";
     }
     public static function etudiant_A2():string
     {
-        return " AND groupe LIKE \"Q\"";
+        return " groupe LIKE \"Q%\"";
     }
     public static function etudiant_A3():string
     {
-        return " AND groupe LIKE \"G\"";
+        return " groupe LIKE \"G%\"";
     }
 
     public static function annee_etudiant(string $filtre)
@@ -37,24 +38,46 @@ class FiltresEtudiant
     {
         $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
         $idEntreprise=$entreprise->getSiret();
-        return " AND numEtudiant IN (SELECT idEtudiant FROM Formations WHERE idEntreprise=76543128904567 )";
+        return " EXISTS (SELECT idEtudiant FROM Formations WHERE idEntreprise=$idEntreprise AND E.numEtudiant=F.idEtudiant)";
     }
 
-    public static function etudiant_avec_formation():string
+    public static function etudiant_avec_formation():?string
     {
-        return "";
+        if (self::EnFormation_etudiant())
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
+        else return null;
     }
 
-    public static function etudiant_sans_formation():string
+    public static function etudiant_sans_formation():?string
     {
-        return "";
+        if (self::enFormation_etudiant())
+        return " NOT EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
+        else return null;
     }
-    public static function etudiant_stage():string
+
+    public static function enFormation_etudiant() :bool
     {
-        return "";
+        if (isset($_REQUEST["etudiant_avec_formation"],$_REQUEST["etudiant_sans_formation"])){
+            return false;
+        }else return true;
     }
-    public static function etudiant_alternance():string
+    public static function etudiant_stage():?string
     {
-        return "";
+        if (self::typeOffre_etudiant())
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\"))";
+        return null;
+    }
+    public static function etudiant_alternance():?string
+    {
+        if (self::typeOffre_etudiant())
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\"))";
+        return null;
+    }
+
+    private static function typeOffre_etudiant():bool
+    {
+        if (isset($_REQUEST["etudiant_alternance"],$_REQUEST["etudiant_stage"])) {
+            return false;
+        }else return true;
     }
 }
