@@ -59,11 +59,11 @@ class Personnels extends Utilisateur
         }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Détails d'un Étudiant") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherDetailEtudiant");
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherDetailEtudiant&numEtudiant=$_GET[numEtudiant]");
         }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Détails d'une Entreprise") {
-            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise");
+            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise&siret=$_GET[siret]");
         }
         return $menu;
     }

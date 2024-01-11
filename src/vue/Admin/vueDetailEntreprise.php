@@ -1,6 +1,6 @@
 <div class="wrapCentreDetailEntr">
     <?php
-    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["idEntreprise"]);
+    $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
     $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
     $adresseHTML = htmlspecialchars($entreprise->getAdresseEntreprise());
     $statutHTML = htmlspecialchars($entreprise->getStatutJuridique());

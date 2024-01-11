@@ -31,7 +31,7 @@ class VilleRepository extends AbstractRepository
         );
     }
 
-    public function getVilleParNom(string $nomVille): ?string
+    public function getVilleParNom(?string $nomVille): ?int
     {
         $sql = "SELECT idVille FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);

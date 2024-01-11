@@ -146,10 +146,10 @@ class ControleurAdminMain extends ControleurMain
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
                 self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
-                self::redirectionFlash("afficherPageConnexion", "danger", "Cette offre n'existe pas");
+                self::redirectionFlash("afficherListeOffres", "danger", "Cette offre n'existe pas");
             }
         } else {
-            self::redirectionFlash("afficherPageConnexion", "danger", "L'offre n'est pas renseignée");
+            self::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
         }
     }
 
@@ -232,8 +232,12 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherFormulaireModifEntreprise(): void
     {
-        self::$pageActuelleAdmin = "Modifier une entreprise";
-        self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            self::$pageActuelleAdmin = "Modifier une entreprise";
+            self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+        } else {
+            self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous ne pouvez pas accéder à cette page");
+        }
     }
 
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
