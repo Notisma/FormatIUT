@@ -12,8 +12,7 @@ if (date("m") >= 9) {
 $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
 $estStage = false;
 ?>
-<form method="post" class="formulaireConv"
-      action="?action=creerConvention&controleur=EtuMain&dateCreation=<?= date("d-m-Y"); ?>&siret=<?= $entreprise->getSiret() ?>&codePostalEntr=<?= $entreprise->getCodePostalEntreprise() ?>&idOff=<?= $offre->getIdFormation() ?>">
+<form method="post" class="formulaireConv">
     <div class="pageConvention">
 
         <div class="entete">
@@ -120,9 +119,9 @@ $estStage = false;
                 <h6 class="titre"><strong>Gratification :</strong> <?= htmlspecialchars($offre->getGratification()); ?>
                     euros par MOIS</h6>
                 <h6 class="titre"><strong>Commentaire :</strong></h6>
-                <h6 class="titre"><strong>Assurance : </strong><input class="inputAssur" placeholder="Caisse d'épargne"
-                                                                      type="text" name="assurance" id="assu_id"
-                                                                      required></h6>
+                <h6 class="titre"><strong>Assurance : </strong><label for="assu_id"></label><input class="inputAssur" placeholder="Caisse d'épargne"
+                                                                                                   type="text" name="assurance" <?php if (!empty($offre->getAssurance())) {echo 'value="'. htmlspecialchars($offre->getAssurance()) .'"';} ?> onchange="this.form.submit()" id="assu_id"
+                                                                                                   required></h6>
             </div>
 
         </div>
@@ -148,9 +147,8 @@ $estStage = false;
         </div>
 
     </div>
-    <input type="hidden" value="<?= date("d-m-Y"); ?>" name="dateCreation">
+    <input type="hidden" value="<?= date('d-m-Y'); ?>" name="dateCreation">
     <input type="hidden" value="<?= $entreprise->getSiret() ?>" name="siret">
-    <input type="hidden" value="<?= $entreprise->getCodePostalEntreprise() ?>" name="codePostalEntr">
+    <input type="hidden" value="<?= $villeEntr->getCodePostal() ?>" name="codePostalEntr">
     <input type="hidden" value="<?= $offre->getIdFormation() ?>" name="idOff">
-    <input type="submit" value="envoyer">
 </form>
