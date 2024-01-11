@@ -23,6 +23,20 @@ class TuteurProRepository extends AbstractRepository
         return "idTuteurPro";
     }
 
+
+    public function getTuteursDuneEntreprise($siret) {
+        $sql = "SELECT * FROM TuteursPro WHERE idEntreprise = :idEntreprise";
+        $requete = $this->db->prepare($sql);
+        $requete->bindValue(":idEntreprise", $siret);
+        $requete->execute();
+        $dataObjectTableau = $requete->fetchAll();
+        $tuteurs = array();
+        foreach ($dataObjectTableau as $dataObject) {
+            $tuteurs[] = $this->construireDepuisTableau($dataObject);
+        }
+        return $tuteurs;
+    }
+
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new TuteurPro(
