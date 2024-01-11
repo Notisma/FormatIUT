@@ -22,7 +22,7 @@ class StringUtils
         if ($beautify) $filename = self::beautify_filename($filename);
         // maximize filename length to 255 bytes http://serverfault.com/a/9548/44086
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $filename = mb_strcut(pathinfo($filename, PATHINFO_FILENAME), 0, 255 - ($ext ? strlen($ext) + 1 : 0), mb_detect_encoding($filename)) . ($ext ? '.' . $ext : '');
+        $filename = substr(pathinfo($filename, PATHINFO_FILENAME), 0, 255 - ($ext ? strlen($ext) + 1 : 0)) . ($ext ? '.' . $ext : '');
         return $filename;
     }
 
@@ -44,7 +44,7 @@ class StringUtils
             '/\.{2,}/'
         ), '.', $filename);
         // lowercase for windows/unix interoperability http://support.microsoft.com/kb/100625
-        $filename = mb_strtolower($filename, mb_detect_encoding($filename));
+        $filename = strtolower($filename);
         // ".file-name.-" becomes "file-name"
         $filename = trim($filename, '.-');
         return $filename;

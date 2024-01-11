@@ -250,10 +250,11 @@ class ControleurMain
                 die();
             }
             if ($file["tmp_name"] != null) {
-                $idFile = (new UploadsRepository())->insert($file['name']);
+                $purifiedName = StringUtils::filter_filename(basename($file['name']));
+                $idFile = (new UploadsRepository())->insert($purifiedName);
                 $ids[$fileName] = $idFile;
 
-                $fileLocation = $uploadsLocation . $idFile . '-' . StringUtils::filter_filename(basename($file['name']));
+                $fileLocation = $uploadsLocation . "$idFile-$purifiedName";
                 if (!move_uploaded_file($file['tmp_name'], $fileLocation))
                     self::redirectionFlash($actionInErrorCase, "danger", "Problem uploading file");
             }
