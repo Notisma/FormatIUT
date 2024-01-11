@@ -162,7 +162,7 @@ class ControleurMain
     /***
      * @param array $liste
      * @return array|null
-     * retourne les 3 éléments avec la valeur les plus hautes
+     * retourne les 6 éléments avec la valeur les plus hautes
      */
     protected static function getSixMax(array $liste): ?array
     {
