@@ -34,8 +34,14 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             <form>
                 <?php
 
+                if (!isset($_REQUEST["etat"])) $_REQUEST["etat"] = "Tous";
+                if (!isset($_REQUEST["type"])) $_REQUEST["type"] = "Tous";
+
                 $_GET["etat"] = $_REQUEST["etat"] ?? "Tous";
                 $_GET["type"] = $_REQUEST["type"] ?? "Tous";
+                var_dump($_REQUEST["etat"]);
+                $type = $_REQUEST["type"];
+                $etat = $_REQUEST["etat"];
 
                 echo '<input type="submit" name="type" value="Tous" class="inputOffre" ';
                 if ($type == "Tous") echo 'id="typeActuel" disabled';
@@ -70,7 +76,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     </div>
 
     <div class="wrapMosaique">
-        <h2 class="titre rouge">Liste des offres de Stage et d'Alternance :</h2>
+        <h2 class="titre rouge">Liste de vos Offres :</h2>
 
         <div class="mosaique">
             <?php
