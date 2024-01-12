@@ -156,6 +156,10 @@ class ControleurAdminMain extends ControleurMain
         }
     }
 
+    /**
+     * @return void affiche le formulaire pour que les admins puissent modifier les informations d'un étudiant
+     */
+
     public static function afficherFormulaireModifEtudiant(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
@@ -167,7 +171,7 @@ class ControleurAdminMain extends ControleurMain
     }
 
     /**
-     * @return void
+     * @return void affiche le formulaire pour que les admins puissent modifier les informations d'une offre
      */
     public static function afficherFormModificationOffre(): void
     {
@@ -231,6 +235,10 @@ class ControleurAdminMain extends ControleurMain
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'êtes pas du secrétariat");
         }
     }
+
+    /**
+     * @return void affiche le formulaire pour que les admins puissent modifier les informations d'une entreprise
+     */
 
 
     public static function afficherFormulaireModifEntreprise(): void
