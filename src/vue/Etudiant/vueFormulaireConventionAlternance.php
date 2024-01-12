@@ -1,78 +1,169 @@
+<?php
 
-<div id="center">
+use App\FormatIUT\Modele\Repository\ConventionRepository;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
-    <div class="presentation">
+$anneeUniv = "";
+if (date("m") >= 9) {
+    $anneeUniv = date("Y") . "/" . (date("Y") + 1);
+} else {
+    $anneeUniv = (date("Y") - 1) . "/" . date("Y");
+}
+$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
+$estStage = false;
+?>
+<form method="post" class="formulaireConv">
+    <div class="pageConvention">
 
-        <form method="post">
-            <fieldset>
-                <legend> Ma convention :</legend>
-                <p><label for="offre_id">Votre alternance : </label>
-                    <?php
-                    if ($offre) {
-                        echo '<input value="' . htmlspecialchars($offre->getNomOffre()) . '" name="nomOffre" id="offre_id"  readonly required> </input>';
-                        echo '<input type="hidden" value="'.$offre->getidFormation().'" name="idOff"> </input>';
+        <div class="entete">
+            <div>
+                <img src="../ressources/images/logo-iut-removed.png" alt="Logo de l'IUT">
+                <img src="../ressources/images/um_all.png" alt="Logo de l'IUT">
+            </div>
+            <h3 class="titre">Année Universitaire <?php echo $anneeUniv ?></h3>
+        </div>
 
-                        }
-                     else {
-                        echo '<input value="aucune" name="idOff" id="offre_id"  readonly required>';
-                    } ?>
+        <div class="titreConv">
+            <h2 class="titre">Convention d<?php if ($offre->getTypeOffre() == "Alternance") {
+                    echo "'alternance";
+                } else {
+                    echo "e stage";
+                    $estStage = true;
+                }
+                ?></h2>
+            <h5 class="titre">En référence à l'arrêté du 29 décembre 2014 relatif aux conventions de stage et
+                d'alternance</h5>
+        </div>
 
-                </p>
-                <p> Informations de l'étudiant :</p>
-                <p><label for="num_id"> N° étudiant </label>
-                    <input type="text" value="<?= $etudiant->getNumEtudiant(); ?>" name="numEtudiant" id="num_id"
-                           readonly required>
-                </p>
-                <p><label for="nom_id"> Nom </label>
-                    <input type="text" value="<?= htmlspecialchars($etudiant->getNomEtudiant()); ?>" name="nomEtudiant" id="nom_id"
-                           readonly required>
-                </p>
-                <p><label for="prenom_id"> Nom </label>
-                    <input type="text" value="<?= htmlspecialchars($etudiant->getPrenomEtudiant()); ?>" name="prenomEtudiant"
-                           id="prenom_id" readonly required>
-                </p>
-                <p><label for="tel_id"> N° tel </label>
-                    <input type="text" value="<?= htmlspecialchars($etudiant->getTelephone()) ?>" name="telephone" id="tel_id" readonly
-                           required></p>
-                <p><label for="mail_id">Mail</label>
-                    <input type="text" value="<?= htmlspecialchars($etudiant->getMailPerso()); ?>" name="mailEtu" id="mail_id" readonly
-                           required></p>
-                <p><label for="assu_id">Assurance</label>
-                    <input type="text" name="assurance" id="assu_id" required></p>
-                <p>Informations de l'entreprise :</p>
-                <p><label for="sir_id">Siret</label>
-                    <input type="number" name="siret" value="<?= $entreprise->getSiret();?>" id="sir_id" required></p>
-                <p><label for="nomEntr_id"> Nom entreprise </label>
-                    <input type="text" name="nomEntreprise" value="<?= htmlspecialchars($entreprise->getNomEntreprise());?>" id="nomEntr_id" required>
-                </p>
-                <p><label for="adrEntr_id">Adresse Entreprise</label>
-                    <input type="text" name="adresseEntr" value="<?= htmlspecialchars($entreprise->getAdresseEntreprise());?>" id="adrEntr_id" required></p>
-                <p><label for="villeEntr_id"> Ville </label>
-                    <input type="text" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille());?>" id="villeEntr_id" required>
-                <p><label for="cpEntr_id">Code postal </label>
-                    <input type="text" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>" id="cpEntr_id" required></p>
-                <?php
-                $dateDebut = $offre->getDateDebut();
-                $dateFin = $offre->getDateFin();
-                echo '<p><label for="debut_id"> Alternance : Date début </label>
-                    <input type="date" name="dateDebut" value="'.$dateDebut.'" id="debut_id" required>
-                    <label for="fin_id"> Date fin </label>
-                    <input type="date" name="dateFin" value="'.$dateFin.'" id="fin_id" required></p>
-                <p>'
-                ?>
-                    <label class="labelFormulaire" for="objStage_id">Programme de formation : </label>
-                <div class="grandInputCentre">
-                    <textarea class="inputFormulaire" name="objfOffre" id="objStage_id"
-                              required maxlength="255"><?php echo $offre->getObjectifOffre() ?></textarea>
+        <div class="firstBlock">
+            <h6 class="titre">Nota : pour faciliter la lecture du document, les mots "stagiaire", "alternant",
+                "enseignant référent",
+                "tuteur de stage", "représentant légal", et "étudiant" sont utilisés au masculin</h6>
+
+            <div class="separateur">
+                <div class="etab">
+                    <h5 class="titre">1 - L'ÉTABLISSEMENT D'ENSEIGNEMENT ou DE FORMATION</h5>
+                    <h6 class="titre"><strong>Nom :</strong> Université de Montpellier</h6>
+                    <h6 class="titre"><strong>Adresse :</strong> 34090 Montpellier</h6>
+                    <h6 class="titre"><strong>Tél :</strong></h6>
+                    <h6 class="titre"><strong>Représenté par (signataire de la convention) :</strong> Gilles TROMBETTONI
+                    </h6>
+                    <h6 class="titre"><strong>Qualité du représentant :</strong> Chef de Département IUT Informatique
+                    </h6>
+                    <h6 class="titre"><strong>Composante/UFR :</strong> IUT MS : INFORMATIQUE</h6>
+                    <h6 class="titre"><strong>Adresse (si différente de celle de l'établissement) :</strong> Bâtiment K
+                        99
+                        avenue d'Occitanie 34090 Montpellier cedex 5</h6>
+                    <h6 class="titre"><strong>Tél :</strong> 04 99 58 51 80</h6>
+                    <h6 class="titre"><strong>Mél :</strong> iutms-info@umontpellier.fr</h6>
                 </div>
-                </p>
 
+                <?php
+                $tuteurPro = (new \App\FormatIUT\Modele\Repository\TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
+                ?>
+                <div class="entr">
+                    <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
+                    <h6 class="titre"><strong>Nom :</strong> <?= htmlspecialchars($entreprise->getNomEntreprise()); ?>
+                    </h6>
+                    <h6 class="titre"><strong>Adresse
+                            :</strong> <?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?>
+                        , <?= htmlspecialchars($villeEntr->getNomVille()); ?></h6>
+                    <h6 class="titre"><strong>Représenté par (nom du signataire de la convention)
+                            :</strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()); ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
+                    </h6>
+                    <h6 class="titre"><strong>Qualité du représentant
+                            :</strong> <?= htmlspecialchars($tuteurPro->getFonctionTuteurPro()); ?></h6>
+                    <h6 class="titre"><strong>Tél :</strong> <?= htmlspecialchars($tuteurPro->getTelTuteurPro()); ?>
+                    </h6>
+                    <h6 class="titre"><strong>Mél :</strong> <?= htmlspecialchars($tuteurPro->getMailTuteurPro()); ?>
+                    </h6>
+                </div>
+            </div>
 
+        </div>
 
-                <input type="hidden" value="<?= date("d-m-Y"); ?>" name="dateCreation">
-                <input type="submit" value="Envoyer"
-                       formaction="?action=creerConvention&controleur=EtuMain">
-            </fieldset>
-        </form>
+        <div class="secondBlock">
+            <h5 class="titre">3 - L'Étudiant</h5>
+            <div>
+                <h6 class="titre"><strong>Nom :</strong> <?= htmlspecialchars($etudiant->getNomEtudiant()); ?></h6>
+                <h6 class="titre"><strong>Prénom :</strong> <?= htmlspecialchars($etudiant->getPrenomEtudiant()); ?>
+                </h6>
+                <h6 class="titre"><strong>Sexe :</strong> <?= htmlspecialchars($etudiant->getSexeEtu()); ?></h6>
+                <h6 class="titre"><strong>Numéro d'étudiant
+                        :</strong> <?= htmlspecialchars($etudiant->getNumEtudiant()); ?>
+                </h6>
+                <h6 class="titre"><strong>Tél :</strong> <?= htmlspecialchars($etudiant->getTelephone()); ?></h6>
+                <h6 class="titre"><strong>Mél :</strong> <?= htmlspecialchars($etudiant->getMailPerso()); ?></h6>
+                <h6 class="titre"><strong>INTITULÉ DE LA FORMATION OU CURSUS SUIVI DANS L'ÉTABLISSEMENT D'ENSEIGNEMENT
+                        SUPÉRIEUR ET VOLUME
+                        HORAIRE (ANNUEL OU SEMESTRIEL) :</strong> BUT <?= htmlspecialchars($etudiant->getAnneeEtu()) ?>
+                    INFO <?= htmlspecialchars($etudiant->getParcours()); ?></h6>
+            </div>
+        </div>
+
+        <div class="threeBlock">
+            <h5 class="titre">SUJET D<?php if ($estStage) {
+                    echo "E STAGE";
+                } else {
+                    echo "' ALTERNANCE";
+                } ?> : <?= htmlspecialchars($offre->getSujet()) ?> </h5>
+            <div>
+                <h6 class="titre"><strong>Dates :</strong> du <?= htmlspecialchars($offre->getDateDebut()); ?>
+                    au <?= htmlspecialchars($offre->getDateFin()) ?></h6>
+                <h6 class="titre"><strong>Intitulé de la formation :</strong>
+                    BUT <?= htmlspecialchars($etudiant->getAnneeEtu()) ?>
+                    INFO <?= htmlspecialchars($etudiant->getParcours()); ?></h6>
+                <h6 class="titre"><strong>Correspondant à</strong> <?= htmlspecialchars($offre->getDureeHeure()) ?>
+                    heures
+                    de présence effective dans l'organisme d'accueil</h6>
+                <h6 class="titre"><strong>Gratification :</strong> <?= htmlspecialchars($offre->getGratification()); ?>
+                    euros par MOIS</h6>
+                <h6 class="titre"><strong>Commentaire :</strong></h6>
+                <h6 class="titre"><strong>Assurance : </strong><label for="assu_id"></label><input class="inputAssur" placeholder="Caisse d'épargne"
+                                                                                                   type="text" name="assurance" <?php if (!empty($offre->getAssurance())) {echo 'value="'. htmlspecialchars($offre->getAssurance()) .'"';} ?>
+                                                                                                   onchange="this.form.action='?action=creerConvention&controleur=EtuMain'; this.form.submit();"
+                                                                                                   id="assu_id" required></h6>
+            </div>
+
+        </div>
+
+        <div class="separateur">
+
+            <div>
+                <h5 class="titre">Encadrement de l'étudiant par l'établissement d'enseignement</h5>
+                <h6 class="titre"><strong>Nom et prénom de l'Enseignant référent :</strong> COLETTA Rémi</h6>
+                <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
+                <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
+            </div>
+
+            <div>
+                <h5 class="titre">Encadrement de l'étudiant par l'organisme d'accueil</h5>
+                <h6 class="titre"><strong>Nom et prénom du tuteur de
+                        l'entreprise </strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()) ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
+                </h6>
+                <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
+                <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
+            </div>
+
+        </div>
+
     </div>
-</div>
+
+    <input type="hidden" value="<?= date('d-m-Y'); ?>" name="dateCreation">
+    <input type="hidden" value="<?= $entreprise->getSiret() ?>" name="siret">
+    <input type="hidden" value="<?= $villeEntr->getCodePostal() ?>" name="codePostalEntr">
+    <input type="hidden" value="<?= $offre->getIdFormation() ?>" name="idOff">
+    <input type="hidden" value="<?= $entreprise->getNomEntreprise() ?>" name="nomEntreprise">
+    <input type="hidden" value="<?= $entreprise->getAdresseEntreprise() ?>" name="adresseEntr">
+    <input type="hidden" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille());?>">
+    <input type="hidden" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>">
+    <?php
+    $dateDebut = $offre->getDateDebut();
+    $dateFin = $offre->getDateFin();
+
+    echo '<input type="hidden" name="dateDebut" value="'.$dateDebut.'">
+    <input type="hidden" name="dateFin" value="'.$dateFin.'">';
+    ?>
+
+
+</form>
