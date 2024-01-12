@@ -56,7 +56,7 @@
         <h3 class="titre">Les présentes conditions générales d’utilisation (ci-après les « CGU ») ont pour objet de
             définir les modalités et conditions d’utilisation des services proposés par le site internet Format'IUT
             (ci-après le « Site ») et de définir les droits et obligations des parties dans ce cadre.</h3>
-        <h3 class="titre">Les CGU sont accessibles et imprimables à tout moment par ce lien : <a class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU
+        <h3 class="titre">Les CGU sont accessibles et imprimables à tout moment par ce lien : <a class="lien" target="_blank" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU
                 - Format'IUT</a></h3>
     </div>
 </div>

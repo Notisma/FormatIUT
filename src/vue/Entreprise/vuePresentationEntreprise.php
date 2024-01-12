@@ -112,7 +112,7 @@
                 <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
                 <div>
                     <label for="cgu-id"></label><input type="checkbox" name="cgu" required id="cgu-id">
-                    <h4 class="titre">Veuillez accepter les <a class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
+                    <h4 class="titre">Veuillez accepter les <a target="_blank" class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
                     </h4>
                 </div>
                 <input type="submit" class="valider" value="NOUS REJOINDRE">
