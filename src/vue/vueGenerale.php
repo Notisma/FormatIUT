@@ -43,11 +43,13 @@ use App\FormatIUT\Configuration\Configuration;
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
+                    $menu=\App\FormatIUT\Controleur\ControleurMain::getMenu();
 
                     if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
                         $user=\App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
                         $src=$user->getImageProfil();
                         $liaison="?controleur=".$user->getControleur()."&action=afficherProfil";
+                        $menu=$user->getMenu();
 
                         $codeRecherche = "
                         <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
@@ -96,9 +98,9 @@ use App\FormatIUT\Configuration\Configuration;
                     foreach ($menu as $item) {
                         $actuel = "";
                         if ($item['label'] == $titrePage) {
-                            $actuel = "id='active'";
+                            $actuel = "class='active'";
                         }
-                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone '><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
                     ?>
                 </div>
