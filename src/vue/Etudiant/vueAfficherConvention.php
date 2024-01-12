@@ -1,7 +1,9 @@
 <?php
 
+use App\FormatIUT\Modele\DataObject\TuteurPro;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
 
 $anneeUniv = "";
 if (date("m") >= 9) {
@@ -31,11 +33,13 @@ $estStage = false;
                 $estStage = true;
             }
             ?></h2>
-        <h5 class="titre">En référence à l'arrêté du 29 décembre 2014 relatif aux conventions de stage et d'alternance</h5>
+        <h5 class="titre">En référence à l'arrêté du 29 décembre 2014 relatif aux conventions de stage et
+            d'alternance</h5>
     </div>
 
     <div class="firstBlock">
-        <h6 class="titre">Nota : pour faciliter la lecture du document, les mots "stagiaire", "alternant", "enseignant référent",
+        <h6 class="titre">Nota : pour faciliter la lecture du document, les mots "stagiaire", "alternant", "enseignant
+            référent",
             "tuteur de stage", "représentant légal", et "étudiant" sont utilisés au masculin</h6>
 
         <div class="separateur">
@@ -55,7 +59,8 @@ $estStage = false;
             </div>
 
             <?php
-            $tuteurPro = (new \App\FormatIUT\Modele\Repository\TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
+            $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
+            if (is_null($tuteurPro)) $tuteurPro = new TuteurPro(-1, "", "", "", "", "", -1);
             ?>
             <div class="entr">
                 <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
@@ -93,7 +98,11 @@ $estStage = false;
     </div>
 
     <div class="threeBlock">
-        <h5 class="titre">SUJET D<?php if ($estStage) {echo "E STAGE";} else {echo "' ALTERNANCE";} ?> : <?= htmlspecialchars($offre->getSujet()) ?> </h5>
+        <h5 class="titre">SUJET D<?php if ($estStage) {
+                echo "E STAGE";
+            } else {
+                echo "' ALTERNANCE";
+            } ?> : <?= htmlspecialchars($offre->getSujet()) ?> </h5>
         <div>
             <h6 class="titre"><strong>Dates :</strong> du <?= htmlspecialchars($offre->getDateDebut()); ?>
                 au <?= htmlspecialchars($offre->getDateFin()) ?></h6>
@@ -121,7 +130,8 @@ $estStage = false;
 
         <div>
             <h5 class="titre">Encadrement de l'étudiant par l'organisme d'accueil</h5>
-            <h6 class="titre"><strong>Nom et prénom du tuteur de l'entreprise </strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()) ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
+            <h6 class="titre"><strong>Nom et prénom du tuteur de
+                    l'entreprise </strong> <?= htmlspecialchars($tuteurPro->getNomTuteurPro()) ?> <?= htmlspecialchars($tuteurPro->getPrenomTuteurPro()) ?>
             </h6>
             <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
             <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>

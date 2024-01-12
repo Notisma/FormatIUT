@@ -103,7 +103,7 @@ class ControleurMain
      */
     public static function afficherSources(): void
     {
-        self::afficherVue("Sources", "sources.php", Configuration::getCheminControleur()::getMenu());
+        self::afficherVue("Sources", "sources.php");
     }
 
     /**

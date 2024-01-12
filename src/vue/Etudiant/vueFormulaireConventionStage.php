@@ -1,5 +1,8 @@
 <?php
 
+/** @var Formation $offre */
+
+use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\ConventionRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 

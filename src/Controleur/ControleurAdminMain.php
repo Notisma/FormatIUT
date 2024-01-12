@@ -145,7 +145,7 @@ class ControleurAdminMain extends ControleurMain
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                 $client = "Admin";
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                self::afficherVue("Détails de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
                 self::redirectionFlash("afficherListeOffres", "danger", "Cette offre n'existe pas");
             }
@@ -158,7 +158,7 @@ class ControleurAdminMain extends ControleurMain
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Modifier un étudiant";
-            self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
+            self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php");
         } else {
             self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous ne pouvez pas accéder à cette page");
         }
@@ -235,7 +235,7 @@ class ControleurAdminMain extends ControleurMain
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Modifier une entreprise";
-            self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+            self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php");
         } else {
             self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous ne pouvez pas accéder à cette page");
         }

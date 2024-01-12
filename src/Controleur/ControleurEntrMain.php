@@ -127,7 +127,7 @@ class ControleurEntrMain extends ControleurMain
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $client = "Entreprise";
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détail de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                    self::afficherVue("Détail de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
                     self::redirectionFlash("afficherMesOffres", "danger", "Cette offre n'existe pas");
                 }
