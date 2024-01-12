@@ -4,7 +4,7 @@ namespace App\FormatIUT\Modele\DataObject;
 
 class Postuler extends AbstractDataObject
 {
-    private float $numEtudiant;
+    private int $numEtudiant;
     private int $idFormation;
     private string $etat;
 
@@ -13,17 +13,17 @@ class Postuler extends AbstractDataObject
     private ?string $lettre;
 
     /**
-     * @return float
+     * @return int
      */
-    public function getNumEtudiant(): float
+    public function getNumEtudiant(): int
     {
         return $this->numEtudiant;
     }
 
     /**
-     * @param float $numEtudiant
+     * @param int $numEtudiant
      */
-    public function setNumEtudiant(float $numEtudiant): void
+    public function setNumEtudiant(int $numEtudiant): void
     {
         $this->numEtudiant = $numEtudiant;
     }
@@ -94,7 +94,7 @@ class Postuler extends AbstractDataObject
     }
 
 
-    public function __construct(float $numEtudiant, int $idFormation, string $etat, ?string $cv, ?string $lettre)
+    public function __construct(int $numEtudiant, int $idFormation, string $etat, ?string $cv, ?string $lettre)
     {
         $this->numEtudiant = $numEtudiant;
         $this->idFormation = $idFormation;

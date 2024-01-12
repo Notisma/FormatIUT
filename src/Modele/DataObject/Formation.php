@@ -6,7 +6,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 class Formation extends AbstractDataObject
 {
-    private ?string $idFormation;
+    private ?int $idFormation;
     private ?string $nomOffre;
     private string $dateDebut;
     private string $dateFin;
@@ -40,7 +40,7 @@ class Formation extends AbstractDataObject
     private bool $tuteurUMvalide;
 
     /**
-     * @param string|null $idFormation
+     * @param int|null $idFormation
      * @param string|null $nomOffre
      * @param string $dateDebut
      * @param string $dateFin
@@ -73,7 +73,7 @@ class Formation extends AbstractDataObject
      * @param string|null $loginTuteurUM
      * @param bool $tuteurUMvalide
      */
-    public function __construct(?string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, string $idEntreprise, ?string $loginTuteurUM, bool $tuteurUMvalide)
+    public function __construct(?int $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, string $idEntreprise, ?string $loginTuteurUM, bool $tuteurUMvalide)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -110,17 +110,17 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getIdFormation(): ?string
+    public function getIdFormation(): ?int
     {
         return $this->idFormation;
     }
 
     /**
-     * @param string|null $idFormation
+     * @param int|null $idFormation
      */
-    public function setIdFormation(?string $idFormation): void
+    public function setIdFormation(?int $idFormation): void
     {
         $this->idFormation = $idFormation;
     }
