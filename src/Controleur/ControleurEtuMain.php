@@ -117,7 +117,8 @@ class ControleurEtuMain extends ControleurMain
             if(is_null($offre)){
                 self::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas d'offre de stage");
             }
-        } else {
+        }
+        if(!is_null($offre)){
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
