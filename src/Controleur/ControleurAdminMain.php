@@ -62,7 +62,7 @@ class ControleurAdminMain extends ControleurMain
     {
         $aFormation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
         self::$pageActuelleAdmin = "Détails d'un Étudiant";
-        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", ["aFormation"=> $aFormation]);
+        self::afficherVue("Détails d'un Étudiant", "Admin/vueDetailEtudiant.php", ["aFormation" => $aFormation]);
     }
 
     /**
@@ -213,9 +213,9 @@ class ControleurAdminMain extends ControleurMain
                         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
                         $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
                         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php",
+                        self::afficherVue("Convention à valider", "Etudiant/vueConvention.php",
                             ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                                "offre" => $formation]);
+                                "offre" => $formation, "etat" => "Visualisation"]);
                     } else {
                         self::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
                     }
@@ -322,19 +322,22 @@ class ControleurAdminMain extends ControleurMain
     {
         ServiceConvention::rejeterConvention();
     }
+
     public static function devenirTuteur(): void
     {
         ServicePersonnel::devenirTuteur();
     }
-    public static function seProposerEnTuteurUM(): void{
+
+    public static function seProposerEnTuteurUM(): void
+    {
         ServicePersonnel::seProposerEnTuteurUM();
     }
-    
+
     public static function validerTuteurUM(): void
     {
         ServicePersonnel::validerTuteurUM();
     }
-    
+
     public static function refuserTuteurUM(): void
     {
         ServicePersonnel::refuserTuteurUM();

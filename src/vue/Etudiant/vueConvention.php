@@ -1,10 +1,17 @@
 <?php
 
 /** @var Formation $offre */
+/** @var Entreprise $entreprise */
+/** @var Ville $villeEntr */
 
+/** @var string $etat : Création / Modification / Visualisation */
+
+use App\FormatIUT\Lib\Users\Entreprise;
 use App\FormatIUT\Modele\DataObject\Formation;
-use App\FormatIUT\Modele\Repository\ConventionRepository;
+use App\FormatIUT\Modele\DataObject\TuteurPro;
+use App\FormatIUT\Modele\DataObject\Ville;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
 
 $anneeUniv = "";
 if (date("m") >= 9) {
@@ -62,7 +69,8 @@ $estStage = false;
                 </div>
 
                 <?php
-                $tuteurPro = (new \App\FormatIUT\Modele\Repository\TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
+                /** @var TuteurPro $tuteurPro */
+                $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
                 ?>
                 <div class="entr">
                     <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
@@ -122,10 +130,15 @@ $estStage = false;
                 <h6 class="titre"><strong>Gratification :</strong> <?= htmlspecialchars($offre->getGratification()); ?>
                     euros par MOIS</h6>
                 <h6 class="titre"><strong>Commentaire :</strong></h6>
-                <h6 class="titre"><strong>Assurance : </strong><label for="assu_id"></label><input class="inputAssur" placeholder="Caisse d'épargne"
-                                                                                                   type="text" name="assurance" <?php if (!empty($offre->getAssurance())) {echo 'value="'. htmlspecialchars($offre->getAssurance()) .'"';} ?>
+                <h6 class="titre"><strong>Assurance : </strong><label for="assu_id"></label><input class="inputAssur"
+                                                                                                   placeholder="Caisse d'épargne"
+                                                                                                   type="text"
+                                                                                                   name="assurance" <?php if (!empty($offre->getAssurance())) {
+                        echo 'value="' . htmlspecialchars($offre->getAssurance()) . '"';
+                    } ?>
                                                                                                    onchange="this.form.action='?action=creerConvention&controleur=EtuMain'; this.form.submit();"
-                                                                                                   id="assu_id" required></h6>
+                                                                                                   id="assu_id"
+                                                                                                   required></h6>
             </div>
 
         </div>
@@ -158,15 +171,16 @@ $estStage = false;
     <input type="hidden" value="<?= $offre->getIdFormation() ?>" name="idOff">
     <input type="hidden" value="<?= $entreprise->getNomEntreprise() ?>" name="nomEntreprise">
     <input type="hidden" value="<?= $entreprise->getAdresseEntreprise() ?>" name="adresseEntr">
-    <input type="hidden" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille());?>">
-    <input type="hidden" name="codePostalEntr" value="<?= $villeEntr->getCodePostal();?>">
+    <input type="hidden" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille()); ?>">
+    <input type="hidden" name="codePostalEntr" value="<?= $villeEntr->getCodePostal(); ?>">
     <?php
     $dateDebut = $offre->getDateDebut();
     $dateFin = $offre->getDateFin();
 
-    echo '<input type="hidden" name="dateDebut" value="'.$dateDebut.'">
-    <input type="hidden" name="dateFin" value="'.$dateFin.'">';
+    echo '<input type="hidden" name="dateDebut" value="' . $dateDebut . '">
+    <input type="hidden" name="dateFin" value="' . $dateFin . '">';
     ?>
 
+    <h3>État (WIP) : <?= $etat ?></h3>
 
 </form>
