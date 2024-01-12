@@ -52,6 +52,14 @@ function fermerPopupMdp() {
     document.getElementById("center").style.opacity = "1";
 }
 
+function afficherPopupCGU() {
+    document.getElementById("cgu").style.display="flex";
+    document.getElementById("center").style.opacity="0.3";
+}
+function fermerPopupCGU(){
+    document.getElementById("cgu").style.display="none";
+    document.getElementById("center").style.opacity="1";
+}
 
 function afficherPopupPremiereCo(indice) {
     let enfants = document.getElementById("popupPremiereCo").children;

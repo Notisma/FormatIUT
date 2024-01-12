@@ -410,15 +410,6 @@ form {
     margin-bottom: 0;
 }
 
-.UlConteneur {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0;
-    width: 100%;
-    margin-left: 0;
-}
 
 
 #footerContent > #footerText > p {

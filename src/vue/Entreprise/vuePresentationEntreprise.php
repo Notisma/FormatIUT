@@ -1,4 +1,4 @@
-<div class="wrapComplet">
+<div class="wrapComplet" id="center">
 
     <div class="partie1">
         <div>
@@ -94,9 +94,7 @@
                            <?php echo "value='" . $_REQUEST["effectif"] . "'" ?>required>
                     <input type="text" name="codeNAF" placeholder="Code NAF"
                            <?php echo "value='" . $_REQUEST["codeNAF"] . "'" ?>required>
-                    <input type="password" name="mdp" placeholder="Mot de passe" required>
-                    <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
-                    <input type="submit" class="valider" value="Créer le compte">
+
                 <?php } else { ?>
                     <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
                     <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
@@ -108,10 +106,14 @@
                     <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
                     <input type="number" name="effectif" placeholder="Effectif" required>
                     <input type="text" name="codeNAF" placeholder="Code NAF" required>
-                    <input type="password" name="mdp" placeholder="Mot de passe" required>
-                    <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
-                    <input type="submit" class="valider" value="NOUS REJOINDRE">
+
                 <?php } ?>
+                <input type="password" name="mdp" placeholder="Mot de passe" required>
+                <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
+                <input type="checkbox" name="cgu" required id="cgu-id">
+                <label for="cgu_id">Veuillez accepter les <a onclick="afficherPopupCGU()" >CGU</a> </label>
+                <input type="submit" class="valider" value="NOUS REJOINDRE">
+
             </form>
         </div>
 
@@ -121,3 +123,5 @@
         </div>
     </div>
 </div>
+<?php require __DIR__."/../CGU.php";?>
+
