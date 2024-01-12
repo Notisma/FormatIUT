@@ -37,7 +37,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
 
     <div class="actionsOffre">
         <div class="first">
-            <img src="../ressources/images/entrepriseOffre.png" alt="details">
+            <img src="../ressources/images/entrepriseConnectee.png" alt="details">
             <h3 class="titre">Détails d'une Offre</h3>
         </div>
 
@@ -70,7 +70,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
                 <a id='my-button' class='boutonAssigner'
                    href="?action=afficherFormulaireModificationOffre&controleur=EntrMain&idFormation=<?= $offre->getIdFormation() ?>">Modifier
                     l'Offre</a>
-                <a id='my-button' class='boutonAssigner' onclick='afficherPopupModifCV_LM()'>Voir les Candidats</a>
+                <a id='my-button' class='boutonAssigner' href="#liste">Voir les Candidats</a>
             </div>
 
         </div>
@@ -80,7 +80,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
 
 </div>
 
-<div class="listeCandidats">
+<div class="listeCandidats" id="liste">
     <h3 class="titre rouge">Liste des Candidats</h3>
 
     <div class="candidatsOverflow">
