@@ -24,7 +24,7 @@ class ControleurMain
     }
 
     /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
+     * @return array[] qui représente le contenu du menu non connecté dans le bandeauDéroulant
      */
     public static function getMenu(): array
     {
@@ -199,23 +199,6 @@ class ControleurMain
         return $id;
     }
 
-    /**
-     * @param array $listeId la liste des IDs déjà utilisées
-     * @param string $get le nom du Request à envoyer
-     * @return int envoie en $_REQUEST une id auto-incrémentée pour les formations
-     */
-    public static function autoIncrementF(array $listeId, string $get): int
-    {
-        $id = 1;
-        while (!isset($_REQUEST[$get])) {
-            if (in_array("F" . $id, $listeId)) {
-                $id++;
-            } else {
-                $_REQUEST[$get] = $id;
-            }
-        }
-        return $id;
-    }
 
     /**
      * @param string $action le nom de la fonction sur laquelle rediriger
