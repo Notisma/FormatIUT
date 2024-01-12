@@ -39,50 +39,52 @@ class ServiceConvention
                                 (new FormationRepository())->modifierObjet($offreVerif);
                                 ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
                             } else {
-                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les dates");
+                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur sur les dates");
                             }
                         } else {
-                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur sur les informations de l'entreprise");
+                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur sur les informations de l'entreprise");
                         }
                     } else {
-                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","L'entreprise n'a jamais créé cette offre");
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "L'entreprise n'a jamais créé cette offre");
                     }
                 } else {
-                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur l'entreprise n'existe pas");
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur l'entreprise n'existe pas");
                 }
             } else {
-                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Erreur nombre(s) négatif(s) présent(s)");
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur nombre(s) négatif(s) présent(s)");
             }
         } else {
-            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success","Aucune offre est liée à votre convention");
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Aucune offre est liée à votre convention");
         }
     }
+
     /**
      * @return void permet à l'étudiant de modifier sa convention
      * @throws Exception
      */
     public static function modifierConvention(): void
     {
-
-        if (isset($_REQUEST['numEtudiant']) == ConnexionUtilisateur::getNumEtudiantConnecte()) {
-            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            if($formation){
-                if($formation->getDateCreationConvention() != null){
-                    if(isset($_REQUEST["assurance"])){
+        if (!isset($_REQUEST['numEtudiant'])) {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Il faut renseigner un étudiant");
+            return;
+        }
+        $numEtu = $_REQUEST['numEtudiant'];
+        if ($numEtu == ConnexionUtilisateur::getNumEtudiantConnecte()) {
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($numEtu);
+            if ($formation) {
+                if ($formation->getDateCreationConvention() != null) {
+                    if (isset($_REQUEST["assurance"])) {
                         $formation->setAssurance($_REQUEST['assurance']);
                         $formation->setDateCreationConvention($_REQUEST['dateCreation']);
                         (new FormationRepository())->modifierObjet($formation);
                         ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
-                    }
-                    else{
+                    } else {
                         ControleurEtuMain::redirectionFlash("AfficherAccueilEtu", "danger", "L'utilisateur n'a changé l'assurance");
                     }
-                }
-                else{
+                } else {
                     ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de convention");
                 }
-            }
-            else{
+            } else {
                 ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de formation");
             }
         } else {
@@ -96,21 +98,20 @@ class ServiceConvention
      * Permet au secréteriat de valider une convention
      */
 
-    public static function validerConvention() : void{
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
+    public static function validerConvention(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            if(!$formation->getConventionValidee()) {
+            if (!$formation->getConventionValidee()) {
                 $formation->setConventionValidee(true);
                 $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
                 (new FormationRepository())->modifierObjet($formation);
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
-            }
-            else{
+            } else {
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
             }
-        }
-        else{
-            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+        } else {
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'êtes ni du secrétariat ni du côté administrateur");
         }
     }
 
@@ -118,7 +119,8 @@ class ServiceConvention
      * @return void
      * Permet au secréteriat de rejeter une convention
      */
-    public static function rejeterConvention(): void{
+    public static function rejeterConvention(): void
+    {
         //Todo quand la modification d'une convention sera accepté dans les tests
         echo "Todo quand la modification d'une convention sera accepté dans les tests";
         echo ConnexionUtilisateur::getTypeConnecte();

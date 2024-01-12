@@ -242,6 +242,11 @@ class ControleurEtuMain extends ControleurMain
     {
         ServiceConvention::creerConvention();
     }
+    
+    public static function modifierConvention(): void
+    {
+        ServiceConvention::modifierConvention();
+    }
 
     public static function modifierFichiers(): void
     {

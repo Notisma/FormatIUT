@@ -136,6 +136,39 @@ strong {
     margin-bottom: 4%;
 }
 
+.wrapBoutons {
+    width: 90%;
+    height: 9%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding-bottom: 1%;
+}
+
+.wrapBoutons > a {
+    width: 40%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-decoration: none;
+    color: white;
+    border-radius: 50px;
+    background-color: #ff5660;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.wrapBoutons > a:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
 @media (max-width: 500px) {
 
     .pageConvention {
