@@ -349,6 +349,7 @@ class EtudiantRepository extends RechercheRepository
 
     public function getEtudiantParLogin(string $login): Etudiant
     {
+        var_dump($login);
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE loginEtudiant=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $login);

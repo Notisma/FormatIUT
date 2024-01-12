@@ -19,7 +19,7 @@ class VerificationEmail
         $etuNom = $etu->getNomEtudiant();
 
         $absoluteURL = Configuration::getAbsoluteURL();
-        $lienValidationConvention = "$absoluteURL?action=afficherConventionEtu&controleur=AdminMain&numEtu=$etuId";
+        $lienValidationConvention = "$absoluteURL?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=$etuId";
         $corpsEmail = "<h2>Vous avez reçu une demande de validation de convention !</h2>
                         <p>Cette demande vous vient de $etuPren $etuNom.
                         <br>Cliquez sur le lien ci-dessous pour vous y rendre (une fois connecté) :</p>

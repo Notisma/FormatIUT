@@ -5,6 +5,7 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -219,9 +220,13 @@ class ControleurAdminMain extends ControleurMain
                         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
                         $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
                         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                        self::afficherVue("Convention à valider", "Etudiant/vueConvention.php",
-                            ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                                "offre" => $formation, "etat" => "Visualisation"]);
+                        self::afficherVue("Convention à valider", "Etudiant/vueConvention.php", [
+                            "etudiant" => $etudiant,
+                            "entreprise" => $entreprise,
+                            "villeEntr" => $villeEntr,
+                            "offre" => $formation,
+                            "etat" => ConventionEtat::VisuAdmin
+                        ]);
                     } else {
                         self::redirectionFlash("afficherConventionAValider", "danger", "Cette convention est déjà validée");
                     }

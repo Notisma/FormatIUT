@@ -15,6 +15,7 @@ use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServicePostuler;
+use App\FormatIUT\Modele\Repository\ConventionEtat;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -93,9 +94,13 @@ class ControleurEtuMain extends ControleurMain
             $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::getCleEtudiant());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
-            self::afficherVue("Ma convention", "Etudiant/vueConvention.php",
-                ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                    "offre" => $offre, "etat" => "Visualisation"]);
+            self::afficherVue("Ma convention", "Etudiant/vueConvention.php", [
+                "etudiant" => $etudiant,
+                "entreprise" => $entreprise,
+                "villeEntr" => $villeEntr,
+                "offre" => $offre,
+                "etat" => ConventionEtat::VisuEtudiant
+            ]);
         } else {
             self::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne possèdez pas de convention");
         }
@@ -122,7 +127,7 @@ class ControleurEtuMain extends ControleurMain
                 "offre" => $offre,
                 "entreprise" => $entreprise,
                 "villeEntr" => $villeEntr,
-                "etat" => "Création"
+                "etat" => ConventionEtat::Creation
             ]);
         }
     }
@@ -144,7 +149,7 @@ class ControleurEtuMain extends ControleurMain
                 "offre" => $offre,
                 "entreprise" => $entreprise,
                 "villeEntr" => $villeEntr,
-                "etat" => "Création"
+                "etat" => ConventionEtat::Creation
             ]);
         } else {
             self::afficherErreur("offre non valide");
@@ -166,7 +171,7 @@ class ControleurEtuMain extends ControleurMain
                 "offre" => $formation,
                 "entreprise" => $entreprise,
                 "villeEntr" => $villeEntr,
-                "etat" => "Modification"
+                "etat" => ConventionEtat::Modification
             ]);
         } else {
             self::afficherErreur("Convention inexistante");

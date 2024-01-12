@@ -3,15 +3,16 @@
 /** @var Formation $offre */
 /** @var Entreprise $entreprise */
 /** @var Ville $villeEntr */
+/** @var Etudiant $etudiant */
 
-/** @var string $etat : Création / Modification / Visualisation */
+/** @var ConventionEtat $etat */
 
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\Users\Entreprise;
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\TuteurPro;
 use App\FormatIUT\Modele\DataObject\Ville;
-use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\TuteurProRepository;
 
 $anneeUniv = "";
@@ -20,26 +21,17 @@ if (date("m") >= 9) {
 } else {
     $anneeUniv = (date("Y") - 1) . "/" . date("Y");
 }
-$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
 $estStage = false;
 
 ?>
 <form method="post" class="formulaireConv"
 <?php
 $etuId = $etudiant->getNumEtudiant();
-switch ($etat) {
-    case "Visualisation":
-        echo ">";
-        break;
-    case "Création":
-        echo "action='?action=creerConvention&controleur=EtuMain'>";
-        break;
-    case "Modification":
-        echo "action='?action=modifierConvention&controleur=EtuMain&numEtudiant=$etuId'>";
-        break;
-    default:
-        ControleurMain::afficherErreur("État de vue convention invalide");
-}
+echo match ($etat) {
+    ConventionEtat::Creation => "action='?action=creerConvention&controleur=EtuMain'>",
+    ConventionEtat::Modification => "action='?action=modifierConvention&controleur=EtuMain&numEtudiant=$etuId'>",
+    default => ">",
+};
 ?>
 <div class="pageConvention">
 
@@ -156,7 +148,7 @@ switch ($etat) {
                     <?php if (!empty($offre->getAssurance())) {
                         echo 'value="' . htmlspecialchars($offre->getAssurance()) . '"';
                     }
-                    if ($etat == "Visualisation") echo " readonly ";
+                    if ($etat == ConventionEtat::VisuEtudiant || $etat == ConventionEtat::VisuAdmin) echo " readonly ";
                     ?>
                        id="assu_id" required>
             </h6>
@@ -202,22 +194,34 @@ echo '<input type="hidden" name="dateDebut" value="' . $dateDebut . '">
     <input type="hidden" name="dateFin" value="' . $dateFin . '">';
 
 switch ($etat) {
-    case "Création":
+    case ConventionEtat::Creation:
         echo "<input type='submit' value='Créer convention'>";
         break;
-    case "Modification":
+    case ConventionEtat::Modification:
         echo "<input type='submit' value='Enregister modifications'>";
         break;
-    case "Visualisation":
-        echo "
-        <div class='wrapBoutons'>
-            <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
-            <a href='?action=faireValiderConvention'>Faire valider</a>
-        </div>
-        ";
+    case ConventionEtat::VisuEtudiant:
+        if ($offre->getConventionValidee())
+            echo "<h3>Convention validée !</h3>";
+        else
+            echo "
+                <div class='wrapBoutons'>
+                    <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
+                    <a href='?action=faireValiderConvention'>Faire valider</a>
+                </div>
+            ";
         break;
-    default:
-        ControleurMain::afficherErreur("État de vue convention invalide");
+    case ConventionEtat::VisuAdmin:
+        if ($offre->getConventionValidee())
+            echo "<h3>Convention validée !</h3>";
+        else
+            echo "
+                <div class='wrapBoutons'>
+                    <a href='?action=validerConvention&controleur=AdminMain&numEtudiant=$etuId'>Valider</a>
+                    <a href='?action=rejeterConvention&controleur=AdminMain&numEtudiant=$etuId'>Rejeter</a>
+                </div>
+            ";
+        break;
 }
 
 ?>

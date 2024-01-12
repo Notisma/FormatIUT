@@ -102,7 +102,7 @@ class ServiceConvention
             $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
             if (!$formation->getConventionValidee()) {
                 $formation->setConventionValidee(true);
-                $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
+                $formation->setDateTransmissionConvention(date("d-m-Y"));
                 (new FormationRepository())->modifierObjet($formation);
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention validée");
             } else {
