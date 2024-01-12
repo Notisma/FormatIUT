@@ -542,6 +542,28 @@ form {
     cursor: pointer;
 }
 
+.footerForm {
+    max-height: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.footerForm > img {
+    width: 80%;
+}
+
+.footerForm > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* RESPONSIVE */
@@ -781,28 +803,6 @@ form {
         justify-content: space-between;
     }
 
-    .footerForm {
-        max-height: 98%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-    }
-
-    .footerForm > img {
-        width: 30%;
-    }
-
-    .footerForm > div {
-        width: 100%;
-        background-color: red;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        align-content: center;
-    }
 }
 
 @media (max-height: 600px) {

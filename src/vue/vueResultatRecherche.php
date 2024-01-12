@@ -47,9 +47,10 @@ if (!isset($_REQUEST['triPar'])) {
         <div class="resultatsRecherche">
             <?php
             if (!empty($liste)) {
-
+                $i=0;
                 foreach ($liste as $type => $elements) {
-                    for ($i = 0; $i < count($elements); $i++) {
+                    foreach ($elements as $objet) {
+
                         $red = "";
                         $n = 2;
                         $row = intdiv($i, $n);
@@ -57,7 +58,6 @@ if (!isset($_REQUEST['triPar'])) {
                         if (($row + $col) % 2 != 0) {
                             $red = "demi";
                         }
-                        $objet = $elements[$i];
                         echo '<a class="element ' . $red . '" href="' . $objet->getLienAction() . '">
                             <img src="' . $objet->getImage() . '" alt="pp">
 
@@ -65,6 +65,7 @@ if (!isset($_REQUEST['triPar'])) {
                                 <h3 class="titre rouge">' . $objet->getTitreRouge() . '</h3>';
                         echo $objet->getTitres();
                         echo '</div></a>';
+                        $i++;
                     }
                 }
             }
@@ -130,7 +131,7 @@ if (!isset($_REQUEST['triPar'])) {
                     ?>
                 </div>
 
-                <input type="hidden" name="controleur" value="<?php echo Configuration::getControleurName() ?>">
+                <input type="hidden" name="controleur" value="Main">
                 <input type="hidden" name="action" value="rechercher">
                 <input type="hidden" name="recherche" value="<?php echo $url ?>">
             </form>

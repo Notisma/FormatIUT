@@ -7,6 +7,16 @@ body {
 
 }
 
+.lien {
+    text-decoration: underline;
+    color: #ff5660;
+}
+
+.lien:hover {
+    cursor: pointer;
+    color: black;
+}
+
 .wrapComplet {
     width: 92%;
     height: 100%;

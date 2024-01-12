@@ -136,10 +136,10 @@ use App\FormatIUT\Configuration\Configuration;
                 <img src="../ressources/images/Logo_rouge.png" alt="petit logo footer">
                 <div>
                     <h4 class="titre blanc">Sources : Cliquer <a
-                                href="?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                                href="?action=afficherSources&controleur=Main">ICI</a>
                     </h4>
                     <h4 class="titre blanc">Mentions Légales : Cliquer <a
-                                href="?action=afficherMentionsLegales&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                                href="?action=afficherMentionsLegales&controleur=Main">ICI</a>
                     </h4>
                 </div>
             </div>
