@@ -13,6 +13,7 @@ use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
+use Exception;
 
 
 class ServiceConvention
@@ -76,6 +77,7 @@ class ServiceConvention
                     if (isset($_REQUEST["assurance"])) {
                         $formation->setAssurance($_REQUEST['assurance']);
                         $formation->setDateCreationConvention($_REQUEST['dateCreation']);
+                        echo "<pre>"; print_r($formation); echo "</pre>";
                         (new FormationRepository())->modifierObjet($formation);
                         ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
                     } else {

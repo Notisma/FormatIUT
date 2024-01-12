@@ -2,37 +2,34 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
-
 abstract class RechercheRepository extends AbstractRepository
 {
-    protected abstract function getColonnesRecherche():array;
+    protected abstract function getColonnesRecherche(): array;
 
-    public function recherche(array $motsclefs,array $filtres)
+    public function recherche(array $motsclefs, array $filtres): array
     {
         foreach ($motsclefs as $mot) {
-            $mot=strtolower($mot);
-            $sql="SELECT * FROM ".$this->getNomTable()." ".strtoupper($this->getNomTable())[0]." WHERE (";
+            $mot = strtolower($mot);
+            $sql = "SELECT * FROM " . $this->getNomTable() . " " . strtoupper($this->getNomTable())[0] . " WHERE (";
             foreach ($this->getColonnesRecherche() as $colonne) {
-                if ($colonne!=$this->getColonnesRecherche()[0]){
-                    $sql.=" OR ";
+                if ($colonne != $this->getColonnesRecherche()[0]) {
+                    $sql .= " OR ";
                 }
-                $sql.=" LOWER($colonne) LIKE :tag$colonne";
-                $values["tag".$colonne]= "%$mot%";
+                $sql .= " LOWER($colonne) LIKE :tag$colonne";
+                $values["tag" . $colonne] = "%$mot%";
             }
         }
-        $sql.=")";
+        $sql .= ")";
         foreach ($filtres as $filtre) {
-            if(!is_null($filtre))
-            $sql.=" AND ".$filtre;
+            if (!is_null($filtre))
+                $sql .= " AND " . $filtre;
         }
         //var_dump($sql);
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
-        $liste=array();
+        $liste = array();
         foreach ($pdoStatement as $item) {
-            $liste[]=$this->construireDepuisTableau($item);
+            $liste[] = $this->construireDepuisTableau($item);
         }
         return $liste;
     }

@@ -26,6 +26,7 @@ $estStage = false;
 ?>
 <form method="post" class="formulaireConv"
 <?php
+$etuId = $etudiant->getNumEtudiant();
 switch ($etat) {
     case "Visualisation":
         echo ">";
@@ -34,7 +35,7 @@ switch ($etat) {
         echo "action='?action=creerConvention&controleur=EtuMain'>";
         break;
     case "Modification":
-        echo "action='?action=modifierConvention&controleur=EtuMain'>";
+        echo "action='?action=modifierConvention&controleur=EtuMain&numEtudiant=$etuId'>";
         break;
     default:
         ControleurMain::afficherErreur("État de vue convention invalide");
@@ -219,7 +220,5 @@ switch ($etat) {
 }
 
 ?>
-
-<h3>État (WIP) : <?= $etat ?></h3>
 
 </form>

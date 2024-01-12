@@ -32,7 +32,6 @@ class FormationRepository extends RechercheRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-
         return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"], $dataObjectTableau["tuteurUMvalide"]);
     }
 

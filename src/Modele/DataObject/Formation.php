@@ -614,6 +614,7 @@ class Formation extends AbstractDataObject
     {
         $this->tuteurUMvalide = $tuteurUMvalide;
     }
+
     /**
      * @return true ssi l'offre possède une idEtudiant, false sinon
      */
@@ -621,8 +622,6 @@ class Formation extends AbstractDataObject
     {
         return $this->idEtudiant != null;
     }
-
-
 
     public function formatTableau(): array
     {
@@ -679,7 +678,7 @@ class Formation extends AbstractDataObject
             $formation["nbHeuresHebdo"],
             0,
             $formation["objectifOffre"],
-            (new \DateTime())->format('d-m-Y'),
+            null,
             $formation["typeOffre"],
             $formation["anneeMax"],
             $formation["anneeMin"],

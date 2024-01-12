@@ -50,7 +50,7 @@ class InsertionCSV
         $dateFin = DateTime::createFromFormat("d/m/Y", $timestampe);
 
 
-        $formation = new Formation("F25", $dateDebut, $dateFin, $ligne[1], "TP1", $ligne[55], $ligne[0], 1, 2, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        $formation = new Formation("F25", $dateDebut, $dateFin, $ligne[1], "TP1", $ligne[55], $ligne[0], 1, 2, "", "", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 0);
         (new FormationRepository())->creerObjet($formation);
 
         $ville = new Ville("V23", $ligne[47], $ligne[45]);
@@ -78,7 +78,7 @@ class InsertionCSV
         $timestampe = $ligne[140];
         $dateFin = DateTime::createFromFormat("d/m/Y", $timestampe);
 
-        $formation = new Formation($ligne[5], $dateDebut, $dateFin, $ligne[3], "TP1", $ligne[58], null, 1, 2, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        $formation = new Formation($ligne[5], $dateDebut, $dateFin, $ligne[3], "TP1", $ligne[58], null, 1, 2, "", "", "", "", "", null, "", "", "", "", "", "", "", null, null, "", "", "", "", "", "", "", 0);
         (new FormationRepository())->creerObjet($formation);
 
         $ville = new Ville("V25", $ligne[33], $ligne[32]);
@@ -110,7 +110,7 @@ class InsertionCSV
         $type = "Alternance";
         if($ligne[6] == "/")
             $type = "Stage";
-        $formation = new Formation($idFormation, null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], $ligne[9], null, null, null, null, $ligne[12], $ligne[17]);
+        $formation = new Formation($idFormation, null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], $ligne[9], null, null, null, null, $ligne[12], $ligne[17], 0);
         (new FormationRepository())->creerObjet($formation);
     }
 
