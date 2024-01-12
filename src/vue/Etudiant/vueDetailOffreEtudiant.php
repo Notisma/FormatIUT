@@ -1,8 +1,10 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\DataObject\Formation;
 
 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+/** @var Formation $offre */
 $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_GET['idFormation']);
 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
 ?>
@@ -107,7 +109,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                 if ($bool) {
                     echo "<a id='desac' class='boutonAssigner'>Vous avez déjà postulé</a>";
                 } else {
-                    if (empty($listeAVerifier) || !in_array($offre->getIdFormation(), $listeAVerifier)) {
+                    if (empty($listeAVerifier) || !in_array($offre, $listeAVerifier)) {
                         if ((new App\FormatIUT\Modele\Repository\EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
                             if ($offre->getIdEtudiant() == $etudiant->getNumEtudiant()) {
                                 echo "<a id='desac' class='boutonAssigner'>Vous avez cette formation</a>";

@@ -71,6 +71,7 @@ $estStage = false;
                 <?php
                 /** @var TuteurPro $tuteurPro */
                 $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($offre->getIdTuteurPro());
+                if (is_null($tuteurPro)) $tuteurPro = new TuteurPro("-1", "", "", "", "", "", -1);
                 ?>
                 <div class="entr">
                     <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>

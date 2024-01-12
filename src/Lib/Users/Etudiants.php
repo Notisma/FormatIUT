@@ -68,7 +68,7 @@ class Etudiants extends Utilisateur
             $offreValidee = (new PostulerRepository())->getOffreValider($etu->getNumEtudiant());
             if ($offreValidee) {
                 $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
-                if ($offre->getTypeOffre() == "Stage" || $offre->getTypeOffre() == "Stage / Alternance")
+                if ($offre->getTypeOffre() == "Stage" || $offre->getTypeOffre() == "Stage/Alternance")
                     $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention"
                     , "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
                 else if ($offre->getTypeOffre() == "Alternance")

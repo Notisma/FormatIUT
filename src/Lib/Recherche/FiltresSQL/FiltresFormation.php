@@ -12,14 +12,14 @@ class FiltresFormation
     public static function formation_stage(): ?string
     {
         if (self::formation_type()) {
-            return " (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\") ";
+            return " (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\") ";
         } else return null;
     }
 
     public static function formation_alternance(): ?string
     {
         if (self::formation_type()) {
-            return " (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\")";
+            return " (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\")";
         } else return null;
     }
 

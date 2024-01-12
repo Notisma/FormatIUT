@@ -123,7 +123,7 @@ class FormationRepository extends RechercheRepository
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " o WHERE idEntreprise=:Tag";
         if ($type == "Stage" || $type == "Alternance") {
-            $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage / Alternance'";
+            $sql .= " AND typeOffre=:TypeTag OR typeOffre='Stage/Alternance'";
             $values["TypeTag"] = $type;
         }
         if ($etat == "Dispo") {
@@ -265,6 +265,7 @@ class FormationRepository extends RechercheRepository
         return $listeOffres;
     }
 
+    /** @return Formation[] */
     public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé

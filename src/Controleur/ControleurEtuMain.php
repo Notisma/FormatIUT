@@ -113,7 +113,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage");
         if (is_null($offre)) {
-            $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage / Alternance");
+            $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage/Alternance");
             if (is_null($offre)) {
                 self::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas d'offre de stage");
             }

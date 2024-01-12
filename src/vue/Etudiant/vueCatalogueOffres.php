@@ -40,7 +40,7 @@ $type = $_REQUEST["type"] ?? "all";
                     <?php use App\FormatIUT\Controleur\ControleurEtuMain;
                     use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 
-                    if ($type == "Tous" || $type == "Stage / Alternance") echo 'id="typeActuel" disabled'; ?>
+                    if ($type == "Tous" || $type == "Stage/Alternance") echo 'id="typeActuel" disabled'; ?>
                 >
                 <input type="submit" name="type" value="Stage" class="stage"
                     <?php if ($type == "Stage") echo 'id="typeActuel" disabled'; ?>

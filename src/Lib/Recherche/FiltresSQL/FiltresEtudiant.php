@@ -64,13 +64,13 @@ class FiltresEtudiant
     public static function etudiant_stage():?string
     {
         if (self::typeOffre_etudiant())
-        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Stage\" OR typeOffre=\"Stage / Alternance\"))";
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\"))";
         return null;
     }
     public static function etudiant_alternance():?string
     {
         if (self::typeOffre_etudiant())
-        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage / Alternance\"))";
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\"))";
         return null;
     }
 
