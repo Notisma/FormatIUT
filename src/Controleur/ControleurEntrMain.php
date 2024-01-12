@@ -114,6 +114,7 @@ class ControleurEntrMain extends ControleurMain
             self::afficherErreur("Il faut préciser la formation");
 
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        
         //if offre existe
         if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
             self::$page = "Détails de l'offre";

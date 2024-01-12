@@ -17,9 +17,10 @@ class ProfRepository extends RechercheRepository
     {
         return array("loginProf", "nomProf", "prenomProf", "mailUniversitaire", "estAdmin", "img_id");
     }
+
     protected function getColonnesRecherche(): array
     {
-        return array("loginProf","nomProf","prenomProf");
+        return array("loginProf", "nomProf", "prenomProf");
     }
 
     protected function getClePrimaire(): string
@@ -29,9 +30,9 @@ class ProfRepository extends RechercheRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        $estAdmin=0;
-        if ($dataObjectTableau["estAdmin"]){
-            $estAdmin=1;
+        $estAdmin = 0;
+        if ($dataObjectTableau["estAdmin"]) {
+            $estAdmin = 1;
         }
 
         return new Prof(
@@ -54,17 +55,30 @@ class ProfRepository extends RechercheRepository
         if ($count[0] > 0) return true;
         else return false;
     }
-    public function getParNom(String $nomProf): ?Prof{
-        $sql="SELECT * FROM ".$this->getNomTable(). " WHERE nomProf=:Tag";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values=array("Tag"=>$nomProf);
+
+    public function getParNom(string $nomProf): ?Prof
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomProf=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $nomProf);
         $pdoStatement->execute($values);
-        $prof=$pdoStatement->fetch();
-        if (!$prof){
+        $prof = $pdoStatement->fetch();
+        if (!$prof) {
             return null;
-        }else{
+        } else {
             return $prof;
         }
     }
 
+    /**
+     * @return Prof[]
+     */
+    public function getAdmins(): array
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE estAdmin=1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $arr = array();
+        foreach ($pdoStatement as $tuple) $arr[] = $this->construireDepuisTableau($tuple);
+        return $arr;
+    }
 }

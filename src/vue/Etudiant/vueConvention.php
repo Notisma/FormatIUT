@@ -202,18 +202,19 @@ echo '<input type="hidden" name="dateDebut" value="' . $dateDebut . '">
     <input type="hidden" name="dateFin" value="' . $dateFin . '">';
 
 switch ($etat) {
-    case "Visualisation":
-        echo "
-        <div class='wrapBoutons'>
-            <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
-        </div>
-        ";
-        break;
     case "Création":
         echo "<input type='submit' value='Créer convention'>";
         break;
     case "Modification":
         echo "<input type='submit' value='Enregister modifications'>";
+        break;
+    case "Visualisation":
+        echo "
+        <div class='wrapBoutons'>
+            <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
+            <a href='?action=faireValiderConvention'>Faire valider</a>
+        </div>
+        ";
         break;
     default:
         ControleurMain::afficherErreur("État de vue convention invalide");

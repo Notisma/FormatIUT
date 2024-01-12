@@ -3,23 +3,18 @@
 namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
-use App\FormatIUT\Modele\DataObject\Postuler;
-use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
-use App\FormatIUT\Modele\Repository\PostulerRepository;
-use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServicePostuler;
-use DateTime;
-use Exception;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -242,7 +237,7 @@ class ControleurEtuMain extends ControleurMain
     {
         ServiceConvention::creerConvention();
     }
-    
+
     public static function modifierConvention(): void
     {
         ServiceConvention::modifierConvention();
@@ -251,6 +246,11 @@ class ControleurEtuMain extends ControleurMain
     public static function modifierFichiers(): void
     {
         ServiceFichier::modifierFichiers();
+    }
+
+    public static function faireValiderConvention(): void
+    {
+        ServiceConvention::faireValiderConvention();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

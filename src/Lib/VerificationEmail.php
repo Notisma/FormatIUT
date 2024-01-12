@@ -6,10 +6,36 @@ use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\DataObject\Entreprise;
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class VerificationEmail
 {
+    public static function envoiEmailValidationDeConventionAuxAdmins(Etudiant $etu): bool
+    {
+        $etuId = $etu->getNumEtudiant();
+        $etuPren = $etu->getPrenomEtudiant();
+        $etuNom = $etu->getNomEtudiant();
+
+        $absoluteURL = Configuration::getAbsoluteURL();
+        $lienValidationConvention = "$absoluteURL?action=afficherConventionEtu&controleur=AdminMain&numEtu=$etuId";
+        $corpsEmail = "<h2>Vous avez reçu une demande de validation de convention !</h2>
+                        <p>Cette demande vous vient de $etuPren $etuNom.
+                        <br>Cliquez sur le lien ci-dessous pour vous y rendre (une fois connecté) :</p>
+                        <a style='color: blue; text-decoration: underline;'  href='$lienValidationConvention'>Aller voir</a>
+                        <p>L'équipe de Format'IUT vous souhaite une bonne journée !</p>";
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf-8-general-ci';
+
+        $everyMailFails = true;
+        foreach ((new ProfRepository())->getAdmins() as $admin) {
+            $worked = mail($admin->getMailUniversitaire(), "Demande de validation de convention", self::squeletteCorpsMail("VALIDATION CONVENTION", $corpsEmail), implode("\r\n", $headers));
+            if ($worked) $everyMailFails = false;
+        }
+        return !$everyMailFails;
+    }
+
     public static function envoiEmailValidation(Entreprise $entreprise): void
     {
         $siretURL = rawurlencode($entreprise->getSiret());
@@ -81,7 +107,6 @@ class VerificationEmail
     public static function squeletteCorpsMail(string $titre, string $message): string
     {
         $police = "'Oswald'";
-        $apostrophe = "'";
         return '
         <html lang="fr">
             <head>
@@ -91,42 +116,38 @@ class VerificationEmail
                     font-family: "Oswald";
                     src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");                
                 }
-            </style>
+                </style>
             </head>
             <body style="height: 100%;
     width: 100%;">
-               <div class="wrapHeadMail" style="display: flex;
+                <div class="wrapHeadMail" style="display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     height: 30%;
     width: 100%;">
-                   <div style="display: flex;
+                    <div style="display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 50%;">
-                      <img src="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/LogoIutMontpellier-removed.png" style="width: 70%;">
-                        <h1>FormatIUT</h1>        
-                   </div>
-                   <div style="display: flex;
+                        <img src="https://webinfo.iutmontp.univ-montp2.fr/~loyet/2S5t5RAd2frMP6/ressources/images/LogoIutMontpellier-removed.png" style="width: 70%;">
+                        <h1>FormatIUT</h1>
+                    </div>
+                    <div style="display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 50%;">
-                      <h1 style="font-family: ' . $police . ', sans-serif;
+                        <h1 style="font-family: ' . $police . ', sans-serif;
     color: #ff5660;
     margin-top: 3%;
     letter-spacing: 0.04em;">' . $titre . ' - FormatIUT</h1>
-                   </div>
-               </div>           
-                  
-</div>
+                    </div>
+                </div>
             
-            
-     
                 <div class="corpsMessage" style="display: flex;
     flex-direction: column;
     justify-content: center;

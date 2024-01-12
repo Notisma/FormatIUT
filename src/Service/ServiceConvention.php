@@ -4,15 +4,12 @@ namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Modele\DataObject\Convention;
-use App\FormatIUT\Modele\Repository\ConventionRepository;
+use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
-use DateTime;
 use Exception;
 
 
@@ -38,24 +35,24 @@ class ServiceConvention
                                 $offreVerif->setDateTransmissionConvention($_REQUEST['dateCreation']);
                                 $offreVerif->setAssurance($_REQUEST['assurance']);
                                 (new FormationRepository())->modifierObjet($offreVerif);
-                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention créée");
+                                ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Convention créée");
                             } else {
-                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur sur les dates");
+                                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur sur les dates");
                             }
                         } else {
-                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur sur les informations de l'entreprise");
+                            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur sur les informations de l'entreprise");
                         }
                     } else {
-                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "L'entreprise n'a jamais créé cette offre");
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'entreprise n'a jamais créée cette offre");
                     }
                 } else {
-                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur l'entreprise n'existe pas");
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur l'entreprise n'existe pas");
                 }
             } else {
-                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Erreur nombre(s) négatif(s) présent(s)");
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur nombre(s) négatif(s) présent(s)");
             }
         } else {
-            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Aucune offre est liée à votre convention");
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Aucune offre est liée à votre convention");
         }
     }
 
@@ -77,11 +74,10 @@ class ServiceConvention
                     if (isset($_REQUEST["assurance"])) {
                         $formation->setAssurance($_REQUEST['assurance']);
                         $formation->setDateCreationConvention($_REQUEST['dateCreation']);
-                        echo "<pre>"; print_r($formation); echo "</pre>";
                         (new FormationRepository())->modifierObjet($formation);
-                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
+                        ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Convention modifiée");
                     } else {
-                        ControleurEtuMain::redirectionFlash("AfficherAccueilEtu", "danger", "L'utilisateur n'a changé l'assurance");
+                        ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a changé l'assurance");
                     }
                 } else {
                     ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "L'utilisateur n'a pas de convention");
@@ -97,7 +93,7 @@ class ServiceConvention
 
     /**
      * @return void
-     * Permet au secréteriat de valider une convention
+     * Permet au secréteriat ou aux admins de valider une convention
      */
 
     public static function validerConvention(): void
@@ -126,6 +122,15 @@ class ServiceConvention
         //Todo quand la modification d'une convention sera accepté dans les tests
         echo "Todo quand la modification d'une convention sera accepté dans les tests";
         echo ConnexionUtilisateur::getTypeConnecte();
+    }
+
+    /** Envoie un mail de demande de validation à tous les admins (pour l'instant) */
+    public static function faireValiderConvention(): void
+    {
+        $numEtu = ConnexionUtilisateur::getNumEtudiantConnecte();
+        $worked = VerificationEmail::envoiEmailValidationDeConventionAuxAdmins((new EtudiantRepository())->getObjectParClePrimaire($numEtu));
+        if ($worked) ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Demande envoyée !");
+        else ControleurEtuMain::redirectionFlash("afficherMaConvention", "warning", "Échec de l'envoi... Contacter un administrateur.");
     }
 
 }
