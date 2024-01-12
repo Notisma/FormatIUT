@@ -71,6 +71,9 @@ class ServiceConvention
                     if(isset($_REQUEST["assurance"])){
                         $formation->setAssurance($_REQUEST['assurance']);
                         $formation->setDateCreationConvention($_REQUEST['dateCreation']);
+                        if($formation->getDateTransmissionConvention() != null){
+                            $formation->setDateTransmissionConvention(null);
+                        }
                         (new FormationRepository())->modifierObjet($formation);
                         ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "success", "Convention modifiée");
                     }
@@ -119,9 +122,18 @@ class ServiceConvention
      * Permet au secréteriat de rejeter une convention
      */
     public static function rejeterConvention(): void{
-        //Todo quand la modification d'une convention sera accepté dans les tests
-        echo "Todo quand la modification d'une convention sera accepté dans les tests";
-        echo ConnexionUtilisateur::getTypeConnecte();
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
+            $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
+            if($formation->getConventionValidee() == false){
+                $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
+                (new FormationRepository())->modifierObjet($formation);
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention rejetée");
+            }else{
+                ControleurAdminMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention a été validée");
+            }
+        }else{
+              ControleurAdminMain::redirectionFlash("afficherAccueilAdmin","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+        }
     }
 
 }

@@ -42,7 +42,7 @@ class ControleurAdminMain extends ControleurMain
         $listeFomations = (new FormationRepository())->etudiantsSansConventionsValides();
         $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants, "listeFormations" => $listeFomations]);
     }
 
 
@@ -145,7 +145,7 @@ class ControleurAdminMain extends ControleurMain
                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                 $client = "Admin";
                 $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                self::afficherVue("Détails de l'offre", $chemin, $menu::getMenu(), ["offre" => $offre, "entreprise" => $entreprise]);
+                self::afficherVue("Détails de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
             } else {
                 self::redirectionFlash("afficherListeOffres", "danger", "Cette offre n'existe pas");
             }
@@ -158,7 +158,7 @@ class ControleurAdminMain extends ControleurMain
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Modifier un étudiant";
-            self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php", self::getMenu());
+            self::afficherVue("Modifier un étudiant", "Admin/vueFormulaireModificationEtudiant.php");
         } else {
             self::redirectionFlash("afficherDetailEtudiant", "danger", "Vous ne pouvez pas accéder à cette page");
         }
@@ -193,7 +193,7 @@ class ControleurAdminMain extends ControleurMain
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             $listeFormations = (new FormationRepository())->getListeObjet();
             self::$pageActuelleAdmin = "Liste des conventions";
-            self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", self::getMenu(), ["listeFormations" => $listeFormations]);
+            self::afficherVue("Liste des conventions", "Admin/vueListeConventions.php", ["listeFormations" => $listeFormations]);
         } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'avez pas accès à la liste des conventions à valider");
         }
@@ -213,7 +213,7 @@ class ControleurAdminMain extends ControleurMain
                         $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
                         $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm($_REQUEST['numEtudiant']);
                         $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php", self::getMenu(),
+                        self::afficherVue("Convention à valider", "Admin/vueDetailConvention.php",
                             ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
                                 "offre" => $formation]);
                     } else {
@@ -235,7 +235,7 @@ class ControleurAdminMain extends ControleurMain
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Modifier une entreprise";
-            self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php", self::getMenu());
+            self::afficherVue("Modifier une entreprise", "Admin/vueFormulaireModificationEntreprise.php");
         } else {
             self::redirectionFlash("afficherDetailEntreprise", "danger", "Vous ne pouvez pas accéder à cette page");
         }
