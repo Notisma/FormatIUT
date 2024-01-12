@@ -67,33 +67,33 @@ class Entreprise extends AbstractDataObject
 
     public function formatTableau(): array
     {
-        $valide=0;
-        if ($this->estValide) $valide=1;
+        $valide = 0;
+        if ($this->estValide) $valide = 1;
         return ['numSiret' => $this->siret,
             'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique,
             'effectif' => $this->effectif,
             'codeNAF' => $this->codeNAF,
             'tel' => $this->tel,
-            "adresseEntreprise"=>$this->adresseEntreprise,
-            "idVille"=>$this->idVille,
-            "img_id"=>$this->img,
-            "mdpHache"=>$this->mdpHache,
-            "email"=>$this->email,
-            "emailAValider"=>$this->emailAValider,
-            "nonce"=>$this->nonce,
-            "estValide"=>$valide,
-            "dateCreationCompte"=>$this->dateCreationCompte
+            "adresseEntreprise" => $this->adresseEntreprise,
+            "idVille" => $this->idVille,
+            "img_id" => $this->img,
+            "mdpHache" => $this->mdpHache,
+            "email" => $this->email,
+            "emailAValider" => $this->emailAValider,
+            "nonce" => $this->nonce,
+            "estValide" => $valide,
+            "dateCreationCompte" => $this->dateCreationCompte
         ];
     }
 
 
-    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
-        $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
-        if (!$ville){
-            $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);
-            (new VilleRepository())->creerObjet($newVille);
-            $ville=$newVille->getIdVille();
+    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire): Entreprise
+    {
+        $ville = (new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
+        if (!$ville) {
+            $newVille = new Ville(null, $EntrepriseEnFormulaire["ville"], $EntrepriseEnFormulaire["codePostal"]);
+            $ville = (new VilleRepository())->creerObjet($newVille);
         }
 
         return new Entreprise(
@@ -114,17 +114,18 @@ class Entreprise extends AbstractDataObject
             (new DateTime())->format('d-m-Y')
         );
     }
+
     protected static function autoIncrementVille($listeId, $get): string
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
-            if (in_array("V".$id, $listeId)) {
+            if (in_array("V" . $id, $listeId)) {
                 $id++;
             } else {
                 $_REQUEST[$get] = $id;
             }
         }
-        return "V".$id;
+        return "V" . $id;
     }
 
     public function getSiret(): float
@@ -277,7 +278,7 @@ class Entreprise extends AbstractDataObject
         $this->dateCreationCompte = $dateCreationCompte;
     }
 
-    public static function creerEntreprise(array $entreprise) : Entreprise
+    public static function creerEntreprise(array $entreprise): Entreprise
     {
         return new Entreprise(
             $entreprise["siret"],

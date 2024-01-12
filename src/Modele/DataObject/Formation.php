@@ -694,7 +694,7 @@ class Formation extends AbstractDataObject
             null,
             null,
             null,
-            ConnexionUtilisateur::getLoginUtilisateurConnecte(),
+            ConnexionUtilisateur::getNumEntrepriseConnectee(),
             null,
             false
         );

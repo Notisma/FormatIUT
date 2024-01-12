@@ -64,7 +64,7 @@ class Personnels extends Utilisateur
         }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Détails d'une Entreprise") {
-            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise&siret=$_GET[siret]");
+            $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise&siret=$_GET[idEntreprise]");
         }
         return $menu;
     }

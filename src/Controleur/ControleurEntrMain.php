@@ -141,6 +141,11 @@ class ControleurEntrMain extends ControleurMain
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
 
+    public static function creerCompteEntreprise(): void
+    {
+        ServiceEntreprise::creerCompteEntreprise();
+    }
+    
     public static function mettreAJour(): void
     {
         ServiceEntreprise::mettreAJourEntreprise();

@@ -81,7 +81,9 @@ class ControleurAdminMain extends ControleurMain
     public static function afficherDetailEntreprise(): void
     {
         self::$pageActuelleAdmin = "Détails d'une Entreprise";
-        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php");
+        self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", [
+            "entreprise" => $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_GET["idEntreprise"])
+        ]);
     }
 
     /**

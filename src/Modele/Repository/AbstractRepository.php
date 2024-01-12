@@ -103,7 +103,7 @@ abstract class AbstractRepository
             $tags[$nomColonne . "Tag"] = $object->formatTableau()[$nomColonne];
         }
         $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
-
+        
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute($tags);
