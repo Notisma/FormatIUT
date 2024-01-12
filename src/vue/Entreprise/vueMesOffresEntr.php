@@ -111,16 +111,20 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 
                     echo '<div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
 
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
-                    if ($nb == 0) {
-                        echo "Aucun";
+                    if ((new FormationRepository())->estFormation($offre->getIdFormation())) {
+                        echo "Assignée";
                     } else {
-                        echo $nb;
-                    }
+                        $nb = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                        if ($nb == 0) {
+                            echo "Aucun";
+                        } else {
+                            echo $nb;
+                        }
 
-                    echo " candidat";
-                    if ($nb > 1) {
-                        echo "s";
+                        echo " candidat";
+                        if ($nb > 1) {
+                            echo "s";
+                        }
                     }
                     echo
                     '</h4> </div>

@@ -442,6 +442,10 @@ form {
     color: white;
 }
 
+.rouge {
+    color: #ff5660;
+}
+
 
 .alert {
     padding: 2%;
