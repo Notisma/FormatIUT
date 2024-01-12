@@ -147,7 +147,7 @@ class EtudiantRepository extends RechercheRepository
      */
     public function etudiantsEnAttente($idFormation): array
     {
-        $sql = "SELECT numEtudiant FROM Postuler r WHERE idFormation=:Tag AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
+        $sql = "SELECT numEtudiant FROM Postuler r WHERE idFormation=:Tag AND etat!='Annulé' AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idFormation);
         $pdoStatement->execute($values);

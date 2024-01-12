@@ -4,7 +4,7 @@ use App\FormatIUT\Configuration\Configuration;
 
 $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_GET['idFormation']);
 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
-
+$listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
 ?>
 
 <div class="detailOffreEtu">
@@ -86,29 +86,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     <div class="candidatsOverflow">
         <?php
         $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
-        if (sizeof($listeEtu) == 1) {
-            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
-            if ($formation) {
-                $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
-                echo '<div class="etudiantPostulant">
-                <div class="illuPostulant">';
-                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
-                echo '</div>
-                <div class="nomEtuPostulant">
-                    <h4 class="titre rouge">';
-                echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h4>";
-                echo "<a class='boutonAssigner disabled' >Assigné</a>
-                    </div> </div>";
-
-            } else {
-                echo "
-                <div class='erreur'>
-                <h4 class='titre'>Personne n'a postulé.</h4>
-                <img src='../ressources/images/erreur.png' alt='erreur'>
-                </div>
-                ";
-            }
-        } else if (sizeof($listeEtu) > 1) {
+        if (sizeof($listeEtu) > 0) {
             foreach ($listeEtu as $etudiant) {
                 echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
                         <div class="illuPostulant">';
@@ -132,17 +110,24 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                     if (!is_null($formation)) {
                         echo ' disabled"';
                         if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
-                            echo ">Assigné";
+                            echo "\">Assigné";
                         } else {
-                            echo ">Assigner";
+                            echo "\">Assigner";
                         }
                     } else {
-                        echo ">Assigner";
+                        echo "\">Assigner";
                     }
                 }
-                echo '</a></div>
+                echo '</div></a>
                 </div>';
             }
+        } else {
+            echo "
+                <div class='erreurCand'>
+                <h4 class='titre'>Personne n'a postulé.</h4>
+                <img src='../ressources/images/erreur.png' alt='erreur'>
+                </div>
+                ";
         }
         ?>
     </div>

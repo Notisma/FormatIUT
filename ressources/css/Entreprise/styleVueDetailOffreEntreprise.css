@@ -202,7 +202,7 @@ body {
     cursor: not-allowed;
 }
 
-.erreur {
+.erreurCand {
     width: 150px;
     height: 100%;
     display: flex;
@@ -212,7 +212,7 @@ body {
     align-content: center;
 }
 
-.erreur > img {
+.erreurCand > img {
     width: 70%;
 }
 
