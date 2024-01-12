@@ -52,14 +52,13 @@ use App\FormatIUT\Configuration\Configuration;
                         $menu = $user->getMenu();
 
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?service=Recherche&menu=" . serialize($menu) . "&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?controleur=Main&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
-                            <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
-                        if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
+                            <input class='searchField' name='recherche' formmethod='post' placeholder='Rechercher dans $type...' required";
+                        if (isset($recherche)) $codeRecherche .= " value='" . urlencode($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='menu' value='" . serialize($menu) . "'>
-                            <input type='hidden' name='service' value='Recherche'>
+                            <input type='hidden' name='controleur' value='Main'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                     }

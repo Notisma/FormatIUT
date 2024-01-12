@@ -27,7 +27,6 @@ abstract class RechercheRepository extends AbstractRepository
             if(!is_null($filtre))
             $sql.=" AND ".$filtre;
         }
-        //var_dump($sql);
         $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $liste=array();

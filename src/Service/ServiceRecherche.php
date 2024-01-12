@@ -22,7 +22,7 @@ class ServiceRecherche
     {
         self::verifRecherche();
 
-        $recherche = $_REQUEST['recherche'];
+        $recherche = urldecode($_REQUEST['recherche']);
         $morceaux = explode(" ", $recherche);
 
         $res = AbstractRepository::getResultatRechercheTrie($morceaux);
