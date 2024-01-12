@@ -5,15 +5,9 @@ body {
 }
 
 #center {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
     background-color: white;
-    margin: auto;
-    width: 80%;
-    height: 80%;
-    min-width: 300px;
     border-radius: 10px;
     text-align: left;
     line-height: 2em;
@@ -225,7 +219,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%;
+    height: 100px;
 }
 
 .boutonsForm > * {
@@ -237,6 +231,11 @@ body {
     border: none;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .boutonsForm > *:hover {

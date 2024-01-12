@@ -1,3 +1,11 @@
+<?php
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
+
+$listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
+
+?>
+
 <div id="center">
     <div class="wrapGauche">
         <img src="../ressources/images/illuEnvoyer.png" alt="illustration d'envoi">
@@ -119,6 +127,25 @@
                     <input class="inputFormulaire" type="number" name="nbHeuresHebdo" id="nbHeureHebdo_id"
                            placeholder="32" required max="99">
                 </div>
+
+                <label class="labelFormulaire" for="tuteurPro_id">Tuteur assigné</label>
+                <div class="inputCentre">
+                    <select name="tuteurPro" id="tuteurPro_id">
+                        <?php
+                        if (!empty($listeTuteurs)) {
+                            foreach ($listeTuteurs as $tuteur) {
+                                echo "<option value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
+                            }
+                        } else {
+                            echo "<option value='0'>Aucun tuteur disponible</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="boutonsForm">
+                    <a target="_blank" href="?action=afficherProfil&controleur=EntrMain">Ajouter un Tuteur</a>
+                </div>
+
                 <div class="boutonsForm">
                     <input type="submit" value="Envoyer" formaction="?action=creerFormation&controleur=EntrMain">
                 </div>

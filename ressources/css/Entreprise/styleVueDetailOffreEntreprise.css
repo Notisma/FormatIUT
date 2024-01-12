@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
 
 body {
-    min-height: 140vh;
+    min-height: 150vh;
 }
 
 
@@ -218,8 +218,8 @@ body {
 
 .listeCandidats {
     width: 95%;
-    min-height: 200px;
-    margin-top: 3%;
+    min-height: 210px;
+    margin-top: 1%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -236,13 +236,18 @@ body {
 
 .candidatsOverflow {
     width: 98%;
-    height: 85%;
+    height: 90%;
     overflow-x: auto;
     overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
 }
 
 .candidatsOverflow::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     border-radius: 10px;
     background-color: #ffbfc2;
 }
@@ -253,7 +258,7 @@ body {
 }
 
 .etudiantPostulant {
-    width : 250px;
+    width: 250px;
     height: 90%;
     border-radius: 10px;
     background-color: white;
@@ -263,6 +268,13 @@ body {
     align-content: center;
     justify-content: space-around;
     padding: 2%;
+    margin-right: 2%;
+    transition: background-color 0.5s ease;
+}
+
+.etudiantPostulant:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
 }
 
 .etudiantPostulant > div > img {
@@ -282,7 +294,7 @@ body {
 @media (max-width: 1050px) {
 
     body {
-        height: 185vh;
+        height: 220vh;
     }
 
     .detailOffreEtu {

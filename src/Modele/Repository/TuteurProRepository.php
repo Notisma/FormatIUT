@@ -24,17 +24,21 @@ class TuteurProRepository extends AbstractRepository
     }
 
 
+    /**
+     * @param $siret
+     * @return array
+     * Retourne un tableau de tuteurs pro d'une entreprise
+     */
     public function getTuteursDuneEntreprise($siret) {
         $sql = "SELECT * FROM TuteursPro WHERE idEntreprise = :idEntreprise";
-        $requete = $this->db->prepare($sql);
-        $requete->bindValue(":idEntreprise", $siret);
-        $requete->execute();
-        $dataObjectTableau = $requete->fetchAll();
-        $tuteurs = array();
-        foreach ($dataObjectTableau as $dataObject) {
-            $tuteurs[] = $this->construireDepuisTableau($dataObject);
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("idEntreprise" => $siret);
+        $pdoStatement->execute($values);
+        $objet = $pdoStatement->fetchAll();
+        foreach ($objet as $key => $value) {
+            $objet[$key] = $this->construireDepuisTableau($value);
         }
-        return $tuteurs;
+        return $objet;
     }
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
