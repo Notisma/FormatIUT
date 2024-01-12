@@ -4,8 +4,10 @@ namespace App\FormatIUT\Modele\DataObject;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
@@ -270,6 +272,12 @@ class Entreprise extends AbstractDataObject
     public function getDateCreationCompte(): string
     {
         return $this->dateCreationCompte;
+    }
+
+    public static function ajouterTuteur($nom, $prenom, $email, $tel, $fonction)
+    {
+        $idEntreprise = ConnexionUtilisateur::getNumEntrepriseConnectee();
+        (new TuteurProRepository())->creerObjet(new TuteurPro($idEntreprise, $nom, $prenom, $email, $tel, $fonction, $idEntreprise));
     }
 
     public function setDateCreationCompte(string $dateCreationCompte): void

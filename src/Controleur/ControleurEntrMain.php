@@ -186,6 +186,11 @@ class ControleurEntrMain extends ControleurMain
         ServiceFormation::modifierOffre();
     }
 
+    public static function ajouterTuteur(): void
+    {
+        ServiceEntreprise::creerTuteur();
+    }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**

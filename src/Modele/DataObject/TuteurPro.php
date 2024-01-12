@@ -33,6 +33,15 @@ class TuteurPro extends AbstractDataObject
         $this->idEntreprise = $idEntreprise;
     }
 
+    public function creerTuteurPro($nom, $prenom, $email, $tel, $fonction, $idEntreprise) : void {
+        $this->nomTuteurPro = $nom;
+        $this->prenomTuteurPro = $prenom;
+        $this->mailTuteurPro = $email;
+        $this->telTuteurPro = $tel;
+        $this->fonctionTuteurPro = $fonction;
+        $this->idEntreprise = $idEntreprise;
+    }
+
     public function getIdTuteurPro(): string
     {
         return $this->idTuteurPro;

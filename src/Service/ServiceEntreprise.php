@@ -159,4 +159,25 @@ class ServiceEntreprise
             ControleurAdminMain::redirectionFlash("afficherListeEntreprises", "danger", "Vous ne pouvez pas effectuer cette action" );
         }
     }
+
+
+    /**
+     * @return void crée un tuteur dans la BD
+     */
+    public static function creerTuteur() {
+        if (isset($_REQUEST["siret"], $_REQUEST["nomTuteur"], $_REQUEST["prenomTuteur"], $_REQUEST["emailTuteur"], $_REQUEST["telTuteur"], $_REQUEST["fonctionTuteur"])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
+                if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
+                    if (!is_null($entreprise)) {
+                            if (strlen($_REQUEST["tel"]) == 10) {
+                                $entreprise->ajouterTuteur($_REQUEST["nomTuteur"], $_REQUEST["prenomTuteur"], $_REQUEST["emailTuteur"], $_REQUEST["telTuteur"], $_REQUEST["fonctionTuteur"]);
+                                (new EntrepriseRepository())->modifierObjet($entreprise);
+                                ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Le tuteur a bien été ajouté");
+                            } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Le numéro de téléphone doit faire 10 caractères");
+                    } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "L'entreprise n'existe pas");
+                } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Vous ne pouvez pas modifier les informations d'autres entreprises");
+            } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requise");
+        } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
+    }
 }

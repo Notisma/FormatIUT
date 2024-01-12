@@ -32,6 +32,13 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
             </div>
         </div>
 
+        <div class="sousMenuEntr mdpM" onclick="afficherPageCompteEntr('tuteurs')">
+            <img src="../ressources/images/employe.png" alt="profil">
+            <div>
+                <h3 class="titre">Mes Tuteurs</h3>
+            </div>
+        </div>
+
     </div>
 
     <div class="mainEntr" id="compte">
@@ -54,28 +61,32 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
             <h3 class="titre">Nom</h3>
             <div class="inputCentre">
                 <label for="nom_id"></label><input type="text"
-                                                   value='<?= htmlspecialchars($entreprise->getNomEntreprise()); ?>' name="nom"
+                                                   value='<?= htmlspecialchars($entreprise->getNomEntreprise()); ?>'
+                                                   name="nom"
                                                    id="nom_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Statut Juridique</h3>
             <div class="inputCentre">
                 <label for="statutJ_id"></label><input type="text"
-                                                       value='<?= htmlspecialchars($entreprise->getStatutJuridique()); ?>' name="statutJ"
+                                                       value='<?= htmlspecialchars($entreprise->getStatutJuridique()); ?>'
+                                                       name="statutJ"
                                                        id="statutJ_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Effectif</h3>
             <div class="inputCentre">
                 <label for="effectif_id"></label><input type="number"
-                                                        value='<?= htmlspecialchars($entreprise->getEffectif()); ?>' name="effectif"
+                                                        value='<?= htmlspecialchars($entreprise->getEffectif()); ?>'
+                                                        name="effectif"
                                                         id="effectif_id" required max="999999999">
             </div>
 
             <h3 class="titre">Code NAF</h3>
             <div class="inputCentre">
                 <label for="codeNAF_id"></label><input type="text"
-                                                       value='<?= htmlspecialchars($entreprise->getCodeNAF()); ?>' name="codeNAF"
+                                                       value='<?= htmlspecialchars($entreprise->getCodeNAF()); ?>'
+                                                       name="codeNAF"
                                                        id="codeNAF_id" required maxlength="50">
             </div>
 
@@ -89,7 +100,8 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
             <h3 class="titre">Adresse</h3>
             <div class="inputCentre">
                 <label for="adresse_id"></label><input type="text"
-                                                       value='<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?>' name="adresse"
+                                                       value='<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?>'
+                                                       name="adresse"
                                                        id="adresse_id" required maxlength="255">
             </div>
 
@@ -135,6 +147,52 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
                 <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&controleur=EntrMain">
             </div>
         </form>
+    </div>
+
+    <div class="mainEntr" id="tuteurs">
+        <h2 class="titre rouge">Gérer mes tuteurs</h2>
+        <form method="post">
+            <h3 class="titre">Ajouter un tuteur</h3>
+            <br>
+            <h3 class="titre">Nom</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="nomTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Prénom</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="prenomTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Email</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="email" name="emailTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Téléphone</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="telTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Fonction</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="fonctionTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <div class="inputCentre">
+                <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>">
+                <input type="submit" value="Ajouter" formaction="?action=ajouterTuteur&controleur=EntrMain">
+            </div>
     </div>
 
 
