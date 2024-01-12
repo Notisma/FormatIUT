@@ -6,7 +6,7 @@
     </div>
 
     <div>
-        <h2 class="titre rouge">Désignations</h2>
+        <h2 class="titre rouge">DÉSIGNATIONS</h2>
         <h3 class="titre">IUT de Montpellier Sète et Université de Montpellier – 163 rue Auguste Broussonnet – 34090
             Montpellier</h3>
         <h3 class="titre">N° SIRET : 130 029 796 000 13</h3>
@@ -17,7 +17,7 @@
     </div>
 
     <div>
-        <h2 class="titre rouge">Crédits</h2>
+        <h2 class="titre rouge">CRÉDITS</h2>
         <ul>
             <li><h3 class="titre">Raphaël IZORET</h3></li>
             <li><h3 class="titre">Romain TOUZE</h3></li>
@@ -52,15 +52,11 @@
     </div>
 
     <div>
-        <h2 class="titre rouge">Conditions Générales d'Utilisation</h2>
+        <h2 class="titre rouge">CONDITIONS GÉNÉRALES D'UTILISATION</h2>
         <h3 class="titre">Les présentes conditions générales d’utilisation (ci-après les « CGU ») ont pour objet de
             définir les modalités et conditions d’utilisation des services proposés par le site internet Format'IUT
             (ci-après le « Site ») et de définir les droits et obligations des parties dans ce cadre.</h3>
-        <h3 class="titre">Les CGU sont accessibles et imprimables à tout moment par ce lien : <a class="lien"
-                                                                                                 onclick="afficherPopupCGU()">CGU
+        <h3 class="titre">Les CGU sont accessibles et imprimables à tout moment par ce lien : <a class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU
                 - Format'IUT</a></h3>
     </div>
 </div>
-
-
-<?php require __DIR__ . "/CGU.php"; ?>
