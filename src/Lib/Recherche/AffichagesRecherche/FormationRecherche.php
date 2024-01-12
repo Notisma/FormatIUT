@@ -12,18 +12,18 @@ class FormationRecherche extends AbstractAffichage
 {
     private Entreprise $entreprise;
 
-    function getTitreRouge()
+    function getTitreRouge():string
     {
         return htmlspecialchars(parent::getObjet()->getNomOffre());
     }
 
-    function getLienAction()
+    function getLienAction():string
     {
         $this->entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(parent::getObjet()->getIdEntreprise()));
         return '?action=afficherVueDetailOffre&controleur=' . Configuration::getControleurName() . '&idFormation=' . parent::getObjet()->getIdFormation();
     }
 
-    function getTitres()
+    function getTitres():string
     {
         $formation=parent::getObjet();
         $titres = '<h4 class="titre">' . htmlspecialchars($this->entreprise->getNomEntreprise()) . '</h4>
@@ -59,7 +59,7 @@ class FormationRecherche extends AbstractAffichage
 
     }
 
-    function getImage()
+    function getImage():string
     {
         return Configuration::getUploadPathFromId($this->entreprise->getImg());
 

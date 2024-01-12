@@ -11,17 +11,17 @@ class EtudiantRecherche extends AbstractAffichage
 {
 
 
-    function getTitreRouge()
+    function getTitreRouge():string
     {
         return htmlspecialchars(parent::getObjet()->getPrenomEtudiant()) ." ". htmlspecialchars(parent::getObjet()->getNomEtudiant());
     }
 
-    public function getLienAction()
+    public function getLienAction():string
     {
         return '?action=afficherDetailEtudiant&controleur=' . Configuration::getControleurName() . '&numEtu=' . parent::getObjet()->getNumEtudiant();
     }
 
-    function getTitres()
+    function getTitres():string
     {
         $etudiant = parent::getObjet();
         $titres = '<h4 class="titre">' . htmlspecialchars($etudiant->getParcours()) . '</h4>
@@ -37,7 +37,7 @@ class EtudiantRecherche extends AbstractAffichage
         return $titres;
     }
 
-    function getImage()
+    function getImage():string
     {
         return Configuration::getUploadPathFromId(parent::getObjet()->getImg());
     }

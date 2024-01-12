@@ -9,17 +9,17 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 class EntrepriseRecherche extends AbstractAffichage
 {
 
-    function getTitreRouge()
+    function getTitreRouge():string
     {
         return htmlspecialchars(parent::getObjet()->getNomEntreprise());
     }
 
-    function getLienAction()
+    function getLienAction():string
     {
         return '?action=afficherDetailEntreprise&controleur=' . Configuration::getControleurName() . '&idEntreprise=' . parent::getObjet()->getSiret();
     }
 
-    function getTitres()
+    function getTitres():string
     {
         $entreprise=parent::getObjet();
         $countValide = count((new EntrepriseRepository)->getOffresValidesDeEntreprise($entreprise->getSiret()));
@@ -39,7 +39,7 @@ class EntrepriseRecherche extends AbstractAffichage
         return $titres;
     }
 
-    function getImage()
+    function getImage():string
     {
         return Configuration::getUploadPathFromId(parent::getObjet()->getImg());
     }

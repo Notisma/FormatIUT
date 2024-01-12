@@ -262,7 +262,7 @@ class ControleurEtuMain extends ControleurMain
     {
         //si un fichier a été passé en paramètre
         if (!empty($_FILES['pdp']['name'])) {
-            //TODO vérif de doublons d'image
+
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
             $nom = "";
             $nomEtudiant = $etudiant->getLogin();

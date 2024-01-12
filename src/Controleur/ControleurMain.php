@@ -113,10 +113,7 @@ class ControleurMain
     public static function afficherRecherche(): void
     {
         self::$pageActuelle = 'Résultats de la recherche';
-        $liste = $_REQUEST["liste"];
 
-        /** @var ControleurMain $contr */
-        $contr = Configuration::getCheminControleur();
         ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php", [
             "recherche" => $_REQUEST["recherche"],
             "liste"=>$_REQUEST["liste"],

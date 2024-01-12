@@ -7,17 +7,17 @@ use App\FormatIUT\Configuration\Configuration;
 class ProfRecherche extends AbstractAffichage
 {
 
-    function getTitreRouge()
+    function getTitreRouge():string
     {
         return htmlspecialchars(parent::getObjet()->getPrenomProf()) . ' ' . htmlspecialchars(parent::getObjet()->getNomProf());
     }
 
-    function getLienAction()
+    function getLienAction():string
     {
-        //return '?action=afficherDetailProf&controleur=' . Configuration::getControleurName() . '&loginProf=' . parent::getObjet()->getLoginProf();
+        return "";
     }
 
-    function getTitres()
+    function getTitres():string
     {
         $titres = '<h4 class="titre">';
         if (parent::getObjet()->isEstAdmin()) {
@@ -33,7 +33,7 @@ class ProfRecherche extends AbstractAffichage
         return $titres;
     }
 
-    function getImage()
+    function getImage():string
     {
         return Configuration::getUploadPathFromId(parent::getObjet()->getImg());
     }
