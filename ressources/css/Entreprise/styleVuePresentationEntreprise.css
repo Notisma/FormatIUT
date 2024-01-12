@@ -268,6 +268,13 @@ body {
     color: #ff5660;
 }
 
+.formulaireGauchePE > form > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
 .formulaireGauchePE > form > input[type='text'], input[type='password'], input[type='number'], input[type='email'] {
     width: 90%;
     height: 10%;

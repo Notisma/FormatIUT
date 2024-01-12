@@ -110,8 +110,11 @@
                 <?php } ?>
                 <input type="password" name="mdp" placeholder="Mot de passe" required>
                 <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
-                <input type="checkbox" name="cgu" required id="cgu-id">
-                <label for="cgu_id">Veuillez accepter les <a class="lien" href="../ressources/CGU/CGU-Format'IUT.png">CGU</a> </label>
+                <div>
+                    <label for="cgu-id"></label><input type="checkbox" name="cgu" required id="cgu-id">
+                    <h4 class="titre">Veuillez accepter les <a class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
+                    </h4>
+                </div>
                 <input type="submit" class="valider" value="NOUS REJOINDRE">
 
             </form>
@@ -123,5 +126,5 @@
         </div>
     </div>
 </div>
-<?php require __DIR__."/../CGU.php";?>
+<?php require __DIR__ . "/../CGU.php"; ?>
 
