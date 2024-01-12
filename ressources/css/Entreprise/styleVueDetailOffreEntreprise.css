@@ -4,541 +4,350 @@ body {
     height: 100vh;
 }
 
-.boiteMain {
-    position: absolute;
-    top: 57%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 92%;
-    height: 87%;
-    min-width: 300px;
-    text-align: left;
-    line-height: 2em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
-    grid-auto-columns: 1fr;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-}
 
-
-.imageEtu {
-    float: right;
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.imageEtu > img {
-    width: 70%;
-    border-radius: 10px;
-    background-color: white;
-}
-
-.conteneurBienvenueDetailEntr {
-    float: right;
-    grid-row: 1;
-    grid-column: 1/4;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 98%;
-    height: 95%;
-    background-color: #ff9095;
-}
-
-
-
-.texteBienvenue {
-    float: left;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.texteBienvenue > h2 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    margin-left: 5%;
+.titre {
+    font-family: 'Oswald', sans-serif;
     letter-spacing: 0.04em;
-    margin-bottom: 1%;
-}
-
-.texteBienvenue > h4 {
-    font-family: "Oswald", sans-serif;
     color: black;
-    margin-left: 5%;
-    letter-spacing: 0.04em;
-    margin-bottom: 1%;
-}
-
-.texteBienvenue > p {
-    font-family: "Open Sans extra", sans-serif;
-    margin-left: 5%;
-    line-height: 1em;
-}
-
-.imageBienvenue {
-    float: right;
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.imageBienvenue > img {
-    width: 75%;
-}
-
-.infosOffreEntr {
-    grid-column: 1/4;
-    grid-row: 2/5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 98%;
-    height: 95%;
     margin: 0;
-    background-color: #aadcda;
 }
 
-.infosOffreEntr > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin-top: 10%;
-}
-
-.overflowListe {
-    width: 80%;
-    height: 80%;
-    border-radius: 10px;
-    background-color: white;
-    margin-left: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.overflowListe2 {
-    width: 95%;
-    height: 95%;
-    border-radius: 10px;
-    overflow-y: auto;
-}
-
-.overflowListe2 > ul > li{
-    color: black;
-
-}
-
-.overflowListe2::-webkit-scrollbar {
-    border-radius: 10px;
-    background-color: #ffd0d4;
-    width: 10px;
-}
-
-.overflowListe2::-webkit-scrollbar-thumb {
-    background-color: #ff5660;
-    border-radius: 10px;
-}
-
-#liseInfosOffreEntr > p {
-    font-family: "Open Sans extra", sans-serif;
-    margin-left: 5%;
-    line-height: 1em;
-}
-
-#liseInfosOffreEntr > p > span {
-    font-weight: bold;
-}
-
-.petitConteneurInfosOffre {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: space-around;
-    margin-bottom: 3%;
-}
-
-.petitConteneurInfosOffre > h3 {
-    margin-bottom: 0;
-}
-
-.petitConteneurInfosOffre > img {
-    width: 35%;
-    margin-bottom: 30%;
-}
-
-
-.actionsRapidesEntr {
-    grid-column: 4/5;
-    grid-row: 3/5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    width: 95%;
-    height: 92%;
-    background-color: #ff9095;
-    border-radius: 10px;
-}
-
-.actionsRapidesEntr > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin-bottom: 0;
-}
-
-.actionsRapidesEntr > form {
-    width: 90%;
-}
-
-.actionsRapidesEntr > form > button {
-    margin: 5% 0;
-}
-
-
-.listeEtudiantsPostulants {
-    grid-column: 4/5 ;
-    grid-row: 1/3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: space-around;
-    border-radius: 10px;
-    margin: 0;
-    height: 97%;
-    width: 95%;
-    background-color: #ff9095;
-    padding: 2px;
-}
-
-
-
-.listeEtudiantsPostulants > h3 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin-bottom: 0;
-}
-
-.listeEtudiantsPostulants > form {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.etudiantPostulant {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    justify-content: space-around;
-    width: 98%;
-    height: 30%;
-    margin: 1%;
-    padding: 0;
-    border-radius: 10px;
-    background-color: white;
-    flex-shrink: 0;
-}
-
-.etudiantPostulant:hover {
-    background-color: #aadcda;
-    cursor: pointer;
-}
-
-.wrapPostulants {
-    width: 95%;
-    height: 70%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    flex-shrink: 0;
-}
-
-.wrapPostulants::-webkit-scrollbar {
-    border-radius: 10px;
-    background-color: #ffd0d4;
-    width: 10px;
-}
-
-.wrapPostulants::-webkit-scrollbar-thumb {
-    background-color: #ff5660;
-    border-radius: 10px;
-}
-
-.illuPostulant {
-    float: left;
-    width: 25%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-}
-
-.illuPostulant > img {
-    width: 70%;
-}
-
-.nomEtuPostulant {
-    float: right;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
-}
-
-.nomEtuPostulant > h4 {
-    font-family: "Oswald", sans-serif;
+#rouge {
     color: #ff5660;
-    margin: 0;
-    letter-spacing: 0.04em;
 }
 
-.nomEtuPostulant > a {
-    height: 50%;
-    width: 70%;
-    margin-bottom: 10%;
+.detailOffreEtu {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.detailsOffre {
+    width: 65%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
-    justify-content: center;
-    text-decoration: none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1%;
 }
 
-.boutonAssigner {
-    width: 100%;
+.entreprise {
+    width: 98%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.entreprise > img {
+    width: 100px;
+}
+
+.offre {
+    width: 98%;
+    height: 64%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+.offre::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.offre::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.actionsOffre {
+    width: 33%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: #ffc4c8;
+    border-radius: 10px;
+}
+
+.actionsOffre > div > img {
+    height: 150px;
+}
+
+.actionsOffre > .first {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.astucesDetails {
+    width: 95%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.astucesDetails > img {
+    max-height: 60%;
+}
+
+.astucesDetails > .contenuAstuce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    width: 75%;
+    height: 98%;
+}
+
+.wrapActionsCandidat {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+
+}
+
+.candidature {
+    height: 130px;
+    width: 95%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+}
+
+.candidature > img {
+    height: 85px;
+}
+
+.boutonCandidater {
+    width: 98%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.boutonCandidater > a {
+    width: 250px;
+    height: 30px;
     border-radius: 50px;
     border: none;
     background-color: #ff5660;
     color: white;
-    padding: 3%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.5s ease;
 }
 
-#petit {
-    height: 100%;
-}
-
-#grand {
-    height: 25%;
-}
-
-.boutonAssigner:hover {
-    background-color: white;
+.boutonCandidater > a:hover {
     border: 1px solid black;
+    background-color: white;
     color: black;
     cursor: pointer;
 }
 
-#disabled:hover {
-    cursor: not-allowed;
-}
-
-.erreur {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    width: 95%;
-    height: 80%;
-}
-
-.erreur > h4 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin-bottom: 0;
-}
-
-.erreur > img {
-    width: 50%;
-}
-
-#disabled {
+#desac {
     opacity: 0.5;
-}
-
-#disabled:hover {
     cursor: not-allowed;
-    background-color: #ff5660;
-    border: none;
-    color: white;
 }
 
-#infosEtuCandidat {
+#desac:hover {
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    cursor: not-allowed;
+}
+
+
+.popup {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
-    width: 40%;
-    height: 80%;
-    background-color: white;
+    width: 70%;
+    height: 70%;
+    min-width: 300px;
+    text-align: left;
+    line-height: 2em;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
     border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+}
+
+
+.mainPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content: flex-start;
-    z-index: 100;
-    border: 1px solid black;
+    justify-content: space-between;
 }
 
-#infosEtuCandidat > h1 {
+.mainPopup > h2 {
     font-family: "Oswald", sans-serif;
     color: #ff5660;
     letter-spacing: 0.04em;
     margin-bottom: 0;
-}
-
-#infosEtuCandidat > h4 {
-    font-family: "Oswald", sans-serif;
-    color: black;
     text-align: center;
-    letter-spacing: 0.04em;
-    margin-bottom: 0;
 }
 
-.detailsEtu {
+.mainPopup > form {
+    width: 90%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 3%;
+    border: #ff5660 1px solid;
+
+}
+
+.mainPopup > form > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
-    width: 95%;
-    height: 40%;
-    background-color: #ff9095;
+    justify-content: space-between;
+    width: 100%;
     border-radius: 10px;
-    margin-top: 2%;
+    background-color: #ff9095;
+    padding: 5%;
 }
 
-.PPEtu {
-    width: 30%;
+.contenuDepot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.imagesDepot {
+    width: 20%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
-    justify-content: center;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 10px;
 }
 
-.PPEtu > img {
-    width: 70%;
+.imagesDepot > img {
+    width: 50%;
 }
 
-.infosEtu {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: center;
-    justify-content: center;
+.imagesDepot > p {
+    font-size: 0.5em;
+    font-family: "Open Sans extra", sans-serif;
+    margin: 0;
+    text-align: center;
+    line-height: 1em;
 }
 
-.infosEtu > h2 {
-    font-family: "Oswald", sans-serif;
-    color: black;
-    letter-spacing: 0.04em;
-    margin : 0;
-}
 
-.infosEtu > h4 {
+
+.mainPopup > form > div > label {
     font-family: "Oswald", sans-serif;
     color: black;
     letter-spacing: 0.04em;
     margin-bottom: 0;
-}
-
-.infosEtu > p {
-    font-family: "Open Sans extra", sans-serif;
-    line-height: 1.5em;
-    margin: 0;
-}
-
-.infosEtu > p > span {
+    text-align: center;
     font-weight: bold;
 }
 
-.wrapBoutonsDoc {
-    width: 95%;
-    height: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: space-around;
-}
-
-.wrapBoutonsDoc > a {
-    width: 60%;
-    height: 30%;
-    text-decoration: none;
-}
-
-.boutonDoc {
-    width: 100%;
-    height: 100%;
+.mainPopup > form > input[type="submit"] {
     border-radius: 50px;
     border: none;
-    background-color: #4bc2bc;
+    width: 80px;
+    height: 20px;
+    background-color: #ff5660;
     color: white;
-    padding: 3%;
 }
 
-.boutonDoc:hover {
-    background-color: white;
+.mainPopup > form > input[type="submit"]:hover {
+    border-radius: 50px;
     border: 1px solid black;
+    background-color: white;
     color: black;
     cursor: pointer;
 }
 
-.wrapActions {
-    width: 95%;
-    height: 9%;
+::-webkit-file-upload-button {
+    border-radius: 50px;
+    border: none;
+    width: 120px;
+    height: 20px;
+    background-color: #ff5660;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.conteneurBoutonPopup {
+    width: 100%;
+    height: 15%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -546,13 +355,18 @@ body {
     justify-content: space-around;
 }
 
-.wrapActions > a {
+.conteneurBoutonPopup > a {
     width: 40%;
-    height: 80%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
     text-decoration: none;
 }
 
-.boutonAction {
+.boutonAssignerPopup {
     width: 100%;
     height: 100%;
     border-radius: 50px;
@@ -562,12 +376,61 @@ body {
     padding: 3%;
 }
 
-.boutonAction:hover {
+.boutonAssignerPopup:hover {
     background-color: white;
     border: 1px solid black;
     color: black;
     cursor: pointer;
 }
 
+.descPopup {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    background-color: #aadcda;
+}
 
-/* TODO : REPSONSIVE */
+.descPopup > img {
+    width: 80%;
+}
+
+.descPopup > h2 {
+    font-family: "Oswald", sans-serif;
+    color: #ff5660;
+    letter-spacing: 0.04em;
+    margin: 0 2%;
+    text-align: center;
+}
+
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 185vh;
+    }
+
+    .detailOffreEtu {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+    }
+
+    .detailsOffre {
+        width: 98%;
+        height: 54%;
+    }
+
+    .actionsOffre {
+        width: 98%;
+        height: 45%;
+    }
+
+}
