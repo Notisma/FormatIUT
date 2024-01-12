@@ -43,22 +43,22 @@ use App\FormatIUT\Configuration\Configuration;
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
-                    $menu=\App\FormatIUT\Controleur\ControleurMain::getMenu();
+                    $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
 
                     if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        $user=\App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
-                        $src=$user->getImageProfil();
-                        $liaison="?controleur=".$user->getControleur()."&action=afficherProfil";
-                        $menu=$user->getMenu();
+                        $user = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+                        $src = $user->getImageProfil();
+                        $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
+                        $menu = $user->getMenu();
 
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?service=Recherche&menu=".serialize($menu)."&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?service=Recherche&menu=" . serialize($menu) . "&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='menu' value='".serialize($menu)."'>
+                            <input type='hidden' name='menu' value='" . serialize($menu) . "'>
                             <input type='hidden' name='service' value='Recherche'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
@@ -121,7 +121,7 @@ use App\FormatIUT\Configuration\Configuration;
         foreach ($menu as $item) {
             $actuel = "";
             if ($item['label'] == $titrePage) {
-                $actuel = "id='active'";
+                $actuel = "class='active'";
             }
             echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
         }
@@ -131,15 +131,23 @@ use App\FormatIUT\Configuration\Configuration;
 
 
     <footer>
-        <div id="footerContent">
-                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
-
-            <p>Mentions Légales : Cliquer <a href="controleurFrontal.php?action=afficherMentionsLegales&controleur=<?= Configuration::getControleurName() ?>">ICI</a> </p>
+        <div class="footerContent">
+            <div class="footerForm">
+                <img src="../ressources/images/Logo_rouge.png" alt="petit logo footer">
+                <div>
+                    <h4 class="titre blanc">Sources : Cliquer <a
+                                href="?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                    </h4>
+                    <h4 class="titre blanc">Mentions Légales : Cliquer <a
+                                href="?action=afficherMentionsLegales&controleur=<?= Configuration::getControleurName() ?>">ICI</a>
+                    </h4>
+                </div>
+            </div>
 
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
                      alt="grand logo footer">
-                <h2>© 2023 - Format'IUT</h2>
+                <h2 class="titre blanc">© 2023 - Format'IUT</h2>
             </div>
         </div>
     </footer>
