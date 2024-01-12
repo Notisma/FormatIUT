@@ -1,29 +1,50 @@
 .grille {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 30px;
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-rows: minmax(250px, auto);
 }
 
 #etu {
     grid-row: 1;
     grid-column: 1;
+    border-top-left-radius: 10px;
 }
 
 #entr {
-    grid-row: 1;
-    grid-column: 2;
+    grid-row: 2;
+    grid-column: 1;
+    border-bottom-left-radius: 10px;
 }
 
 #form{
-    grid-row: 2;
-    grid-column: 1;
+    grid-row: 1/3;
+    grid-column: 2;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .titreStats{
     color:indianred;
+    margin: 30px 200px 30px 200px;
 }
 
 .gridElem{
+    background-color: lightblue;
+}
 
+.listeStats{
+    background-color: #e6e8e6;
+    border-radius: 20px;
+    margin: 15px 10px 20px 10px;
+    padding:10px 10px 10px 10px;
+}
+
+.pStat{
+    margin: 20px 20px;
+    font-weight: bold;
+}
+
+#listeForm{
+    display: flex;
+    flex-direction: column;
 }
