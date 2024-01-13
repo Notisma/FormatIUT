@@ -99,7 +99,6 @@ class ServiceEntreprise
             //vérification de doublon de Siret
             $overrideEntrepriseFactice = false;
             if (!is_null($entreprise)) {
-                DevUtils::print($entreprise, true);
                 if ($entreprise->getMdpHache() == "") {
                     $overrideEntrepriseFactice = true;
                 } else {
