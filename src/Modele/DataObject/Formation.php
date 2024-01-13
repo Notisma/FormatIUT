@@ -694,7 +694,7 @@ class Formation extends AbstractDataObject
             null,
             null,
             $formation["tuteurPro"],
-            ConnexionUtilisateur::getLoginUtilisateurConnecte(),
+            ConnexionUtilisateur::getNumEntrepriseConnectee(),
             null,
             false
         );
