@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Lib\Recherche\AffichagesRecherche;
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\Recherche\AffichagesRecherche\AbstractAffichage;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
@@ -20,7 +21,7 @@ class FormationRecherche extends AbstractAffichage
     function getLienAction():string
     {
         $this->entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(parent::getObjet()->getIdEntreprise()));
-        return '?action=afficherVueDetailOffre&controleur=' . Configuration::getControleurName() . '&idFormation=' . parent::getObjet()->getIdFormation();
+        return '?action=afficherVueDetailOffre&controleur=' .  ConnexionUtilisateur::getUtilisateurConnecte()->getControleur() . '&idFormation=' . parent::getObjet()->getIdFormation();
     }
 
     function getTitres():string
