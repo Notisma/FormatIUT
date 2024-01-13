@@ -25,7 +25,7 @@ if (date("m") >= 9) {
         <div class="titreConv">
             <h2 class="titre"><label for="type_id">Convention de type : </label></h2>
             <div class="inputCentre">
-                <select name="typeOffre" id="type_id">
+                <select name="typeOffre" id="type_id" required>
                     <option value="Stage"> Stage</option>
                     <option value="Alternance">Alternance</option>
                 </select>
@@ -61,30 +61,30 @@ if (date("m") >= 9) {
                     <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
                     <h6 class="titre">
                         <strong><label for="nom_entr_id">Nom : </label>
-                            <input type="text" id="nom_entr_id" name="nomEntreprise"></strong>
+                            <input type="text" required id="nom_entr_id" name="nomEntreprise"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="adresse_id">Adresse : </label>
-                            <input type="text" id="adresse_id" name="adresseEntr"></strong>
-                        <strong><label for="ville_id">Adresse : </label>
-                            <input type="text" id="ville_id" name="villeEntr"></strong>
+                            <input type="text" required id="adresse_id" name="adresseEntr"></strong>
+                        <strong><label for="ville_id">Ville : </label>
+                            <input type="text" required id="ville_id" name="villeEntr"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="representant_id">Représenté par (nom du signataire de la convention)
                                 :</label>
-                            <input type="text" id="representant_id" name="nomRepresentant"></strong>
+                            <input type="text" required id="representant_id" name="nomRepresentant"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="representant_fonction_id">Qualité du représentant :</label>
-                            <input type="text" id="representant_fonction_id" name="representant_fonction"></strong>
+                            <input type="text" required id="representant_fonction_id" name="representant_fonction"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="tel_id">Tél :</label>
-                            <input type="tel" id="tel_id" name="telEntreprise"></strong>
+                            <input type="tel" required id="tel_id" name="telEntreprise"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="email_id">Mél :</label>
-                            <input type="email" id="email_id" name="emailEntreprise"></strong>
+                            <input type="email" required id="email_id" name="emailEntreprise"></strong>
                     </h6>
                 </div>
             </div>
@@ -116,41 +116,41 @@ if (date("m") >= 9) {
 
         <div class="threeBlock">
             <h5 class="titre"><label for="sujet_id">SUJET : </label>
-                <input type="text" id="sujet_id" name="offreSujet">
+                <input type="text" required id="sujet_id" name="offreSujet">
             </h5>
             <div>
                 <h6 class="titre">
                     <strong>Dates :</strong> du
-                    <label for="debutdate_id"></label><input type="date" id="debutdate_id" name="offreDateDebut">
+                    <label for="debutdate_id"></label><input type="date" required id="debutdate_id" name="offreDateDebut">
                     au
-                    <label for="findate_id"></label><input type="date" id="findate_id" name="offreDateFin"
+                    <label for="findate_id"></label><input type="date" required id="findate_id" name="offreDateFin"
                 </h6>
                 <h6 class="titre"><strong>Intitulé de la formation :</strong>
                     BUT INFORMATIQUE,
                     <label for="anneeBUT_id"> année : </label>
-                    <input type="number" id="anneeBUT_id" name="etudiantAnneeEtu" min="1" max="3">
+                    <input type="number" required id="anneeBUT_id" name="etudiantAnneeEtu" min="1" max="3">
                     ,
                     <label for="parcoursBUT_id"> parcours : </label>
-                    <input type="text" id="parcoursBUT_id" name="etudiantParcours">
+                    <input type="text" required id="parcoursBUT_id" name="etudiantParcours">
                 </h6>
                 <h6 class="titre">
                     <strong><label for="nbHeures_id">Nombre d'heures total dans l'organisme : </label>
-                        <input type="number" id="nbHeures_id" name="offreDureeHeure" min="100" max="2500">
+                        <input type="number" required id="nbHeures_id" name="offreDureeHeure" min="100" max="2500">
                     </strong>
                     heures de présence effective dans l'organisme d'accueil
                 </h6>
                 <h6 class="titre">
                     <strong><label for="gratification_id">Gratification : </label>
-                        <input type="number" id="gratification_id" name="offreGratification"></strong>
+                        <input type="number" required id="gratification_id" name="offreGratification"></strong>
                     euros par MOIS
                 </h6>
                 <h6 class="titre">
                     <strong><label for="commentaire_id">Commentaire : </label></strong>
-                    <input type="text" name="commentaire" id="commentaire_id" maxlength="10000">
+                    <input type="text" required name="commentaire" id="commentaire_id" maxlength="10000">
                 </h6>
                 <h6 class="titre">
                     <strong><label for="assurance_id">Assurance : </label></strong>
-                    <input class="inputAssur" type="text" name="assurance" id="assurance_id">
+                    <input class="inputAssur" required type="text" name="assurance" id="assurance_id">
                 </h6>
             </div>
 
