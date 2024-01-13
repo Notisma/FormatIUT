@@ -175,7 +175,6 @@ class ControleurEtuMain extends ControleurMain
             if ($offre->getEstValide()) {
                 self::$titrePageActuelleEtu = "Détails de l'offre";
                 /** @var ControleurMain $menu */
-                $menu = Configuration::getCheminControleur();
                 $liste = (new FormationRepository())->getListeidFormations();
                 if ($idFormation || isset($_REQUEST["idFormation"])) {
                     if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
