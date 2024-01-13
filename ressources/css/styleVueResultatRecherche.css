@@ -334,8 +334,68 @@ p {
     flex-shrink: 0;
 }
 
+.goFiltres {
+    width: 120px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.5s ease;
+}
+
+.goFiltres:hover {
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid black;
+    color: black;
+}
+
 
 @media (max-width: 500px) {
+
+    body {
+        height: 300vh;
+    }
+
+    .mainRecherche {
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        flex-direction: column-reverse;
+        margin-top: 5%;
+    }
+
+    .mainRecherche > div {
+        width: 98%;
+    }
+
+    .resultatsRecherche {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, minmax(180px, auto));
+        grid-auto-rows: minmax(180px, auto);
+    }
+
+    .parametresRecherche {
+        height: 30%;
+    }
+
+    .controleRech {
+        height: 15%;
+    }
+
+    .bodyRecherche {
+        justify-content: space-around;
+    }
+
+    .vitrine {
+        margin-bottom: 10%;
+    }
 
 }
 
