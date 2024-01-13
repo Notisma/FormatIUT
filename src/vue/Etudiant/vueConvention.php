@@ -203,7 +203,7 @@ echo match ($etat) {
             break;
         case ConventionEtat::VisuEtudiant:
             if ($offre->getConventionValidee())
-                echo "<h3>Convention validée !</h3>";
+                echo "<a href=''>Convention validée !</a>";
             else
                 echo "
                
@@ -214,7 +214,7 @@ echo match ($etat) {
             break;
         case ConventionEtat::VisuAdmin:
             if ($offre->getConventionValidee())
-                echo "<h3>Convention validée !</h3>";
+                echo "<a href=''>Convention validée !</a>";
             else
                 echo "
                
