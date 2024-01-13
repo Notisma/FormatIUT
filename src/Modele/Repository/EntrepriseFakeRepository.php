@@ -23,15 +23,15 @@ class EntrepriseFakeRepository extends RechercheRepository
 
     public function construireDepuisTableau(array $entrepriseFakeFormatTableau): EntrepriseFake
     {
-        return new EntrepriseFake($entrepriseFormatTableau['numSiret'],
-            $entrepriseFormatTableau['nomEntreprise'],
-            $entrepriseFormatTableau['statutJuridique'],
-            $entrepriseFormatTableau['effectif'],
-            $entrepriseFormatTableau['codeNAF'],
-            $entrepriseFormatTableau['tel'],
-            $entrepriseFormatTableau['adresseEntreprise'],
-            $entrepriseFormatTableau['idVille'],
-            $entrepriseFormatTableau["email"],
+        return new EntrepriseFake($entrepriseFakeFormatTableau['numSiret'],
+            $entrepriseFakeFormatTableau['nomEntreprise'],
+            $entrepriseFakeFormatTableau['statutJuridique'],
+            $entrepriseFakeFormatTableau['effectif'],
+            $entrepriseFakeFormatTableau['codeNAF'],
+            $entrepriseFakeFormatTableau['tel'],
+            $entrepriseFakeFormatTableau['adresseEntreprise'],
+            $entrepriseFakeFormatTableau['idVille'],
+            $entrepriseFakeFormatTableau["email"],
         );
     }
 

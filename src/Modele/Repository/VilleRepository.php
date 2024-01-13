@@ -43,6 +43,18 @@ class VilleRepository extends AbstractRepository
         else return ($result)["idVille"];
     }
 
+    public function getVilleParNom2(?string $nomVille): ?Ville
+    {
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("Tag" => $nomVille);
+        $pdoStatement->execute($values);
+
+        $result = $pdoStatement->fetch();
+        if (!$result) return null;
+        else return $this->construireDepuisTableau($result);
+    }
+
     public function getVilleParIdResidence($idResidence): Ville
     {
         $sql = "SELECT v.idVille, nomVille,codePostal FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";

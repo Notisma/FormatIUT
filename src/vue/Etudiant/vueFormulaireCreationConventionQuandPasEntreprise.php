@@ -60,6 +60,8 @@ if (date("m") >= 9) {
                 <div class="entr">
                     <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
                     <h6 class="titre">
+                        <strong><label for="siret_entr_id">Siret :
+                            </label> <input type="number" id="siret_entr_id" name="siret"> </strong>
                         <strong><label for="nom_entr_id">Nom : </label>
                             <input type="text" required id="nom_entr_id" name="nomEntreprise"></strong>
                     </h6>
@@ -76,7 +78,8 @@ if (date("m") >= 9) {
                     </h6>
                     <h6 class="titre">
                         <strong><label for="representant_fonction_id">Qualité du représentant :</label>
-                            <input type="text" required id="representant_fonction_id" name="representant_fonction"></strong>
+                            <input type="text" required id="representant_fonction_id"
+                                   name="representant_fonction"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="tel_id">Tél :</label>
@@ -121,7 +124,8 @@ if (date("m") >= 9) {
             <div>
                 <h6 class="titre">
                     <strong>Dates :</strong> du
-                    <label for="debutdate_id"></label><input type="date" required id="debutdate_id" name="offreDateDebut">
+                    <label for="debutdate_id"></label><input type="date" required id="debutdate_id"
+                                                             name="offreDateDebut">
                     au
                     <label for="findate_id"></label><input type="date" required id="findate_id" name="offreDateFin"
                 </h6>
@@ -181,8 +185,6 @@ if (date("m") >= 9) {
 
     <input type="hidden" value="<?= $etudiant->getNumEtudiant() ?>" name="numEtu">
     <input type="hidden" value="<?= date('d-m-Y'); ?>" name="dateCreation">
-
-    <!--    <input type="hidden" name="codePostalEntr" value="--><?php //= $villeEntr->getCodePostal(); ?><!--">-->
 
     <input type='submit' value='Créer convention'>
 
