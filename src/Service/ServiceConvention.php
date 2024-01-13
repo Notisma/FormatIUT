@@ -5,11 +5,8 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-
-
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Modele\DataObject\TuteurPro;
@@ -150,6 +147,17 @@ class ServiceConvention
     public static function faireValiderConvention(): void
     {
         $numEtu = ConnexionUtilisateur::getNumEtudiantConnecte();
+
+        $offre = (new FormationRepository())->trouverOffreDepuisForm($numEtu);
+        if (!$offre || is_null($offre->getDateCreationConvention())) {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas les droits nécessaires; cet incident sera reporté.");
+            return;
+        }
+        if ($offre->getConventionValidee()) {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "warning", "Cette convention est déjà validée.");
+            return;
+        }
+
         $worked = VerificationEmail::envoiEmailValidationDeConventionAuxAdmins((new EtudiantRepository())->getObjectParClePrimaire($numEtu));
         if ($worked) ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Demande envoyée !");
         else ControleurEtuMain::redirectionFlash("afficherMaConvention", "warning", "Échec de l'envoi... Contacter un administrateur.");
@@ -196,8 +204,8 @@ class ServiceConvention
                         $idville = strval($villeEntr->getIdVille());
 
                         $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
-                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, "",
-                         $_REQUEST['emailEntreprise'], null, null, true, null);
+                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville, null, "",
+                            $_REQUEST['emailEntreprise'], null, null, true, null);
 
                         $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
                         if (!$entrepriseVerif) {
