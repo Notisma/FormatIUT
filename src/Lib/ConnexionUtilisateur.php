@@ -154,11 +154,16 @@ class ConnexionUtilisateur
      * @param string $login le login de l'utilisateur test qui se connecte
      * @return void enregistre dans la BD le personnel test s'il s'agit de sa premoère connexion sur le site
      */
-    public static function premiereConnexionProfTest(string $login):void
+    public static function premiereConnexionTest(string $login):void
     {
         if (!(new ProfRepository())->estProf($login)) {
             $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail",0,1);
             (new ProfRepository())->creerObjet($prof);
+        }
+        if (!(new EtudiantRepository())->estEtudiant($login)){
+            $etudiant=array("numEtudiant"=>"0","prenomEtudiant"=>"etudiant","nomEtudiant"=>"test","loginEtudiant"=>$login,"mailUniversitaire"=>"etudiant.test@etu.umontpellier.fr","groupe"=>"Q2","parcours"=>"RACDV");
+            $etu=Etudiant::creerEtudiant($etudiant);
+            (new EtudiantRepository())->creerObjet($etu);
         }
     }
 

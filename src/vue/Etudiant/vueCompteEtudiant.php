@@ -61,13 +61,13 @@ $etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\C
             <h3 class="titre">Mail Personnel</h3>
             <div class="inputCentre">
                 <input type="text" value='<?= htmlspecialchars($etudiant->getMailPerso()); ?>' name="mailPerso"
-                       id="mailPerso_id" required maxlength="50">
+                       id="mailPerso_id"  maxlength="50">
             </div>
 
             <h3 class="titre">Numéro de téléphone</h3>
             <div class="inputCentre">
                 <input type="text" value='<?= htmlspecialchars($etudiant->getTelephone()); ?>' name="numTel"
-                       id="numTel_id" required maxlength="11" >
+                       id="numTel_id"  maxlength="11" >
             </div>
 
             <div class="inputCentre">

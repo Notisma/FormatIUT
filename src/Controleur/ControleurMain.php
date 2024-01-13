@@ -129,6 +129,11 @@ class ControleurMain
         self::afficherVue("Mentions Légales", "vueMentionsLegales.php",Configuration::getCheminControleur()::getMenu());
     }
 
+    public static function afficherMdpOublie():void
+    {
+        self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php");
+    }
+
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
 
     public static function seConnecter(): void

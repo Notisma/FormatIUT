@@ -118,7 +118,7 @@ class ServiceConnexion
     private static function connexionTest() : void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
-            ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);
+            ConnexionUtilisateur::premiereConnexionTest($_REQUEST["login"]);
             $login = $_REQUEST["login"];
             if ($login == "ProfTest") {
                 $user = new Personnels($login);
@@ -126,13 +126,20 @@ class ServiceConnexion
                 $user = new Secretariat($login);
             } else if ($login == "AdminTest") {
                 $user = new Administrateurs($login);
-            } else {
-                $user = null;
+            } else if ($login == "EtuTest"){
+                $user = new Etudiants($login);
+            }else {
+                $user=null;
             }
             if (!is_null($user)) {
                 ConnexionUtilisateur::connecter($user);
                 MessageFlash::ajouter("success", "Connexion Réussie");
-                header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+
+                if($user instanceof Etudiants){
+                    header("Location:controleurFrontal.php?action=afficherAccueilEtu&controleur=EtuMain");
+                }else {
+                    header("Location:controleurFrontal.php?action=afficherAccueilAdmin&controleur=AdminMain");
+                }
                 exit();
             }
         }

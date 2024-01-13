@@ -69,7 +69,7 @@ class ServiceMdp
         if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
             ControleurMain::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
         else
-            ControleurMain::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php");
+            ControleurMain::afficherMdpOublie();
     }
 
     /**

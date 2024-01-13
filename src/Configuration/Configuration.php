@@ -16,30 +16,6 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class Configuration
 {
-    static private array $configLocal = array(
-
-        'hostname' => 'localhost',
-        'database' => 'loyet',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
-    );
-    static private array $configLocalRaphael = array(
-
-        'hostname' => 'localhost',
-        'database' => 'sae',
-        'port' => '3306',
-        'login' => 'notisma',
-        'password' => ''
-    );
-    static private array $configLocalNoe = array(
-
-        'hostname' => 'localhost',
-        'database' => 'devapplicationformatiut',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
-    );
     static private array $configWebInfo = array(
 
         'hostname' => 'localhost',
@@ -48,7 +24,6 @@ class Configuration
         'login' => 'loyet',
         'password' => 'gfsGnT!!hSSfE88.'
     );
-
     static private function getConfig(): array
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr")
@@ -152,4 +127,29 @@ class Configuration
     {
         return 30 * 60;
     }
+    static private array $configLocal = array(
+
+        'hostname' => 'localhost',
+        'database' => 'loyet',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
+    static private array $configLocalRaphael = array(
+
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
+    );
+    static private array $configLocalNoe = array(
+
+        'hostname' => 'localhost',
+        'database' => 'devapplicationformatiut',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
+
 }

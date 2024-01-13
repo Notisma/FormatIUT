@@ -62,13 +62,12 @@ class VerificationEmail
     }
 
     /**
-     * @param $login
-     * @param $nonce
-     * @return bool
+     * @param string $login  login de l'entreprise
+     * @param string $nonce le nonce de l'entreprise
+     * @return bool vérifie si l'entreprise est en droit de valider son email
      */
-    public static function traiterEmailValidation($login, $nonce): bool
+    public static function traiterEmailValidation(string $login, string $nonce): bool
     {
-        // À compléter
         $user = (new EntrepriseRepository())->getObjectParClePrimaire($login);
         if (!is_null($user)) {
             if ($user->formatTableau()["nonce"] == $nonce) {
@@ -82,6 +81,10 @@ class VerificationEmail
         return false;
     }
 
+    /**
+     * @param Entreprise $entreprise
+     * @return void envoi un email à l'entreprise pour qu'elle modifie son mot de passe oublié
+     */
     public static function envoyerMailMdpOublie(Entreprise $entreprise): void
     {
         $mailURL = rawurlencode($entreprise->getEmail());
@@ -98,9 +101,13 @@ class VerificationEmail
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
 
+    /**
+     * @param $login
+     * @param $nonce
+     * @return bool
+     */
     public static function traiterEmailMdpOublie($login, $nonce): bool
     {
-        // À compléter
         $user = (new EntrepriseRepository())->getObjectParClePrimaire($login);
         if (!is_null($user)) {
             if ($user->formatTableau()["nonce"] == $nonce) {
@@ -112,13 +119,21 @@ class VerificationEmail
         return false;
     }
 
+    /**
+     * @param Entreprise $entreprise
+     * @return bool vérifie si l'entreprise à valider son email
+     */
     public static function aValideEmail(Entreprise $entreprise): bool
     {
         if ($entreprise->getEmail() != "") return true;
         return false;
     }
 
-
+    /**
+     * @param string $titre le titre de l'email
+     * @param string $message le contenu du message
+     * @return string le squelette de l'email à envoyer
+     */
     public static function squeletteCorpsMail(string $titre, string $message): string
     {
         $police = "'Oswald'";
