@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Lib;
 
 use App\FormatIUT\Lib\Users\Utilisateur;
+use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
