@@ -59,7 +59,12 @@ class ServiceRecherche
         }
     }
 
-    private static function filtresFunction(string $repository, array $filtres)
+    /**
+     * @param string $repository le type de l'élément recherchable
+     * @param array $filtres la liste des filtres
+     * @return array regroupe les filtres actif et exécute leurs fonctions dans les classes FiltresSQL
+     */
+    private static function filtresFunction(string $repository, array $filtres):array
     {
         $listeFiltres = array();
         foreach ($filtres as $filtre) {
@@ -72,6 +77,9 @@ class ServiceRecherche
         return $listeFiltres;
     }
 
+    /**
+     * @return bool vérifie si la recherche est valide
+     */
     private static function verifRecherche(): bool
     {
         if (!isset($_REQUEST['recherche'])) {
