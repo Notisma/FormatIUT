@@ -6,6 +6,7 @@ use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Ville;
@@ -98,11 +99,12 @@ class ServiceEntreprise
             //vérification de doublon de Siret
             $overrideEntrepriseFactice = false;
             if (!is_null($entreprise)) {
-                if (!is_null($entreprise->getMdpHache())) {
+                DevUtils::print($entreprise, true);
+                if ($entreprise->getMdpHache() == "") {
+                    $overrideEntrepriseFactice = true;
+                } else {
                     ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
                     return;
-                } else {
-                    $overrideEntrepriseFactice = true;
                 }
 
             }

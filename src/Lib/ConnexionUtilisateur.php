@@ -2,9 +2,7 @@
 
 namespace App\FormatIUT\Lib;
 
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\Users\Utilisateur;
-use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
@@ -44,11 +42,11 @@ class ConnexionUtilisateur
 
     }
 
-    public static function getUtilisateurConnecte():?Utilisateur
+    public static function getUtilisateurConnecte(): ?Utilisateur
     {
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user= $session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
 
             return $user;
         }
@@ -60,7 +58,7 @@ class ConnexionUtilisateur
         // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user= $session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
             return $user->getLogin();
         }
         return null;
@@ -90,7 +88,7 @@ class ConnexionUtilisateur
     {
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user=$session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
             return $user->getTypeConnecte();
         }
         return null;
@@ -125,14 +123,15 @@ class ConnexionUtilisateur
     {
         if (!(new ProfRepository())->estProf($login)) {
             $infos = ConnexionLdap::getInfoPersonne();
-            $prof = new Prof($infos["login"], $infos["nom"], $infos["prenom"], $infos["mail"],0,0);
+            $prof = new Prof($infos["login"], $infos["nom"], $infos["prenom"], $infos["mail"], 0, 0);
             (new ProfRepository())->creerObjet($prof);
         }
     }
-    public static function premiereConnexionProfTest(string $login)
+
+    public static function premiereConnexionProfTest(string $login): void
     {
         if (!(new ProfRepository())->estProf($login)) {
-            $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail",0,1);
+            $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail", 0, 1);
             (new ProfRepository())->creerObjet($prof);
         }
     }
@@ -143,16 +142,17 @@ class ConnexionUtilisateur
         return false;
     }
 
-    public static function verifConnecte(string $controleur):bool{
-        $bool=false;
-        if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
-            $bool=true;
-        } else if ($controleur=="EtuMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Etudiants") {
-            $bool=true;
-        } else if ($controleur=="AdminMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Administrateurs") {
-            if (ConnexionUtilisateur::getTypeConnecte()!="Personnels")
-                if (ConnexionUtilisateur::getTypeConnecte()!="Secretariat")
-                    $bool=true;
+    public static function verifConnecte(string $controleur): bool
+    {
+        $bool = false;
+        if ($controleur == "EntrMain" && ConnexionUtilisateur::getTypeConnecte() != "Entreprise") {
+            $bool = true;
+        } else if ($controleur == "EtuMain" && ConnexionUtilisateur::getTypeConnecte() != "Etudiants") {
+            $bool = true;
+        } else if ($controleur == "AdminMain" && ConnexionUtilisateur::getTypeConnecte() != "Administrateurs") {
+            if (ConnexionUtilisateur::getTypeConnecte() != "Personnels")
+                if (ConnexionUtilisateur::getTypeConnecte() != "Secretariat")
+                    $bool = true;
         }
         return $bool;
     }

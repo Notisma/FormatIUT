@@ -21,7 +21,7 @@ class Entreprise extends AbstractDataObject
     private string $adresseEntreprise;
     private string $idVille;
     private ?string $img;
-    private ?string $mdpHache;
+    private string $mdpHache;
     private string $email;
     private ?string $emailAValider;
     private ?string $nonce;
@@ -38,14 +38,14 @@ class Entreprise extends AbstractDataObject
      * @param string $AdresseEntreprise
      * @param string $idVille
      * @param string|null $img
-     * @param string|null $mdpHache
+     * @param string $mdpHache
      * @param string $email
      * @param string|null $emailAValider
      * @param string|null $nonce
      * @param bool $estValide
      * @param string|null $dateCreationCompte
      */
-    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, ?string $img, ?string $mdpHache, string $email, ?string $emailAValider, ?string $nonce, bool $estValide, ?string $dateCreationCompte)
+    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, ?string $img, string $mdpHache, string $email, ?string $emailAValider, ?string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -218,12 +218,12 @@ class Entreprise extends AbstractDataObject
         $this->img = $img;
     }
 
-    public function getMdpHache(): ?string
+    public function getMdpHache(): string
     {
         return $this->mdpHache;
     }
 
-    public function setMdpHache(?string $mdpHache): void
+    public function setMdpHache(string $mdpHache): void
     {
         $this->mdpHache = $mdpHache;
     }
