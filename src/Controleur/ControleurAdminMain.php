@@ -358,9 +358,16 @@ class ControleurAdminMain extends ControleurMain
         ServicePersonnel::refuserTuteurUM();
     }
 
-    public static function exporterCSV() : void {
+    public static function exporterCSV(): void
+    {
         ServiceFichier::exporterCSV();
     }
+
+    public static function ajouterAnnotation(): void
+    {
+        ServicePersonnel::ajouterAnnotation();
+    }
+
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 

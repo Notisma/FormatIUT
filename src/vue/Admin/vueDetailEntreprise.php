@@ -35,8 +35,8 @@
             <?php
             if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 if ($entreprise->isEstValide()) {
-                    echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">SUPPRIMER</a>';
-                    echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">MODIFIER</a>';
+                    echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">SUPPRIMER</a>';
+                    echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">MODIFIER</a>';
                 } else {
                     echo '<a href="?action=refuserEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">REFUSER</a>';
                     echo '<a id="vert" href="?action=validerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">ACCEPTER</a>';
@@ -150,6 +150,33 @@
             }
             ?>
         </div>
+
+        <?php
+
+        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($offre->getIdEntreprise(), \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+            echo '     
+
+        <div class="rediger">
+            <h4 class="titre">Rédiger Mon Commentaire</h4>
+            <form action="?action=ajouterAnnotation&controleur=AdminMain" method="post">
+                <input type="hidden" name="idEntreprise" value="<?php echo $entreprise->getSiret() ?>">
+                <input type="hidden" name="loginProf"
+                       value="<?php echo \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte() ?>">
+                <input type="hidden" name="dateAnnotation" value="<?php echo date("d/m/Y") ?>">
+                <input type="hidden" name="idFormation" value="<?php echo $offre->getIdFormation() ?>">
+
+                <h5 class="titre">Note /5 :</h5>
+                <label for="stars"></label>
+                <input type="number" id="stars" max="5" min="0" name="noteAnnotation" required>
+
+                <h5 class="titre">Commentaire :</h5>
+                <label for="comm"></label><textarea name="messageAnnotation" id="comm" maxlength="255" required></textarea>
+
+                <input type="submit" value="Envoyer">
+        </div>
+            ';
+        }
+        ?>
 
     </div>
 </div>
