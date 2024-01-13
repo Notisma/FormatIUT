@@ -60,13 +60,15 @@ if (date("m") >= 9) {
                 <div class="entr">
                     <h5 class="titre">2 - L'ORGANISME D'ACCUEIL</h5>
                     <h6 class="titre">
+                        <strong><label for="siret_entr_id">Siret :
+                            </label> <input type="number" id ="siret_entr_id" name="siret"> </strong>
                         <strong><label for="nom_entr_id">Nom : </label>
                             <input type="text" id="nom_entr_id" name="nomEntreprise"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="adresse_id">Adresse : </label>
                             <input type="text" id="adresse_id" name="adresseEntr"></strong>
-                        <strong><label for="ville_id">Adresse : </label>
+                        <strong><label for="ville_id">Ville : </label>
                             <input type="text" id="ville_id" name="villeEntr"></strong>
                     </h6>
                     <h6 class="titre">
