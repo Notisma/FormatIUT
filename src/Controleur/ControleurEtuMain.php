@@ -209,7 +209,7 @@ class ControleurEtuMain extends ControleurMain
         $formation = (new FormationRepository())->getObjectParClePrimaire(self::getCleEtudiant());
         if ($formation == null && ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreatio nConventionQuandPasEntreprise.php", ['etudiant' => $etudiant]);
+            self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreationConventionQuandPasEntreprise.php", ['etudiant' => $etudiant]);
         }
         else{
             self::redirectionFlash("afficherAccueilEtu", "warning", "Vous avez déjà une formation");
