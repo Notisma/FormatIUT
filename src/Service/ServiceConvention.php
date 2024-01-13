@@ -6,6 +6,8 @@ use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\VerificationEmail;
+use App\FormatIUT\Modele\DataObject\EntrepriseFake;
+use App\FormatIUT\Modele\DataObject\Ville;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -143,6 +145,35 @@ class ServiceConvention
         $worked = VerificationEmail::envoiEmailValidationDeConventionAuxAdmins((new EtudiantRepository())->getObjectParClePrimaire($numEtu));
         if ($worked) ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Demande envoyée !");
         else ControleurEtuMain::redirectionFlash("afficherMaConvention", "warning", "Échec de l'envoi... Contacter un administrateur.");
+    }
+
+    /**
+     * @return void creer une convention où l'entreprise n'est pas présente dans la bd
+     */
+    public static function creerConventionSansEntreprise(){
+        if(ConnexionUtilisateur::getTypeConnecte() == "Etudiants"){
+            if(ConnexionUtilisateur::getNumEtudiantConnecte() == $_REQUEST['numEtu']){
+                $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtu']);
+                if(!$formation){
+
+                    $villeEntr = (new VilleRepository())->getVilleParNom($_REQUEST['idVilleEntr']);
+                    if($villeEntr == null){
+                        $villeEntr = new Ville(null, $_REQUEST['villeEntr'], $_REQUEST['codePostalEntr']);
+                    }
+                    $entrepriseFake = new EntrepriseFake($_REQUEST['siret'], $_REQUEST['nomEntreprise'], $_REQUEST['statutJuridique'], $_REQUEST['effectif']
+                    , $_REQUEST['codeNAF'], $_REQUEST['tel'], $_REQUEST['adresseEntr'], $villeEntr->getIdVille(), $_REQUEST['email']);
+
+
+
+                }else{
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne pouvez pas créer une convention alors que vous avez une formation");
+                }
+            }else{
+                ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne pouvez pas créer une convention d'un autre étudiant");
+            }
+        }else{
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur vous n'êtes pas un étudiant");
+        }
     }
 
 }

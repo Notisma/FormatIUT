@@ -249,7 +249,7 @@ class ControleurEtuMain extends ControleurMain
     }
 
     public static function creerConventionSansEntreprise(): void{
-
+        ServiceConvention::creerConventionSansEntreprise();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
