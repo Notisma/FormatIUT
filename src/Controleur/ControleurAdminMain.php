@@ -242,7 +242,10 @@ class ControleurAdminMain extends ControleurMain
         }
     }
 
-    //affiche la vue présentant les statistiques
+    /**
+     * @return void
+     * Affiche la vue présentant les statistiques
+     */
     public static function afficherVueStatistiques(): void
     {
         if(ConnexionUtilisateur::getTypeConnecte()== "Administrateurs") {
@@ -254,12 +257,16 @@ class ControleurAdminMain extends ControleurMain
         }
     }
 
-    //affiche la vue avec l'historique des stats
+    /**
+     * @return void
+     * Affiche la vue présentant quelques historiques
+     */
     public static function afficherVueHistorique(): void
     {
         if(ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
             self::$pageActuelleAdmin="Historique";
-            self::afficherVue("Historique", "Admin/vueHistorique.php");
+            $histo = ServicePersonnel::recupererHisto();
+            self::afficherVue("Historique", "Admin/vueHistorique.php", $histo);
         }
         else{
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");

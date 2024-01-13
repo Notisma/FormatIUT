@@ -164,6 +164,12 @@ abstract class AbstractRepository
         return $objet;
     }
 
+    /**
+     * @param $colonne
+     * @param $valeur
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée lorsque la valeur donnée est contenue dedans
+     */
     public function nbElementsDistinctsQuandContient($colonne, $valeur): ?int {
         $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." LIKE '%" . $valeur . "%';";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -174,6 +180,12 @@ abstract class AbstractRepository
         return $objet;
     }
 
+    /**
+     * @param $colonne
+     * @param $valeur
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée lorsque sa valeur est égale à celle donnée
+     */
     public function nbElementsDistinctsQuandEgal($colonne, $valeur): ?int {
         $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." = " . $valeur . ";";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
@@ -271,4 +283,20 @@ abstract class AbstractRepository
         }
         return true;
     }
+
+    /**
+     * @param $nom
+     * @return int|null
+     * Permet de récupérer le résultat d'une des fonctions pl/sql en passant son nom en paramètre
+     */
+    public static function lancerFonctionHistorique($nom) : ?int {
+        $sql = "SELECT " . $nom . "();";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet){
+            return false;
+        }
+        return $objet;
+    }
+
 }
