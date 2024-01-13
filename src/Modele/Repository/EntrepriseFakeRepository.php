@@ -2,6 +2,8 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Modele\DataObject\EntrepriseFake;
+
 class EntrepriseFakeRepository extends RechercheRepository
 {
     protected function getNomTable(): string
