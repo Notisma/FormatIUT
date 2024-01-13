@@ -7,12 +7,12 @@ use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
-use App\FormatIUT\Modele\DataObject\EntrepriseFake;
+use App\FormatIUT\Modele\DataObject\Entreprise;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Modele\DataObject\TuteurPro;
 use App\FormatIUT\Modele\DataObject\Ville;
-use App\FormatIUT\Modele\Repository\EntrepriseFakeRepository;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -192,11 +192,11 @@ class ServiceConvention
                         }
 
                         $idville = strval($villeEntr->getIdVille());
-                        $entrepriseFake = new EntrepriseFake($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
+                        $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
                             , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville, $_REQUEST['emailEntreprise']);
-                        $entrepriseFakeVerif = (new EntrepriseFakeRepository())->getObjectParClePrimaire($entrepriseFake->getSiret());
-                        if (!$entrepriseFakeVerif) {
-                            (new EntrepriseFakeRepository())->creerObjet($entrepriseFake);
+                        $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
+                        if (!$entrepriseVerif) {
+                            (new EntrepriseRepository())->creerObjet($entreprise);
                         }
 
                         $tuteurliste = (new TuteurProRepository())->getListeObjet();
