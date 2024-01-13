@@ -14,7 +14,6 @@ use App\FormatIUT\Modele\Repository\PostulerRepository;
 class ServiceFormation
 {
 
-
     /**
      * @return void permet à l'admin connecté de valider une offre
      */
@@ -57,14 +56,14 @@ class ServiceFormation
      * @return void permet à l'admin connecté de supprimer(archiver) une offre
      */
     public static function supprimerFormation(): void
-        //TODO doublon de fonction avec supprimerOffre
     {
         if (isset($_REQUEST["idFormation"])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
             if (!is_null($offre)) {
-                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" ||ConnexionUtilisateur::getTypeConnecte()=="Entreprise") {
                     (new FormationRepository())->supprimer($_REQUEST['idFormation']);
-                    ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
+                    $controleur=ConnexionUtilisateur::getUtilisateurConnecte()->getControleur();
+                    $controleur::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
                 } else ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");
             } else ControleurAdminMain::redirectionFlash("afficherListeOffres", "warning", "L'offre n'existe pas");
         } else ControleurAdminMain::redirectionFlash("afficherListeOffres", "danger", "L'offre n'est pas renseignée");
@@ -111,42 +110,6 @@ class ServiceFormation
         }
 
     }
-
-
-    /**
-     * @return void supprime une offre de l'entreprise connecté
-     */
-    public static function supprimerOffre(): void
-    {
-        if (isset($_REQUEST["idFormation"])) {
-            $listeOffre = ((new FormationRepository())->getListeidFormations());
-            if (in_array($_REQUEST["idFormation"], $listeOffre)) {
-                if (!((new FormationRepository())->estFormation($_REQUEST["idFormation"]))) {
-                    $offre = ((new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]));
-                    if ($offre->getIdEntreprise() == ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                        (new PostulerRepository())->supprimerOffreDansPostuler($_REQUEST["idFormation"]);
-                        (new FormationRepository())->supprimer($_REQUEST["idFormation"]);
-                        $_REQUEST["action"] = "afficherAccueilEntr()";
-                        header("Location: controleurFrontal.php?action=afficherAccueilEntr&controleur=EntrMain");
-                        MessageFlash::ajouter("success", "Offre supprimée");
-                    } else {
-                        header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
-                        MessageFlash::ajouter("danger", "Cette offre ne vous appartient pas");
-                    }
-                } else {
-                    header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
-                    MessageFlash::ajouter("danger", "Cette offre a été acceptée par un étudiant");
-                }
-            } else {
-                header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
-                MessageFlash::ajouter("danger", "Cette offre n'existe pas");
-            }
-        } else {
-            header("Location: controleurFrontal.php?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=" . $_REQUEST["idFormation"]);
-            MessageFlash::ajouter("danger", "Des données sont manquantes");
-        }
-    }
-
 
     /**
      * @return void modifie une offre de l'entreprise connecté

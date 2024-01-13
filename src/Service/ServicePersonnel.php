@@ -11,6 +11,9 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 
 class ServicePersonnel
 {
+    /**
+     * @return void permet à un admin de promouvoir un prof
+     */
     public static function promouvoirProf(): void
     {
         if (isset($_REQUEST["loginProf"])) {
@@ -27,7 +30,9 @@ class ServicePersonnel
         } else ControleurAdminMain::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
     }
 
-
+    /**
+     * @return void permet à un admin de rétrograder un prof
+     */
     public static function retrograderProf(): void
     {
         if (isset($_REQUEST["loginProf"])) {
@@ -44,6 +49,9 @@ class ServicePersonnel
         } else ControleurAdminMain::redirectionFlash("afficherProfilAdmin", "danger", "Le professeur n'est pas renseigné");
     }
 
+    /**
+     * @return void permet à un prof de se proposer en tant que tuteur sur une formation
+     */
     public static function seProposerEnTuteurUM(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Personnels") {
@@ -64,6 +72,9 @@ class ServicePersonnel
         }
     }
 
+    /**
+     * @return void
+     */
     public static function validerTuteurUM(): void
     {
         if (!isset($_GET['eleveId'])) {
@@ -85,6 +96,9 @@ class ServicePersonnel
         ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "Le tuteur est désormais validé !");
     }
 
+    /**
+     * @return void
+     */
     public static function refuserTuteurUM(): void
     {
         if (!isset($_GET['eleveId'])) {

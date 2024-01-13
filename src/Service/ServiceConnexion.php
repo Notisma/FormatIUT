@@ -19,9 +19,8 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ServiceConnexion
 {
-
-
     private static bool $avecConnexionTest=true;
+
     /**
      * @return void action connectant l'utilisateur
      */
@@ -39,7 +38,6 @@ class ServiceConnexion
         }
         header("Location: controleurFrontal.php?controleur=Main&action=afficherPageConnexion&erreur=1");
     }
-
 
     /**
      * @return void déconnecte l'utilisateur
@@ -82,6 +80,9 @@ class ServiceConnexion
 
     }
 
+    /**
+     * @return void gère la connexion pour les personnels de l'IUT
+     */
     private static function connexionPersonnel(): void
     {
         $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["login"]);
@@ -97,6 +98,9 @@ class ServiceConnexion
         }
     }
 
+    /**
+     * @return void gère les connexions avec LDAP
+     */
     private static function connexionLDAP(): void
     {
         MessageFlash::ajouter("success", "Connexion Réussie");
@@ -108,7 +112,10 @@ class ServiceConnexion
         }
     }
 
-    private static function connexionTest()
+    /**
+     * @return void gère les connexions avec des comptes test
+     */
+    private static function connexionTest() : void
     {
         if (MotDePasse::verifier($_REQUEST["mdp"], '$2y$10$oBxrVTdMePhNpS5y4SzhHefAh7HIUrbzAU0vSpfBhDFUysgu878B2')) {
             ConnexionUtilisateur::premiereConnexionProfTest($_REQUEST["login"]);

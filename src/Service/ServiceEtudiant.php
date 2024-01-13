@@ -13,7 +13,6 @@ class ServiceEtudiant
     /**
      * @return void permet à l'admin connecté d'ajouter un étudiant avec ses informations primordiales
      */
-
     public static function ajouterEtudiant(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
@@ -27,6 +26,9 @@ class ServiceEtudiant
         }
     }
 
+    /**
+     * @return void Un admin puisse modifier les informations d'un étudiant
+     */
     public static function modifierEtudiant(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {

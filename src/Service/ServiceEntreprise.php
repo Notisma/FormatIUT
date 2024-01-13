@@ -87,7 +87,7 @@ class ServiceEntreprise
 
 
     /**
-     * @return void créeer une entreprise dans la BD et envoie un mail de validation
+     * @return void créer une entreprise dans la BD et envoie un mail de validation
      */
     public static function creerCompteEntreprise(): void
     {
@@ -127,6 +127,9 @@ class ServiceEntreprise
         }
     }
 
+    /**
+     * @return void modifer une entreprise dans la BD
+     */
     public static function modifierEntreprise(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
