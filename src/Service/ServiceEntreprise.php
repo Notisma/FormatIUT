@@ -93,34 +93,42 @@ class ServiceEntreprise
     {
         //vérification des nombres négatifs
         if ($_REQUEST["siret"] > 0 && $_REQUEST["codePostal"] > 0 && $_REQUEST["tel"] > 0 && $_REQUEST["effectif"] > 0) {
+            /** @var Entreprise $entreprise */
             $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
             //vérification de doublon de Siret
-            if (is_null($entreprise)) {
-                $liste = ((new EntrepriseRepository())->getListeObjet());
-                $listeMail = null;
-                foreach ($liste as $entreprise) {
-                    $listeMail[] = $entreprise->getEmail();
+            $overrideEntrepriseFactice = false;
+            if (!is_null($entreprise)) {
+                if (!is_null($entreprise->getMdpHache())) {
+                    ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
+                    return;
+                } else {
+                    $overrideEntrepriseFactice = true;
                 }
-                //vérification de doublon de mail
-                if (!in_array($_REQUEST["email"], $listeMail)) {
-                    //concordance des mots de passe
-                    if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
-                        if (strlen($_REQUEST["mdp"]) >= 8) {
-                            $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
-                            (new EntrepriseRepository())->creerObjet($entreprise);
-                            VerificationEmail::envoiEmailValidation($entreprise);
-                            ControleurMain::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
-                        } else {
-                            ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
-                        }
+
+            }
+            $liste = ((new EntrepriseRepository())->getListeObjet());
+            $listeMail = null;
+            foreach ($liste as $entreprise) {
+                $listeMail[] = $entreprise->getEmail();
+            }
+            //vérification de doublon de mail
+            if (!in_array($_REQUEST["email"], $listeMail)) {
+                //concordance des mots de passe
+                if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
+                    if (strlen($_REQUEST["mdp"]) >= 8) {
+                        $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
+                        (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+                        (new EntrepriseRepository())->creerObjet($entreprise);
+                        VerificationEmail::envoiEmailValidation($entreprise);
+                        ControleurMain::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
                     } else {
-                        ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
+                        ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Le mot de passe doit faire plus de 7 caractères");
                     }
                 } else {
-                    ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "L'adresse mail est déjà utilisée");
+                    ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "Les mots de passes doivent corréler");
                 }
             } else {
-                ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Le SIRET est déjà utilisé");
+                ControleurMain::redirectionFlash("afficherVuePresentation", "warning", "L'adresse mail est déjà utilisée");
             }
         } else {
             ControleurMain::redirectionFlash("afficherVuePresentation", "danger", "Des données sont érronées");
@@ -155,7 +163,7 @@ class ServiceEntreprise
                 ControleurAdminMain::redirectionFlash("afficherDetailEntreprise", "success", "L'entreprise a bien été modifiée");
             }
         } else {
-            ControleurAdminMain::redirectionFlash("afficherListeEntreprises", "danger", "Vous ne pouvez pas effectuer cette action" );
+            ControleurAdminMain::redirectionFlash("afficherListeEntreprises", "danger", "Vous ne pouvez pas effectuer cette action");
         }
     }
 }
