@@ -407,6 +407,39 @@ body {
     text-align: center;
 }
 
+.interaction {
+    z-index: 10;
+    border-radius: 50px 0 0 50px;
+    width: 40px;
+    height: 40px;
+    background-color: #bde8e7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    position: fixed;
+    top: 12%;
+    right: 0;
+    cursor: pointer;
+}
+
+.interaction > img {
+    width: 70%;
+}
+
+.annotations {
+    position: fixed;
+    top: 12%;
+    right: 0;
+    width: 0;
+    height: 85%;
+    background-color: #bde8e7;
+    border-radius: 0 0 0 10px;
+    transition: width 0.5s ease;
+}
+
+
 
 @media (max-width: 1050px) {
 

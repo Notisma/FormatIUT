@@ -252,3 +252,12 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     </div>
 </div>
 
+<div class="annotations">
+    <div class="interaction" onclick="toggleExpand()">
+        <img src="../ressources/images/gauche.png" alt="">
+    </div>
+    <div class="expanding-div" id="expandingDiv">
+
+    </div>
+</div>
+
