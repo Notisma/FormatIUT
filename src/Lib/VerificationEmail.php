@@ -12,6 +12,12 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class VerificationEmail
 {
+    /**
+     * @param Etudiant $etu
+     * @return bool si l'envoi a fonctionné ou pas (localhost ?)
+     * <br><br>Quand un étudiant pense avoir fini sa convention, il clique sur un bouton qui appelle cette méthode.
+     * <br>Elle ennvoie un mail à tous les admins qui va les rediriger sur détail convention.
+     */
     public static function envoiEmailValidationDeConventionAuxAdmins(Etudiant $etu): bool
     {
         $etuId = $etu->getNumEtudiant();
