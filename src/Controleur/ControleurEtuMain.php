@@ -6,6 +6,7 @@ use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
+use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -15,7 +16,6 @@ use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServicePostuler;
-use App\FormatIUT\Modele\Repository\ConventionEtat;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -47,7 +47,7 @@ class ControleurEtuMain extends ControleurMain
         }
         $convention = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["convention" => $convention ,"listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["convention" => $convention, "listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
     }
 
     /**
@@ -108,53 +108,25 @@ class ControleurEtuMain extends ControleurMain
     }
 
     /**
-     * @return void affiche le formulaire de convention de stage
+     * @return void affiche le formulaire de convention (alternance / stage)
      */
-    public static function afficherFormulaireConventionStage(): void
+    public static function afficherFormulaireConvention(): void
     {
-        $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage");
+        $offre = (new FormationRepository())->trouverFormationValidee(self::getCleEtudiant());
         if (is_null($offre)) {
-            $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage/Alternance");
-            if (is_null($offre)) {
-                self::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas d'offre de stage");
-            }
+            self::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas d'offre de stage");
+            return;
         }
-        if (!is_null($offre)) {
-            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Remplir ma convention", "Etudiant/vueConvention.php", [
-                "etudiant" => $etudiant,
-                "offre" => $offre,
-                "entreprise" => $entreprise,
-                "villeEntr" => $villeEntr,
-                "etat" => ConventionEtat::Creation
-            ]);
-        }
-    }
-
-    /**
-     * @return void affiche le formulaire de convention d'alternance
-     */
-    public static function afficherFormulaireConventionAlternance(): void
-    {
-//        $offreVerif = (new PostulerRepository())->getOffreValider(self::self::getCleEtudiant());
-        $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Alternance");
-        if ($offre) {
-
-            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Alternance", "Etudiant/vueConvention.php", [
-                "etudiant" => $etudiant,
-                "offre" => $offre,
-                "entreprise" => $entreprise,
-                "villeEntr" => $villeEntr,
-                "etat" => ConventionEtat::Creation
-            ]);
-        } else {
-            self::afficherErreur("offre non valide");
-        }
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        self::afficherVue("Remplir ma convention", "Etudiant/vueConvention.php", [
+            "etudiant" => $etudiant,
+            "offre" => $offre,
+            "entreprise" => $entreprise,
+            "villeEntr" => $villeEntr,
+            "etat" => ConventionEtat::Creation
+        ]);
     }
 
     /**

@@ -40,7 +40,6 @@ class ControleurMain
     /**
      * @param string $titrePage Le titre de la Page actuelle
      * @param string $cheminVue Le chemin de la vue à utiliser
-     * @param array $menu Le menu à utiliser dans le bandeau déroulant
      * @param array $parametres des paramètres supplémentaire pour des informations spécifiques aux pages
      * @return void fonctions à appeler pour afficher une vue
      */
