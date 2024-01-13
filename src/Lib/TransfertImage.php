@@ -16,7 +16,7 @@ class TransfertImage
      * <br>
      * Après ça, la méthode appelle simplement uploadFichiers.
      */
-    public static function transfert(): int
+    public static function transfert(): int|false
     {
         $taille_max = 1000000;
         $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
@@ -42,10 +42,7 @@ class TransfertImage
             }
 
             //convert image to png
-            $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
-            imagesavealpha($tempImage, true);
-            imagepng($tempImage, $_FILES['pdp']['tmp_name']);
-            imagedestroy($tempImage);
+            imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
 
             $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
             //echo $_FILES['pdp']['name']; die();
@@ -54,11 +51,6 @@ class TransfertImage
         }
     }
 
-    /**
-     * @param string $image
-     * @return false|string, l'image en format texte
-     * <br><br>Arrondit l'image. Méthode privée car utilisée dans transfert().
-     */
     public static function getImageArrondieData(string $image): false|string
     {
         $image = imagecreatefromstring($image);
@@ -89,4 +81,5 @@ class TransfertImage
         imagepng($image_ronde);
         return (ob_get_clean());
     }
+
 }
