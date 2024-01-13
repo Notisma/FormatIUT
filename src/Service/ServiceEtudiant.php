@@ -144,4 +144,11 @@ class ServiceEtudiant
         ControleurEtuMain::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
+
+    /**
+     * @return void creer une convention où l'entreprise n'est pas présente dans la bd
+     */
+    public static function creerConventionSansEntreprise(){
+       // if()
+    }
 }
