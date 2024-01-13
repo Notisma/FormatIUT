@@ -1,191 +1,146 @@
-<div class="boiteMain" id="aGriser">
-    <div class="conteneurBienvenueDetailEntr">
-        <div class="texteBienvenue">
-            <!-- affhichage des informations principales de l'offre -->
-            <h2><?php use App\FormatIUT\Configuration\Configuration;
+<?php
 
-                $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
-                echo $nomOffreHTML . " - " . $offre->getTypeOffre() ?></h2>
-            <h4>
-                <?php echo 'Sujet : '.htmlspecialchars($offre->getSujet())?>
-            </h4>
-            <h4>
-                <?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo "Du " . $offre->getDateDebut() . " au " . $offre->getDateFin() ?></h4>
-            <p><?php if($offre->getDateDebut() != null && $offre->getDateFin() != null) echo ((new DateTime($offre->getDateDebut()))->diff(new DateTime($offre->getDateFin())))->format('Durée : %m mois, %d jours.'); ?></p>
+use App\FormatIUT\Configuration\Configuration;
+
+$offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_GET['idFormation']);
+$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+$listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
+?>
+
+<div class="detailOffreEtu">
+
+    <div class="detailsOffre">
+
+        <div class="entreprise">
+            <img src="<?= Configuration::getUploadPathFromId($entreprise->getImg()); ?>" alt="entreprise">
+            <h2 class="titre rouge"><?php echo htmlspecialchars($entreprise->getNomEntreprise()) ?></h2>
+            <h3 class="titre"><?php echo htmlspecialchars($entreprise->getAdresseEntreprise()) ?>,
+                <?php echo htmlspecialchars((new App\FormatIUT\Modele\Repository\VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille())->getNomVille()) ?></h3>
         </div>
-        <div class="imageBienvenue">
-            <img src="../ressources/images/entrepriseOffre.png" alt="image de bienvenue">
+
+        <div class="offre">
+            <h2 class="titre rouge">Description de l'offre :</h2>
+            <h3 class="titre"><?php echo htmlspecialchars($offre->getNomOffre()) ?>
+                : <?php echo htmlspecialchars($offre->getSujet()) ?>
+                - <?php echo htmlspecialchars($offre->getTypeOffre()) ?></h3>
+            <h4 class="titre"><?php echo "Du " . htmlspecialchars($offre->getDateDebut()) . " au " . htmlspecialchars($offre->getDateFin()) ?></h4>
+            <h4 class="titre">Rémunération : <?php echo $offre->getGratification() ?>€ par mois</h4>
+            <h4 class="titre">Durée en heures : <?php echo $offre->getDureeHeure() ?> heures au total</h4>
+            <h4 class="titre">Nombre de jours par semaines : <?php echo $offre->getJoursParSemaine() ?> jours</h4>
+            <h4 class="titre">Nombre d'Heures hebdomadaires : <?php echo $offre->getNbHeuresHebdo() ?> heures</h4>
+            <h5 class="titre">Détails de l'offre : <?php $detailHTML = htmlspecialchars($offre->getDetailProjet());
+                echo $detailHTML ?>
+            </h5>
         </div>
+
     </div>
 
-        <!-- TODO finir de lier à la BD -->
-        <div class="infosOffreEntr">
-            <h3>Les Informations de votre Offre</h3>
-            <div class="petitConteneurInfosOffre">
-                <div class="overflowListe">
-                    <div class="overflowListe2">
-                        <div id="liseInfosOffreEntr">
-                            <p><span>Année universitaire requise : </span><?php if($offre->getAnneeMin() != $offre->getAnneeMax()) echo $offre->getAnneeMin(). ' année - ' . $offre->getAnneeMax(). ' année'; else echo $offre->getAnneeMin(). ' année' ;?> </p>
-                            <p><span>Rémunération :</span> <?php echo $offre->getGratification() ?>€ par mois</p>
-                            <p><span>Durée en heures :</span> <?php echo $offre->getDureeHeure() ?> heures au total</p>
-                            <p><span>Nombre de jours par semaines :</span> <?php echo $offre->getJoursParSemaine() ?>
-                                jours
-                            </p>
-                            <p><span>Nombre d'Heures hebdomadaires :</span> <?php echo $offre->getNbHeuresHebdo() ?>
-                                heures
-                            </p>
-                            <p>
-                                <span>Détails de l'offre :</span> <?php $detailHTML = htmlspecialchars($offre->getDetailProjet());
-                                echo $detailHTML ?></p>
-                        </div>
-                    </div>
-                </div>
-                <img src="../ressources/images/entrepriseData.png" alt="illu">
+    <div class="actionsOffre">
+        <div class="first">
+            <img src="../ressources/images/entrepriseConnectee.png" alt="details">
+            <h3 class="titre">Détails d'une Offre</h3>
+        </div>
+
+        <div class="astucesDetails">
+            <img src="../ressources/images/astuces.png" alt="astuces">
+            <div class="contenuAstuce">
+                <h4 class="titre rouge">Astuces</h4>
+                <h5 class="titre">
+                    Visualisez les informations propres à une offre sur une seule page !
+                </h5>
+                <h5 class="titre">Pratique : consultez le nombre de candidats et postulez en un seul click !</h5>
             </div>
         </div>
 
-    <div class="actionsRapidesEntr">
-        <h3>Actions Rapides</h3>
-        <form method="post">
-            <?php
-            if ($entreprise->getSiret() == \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()) {
-                echo '
-            <input type="hidden" name="idFormation" value="' . rawurlencode($offre->getIdFormation()) . '">
-        
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=supprimerFormation&controleur=EntrMain">SUPPRIMER L\'OFFRE</button>
-            
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherFormulaireModificationOffre&controleur=EntrMain">MODIFIER L\'OFFRE</button>
-        ';
-            }
-            ?>
-            <button type="submit" id="grand" class="boutonAssigner" formaction="?action=afficherMesOffres&controleur=EntrMain">RETOUR</button>
-        </form>
-    </div>
+        <?php
+        if ($offre->getEstValide()) {
+            echo "<div class='statutOffre valide'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
+        } else {
+            echo "<div class='statutOffre nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
+        }
+        ?>
 
+        <div class="wrapActionsCandidat">
 
-        <div class="listeEtudiantsPostulants">
-            <h3>Etudiants Postulants</h3>
-
-        <div class="wrapPostulants">
-            <?php
-            $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
-            if (empty($listeEtu)) {
-                $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation());
-                if ($formation) {
-                    $etudiant = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($formation->getIdEtudiant()));
-                    echo '<div class="etudiantPostulant">
-                <div class="illuPostulant">';
-                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
-                    echo '</div>
-                <div class="nomEtuPostulant">
-                    <h4>';
-                    echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h4>";
-                    echo "<a><button class='boutonAssigner' disabled id='disabled' >Assigné</button>
-                    </a>
-                    </div> </div>";
-
-                    } else {
-                        echo "
-                <div class='erreur'>
-                <h4>Personne n'a postulé.</h4>
-                <img src='../ressources/images/erreur.png' alt='erreur'>
-                </div>
-                ";
-                    }
+            <div class="candidature">
+                <img src="../ressources/images/equipe.png" alt="equipe">
+                <?php
+                $nbCandidats = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                if ((new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation())) {
+                    echo "<h4 class='titre rouge'>Assignée</h4>";
                 } else {
-                    foreach ($listeEtu as $etudiant) {
-                        echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
-                        <div class="illuPostulant">';
-                        echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
-                        echo '</div>
-                        <div class="nomEtuPostulant">
-                            <h4>';
-                        echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant());
-                        $idFormationURl = rawurlencode($offre->getidFormation());
-                        $idURL = rawurlencode($etudiant->getNumEtudiant());
-                        echo '</h4>
-                            <a href="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">';
-                        echo '<button id="petit" class="boutonAssigner" ';
-                        if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
-                            echo ' id="disabled" disabled';
-                        }
-                        if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
-                            echo 'id="disabled" disabled>Envoyée';
-                        } else {
-                            $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
-                            if (!is_null($formation)) {
-                                echo ' id="disabled" disabled';
-                                if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
-                                    echo ">Assigné";
-                                } else {
-                                    echo ">Assigner";
-                                }
-                            } else {
-                                echo ">Assigner";
-                            }
-                        }
-                        echo '</button></a></div>
-                </div>';
-                    }
+                    echo "<h4 class='titre rouge'>$nbCandidats Candidat(s)</h4>";
                 }
                 ?>
             </div>
 
+            <div class="boutonCandidater">
+                <a id='my-button' class='boutonAssigner'
+                   href="?action=afficherFormulaireModificationOffre&controleur=EntrMain&idFormation=<?= $offre->getIdFormation() ?>">Modifier
+                    l'Offre</a>
+                <a id='my-button' class='boutonAssigner' href="?action=supprimerFormation&idFormation=<?= $offre->getIdFormation() ?>">Supprimer l'Offre</a>
+            </div>
+
         </div>
+
 
     </div>
 
-
-</div>
 </div>
 
+<div class="listeCandidats" id="liste">
+    <h3 class="titre rouge">Liste des Candidats</h3>
 
-<div id="infosEtuCandidat">
-    <h1>INFORMATIONS SUR LE CANDIDAT</h1>
-    <h4>Retrouvez toutes les informations sur un étudiant et les actions qui y sont associées</h4>
-    <div class="detailsEtu">
-        <div class="PPEtu">
-            <?php
-            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
-            ?>
-        </div>
-
-        <div class="infosEtu">
-            <?php
-            echo "<h2>" . htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant()) . "</h2>";
-            echo "<p><span>Numéro Etudiant :</span> " . $etudiant->getNumEtudiant() . "</p>";
-            echo "<p><span>Mail Universitaire :</span> " . htmlspecialchars($etudiant->getMailUniersitaire()) . "</p>";
-            echo "<p><span>Mail Personnel :</span> " . htmlspecialchars($etudiant->getMailPerso()) . "</p>";
-            echo "<p><span>Téléphone :</span> " . htmlspecialchars($etudiant->getTelephone()) . "</p>";
-            echo "<p><span>Groupe :</span> " . htmlspecialchars($etudiant->getGroupe()) . "</p>";
-            echo "<p><span>Parcours :</span> " . htmlspecialchars($etudiant->getParcours()) . "</p>";
-            ?>
-        </div>
-    </div>
-
-    <div class="wrapBoutonsDoc">
+    <div class="candidatsOverflow">
         <?php
-        echo '<a href=?action=telechargerCV&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
-            <button class="boutonDoc">TELECHARGER CV</button>
-        </a>
-        <a href=?action=telechargerLM&controleur=EntrMain&etudiant='.$etudiant->getNumEtudiant().'&idFormation='.$_REQUEST['idFormation'].'>
-            <button class="boutonDoc">TELECHARGER LETTRE</button>
-        </a>' ?>
-    </div>
-
-    <div class="wrapActions">
-        <a onclick="fermerPopupInfosEtu()">
-            <button class="boutonAction">RETOUR</button>
-        </a>
-
-        <!-- TODO : RELIER A LA BD -->
-        <a href="">
-            <button class="boutonAction">ASSIGNER</button>
-        </a>
-
+        $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
+        if (sizeof($listeEtu) > 0) {
+            foreach ($listeEtu as $etudiant) {
+                echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
+                        <div class="illuPostulant">';
+                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+                echo '</div>
+                        <div class="nomEtuPostulant">
+                            <h4 class="titre rouge">';
+                echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant());
+                $idFormationURl = rawurlencode($offre->getidFormation());
+                $idURL = rawurlencode($etudiant->getNumEtudiant());
+                echo '</h4>
+                            <a href="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '"';
+                echo 'class="boutonAssigner';
+                if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
+                    echo ' disabled"';
+                }
+                if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
+                    echo ' disabled">Envoyée';
+                } else {
+                    $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
+                    if (!is_null($formation)) {
+                        echo ' disabled"';
+                        if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
+                            echo "\">Assigné";
+                        } else {
+                            echo "\">Assigner";
+                        }
+                    } else {
+                        echo "\">Assigner";
+                    }
+                }
+                echo '</div></a>
+                </div>';
+            }
+        } else {
+            echo "
+                <div class='erreurCand'>
+                <h4 class='titre'>Personne n'a postulé.</h4>
+                <img src='../ressources/images/erreur.png' alt='erreur'>
+                </div>
+                ";
+        }
+        ?>
     </div>
 
 </div>
 
-</body>
-</html>
+
+

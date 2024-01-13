@@ -53,7 +53,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
 
     <div class="mainAdmins" id="compte">
         <h2 class="titre rouge">Modifier mon Profil</h2>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
                 <img src="../ressources/images/admin.png" alt="avatar">

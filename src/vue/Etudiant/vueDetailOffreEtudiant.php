@@ -71,7 +71,8 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                     }
                 } else {
                     $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
-                    if (empty($listeEtu)) {
+                    $nb = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                    if ($nb == 0) {
                         echo "
                 <h4 class='titre'>Personne n'a postulé. Faites Vite !</h4>
                
@@ -88,7 +89,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                
             
                                 <h4 class='titre'>";
-                            $nbEtudiants = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->nbPostulations($offre->getIdFormation()));
+                            $nbEtudiants = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
                             echo $nbEtudiants . " étudiant";
                             if ($nbEtudiants == 1) echo " a";
                             else echo "s ont";

@@ -3,6 +3,7 @@
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+
 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
 
 ?>
@@ -96,25 +97,34 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                     if (($row + $col) % 2 == 0) {
                         $red = "demi";
                     }
-                    echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
+                    echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
-           <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
-           <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
-           <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
-           <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
+           <h3 class="titre rouge">' . htmlspecialchars($offre->getNomOffre()) . ' - ' . htmlspecialchars($offre->getTypeOffre()) . '</h3>
+           <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>';
 
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
-                    if ($nb == 0) {
-                        echo "Aucun";
+                    if ($offre->getEstValide()) {
+                        echo "<div class='statutOffre valide'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
                     } else {
-                        echo $nb;
+                        echo "<div class='statutOffre nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
                     }
 
-                    echo " candidat";
-                    if ($nb > 1) {
-                        echo "s";
+                    echo '<div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
+
+                    if ((new FormationRepository())->estFormation($offre->getIdFormation())) {
+                        echo "Assignée";
+                    } else {
+                        $nb = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                        if ($nb == 0) {
+                            echo "Aucun";
+                        } else {
+                            echo $nb;
+                        }
+
+                        echo " candidat";
+                        if ($nb > 1) {
+                            echo "s";
+                        }
                     }
                     echo
                     '</h4> </div>

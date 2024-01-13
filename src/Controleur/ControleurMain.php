@@ -121,6 +121,14 @@ class ControleurMain
         ]);
     }
 
+    /**
+     * @return void afficher les mentions légales du site
+     */
+    public static function afficherMentionsLegales() :void
+    {
+        self::afficherVue("Mentions Légales", "vueMentionsLegales.php",Configuration::getCheminControleur()::getMenu());
+    }
+
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------
 
     public static function seConnecter(): void

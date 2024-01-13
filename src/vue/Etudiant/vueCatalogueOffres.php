@@ -85,7 +85,7 @@ $type = $_REQUEST["type"] ?? "all";
            <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
            <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
 
-                    $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
+                    $nb = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
                     if ($nb == 0) {
                         echo "Aucun";
                     } else {

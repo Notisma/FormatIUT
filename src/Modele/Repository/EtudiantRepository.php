@@ -145,10 +145,9 @@ class EtudiantRepository extends RechercheRepository
      * @return array
      * retourne la liste des étudiant qui sont actuellement dans la table Postuler de cette offre
      */
-
     public function etudiantsEnAttente($idFormation): array
     {
-        $sql = "SELECT numEtudiant FROM Postuler r WHERE idFormation=:Tag AND NOT EXISTS(SELECT * FROM Formations f WHERE r.numEtudiant=f.idEtudiant)";
+        $sql = "SELECT numEtudiant FROM Postuler r WHERE idFormation=:Tag AND etat!='Annulé'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idFormation);
         $pdoStatement->execute($values);

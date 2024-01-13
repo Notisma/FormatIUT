@@ -122,6 +122,17 @@ class PostulerRepository extends AbstractRepository
         return $pdoStatement->fetch()["cv"];
     }
 
+    public function getNbCandidatsPourOffre($idFormation)
+    {
+        $sql = "SELECT COUNT(*) FROM Postuler WHERE idFormation=:offreTag AND etat!='Annulé'";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array(
+            "offreTag" => $idFormation
+        );
+        $pdoStatement->execute($values);
+        return $pdoStatement->fetch()["COUNT(*)"];
+    }
+
     public function recupererLettre($numEtudiant, $idFormation)
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idFormation =:offreTag";

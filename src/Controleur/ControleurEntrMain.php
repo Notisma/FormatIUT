@@ -192,6 +192,21 @@ class ControleurEntrMain extends ControleurMain
         ServiceFormation::modifierOffre();
     }
 
+    public static function ajouterTuteur(): void
+    {
+        ServiceEntreprise::creerTuteur();
+    }
+
+    public static function supprimerTuteur()
+    {
+        ServiceEntreprise::supprimerTuteur();
+    }
+
+    public static function modifierFonctionTuteur()
+    {
+        ServiceEntreprise::modifierFonctionTuteur();
+    }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -199,7 +214,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee()));
         $nom = "";
         $nomEntreprise = $entreprise->getNomEntreprise();
         for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
@@ -210,7 +225,7 @@ class ControleurEntrMain extends ControleurMain
             }
         }
 
-        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
 
         $ai_id = TransfertImage::transfert();
 
