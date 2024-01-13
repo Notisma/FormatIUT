@@ -199,9 +199,9 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             <h2>MA PHOTO DE PROFIL (FACULTATIF)</h2>
         </div>
         <div class="contenuPremiereCo">
-            <form enctype="multipart/form-data" action="?action=updateImage&controleur=EtuMain" method="post">
+            <form enctype="multipart/form-data" action="?action=mettreAJour&controleur=EtuMain" method="post">
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                <input type="file" name="fic" size=500/>
+                <input type="file" name="pdp" size=500/>
 
                 <h4>Cliquez sur "Terminer" pour enregistrer vos informations et commencer l'aventure Format'IUT !</h4>
 
