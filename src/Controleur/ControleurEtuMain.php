@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Controleur;
 
-use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
@@ -47,7 +46,11 @@ class ControleurEtuMain extends ControleurMain
         }
         $convention = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["convention" => $convention, "listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", [
+            "listeStage" => $listeOffres,
+            "listeAlternance" => $listeOffres,
+            "convention" => $convention,
+        ]);
     }
 
     /**
