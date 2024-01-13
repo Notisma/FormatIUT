@@ -302,7 +302,6 @@ body {
 }
 
 
-
 .mainPopup > form > div > label {
     font-family: "Oswald", sans-serif;
     color: black;
@@ -465,6 +464,85 @@ body {
     border-radius: 10px;
 }
 
+.moyenne {
+    width: 98%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+.moyenne > div {
+    height: 50%;
+    min-width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.moyenne > div > div {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.moyenne > div > div > img {
+    width: 10px;
+}
+
+.autresComm {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+.commentaire {
+    width: 100%;
+    min-height: 100px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+.commentaire > img {
+    width: 50px;
+}
+
+.commentaire > div {
+    width: 70%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
 
 
 @media (max-width: 1050px) {

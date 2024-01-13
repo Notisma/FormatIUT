@@ -3,6 +3,8 @@ function afficherPopupDepotCV_LM() {
     document.getElementById("aGriser").style.opacity = "0.3";
 }
 
+
+
 function toggleExpand() {
     let element = document.getElementsByClassName("annotations")[0];
     let fleche = document.getElementsByClassName("interaction")[0];

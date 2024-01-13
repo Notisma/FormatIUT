@@ -40,7 +40,7 @@ class AnnotationRepository extends AbstractRepository
      * Permet d'avoir la liste des annotations d'une entreprise
      */
     public function annotationsParEntreprise($idEntreprise): array {
-        $sql = "SELECT messageAnnotaion, dateAnnotation, noteAnnotation FROM " . $this->getNomTable() .
+        $sql = "SELECT * FROM " . $this->getNomTable() .
             " WHERE siretEntreprise=:Tag;";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $idEntreprise);
