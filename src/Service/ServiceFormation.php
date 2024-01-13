@@ -62,7 +62,7 @@ class ServiceFormation
         if (isset($_REQUEST["idFormation"])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
             if (!is_null($offre)) {
-                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte()== "Entreprise") {
                     (new FormationRepository())->supprimer($_REQUEST['idFormation']);
                     ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "success", "L'offre a bien été supprimée");
                 } else ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis");

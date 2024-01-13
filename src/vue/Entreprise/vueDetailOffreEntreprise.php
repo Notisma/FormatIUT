@@ -78,7 +78,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
                 <a id='my-button' class='boutonAssigner'
                    href="?action=afficherFormulaireModificationOffre&controleur=EntrMain&idFormation=<?= $offre->getIdFormation() ?>">Modifier
                     l'Offre</a>
-                <a id='my-button' class='boutonAssigner' href="#liste">Voir les Candidats</a>
+                <a id='my-button' class='boutonAssigner' href="?action=supprimerFormation&idFormation=<?= $offre->getIdFormation() ?>">Supprimer l'Offre</a>
             </div>
 
         </div>
