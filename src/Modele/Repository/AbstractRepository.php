@@ -149,6 +149,24 @@ abstract class AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $colonne
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée
+     */
+    public function nbElementsDistincts($colonne): ?float {
+        $sql = "SELECT COUNT(DISTINCT(:colTag)) FROM " . $this->getNomTable() . ";";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("colTag" => $colonne);
+        $pdoStatement->execute($values);
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
+            return null;
+        }
+        var_dump($objet);
+        return $objet[0];
+    }
+
     //-------------AUTRES------------
 
     public static function getResultatRechercheTrie($motsclefs): ?array

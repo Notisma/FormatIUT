@@ -327,4 +327,18 @@ class FormationRepository extends RechercheRepository
         }
         return $listFormations;
     }
+
+    public static function nbMoyenOffresParEntreprise(): ?float {
+        $sql = "SELECT AVG(COALESCE(subquery.nbFormations, 0)) AS MoyenneFormations
+                FROM Entreprises e
+                LEFT JOIN (SELECT idEntreprise, COUNT(*) AS nbFormations
+                FROM Formations
+                GROUP BY idEntreprise) AS subquery ON e.numSiret = subquery.idEntreprise;";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
+            return null;
+        }
+        return $objet[0];
+    }
 }

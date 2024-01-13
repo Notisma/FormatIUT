@@ -3,17 +3,17 @@
         <div id="etu" class="gridElem">
             <h4 class="titreStats">Statistiques sur les étudiants</h4>
             <div class="listeStats">
-                <p class="pStat">Nombre d'étudiants inscrits sur Format'IUT : placeholder</p>
-                <p class="pStat">Nombre d'étudiants ayant postulé à une offre : placeholder</p>
-                <p class="pStat">Nombre d'étudiants ayant une formation : placeholder</p>
+                <p class="pStat">Nombre d'étudiants inscrits sur Format'IUT: <?php echo $nbEtudiants ?></p>
+                <p class="pStat">Nombre d'étudiants ayant postulé à une offre: <?php echo $nbEtudiantsPostulant ?></p>
+                <p class="pStat">Nombre d'étudiants ayant une formation: <?php echo $nbEtudiantsAvecFormation ?></p>
             </div>
         </div>
         <div id="entr" class="gridElem">
             <h4 class="titreStats">Statistiques sur les entreprises</h4>
             <div class="listeStats">
-                <p class="pStat">Nombre d'entreprises inscrites sur Format'IUT : placeholder</p>
-                <p class="pStat">Nombre d'entreprises n'ayant pas soumis d'offre : placeholder</p>
-                <p class="pStat">Nombre moyen d'offres par entreprise : placeholder</p>
+                <p class="pStat">Nombre d'entreprises inscrites sur Format'IUT: <?php echo $nbEntreprises ?></p>
+                <p class="pStat">Nombre d'entreprises n'ayant pas soumis d'offre: <?php echo $nbEntreprisesSansOffre ?></p>
+                <p class="pStat">Nombre moyen d'offres par entreprise: <?php echo $nbOffresMoyen ?></p>
             </div>
         </div>
         <div id="form" class="gridElem">

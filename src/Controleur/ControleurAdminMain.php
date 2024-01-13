@@ -8,6 +8,7 @@ use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEntreprise;
@@ -246,7 +247,14 @@ class ControleurAdminMain extends ControleurMain
     {
         if(ConnexionUtilisateur::getTypeConnecte()== "Administrateurs") {
             self::$pageActuelleAdmin = "Statistiques";
-            self::afficherVue("Statistiques", "Admin/vueStatistiques.php");
+            $nbEtudiants = (new EtudiantRepository())->nbElementsDistincts("numEtudiant");
+            $nbEtudiantsPostulant = (new PostulerRepository())->nbElementsDistincts("numEtudiant");
+            $nbEtudiantsAvecFormation = (new FormationRepository())->nbElementsDistincts("idEtudiant");
+            $nbEntreprises = (new EntrepriseRepository())->nbElementsDistincts("numSiret");
+            $nbEntreprisesSansOffre = $nbEntreprises - (new FormationRepository())->nbElementsDistincts("idEntreprise");
+            $nbOffresMoyen = (new FormationRepository())->nbMoyenOffresParEntreprise();
+            self::afficherVue("Statistiques", "Admin/vueStatistiques.php", ["nbEtudiants" => $nbEtudiants, "nbEtudiantsPostulant" => $nbEtudiantsPostulant, "nbEtudiantsAvecFormation" => $nbEtudiantsAvecFormation,
+                "nbEntreprises" => $nbEntreprises, "nbEntreprisesSansOffre" => $nbEntreprisesSansOffre, "nbOffresMoyen" => $nbOffresMoyen]);
         } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
