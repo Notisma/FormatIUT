@@ -2,6 +2,8 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use PDO;
+
 class CSV_Utils
 {
     public function exportCSV(): array
@@ -16,11 +18,9 @@ class CSV_Utils
                 WHERE etat = 'Validée'
         ";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $pdoStatement->setFetchMode(\PDO::FETCH_NUM);
+        $pdoStatement->setFetchMode(PDO::FETCH_NUM);
         $listeObjet = array();
         foreach ($pdoStatement as $item) {
-            //echo '<pre>'; print_r($item); echo '</pre>';
-
             $listeObjet[] = $item;
         }
         return $listeObjet;

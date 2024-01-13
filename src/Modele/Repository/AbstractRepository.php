@@ -198,7 +198,6 @@ abstract class AbstractRepository
         $sqlFormations = substr($sqlFormations, 0, -9);
         $sqlEntreprises = substr($sqlEntreprises, 0, -9);
 
-    //    echo "<pre>";var_dump($sqlEntreprises);echo "</pre>";
         try {
             $pdoStatement = $pdo->prepare($sqlFormations);
             $pdoStatement->execute($tags);

@@ -54,7 +54,6 @@ class ServiceRecherche
             $_REQUEST["count"] = $count;
             ControleurMain::afficherRecherche();
         } else {
-            var_dump("de");
             header("Location: $_SERVER[HTTP_REFERER]");;
         }
     }
