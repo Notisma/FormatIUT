@@ -14,20 +14,12 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 class Etudiants extends Utilisateur
 {
 
-    public function getRecherche(): array
-    {
-        return array(
-            "Formation",
-            "Entreprise"
-        );
-    }
-
     public function getControleur(): string
     {
         return "EtuMain";
     }
 
-    public function getImageProfil()
+    public function getImageProfil():string
     {
         $etu=(new EtudiantRepository())->getObjectParClePrimaire((new EtudiantRepository())->getNumEtudiantParLogin($this->getLogin()));
 

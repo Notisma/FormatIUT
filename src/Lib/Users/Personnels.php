@@ -10,22 +10,12 @@ use App\FormatIUT\Lib\Users\Utilisateur;
 class Personnels extends Utilisateur
 {
 
-    public function getRecherche(): array
-    {
-        return array(
-            "Formation",
-            "Entreprise",
-            "Etudiant",
-            "Prof"
-        );
-    }
-
     public function getControleur(): string
     {
         return "AdminMain";
     }
 
-    public function getImageProfil()
+    public function getImageProfil():string
     {
         return "../ressources/images/admin.png";
     }

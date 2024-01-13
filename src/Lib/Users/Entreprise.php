@@ -12,20 +12,13 @@ use Vtiful\Kernel\Format;
 class Entreprise extends Utilisateur
 {
 
-    public function getRecherche(): array
-    {
-        return array(
-            "Formation",
-            "Etudiant"
-        );
-    }
 
     public function getControleur(): string
     {
        return "EntrMain";
     }
 
-    public function getImageProfil()
+    public function getImageProfil():string
     {
         $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($this->getLogin());
         return Configuration::getUploadPathFromId($entreprise->getImg());
@@ -56,8 +49,6 @@ class Entreprise extends Utilisateur
 
     public function getFiltresRecherche(): array
     {
-        $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($this->getLogin());
-        $idEntreprise=$entreprise->getSiret();
         return array(
             "Formation"=>array(
                 "filtre1"=>array("label"=>"Stage","value"=>"formation_stage"),

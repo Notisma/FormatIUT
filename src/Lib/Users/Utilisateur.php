@@ -6,9 +6,6 @@ abstract class Utilisateur
 {
     private string $login;
 
-    /**
-     * @return string
-     */
     public function __construct(string $login)
     {
         $this->login=$login;
@@ -19,12 +16,29 @@ abstract class Utilisateur
         return $this->login;
     }
 
-    public abstract function getRecherche():array;
-
+    /**
+     * @return string le controleur à utiliser, associé à l'utilisateur
+     */
     public abstract function getControleur():string;
-    public abstract function getImageProfil();
+
+    /**
+     * @return string l'image de profil de l'utilisateur connecté
+     */
+    public abstract function getImageProfil():string;
+
+    /**
+     * @return string le type de connexion de l'utilisateur connecté
+     */
     public abstract function getTypeConnecte() :string;
+
+    /**
+     * @return array le contenu du bandeau déroulant
+     */
     public abstract function getMenu():array;
+
+    /**
+     * @return array tableau des éléments recherchable et les filtres associés
+     */
     public abstract function getFiltresRecherche() : array;
 
 
