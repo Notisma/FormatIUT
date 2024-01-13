@@ -14,7 +14,7 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
-use App\FormatIUT\Modele\Repository\pstageRepository;
+use App\FormatIUT\Modele\Repository\CSV_Utils;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
 use Exception;
@@ -56,7 +56,7 @@ class ServiceFichier
      */
     public static function exporterCSV(): void
     {
-        $tab = (new pstageRepository())->exportCSV();
+        $tab = (new CSV_Utils())->exportCSV();
 
         $delimiter = ",";
         $filename = "sae-data_" . date('Y-m-d') . ".csv";

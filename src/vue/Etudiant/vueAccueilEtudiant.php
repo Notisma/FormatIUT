@@ -72,6 +72,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
                              <h4 class='titre'>Votre convention a été rejetée, le " . $convention->getDateTransmissionConvention() . " cliquez ci-dessous pour la modifier :</h4>
                              <div class='wrapBoutons'>
                              <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
+                             </div>
                           </div>
                     ";
                 }
