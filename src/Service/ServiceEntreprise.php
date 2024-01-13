@@ -117,7 +117,7 @@ class ServiceEntreprise
                 if ($_REQUEST["mdp"] == $_REQUEST["mdpConf"]) {
                     if (strlen($_REQUEST["mdp"]) >= 8) {
                         $entreprise = Entreprise::construireDepuisFormulaire($_REQUEST);
-                        (new EntrepriseRepository())->supprimer($entreprise->getSiret());
+                        if ($overrideEntrepriseFactice) (new EntrepriseRepository())->supprimer($entreprise->getSiret());
                         (new EntrepriseRepository())->creerObjet($entreprise);
                         VerificationEmail::envoiEmailValidation($entreprise);
                         ControleurMain::redirectionFlash("afficherPageConnexion", "info", "Un email de validation vous a été envoyé");
