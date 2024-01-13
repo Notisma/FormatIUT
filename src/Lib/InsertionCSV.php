@@ -20,7 +20,10 @@ use DateTime;
 
 class InsertionCSV
 {
-
+    /**
+     * @param $ligne
+     * @return void permet d'insérer un CSV de pstage à la base de données
+     */
     public static function insererPstage($ligne): void
     {
         $login = $ligne[2];
@@ -60,6 +63,11 @@ class InsertionCSV
         (new VilleRepository())->creerObjet($ville2);
     }
 
+    /**
+     * @param $ligne
+     * @return void permet d'insérer un CSV de studea dans la base de données
+     */
+
     public static function insererStudea($ligne): void
     {
         $login = $ligne[9];
@@ -88,6 +96,11 @@ class InsertionCSV
         (new VilleRepository())->creerObjet($ville2);
     }
 
+    /**
+     * @param $ligne
+     * @param $idFormation
+     * @return void permet d'insérer un CSV du secrétariat dans la base de données
+     */
     public static function insererSuiviSecretariat($ligne, $idFormation): void {
         $groupe = $ligne[4][0];
         $groupe .= $ligne[4][1];
