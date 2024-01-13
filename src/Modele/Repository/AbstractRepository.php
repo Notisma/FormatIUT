@@ -154,17 +154,34 @@ abstract class AbstractRepository
      * @return int|null
      * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée
      */
-    public function nbElementsDistincts($colonne): ?float {
-        $sql = "SELECT COUNT(DISTINCT(:colTag)) FROM " . $this->getNomTable() . ";";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("colTag" => $colonne);
-        $pdoStatement->execute($values);
-        $objet = $pdoStatement->fetch();
+    public function nbElementsDistincts($colonne): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $colonne . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." IS NOT NULL;";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
         if (!$objet) {
             return null;
         }
-        var_dump($objet);
-        return $objet[0];
+        return $objet;
+    }
+
+    public function nbElementsDistinctsQuandContient($colonne, $valeur): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." LIKE '%" . $valeur . "%';";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet) {
+            return null;
+        }
+        return $objet;
+    }
+
+    public function nbElementsDistinctsQuandEgal($colonne, $valeur): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." = " . $valeur . ";";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet) {
+            return null;
+        }
+        return $objet;
     }
 
     //-------------AUTRES------------

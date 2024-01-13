@@ -19,12 +19,12 @@
         <div id="form" class="gridElem">
             <h4 class="titreStats">Statistiques sur les formations</h4>
             <div class="listeStats" id="listeForm">
-                <p class="pStat">Nombre d'offres de formation sur le site : placeholder</p>
-                <p class="pStat">Nombre d'offres de stage : placeholder</p>
-                <p class="pStat">Nombre d'offres d'alternance : placeholder</p>
-                <p class="pStat">Nombre d'offres non validées : placeholder</p>
-                <p class="pStat">Nombre de formations assignées à un étudiant : placeholder </p>
-                <p class="pStat">Nombre de formations n'ayant pas de convention validée : placeholder</p>
+                <p class="pStat">Nombre d'offres de formation sur le site : <?php echo $nbFormations ?></p>
+                <p class="pStat">Nombre d'offres de stage : <?php echo $nbStages ?></p>
+                <p class="pStat">Nombre d'offres d'alternance : <?php echo $nbAlternances ?></p>
+                <p class="pStat">Nombre d'offres non validées : <?php echo $nbOffresNonValidees ?></p>
+                <p class="pStat">Nombre de formations assignées à un étudiant : <?php echo $nbOffresAvecEtudiant ?> </p>
+                <p class="pStat">Nombre de formations n'ayant pas de convention validée : <?php echo $nbOffresConventionNonValidee ?></p>
             </div>
         </div>
     </div>

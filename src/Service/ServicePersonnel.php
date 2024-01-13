@@ -6,8 +6,10 @@ use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 
 class ServicePersonnel
 {
@@ -104,5 +106,24 @@ class ServicePersonnel
         (new FormationRepository())->modifierObjet($offreValide);
 
         ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "Le tuteur a été refusé avec succès.");
+    }
+
+    public static function recupererStats() : array {
+        $nbEtudiants = (new EtudiantRepository())->nbElementsDistincts("numEtudiant");
+        $nbEtudiantsPostulant = (new PostulerRepository())->nbElementsDistincts("numEtudiant");
+        $nbEtudiantsAvecFormation = (new FormationRepository())->nbElementsDistincts("idEtudiant");
+        $nbEntreprises = (new EntrepriseRepository())->nbElementsDistincts("numSiret");
+        $nbEntreprisesSansOffre = $nbEntreprises - (new FormationRepository())->nbElementsDistincts("idEntreprise");
+        $nbOffresMoyen = (new FormationRepository())->nbMoyenOffresParEntreprise();
+        $nbFormations = (new FormationRepository())->nbElementsDistincts("idFormation");
+        $nbStages = (new FormationRepository())->nbElementsDistinctsQuandContient("typeOffre", "Stage");
+        $nbAlternances = (new FormationRepository())->nbElementsDistinctsQuandContient("typeOffre", "Alternance");
+        $nbOffresNonValidees = (new FormationRepository())->nbElementsDistinctsQuandEgal("offreValidee", 0);
+        $nbOffresAvecEtudiant = (new FormationRepository())->nbElementsDistincts("idEtudiant");
+        $nbOffresConventionNonValidee = (new FormationRepository())->nbElementsDistinctsQuandEgal("conventionValidee", 0);
+        return ["nbEtudiants" => $nbEtudiants, "nbEtudiantsPostulant" => $nbEtudiantsPostulant, "nbEtudiantsAvecFormation" => $nbEtudiantsAvecFormation,
+            "nbEntreprises" => $nbEntreprises, "nbEntreprisesSansOffre" => $nbEntreprisesSansOffre, "nbOffresMoyen" => $nbOffresMoyen,
+            "nbFormations" => $nbFormations, "nbStages" => $nbStages, "nbAlternances" => $nbAlternances, "nbOffresNonValidees" => $nbOffresNonValidees,
+            "nbOffresAvecEtudiant" => $nbOffresAvecEtudiant, "nbOffresConventionNonValidee" => $nbOffresConventionNonValidee];
     }
 }
