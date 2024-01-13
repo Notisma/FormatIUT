@@ -50,7 +50,7 @@ use App\FormatIUT\Configuration\Configuration;
                         $src = $user->getImageProfil();
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
                         $menu = $user->getMenu();
-
+                        $controleur=$user->getControleur();
                         $codeRecherche = "
                         <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?controleur=Main&action=rechercher' method='post'>
