@@ -7,77 +7,102 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 
 class FiltresEtudiant
 {
-    public static function etudiant_A1():string
+    public static function etudiant_A1(): string
     {
-        self::annee_etudiant("etudiant_A1");
-        return " groupe LIKE \"S%\"";
-    }
-    public static function etudiant_A2():string
-    {
-        return " groupe LIKE \"Q%\"";
-    }
-    public static function etudiant_A3():string
-    {
-        return " groupe LIKE \"G%\"";
+        $sql = " groupe LIKE \"S%\"";
+        return self::annee_etudiant($sql);
     }
 
-    public static function annee_etudiant(string $filtre)
+    public static function etudiant_A2(): string
     {
-        $filtreL=array($filtre);
+        $sql= " groupe LIKE \"Q%\"";
+        return self::annee_etudiant($sql);
+
+    }
+
+    public static function etudiant_A3(): string
+    {
+        $sql= " groupe LIKE \"G%\"";
+        return self::annee_etudiant($sql);
+
+    }
+
+    public static function annee_etudiant(string $filtre): string
+    {
         foreach ($_REQUEST as $item) {
-            if (in_array($item,get_class_methods("App\\FormatIUT\\Lib\\Recherche\\FiltresSQL\\FiltresEtudiant")) && $item!=$filtre){
-                if (str_contains($item,"etudiant_A")){
-                    $filtreL[]=$item;
+            if (in_array($item, get_class_methods("App\\FormatIUT\\Lib\\Recherche\\FiltresSQL\\FiltresEtudiant"))) {
+                if (str_contains($item, "etudiant_A")) {
+                    $filtreL[] = $item;
                 }
             }
         }
+        if (count($filtreL) > 1) {
+            $sql="(";
+            foreach ($filtreL as $item) {
+                $sql.=" groupe LIKE \"";
+                if (str_contains($item, "A1")) {
+                    $sql.="S";
+                } else if (str_contains($item, "A2")) {
+                    $sql.="Q";
+                } else if (str_contains($item, "A3")) {
+                    $sql.="G";
+                }
+                $sql.="%\"";
+                if ($item !=$filtreL[count($filtreL)-1]){
+                    $sql.=" OR ";
+                }
+            }
+            $sql.=")";
+            return $sql;
+        } else {
+            return $filtre;
+        }
+
     }
 
 
-    public static function etudiant_concerne():string
+    public static function etudiant_concerne(): string
     {
-        $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
-        $idEntreprise=$entreprise->getSiret();
+        $entreprise = (new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
+        $idEntreprise = $entreprise->getSiret();
         return " EXISTS (SELECT idEtudiant FROM Formations WHERE idEntreprise=$idEntreprise AND E.numEtudiant=F.idEtudiant)";
     }
 
-    public static function etudiant_avec_formation():?string
+    public static function etudiant_avec_formation(): string
     {
-        if (self::EnFormation_etudiant())
-        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
-        else return null;
+        $sql = " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
+        return self::enFormation_etudiant($sql);
     }
 
-    public static function etudiant_sans_formation():?string
+    public static function etudiant_sans_formation(): string
     {
-        if (self::enFormation_etudiant())
-        return " NOT EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
-        else return null;
+        $sql = " NOT EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
+        return self::enFormation_etudiant($sql);
     }
 
-    public static function enFormation_etudiant() :bool
+    public static function enFormation_etudiant(string $sql): string
     {
-        if (isset($_REQUEST["etudiant_avec_formation"],$_REQUEST["etudiant_sans_formation"])){
-            return false;
-        }else return true;
-    }
-    public static function etudiant_stage():?string
-    {
-        if (self::typeOffre_etudiant())
-        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\"))";
-        return null;
-    }
-    public static function etudiant_alternance():?string
-    {
-        if (self::typeOffre_etudiant())
-        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\"))";
-        return null;
+        if (isset($_REQUEST["etudiant_avec_formation"], $_REQUEST["etudiant_sans_formation"])) {
+            return "";
+        } else return $sql;
     }
 
-    private static function typeOffre_etudiant():bool
+    public static function etudiant_stage(): string
     {
-        if (isset($_REQUEST["etudiant_alternance"],$_REQUEST["etudiant_stage"])) {
-            return false;
-        }else return true;
+        $sql = " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\"))";
+        return self::typeOffre_etudiant($sql);
+    }
+
+    public static function etudiant_alternance(): string
+    {
+        $sql = " EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant AND (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\"))";
+        return self::typeOffre_etudiant($sql);
+    }
+
+    private static function typeOffre_etudiant(string $sql): string
+    {
+        if (isset($_REQUEST["etudiant_alternance"], $_REQUEST["etudiant_stage"])) {
+            return "EXISTS (SELECT idEtudiant FROM Formations F WHERE E.numEtudiant=F.idEtudiant)";
+        } else return $sql;
     }
 }

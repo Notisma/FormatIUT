@@ -21,7 +21,7 @@ abstract class RechercheRepository extends AbstractRepository
         }
         $sql .= ")";
         foreach ($filtres as $filtre) {
-            if (!is_null($filtre))
+            if (!empty($filtre))
                 $sql .= " AND " . $filtre;
         }
         //var_dump($sql);

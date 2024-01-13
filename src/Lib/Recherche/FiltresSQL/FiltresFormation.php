@@ -9,69 +9,64 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 class FiltresFormation
 {
 
-    public static function formation_stage(): ?string
+    public static function formation_stage(): string
     {
-        if (self::formation_type()) {
-            return " (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\") ";
-        } else return null;
+        $sql = " (typeOffre=\"Stage\" OR typeOffre=\"Stage/Alternance\") ";
+        return self::formation_type($sql);
     }
 
-    public static function formation_alternance(): ?string
+    public static function formation_alternance(): string
     {
-        if (self::formation_type()) {
-            return " (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\")";
-        } else return null;
+        $sql = " (typeOffre=\"Alternance\" OR typeOffre=\"Stage/Alternance\")";
+        return self::formation_type($sql);
     }
 
-    public static function formation_type(): bool
+    public static function formation_type(string $sql): string
     {
         if (isset($_REQUEST["formation_stage"], $_REQUEST["formation_alternance"])) {
-            return false;
+            return "";
         } else {
-            return true;
+            return $sql;
         }
     }
 
-    public static function formation_validee(): ?string
+    public static function formation_validee(): string
     {
-        if (self::validite_formation())
-            return " estValide=1 ";
-            else return null;
+        $sql = " estValide=1 ";
+        return self::validite_formation($sql);
+
     }
 
-    public static function formation_non_validee(): ?string
+    public static function formation_non_validee(): string
     {
-        if (self::validite_formation())
-            return " estValide=0 ";
-        else return null;
+        $sql = " estValide=0 ";
+        return self::validite_formation($sql);
     }
 
-    public static function validite_formation(): bool
+    public static function validite_formation(string $sql): string
     {
         if (isset($_REQUEST["formation_validee"], $_REQUEST["formation_non_validee"])) {
-            return false;
-        } else return true;
+            return "";
+        } else return $sql;
     }
 
-    public static function formation_disponible(): ?string
+    public static function formation_disponible(): string
     {
-        if (self::disponibilite_formation())
-        return " idEtudiant is null";
-        else return null;
+        $sql = " idEtudiant is null";
+        return self::disponibilite_formation($sql);
     }
 
-    public static function formation_non_disponible(): ?string
+    public static function formation_non_disponible(): string
     {
-        if (self::disponibilite_formation())
-        return " idEtudiant is not null";
-        else return null;
+        $sql = " idEtudiant is not null";
+        return self::disponibilite_formation($sql);
     }
 
-    public static function disponibilite_formation(): bool
+    public static function disponibilite_formation(string $sql): string
     {
-        if (isset($_REQUEST["formation_disponible"],$_REQUEST["formation_non_disponible"])){
-            return false;
-        }else return true;
+        if (isset($_REQUEST["formation_disponible"], $_REQUEST["formation_non_disponible"])) {
+            return "";
+        } else return $sql;
     }
 
     public static function formation_entreprise(): string
