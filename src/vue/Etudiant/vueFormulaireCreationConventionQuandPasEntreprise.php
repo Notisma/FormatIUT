@@ -12,6 +12,8 @@ if (date("m") >= 9) {
 }
 
 ?>
+<h3>Uniquement utiliser cette création manuelle si vous avez déjà un stage mais que l'entreprise n'est pas sur le site
+    !</h3>
 <form method="post" class="formulaireConv" action='?action=creerConventionSansEntreprise&controleur=EtuMain'>
     <div class="pageConvention">
         <div class="entete">
