@@ -2,17 +2,11 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
-use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Controleur\ControleurMain;
-use App\FormatIUT\Lib\MotDePasse;
-use App\FormatIUT\Modele\Repository\AbstractRepository;
-use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
-use DateTime;
 
 class EntrepriseFake extends AbstractDataObject
 {
-    private float $siret;
+    private int $siret;
     private string $nomEntreprise;
     private ?string $statutJuridique;
     private ?int $effectif;
@@ -24,7 +18,7 @@ class EntrepriseFake extends AbstractDataObject
 
 
     /**
-     * @param float $siret
+     * @param int $siret
      * @param string $nomEntreprise
      * @param string|null $statutJuridique
      * @param int|null $effectif
@@ -34,7 +28,7 @@ class EntrepriseFake extends AbstractDataObject
      * @param string $idVille
      * @param string $email
      */
-    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $email)
+    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $email)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -100,12 +94,12 @@ class EntrepriseFake extends AbstractDataObject
         return "V" . $id;
     }
 
-    public function getSiret(): float
+    public function getSiret(): int
     {
         return $this->siret;
     }
 
-    public function setSiret(float $siret): void
+    public function setSiret(int $siret): void
     {
         $this->siret = $siret;
     }
@@ -179,8 +173,6 @@ class EntrepriseFake extends AbstractDataObject
     {
         $this->idVille = $idVille;
     }
-
-
 
 
     public function getEmail(): string

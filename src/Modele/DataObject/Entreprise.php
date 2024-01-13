@@ -12,7 +12,7 @@ use DateTime;
 
 class Entreprise extends AbstractDataObject
 {
-    private float $siret;
+    private int $siret;
     private string $nomEntreprise;
     private ?string $statutJuridique;
     private ?int $effectif;
@@ -29,7 +29,7 @@ class Entreprise extends AbstractDataObject
     private ?string $dateCreationCompte;
 
     /**
-     * @param float $siret
+     * @param int $siret
      * @param string $nomEntreprise
      * @param string|null $statutJuridique
      * @param int|null $effectif
@@ -45,7 +45,7 @@ class Entreprise extends AbstractDataObject
      * @param bool $estValide
      * @param string|null $dateCreationCompte
      */
-    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
+    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -128,12 +128,12 @@ class Entreprise extends AbstractDataObject
         return "V" . $id;
     }
 
-    public function getSiret(): float
+    public function getSiret(): int
     {
         return $this->siret;
     }
 
-    public function setSiret(float $siret): void
+    public function setSiret(int $siret): void
     {
         $this->siret = $siret;
     }
