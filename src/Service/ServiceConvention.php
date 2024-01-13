@@ -8,12 +8,12 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\Entreprise;
-use App\FormatIUT\Modele\DataObject\EntrepriseFake;
+
+
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Postuler;
 use App\FormatIUT\Modele\DataObject\TuteurPro;
 use App\FormatIUT\Modele\DataObject\Ville;
-use App\FormatIUT\Modele\Repository\EntrepriseFakeRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -193,12 +193,14 @@ class ServiceConvention
                         }
 
                         $idville = strval($villeEntr->getIdVille());
-                        $entrepriseFake = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], "", null
-                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null,null, $_REQUEST['emailEntreprise'],
-                            null);
-                        $entrepriseFakeVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entrepriseFake->getSiret());
-                        if (!$entrepriseFakeVerif) {
-                            (new EntrepriseRepository())->creerObjet($entrepriseFake);
+
+                        $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
+                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, null,
+                         $_REQUEST['emailEntreprise'], null, null, false, null);
+
+                        $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
+                        if (!$entrepriseVerif) {
+                            (new EntrepriseRepository())->creerObjet($entreprise);
                         }
 
                         $tuteurliste = (new TuteurProRepository())->getListeObjet();
