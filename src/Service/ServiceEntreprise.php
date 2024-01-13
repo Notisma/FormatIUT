@@ -186,16 +186,34 @@ class ServiceEntreprise
     /**
      * @return void supprime un tuteur dans la BD
      */
-    public static function supprimerTuteur()
+    public static function supprimerTuteur(): void
     {
         if (isset($_REQUEST["idTuteur"])) {
             if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
-                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
-                    $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($_REQUEST["idTuteur"]);
-                    if ($entreprise->getSiret() == $tuteurPro->getIdEntreprise()) {
-                        (new TuteurProRepository())->supprimer($_REQUEST["idTuteur"]);
-                        ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Le tuteur a bien été supprimé");
-                    } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Le tuteur n'est pas dans votre entreprise");
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+                $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($_REQUEST["idTuteur"]);
+                if ($entreprise->getSiret() == $tuteurPro->getIdEntreprise()) {
+                    (new TuteurProRepository())->supprimer($_REQUEST["idTuteur"]);
+                    ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Le tuteur a bien été supprimé");
+                } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Le tuteur n'est pas dans votre entreprise");
+            } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requis");
+        } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
+    }
+
+    /**
+     * @return void met à jour la fonction d'un tuteur dans la BD
+     */
+    public static function modifierFonctionTuteur(): void
+    {
+        if (isset($_REQUEST["idTuteur"], $_REQUEST["fonctionTuteur"])) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
+                $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+                $tuteurPro = (new TuteurProRepository())->getObjectParClePrimaire($_REQUEST["idTuteur"]);
+                if ($entreprise->getSiret() == $tuteurPro->getIdEntreprise()) {
+                    $tuteurPro->setFonctionTuteurPro($_REQUEST["fonctionTuteur"]);
+                    (new TuteurProRepository())->modifierObjet($tuteurPro);
+                    ControleurEntrMain::redirectionFlash("afficherProfil", "success", "La fonction du tuteur a bien été modifiée");
+                } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Le tuteur n'est pas dans votre entreprise");
             } else ControleurMain::redirectionFlash("afficherIndex", "danger", "Vous n'avez pas les droits requis");
         } else ControleurEntrMain::redirectionFlash("afficherProfil", "danger", "Les informations ne sont pas renseignées");
     }

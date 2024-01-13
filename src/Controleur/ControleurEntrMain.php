@@ -86,7 +86,7 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function afficherFormulaireModificationOffre(): void
     {
-            if (isset($_REQUEST['idFormation'])) {
+        if (isset($_REQUEST['idFormation'])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
             self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", ["offre" => $offre]);
         } else {
@@ -194,6 +194,11 @@ class ControleurEntrMain extends ControleurMain
     public static function supprimerTuteur()
     {
         ServiceEntreprise::supprimerTuteur();
+    }
+
+    public static function modifierFonctionTuteur()
+    {
+        ServiceEntreprise::modifierFonctionTuteur();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
