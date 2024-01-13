@@ -256,6 +256,17 @@ class ControleurAdminMain extends ControleurMain
         }
     }
 
+    public static function afficherVueProf(): void
+    {
+        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
+            self::$pageActuelleAdmin="Détails de l'enseignant";
+            self::afficherVue("Détails de l'enseignant", "Admin/vueDetailProf.php");
+        }
+        else {
+            self::redirectionFlash("afficherCompteAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
+        }
+    }
+
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static function modifierOffre(): void
