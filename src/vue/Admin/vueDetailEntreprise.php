@@ -98,7 +98,7 @@
     <div class="wrapAnnotations">
         <h3 class="titre rouge">Annotations des Enseignants</h3>
         <?php
-        $listeAnnotations = (new \App\FormatIUT\Modele\Repository\AnnotationRepository())->annotationsParEntreprise($offre->getIdEntreprise());
+        $listeAnnotations = (new \App\FormatIUT\Modele\Repository\AnnotationRepository())->annotationsParEntreprise($entreprise->getSiret());
         ?>
 
         <div class="moyenne">
@@ -133,17 +133,16 @@
             <?php
             if (!empty($listeAnnotations)) {
                 foreach ($listeAnnotations as $annotation) {
-                    for ($i = 0; $i < 10; $i++) {
-                        $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
-                        echo "<div class='commentaire'>";
-                        echo "<img src='../ressources/images/admin.png' alt='etoile'>";
-                        echo "<div>";
-                        echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
-                        echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
-                        echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
+                    $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
+                    echo "<div class='commentaire'>";
+                    echo "<img src='../ressources/images/admin.png' alt='etoile'>";
+                    echo "<div>";
+                    echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
+                    echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
+                    echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
+                    echo "</div>";
+                    echo "</div>";
+
                 }
             } else {
                 echo "<h5 class='titre'>Aucun commentaire pour le moment</h5>";
@@ -153,17 +152,16 @@
 
         <?php
 
-        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($offre->getIdEntreprise(), \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($entreprise->getSiret(), \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
             echo '     
 
         <div class="rediger">
             <h4 class="titre">Rédiger Mon Commentaire</h4>
             <form action="?action=ajouterAnnotation&controleur=AdminMain" method="post">
-                <input type="hidden" name="idEntreprise" value="<?php echo $entreprise->getSiret() ?>">
+                <input type="hidden" name="idEntreprise" value="' . $entreprise->getSiret() . '">
                 <input type="hidden" name="loginProf"
-                       value="<?php echo \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte() ?>">
-                <input type="hidden" name="dateAnnotation" value="<?php echo date("d/m/Y") ?>">
-                <input type="hidden" name="idFormation" value="<?php echo $offre->getIdFormation() ?>">
+                       value="' . \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte() . '">
+                <input type="hidden" name="dateAnnotation" value="' . date("d/m/Y") . '">
 
                 <h5 class="titre">Note /5 :</h5>
                 <label for="stars"></label>

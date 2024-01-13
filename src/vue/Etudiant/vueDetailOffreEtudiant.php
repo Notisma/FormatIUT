@@ -294,17 +294,16 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             <?php
             if (!empty($listeAnnotations)) {
                 foreach ($listeAnnotations as $annotation) {
-                    for ($i = 0; $i < 10; $i++) {
-                        $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
-                        echo "<div class='commentaire'>";
-                        echo "<img src='../ressources/images/admin.png' alt='etoile'>";
-                        echo "<div>";
-                        echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
-                        echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
-                        echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
+                    $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
+                    echo "<div class='commentaire'>";
+                    echo "<img src='../ressources/images/admin.png' alt='etoile'>";
+                    echo "<div>";
+                    echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
+                    echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
+                    echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
+                    echo "</div>";
+                    echo "</div>";
+
                 }
             } else {
                 echo "<h5 class='titre'>Aucun commentaire pour le moment</h5>";

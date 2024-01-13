@@ -8,6 +8,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Annotation;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\AnnotationRepository;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 
@@ -131,11 +132,11 @@ class ServicePersonnel
 
     public static function ajouterAnnotation()
     {
-        if (isset($_REQUEST['idFormation']) && isset($_REQUEST['idEntreprise']) && isset($_REQUEST['messageAnnotation']) && isset($_REQUEST['dateAnnotation']) && isset($_REQUEST['noteAnnotation'])) {
-            $formation = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
-            if ($formation) {
+        if (isset($_REQUEST['idEntreprise']) && isset($_REQUEST['messageAnnotation']) && isset($_REQUEST['dateAnnotation']) && isset($_REQUEST['noteAnnotation'])) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['idEntreprise']);
+            if ($entreprise) {
                 if (Configuration::getControleurName() == "AdminMain") {
-                    if ((new AnnotationRepository())->aDeposeAnnotation($_REQUEST["idEntreprise"], ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+                    if (!(new AnnotationRepository())->aDeposeAnnotation($_REQUEST["idEntreprise"], ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
                         $annotation = (new Annotation($_REQUEST["loginProf"], $_REQUEST['idEntreprise'], $_REQUEST['messageAnnotation'], $_REQUEST['dateAnnotation'], $_REQUEST['noteAnnotation']));
                         (new AnnotationRepository())->creerAnnotationDepuisForm($annotation);
                         ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "success", "L'annotation a été ajoutée avec succès.");
@@ -146,7 +147,7 @@ class ServicePersonnel
                     ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis.");
                 }
             } else {
-                ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "L'offre n'existe pas.");
+                ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "L'entreprise n'existe pas.");
             }
         } else {
             ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Des données sont manquantes.");
