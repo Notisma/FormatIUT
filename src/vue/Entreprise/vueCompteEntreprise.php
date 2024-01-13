@@ -206,7 +206,26 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
         <h2 class="titre rouge">Gérer mes Tuteurs</h2>
         <h3 class="titre">Liste de mes Tuteurs</h3>
         <div class="listeTuteurs">
-
+            <?php
+            $liste = (new \App\FormatIUT\Modele\Repository\TuteurProRepository())->getTuteursDuneEntreprise($entreprise->getSiret());
+            if (!empty($liste)) {
+                foreach ($liste as $tuteur) {
+                    echo "<div class='tuteur'>";
+                    echo "<h3 class='titre'>" . htmlspecialchars($tuteur->getNomTuteurPro()) . " " . htmlspecialchars($tuteur->getPrenomTuteurPro()) . "</h3>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getFonctionTuteurPro()) . "</p>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getMailTuteurPro()) . "</p>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getTelTuteurPro()) . "</p>";
+                    echo "<form method='post' action='?action=modifierFonctionTuteur&controleur=EntrMain'>";
+                    echo "<input type='hidden' name='idTuteur' value='" . htmlspecialchars($tuteur->getIdTuteurPro()) . "'>";
+                    echo "<input class='inputTuteur' type='text' name='fonctionTuteur' onChange='this.form.submit()' value='" . htmlspecialchars($tuteur->getFonctionTuteurPro()) . "' maxlength='50'>";
+                    echo "</form>";
+                    echo "<a class='boutonTuteur' href='?action=supprimerTuteur&controleur=EntrMain&idTuteur=" . htmlspecialchars($tuteur->getIdTuteurPro()) . "'>Supprimer</a>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p class='titre'>Vous n'avez pas encore de tuteur</p>";
+            }
+            ?>
         </div>
     </div>
 

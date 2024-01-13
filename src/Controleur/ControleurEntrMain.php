@@ -191,6 +191,11 @@ class ControleurEntrMain extends ControleurMain
         ServiceEntreprise::creerTuteur();
     }
 
+    public static function supprimerTuteur()
+    {
+        ServiceEntreprise::supprimerTuteur();
+    }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
