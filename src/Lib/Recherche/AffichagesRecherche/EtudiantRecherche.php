@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Lib\Recherche\AffichagesRecherche;
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -18,7 +19,7 @@ class EtudiantRecherche extends AbstractAffichage
 
     public function getLienAction():string
     {
-        return '?action=afficherDetailEtudiant&controleur=' . Configuration::getControleurName() . '&numEtu=' . parent::getObjet()->getNumEtudiant();
+        return '?action=afficherDetailEtudiant&controleur=' .  ConnexionUtilisateur::getUtilisateurConnecte()->getControleur() . '&numEtudiant=' . parent::getObjet()->getNumEtudiant();
     }
 
     function getTitres():string

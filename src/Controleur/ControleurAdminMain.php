@@ -83,7 +83,7 @@ class ControleurAdminMain extends ControleurMain
     {
         self::$pageActuelleAdmin = "Détails d'une Entreprise";
         self::afficherVue("Détails d'une Entreprise", "Admin/vueDetailEntreprise.php", [
-            "entreprise" => $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_GET["idEntreprise"])
+            "entreprise" => $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_GET["siret"])
         ]);
     }
 

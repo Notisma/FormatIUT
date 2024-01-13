@@ -5,7 +5,7 @@ namespace App\FormatIUT\Modele\Repository;
 use App\FormatIUT\Modele\DataObject\Entreprise;
 use DateTime;
 
-class EntrepriseRepository extends RechercheRepository
+class  EntrepriseRepository extends RechercheRepository
 {
     protected function getNomTable(): string
     {

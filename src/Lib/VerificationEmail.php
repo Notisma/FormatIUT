@@ -42,6 +42,10 @@ class VerificationEmail
         return !$everyMailFails;
     }
 
+    /**
+     * @param Entreprise $entreprise l'entreprise qui va recevoir l'email
+     * @return void envoi un email à l'entreprise pour qu'elle valide son compte
+     */
     public static function envoiEmailValidation(Entreprise $entreprise): void
     {
         $siretURL = rawurlencode($entreprise->getSiret());
@@ -57,6 +61,11 @@ class VerificationEmail
 
     }
 
+    /**
+     * @param $login
+     * @param $nonce
+     * @return bool
+     */
     public static function traiterEmailValidation($login, $nonce): bool
     {
         // À compléter
