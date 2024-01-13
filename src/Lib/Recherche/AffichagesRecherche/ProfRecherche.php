@@ -14,7 +14,7 @@ class ProfRecherche extends AbstractAffichage
 
     function getLienAction():string
     {
-        return "";
+        return "?action=afficherVueProf&controleur=AdminMain&loginProf=".$this->objet->getLoginProf();
     }
 
     function getTitres():string
