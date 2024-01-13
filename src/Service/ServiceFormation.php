@@ -87,7 +87,9 @@ class ServiceFormation
                             (new FormationRepository())->creerObjet($offre);
                             $_REQUEST["action"] = "afficherMesOffres";
                             MessageFlash::ajouter("success", "Offre créée avec succès");
-                            ControleurEntrMain::afficherMesOffres();
+                            var_dump($_REQUEST);
+                            var_dump($offre);
+                            //ControleurEntrMain::afficherMesOffres();
                         } else {
                             header("Location: controleurFrontal.php?action=afficherFormulaireCreationOffre&controleur=EntrMain");
                             MessageFlash::ajouter("danger", "Les heures inscrites ne sont pas correctes");
