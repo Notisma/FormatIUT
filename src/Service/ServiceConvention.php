@@ -196,7 +196,7 @@ class ServiceConvention
                         $idville = strval($villeEntr->getIdVille());
 
                         $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
-                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, null,
+                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, "",
                          $_REQUEST['emailEntreprise'], null, null, true, null);
 
                         $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
