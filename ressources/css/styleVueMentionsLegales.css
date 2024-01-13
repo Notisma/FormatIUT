@@ -28,3 +28,14 @@ body {
     color: black;
     cursor: pointer;
 }
+
+@media (max-width: 1050px) {
+    body {
+        min-height: 260vh;
+    }
+
+    .centerMentions {
+        width: 98%;
+    }
+
+}
