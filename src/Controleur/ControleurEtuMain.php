@@ -201,6 +201,14 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+    /**
+     * @return void renvoie sur le formulaire convention une entreprise n'est pas inscrite sur le site
+     */
+    public static function afficherFormulaireConventionSansEntreprise(){
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreatio nConventionQuandPasEntreprise.php", ['etudiant'=>$etudiant]);
+    }
+
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static function postuler(): void
