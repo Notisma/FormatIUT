@@ -14,9 +14,12 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ConnexionUtilisateur
 {
-    // L'utilisateur connecté sera enregistré en session associé à la clé suivante
     private static string $cleConnexion = "_utilisateurConnecte";
 
+    /**
+     * @param Utilisateur $user l'utiliser à connecté
+     * @return void enregistre dans la session l'utilisateur à connecté
+     */
     public static function connecter(Utilisateur $user): void
     {
         $session = Session::getInstance();
@@ -24,16 +27,20 @@ class ConnexionUtilisateur
         $session->enregistrer(self::$cleConnexion, $user);
     }
 
+    /**
+     * @return bool permet de savoir si un utilisateur est connecté
+     */
     public static function estConnecte(): bool
     {
-        // À compléter
         $session = Session::getInstance();
         return $session->contient(self::$cleConnexion);
     }
 
+    /**
+     * @return void déconnecte l'utilisateur connecté en le supprimant de la session
+     */
     public static function deconnecter(): void
     {
-        // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
             if (self::getTypeConnecte() == "Etudiants") {
@@ -44,6 +51,9 @@ class ConnexionUtilisateur
 
     }
 
+    /**
+     * @return Utilisateur|null l'utilisateur connecté, null si non connecté
+     */
     public static function getUtilisateurConnecte():?Utilisateur
     {
         if (self::estConnecte()) {
@@ -55,6 +65,9 @@ class ConnexionUtilisateur
         return null;
     }
 
+    /**
+     * @return string|null le login de l'utilisateur connecté, null si non connecté
+     */
     public static function getLoginUtilisateurConnecte(): ?string
     {
         // À compléter
@@ -66,6 +79,9 @@ class ConnexionUtilisateur
         return null;
     }
 
+    /**
+     * @return int|null le numéro etudiant de l'étudiant connecté, null si non connecté
+     */
     public static function getNumEtudiantConnecte(): ?int
     {
         if (self::estConnecte()) {
@@ -76,6 +92,9 @@ class ConnexionUtilisateur
         return null;
     }
 
+    /**
+     * @return int|null le siret de l'entreprise connecté, null si non connecté
+     */
     public static function getNumEntrepriseConnectee(): ?int
     {
         if (self::estConnecte()) {
@@ -86,6 +105,9 @@ class ConnexionUtilisateur
         return null;
     }
 
+    /**
+     * @return string|null le type d'utilisateur connecté, null si non connecté
+     */
     public static function getTypeConnecte(): ?string
     {
         if (self::estConnecte()) {
@@ -96,20 +118,14 @@ class ConnexionUtilisateur
         return null;
     }
 
-    public static function genererChiffresAleatoires(int $nbChiffres = 8): string
-    {
-        $chiffres = "";
-        for ($i = 0; $i < $nbChiffres; $i++) {
-            $chiffres .= rand(0, 9);
-        }
-        return $chiffres;
-    }
-
+    /**
+     * @param string $login le login de l'étudiant qui se connecte
+     * @return bool vérifie si l'étudiant connecté se connecte pour la première fois sur le site, si oui, l'enregistre dans la BD
+     */
     public static function premiereConnexionEtu(string $login): bool
     {
         if (!(new EtudiantRepository())->estEtudiant($login)) {
             $infos = ConnexionLdap::getInfoPersonne();
-            echo $infos["mail"];
             $value = array("numEtudiant" => self::genererChiffresAleatoires(), "prenomEtudiant" => $infos["prenom"], "nomEtudiant" => $infos["nom"], "loginEtudiant" => $login, "mailUniversitaire" => $infos["mail"]);
             (new EtudiantRepository())->premiereConnexion($value);
             return true;
@@ -121,7 +137,11 @@ class ConnexionUtilisateur
         return false;
     }
 
-    public static function premiereConnexionProf(string $login)
+    /**
+     * @param string $login le login du personnel qui se connecte
+     * @return void enregistre dans la BD le personnel s'il s'agit de sa première connexion sur le site
+     */
+    public static function premiereConnexionProf(string $login):void
     {
         if (!(new ProfRepository())->estProf($login)) {
             $infos = ConnexionLdap::getInfoPersonne();
@@ -129,7 +149,12 @@ class ConnexionUtilisateur
             (new ProfRepository())->creerObjet($prof);
         }
     }
-    public static function premiereConnexionProfTest(string $login)
+
+    /**
+     * @param string $login le login de l'utilisateur test qui se connecte
+     * @return void enregistre dans la BD le personnel test s'il s'agit de sa premoère connexion sur le site
+     */
+    public static function premiereConnexionProfTest(string $login):void
     {
         if (!(new ProfRepository())->estProf($login)) {
             $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail",0,1);
@@ -137,12 +162,10 @@ class ConnexionUtilisateur
         }
     }
 
-    public static function profilEstComplet(string $login): bool
-    {
-
-        return false;
-    }
-
+    /**
+     * @param string $controleur le controleur sur lequel l'utilisateur se rend
+     * @return bool vérifie si l'utilisateur connecté à les droits pour se rendre sur les pages
+     */
     public static function verifConnecte(string $controleur):bool{
         $bool=false;
         if ($controleur == "EntrMain" && \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()!="Entreprise") {
@@ -155,6 +178,19 @@ class ConnexionUtilisateur
                     $bool=true;
         }
         return $bool;
+    }
+
+    /**
+     * @param int $nbChiffres le nombre de chiffre à générer
+     * @return string un nombre aléatoire de taille nbChiffres
+     */
+    public static function genererChiffresAleatoires(int $nbChiffres = 8): string
+    {
+        $chiffres = "";
+        for ($i = 0; $i < $nbChiffres; $i++) {
+            $chiffres .= rand(0, 9);
+        }
+        return $chiffres;
     }
 
 
