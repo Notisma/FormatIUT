@@ -58,7 +58,7 @@ function afficherPopupPremiereCo(indice) {
     }
 
     document.getElementById("popupPremiereCo").style.display = "flex";
-    document.getElementById("conteneurPrincipal").style.opacity = "0.3";
+    document.getElementsByClassName("mainAcc")[0].style.opacity = "0.3";
 
     for (var i = 0; i < enfants.length; i++) {
         enfants[i].style.display = "none";
