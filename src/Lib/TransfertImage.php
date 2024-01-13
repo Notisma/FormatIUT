@@ -6,7 +6,17 @@ use App\FormatIUT\Controleur\ControleurMain;
 
 class TransfertImage
 {
-    public static function transfert(): int|false
+
+    /**
+     * @return int L'ID auto-incrémenté de l'image.
+     * <br><br>
+     * Méthode appelée quand il faut upload une image.
+     * <br>
+     * Gère les types, l'arrondissement si pp étudiant, la taille, la conversion et le nommage.
+     * <br>
+     * Après ça, la méthode appelle simplement uploadFichiers.
+     */
+    public static function transfert(): int
     {
         $taille_max = 1000000;
         $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
@@ -41,6 +51,11 @@ class TransfertImage
         }
     }
 
+    /**
+     * @param string $image
+     * @return false|string, l'image en format texte
+     * <br><br>Arrondit l'image. Méthode privée car utilisée dans transfert().
+     */
     public static function getImageArrondieData(string $image): false|string
     {
         $image = imagecreatefromstring($image);
