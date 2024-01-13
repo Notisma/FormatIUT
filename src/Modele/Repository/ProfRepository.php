@@ -81,4 +81,18 @@ class ProfRepository extends RechercheRepository
         foreach ($pdoStatement as $tuple) $arr[] = $this->construireDepuisTableau($tuple);
         return $arr;
     }
+
+    public function getEtudiantsTutores(string $login): array
+    {
+        $sql = "SELECT idEtudiant FROM Formations WHERE loginTuteurUM =:loginTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("loginTag" => $login);
+        $pdoStatement->execute($values);
+        $arr = array();
+        foreach ($pdoStatement as $var){
+            $etu = (new EtudiantRepository())->getObjectParClePrimaire($var[0]);
+            $arr[] = $etu;
+        }
+        return $arr;
+    }
 }
