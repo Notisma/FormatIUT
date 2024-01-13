@@ -6,6 +6,7 @@
                 use App\FormatIUT\Configuration\Configuration;
                 use App\FormatIUT\Lib\ConnexionUtilisateur;
                 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+                use App\FormatIUT\Modele\Repository\EtudiantRepository;
                 use App\FormatIUT\Modele\Repository\ProfRepository;
 
                 $prof = (new ProfRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
@@ -224,8 +225,7 @@ echo '
 
 if (isset($listeFormations)) {
     foreach ($listeFormations as $convention) {
-        $etudiant = (new
-        \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
         echo '<a
                     href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
                     class="alerteEntr" id="hoverRose">

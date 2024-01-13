@@ -1,6 +1,9 @@
 <?php
 
+/** @var Formation|null $convention */
+
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\DataObject\Formation;
 
 $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
 
@@ -58,32 +61,31 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         <div class="notifs">
             <?php
 
-            if($convention->getDateTransmissionConvention() != null && $convention->getConventionValidee() == false){
-                echo "<div class='erreur'>
-                 <h4 class='titre'>Votre convention a été rejetée, le ".$convention->getDateTransmissionConvention()." cliquez ci-dessous pour la modifier :</h4>
-                 <div class='wrapBoutons'>
-                 <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
-                </div>";
-
-            }
-            else if($convention->getDateTransmissionConvention() != null && $convention->getConventionValidee() == true){
-                echo "<div class='erreur'>
-                 <h4 class='titre'>Votre convention a été validée, le ".$convention->getDateTransmissionConvention()." </h4>";
-            }
-            else{
-
-            echo "<div class='erreur'>
-                <img src='../ressources/images/erreur.png' alt='erreur'>
-                <h4 class='titre'>Vous n'avez aucune notification</h4>";
+            if (isset($convention) && !is_null($convention->getDateTransmissionConvention())) {
+                if ($convention->getConventionValidee()) {
+                    echo "<div class='erreur'>
+                            <h4 class='titre'>Votre convention a été validée, le " . $convention->getDateTransmissionConvention() . " </h4>
+                          </div>
+                    ";
+                } else {
+                    echo "<div class='erreur'>
+                             <h4 class='titre'>Votre convention a été rejetée, le " . $convention->getDateTransmissionConvention() . " cliquez ci-dessous pour la modifier :</h4>
+                             <div class='wrapBoutons'>
+                             <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
+                          </div>
+                    ";
                 }
+            } else {
+                echo "<div class='erreur'>
+                        <img src='../ressources/images/erreur.png' alt='erreur'>
+                        <h4 class='titre'>Vous n'avez aucune notification</h4>
+                      </div>
+                ";
+            }
             ?>
-            </div>
         </div>
-
     </div>
-
 </div>
-
 
 <div class="premiereCo" id="popupPremiereCo">
 

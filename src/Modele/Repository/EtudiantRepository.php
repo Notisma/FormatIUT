@@ -2,7 +2,6 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
-use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 
@@ -348,8 +347,7 @@ class EtudiantRepository extends RechercheRepository
 
     public function getEtudiantParLogin(string $login): Etudiant
     {
-        var_dump($login);
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE loginEtudiant=:Tag";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE loginEtudiant = :Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values = array("Tag" => $login);
         $pdoStatement->execute($values);

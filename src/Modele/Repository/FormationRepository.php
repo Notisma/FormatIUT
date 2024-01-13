@@ -4,7 +4,6 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Formation;
-use DateTime;
 
 class FormationRepository extends RechercheRepository
 {
@@ -313,10 +312,24 @@ class FormationRepository extends RechercheRepository
         $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
         $pdoStatement->execute($values);
         $test = $pdoStatement->fetch();
-        if($test == false){
+        if (!$test) {
             return null;
         }
         return $this->construireDepuisTableau($test);
+    }
+
+    /** Comme au dessus, mais de n'importe quel type */
+    public function trouverFormationValidee($numEtu): ?Formation
+    {
+        $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant = :tagEtu AND etat = 'Validée'";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("tagEtu" => $numEtu);
+        $pdoStatement->execute($values);
+        $test = $pdoStatement->fetch();
+        if (!$test)
+            return null;
+        else
+            return $this->construireDepuisTableau($test);
     }
 
     public function etudiantsSansConventionsValides(): array

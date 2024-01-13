@@ -59,22 +59,26 @@ class ServiceEtudiant
      */
     public static function supprimerEtudiant(): void
     {
-        if (isset($_REQUEST["numEtudiant"])) {
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['numEtudiant']);
-            if (!is_null($etudiant)) {
-                if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                    (new EtudiantRepository())->supprimer($_REQUEST['numEtudiant']);
-                    ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "L'étudiant a bien été supprimé");
-                } else ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "danger", "Vous n'avez pas les droits requis");
-            } else ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "warning", "L'étudiant n'existe pas");
-        } else ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "danger", "L'étudiant n'est pas renseigné");
+        if (!isset($_GET["numEtu"])) {
+            ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "danger", "L'étudiant n'est pas renseigné");
+            return;
+        }
+        $numEtu = $_GET["numEtu"];
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($numEtu);
+        if (!is_null($etudiant)) {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+                (new EtudiantRepository())->supprimer($numEtu);
+                ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "L'étudiant a bien été supprimé");
+            } else ControleurAdminMain::redirectionFlash("afficherDetailEtudiant", "danger", "Vous n'avez pas les droits requis");
+        } else ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "warning", "L'étudiant n'existe pas");
 
     }
 
     /**
      * @return void met à jour les informations de l'étudiant connecté
      */
-    public static function mettreAJour(): void
+    public
+    static function mettreAJour(): void
     {
         if (isset($_REQUEST['numEtu'])) {
             if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
@@ -93,7 +97,8 @@ class ServiceEtudiant
     /**
      * @return void modifie le numéroEtudiant et le sexe lors de la Première Connexion
      */
-    public static function setNumEtuSexe(): void
+    public
+    static function setNumEtuSexe(): void
     {
         $ancienNumEtu = $_REQUEST['oldNumEtu'];
         $numEtu = $_REQUEST['numEtu'];
@@ -110,7 +115,8 @@ class ServiceEtudiant
     /**
      * @return void modifie le téléphone et le mail perso lors de la Première Connexion
      */
-    public static function setTelMailPerso(): void
+    public
+    static function setTelMailPerso(): void
     {
         $numEtu = $_REQUEST['numEtu'];
         $tel = $_REQUEST['telephone'];
@@ -127,7 +133,8 @@ class ServiceEtudiant
     /**
      * @return void modifie le groupe et le parcours lors de la Première Connexion
      */
-    public static function setGroupeParcours(): void
+    public
+    static function setGroupeParcours(): void
     {
         $numEtu = $_REQUEST['numEtu'];
         $groupe = $_REQUEST['groupe'];

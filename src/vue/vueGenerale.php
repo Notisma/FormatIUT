@@ -1,6 +1,7 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
 <!DOCTYPE html>
@@ -35,7 +36,8 @@ use App\FormatIUT\Configuration\Configuration;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
-                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
+                    $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
+                    $type = ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -45,12 +47,12 @@ use App\FormatIUT\Configuration\Configuration;
                 </form>";
                     $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
 
-                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        $user = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
+                    if (ConnexionUtilisateur::estConnecte()) {
+                        $user = ConnexionUtilisateur::getUtilisateurConnecte();
+                        $menu = $user->getMenu();
                         $src = $user->getImageProfil();
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
-                        $menu = $user->getMenu();
-                        $controleur=$user->getControleur();
+                        $controleur = $user->getControleur();
                         $codeRecherche = "
                         <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?controleur=Main&action=rechercher' method='post'>
