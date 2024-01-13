@@ -8,6 +8,7 @@ use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\StringUtils;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Service\ServiceConnexion;
+use App\FormatIUT\Service\ServiceEtudiant;
 use App\FormatIUT\Service\ServiceMdp;
 use App\FormatIUT\Service\ServiceRecherche;
 
@@ -158,6 +159,19 @@ class ControleurMain
     public static function rechercher(): void
     {
         ServiceRecherche::rechercher();
+    }
+
+    public static function setNumEtuSexe():void
+    {
+        ServiceEtudiant::setNumEtuSexe();
+    }
+    public static function setTelMailPerso():void
+    {
+        ServiceEtudiant::setTelMailPerso();
+    }
+    public static function setGroupeParcours():void
+    {
+        ServiceEtudiant::setGroupeParcours();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
