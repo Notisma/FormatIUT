@@ -4,7 +4,6 @@ namespace App\FormatIUT\Service;
 
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -74,6 +73,8 @@ class ServicePersonnel
 
     /**
      * @return void
+     * <br><br>
+     * Passe l'attribut TuteurUMvalide à true;
      */
     public static function validerTuteurUM(): void
     {
@@ -82,6 +83,11 @@ class ServicePersonnel
             return;
         }
         $etuID = $_GET['eleveId'];
+
+        if (ConnexionUtilisateur::getTypeConnecte() != "Administrateurs") {
+            ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "danger", "Vous n'avez pas les droits nécessaires. Cet incident sera reporté.");
+            return;
+        }
 
         /** @var Formation $offreValide */
         $offreValide = (new EtudiantRepository())->getOffreValidee($etuID);
