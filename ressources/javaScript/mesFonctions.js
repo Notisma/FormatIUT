@@ -8,16 +8,6 @@ function fermerPopupDepotCV_LM() {
     document.getElementById("aGriser").style.opacity = "1";
 }
 
-function afficherPopupInfosEtu() {
-    document.getElementById("infosEtuCandidat").style.display = "flex";
-    document.getElementById("aGriser").style.opacity = "0.3";
-}
-
-function fermerPopupInfosEtu() {
-    document.getElementById("infosEtuCandidat").style.display = "none";
-    document.getElementById("aGriser").style.opacity = "1";
-}
-
 function updateImage(inputNumber) {
     const fileInput = document.getElementById("fd" + inputNumber);
     const noFileImage = document.getElementById("imageNonDepose" + inputNumber);

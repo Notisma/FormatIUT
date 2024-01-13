@@ -32,10 +32,17 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
             </div>
         </div>
 
-        <div class="sousMenuEntr mdpM" onclick="afficherPageCompteEntr('tuteurs')">
+        <div class="sousMenuEntr tuteursM" onclick="afficherPageCompteEntr('tuteurs')">
             <img src="../ressources/images/employe.png" alt="profil">
             <div>
-                <h3 class="titre">Mes Tuteurs</h3>
+                <h3 class="titre">Créer un Tuteur</h3>
+            </div>
+        </div>
+
+        <div class="sousMenuEntr myTuteursM" onclick="afficherPageCompteEntr('myTuteurs')">
+            <img src="../ressources/images/parametres.png" alt="profil">
+            <div>
+                <h3 class="titre">Gérer mes Tuteurs</h3>
             </div>
         </div>
 
@@ -150,7 +157,7 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
     </div>
 
     <div class="mainEntr" id="tuteurs">
-        <h2 class="titre rouge">Gérer mes tuteurs</h2>
+        <h2 class="titre rouge">Créer un tuteur</h2>
         <form method="post">
             <h3 class="titre">Ajouter un tuteur</h3>
             <br>
@@ -193,6 +200,14 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
                 <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>">
                 <input type="submit" value="Ajouter" formaction="?action=ajouterTuteur&controleur=EntrMain">
             </div>
+    </div>
+
+    <div class="mainEntr" id="myTuteurs">
+        <h2 class="titre rouge">Gérer mes Tuteurs</h2>
+        <h3 class="titre">Liste de mes Tuteurs</h3>
+        <div class="listeTuteurs">
+
+        </div>
     </div>
 
 
