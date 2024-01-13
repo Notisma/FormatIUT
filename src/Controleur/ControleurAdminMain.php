@@ -263,7 +263,7 @@ class ControleurAdminMain extends ControleurMain
             self::afficherVue("Détails de l'enseignant", "Admin/vueDetailProf.php");
         }
         else {
-            self::redirectionFlash("afficherCompteAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
+            self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
     }
 
