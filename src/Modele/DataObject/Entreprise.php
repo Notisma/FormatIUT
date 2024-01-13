@@ -277,7 +277,8 @@ class Entreprise extends AbstractDataObject
     public static function ajouterTuteur($nom, $prenom, $email, $tel, $fonction)
     {
         $idEntreprise = ConnexionUtilisateur::getNumEntrepriseConnectee();
-        (new TuteurProRepository())->creerObjet(new TuteurPro($idEntreprise, $nom, $prenom, $email, $tel, $fonction, $idEntreprise));
+        $nb = (new TuteurProRepository())->getNewIdTuteurPro();
+        (new TuteurProRepository())->creerObjet(new TuteurPro($nb, $email, $tel, $fonction,$nom, $prenom, $idEntreprise));
     }
 
     public function setDateCreationCompte(string $dateCreationCompte): void

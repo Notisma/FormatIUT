@@ -134,7 +134,7 @@ $listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionU
                         <?php
                         if (!empty($listeTuteurs)) {
                             foreach ($listeTuteurs as $tuteur) {
-                                echo "<option value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
+                                echo "<option name='idTuteur' value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
                             }
                         } else {
                             echo "<option value='0'>Aucun tuteur disponible</option>";

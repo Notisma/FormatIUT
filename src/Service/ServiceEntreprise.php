@@ -170,7 +170,7 @@ class ServiceEntreprise
                 if ($_REQUEST["siret"] == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST["siret"]);
                     if (!is_null($entreprise)) {
-                            if (strlen($_REQUEST["tel"]) == 10) {
+                            if (strlen($_REQUEST["telTuteur"]) == 10) {
                                 $entreprise->ajouterTuteur($_REQUEST["nomTuteur"], $_REQUEST["prenomTuteur"], $_REQUEST["emailTuteur"], $_REQUEST["telTuteur"], $_REQUEST["fonctionTuteur"]);
                                 (new EntrepriseRepository())->modifierObjet($entreprise);
                                 ControleurEntrMain::redirectionFlash("afficherProfil", "success", "Le tuteur a bien été ajouté");
