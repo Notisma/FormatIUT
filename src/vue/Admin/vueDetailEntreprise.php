@@ -90,3 +90,66 @@
         </div>
     </div>
 </div>
+
+<div class="annotations">
+    <div class="interaction" onclick="toggleExpand()">
+        <img src="../ressources/images/gauche.png" alt="">
+    </div>
+    <div class="wrapAnnotations">
+        <h3 class="titre rouge">Annotations des Enseignants</h3>
+        <?php
+        $listeAnnotations = (new \App\FormatIUT\Modele\Repository\AnnotationRepository())->annotationsParEntreprise($offre->getIdEntreprise());
+        ?>
+
+        <div class="moyenne">
+            <h4 class="titre">Moyenne des Commentaires</h4>
+            <div>
+                <?php
+                if (!empty($listeAnnotations)) {
+                    foreach ($listeAnnotations as $annotation) {
+                        $moyenne = $annotation->getNoteAnnotation();
+                    }
+                    $moyenne = $moyenne / count($listeAnnotations);
+
+                    if ($moyenne - floor($moyenne) >= 0.5) {
+                        $moyenne = ceil($moyenne);
+                    } else {
+                        $moyenne = floor($moyenne);
+                    }
+                    echo "<div>";
+                    for ($i = 0; $i < $moyenne; $i++) {
+                        echo "<img src='../ressources/images/etoile.png' alt='etoile'>";
+                    }
+                    echo "</div>";
+                    echo "<h4 class='titre'>" . $moyenne . "/5</h4>";
+                }
+                ?>
+            </div>
+
+        </div>
+
+        <div class="autresComm">
+            <h4 class="titre">Autres Commentaires</h4>
+            <?php
+            if (!empty($listeAnnotations)) {
+                foreach ($listeAnnotations as $annotation) {
+                    for ($i = 0; $i < 10; $i++) {
+                        $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
+                        echo "<div class='commentaire'>";
+                        echo "<img src='../ressources/images/admin.png' alt='etoile'>";
+                        echo "<div>";
+                        echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
+                        echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
+                        echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                }
+            } else {
+                echo "<h5 class='titre'>Aucun commentaire pour le moment</h5>";
+            }
+            ?>
+        </div>
+
+    </div>
+</div>
