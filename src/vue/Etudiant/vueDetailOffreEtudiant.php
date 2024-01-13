@@ -256,7 +256,11 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     <div class="interaction" onclick="toggleExpand()">
         <img src="../ressources/images/gauche.png" alt="">
     </div>
-    <div class="expanding-div" id="expandingDiv">
+    <div class="wrapAnnotations">
+        <h3 class="titre rouge">Annotations des Enseignants</h3>
+        <?php
+        $listeAnnotations = (new \App\FormatIUT\Modele\Repository\AnnotationRepository())->getAnnotationsPourOffre($offre->getIdFormation());
+        ?>
 
     </div>
 </div>
