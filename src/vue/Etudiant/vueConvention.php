@@ -186,44 +186,46 @@ echo match ($etat) {
 <input type="hidden" value="<?= $entreprise->getAdresseEntreprise() ?>" name="adresseEntr">
 <input type="hidden" name="villeEntr" value="<?= htmlspecialchars($villeEntr->getNomVille()); ?>">
 <input type="hidden" name="codePostalEntr" value="<?= $villeEntr->getCodePostal(); ?>">
-<?php
-$dateDebut = $offre->getDateDebut();
-$dateFin = $offre->getDateFin();
+<div class="boutonsConv">
+    <?php
+    $dateDebut = $offre->getDateDebut();
+    $dateFin = $offre->getDateFin();
 
-echo '<input type="hidden" name="dateDebut" value="' . $dateDebut . '">
+    echo '<input type="hidden" name="dateDebut" value="' . $dateDebut . '">
     <input type="hidden" name="dateFin" value="' . $dateFin . '">';
 
-switch ($etat) {
-    case ConventionEtat::Creation:
-        echo "<input type='submit' value='Créer convention'>";
-        break;
-    case ConventionEtat::Modification:
-        echo "<input type='submit' value='Enregister modifications'>";
-        break;
-    case ConventionEtat::VisuEtudiant:
-        if ($offre->getConventionValidee())
-            echo "<h3>Convention validée !</h3>";
-        else
-            echo "
-                <div class='wrapBoutons'>
+    switch ($etat) {
+        case ConventionEtat::Creation:
+            echo "<input type='submit' value='Créer convention'>";
+            break;
+        case ConventionEtat::Modification:
+            echo "<input type='submit' value='Enregister modifications'>";
+            break;
+        case ConventionEtat::VisuEtudiant:
+            if ($offre->getConventionValidee())
+                echo "<h3>Convention validée !</h3>";
+            else
+                echo "
+               
                     <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
                     <a href='?action=faireValiderConvention'>Faire valider</a>
-                </div>
+                
             ";
-        break;
-    case ConventionEtat::VisuAdmin:
-        if ($offre->getConventionValidee())
-            echo "<h3>Convention validée !</h3>";
-        else
-            echo "
-                <div class='wrapBoutons'>
+            break;
+        case ConventionEtat::VisuAdmin:
+            if ($offre->getConventionValidee())
+                echo "<h3>Convention validée !</h3>";
+            else
+                echo "
+               
                     <a href='?action=validerConvention&controleur=AdminMain&numEtudiant=$etuId'>Valider</a>
                     <a href='?action=rejeterConvention&controleur=AdminMain&numEtudiant=$etuId'>Rejeter</a>
-                </div>
+               
             ";
-        break;
-}
+            break;
+    }
 
-?>
+    ?>
+</div>
 
 </form>
