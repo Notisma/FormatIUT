@@ -52,6 +52,14 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
             </div>
         </div>
 
+        <?php
+        if ($offre->getEstValide()) {
+            echo "<div class='statutOffre valide'><img src='../ressources/images/success.png' alt='valide'><p>Offre validée</p></div>";
+        } else {
+            echo "<div class='statutOffre nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Offre en attente</p></div>";
+        }
+        ?>
+
         <div class="wrapActionsCandidat">
 
             <div class="candidature">

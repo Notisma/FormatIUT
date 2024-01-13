@@ -167,6 +167,36 @@ body {
     align-content: center;
 }
 
+.statutOffre {
+    width: 95%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 1%;
+    padding: 1%;
+}
+
+.statutOffre > img {
+    max-height: 90%;
+    padding-right: 2%;
+}
+
+.valide {
+    background-color: #24942b;
+    color: #0d4e00;
+    border: 2px solid #0d4e00;
+}
+
+
+.nonValide {
+    background-color: #ffb700;
+    color: #814900;
+    border: 2px solid #fa7506;
+}
+
 .boutonAssigner {
     width: 210px;
     height: 25px;

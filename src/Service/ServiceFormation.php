@@ -85,7 +85,7 @@ class ServiceFormation
                         if ($_REQUEST["nbHeuresHebdo"] < 8 * 7 && $_REQUEST["dureeHeure"] > $_REQUEST["nbHeuresHebdo"]) {
                             $offre = Formation::creerFormation($_REQUEST);
                             (new FormationRepository())->creerObjet($offre);
-                            //$_REQUEST["action"] = "afficherMesOffres";
+                            $_REQUEST["action"] = "afficherMesOffres";
                             MessageFlash::ajouter("success", "Offre créée avec succès");
                             ControleurEntrMain::afficherMesOffres();
                         } else {
