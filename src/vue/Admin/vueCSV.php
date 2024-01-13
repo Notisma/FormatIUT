@@ -21,7 +21,7 @@
         <h2 class="titre">Exporter les données</h2>
         <img src="../ressources/images/csvIcone.png" alt="export">
         <p>Exportez les données de Format'IUT en format CSV</p>
-        <form method="post" action="?service=Fichier&action=exporterCSV">
+        <form method="post" action="?controleur=AdminMain&action=exporterCSV">
             <input type="submit" value="Télécharger">
         </form>
     </div>
