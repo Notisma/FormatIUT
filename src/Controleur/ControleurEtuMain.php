@@ -91,7 +91,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
 
-        if ($offre != false && $offre->getDateCreationConvention() != null) {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" && $offre != null &&  $offre != false && $offre->getDateCreationConvention() != null) {
 
             $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
@@ -201,6 +201,21 @@ class ControleurEtuMain extends ControleurMain
         }
     }
 
+    /**
+     * @return void renvoie sur le formulaire convention une entreprise n'est pas inscrite sur le site
+     */
+    public static function afficherFormulaireConventionSansEntreprise()
+    {
+        $formation = (new FormationRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        if ($formation == null && ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+            self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreationConventionQuandPasEntreprise.php", ['etudiant' => $etudiant]);
+        }
+        else{
+            self::redirectionFlash("afficherAccueilEtu", "warning", "Vous avez déjà une formation");
+        }
+    }
+
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static function postuler(): void
@@ -231,6 +246,10 @@ class ControleurEtuMain extends ControleurMain
     public static function faireValiderConvention(): void
     {
         ServiceConvention::faireValiderConvention();
+    }
+
+    public static function creerConventionSansEntreprise(): void{
+        ServiceConvention::creerConventionSansEntreprise();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

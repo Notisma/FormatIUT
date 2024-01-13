@@ -2,9 +2,7 @@
 
 namespace App\FormatIUT\Lib;
 
-use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\Users\Utilisateur;
-use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\ConnexionLdap;
@@ -58,7 +56,7 @@ class ConnexionUtilisateur
     {
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user= $session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
 
             return $user;
         }
@@ -73,7 +71,7 @@ class ConnexionUtilisateur
         // À compléter
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user= $session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
             return $user->getLogin();
         }
         return null;
@@ -112,7 +110,7 @@ class ConnexionUtilisateur
     {
         if (self::estConnecte()) {
             $session = Session::getInstance();
-            $user=$session->lire(self::$cleConnexion);
+            $user = $session->lire(self::$cleConnexion);
             return $user->getTypeConnecte();
         }
         return null;
@@ -145,7 +143,7 @@ class ConnexionUtilisateur
     {
         if (!(new ProfRepository())->estProf($login)) {
             $infos = ConnexionLdap::getInfoPersonne();
-            $prof = new Prof($infos["login"], $infos["nom"], $infos["prenom"], $infos["mail"],0,0);
+            $prof = new Prof($infos["login"], $infos["nom"], $infos["prenom"], $infos["mail"], 0, 0);
             (new ProfRepository())->creerObjet($prof);
         }
     }
@@ -157,7 +155,7 @@ class ConnexionUtilisateur
     public static function premiereConnexionTest(string $login):void
     {
         if (!(new ProfRepository())->estProf($login)) {
-            $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail",0,1);
+            $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail", 0, 1);
             (new ProfRepository())->creerObjet($prof);
         }
         if (!(new EtudiantRepository())->estEtudiant($login)){

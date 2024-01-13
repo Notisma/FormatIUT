@@ -7,6 +7,7 @@ use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Etudiant;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 
 class ServiceEtudiant
 {
@@ -146,4 +147,9 @@ class ServiceEtudiant
         ControleurEtuMain::afficherAccueilEtu();
         echo "<script>afficherPopupPremiereCo(4)</script>";
     }
+
+    /**
+     * @return void creer une convention où l'entreprise n'est pas présente dans la bd
+     */
+
 }

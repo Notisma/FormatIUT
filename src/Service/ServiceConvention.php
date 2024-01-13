@@ -5,10 +5,20 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
+use App\FormatIUT\Modele\DataObject\Entreprise;
+
+
+use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\DataObject\Postuler;
+use App\FormatIUT\Modele\DataObject\TuteurPro;
+use App\FormatIUT\Modele\DataObject\Ville;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use Exception;
 
@@ -74,7 +84,7 @@ class ServiceConvention
                     if (isset($_REQUEST["assurance"])) {
                         $formation->setAssurance($_REQUEST['assurance']);
                         $formation->setDateCreationConvention($_REQUEST['dateCreation']);
-                        if($formation->getDateTransmissionConvention() != null){
+                        if ($formation->getDateTransmissionConvention() != null) {
                             $formation->setDateTransmissionConvention(null);
                         }
                         (new FormationRepository())->modifierObjet($formation);
@@ -122,17 +132,17 @@ class ServiceConvention
      */
     public static function rejeterConvention(): void
     {
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat"){
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            if($formation->getConventionValidee() == false){
+            if ($formation->getConventionValidee() == false) {
                 $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
                 (new FormationRepository())->modifierObjet($formation);
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention rejetée");
-            }else{
+            } else {
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "danger", "Cette convention a été validée");
             }
-        }else{
-              ControleurAdminMain::redirectionFlash("afficherAccueilAdmin","danger","Vous n'êtes ni du secrétariat ni du côté administrateur");
+        } else {
+            ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "danger", "Vous n'êtes ni du secrétariat ni du côté administrateur");
         }
     }
 
@@ -143,6 +153,87 @@ class ServiceConvention
         $worked = VerificationEmail::envoiEmailValidationDeConventionAuxAdmins((new EtudiantRepository())->getObjectParClePrimaire($numEtu));
         if ($worked) ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Demande envoyée !");
         else ControleurEtuMain::redirectionFlash("afficherMaConvention", "warning", "Échec de l'envoi... Contacter un administrateur.");
+    }
+
+    /**
+     * @return void creer une convention où l'entreprise n'est pas présente dans la bd
+     */
+    public static function creerConventionSansEntreprise(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
+            $login = ConnexionUtilisateur::getNumEtudiantConnecte();
+            if (
+                isset($_REQUEST['typeOffre']) && $_REQUEST['typeOffre'] != "" &&
+                isset($_REQUEST['siret']) && $_REQUEST['siret'] != "" &&
+                isset($_REQUEST['nomEntreprise']) && $_REQUEST['nomEntreprise'] != "" &&
+                isset($_REQUEST['adresseEntr']) && $_REQUEST['adresseEntr'] != "" &&
+                isset($_REQUEST['villeEntr']) && $_REQUEST['villeEntr'] != "" &&
+                isset($_REQUEST['telEntreprise']) && $_REQUEST['telEntreprise'] != "" &&
+                isset($_REQUEST['emailEntreprise']) && $_REQUEST['emailEntreprise'] != "" &&
+                isset($_REQUEST['offreSujet']) && $_REQUEST['offreSujet'] != "" &&
+                isset($_REQUEST['offreDateDebut']) && $_REQUEST['offreDateDebut'] != "" &&
+                isset($_REQUEST['offreDateFin']) && $_REQUEST['offreDateFin'] != "" &&
+                isset($_REQUEST['etudiantAnneeEtu']) && $_REQUEST['etudiantAnneeEtu'] != "" &&
+                isset($_REQUEST['etudiantParcours']) && $_REQUEST['etudiantParcours'] != "" &&
+                isset($_REQUEST['offreDureeHeure']) && $_REQUEST['offreDureeHeure'] != "" &&
+                isset($_REQUEST['offreGratification']) && $_REQUEST['offreGratification'] != "" &&
+                isset($_REQUEST['assurance']) && $_REQUEST['assurance'] != "" &&
+                isset($_REQUEST['nomTuteurPro']) && $_REQUEST['nomTuteurPro'] != "" &&
+                isset($_REQUEST['prenomTuteurPro']) && $_REQUEST['prenomTuteurPro'] != "" &&
+                isset($_REQUEST['codePostalEntr']) && $_REQUEST['codePostalEntr'] != ""
+            ) {
+                $formation = (new FormationRepository())->trouverOffreDepuisForm($login);
+                if (!$formation) {
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
+                    if (!$entreprise || $entreprise->getMdpHache() == null) {
+                        $villeEntr = (new VilleRepository())->getVilleParNom2($_REQUEST['villeEntr']);
+                        if (!$villeEntr) {
+                            $listeVille = (new VilleRepository())->getListeObjet();
+                            $villeEntr = new Ville((sizeof($listeVille) + 1), $_REQUEST['villeEntr'], $_REQUEST['codePostalEntr']);
+                            (new VilleRepository())->creerObjet($villeEntr);
+                        }
+
+                        $idville = strval($villeEntr->getIdVille());
+
+                        $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
+                            , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, "",
+                         $_REQUEST['emailEntreprise'], null, null, true, null);
+
+                        $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
+                        if (!$entrepriseVerif) {
+                            (new EntrepriseRepository())->creerObjet($entreprise);
+                        }
+
+                        $tuteurliste = (new TuteurProRepository())->getListeObjet();
+                        $idTuteur = "TP" . (is_null($tuteurliste) ? 0 : sizeof($tuteurliste)) + 1;
+                        $tuteurInserer = new TuteurPro($idTuteur, "", "", "", $_REQUEST['nomTuteurPro'], $_REQUEST['prenomTuteurPro'], $_REQUEST['siret']);
+                        (new TuteurProRepository())->creerObjet($tuteurInserer);
+
+                        $formation = new Formation(null, "", $_REQUEST['offreDateDebut'], $_REQUEST['offreDateFin'], $_REQUEST['offreSujet'], $_REQUEST['etudiantAnneeEtu'],
+                            $_REQUEST['offreDureeHeure'], null, $_REQUEST['offreGratification'], "euros", null, null, true, "", $_REQUEST['dateCreation'],
+                            $_REQUEST['typeOffre'], $_REQUEST['etudiantAnneeEtu'], $_REQUEST['etudiantAnneeEtu'], true, false, null, false, $_REQUEST['dateCreation'],
+                            null, false, $_REQUEST['assurance'], null, $login, $idTuteur, $_REQUEST['siret'], null, false);
+                        $idFormation = (new FormationRepository())->creerObjet($formation);
+
+                        $postuler = new Postuler($login, $idFormation, "Validée", null, null);
+                        (new PostulerRepository())->creerObjet($postuler);
+
+                        ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Vous avez créé votre convention");
+
+                    } else {
+                        ControleurEtuMain::redirectionFlash("afficherFormulaireConventionSansEntreprise", "warning", "Cette entreprise a déjà un compte");
+                    }
+
+                } else {
+                    ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne pouvez pas créer une convention alors que vous avez déjà une formation");
+                }
+
+            } else {
+                ControleurEtuMain::redirectionFlash("afficherFormulaireConventionSansEntreprise", "warning", "Vous n'avez pas rempli tout les champs du formulaire");
+            }
+        } else {
+            ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Erreur vous n'êtes pas un étudiant");
+        }
     }
 
 }
