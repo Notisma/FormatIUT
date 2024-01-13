@@ -62,13 +62,15 @@ class Etudiants extends Utilisateur
         }
 
         $offre = (new FormationRepository())->trouverOffreDepuisForm($etu->getNumEtudiant());
-        if ($offre && $offre->getDateCreationConvention() == null) {
-            $offreValidee = (new PostulerRepository())->getOffreValider($etu->getNumEtudiant());
-            if ($offreValidee) {
-                $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention", "lien" => "?controleur=EtuMain&action=afficherFormulaireConvention");
-            }
-        } else if ($offre != false && $offre->getDateCreationConvention() != null) {
-            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+        if ($offre) {
+            if (is_null($offre->getDateCreationConvention())) {
+                $offreValidee = (new PostulerRepository())->getOffreValider($etu->getNumEtudiant());
+                if ($offreValidee) {
+                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention", "lien" => "?controleur=EtuMain&action=afficherFormulaireConvention");
+                }
+            } else $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
+        } else {
+            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Créer une convention", "lien" => "?controleur=EtuMain&action=goulag");
         }
 
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");
