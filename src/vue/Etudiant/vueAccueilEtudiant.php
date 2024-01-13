@@ -56,9 +56,27 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
 
         <h3 class="titre" id="sep">Vos Notifications :</h3>
         <div class="notifs">
-            <div class="erreur">
-                <img src="../ressources/images/erreur.png" alt="erreur">
-                <h4 class="titre">Vous n'avez aucune notification</h4>
+            <?php
+
+            if($convention->getDateTransmissionConvention() != null && $convention->getConventionValidee() == false){
+                echo "<div class='erreur'>
+                 <h4 class='titre'>Votre convention a été rejetée, le ".$convention->getDateTransmissionConvention()." cliquez ci-dessous pour la modifier :</h4>
+                 <div class='wrapBoutons'>
+                 <a href='?action=afficherFormulaireModifierConvention'>Modifier</a>
+                </div>";
+
+            }
+            else if($convention->getDateTransmissionConvention() != null && $convention->getConventionValidee() == true){
+                echo "<div class='erreur'>
+                 <h4 class='titre'>Votre convention a été validée, le ".$convention->getDateTransmissionConvention()." </h4>";
+            }
+            else{
+
+            echo "<div class='erreur'>
+                <img src='../ressources/images/erreur.png' alt='erreur'>
+                <h4 class='titre'>Vous n'avez aucune notification</h4>";
+                }
+            ?>
             </div>
         </div>
 

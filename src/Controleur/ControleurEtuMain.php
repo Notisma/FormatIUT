@@ -45,8 +45,9 @@ class ControleurEtuMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeIdOffres); $i++) {
             $listeOffres[] = (new FormationRepository())->getObjectParClePrimaire($listeIdOffres[$i]);
         }
+        $convention = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", ["convention" => $convention ,"listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
     }
 
     /**

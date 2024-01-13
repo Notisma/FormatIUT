@@ -110,7 +110,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
                 echo "Tuteur UM : ";
                 echo $tuteur;
                 if (!$formationValidee->isTuteurUMvalide()) {
-                    $eleveId = $_GET['numEtu'];
+                    $eleveId = $_GET['numEtudiant'];
                     echo "
                             Acceptez-vous ce tuteur ?
                             <div class='wrapBoutons'>

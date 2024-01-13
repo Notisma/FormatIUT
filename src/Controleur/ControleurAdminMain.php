@@ -43,7 +43,7 @@ class ControleurAdminMain extends ControleurMain
         $listeFomations = (new FormationRepository())->etudiantsSansConventionsValides();
         $accueil = ConnexionUtilisateur::getTypeConnecte();
         self::$pageActuelleAdmin = "Accueil Administrateurs";
-        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants]);
+        self::afficherVue("Accueil $accueil", "Admin/vueAccueilAdmin.php", ["listeEntreprises" => $listeEntreprises, "listeOffres" => $listeOffres, "listeEtudiants" => $listeEtudiants, "listeFormations" => $listeFomations]);
     }
 
 
