@@ -179,16 +179,17 @@ class ServiceConvention
                 isset($_REQUEST['offreGratification']) && $_REQUEST['offreGratification'] != "" &&
                 isset($_REQUEST['assurance']) && $_REQUEST['assurance'] != "" &&
                 isset($_REQUEST['nomTuteurPro']) && $_REQUEST['nomTuteurPro'] != "" &&
-                isset($_REQUEST['prenomTuteurPro']) && $_REQUEST['prenomTuteurPro'] != ""
+                isset($_REQUEST['prenomTuteurPro']) && $_REQUEST['prenomTuteurPro'] != "" &&
+                isset($_REQUEST['codePostalEntr']) && $_REQUEST['codePostalEntr'] != ""
             ) {
                 $formation = (new FormationRepository())->trouverOffreDepuisForm($login);
                 if (!$formation) {
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
-                    if (!$entreprise) {
+                    if (!$entreprise || $entreprise->getMdpHache() == null) {
                         $villeEntr = (new VilleRepository())->getVilleParNom2($_REQUEST['villeEntr']);
                         if (!$villeEntr) {
                             $listeVille = (new VilleRepository())->getListeObjet();
-                            $villeEntr = new Ville(sizeof($listeVille) + 1, $_REQUEST['villeEntr'], null);
+                            $villeEntr = new Ville((sizeof($listeVille) + 1), $_REQUEST['villeEntr'], $_REQUEST['codePostalEntr']);
                             (new VilleRepository())->creerObjet($villeEntr);
                         }
 
@@ -196,7 +197,7 @@ class ServiceConvention
 
                         $entreprise = new Entreprise($_REQUEST['siret'], $_REQUEST['nomEntreprise'], null, null
                             , null, $_REQUEST['telEntreprise'], $_REQUEST['adresseEntr'], $idville,null, null,
-                         $_REQUEST['emailEntreprise'], null, null, false, null);
+                         $_REQUEST['emailEntreprise'], null, null, true, null);
 
                         $entrepriseVerif = (new EntrepriseRepository())->getObjectParClePrimaire($entreprise->getSiret());
                         if (!$entrepriseVerif) {

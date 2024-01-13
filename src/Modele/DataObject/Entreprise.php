@@ -20,11 +20,11 @@ class Entreprise extends AbstractDataObject
     private ?string $tel;
     private string $adresseEntreprise;
     private string $idVille;
-    private string $img;
-    private string $mdpHache;
+    private ?string $img;
+    private ?string $mdpHache;
     private string $email;
-    private string $emailAValider;
-    private string $nonce;
+    private ?string $emailAValider;
+    private ?string $nonce;
     private bool $estValide;
     private ?string $dateCreationCompte;
 
@@ -37,15 +37,15 @@ class Entreprise extends AbstractDataObject
      * @param string|null $tel
      * @param string $AdresseEntreprise
      * @param string $idVille
-     * @param string $img
-     * @param string $mdpHache
+     * @param string|null $img
+     * @param string|null $mdpHache
      * @param string $email
-     * @param string $emailAValider
-     * @param string $nonce
+     * @param string|null $emailAValider
+     * @param string|null $nonce
      * @param bool $estValide
      * @param string|null $dateCreationCompte
      */
-    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
+    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, ?string $img, ?string $mdpHache, string $email, ?string $emailAValider, ?string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -208,22 +208,22 @@ class Entreprise extends AbstractDataObject
         $this->idVille = $idVille;
     }
 
-    public function getImg(): string
+    public function getImg(): ?string
     {
         return $this->img;
     }
 
-    public function setImg(string $img): void
+    public function setImg(?string $img): void
     {
         $this->img = $img;
     }
 
-    public function getMdpHache(): string
+    public function getMdpHache(): ?string
     {
         return $this->mdpHache;
     }
 
-    public function setMdpHache(string $mdpHache): void
+    public function setMdpHache(?string $mdpHache): void
     {
         $this->mdpHache = $mdpHache;
     }
@@ -238,22 +238,22 @@ class Entreprise extends AbstractDataObject
         $this->email = $email;
     }
 
-    public function getEmailAValider(): string
+    public function getEmailAValider(): ?string
     {
         return $this->emailAValider;
     }
 
-    public function setEmailAValider(string $emailAValider): void
+    public function setEmailAValider(?string $emailAValider): void
     {
         $this->emailAValider = $emailAValider;
     }
 
-    public function getNonce(): string
+    public function getNonce(): ?string
     {
         return $this->nonce;
     }
 
-    public function setNonce(string $nonce): void
+    public function setNonce(?string $nonce): void
     {
         $this->nonce = $nonce;
     }
@@ -268,12 +268,12 @@ class Entreprise extends AbstractDataObject
         $this->estValide = $estValide;
     }
 
-    public function getDateCreationCompte(): string
+    public function getDateCreationCompte(): ?string
     {
         return $this->dateCreationCompte;
     }
 
-    public function setDateCreationCompte(string $dateCreationCompte): void
+    public function setDateCreationCompte(?string $dateCreationCompte): void
     {
         $this->dateCreationCompte = $dateCreationCompte;
     }
