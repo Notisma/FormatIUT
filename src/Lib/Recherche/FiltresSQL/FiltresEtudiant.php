@@ -63,9 +63,9 @@ class FiltresEtudiant
 
     public static function etudiant_concerne(): string
     {
-        $entreprise = (new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
-        $idEntreprise = $entreprise->getSiret();
-        return " EXISTS (SELECT idEtudiant FROM Formations WHERE idEntreprise=$idEntreprise AND E.numEtudiant=F.idEtudiant)";
+        $entreprise=(new EntrepriseRepository())->getEntrepriseParMail(ConnexionUtilisateur::getUtilisateurConnecte()->getLogin());
+        $idEntreprise=$entreprise->getSiret();
+        return " EXISTS (SELECT idEtudiant FROM Formations F WHERE idEntreprise=$idEntreprise AND E.numEtudiant=F.idEtudiant)";
     }
 
     public static function etudiant_avec_formation(): string

@@ -184,7 +184,11 @@ body {
     margin-bottom: 5%;
 }
 
-.inputCentre > input[type="text"], .inputCentre > input[type="number"], .inputCentre > input[type="password"] {
+.inputCentre > label {
+    width : 100%;
+}
+
+.inputCentre > input[type="text"], .inputCentre > input[type="number"], .inputCentre > label > input {
     width: 100%;
     height: 35px;
     border-radius: 10px;
@@ -302,4 +306,74 @@ body {
 
 #mdp {
     display: none;
+}
+
+.listeTuteurs {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.listeTuteurs::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #ffbfc2;
+}
+
+.listeTuteurs::-webkit-scrollbar-thumb {
+    background-color: #ff5660;
+    border-radius: 10px;
+}
+
+.tuteur {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    background-color: #aadcda;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.boutonTuteur {
+    width: 130px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff5660;
+    color: white;
+    transition: background-color 0.5s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.inputTuteur {
+    width: 90%;
+    height: 20px;
+    background-color: #ff9095;
+    border-radius: 5px;
+    border: none;
+    padding-left: 2%;
+}
+
+.boutonTuteur:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
 }

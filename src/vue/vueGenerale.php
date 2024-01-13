@@ -1,7 +1,6 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body
     <?php
@@ -36,8 +35,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
-                    $menu=\App\FormatIUT\Controleur\ControleurMain::getMenu();
-                    $type = ConnexionUtilisateur::getTypeConnecte();
+                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -45,15 +43,14 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
+                    $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
 
-
-                    if (ConnexionUtilisateur::estConnecte()) {
-
-                        $user = ConnexionUtilisateur::getUtilisateurConnecte();
-                        $menu=$user->getMenu();
+                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
+                        $user = \App\FormatIUT\Lib\ConnexionUtilisateur::getUtilisateurConnecte();
                         $src = $user->getImageProfil();
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
-                        $controleur=$user->getControleur();
+                        $menu = $user->getMenu();
+
                         $codeRecherche = "
                         <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?controleur=Main&action=rechercher' method='post'>
@@ -61,7 +58,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='controleur' value='$controleur'>
+                            <input type='hidden' name='controleur' value='Main'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                     }
@@ -102,7 +99,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                         if ($item['label'] == $titrePage) {
                             $actuel = "class='active'";
                         }
-                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone '><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
                     ?>
                 </div>
@@ -133,60 +130,26 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 
     <footer>
-        <div id="footerContent">
-            <div id="footerText">
-                <h4>Equipe de Développement :</h4>
-                <div class="UlConteneur">
-                    <div>
-                        <ul>
-                            <li>Romain TOUZE</li>
-                            <li>Raphaël IZORET</li>
-                            <li>Matteo TORDEUX</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>Enzo GUILHOT</li>
-                            <li>Noé FUERTES-TORREDEME</li>
-                            <li>Thomas LOYE</li>
-                        </ul>
-                    </div>
+        <div class="footerContent">
+            <div class="footerForm">
+                <img src="../ressources/images/Logo_rouge.png" alt="petit logo footer">
+                <div>
+                    <h4 class="titre blanc">Sources : Cliquer <a
+                                href="?action=afficherSources&controleur=Main">ICI</a>
+                    </h4>
+                    <h4 class="titre blanc">Mentions Légales : Cliquer <a
+                                href="?action=afficherMentionsLegales&controleur=Main">ICI</a>
+                    </h4>
                 </div>
-                <p>Sources : Cliquer <a
-                            href="controleurFrontal.php?action=afficherSources&controleur=Main">ICI</a>
-                </p>
             </div>
+
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
                      alt="grand logo footer">
-                <h2>© 2023 - Format'IUT</h2>
+                <h2 class="titre blanc">© 2023 - Format'IUT</h2>
             </div>
         </div>
     </footer>
 </div>
-
-<div class="decoAuto" id="decoAuto">
-    <img src="../ressources/images/warning.png" alt="warning">
-    <h2 class="titre" id="rouge">AVERTISSEMENT</h2>
-    <h3 class="titre">Vous serez déconnecté automatiquement à
-        <?php
-        date_default_timezone_set('Europe/Paris');
-        $date = date("H:i");
-        $time = strtotime($date . " +10 minutes");
-        echo date("H:i", $time);
-        ?>
-    </h3>
-    <a class="boutonFermer" onclick="supprimerElement('decoAuto')">J'ai Compris</a>
-</div>
-
-<?php
-
-if (isset($_SESSION['script'])) {
-    echo $_SESSION['script'];
-    unset($_SESSION['script']);
-}
-
-?>
-
 </body>
 </html>
