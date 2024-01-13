@@ -70,6 +70,8 @@ if (date("m") >= 9) {
                             <input type="text" required id="adresse_id" name="adresseEntr"></strong>
                         <strong><label for="ville_id">Ville : </label>
                             <input type="text" required id="ville_id" name="villeEntr"></strong>
+                        <strong><label for="postal_id">Code Postal : </label>
+                            <input type="number" required id="postal_id" name="codePostalEntr"></strong>
                     </h6>
                     <h6 class="titre">
                         <strong><label for="representant_id">Représenté par (nom du signataire de la convention)
