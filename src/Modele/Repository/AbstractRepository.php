@@ -4,6 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository
@@ -25,6 +26,7 @@ abstract class AbstractRepository
     {
         $sql = 'SELECT * FROM ' . $this->getNomTable();
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeObjet = array();
         foreach ($pdoStatement as $item) {
             $listeObjet[] = $this->construireDepuisTableau($item);
         }
@@ -102,10 +104,11 @@ abstract class AbstractRepository
             $values .= ":" . $nomColonne . "Tag";
             $tags[$nomColonne . "Tag"] = $object->formatTableau()[$nomColonne];
         }
-        $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
-        
+        $sql = "INSERT INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
+        DevUtils::print($tags);
         $pdo = ConnexionBaseDeDonnee::getPdo();
         $pdoStatement = $pdo->prepare($sql);
+        DevUtils::print($sql);
         $pdoStatement->execute($tags);
 
         return $pdo->lastInsertId();

@@ -5,6 +5,7 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\VerificationEmail;
 use App\FormatIUT\Modele\DataObject\EntrepriseFake;
 use App\FormatIUT\Modele\DataObject\Formation;
@@ -156,12 +157,8 @@ class ServiceConvention
     /**
      * @return void creer une convention où l'entreprise n'est pas présente dans la bd
      */
-    public static function creerConventionSansEntreprise()
+    public static function creerConventionSansEntreprise(): void
     {
-        /* echo '<pre>';
-         print_r($_REQUEST);
-         echo '</pre>';*/
-
         if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
             $login = ConnexionUtilisateur::getNumEtudiantConnecte();
             if (
@@ -187,7 +184,6 @@ class ServiceConvention
                 if (!$formation) {
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
                     if (!$entreprise) {
-
                         $villeEntr = (new VilleRepository())->getVilleParNom2($_REQUEST['villeEntr']);
                         if (!$villeEntr) {
                             $listeVille = (new VilleRepository())->getListeObjet();
@@ -202,17 +198,21 @@ class ServiceConvention
                         if (!$entrepriseFakeVerif) {
                             (new EntrepriseFakeRepository())->creerObjet($entrepriseFake);
                         }
+
                         $tuteurliste = (new TuteurProRepository())->getListeObjet();
-                        $idTuteur = "TP" . sizeof($tuteurliste) + 1;
+                        $idTuteur = "TP" . (is_null($tuteurliste) ? 0 : sizeof($tuteurliste)) + 1;
                         $tuteurInserer = new TuteurPro($idTuteur, "", "", "", $_REQUEST['nomTuteurPro'], $_REQUEST['prenomTuteurPro'], $_REQUEST['siret']);
                         (new TuteurProRepository())->creerObjet($tuteurInserer);
-                        $postuler = new Postuler($login, $_REQUEST['siret'], "Validée", null, null);
-                        (new PostulerRepository())->creerObjet($postuler);
+
                         $formation = new Formation(null, "", $_REQUEST['offreDateDebut'], $_REQUEST['offreDateFin'], $_REQUEST['offreSujet'], $_REQUEST['etudiantAnneeEtu'],
                             $_REQUEST['offreDureeHeure'], null, $_REQUEST['offreGratification'], "euros", null, null, true, "", $_REQUEST['dateCreation'],
                             $_REQUEST['typeOffre'], $_REQUEST['etudiantAnneeEtu'], $_REQUEST['etudiantAnneeEtu'], true, false, null, false, $_REQUEST['dateCreation'],
                             null, false, $_REQUEST['assurance'], null, $login, $idTuteur, $_REQUEST['siret'], null, false);
-                        (new FormationRepository())->creerObjet($formation);
+                        $idFormation = (new FormationRepository())->creerObjet($formation);
+
+                        $postuler = new Postuler($login, $idFormation, "Validée", null, null);
+                        (new PostulerRepository())->creerObjet($postuler);
+
                         ControleurEtuMain::redirectionFlash("afficherMaConvention", "success", "Vous avez créé votre convention");
 
                     } else {
