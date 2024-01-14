@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Lib;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurEntrMain;
 use App\FormatIUT\Controleur\ControleurEtuMain;
@@ -19,7 +20,7 @@ class TransfertImage
      * <br>
      * Après ça, la méthode appelle simplement uploadFichiers.
      */
-    public static function transfert(): ?int
+    public static function transfert(): int|false
     {
         $taille_max = 1000000;
         $ret = is_uploaded_file($_FILES['pdp']['tmp_name']);
@@ -35,48 +36,12 @@ class TransfertImage
                 die();
             }
             // si l'upload est une nouvelle PP étudiant, on la rend ronde avant de l'importer
-            if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
+            if (Configuration::getControleurName() == "EtuMain" || Configuration::getControleurName() == "AdminMain") {
                 $tmp_filename = $_FILES['pdp']['tmp_name'];
                 if (exif_imagetype($tmp_filename)) {
-                    // Convertir l'image en PNG si elle ne l'est pas déjà
-                    $image = imagecreatefromstring(file_get_contents($tmp_filename));
-                    imagepng($image, $tmp_filename);
-                    imagedestroy($image);
-
-                    // Arrondir l'image
                     $img = file_get_contents($tmp_filename);
                     $img_arrondie = self::getImageArrondieData($img);
                     file_put_contents($tmp_filename, $img_arrondie);
-
-                    $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
-                    imagesavealpha($tempImage, true);
-                    imagepng($tempImage, $_FILES['pdp']['tmp_name']);
-                    imagedestroy($tempImage);
-                }
-            } else {
-
-                //convert image to png
-                $allowedExtensions = ['jpg', 'jpeg', 'png'];
-                $fileExtension = strtolower(pathinfo($_FILES['pdp']['name'], PATHINFO_EXTENSION));
-                if (in_array($fileExtension, $allowedExtensions)) {
-                    $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
-                    imagesavealpha($tempImage, true);
-                    imagepng($tempImage, $_FILES['pdp']['tmp_name']);
-                    imagedestroy($tempImage);
-
-                    $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
-                    //echo $_FILES['pdp']['name']; die();
-                    $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
-                    return $ai_id;
-                } else {
-                    if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
-                        ControleurEtuMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    } else if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
-                        ControleurEntrMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    } else if (ConnexionUtilisateur::getTypeConnecte() == "Administateurs" || ConnexionUtilisateur::getTypeConnecte() == "Personnels" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
-                        ControleurAdminMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    }
-                    return null;
                 }
                 imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
             } else {
@@ -94,14 +59,8 @@ class TransfertImage
             $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
             return $ai_id;
         }
-        return null;
     }
 
-    /**
-     * @param string $image
-     * @return false|string, l'image en format texte
-     * <br><br>Arrondit l'image. Méthode privée car utilisée dans transfert().
-     */
     public static function getImageArrondieData(string $image): false|string
     {
         $image = imagecreatefromstring($image);
@@ -131,8 +90,7 @@ class TransfertImage
         ob_start();
         imagepng($image_ronde);
         return (ob_get_clean());
-
-
     }
+
 
 }

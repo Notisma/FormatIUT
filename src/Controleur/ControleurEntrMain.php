@@ -238,7 +238,7 @@ class ControleurEntrMain extends ControleurMain
             }
             $nom .= "_logo";
 
-            $ancienneImage = (new UploadsRepository())->imageParEtudiant(ConnexionUtilisateur::getNumEntrepriseConnectee());
+            $ancienneImage = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
 
             $ai_id = TransfertImage::transfert();
 
