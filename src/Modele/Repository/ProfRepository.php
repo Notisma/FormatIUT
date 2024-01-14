@@ -103,4 +103,13 @@ class ProfRepository extends RechercheRepository
         $values = array("nomTag" => $nom, "prenomTag" => $prenom, "loginTag" => $login);
         $pdoStatement->execute($values);
     }
+
+    public function getParLogin(string $login):Prof
+    {
+        $sql="SELECT * FROM ".$this->getNomTable()." WHERE loginProf=:Tag";
+        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values=array("Tag"=>$login);
+        $pdoStatement->execute($values);
+        return self::construireDepuisTableau($pdoStatement->fetch());
+    }
 }

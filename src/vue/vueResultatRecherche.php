@@ -6,10 +6,6 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 
-if (!isset($_REQUEST['triPar'])) {
-    $_REQUEST['triPar'] = "type";
-}
-
 ?>
 
 <div class="mainRecherche">
@@ -21,28 +17,6 @@ if (!isset($_REQUEST['triPar'])) {
             <?php
             echo $codeRecherche;
             ?>
-
-            <div class="trierPar">
-                <h4 class="titre">Trier Par :</h4>
-
-                <?php
-                $url = $_REQUEST['recherche'];
-
-                ?>
-
-                <form method="get" id="formTrierPar">
-                    <select name="triPar" onchange="this.form.submit()">
-                        <option value="type">Type</option>
-                        <option value="date">Date</option>
-                        <option value="asc">Ordre Alphabétique</option>
-                    </select>
-                    <input type="hidden" name="controleur" value="AdminMain">
-                    <input type="hidden" name="action" value="rechercher">
-                    <input type="hidden" name="recherche" value="<?php echo $url ?>">
-                </form>
-
-                <a href="#filters" class="goFiltres">Filtres</a>
-            </div>
 
         </div>
 
