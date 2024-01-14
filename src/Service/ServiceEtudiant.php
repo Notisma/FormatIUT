@@ -85,6 +85,12 @@ class ServiceEtudiant
                 if (isset($_FILES['pdp']) && $_FILES['pdp']['error'] == 0) {
                     ControleurEtuMain::updateImage();
                 }
+                if (!isset($_REQUEST['mailPerso'])) {
+                    $_REQUEST['mailPerso'] = "";
+                }
+                if (!isset($_REQUEST['numTel'])) {
+                    $_REQUEST['numTel'] = "";
+                }
                 (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
                 ControleurEtuMain::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
             } else {

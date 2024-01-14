@@ -354,6 +354,12 @@ body {
 
     }
 
+    #popupPremiereCo {
+        top: 55%;
+        width: 90%;
+        height: 80%;
+    }
+
 }
 
 
