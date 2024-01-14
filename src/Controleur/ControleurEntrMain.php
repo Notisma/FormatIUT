@@ -101,6 +101,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST['idEtudiant'])) {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['idEtudiant']);
+            self::$page = "Détails d'un Étudiant";
             self::afficherVue("Détails d'un Étudiant", "Entreprise/vueDetailEtudiant.php", ["etudiant" => $etudiant]);
         } else {
             self::redirectionFlash("afficherAccueilEntr","danger", "Un étudiant devrait être renseigné");
@@ -141,7 +142,7 @@ class ControleurEntrMain extends ControleurMain
                     $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $client = "Entreprise";
                     $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
-                    self::afficherVue("Détail de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
+                    self::afficherVue("Détails de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
                 } else {
                     self::redirectionFlash("afficherMesOffres", "danger", "Cette offre n'existe pas");
                 }
