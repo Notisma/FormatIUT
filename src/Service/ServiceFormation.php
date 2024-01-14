@@ -116,7 +116,6 @@ class ServiceFormation
      */
     public static function modifierOffre(): void
     {
-        //TODO à revoir (SOLID)
         if (isset($_REQUEST["idFormation"], $_REQUEST['nomOffre'], $_REQUEST['anneeMin'], $_REQUEST['anneeMax'], $_REQUEST["dateDebut"], $_REQUEST["dateFin"], $_REQUEST["sujet"], $_REQUEST["detailProjet"], $_REQUEST['objectifOffre'], $_REQUEST["gratification"], $_REQUEST["uniteGratification"], $_REQUEST["uniteDureeGratification"], $_REQUEST['dureeHeure'], $_REQUEST["joursParSemaine"], $_REQUEST["nbHeuresHebdo"], $_REQUEST["typeOffre"])) {
             $anneeMin = $_REQUEST['anneeMin'];
             $anneeMax = $_REQUEST['anneeMax'];
