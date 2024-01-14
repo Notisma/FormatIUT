@@ -59,15 +59,12 @@ $type = $_REQUEST["type"] ?? "all";
 
         <div class="mosaique">
             <?php
-            $data = (new FormationRepository())->getListeIDFormationsPourEtudiant($type, $etudiant);
-
-            if ($data == null) {
+            if ($offres == null) {
                 echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre" id="rouge">Aucune offre ne correspond à vos critères</h3></div>';
             } else {
 
-                for ($i = 0; $i < count($data); $i++) {
-                    $offre = $data[$i];
-                    $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($offre);
+                for ($i = 0; $i < count($offres); $i++) {
+                    $offre = $offres[$i];
                     $red = "";
                     $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
                     $n = 2;

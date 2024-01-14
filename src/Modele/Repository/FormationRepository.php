@@ -2,6 +2,7 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Formation;
 
@@ -71,13 +72,17 @@ class FormationRepository extends RechercheRepository
 
     public function getListeOffresDispoParType($type): array
     {
+        $etu=(new EtudiantRepository())->getObjectParClePrimaire((new EtudiantRepository())->getNumEtudiantParLogin(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $anneeEtudiant = (new EtudiantRepository())->getAnneeEtudiant($etu);
         $values = array();
         $sql = "SELECT * FROM " . $this->getNomTable() . " o ";
         $sql .= " WHERE idEtudiant is null AND estValide=1";
         if ($type == "Stage" || $type == "Alternance") {
-            $sql .= " AND typeOffre=:TypeTag";
+            $sql .= " AND (typeOffre=:TypeTag  OR typeOffre=\"Stage/Alternance\")";
             $values["TypeTag"] = $type;
         }
+        $sql .= " AND anneeMin <= :TagAnnee AND anneeMax >= :TagAnnee AND estValide=1";
+        $values["TagAnnee"]=$anneeEtudiant;
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $listeOffre = array();
