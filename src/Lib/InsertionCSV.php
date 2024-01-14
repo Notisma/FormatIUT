@@ -9,6 +9,7 @@ use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\DataObject\TuteurPro;
 use App\FormatIUT\Modele\DataObject\Ville;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
 use App\FormatIUT\Modele\Repository\ConventionStageRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
@@ -16,6 +17,16 @@ use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\TuteurProRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
+use App\FormatIUT\Service\ServiceConnexion;
+use App\FormatIUT\Service\ServiceConvention;
+use App\FormatIUT\Service\ServiceEntreprise;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServiceFormation;
+use App\FormatIUT\Service\ServiceMdp;
+use App\FormatIUT\Service\ServicePersonnel;
+use App\FormatIUT\Service\ServicePostuler;
+use App\FormatIUT\Service\ServiceRecherche;
 use DateTime;
 
 class InsertionCSV
@@ -27,40 +38,29 @@ class InsertionCSV
     public static function insererPstage($ligne): void
     {
         $login = $ligne[2];
-        $login .= $ligne[3][0]; //surement à changer si un étudiant à le même nom et le même prenom
+        $login .= $ligne[3][0]; //surement à changer si un étudiant a le même nom et le même prenom
         $login = strtolower($login);
-        $etudiant = new Etudiant($ligne[1], $ligne[3], $ligne[2], $login, $ligne[42], $ligne[7], $ligne[6], $ligne[5], "XX", "XXXXX", 1, 1, "R1");
+        $etudiant = new Etudiant($ligne[1], $ligne[3], $ligne[2], $login, $ligne[42], $ligne[7], $ligne[6], $ligne[5], "XX", "XXXXX", 1, 1, 1);
         (new EtudiantRepository())->creerObjet($etudiant);
 
-        //il faut changer l'effectif,
-        $entreprise = new Entreprise($ligne[55], "", $ligne[62], 0, $ligne[65], $ligne[66], "", "V1", 0, "", "", "", "", 0, "");
-        (new EntrepriseRepository())->creerObjet($entreprise);
-
-        $dateConv1 = $ligne[13]; // Chaîne représentant la date
-        $dateDebutConv = DateTime::createFromFormat('d/m/Y', $dateConv1);
-
-        $dateConv2 = $ligne[14];
-        $dateFinConv = DateTime::createFromFormat("d/m/Y", $dateConv2);
-
-        $conventionValidee = $ligne[28] == "oui" ? 1 : 0;
-        $convention = new ConventionStage($ligne[0], $conventionValidee, $dateDebutConv, $dateFinConv, 0, "", $ligne[20], $ligne[37]);
-        (new ConventionStageRepository())->creerObjet($convention);
-
-        $dateString = $ligne[13]; // Chaîne représentant la date
-        $dateDebut = DateTime::createFromFormat('d/m/Y', $dateString); // Créer un objet DateTime à partir de la chaîne
-
-        $timestampe = $ligne[14];
-        $dateFin = DateTime::createFromFormat("d/m/Y", $timestampe);
-
-
-        $formation = new Formation("F25", $dateDebut, $dateFin, $ligne[1], "TP1", $ligne[55], $ligne[0], 1, 2, "", "", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 0);
-        (new FormationRepository())->creerObjet($formation);
-
-        $ville = new Ville("V23", $ligne[47], $ligne[45]);
+        $idVille = "";
+        $ville = new Ville($idVille, $ligne[47], $ligne[45]);
         (new VilleRepository())->creerObjet($ville);
 
-        $ville2 = new Ville("V24", $ligne[60], $ligne[59]);
-        (new VilleRepository())->creerObjet($ville2);
+        $entreprise = new Entreprise($ligne[55], $ligne[54], $ligne[62], $ligne[64], $ligne[65], $ligne[66], $ligne[57], $idVille, 0, "", "", "", "", 0, "");
+        (new EntrepriseRepository())->creerObjet($entreprise);
+
+        $loginProf = $ligne[29];
+        $loginProf .= $ligne[30][0];
+        $prof = new Prof($loginProf, $ligne[29], $ligne[30], $ligne[31], 0, 1);
+        (new ProfRepository())->creerObjet($prof);
+
+        $idTuteur = "";
+        $tuteur = new TuteurPro($idTuteur, $ligne[79], $ligne[80], $ligne[81], $ligne[77], $ligne[78], $ligne[55]);
+        (new TuteurProRepository())->creerObjet($tuteur);
+
+        $formation = new Formation(null, "", $ligne[13], $ligne[14], $ligne[18], $ligne[19], $ligne[22], $ligne[23], $ligne[25], $ligne[26], $ligne[27], $ligne[24], 1, "", null, "Stage", "", "", 1, 1, null, $ligne[48], $ligne[51], "", "", "", $ligne[50], $ligne[1], $idTuteur, $ligne[55], $loginProf, 0);
+        (new FormationRepository())->creerObjet($formation);
     }
 
     /**
@@ -73,27 +73,18 @@ class InsertionCSV
         $login = $ligne[9];
         $login .= $ligne[10][0]; //surement à changer si un étudiant à le même nom et le même prenom
         $login = strtolower($login);
-        $etudiant = new Etudiant($ligne[3], $ligne[10], $ligne[9], $login, $ligne[8], $ligne[28], $ligne[29], $ligne[26], "XX", "XXXXX", 1, 1, "R1", 0);
+        $etudiant = new Etudiant($ligne[3], $ligne[10], $ligne[9], $login, $ligne[8], $ligne[28], $ligne[29], $ligne[26], "XX", "XXXXX", 1, 0, 1);
         (new EtudiantRepository())->creerObjet($etudiant);
 
-        //il faut changer l'effectif,
-        $entreprise = new Entreprise($ligne[58], "", "XX", $ligne[82], $ligne[80], "XX", $ligne[64], "V1", 0, "", "", "", "", 0, "");
-        (new EntrepriseRepository())->creerObjet($entreprise);
-
-        $dateString = $ligne[139]; // Chaîne représentant la date
-        $dateDebut = DateTime::createFromFormat('d/m/Y', $dateString); // Créer un objet DateTime à partir de la chaîne
-
-        $timestampe = $ligne[140];
-        $dateFin = DateTime::createFromFormat("d/m/Y", $timestampe);
-
-        $formation = new Formation($ligne[5], $dateDebut, $dateFin, $ligne[3], "TP1", $ligne[58], null, 1, 2, "", "", "", "", "", null, "", "", "", "", "", "", "", null, null, "", "", "", "", "", "", "", 0);
-        (new FormationRepository())->creerObjet($formation);
-
-        $ville = new Ville("V25", $ligne[33], $ligne[32]);
+        $idVille = 0;
+        $ville = new Ville($idVille, $ligne[33], $ligne[32]);
         (new VilleRepository())->creerObjet($ville);
 
-        $ville2 = new Ville("V26", $ligne[67], $ligne[66]);
-        (new VilleRepository())->creerObjet($ville2);
+        $entreprise = new Entreprise($ligne[58], "", "XX", $ligne[63], $ligne[61], "", $ligne[64], $idVille, 0, "", "", "", "", 0, "");
+        (new EntrepriseRepository())->creerObjet($entreprise);
+
+        $formation = new Formation($ligne[5], $ligne[139], $ligne[140], $ligne[3], "TP1", $ligne[58], null, 1, 2, "", "", "", "", "", null, "", "", "", "", "", "", "", null, null, "", "", "", "", "", "", "", 0);
+        (new FormationRepository())->creerObjet($formation);
     }
 
     /**
@@ -123,7 +114,7 @@ class InsertionCSV
         $type = "Alternance";
         if($ligne[6] == "/")
             $type = "Stage";
-        $formation = new Formation($idFormation, null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], $ligne[9], null, null, null, null, $ligne[12], $ligne[17], 0);
+        $formation = new Formation($idFormation, null, $ligne[10], $ligne[11], null, null, null, null, null, null, null, null, null, null, null, $type, null, null, 1, 1, null, null, $ligne[7], $ligne[8], $ligne[9], null, null, null, $ligne[13], $ligne[12], $ligne[17], 0);
         (new FormationRepository())->creerObjet($formation);
     }
 
