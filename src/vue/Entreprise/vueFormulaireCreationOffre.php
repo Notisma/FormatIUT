@@ -1,8 +1,11 @@
-<html>
-<head>
-    <link rel="stylesheet" href="../ressources/css/styleFormulaireCreationOffre.css">
-</head>
-<body>
+<?php
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
+
+$listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
+
+?>
+
 <div id="center">
     <div class="wrapGauche">
         <img src="../ressources/images/illuEnvoyer.png" alt="illustration d'envoi">
@@ -36,20 +39,14 @@
 
                 <h1>ENVOYEZ UNE OFFRE SUR FORMAT'IUT !</h1>
 
-                <label class="labelFormulaire" for="type_id">Type d'Offre </label>
-
+                <label class="labelFormulaire" for="type_id">Type d'Offre</label>
                 <div class="inputCentre">
-                    <select name="typeOffre">
-                        <option value="Stage/Alternance" name="typeOffre" id="type_id"> Stage et alternance</option>
-                        <option value="Stage" name="typeOffre" id="type_id">Seuelement stage</option>
-                        <option value="Alternance" name="typeOffre" id="type_id">Seulement alternance</option>
+                    <select name="typeOffre" id="type_id">
+                        <option value="Stage/Alternance"> Stage et alternance</option>
+                        <option value="Stage">Seulement stage</option>
+                        <option value="Alternance">Seulement alternance</option>
                     </select>
                 </div>
-                <!--
-                <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Stage"
-                       required>Stage
-                <input class="inputFormulaire" type="radio" name="typeFormation" id="type_id" value="Alternance">Alternance
-                -->
                 <label class="labelFormulaire" for="nomOffre_id">Profession visée par l'offre</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="text" name="nomOffre" id="nomOffre_id" required
@@ -57,12 +54,12 @@
                 </div>
                 <label class="labelFormulaire" for="dateDebut_id">Date de début de l'offre (non obligatoire)</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id" >
+                    <input class="inputFormulaire" type="date" name="dateDebut" id="dateDebut_id">
                 </div>
 
                 <label class="labelFormulaire" for="dateFin_id">Date de fin de l'offre (non obligatoire)</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id" >
+                    <input class="inputFormulaire" type="date" name="dateFin" id="dateFin_id">
                 </div>
 
                 <label class="labelFormulaire" for="anneeMin_id">Année d'étude minimale pour postuler</label>
@@ -97,7 +94,7 @@
                 <label class="labelFormulaire" for="gratification_id">Rémunération de l'offre par mois</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="gratification" id="gratification_id"
-                           placeholder="420" required maxlength="4">
+                           placeholder="420" required max="9999">
                 </div>
 
                 <label class="labelFormulaire" for="uniteGratification_id">Devise utilisée pour la rémunération</label>
@@ -108,34 +105,51 @@
 
                 <label class="labelFormulaire" for="uniteDureeGratification_id">Rémunération par heure</label>
                 <div class="inputCentre">
-                    <input class="inputFormulaire" type="number" name="uniteDureeGratification" id="uniteDureeGratification_id"
-                           placeholder="6" required maxlength="4">
+                    <input class="inputFormulaire" type="number" name="uniteDureeGratification"
+                           id="uniteDureeGratification_id"
+                           placeholder="6" required max="9999">
                 </div>
 
                 <label class="labelFormulaire" for="dureeHeure_id">Durée en heure</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="dureeHeure" id="dureeHeure_id"
-                           placeholder="935" required maxlength="4">
+                           placeholder="935" required max="9999">
                 </div>
 
                 <label class="labelFormulaire" for="jourParSemaine_id">Nombre de jours par Semaine</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="joursParSemaine" id="jourParSemaine_id"
-                           placeholder="5" required maxlength="1">
+                           placeholder="5" required max="7">
                 </div>
 
                 <label class="labelFormulaire" for="nbHeureHebdo_id">Nombre d'heures Hebdomadaires</label>
                 <div class="inputCentre">
                     <input class="inputFormulaire" type="number" name="nbHeuresHebdo" id="nbHeureHebdo_id"
-                           placeholder="32" required maxlength="2">
+                           placeholder="32" required max="99">
+                </div>
+
+                <label class="labelFormulaire" for="tuteurPro_id">Tuteur assigné</label>
+                <div class="inputCentre">
+                    <select name="tuteurPro" id="tuteurPro_id">
+                        <?php
+                        if (!empty($listeTuteurs)) {
+                            foreach ($listeTuteurs as $tuteur) {
+                                echo "<option id='idTuteur' value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
+                            }
+                        } else {
+                            echo "<option value='0'>Aucun tuteur disponible</option>";
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="boutonsForm">
-                    <input type="submit" value="Envoyer" formaction="?action=creerFormation&service=Formation">
+                    <a target="_blank" href="?action=afficherProfil&controleur=EntrMain">Ajouter un Tuteur</a>
+                </div>
+
+                <div class="boutonsForm">
+                    <input type="submit" value="Envoyer" formaction="?action=creerFormation&controleur=EntrMain">
                 </div>
             </form>
         </div>
     </div>
 </div>
-</body>
-</html>
-

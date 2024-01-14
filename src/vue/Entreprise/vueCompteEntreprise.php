@@ -1,7 +1,9 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
-$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+
+$entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
 ?>
 
 <div class="centreCompte">
@@ -30,16 +32,30 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             </div>
         </div>
 
+        <div class="sousMenuEntr tuteursM" onclick="afficherPageCompteEntr('tuteurs')">
+            <img src="../ressources/images/employe.png" alt="profil">
+            <div>
+                <h3 class="titre">Créer un Tuteur</h3>
+            </div>
+        </div>
+
+        <div class="sousMenuEntr myTuteursM" onclick="afficherPageCompteEntr('myTuteurs')">
+            <img src="../ressources/images/parametres.png" alt="profil">
+            <div>
+                <h3 class="titre">Gérer mes Tuteurs</h3>
+            </div>
+        </div>
+
     </div>
 
     <div class="mainEntr" id="compte">
 
-        <h2 class="titre" id="rouge">Modifier mon Profil</h2>
+        <h2 class="titre rouge">Modifier mon Profil</h2>
         <form method="POST" enctype="multipart/form-data">
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
                 <?php
-                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='etudiant'>";
+                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='entreprise'>";
                 ?>
                 <div>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
@@ -48,51 +64,57 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
                 </div>
             </div>
 
-            <h3 class="titre">Siret</h3>
-            <div class="inputCentre">
-                <input disabled type="text" value='<?= htmlspecialchars($entreprise->getSiret()); ?>' name="siret"
-                       required maxlength="50"/>
-            </div>
 
             <h3 class="titre">Nom</h3>
             <div class="inputCentre">
-                <input type="text" value=<?= htmlspecialchars($entreprise->getNomEntreprise()); ?> name="nom"
-                       id="nom_id" required maxlength="50"/>
+                <label for="nom_id"></label><input type="text"
+                                                   value='<?= htmlspecialchars($entreprise->getNomEntreprise()); ?>'
+                                                   name="nom"
+                                                   id="nom_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Statut Juridique</h3>
             <div class="inputCentre">
-                <input type="text" value=<?= htmlspecialchars($entreprise->getStatutJuridique()); ?> name="statutJ"
-                       id="statutJ_id" required maxlength="50"/>
+                <label for="statutJ_id"></label><input type="text"
+                                                       value='<?= htmlspecialchars($entreprise->getStatutJuridique()); ?>'
+                                                       name="statutJ"
+                                                       id="statutJ_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Effectif</h3>
             <div class="inputCentre">
-                <input type="number" value=<?= htmlspecialchars($entreprise->getEffectif()); ?> name="effectif"
-                       id="effectif_id" required maxlength="11"/>
+                <label for="effectif_id"></label><input type="number"
+                                                        value='<?= htmlspecialchars($entreprise->getEffectif()); ?>'
+                                                        name="effectif"
+                                                        id="effectif_id" required max="999999999">
             </div>
 
             <h3 class="titre">Code NAF</h3>
             <div class="inputCentre">
-                <input type="text" value=<?= htmlspecialchars($entreprise->getCodeNAF()); ?> name="codeNAF"
-                       id="codeNAF_id" required maxlength="50"/>
+                <label for="codeNAF_id"></label><input type="text"
+                                                       value='<?= htmlspecialchars($entreprise->getCodeNAF()); ?>'
+                                                       name="codeNAF"
+                                                       id="codeNAF_id" required maxlength="50">
             </div>
 
             <h3 class="titre">Numéro de Téléphone</h3>
             <div class="inputCentre">
-                <input type="text" value=<?= htmlspecialchars($entreprise->getTel()); ?> name="tel"
-                       id="tel_id" required maxlength="11"/>
+                <label for="tel_id"></label><input type="text"
+                                                   value='<?= htmlspecialchars($entreprise->getTel()); ?>' name="tel"
+                                                   id="tel_id" required maxlength="11">
             </div>
 
             <h3 class="titre">Adresse</h3>
             <div class="inputCentre">
-                <input type="text" value=<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?> name="adresse"
-                       id="adresse_id" required maxlength="255"/>
+                <label for="adresse_id"></label><input type="text"
+                                                       value='<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?>'
+                                                       name="adresse"
+                                                       id="adresse_id" required maxlength="255">
             </div>
 
             <div class="inputCentre">
-                <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>"/>
-                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EntrMain"/>
+                <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>">
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=EntrMain">
             </div>
 
 
@@ -101,31 +123,111 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     </div>
 
     <div class="mainEntr" id="notifs">
-        <h2 class="titre" id="rouge">Gérer les paramètres de Notifications</h2>
+        <h2 class="titre rouge">Gérer les paramètres de Notifications</h2>
     </div>
 
     <div class="mainEntr" id="mdp">
-        <h2 class="titre" id="rouge">Modifier le Mot de Passe</h2>
+        <h2 class="titre rouge">Modifier le Mot de Passe</h2>
         <form method="post">
             <h3 class="titre">Ancien Mot de Passe</h3>
             <div class="inputCentre">
-                <input type="password" name="ancienMdp" required maxlength="50"/>
+                <label>
+                    <input type="password" name="ancienMdp" required maxlength="50">
+                </label>
             </div>
 
             <h3 class="titre">Nouveau Mot de Passe</h3>
             <div class="inputCentre">
-                <input type="password" name="nouveauMdp" required maxlength="50"/>
+                <label>
+                    <input type="password" name="nouveauMdp" required maxlength="50">
+                </label>
             </div>
 
             <h3 class="titre">Confirmer le Nouveau Mot de Passe</h3>
             <div class="inputCentre">
-                <input type="password" name="confirmerMdp" required maxlength="50"/>
+                <label>
+                    <input type="password" name="confirmerMdp" required maxlength="50">
+                </label>
             </div>
 
             <div class="inputCentre">
-                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&service=Mdp"/>
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJourMdp&controleur=EntrMain">
             </div>
         </form>
+    </div>
+
+    <div class="mainEntr" id="tuteurs">
+        <h2 class="titre rouge">Créer un tuteur</h2>
+        <form method="post">
+            <h3 class="titre">Ajouter un tuteur</h3>
+            <br>
+            <h3 class="titre">Nom</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="nomTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Prénom</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="prenomTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Email</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="email" name="emailTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Téléphone</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="telTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <h3 class="titre">Fonction</h3>
+            <div class="inputCentre">
+                <label>
+                    <input type="text" name="fonctionTuteur" required maxlength="50">
+                </label>
+            </div>
+
+            <div class="inputCentre">
+                <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>">
+                <input type="submit" value="Ajouter" formaction="?action=ajouterTuteur&controleur=EntrMain">
+            </div>
+        </form>
+    </div>
+
+    <div class="mainEntr" id="myTuteurs">
+        <h2 class="titre rouge">Gérer mes Tuteurs</h2>
+        <h3 class="titre">Liste de mes Tuteurs</h3>
+        <div class="listeTuteurs">
+            <?php
+            $liste = (new \App\FormatIUT\Modele\Repository\TuteurProRepository())->getTuteursDuneEntreprise($entreprise->getSiret());
+            if (!empty($liste)) {
+                foreach ($liste as $tuteur) {
+                    echo "<div class='tuteur'>";
+                    echo "<h3 class='titre'>" . htmlspecialchars($tuteur->getNomTuteurPro()) . " " . htmlspecialchars($tuteur->getPrenomTuteurPro()) . "</h3>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getFonctionTuteurPro()) . "</p>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getMailTuteurPro()) . "</p>";
+                    echo "<p class='titre'>" . htmlspecialchars($tuteur->getTelTuteurPro()) . "</p>";
+                    echo "<form method='post' action='?action=modifierFonctionTuteur&controleur=EntrMain'>";
+                    echo "<input type='hidden' name='idTuteur' value='" . htmlspecialchars($tuteur->getIdTuteurPro()) . "'>";
+                    echo "<input class='inputTuteur' type='text' name='fonctionTuteur' onChange='this.form.submit()' value='" . htmlspecialchars($tuteur->getFonctionTuteurPro()) . "' maxlength='50'>";
+                    echo "</form>";
+                    echo "<a class='boutonTuteur' href='?action=supprimerTuteur&controleur=EntrMain&idTuteur=" . htmlspecialchars($tuteur->getIdTuteurPro()) . "'>Supprimer</a>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p class='titre'>Vous n'avez pas encore de tuteur</p>";
+            }
+            ?>
+        </div>
     </div>
 
 

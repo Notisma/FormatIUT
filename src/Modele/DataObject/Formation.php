@@ -1,11 +1,13 @@
 <?php
 
 namespace App\FormatIUT\Modele\DataObject;
+
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use Cassandra\Date;
 
 class Formation extends AbstractDataObject
 {
-    private string $idFormation;
+    private ?int $idFormation;
     private ?string $nomOffre;
     private string $dateDebut;
     private string $dateFin;
@@ -34,11 +36,12 @@ class Formation extends AbstractDataObject
     private ?string $avenant;
     private ?int $idEtudiant;
     private ?string $idTuteurPro;
-    private float $idEntreprise;
+    private string $idEntreprise;
     private ?string $loginTuteurUM;
+    private bool $tuteurUMvalide;
 
     /**
-     * @param string $idFormation
+     * @param int|null $idFormation
      * @param string|null $nomOffre
      * @param string $dateDebut
      * @param string $dateFin
@@ -67,10 +70,11 @@ class Formation extends AbstractDataObject
      * @param string|null $avenant
      * @param int|null $idEtudiant
      * @param string|null $idTuteurPro
-     * @param float $idEntreprise
+     * @param string $idEntreprise
      * @param string|null $loginTuteurUM
+     * @param bool $tuteurUMvalide
      */
-    public function __construct(string $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, float $idEntreprise, ?string $loginTuteurUM)
+    public function __construct(?int $idFormation, ?string $nomOffre, string $dateDebut, string $dateFin, ?string $sujet, ?string $detailProjet, ?int $dureeHeure, ?int $joursParSemaine, ?int $gratification, ?string $uniteGratification, ?int $uniteDureeGratification, ?int $nbHeuresHebdo, ?bool $offreValidee, ?string $objectifOffre, ?string $dateCreationOffre, ?string $typeOffre, ?int $anneeMax, ?int $anneeMin, ?bool $estValide, ?bool $validationPedagogique, ?string $convention, ?bool $conventionValidee, ?string $dateCreationConvention, ?string $dateTransmissionConvention, ?string $dateRetourSigne, ?string $assurance, ?string $avenant, ?int $idEtudiant, ?string $idTuteurPro, string $idEntreprise, ?string $loginTuteurUM, bool $tuteurUMvalide)
     {
         $this->idFormation = $idFormation;
         $this->nomOffre = $nomOffre;
@@ -103,20 +107,21 @@ class Formation extends AbstractDataObject
         $this->idTuteurPro = $idTuteurPro;
         $this->idEntreprise = $idEntreprise;
         $this->loginTuteurUM = $loginTuteurUM;
+        $this->tuteurUMvalide = $tuteurUMvalide;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getIdFormation(): string
+    public function getIdFormation(): ?int
     {
         return $this->idFormation;
     }
 
     /**
-     * @param string $idFormation
+     * @param int|null $idFormation
      */
-    public function setIdFormation(string $idFormation): void
+    public function setIdFormation(?int $idFormation): void
     {
         $this->idFormation = $idFormation;
     }
@@ -564,17 +569,17 @@ class Formation extends AbstractDataObject
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getIdEntreprise(): float
+    public function getIdEntreprise(): string
     {
         return $this->idEntreprise;
     }
 
     /**
-     * @param float $idEntreprise
+     * @param string $idEntreprise
      */
-    public function setIdEntreprise(float $idEntreprise): void
+    public function setIdEntreprise(string $idEntreprise): void
     {
         $this->idEntreprise = $idEntreprise;
     }
@@ -595,47 +600,71 @@ class Formation extends AbstractDataObject
         $this->loginTuteurUM = $loginTuteurUM;
     }
 
+    /**
+     * @return bool
+     */
+    public function isTuteurUMvalide(): bool
+    {
+        return $this->tuteurUMvalide;
+    }
 
+    /**
+     * @param bool $tuteurUMvalide
+     */
+    public function setTuteurUMvalide(bool $tuteurUMvalide): void
+    {
+        $this->tuteurUMvalide = $tuteurUMvalide;
+    }
+
+    /**
+     * @return true ssi l'offre possède une idEtudiant, false sinon
+     */
+    public function estAssignee(): bool
+    {
+        return $this->idEtudiant != null;
+    }
 
     public function formatTableau(): array
     {
         return array(
             "idFormation" => $this->idFormation,
             'nomOffre' => $this->nomOffre,
-            'dateDebut'=>$this->dateDebut,
-            'dateFin'=>$this->dateFin,
-            'sujet'=>$this->sujet,
-            'detailProjet'=>$this->detailProjet,
-            'dureeHeure'=>$this->dureeHeure,
-            'joursParSemaine'=>$this->joursParSemaine,
-            'gratification'=>$this->gratification,
-            'uniteGratification'=>$this->uniteGratification,
-            'uniteDureeGratification'=>$this->uniteDureeGratification,
-            'nbHeuresHebdo'=>$this->nbHeuresHebdo,
-            'offreValidee'=>$this->offreValidee?1:0,
-            'objectifOffre'=>$this->objectifOffre,
-            'dateCreationOffre'=>$this->dateCreationOffre,
-            'typeOffre'=>$this->typeOffre,
-            'anneeMax'=>$this->anneeMax,
-            'anneeMin'=>$this->anneeMin,
-            'estValide'=>$this->estValide?1:0,
-            'validationPedagogique'=>$this->validationPedagogique?1:0,
-            'convention'=>$this->convention,
-            'conventionValidee'=>$this->conventionValidee?1:0,
-            'dateCreationConvention'=>$this->dateCreationConvention,
-            'dateTransmissionConvention'=>$this->dateTransmissionConvention,
-            'dateRetourSigne'=>$this->dateRetourSigne,
-            'assurance'=>$this->assurance,
-            'avenant'=>$this->avenant,
-            'idEtudiant'=>$this->idEtudiant,
-            'idTuteurPro'=>$this->idTuteurPro,
-            'idEntreprise'=>$this->idEntreprise,
-            'loginTuteurUM'=>$this->loginTuteurUM
+            'dateDebut' => $this->dateDebut,
+            'dateFin' => $this->dateFin,
+            'sujet' => $this->sujet,
+            'detailProjet' => $this->detailProjet,
+            'dureeHeure' => $this->dureeHeure,
+            'joursParSemaine' => $this->joursParSemaine,
+            'gratification' => $this->gratification,
+            'uniteGratification' => $this->uniteGratification,
+            'uniteDureeGratification' => $this->uniteDureeGratification,
+            'nbHeuresHebdo' => $this->nbHeuresHebdo,
+            'offreValidee' => $this->offreValidee ? 1 : 0,
+            'objectifOffre' => $this->objectifOffre,
+            'dateCreationOffre' => $this->dateCreationOffre,
+            'typeOffre' => $this->typeOffre,
+            'anneeMax' => $this->anneeMax,
+            'anneeMin' => $this->anneeMin,
+            'estValide' => $this->estValide ? 1 : 0,
+            'validationPedagogique' => $this->validationPedagogique ? 1 : 0,
+            'convention' => $this->convention,
+            'conventionValidee' => $this->conventionValidee ? 1 : 0,
+            'dateCreationConvention' => $this->dateCreationConvention,
+            'dateTransmissionConvention' => $this->dateTransmissionConvention,
+            'dateRetourSigne' => $this->dateRetourSigne,
+            'assurance' => $this->assurance,
+            'avenant' => $this->avenant,
+            'idEtudiant' => $this->idEtudiant,
+            'idTuteurPro' => $this->idTuteurPro,
+            'idEntreprise' => $this->idEntreprise,
+            'loginTuteurUM' => $this->loginTuteurUM,
+            'tuteurUMvalide' => $this->tuteurUMvalide ? 1 : 0
         );
     }
 
-    public static function creerFormation(array $formation) : Formation
+    public static function creerFormation(array $formation): Formation
     {
+        $dateAujourdhuiYmd = (new \DateTime())->format("Y-m-d");
         return new Formation(
             null,
             $formation["nomOffre"],
@@ -651,7 +680,7 @@ class Formation extends AbstractDataObject
             $formation["nbHeuresHebdo"],
             0,
             $formation["objectifOffre"],
-            (new \DateTime())->format('d-m-Y'),
+            $dateAujourdhuiYmd,
             $formation["typeOffre"],
             $formation["anneeMax"],
             $formation["anneeMin"],
@@ -665,10 +694,10 @@ class Formation extends AbstractDataObject
             null,
             null,
             null,
+            $formation["tuteurPro"],
+            ConnexionUtilisateur::getNumEntrepriseConnectee(),
             null,
-            ConnexionUtilisateur::getLoginUtilisateurConnecte(),
-            null
-            
+            false
         );
     }
 

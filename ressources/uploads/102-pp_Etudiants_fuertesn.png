@@ -1,0 +1,778 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.4
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost
+-- Généré le : dim. 14 jan. 2024 à 23:06
+-- Version du serveur : 10.5.15-MariaDB-0+deb11u1
+-- Version de PHP : 8.1.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `loyet`
+--
+
+DELIMITER $$
+--
+-- Fonctions
+--
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbEntreAnneeDerniere` () RETURNS INT(11)  BEGIN
+	DECLARE nb INT;
+    DECLARE nbEntr INT;
+    DECLARE nbNouvellesEntr INT;
+    
+    SELECT COUNT(numSiret) INTO nbEntr FROM Entreprises;
+    
+    SELECT COUNT(numSiret) INTO nbNouvellesEntr
+    FROM Entreprises
+    WHERE YEAR(dateCreationCompte) = YEAR(CURRENT_DATE());
+    
+    SET nb = nbEntr - nbNouvellesEntr;
+    
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbEntrSansOffreAnneeDerniere` () RETURNS INT(11)  BEGIN
+DECLARE nb INT;
+DECLARE nbEntr INT;
+DECLARE nbEntrAvecOffres INT;
+SELECT COUNT(numSiret) INTO nbEntr
+FROM Entreprises;
+SELECT COUNT(idEntreprise) INTO nbEntrAvecOffres
+FROM Formations
+WHERE dateDebut LIKE CONCAT('%', YEAR(DATE_SUB(NOW(), INTERVAL 1 YEAR)), '%');
+    SET nb = nbEntr - nbEntrAvecOffres;
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbEtuAvecFormAnneeDerniere` () RETURNS INT(11)  BEGIN
+DECLARE nb INT;
+    SELECT COUNT(idEtudiant) INTO nb
+    FROM Formations
+    WHERE dateDebut LIKE CONCAT('%', YEAR(DATE_SUB(NOW(), INTERVAL 1 YEAR)), '%');
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbMoyenEntrQuiPosteOffre` () RETURNS FLOAT  BEGIN
+	DECLARE nb FLOAT;
+    SELECT ROUND(AVG(COALESCE(subquery.nbFormations, 0)), 2) INTO nb
+                FROM (SELECT COUNT(DISTINCT(idEntreprise)) AS nbFormations
+                FROM Formations
+                GROUP BY YEAR(dateCreationOffre)) AS subquery;
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbMoyenEtuAvecForm` () RETURNS FLOAT  BEGIN
+	DECLARE nb FLOAT;
+    SELECT ROUND(AVG(COALESCE(subquery.nbFormations, 0)), 2) INTO nb
+                FROM (SELECT COUNT(DISTINCT(idEtudiant)) AS nbFormations
+                FROM Formations
+                WHERE idEtudiant IS NOT NULL
+                GROUP BY YEAR(dateCreationOffre)) AS subquery;
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbMoyenOffresChaqueAnnee` () RETURNS FLOAT  BEGIN
+	DECLARE nb FLOAT;
+    SELECT ROUND(AVG(COALESCE(subquery.nbFormations, 0)), 2) INTO nb
+                FROM (SELECT COUNT(*) AS nbFormations
+                FROM Formations
+                GROUP BY YEAR(dateCreationOffre)) AS subquery;
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbOffresAnneeDerniere` () RETURNS INT(11)  BEGIN
+	DECLARE nb INT;
+    SELECT COUNT(idFormation) INTO nb
+    FROM Formations
+    WHERE YEAR(dateCreationOffre) = YEAR(NOW()) - 1;
+    RETURN nb;
+END$$
+
+CREATE DEFINER=`loyet`@`%` FUNCTION `nbOffresSansConvValideeAnneeDerniere` () RETURNS INT(11)  BEGIN
+	DECLARE nb INT;
+    SELECT COUNT(idFormation) INTO nb
+FROM Formations 
+WHERE conventionValidee = 0
+AND dateTransmissionConvention LIKE CONCAT('%', YEAR(DATE_SUB(NOW(), INTERVAL 1 YEAR)), '%');
+    RETURN nb;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Annotations`
+--
+
+CREATE TABLE `Annotations` (
+  `loginProf` varchar(50) NOT NULL,
+  `siretEntreprise` bigint(20) NOT NULL,
+  `messageAnnotation` varchar(256) NOT NULL,
+  `dateAnnotation` varchar(32) NOT NULL,
+  `noteAnnotation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Annotations`
+--
+
+INSERT INTO `Annotations` (`loginProf`, `siretEntreprise`, `messageAnnotation`, `dateAnnotation`, `noteAnnotation`) VALUES
+('AdminTest', 4, 'nonbril', '12/01/2024', 1),
+('AdminTest', 76543128904567, 'OuiStsti', '12/01/2024', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ArchiveEntreprises`
+--
+
+CREATE TABLE `ArchiveEntreprises` (
+  `numSiret` bigint(20) NOT NULL,
+  `nomEntreprise` varchar(50) NOT NULL,
+  `statutJuridique` varchar(50) DEFAULT 'Non renseigné',
+  `effectif` varchar(50) DEFAULT NULL,
+  `codeNAF` varchar(50) DEFAULT 'Non renseigné ',
+  `tel` varchar(50) DEFAULT NULL,
+  `adresseEntreprise` varchar(255) DEFAULT NULL,
+  `idVille` varchar(20) DEFAULT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 0,
+  `mdpHache` varchar(256) NOT NULL,
+  `email` varchar(256) DEFAULT NULL,
+  `emailAValider` varchar(256) NOT NULL,
+  `nonce` varchar(23) NOT NULL,
+  `estValide` tinyint(1) NOT NULL DEFAULT 0,
+  `dateCreationCompte` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ArchiveEntreprises`
+--
+
+INSERT INTO `ArchiveEntreprises` (`numSiret`, `nomEntreprise`, `statutJuridique`, `effectif`, `codeNAF`, `tel`, `adresseEntreprise`, `idVille`, `img_id`, `mdpHache`, `email`, `emailAValider`, `nonce`, `estValide`, `dateCreationCompte`) VALUES
+(-1, 'A', NULL, NULL, NULL, 'a', 'a', '12', 0, '', 'a@gmail', '', '', 0, NULL),
+(1, 'MikasaEsSuCasa', NULL, NULL, NULL, 'aee', '85 Rue de Limayrac', '14', 0, '', 'matteotordeux@gmail.com', '', '', 1, NULL),
+(2, 'MikasaEsSuCasa', 'truc', '1', '231', '0621807192', '85 Rue de Limayrac', '14', 0, '$2y$10$2i65xeNR8od19JgR3TXL0.fE60FaD8TcBmjDZWrmqN25z3iFiyLJi', 'matteotordeux@gmail.com', '', 'e840d24a6ac2a28a0e29e0', 1, '0000-00-00'),
+(123, 'MikasaEsSuCasa', NULL, NULL, NULL, 'azeaze', '85 Rue de Limayrac', '14', 0, '', 'matteotordeux@gmail.com', '', '', 1, NULL),
+(3213, 'MikasaEsSuCasa', NULL, NULL, NULL, 'azeae', 'aze', '14', 0, '', 'matteotordeux@gmail.com', '', '', 1, NULL),
+(15487, '', NULL, NULL, NULL, NULL, '', 'V0', 0, '', '', '', '', 1, NULL),
+(65473, 'Test', 'SA', '1000', '975421', '0987654642', '53', 'V1', 0, '$2y$10$pANEgqsOJL8txID5YotmgurnMx4tgmRGA3g0nygTJeqmwTfZIuPv.', 'test@yopmail.com', '', 'd4bccef80ec18aa1ac1801', 1, '2023-11-01'),
+(123131, 'MikasaEsSuCasa', 'truc', '2', '231', '0621807192', '85 Rue de Limayrac', '14', 0, '$2y$10$fCkz4wlc6tKhS.5WYqP.P.xPuRkUnd11Vh/qNovkC2q4RGUsQGAb6', '', 'matteotordeux@gmail.com', 'd3e44568d58a999e9a3e3d', 0, '0000-00-00'),
+(769403, 'EIFFAGE', 'SA', '50000', 'OEHGPOREJ', '0987657481', '53 Avenue Charles Martinez', 'V1', 0, '$2y$10$/80mB6FJAB0gga.PfHueAuc6wY3OC4ywEzuxMPGalygnFUx4wecZi', 'eiffage@yopmail.com', '', '7f7e8b289f3480011762b6', 1, '2023-11-04'),
+(1000000, 'jambon', 'Jambonerie', '22', '4565656', '0625255544', '10 rue du jambon', 'V12', 0, '$2y$10$J/38pr2.lMO4RNHjgP7Bt.4fUDgSyP4ArGie4Vj78ghRgqd9adoSy', '', 'jambon@yopmail.com', '430a109e9c7040d08a14bd', 1, '0000-00-00'),
+(11232131, 'MikasaEsSuCasa', 'truc', '1', '21', '0621807192', '85 Rue de Limayrac', '14', 0, '$2y$10$oq5zdtW42wxwPYvuI2zQj.xehu/HdENgolVv4QcK.m67gAScAG5AO', '', 'matteotordeux@yopmail.com', '86c7d3bc1719421c37d7dd', 0, '0000-00-00'),
+(210981231, 'MikasaEsSuCasa', 'truc', '1', '231', '0621807192', '85 Rue de Limayrac', '14', 0, '$2y$10$KnJ.BRmljpL4RHi2aTHf8OJWvciawVtEJQOijd8X/8y6Ki.RPoWrq', '', 'matteotordeux@gmail.com', 'aff7a23834f7d0400e597e', 0, '0000-00-00'),
+(90205402784000, 'RDD', '', NULL, '77.11A', '07 92 297 69 19', '13 rue michel', '14', 0, '', '', '', '', 1, '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ArchiveEtudiants`
+--
+
+CREATE TABLE `ArchiveEtudiants` (
+  `numEtudiant` int(11) NOT NULL,
+  `prenomEtudiant` varchar(32) DEFAULT NULL,
+  `nomEtudiant` varchar(32) DEFAULT NULL,
+  `loginEtudiant` varchar(32) NOT NULL,
+  `sexeEtu` char(1) DEFAULT 'X',
+  `mailUniversitaire` varchar(50) DEFAULT 'Non renseigné',
+  `mailPerso` varchar(50) DEFAULT 'Non renseigné',
+  `telephone` varchar(10) DEFAULT NULL,
+  `groupe` char(2) DEFAULT NULL,
+  `parcours` char(5) DEFAULT NULL,
+  `validationPedagogique` tinyint(1) DEFAULT NULL,
+  `presenceForumIUT` tinyint(1) DEFAULT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ArchiveEtudiants`
+--
+
+INSERT INTO `ArchiveEtudiants` (`numEtudiant`, `prenomEtudiant`, `nomEtudiant`, `loginEtudiant`, `sexeEtu`, `mailUniversitaire`, `mailPerso`, `telephone`, `groupe`, `parcours`, `validationPedagogique`, `presenceForumIUT`, `img_id`) VALUES
+(777, 'Enzo', 'Guilhot', 'guilhote', 'M', 'enzo.guilot@etu.umontpellier.fr', 'adresseperso@yopmail.fr', '636303630', 'XX', 'XXXXX', 1, 1, 0),
+(12121, 'Enzo', 'Guilhot', 'guilhote', 'M', 'enzo.guilhot@etu.umontpellier.fr', 'non@yopmail.fr', '06060606', 'Q2', 'RACDV', NULL, NULL, 1),
+(22528, ' Ezio', '', '', NULL, NULL, NULL, NULL, 'Q3', 'DACS', 1, 0, 1),
+(46753, 'Bob', 'Lenon', 'lenonb', NULL, 'bob.lenon@etu.umontpellier.fr', NULL, NULL, 'G3', 'DACS', 0, 0, 1),
+(222222, 'Enzo', 'Guilhot', 'guilhote', 'M', 'enzo.guilhot@etu.umontpellier.fr', 'efe@efe.fr', '2222223', 'Q2', 'RACDV', NULL, NULL, 1),
+(22002821, 'BOB', 'LEPONGE', 'lepongeb', 'M', 'bob@etu.umontpellier.fr', 'bob@gmail.com', '683520000', 'XX', 'XXXXX', 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ArchiveFormations`
+--
+
+CREATE TABLE `ArchiveFormations` (
+  `idFormation` varchar(20) NOT NULL,
+  `nomOffre` varchar(100) DEFAULT NULL,
+  `dateDebut` varchar(50) DEFAULT NULL,
+  `dateFin` varchar(50) DEFAULT NULL,
+  `sujet` varchar(256) DEFAULT NULL,
+  `detailProjet` varchar(512) DEFAULT NULL,
+  `dureeHeure` int(11) DEFAULT NULL,
+  `joursParSemaine` int(11) DEFAULT NULL,
+  `gratification` int(11) DEFAULT NULL,
+  `uniteGratification` varchar(50) DEFAULT NULL,
+  `uniteDureeGratification` int(11) DEFAULT NULL,
+  `nbHeuresHebdo` int(11) DEFAULT NULL,
+  `offreValidee` tinyint(1) DEFAULT NULL,
+  `objectifOffre` varchar(512) DEFAULT NULL,
+  `dateCreationOffre` date DEFAULT NULL,
+  `typeOffre` varchar(50) DEFAULT NULL,
+  `anneeMax` int(11) DEFAULT NULL,
+  `anneeMin` int(11) DEFAULT NULL,
+  `estValide` tinyint(1) DEFAULT NULL,
+  `validationPedagogique` tinyint(1) NOT NULL,
+  `convention` longblob DEFAULT NULL,
+  `conventionValidee` tinyint(4) NOT NULL DEFAULT 0,
+  `dateCreationConvention` varchar(50) DEFAULT NULL,
+  `dateTransmissionConvention` varchar(50) DEFAULT NULL,
+  `dateRetourSigne` varchar(50) DEFAULT NULL,
+  `assurance` varchar(80) DEFAULT NULL,
+  `avenant` longblob DEFAULT NULL,
+  `idEtudiant` int(11) DEFAULT NULL,
+  `idTuteurPro` varchar(20) DEFAULT 'Non renseigné',
+  `idEntreprise` bigint(20) DEFAULT NULL,
+  `loginTuteurUM` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ArchiveFormations`
+--
+
+INSERT INTO `ArchiveFormations` (`idFormation`, `nomOffre`, `dateDebut`, `dateFin`, `sujet`, `detailProjet`, `dureeHeure`, `joursParSemaine`, `gratification`, `uniteGratification`, `uniteDureeGratification`, `nbHeuresHebdo`, `offreValidee`, `objectifOffre`, `dateCreationOffre`, `typeOffre`, `anneeMax`, `anneeMin`, `estValide`, `validationPedagogique`, `convention`, `conventionValidee`, `dateCreationConvention`, `dateTransmissionConvention`, `dateRetourSigne`, `assurance`, `avenant`, `idEtudiant`, `idTuteurPro`, `idEntreprise`, `loginTuteurUM`) VALUES
+('F25', 'Développeur web', '2023-04-17', '2023-07-07', 'Développement d\'une application web', 'idem', 350, 5, 200, 'dollar canadien', 66, 35, 0, 'Quand croyez-vous qu\'un homme meurt ?', '2023-11-21', 'Fraude', 3, 2, 0, 0, NULL, 0, '2023-11-18', '2023-11-20', '0', NULL, '', NULL, 'TP1', 90205402784000, '1'),
+('Test', 'Test', 'Test', 'Test', 'Test', 'Test', 1, 1, 1, 'Test', 1, 1, 1, 'Test', NULL, 'Test', 2023, 2023, 1, 1, NULL, 1, 'Test', 'Test', 'Test', 'Test', NULL, 22205609, 'TP2', 12345678901234, '1'),
+('F4', 'Développeur réseau', '2023-11-01', '2023-11-30', 'Application client/serveur en C', 'Développer une application client/serveur gérer par une intelligence artificielle', 555, 4, 233, 'Euros', 22, 36, 1, 'Développer ses connaissances concernant les réseaux et les intelligences artificielles', '2023-11-11', 'Alternance', 3, 2, 1, 0, NULL, 0, '2023-11-23', '2023-11-29', '0000-00-00', NULL, '', NULL, NULL, 76543128904567, '1'),
+('5', 'Developpeur web (egg)', '2024-01-12', '2024-05-17', 'Développement d\'application web full stack', '                                                                                                                        L\'étudiant devra faire une maintenance des applications de l\'entreprise tout en travaillant en équipe                                                                                                    ', 935, 5, 420, 'Euros', 6, 33, 0, 'Les objectifs de l\'étudiant sera d\'apprendre', '0000-00-00', 'Alternance', 3, 2, 1, 0, NULL, 0, '11-01-2024', NULL, NULL, 'aeazes', NULL, 22202027, NULL, 76543128904567, NULL),
+('6', 'a', '', '', 'd', 'd', 935, 5, 420, 'Euros', 6, 32, 0, 'd', NULL, 'Stage/Alternance', 3, 2, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL),
+('11', '', '2024-01-12', '2024-02-08', 'aze', '3', 100, NULL, 2, 'euros', NULL, NULL, 1, '', '0000-00-00', 'Stage', 3, 3, 1, 0, NULL, 1, '13-01-2024', '13-01-2024', '', 'aze', NULL, 22205609, 'TP2', 1, NULL),
+('12', '', '2024-01-04', '2024-01-24', 'a', '3', 100, NULL, 12, 'euros', NULL, NULL, 1, '', '2023-01-01', 'Stage', 3, 2, 1, 0, NULL, 0, '13-01-2024', '13-01-2023', '', 'aze', NULL, 22205609, 'TP2', 123, NULL),
+('207', '', '2024-01-04', '2024-01-18', 'azeaeza', '2', 100, NULL, 2, 'euros', NULL, NULL, 1, '', '0000-00-00', 'Stage', 2, 2, 1, 0, NULL, 0, '14-01-2024', NULL, '', 'aze', NULL, 22205609, 'TP3', 3213, NULL),
+('208', '', '2024-01-04', '2024-01-18', 'A', '2', 100, NULL, 1, 'euros', NULL, NULL, 1, '', '0000-00-00', 'Stage', 2, 2, 1, 0, NULL, 0, '14-01-2024', NULL, '', 'ae', NULL, 22205609, 'TP2', 123, NULL),
+('209', '', '17/04/2023', '07/07/2023', 'Informatique', 'Un sujet', NULL, 5, 4, 'Net', NULL, 35, 1, '', NULL, 'Stage', 3, 2, 1, 1, NULL, 1, '15/12/2022 à 15:04:43', '', '', '', 0x417563756e206176656e616e742076616c6964c3a9, 22002821, 'TP2', 90205402784000, 'ColettaR'),
+('210', '', '17/04/2023', '07/07/2023', 'Informatique', 'Un sujet', NULL, 5, 4, 'Net', NULL, 35, 1, '', NULL, 'Stage', 3, 2, 1, 1, NULL, 1, '15/12/2022 à 15:04:43', '', '', '', 0x417563756e206176656e616e742076616c6964c3a9, 22002821, 'TP2', 90205402784000, 'ColettaR'),
+('211', '', '17/04/2023', '07/07/2023', 'Informatique', 'Un sujet', NULL, 5, 4, 'Net', NULL, 35, 1, '', NULL, 'Stage', 3, 2, 1, 1, NULL, 1, '15/12/2022 à 15:04:43', '', '', '', 0x417563756e206176656e616e742076616c6964c3a9, 22002821, 'TP2', 90205402784000, 'ColettaR');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ArchiveProfs`
+--
+
+CREATE TABLE `ArchiveProfs` (
+  `loginProf` varchar(50) NOT NULL,
+  `nomProf` varchar(32) DEFAULT NULL,
+  `prenomProf` varchar(32) DEFAULT NULL,
+  `mailUniversitaire` varchar(256) DEFAULT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 1,
+  `estAdmin` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ArchiveProfs`
+--
+
+INSERT INTO `ArchiveProfs` (`loginProf`, `nomProf`, `prenomProf`, `mailUniversitaire`, `img_id`, `estAdmin`) VALUES
+('7', NULL, NULL, NULL, 1, 0),
+('9', '[value-2]', '[value-3]', '[value-4]', 0, 1),
+('tordeuxm', 'secretariat', 'secretariat', 'mail', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Entreprises`
+--
+
+CREATE TABLE `Entreprises` (
+  `numSiret` bigint(20) NOT NULL,
+  `nomEntreprise` varchar(50) NOT NULL,
+  `statutJuridique` varchar(50) DEFAULT 'Non renseigné',
+  `effectif` varchar(50) DEFAULT NULL,
+  `codeNAF` varchar(50) DEFAULT 'Non renseigné ',
+  `tel` varchar(50) DEFAULT NULL,
+  `adresseEntreprise` varchar(255) DEFAULT NULL,
+  `idVille` int(20) NOT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 0,
+  `mdpHache` varchar(256) NOT NULL DEFAULT '',
+  `email` varchar(256) NOT NULL,
+  `emailAValider` varchar(256) NOT NULL DEFAULT '',
+  `nonce` varchar(23) NOT NULL DEFAULT '',
+  `estValide` tinyint(1) NOT NULL DEFAULT 0,
+  `dateCreationCompte` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Entreprises`
+--
+
+INSERT INTO `Entreprises` (`numSiret`, `nomEntreprise`, `statutJuridique`, `effectif`, `codeNAF`, `tel`, `adresseEntreprise`, `idVille`, `img_id`, `mdpHache`, `email`, `emailAValider`, `nonce`, `estValide`, `dateCreationCompte`) VALUES
+(4, 'truc', '4', '4', '4', '4', '4', 6, 0, '$2y$10$oMvZW5YJEKPJCzvqHH4yIOPrlK7bf3WiQTQlwYinwjiTy//y8j0eW', '', '4@4.4', '7d5a0913a6f149e6a629be', 1, '0000-00-00'),
+(77777, '', 'XX', NULL, '', '', 'Avenue de l\'entreprise', 14, 0, '', '', '', '', 1, '0000-00-00'),
+(89650398, 'Dell', 'SAS', '1501', '90475TBE', '0987654667', 'rue', 1, 82, '$2y$10$j05oP1ybNX1BTRIUQNivqu8o4V0B05uiG6fKCCUwcTh4ODg3Hzkti', 'dell@bouledogue.dz', '', 'c68be6696f8251db593e83', 1, '2024-01-01'),
+(12345678901236, 'Stage Inc.', 'Non renseigné', '90000', 'Non renseigné ', '0611111112', '35 rue Bidon', 11, 0, '', 'stage@dmail.com', '', '', 1, '2023-12-04'),
+(56473829104753, 'Global Déports', 'EURL', '10', '4619B', '', '567 Avenue du Commerce', 3, 0, '$2y$10$nLT4NnWjIga0cLMuEVzaM.QnM4o.M.AZFS0F9CL2FiAFbaE7rru02', 'thomasloye1@gmail.com', '', 'bZuSFB+EcfkrVOcqUnTCw3', 1, '2023-11-08'),
+(76543128904567, 'Crédit', 'SAS', '35', 'P3456', '0636303630', 'Avenue', 4, 92, '$2y$10$Ulth9Y4hSBGk8Cpc0h7rhuwkbAYF2ayokF7dKIjkx3nhOEU8Zj1jS', 'credit@yopmail.com', '', 'ba0fb1019bd005794e5601', 1, '2023-11-09'),
+(90205402784000, 'RDD', '', NULL, '77.11A', '07 92 297 69 19', '13 rue michel', 14, 0, '', '', '', '', 1, '0000-00-00'),
+(98765432109876, 'Beta Tech Solutions', 'SASU', '20', '5829C', '04 56 78 90 12', '234 Rue de la Technologie', 4, 0, '$2y$10$GWWynuOyKe44jfSxWtK31udmEbM3DJfoNKaqVMiWnPzKJKSXmjzJa', 'bob@yopmail.com', '', '394597beb29166aa714fc2', 1, '2023-11-14');
+
+--
+-- Déclencheurs `Entreprises`
+--
+DELIMITER $$
+CREATE TRIGGER `archiverEntreprises` BEFORE DELETE ON `Entreprises` FOR EACH ROW BEGIN 
+	REPLACE INTO ArchiveEntreprises VALUES (OLD.numSiret, OLD.nomEntreprise, OLD.statutJuridique, OLD.effectif, OLD.codeNAF, OLD.tel, OLD.adresseEntreprise, OLD.idVille, OLD.img_id, OLD.mdpHache, OLD.email, OLD.emailAValider, OLD.nonce, OLD.estValide, OLD.dateCreationCompte);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Etudiants`
+--
+
+CREATE TABLE `Etudiants` (
+  `numEtudiant` int(11) NOT NULL,
+  `prenomEtudiant` varchar(32) NOT NULL,
+  `nomEtudiant` varchar(32) NOT NULL,
+  `loginEtudiant` varchar(32) NOT NULL,
+  `sexeEtu` char(1) DEFAULT 'X',
+  `mailUniversitaire` varchar(50) DEFAULT 'Non renseigné',
+  `mailPerso` varchar(50) DEFAULT 'Non renseigné',
+  `telephone` varchar(10) DEFAULT NULL,
+  `groupe` char(2) DEFAULT NULL,
+  `parcours` char(5) DEFAULT NULL,
+  `validationPedagogique` tinyint(1) DEFAULT NULL,
+  `presenceForumIUT` tinyint(1) DEFAULT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Etudiants`
+--
+
+INSERT INTO `Etudiants` (`numEtudiant`, `prenomEtudiant`, `nomEtudiant`, `loginEtudiant`, `sexeEtu`, `mailUniversitaire`, `mailPerso`, `telephone`, `groupe`, `parcours`, `validationPedagogique`, `presenceForumIUT`, `img_id`) VALUES
+(0, 'etudiant', 'test', 'secretariattest', NULL, 'etudiant.test@etu.umontpellier.fr', NULL, NULL, 'Q2', 'RACDV', 0, 0, 1),
+(21890, 'Alice', 'A', 'aa', 'M', 'alice@etu.umontpellier.fr', '', '', 'XX', 'XXXXX', 1, 1, 0),
+(22528, ' Ezio', '', '', NULL, NULL, NULL, NULL, 'Q3', 'DACS', 1, 0, 1),
+(321444, 'Jean', 'Neymar', 'neymarj', 'M', 'jean.neymar@etu.umontpellier.fr', '0', '832406721', 'Q4', 'IAMSI', 1, NULL, 1),
+(7777777, 'Enzo', 'Guilhot', 'guilhote', 'M', 'enzo.guilot@etu.umontpellier.fr', '', '', 'G7', 'IAMSI', 1, 0, 1),
+(9897887, 'John', 'Smith', 'smithj', NULL, 'john.smith@etu.umontpellier.fr', NULL, NULL, 'Q1', 'RACDV', 0, 0, 1),
+(18067979, 'Enzo', 'Guilhot', 'guilhote', 'X', 'enzo.guilhot@etu.umontpellier.fr', 'Non renseigné', NULL, NULL, NULL, NULL, NULL, 1),
+(22002821, 'BOB', 'LEPONGE', 'lepongeb', 'M', 'bob@etu.umontpellier.fr', 'bob@gmail.com', '683520000', 'XX', 'XXXXX', 1, 1, 1),
+(22201580, 'Noe', 'Fuertes-Torredeme', 'fuertesn', 'M', 'noe.fuertes-torredeme@etu.umontpellier.fr', 'monkeyouhouh@gmail.com', '0252885968', 'Q2', 'RACDV', NULL, NULL, 1),
+(22202027, 'Raphael', 'Izoret', 'izoretr', 'M', 'raphael.izoret@etu.umontpellier.fr', 'ex@ex.ex', '0600000000', 'Q2', 'RACIS', NULL, 0, 97),
+(22202117, 'Thomas', 'Loye', 'loyet', 'M', 'thomas.loye@etu.umontpellier.fr', 'thomasloye1@gmail.com', '0687045071', 'Q2', 'RACDV', NULL, NULL, 89),
+(22204392, 'Enzo', 'Guilhot', 'guilhote', NULL, 'enzo.guilhot@etu.umontpellier.fr', 'girardenzo20@gmail.com', '0688511964', 'Q2', 'RACDV', 0, 0, 96),
+(22205609, 'Matteo', 'Tordeux', 'tordeuxm', 'M', 'matteo.tordeux@etu.umontpellier.fr', '', '', 'Q2', 'RACDV', NULL, NULL, 1),
+(22206782, 'Romain', 'Touze', 'touzer', 'M', 'romain.touze@etu.umontpellier.fr', '', '', 'Q2', 'RACDV', NULL, NULL, 1),
+(71845136, 'Enzo', 'Guilhot', 'guilhote', 'X', 'enzo.guilhot@etu.umontpellier.fr', 'Non renseigné', NULL, NULL, NULL, NULL, NULL, 1),
+(75282004, 'Enzo', 'Guilhot', 'guilhote', 'X', 'enzo.guilhot@etu.umontpellier.fr', 'Non renseigné', NULL, NULL, NULL, NULL, NULL, 1),
+(85249969, 'Enzo', 'Guilhot', 'guilhote', 'X', 'enzo.guilhot@etu.umontpellier.fr', 'Non renseigné', NULL, NULL, NULL, NULL, NULL, 1);
+
+--
+-- Déclencheurs `Etudiants`
+--
+DELIMITER $$
+CREATE TRIGGER `archiverEtudiants` BEFORE DELETE ON `Etudiants` FOR EACH ROW BEGIN 
+  REPLACE INTO ArchiveEtudiants VALUES (OLD.numEtudiant, OLD.prenomEtudiant, OLD.nomEtudiant, OLD.loginEtudiant, OLD.sexeEtu, OLD.mailUniversitaire, OLD.mailPerso, OLD.telephone, OLD.groupe, OLD.parcours
+  , OLD.validationPedagogique, OLD.presenceForumIUT, OLD.img_id);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Formations`
+--
+
+CREATE TABLE `Formations` (
+  `idFormation` int(20) NOT NULL,
+  `nomOffre` varchar(30) DEFAULT NULL,
+  `dateDebut` varchar(50) DEFAULT NULL,
+  `dateFin` varchar(50) DEFAULT NULL,
+  `sujet` varchar(256) DEFAULT NULL,
+  `detailProjet` varchar(512) DEFAULT NULL,
+  `dureeHeure` int(11) DEFAULT NULL,
+  `joursParSemaine` int(11) DEFAULT NULL,
+  `gratification` int(11) DEFAULT NULL,
+  `uniteGratification` varchar(50) DEFAULT NULL,
+  `uniteDureeGratification` int(11) DEFAULT NULL,
+  `nbHeuresHebdo` int(11) DEFAULT NULL,
+  `offreValidee` tinyint(1) DEFAULT NULL,
+  `objectifOffre` varchar(512) DEFAULT NULL,
+  `dateCreationOffre` date DEFAULT NULL,
+  `typeOffre` varchar(50) DEFAULT NULL,
+  `anneeMax` int(11) DEFAULT NULL,
+  `anneeMin` int(11) DEFAULT NULL,
+  `estValide` tinyint(1) DEFAULT NULL,
+  `validationPedagogique` tinyint(1) NOT NULL,
+  `convention` longblob DEFAULT NULL,
+  `conventionValidee` tinyint(4) NOT NULL DEFAULT 0,
+  `dateCreationConvention` varchar(50) DEFAULT NULL,
+  `dateTransmissionConvention` varchar(50) DEFAULT NULL,
+  `dateRetourSigne` varchar(50) DEFAULT NULL,
+  `assurance` varchar(80) DEFAULT NULL,
+  `avenant` longblob DEFAULT NULL,
+  `idEtudiant` int(11) DEFAULT NULL,
+  `idTuteurPro` varchar(20) DEFAULT 'Non renseigné',
+  `idEntreprise` bigint(20) DEFAULT NULL,
+  `loginTuteurUM` varchar(50) DEFAULT NULL,
+  `tuteurUMvalide` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Formations`
+--
+
+INSERT INTO `Formations` (`idFormation`, `nomOffre`, `dateDebut`, `dateFin`, `sujet`, `detailProjet`, `dureeHeure`, `joursParSemaine`, `gratification`, `uniteGratification`, `uniteDureeGratification`, `nbHeuresHebdo`, `offreValidee`, `objectifOffre`, `dateCreationOffre`, `typeOffre`, `anneeMax`, `anneeMin`, `estValide`, `validationPedagogique`, `convention`, `conventionValidee`, `dateCreationConvention`, `dateTransmissionConvention`, `dateRetourSigne`, `assurance`, `avenant`, `idEtudiant`, `idTuteurPro`, `idEntreprise`, `loginTuteurUM`, `tuteurUMvalide`) VALUES
+(1, 'Développeur JS', '2022-02-25', '2023-05-21', 'Amélioration d\'un site web', 'L\'étudiant devra améliorer un site web existant en y ajoutant du javascript pour augmenter la satisfaction des utilisateurs', 400, 5, 447, 'Euros', 5, 30, 0, 'Objectif de l\'étudiant : mettre en place ses compétences en javascript', '2001-01-10', 'Stage', 3, 2, 1, 0, NULL, 0, '11-01-2024', NULL, NULL, 'babbébéébébé', NULL, 22201580, 'TP1', 76543128904567, 'ProfTest', 0),
+(2, 'Développeur C', '2023-11-24', '2023-11-30', 'Développement d\'un logiciel bas niveau', 'L\'étudiant devra mettre en place un logiciel bas niveau en C pour créer un réseau de communication interne à certains départements de l\'entreprise', 644, 5, 234, 'Euros', 4, 32, 1, 'Mettre en application toute les connaissances de l\'étudiant sur les réseaux et sur la programmation bas niveau', '2001-01-01', 'Stage', 3, 2, 1, 0, NULL, 1, '13-01-2024', '14-01-2024', NULL, 'automobile carglass', NULL, 22202027, 'TP1', 76543128904567, NULL, 0),
+(3, 'Développeur Symfony', '2023-11-24', '2023-11-30', 'Développement d\'un projet PhP avec Symfony', 'L\'étudiant devra développer un site de vente d\'une grande surface', 806, 5, 652, 'Euros', 7, 34, 1, 'Objectif : mettre en place ses compétences des frameworks', '2010-10-01', 'Stage/Alternance', 3, 2, 1, 0, NULL, 0, '14-01-2024', '14-01-2024', NULL, 'a', NULL, 22204392, 'TP1', 76543128904567, NULL, 0),
+(213, '', '24/06/2023', '12/07/2024', '', '77777', NULL, 5, 2, 'euros', NULL, NULL, 1, '', NULL, 'Alternance', 2, 3, 1, 1, NULL, 1, NULL, NULL, '1', '', NULL, 777, 'TP4', 77777, 'yooooa', 1);
+
+--
+-- Déclencheurs `Formations`
+--
+DELIMITER $$
+CREATE TRIGGER `ajouterOffre` BEFORE INSERT ON `Formations` FOR EACH ROW BEGIN
+	DECLARE p_estValide INT;
+	SELECT estValide INTO p_estValide
+    FROM Entreprises
+    WHERE numSiret = NEW.idEntreprise;
+	
+    IF p_estValide = 0 THEN
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'L''entreprise n''est pas valide' ;
+   END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `archiverFormations` BEFORE DELETE ON `Formations` FOR EACH ROW BEGIN 
+  REPLACE INTO ArchiveFormations VALUES(OLD.idFormation, OLD.nomOffre, OLD.dateDebut, OLD.dateFin, OLD.sujet, OLD.detailProjet, OLD.dureeHeure, OLD.joursParSemaine, OLD.gratification, OLD.uniteGratification, OLD.uniteDureeGratification,
+  OLD.nbHeuresHebdo, OLD.offreValidee, OLD.ObjectifOffre, OLD.dateCreationOffre, OLD.typeOffre, OLD.anneeMax, OLD.anneeMin, OLD.estValide, OLD.validationPedagogique, OLD.convention,
+  OLD.conventionValidee, OLD.dateCreationConvention, OLD.dateTransmissionConvention, OLD.dateRetourSigne, OLD.assurance, OLD.avenant, OLD.idEtudiant, OLD.idTuteurPro, OLD.idEntreprise, OLD.loginTuteurUM);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Postuler`
+--
+
+CREATE TABLE `Postuler` (
+  `numEtudiant` int(11) NOT NULL,
+  `idFormation` int(20) NOT NULL,
+  `etat` varchar(32) NOT NULL,
+  `cv` varchar(150) DEFAULT NULL,
+  `lettre` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Postuler`
+--
+
+INSERT INTO `Postuler` (`numEtudiant`, `idFormation`, `etat`, `cv`, `lettre`) VALUES
+(7777777, 213, 'Validée', NULL, NULL),
+(22201580, 1, 'Validée', NULL, NULL),
+(22202027, 2, 'Validée', NULL, NULL),
+(22204392, 3, 'Validée', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Profs`
+--
+
+CREATE TABLE `Profs` (
+  `loginProf` varchar(50) NOT NULL,
+  `nomProf` varchar(32) DEFAULT NULL,
+  `prenomProf` varchar(32) DEFAULT NULL,
+  `mailUniversitaire` varchar(256) DEFAULT NULL,
+  `img_id` int(11) NOT NULL DEFAULT 1,
+  `estAdmin` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Profs`
+--
+
+INSERT INTO `Profs` (`loginProf`, `nomProf`, `prenomProf`, `mailUniversitaire`, `img_id`, `estAdmin`) VALUES
+('7', NULL, NULL, NULL, 1, 0),
+('AdminTest', 'Admin', 'Rémi', 'AdminTest@yopmail.com', 1, 1),
+('ColettaR', 'Coletta', 'Remi', 'remi.coletta@umontpellier.fr', 1, 0),
+('ProfTest', 'ProfTest', 'Gilles', 'Prof.test@umontpellier.fr', 1, 1),
+('secretariatTest', 'secretariat', 'secretariat', 'mail', 1, 0),
+('yoooo', 'yoooo', '', '', 1, 0),
+('yooooa', 'yoooo', 'aeze', '', 1, 0);
+
+--
+-- Déclencheurs `Profs`
+--
+DELIMITER $$
+CREATE TRIGGER `archiverProfs` BEFORE DELETE ON `Profs` FOR EACH ROW BEGIN
+  REPLACE INTO ArchiveProfs VALUES (OLD.loginProf, OLD.nomProf, OLD.prenomProf, OLD.mailUniversitaire, OLD.img_id, OLD.estAdmin);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `TuteursPro`
+--
+
+CREATE TABLE `TuteursPro` (
+  `idTuteurPro` varchar(20) NOT NULL,
+  `mailTuteurPro` varchar(50) DEFAULT NULL,
+  `telTuteurPro` varchar(50) DEFAULT NULL,
+  `fonctionTuteurPro` varchar(50) DEFAULT NULL,
+  `nomTuteurPro` varchar(50) DEFAULT NULL,
+  `prenomTuteurPro` varchar(50) DEFAULT NULL,
+  `idEntreprise` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `TuteursPro`
+--
+
+INSERT INTO `TuteursPro` (`idTuteurPro`, `mailTuteurPro`, `telTuteurPro`, `fonctionTuteurPro`, `nomTuteurPro`, `prenomTuteurPro`, `idEntreprise`) VALUES
+('TP1', 'gilleslefisc@yahoo.fr', '07 81 65 27 83', 'Notation ', 'test', 'test', 76543128904567),
+('TP2', 'truc@yopmail.com', '', 'Chief Technology Officer', 'Ed', 'dedez', 90205402784000),
+('TP3', 'studea@gmail.com', '', '', 'zaear', 'tyteyr', 77777),
+('TP4', 'studea@gmail.com', '', '', 'zaear', 'tyteyr', 77777);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Uploads`
+--
+
+CREATE TABLE `Uploads` (
+  `idUpload` int(11) NOT NULL,
+  `fileName` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Uploads`
+--
+
+INSERT INTO `Uploads` (`idUpload`, `fileName`) VALUES
+(0, 'baseentrprofil.png'),
+(1, 'baseetuprofil.png'),
+(70, 'lorem-ipsum.pdf'),
+(75, 'jdg.jpg'),
+(76, 'jdg.jpg'),
+(77, 'jdg.jpg'),
+(78, 'jdg.jpg'),
+(82, 'Capture d\'écran 2023-04-19 122954.png'),
+(87, 'Capture d’écran du 2023-11-17 12-06-28.png'),
+(89, 'Capture d\'écran 2023-03-08 151051.png'),
+(92, 'logo_CA.png'),
+(95, 'pp_Etudiants_izoretr.png'),
+(96, 'pp_Etudiants_guilhote.png'),
+(97, 'pp_Etudiants_izoretr.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Villes`
+--
+
+CREATE TABLE `Villes` (
+  `idVille` int(20) NOT NULL,
+  `nomVille` varchar(50) NOT NULL,
+  `codePostal` int(11) NOT NULL,
+  `pays` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Villes`
+--
+
+INSERT INTO `Villes` (`idVille`, `nomVille`, `codePostal`, `pays`) VALUES
+(1, 'Avignon', 84000, NULL),
+(3, 'Marseille', 13000, NULL),
+(4, 'Lyon', 69000, NULL),
+(5, 'Paris', 75000, NULL),
+(6, 'MARSEILLE 02EME', 13002, NULL),
+(7, 'VALROS', 34090, NULL),
+(8, 'Tokyo', 1000000, NULL),
+(9, 'Montpellier', 34000, NULL),
+(10, 'Non renseigné', 0, NULL),
+(11, 'Rouen', 76000, NULL),
+(12, 'MARSEILLE 02EME', 13002, NULL),
+(13, 'MARSEILLE 02EME', 13002, NULL),
+(14, 'Toulouse', 31500, NULL);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `Annotations`
+--
+ALTER TABLE `Annotations`
+  ADD PRIMARY KEY (`loginProf`,`siretEntreprise`),
+  ADD KEY `fk_Annotations_siretEntreprise` (`siretEntreprise`);
+
+--
+-- Index pour la table `ArchiveEntreprises`
+--
+ALTER TABLE `ArchiveEntreprises`
+  ADD PRIMARY KEY (`numSiret`);
+
+--
+-- Index pour la table `ArchiveEtudiants`
+--
+ALTER TABLE `ArchiveEtudiants`
+  ADD PRIMARY KEY (`numEtudiant`);
+
+--
+-- Index pour la table `ArchiveProfs`
+--
+ALTER TABLE `ArchiveProfs`
+  ADD PRIMARY KEY (`loginProf`);
+
+--
+-- Index pour la table `Entreprises`
+--
+ALTER TABLE `Entreprises`
+  ADD PRIMARY KEY (`numSiret`),
+  ADD KEY `idVille` (`idVille`),
+  ADD KEY `img_id` (`img_id`);
+
+--
+-- Index pour la table `Etudiants`
+--
+ALTER TABLE `Etudiants`
+  ADD PRIMARY KEY (`numEtudiant`),
+  ADD KEY `fk_etu_image` (`img_id`);
+
+--
+-- Index pour la table `Formations`
+--
+ALTER TABLE `Formations`
+  ADD PRIMARY KEY (`idFormation`),
+  ADD KEY `idEtudiant` (`idEtudiant`),
+  ADD KEY `Formation_ibfk_4` (`idTuteurPro`),
+  ADD KEY `Formation_ibfk_5` (`loginTuteurUM`),
+  ADD KEY `Formation_ibfk_3` (`idEntreprise`);
+
+--
+-- Index pour la table `Postuler`
+--
+ALTER TABLE `Postuler`
+  ADD PRIMARY KEY (`numEtudiant`,`idFormation`),
+  ADD KEY `Postuler_ibfk_2` (`idFormation`) USING BTREE;
+
+--
+-- Index pour la table `Profs`
+--
+ALTER TABLE `Profs`
+  ADD PRIMARY KEY (`loginProf`);
+
+--
+-- Index pour la table `TuteursPro`
+--
+ALTER TABLE `TuteursPro`
+  ADD PRIMARY KEY (`idTuteurPro`),
+  ADD KEY `TuteurPro_fkidEnt` (`idEntreprise`);
+
+--
+-- Index pour la table `Uploads`
+--
+ALTER TABLE `Uploads`
+  ADD PRIMARY KEY (`idUpload`);
+
+--
+-- Index pour la table `Villes`
+--
+ALTER TABLE `Villes`
+  ADD PRIMARY KEY (`idVille`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Formations`
+--
+ALTER TABLE `Formations`
+  MODIFY `idFormation` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+
+--
+-- AUTO_INCREMENT pour la table `Uploads`
+--
+ALTER TABLE `Uploads`
+  MODIFY `idUpload` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT pour la table `Villes`
+--
+ALTER TABLE `Villes`
+  MODIFY `idVille` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `Annotations`
+--
+ALTER TABLE `Annotations`
+  ADD CONSTRAINT `fk_Annotations_siretEntreprise` FOREIGN KEY (`siretEntreprise`) REFERENCES `Entreprises` (`numSiret`);
+
+--
+-- Contraintes pour la table `Entreprises`
+--
+ALTER TABLE `Entreprises`
+  ADD CONSTRAINT `fk_Ville_idVille` FOREIGN KEY (`idVille`) REFERENCES `Villes` (`idVille`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_entr_image` FOREIGN KEY (`img_id`) REFERENCES `Uploads` (`idUpload`);
+
+--
+-- Contraintes pour la table `Etudiants`
+--
+ALTER TABLE `Etudiants`
+  ADD CONSTRAINT `fk_etu_image` FOREIGN KEY (`img_id`) REFERENCES `Uploads` (`idUpload`);
+
+--
+-- Contraintes pour la table `Formations`
+--
+ALTER TABLE `Formations`
+  ADD CONSTRAINT `Formations_ibfk_3` FOREIGN KEY (`idEntreprise`) REFERENCES `Entreprises` (`numSiret`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Formations_ibfk_4` FOREIGN KEY (`idTuteurPro`) REFERENCES `TuteursPro` (`idTuteurPro`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Postuler`
+--
+ALTER TABLE `Postuler`
+  ADD CONSTRAINT `Postuler_ibfk_1` FOREIGN KEY (`numEtudiant`) REFERENCES `Etudiants` (`numEtudiant`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Postuler_ibfk_2` FOREIGN KEY (`idFormation`) REFERENCES `Formations` (`idFormation`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `TuteursPro`
+--
+ALTER TABLE `TuteursPro`
+  ADD CONSTRAINT `TuteurPro_fkidEnt` FOREIGN KEY (`idEntreprise`) REFERENCES `Entreprises` (`numSiret`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

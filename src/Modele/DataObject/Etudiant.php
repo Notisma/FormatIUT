@@ -2,9 +2,13 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
+
 class Etudiant extends AbstractDataObject
 {
-    private float $numEtudiant;
+    private int $numEtudiant;
     private string $prenomEtudiant;
     private string $nomEtudiant;
     private string $loginEtudiant;
@@ -19,7 +23,7 @@ class Etudiant extends AbstractDataObject
     private string $img_id;
 
     /**
-     * @param float $numEtudiant
+     * @param int $numEtudiant
      * @param string $prenomEtudiant
      * @param string $nomEtudiant
      * @param string $loginEtudiant
@@ -33,7 +37,7 @@ class Etudiant extends AbstractDataObject
      * @param bool|null $presenceForumIUT
      * @param string $img
      */
-    public function __construct(float $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?bool $presenceForumIUT, string $img)
+    public function __construct(int $numEtudiant, string $prenomEtudiant, string $nomEtudiant, string $loginEtudiant, ?string $sexeEtu, ?string $mailUniersitaire, ?string $mailPerso, ?string $telephone, ?string $groupe, ?string $parcours, ?int $validationPedagogique, ?bool $presenceForumIUT, string $img)
     {
         $this->numEtudiant = $numEtudiant;
         $this->prenomEtudiant = $prenomEtudiant;
@@ -114,6 +118,19 @@ class Etudiant extends AbstractDataObject
         $this->mailUniersitaire = $mailUniersitaire;
     }
 
+    public function getAnneeEtu(): int|string
+    {
+        //retourne 1 si le groupe commence par un S, 2 si il commence par un Q et 3 si il commence par un G
+        if ($this->groupe == null) return "";
+        else {
+            $groupe = $this->groupe;
+            if (substr($groupe, 0, 1) == "S") return 1;
+            else if (substr($groupe, 0, 1) == "Q") return 2;
+            else if (substr($groupe, 0, 1) == "G") return 3;
+            else return "";
+        }
+    }
+
     public function getMailPerso(): string
     {
         if ($this->mailPerso == null) return "";
@@ -184,14 +201,12 @@ class Etudiant extends AbstractDataObject
         $this->presenceForumIUT = $presenceForumIUT;
     }
 
-
-
-    public function getNumEtudiant(): float
+    public function getNumEtudiant(): int
     {
         return $this->numEtudiant;
     }
 
-    public function setNumEtudiant(float $numEtudiant): void
+    public function setNumEtudiant(int $numEtudiant): void
     {
         $this->numEtudiant = $numEtudiant;
     }
@@ -243,4 +258,6 @@ class Etudiant extends AbstractDataObject
             1
         );
     }
+
+
 }

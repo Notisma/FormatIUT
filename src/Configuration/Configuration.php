@@ -11,34 +11,11 @@ namespace App\FormatIUT\Configuration;
 
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\HTTP\Session;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 
 class Configuration
 {
-    static private array $configLocal = array(
-
-        'hostname' => 'localhost',
-        'database' => 'loyet',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
-    );
-    static private array $configLocalRaphael = array(
-
-        'hostname' => 'localhost',
-        'database' => 'sae',
-        'port' => '3306',
-        'login' => 'notisma',
-        'password' => ''
-    );
-    static private array $configLocalNoe = array(
-
-        'hostname' => 'localhost',
-        'database' => 'devapplicationformatiut',
-        'port' => '3306',
-        'login' => 'root',
-        'password' => 'root'
-    );
     static private array $configWebInfo = array(
 
         'hostname' => 'localhost',
@@ -47,7 +24,6 @@ class Configuration
         'login' => 'loyet',
         'password' => 'gfsGnT!!hSSfE88.'
     );
-
     static private function getConfig(): array
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr")
@@ -118,21 +94,24 @@ class Configuration
     }
 
 
-    private static string $controleur;
+    public static function controleurIsSet(): bool
+    {
+        return Session::getInstance()->contient('controleur');
+    }
 
     public static function controleurIs(string $contr): bool
     {
-        return self::$controleur == $contr;
+        return Session::getInstance()->lire('controleur') == $contr;
     }
 
     public static function setControleur(string $controleur): void
     {
-        self::$controleur = $controleur;
+        Session::getInstance()->enregistrer('controleur', $controleur);
     }
 
     public static function getControleurName(): string
     {
-        return self::$controleur;
+        return Session::getInstance()->lire('controleur');
     }
 
     /**
@@ -140,16 +119,37 @@ class Configuration
      */
     public static function getCheminControleur(): string
     {
-        return "App\FormatIUT\Controleur\Controleur" . self::$controleur;
+        return "App\FormatIUT\Controleur\Controleur" . Session::getInstance()->lire('controleur');
     }
 
-    /*    public static function getControleurClass(): string
-        {
-            return "Controleur" . self::$controleur;
-        }
-    */
-    public static function getDelai()
+
+    public static function getDelai(): int
     {
         return 30 * 60;
     }
+    static private array $configLocal = array(
+
+        'hostname' => 'localhost',
+        'database' => 'loyet',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
+    static private array $configLocalRaphael = array(
+
+        'hostname' => 'localhost',
+        'database' => 'sae',
+        'port' => '3306',
+        'login' => 'notisma',
+        'password' => ''
+    );
+    static private array $configLocalNoe = array(
+
+        'hostname' => 'localhost',
+        'database' => 'devapplicationformatiut',
+        'port' => '3306',
+        'login' => 'root',
+        'password' => 'root'
+    );
+
 }

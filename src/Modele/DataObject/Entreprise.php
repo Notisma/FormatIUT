@@ -2,16 +2,19 @@
 
 namespace App\FormatIUT\Modele\DataObject;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurMain;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\TuteurProRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use DateTime;
 
 class Entreprise extends AbstractDataObject
 {
-    private float $siret;
+    private int $siret;
     private string $nomEntreprise;
     private ?string $statutJuridique;
     private ?int $effectif;
@@ -19,16 +22,16 @@ class Entreprise extends AbstractDataObject
     private ?string $tel;
     private string $adresseEntreprise;
     private string $idVille;
-    private string $img;
+    private ?string $img;
     private string $mdpHache;
     private string $email;
-    private string $emailAValider;
-    private string $nonce;
+    private ?string $emailAValider;
+    private ?string $nonce;
     private bool $estValide;
     private ?string $dateCreationCompte;
 
     /**
-     * @param float $siret
+     * @param int $siret
      * @param string $nomEntreprise
      * @param string|null $statutJuridique
      * @param int|null $effectif
@@ -36,15 +39,15 @@ class Entreprise extends AbstractDataObject
      * @param string|null $tel
      * @param string $AdresseEntreprise
      * @param string $idVille
-     * @param string $img
+     * @param string|null $img
      * @param string $mdpHache
      * @param string $email
-     * @param string $emailAValider
-     * @param string $nonce
+     * @param string|null $emailAValider
+     * @param string|null $nonce
      * @param bool $estValide
      * @param string|null $dateCreationCompte
      */
-    public function __construct(float $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, string $img, string $mdpHache, string $email, string $emailAValider, string $nonce, bool $estValide, ?string $dateCreationCompte)
+    public function __construct(int $siret, string $nomEntreprise, ?string $statutJuridique, ?int $effectif, ?string $codeNAF, ?string $tel, string $AdresseEntreprise, string $idVille, ?string $img, string $mdpHache, string $email, ?string $emailAValider, ?string $nonce, bool $estValide, ?string $dateCreationCompte)
     {
         $this->siret = $siret;
         $this->nomEntreprise = $nomEntreprise;
@@ -66,33 +69,33 @@ class Entreprise extends AbstractDataObject
 
     public function formatTableau(): array
     {
-        $valide=0;
-        if ($this->estValide) $valide=1;
+        $valide = 0;
+        if ($this->estValide) $valide = 1;
         return ['numSiret' => $this->siret,
             'nomEntreprise' => $this->nomEntreprise,
             'statutJuridique' => $this->statutJuridique,
             'effectif' => $this->effectif,
             'codeNAF' => $this->codeNAF,
             'tel' => $this->tel,
-            "adresseEntreprise"=>$this->adresseEntreprise,
-            "idVille"=>$this->idVille,
-            "img_id"=>$this->img,
-            "mdpHache"=>$this->mdpHache,
-            "email"=>$this->email,
-            "emailAValider"=>$this->emailAValider,
-            "nonce"=>$this->nonce,
-            "estValide"=>$valide,
-            "dateCreationCompte"=>$this->dateCreationCompte
+            "adresseEntreprise" => $this->adresseEntreprise,
+            "idVille" => $this->idVille,
+            "img_id" => $this->img,
+            "mdpHache" => $this->mdpHache,
+            "email" => $this->email,
+            "emailAValider" => $this->emailAValider,
+            "nonce" => $this->nonce,
+            "estValide" => $valide,
+            "dateCreationCompte" => $this->dateCreationCompte
         ];
     }
 
 
-    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire):Entreprise{
-        $ville=(new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
-        if (!$ville){
-            $newVille=new Ville(self::autoIncrementVille((new VilleRepository())->getListeID(),"idVille"),$EntrepriseEnFormulaire["ville"],$EntrepriseEnFormulaire["codePostal"]);
-            (new VilleRepository())->creerObjet($newVille);
-            $ville=$newVille->getIdVille();
+    public static function construireDepuisFormulaire(array $EntrepriseEnFormulaire): Entreprise
+    {
+        $ville = (new VilleRepository())->getVilleParNom($EntrepriseEnFormulaire["ville"]);
+        if (!$ville) {
+            $newVille = new Ville(null, $EntrepriseEnFormulaire["ville"], $EntrepriseEnFormulaire["codePostal"]);
+            $ville = (new VilleRepository())->creerObjet($newVille);
         }
 
         return new Entreprise(
@@ -113,25 +116,26 @@ class Entreprise extends AbstractDataObject
             (new DateTime())->format('d-m-Y')
         );
     }
+
     protected static function autoIncrementVille($listeId, $get): string
     {
         $id = 1;
         while (!isset($_REQUEST[$get])) {
-            if (in_array("V".$id, $listeId)) {
+            if (in_array("V" . $id, $listeId)) {
                 $id++;
             } else {
                 $_REQUEST[$get] = $id;
             }
         }
-        return "V".$id;
+        return "V" . $id;
     }
 
-    public function getSiret(): float
+    public function getSiret(): int
     {
         return $this->siret;
     }
 
-    public function setSiret(float $siret): void
+    public function setSiret(int $siret): void
     {
         $this->siret = $siret;
     }
@@ -206,12 +210,12 @@ class Entreprise extends AbstractDataObject
         $this->idVille = $idVille;
     }
 
-    public function getImg(): string
+    public function getImg(): ?string
     {
         return $this->img;
     }
 
-    public function setImg(string $img): void
+    public function setImg(?string $img): void
     {
         $this->img = $img;
     }
@@ -236,22 +240,22 @@ class Entreprise extends AbstractDataObject
         $this->email = $email;
     }
 
-    public function getEmailAValider(): string
+    public function getEmailAValider(): ?string
     {
         return $this->emailAValider;
     }
 
-    public function setEmailAValider(string $emailAValider): void
+    public function setEmailAValider(?string $emailAValider): void
     {
         $this->emailAValider = $emailAValider;
     }
 
-    public function getNonce(): string
+    public function getNonce(): ?string
     {
         return $this->nonce;
     }
 
-    public function setNonce(string $nonce): void
+    public function setNonce(?string $nonce): void
     {
         $this->nonce = $nonce;
     }
@@ -266,14 +270,42 @@ class Entreprise extends AbstractDataObject
         $this->estValide = $estValide;
     }
 
-    public function getDateCreationCompte(): DateTime
+    public function getDateCreationCompte(): ?string
     {
         return $this->dateCreationCompte;
     }
 
-    public function setDateCreationCompte(DateTime $dateCreationCompte): void
+    public function setDateCreationCompte(string $dateCreationCompte): void
     {
         $this->dateCreationCompte = $dateCreationCompte;
+    }
+
+    public static function ajouterTuteur($nom, $prenom, $email, $tel, $fonction): void
+    {
+        $idEntreprise = ConnexionUtilisateur::getNumEntrepriseConnectee();
+        $nb = (new TuteurProRepository())->getNewIdTuteurPro();
+        (new TuteurProRepository())->creerObjet(new TuteurPro($nb, $email, $tel, $fonction,$nom, $prenom, $idEntreprise));
+    }
+
+    public static function creerEntreprise(array $entreprise): Entreprise
+    {
+        return new Entreprise(
+            $entreprise["siret"],
+            $entreprise["nomEntreprise"],
+            $entreprise["statutJuridique"],
+            $entreprise["effectif"],
+            $entreprise['codeNAF'],
+            $entreprise["tel"],
+            $entreprise["adresseEntreprise"],
+            $entreprise["idVille"],
+            $entreprise["img"],
+            $entreprise["mdpHache"],
+            $entreprise["email"],
+            $entreprise["emailAValider"],
+            $entreprise["nonce"],
+            1,
+            $entreprise['dateCreationCompte']
+        );
     }
 
 }

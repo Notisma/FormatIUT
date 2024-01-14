@@ -22,6 +22,10 @@ class VilleRepository extends AbstractRepository
         return "idVille";
     }
 
+    /**
+     * @param array $dataObjectTableau
+     * @return AbstractDataObject permet de construire une ville depuis un tableau
+     */
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new Ville(
@@ -31,7 +35,11 @@ class VilleRepository extends AbstractRepository
         );
     }
 
-    public function getVilleParNom(string $nomVille): ?string
+    /**
+     * @param string|null $nomVille
+     * @return int|null permet de récupérer l'id d'une ville depuis son nom
+     */
+    public function getVilleParNom(?string $nomVille): ?int
     {
         $sql = "SELECT idVille FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
@@ -43,16 +51,27 @@ class VilleRepository extends AbstractRepository
         else return ($result)["idVille"];
     }
 
-    public function getVilleParIdResidence($idResidence): Ville
+    /**
+     * @param string|null $nomVille
+     * @return Ville|null permet de récupérer une ville depuis son nom
+     */
+    public function getVilleParNom2(?string $nomVille): ?Ville
     {
-        $sql = "SELECT v.idVille, nomVille,codePostal FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";
+        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagResidence" => $idResidence);
+        $values = array("Tag" => $nomVille);
         $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
 
+        $result = $pdoStatement->fetch();
+        if (!$result) return null;
+        else return $this->construireDepuisTableau($result);
     }
 
+
+    /**
+     * @param $siret
+     * @return Ville permet de récupérer la ville d'une entreprise depuis son siret
+     */
     public function getVilleParIdVilleEntr($siret): Ville
     {
         $sql = "Select v.idVille, nomVille, codePostal From Villes v JOIN Entreprises e ON v.idVille = e.idVille WHERE numSiret =:Tag";

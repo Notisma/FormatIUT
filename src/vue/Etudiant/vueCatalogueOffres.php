@@ -1,20 +1,46 @@
-<div id="center">
-    <div class="presentation">
-        <div class="texteGauche">
-            <h3>CATALOGUE DES OFFRES</h3>
-            <p>Consultez et postulez sur toutes les offres disponibles en quelques clics</p>
+<?php
 
-            <form>
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
+$etudiant = (new EtudiantRepository())->getEtudiantParLogin(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte());
+$type = $_REQUEST["type"] ?? "all";
+
+?>
+
+<div class="mainCatalogue">
+
+    <div class="descCatalogue">
+
+        <div class="wrap">
+            <img src="../ressources/images/vueCatalogueEtu.png" alt="image de bienvenue">
+            <h3 class="titre">Catalogue des Offres</h3>
+            <h4 class="titre">Retrouvez ici toutes les offres de stage et d'alternance disponibles sur Format'IUT !</h4>
+        </div>
+
+        <div class="tips">
+            <img src="../ressources/images/astuces.png" alt="astuces">
+            <div>
+                <h4 class="titre">Astuces :</h4>
+                <h5 class="titre">Triez les offres par leur type grâce aux filtres, et recherchez avec plus de détails
+                    avec
+                    la barre de recherche</h5>
+            </div>
+        </div>
+
+        <div class="wrapForm">
+
+            <h3 class="titre">Options de tri :</h3>
+
+            <form method="get">
                 <input type="hidden" name="controleur" value="EtuMain">
                 <input type="hidden" name="action" value="afficherCatalogue">
 
-                <input type="submit" name="type" value="Tous" class="offre"
+                <input type="submit" name="type" value="Tous" class="inputOffre"
                     <?php use App\FormatIUT\Controleur\ControleurEtuMain;
                     use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-                    use App\FormatIUT\Modele\Repository\EtudiantRepository;
-                    use App\FormatIUT\Modele\Repository\FormationRepository;
 
-                    if ($type == "Tous") echo 'id="typeActuel" disabled'; ?>
+                    if ($type == "Tous" || $type == "Stage/Alternance") echo 'id="typeActuel" disabled'; ?>
                 >
                 <input type="submit" name="type" value="Stage" class="stage"
                     <?php if ($type == "Stage") echo 'id="typeActuel" disabled'; ?>
@@ -22,64 +48,61 @@
                 <input type="submit" name="type" value="Alternance" class="alternance"
                     <?php if ($type == "Alternance") echo 'id="typeActuel" disabled'; ?>
                 >
+
             </form>
         </div>
 
-        <div class="imageDroite">
-            <img src="../ressources/images/vueCatalogueEtu.png" alt="illustration">
-        </div>
-
     </div>
 
-    <div class="assistance">
-        <h3>ASTUCES</h3>
-        <p>Visualisez en un coup d'oeil les informations d'une offre, et cliquez sur cette dernière pour en savoir
-            plus</p>
-    </div>
+    <div class="wrapMosaique">
+        <h2 class="titre rouge">Liste des offres de Stage et d'Alternance :</h2>
 
-    <div class="offresEtu">
-        <div class="contenuOffresEtu">
+        <div class="mosaique">
             <?php
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant());
-            $compteurOffres = 0;
-            if (!empty($offres)) {
-                foreach ($offres as $offre) {
-                    $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
-                    if (( $anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax() && $offre->getEstValide()) {
-                        $compteurOffres++;
-                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-                        echo "<a href='?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=" . $offre->getidFormation() . "' class='wrapOffres'>
-                            <div class='partieGauche'>
-                            <h3>" . htmlspecialchars($offre->getNomOffre()) . " - " . $offre->getTypeOffre() . "</h3>
-                            <p> Du " .  $offre->getDateDebut()  . " au " .  $offre->getDateFin()  . " pour " . htmlspecialchars($offre->getSujet()) . "</p>
-                            <p>" . htmlspecialchars($offre->getDetailProjet()) . "</p>
-                            </div>
-                            <div class='partieDroite'>
-                            <div class='divInfo'>
-                            <img src=\"" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "\" alt='logo'>
-                            </div>
-                            <div class='divInfo'>
-                            <img src='../ressources/images/recherche-demploi.png' alt='postulations'>
-                            <p>";
-                        if (!(new FormationRepository())->estFormation($offre->getidFormation())) {
-                            $nb = (new EtudiantRepository())->nbPostulations($offre->getidFormation());
-                            echo $nb . " postulation";
-                            if ($nb > 1) echo "s";
-                        } else {
-                            echo "Assignée";
-                        }
-                        echo "</p>
-                        </div>
-                        </div>
-                        </a>";
-                    }
-                }
-                if($compteurOffres == 0){
-                    echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
-                }
+            if ($offres == null) {
+                echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre rouge">Aucune offre ne correspond à vos critères</h3></div>';
             } else {
-                echo "<h2>Il n'y a aucune offre disponible actuellement. Veuillez revenir plus tard !</h2>";
-            } ?>
+
+                for ($i = 0; $i < count($offres); $i++) {
+                    $offre = $offres[$i];
+                    $red = "";
+                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                    $n = 2;
+                    $row = intdiv($i, $n);
+                    $col = $i % $n;
+                    if (($row + $col) % 2 == 0) {
+                        $red = "demi";
+                    }
+                    echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
+            <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
+           <div>
+           <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
+           <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
+           <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
+           <div><img src="../ressources/images/equipe.png" alt="candidats"> <h4 class="titre">';
+
+                    $nb = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                    if ($nb == 0) {
+                        echo "Aucun";
+                    } else {
+                        echo $nb;
+                    }
+
+                    echo " candidat";
+                    if ($nb > 1) {
+                        echo "s";
+                    }
+                    echo
+                    '</h4> </div>
+            </div>
+            </a>';
+                }
+            }
+
+            ?>
         </div>
+
     </div>
+
 </div>

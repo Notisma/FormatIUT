@@ -1,16 +1,21 @@
 <?php
-use App\FormatIUT\Configuration\Configuration;
 
-$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+/** @var Formation[] $listeOffre */
+
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+
+$entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
 ?>
 
 <div class="mainAcc">
 
     <div class="gaucheAcc">
-        <h3 class="titre" id="rouge">Vos Offres récentes :</h3>
+        <h3 class="titre rouge">Vos Offres récentes :</h3>
         <?php
         $data = $listeOffre;
-
         echo '<div class="grille">';
         for ($i = 0; $i < count($data); $i++) {
             $offre = $data[$i];
@@ -21,18 +26,18 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             if (($row + $col) % 2 == 0) {
                 $red = "demi";
             }
-            echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idFormation='. $offre->getIdFormation() .'" class="offre '. $red .'">
+            echo '<a href="?controleur=EntrMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . $offre->getNomOffre() . '</h3>
+           <h3 class="titre rouge">' . $offre->getNomOffre() . '</h3>
            ';
 
             if (!$offre->getEstValide()) {
-                echo '<h4 class="titre" id="rouge">Offre <span>non validée</span></h4>';
+                echo '<h4 class="titre rouge">Offre <span>non validée</span></h4>';
             } else {
                 echo '<h4 class="titre">Offre <span>validée</span></h4>';
             }
-            echo'
+            echo '
            <h4 class="titre">' . $offre->getTypeOffre() . '</h4>
            <h5 class="titre">' . $offre->getSujet() . '</h5>
            
@@ -46,7 +51,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
     <div class="droiteAcc">
 
         <img src="../ressources/images/bonjourEntr.png" alt="image de bienvenue">
-        <h2 class="titre">Bonjour, <?php echo $entreprise->getNomEntreprise() . " !"?></h2>
+        <h2 class="titre">Bonjour, <?php echo $entreprise->getNomEntreprise() . " !" ?></h2>
 
         <div class="tips">
             <img src="../ressources/images/astuces.png" alt="astuces">

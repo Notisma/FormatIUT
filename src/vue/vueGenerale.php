@@ -1,6 +1,6 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ use App\FormatIUT\Configuration\Configuration;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body
     <?php
@@ -35,7 +35,8 @@ use App\FormatIUT\Configuration\Configuration;
             <div class="separator">
                 <div id="gestionRecherche">
                     <?php
-                    $type = \App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte();
+                    $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
+                    $type = ConnexionUtilisateur::getTypeConnecte();
                     $liaison = "";
                     $src = "../ressources/images/profil.png";
                     $liaison = "?controleur=Main&action=afficherPageConnexion";
@@ -43,47 +44,22 @@ use App\FormatIUT\Configuration\Configuration;
                 <form action='?action=nothing' method='post'>            
                 <input class='searchField' id='hide' name='recherche' placeholder='Rechercher... ' disabled>
                 </form>";
+                    $menu = \App\FormatIUT\Controleur\ControleurMain::getMenu();
 
-                    if (\App\FormatIUT\Lib\ConnexionUtilisateur::estConnecte()) {
-                        switch (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()) {
-                            case "Entreprise" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=entrMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Etudiants" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Controleur\ControleurEtuMain::getCleEtudiant()));
-                                $src = Configuration::getUploadPathFromId($image->getImg());
-                                $liaison = "?controleur=etuMain&action=afficherProfil";
-                                break;
-                            }
-                            case "Administrateurs" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                            case "Personnels" :
-                            {
-                                $image = ((new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte()));
-                                $src = "../ressources/images/admin.png";
-                                $liaison = "?controleur=AdminMain&action=afficherProfilAdmin";
-                                break;
-                            }
-                        }
-
+                    if (ConnexionUtilisateur::estConnecte()) {
+                        $user = ConnexionUtilisateur::getUtilisateurConnecte();
+                        $menu = $user->getMenu();
+                        $src = $user->getImageProfil();
+                        $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
+                        $controleur = $user->getControleur();
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
-                        <form action='?' method='get'>
+                        <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche=e'><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <form action='?controleur=Main&action=rechercher' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
                         $codeRecherche .=
                             ">
-                            <input type='hidden' name='controleur' value='" . Configuration::getControleurName() . "'>
+                            <input type='hidden' name='controleur' value='Main'>
                             <input type='hidden' name='action' value='rechercher'>                    
                         </form>";
                     }
@@ -122,9 +98,9 @@ use App\FormatIUT\Configuration\Configuration;
                     foreach ($menu as $item) {
                         $actuel = "";
                         if ($item['label'] == $titrePage) {
-                            $actuel = "id='active'";
+                            $actuel = "class='active'";
                         }
-                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
+                        echo "<a " . $actuel . " href='{$item['lien']}'><div class='icone '><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></div></a>";
                     }
                     ?>
                 </div>
@@ -145,7 +121,7 @@ use App\FormatIUT\Configuration\Configuration;
         foreach ($menu as $item) {
             $actuel = "";
             if ($item['label'] == $titrePage) {
-                $actuel = "id='active'";
+                $actuel = "class='active'";
             }
             echo "<a " . $actuel . " href='{$item['lien']}'><img src='{$item['image']}' alt=\"imgmenu\"><p>{$item['label']}</p></a>";
         }
@@ -155,34 +131,25 @@ use App\FormatIUT\Configuration\Configuration;
 
 
     <footer>
-        <div id="footerContent">
-            <div id="footerText">
-                <h4>Equipe de Développement :</h4>
-                <div class="UlConteneur">
-                    <div>
-                        <ul>
-                            <li>Romain TOUZE</li>
-                            <li>Raphaël IZORET</li>
-                            <li>Matteo TORDEUX</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>Enzo GUILHOT</li>
-                            <li>Noé FUERTES-TORREDEME</li>
-                            <li>Thomas LOYE</li>
-                        </ul>
-                    </div>
+        <div class="footerContent">
+            <div class="footerForm">
+                <img src="../ressources/images/Logo_rouge.png" alt="petit logo footer">
+                <div>
+                    <h4 class="titre blanc">Sources : Cliquer <a
+                                href="?action=afficherSources&controleur=Main">ICI</a>
+                    </h4>
+                    <h4 class="titre blanc">Mentions Légales : Cliquer <a
+                                href="?action=afficherMentionsLegales&controleur=Main">ICI</a>
+                    </h4>
                 </div>
-                <p>Sources : Cliquer <a href="controleurFrontal.php?action=afficherSources&controleur=<?= Configuration::getControleurName() ?>">ICI</a></p>
             </div>
+
             <div id="footerLogo">
                 <img src="../ressources/images/LogoIutMontpellier-removed.png" class="grandLogo"
                      alt="grand logo footer">
-                <h2>© 2023 - Format'IUT</h2>
+                <h2 class="titre blanc">© 2023 - Format'IUT</h2>
             </div>
         </div>
     </footer>
-</div>
 </body>
 </html>

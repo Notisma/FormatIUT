@@ -22,6 +22,11 @@ class ConventionRepository extends AbstractRepository
         return array("idConvention", "conventionValidee", "dateCreation", "dateTransmission", "retourSigne", "assurance", "objectifOffre", "typeConvention");
     }
 
+    /**
+     * @param array $convention
+     * @return AbstractDataObject
+     * @throws \Exception permet de construire une convention depuis un tableau
+     */
     public function construireDepuisTableau(array $convention): AbstractDataObject
     {
         $dateCreation = new \DateTime($convention['dateCreation']);
@@ -31,38 +36,5 @@ class ConventionRepository extends AbstractRepository
             $dateTransmission, $convention['retourSigne'], $convention['assurance'],
             $convention['objectifOffre'], $convention['typeConvention']);
         return $creationconv;
-    }
-
-    public function getNbConvention()
-    {
-        $sql = "SELECT COUNT(idConvention) as nb FROM Formations";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $pdoStatement->execute();
-        $resultat = $pdoStatement->fetch();
-        if ($resultat === false) {
-            return 0;
-        }
-        return $resultat["nb"];
-    }
-
-    public function aUneConvention($numEtu): bool
-    {
-        $sql = "Select * FROM Formations WHERE idEtudiant=:tagEtu";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagEtu" => $numEtu);
-        $pdoStatement->execute($values);
-        if (!$pdoStatement->fetch()) return false;
-        else return true;
-    }
-
-
-    public function trouverConventionDepuisForm($numEtu): Convention
-    {
-        $sql = "Select c.idConvention, conventionValidee, dateCreation, dateTransmission, retourSigne, assurance, objectifOffre, typeConvention
-        FROM Formations f JOIN Convention c ON c.idConvention = f.idConvention WHERE idEtudiant = :tagEtu";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagEtu" => $numEtu);
-        $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
     }
 }

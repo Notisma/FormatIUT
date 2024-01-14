@@ -1,3 +1,14 @@
+<?php
+
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+
+if (ConnexionUtilisateur::estConnecte()) {
+    ConnexionUtilisateur::deconnecter();
+    header("Location: ?action=afficherPageConnexion&controleur=Main");
+    \App\FormatIUT\Lib\MessageFlash::ajouter("info", "Vous avez été déconnecté avec succès.");
+}
+?>
+
 
 <div id="center">
 
@@ -11,9 +22,6 @@
             <p id="premiereLigne"> LA PLATEFORME DE GESTION ET DE CONSULATION DES STAGES ET DES ALTERNANCES DE L'IUT
                 MONTPELLIER-SETE</p>
             <!-- <p>Vous êtes une entreprise et voulez faire une proposition de stage ou d'alternance ?</p> -->
-        </div>
-        <div id="boutonCentre">
-            <a href="proposition.html"><input id="boutonredirect" type="button" value="CONSULTER"></a>
         </div>
     </div>
 
@@ -44,7 +52,7 @@
                         <input type="password" name="mdp" id="mdp" required>
                     </div>
                 </div>
-                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&service=Connexion">
+                <input id="bouton" type="submit" value="CONNEXION" formaction="?action=seConnecter&controleur=Main">
                 <a class="oublié" onclick="afficherPopupMdp()" id="ouvrir">Mot de Passe oublié ?</a>
             </form>
         </div>
@@ -56,13 +64,13 @@
 <div class="popupOublié" id="popupMdp">
     <div class="mainForget">
         <div class="closeForget">
-            <a onclick="fermerPopupMdp()" id="fermer">
-                <img src="../ressources/images/fermer.png" alt="fermer" id="fermer">
+            <a onclick="fermerPopupMdp()">
+                <img src="../ressources/images/fermer.png" alt="fermer">
             </a>
         </div>
         <div class="conteneurForget">
             <h2>MOT DE PASSE OUBLIÉ ?</h2>
-            <form action="?action=mdpOublie&service=Mdp" method="post">
+            <form action="?action=mdpOublie&controleur=Main" method="post">
                 <label for="mail">Saisissez votre adresse mail :</label>
                 <input type="email" name="mail" id="mail" placeholder="exemple@exemple.ex" required>
                 <input type="submit" value="ENVOYER">

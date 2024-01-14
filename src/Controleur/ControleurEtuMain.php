@@ -2,19 +2,19 @@
 
 namespace App\FormatIUT\Controleur;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\TransfertImage;
-use App\FormatIUT\Modele\DataObject\Postuler;
-use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
-use App\FormatIUT\Modele\Repository\PostulerRepository;
-use App\FormatIUT\Modele\Repository\ResidenceRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
-use DateTime;
-use Exception;
+use App\FormatIUT\Service\ServiceConvention;
+use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
+use App\FormatIUT\Service\ServicePostuler;
 
 class ControleurEtuMain extends ControleurMain
 {
@@ -30,43 +30,6 @@ class ControleurEtuMain extends ControleurMain
         return self::$titrePageActuelleEtu;
     }
 
-    /**
-     * @return array[] qui représente le contenu du menu dans le bandeauDéroulant
-     */
-    public static function getMenu(): array
-    {
-        $menu = array(
-            array("image" => "../ressources/images/accueil.png", "label" => "Accueil Etudiants", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain"),
-            array("image" => "../ressources/images/stage.png", "label" => "Offres de Stage/Alternance", "lien" => "?action=afficherCatalogue&controleur=EtuMain"),
-            array("image" => "../ressources/images/signet.png", "label" => "Mes Offres", "lien" => "?action=afficherMesOffres&controleur=EtuMain"),
-        );
-
-        $formation = (new EtudiantRepository())->aUneFormation(self::getCleEtudiant());
-        if ($formation) {
-            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => " Mon Offre", "lien" => "?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $formation['idFormation']);
-        }
-        if (self::$titrePageActuelleEtu == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfil&controleur=EtuMain");
-        }
-
-        $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
-        if ($offre != false && $offre->getDateCreationConvention() == null) {
-            $offreValidee = (new PostulerRepository())->getOffreValider(self::getCleEtudiant());
-            if ($offreValidee) {
-                $offre = (new FormationRepository())->getObjectParClePrimaire($offreValidee->getidFormation());
-                if ($offre->getTypeOffre() == "Stage")
-                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir ma convention"
-                    , "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionStage");
-                else if ($offre->getTypeOffre() == "Alternance")
-                    $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention alternance", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionAlternance");
-            }
-        } else if ($offre!= false && $offre->getDateCreationConvention() != null) {
-            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
-        }
-
-        $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&service=Connexion");
-        return $menu;
-    }
 
     //FONCTIONS D'AFFICHAGES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -75,15 +38,19 @@ class ControleurEtuMain extends ControleurMain
      */
     public static function afficherAccueilEtu(): void
     {
-        $listeIdOffres = self::getSixMax((new FormationRepository())->getListeidFormations());
-        $listeIdStage = self::getSixMax((new FormationRepository())->listeIdTypeOffre("Stage"));
-        $listeStage = array();
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        $listeIdOffres = self::getSixMax((new FormationRepository())->getListeIDFormationsPourEtudiant("all", $etudiant));
         $listeOffres = array();
         for ($i = 0; $i < sizeof($listeIdOffres); $i++) {
             $listeOffres[] = (new FormationRepository())->getObjectParClePrimaire($listeIdOffres[$i]);
         }
+        $convention = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Accueil Etudiants";
-        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", self::getMenu(), ["listeStage" => $listeOffres, "listeAlternance" => $listeOffres]);
+        self::afficherVue("Accueil Etudiants", "Etudiant/vueAccueilEtudiant.php", [
+            "listeStage" => $listeOffres,
+            "listeAlternance" => $listeOffres,
+            "convention" => $convention,
+        ]);
     }
 
     /**
@@ -94,7 +61,7 @@ class ControleurEtuMain extends ControleurMain
         $type = $_REQUEST["type"] ?? "Tous";
         $offres = (new FormationRepository())->getListeOffresDispoParType($type);
         self::$titrePageActuelleEtu = "Offres de Stage/Alternance";
-        self::afficherVue("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffres.php", self::getMenu(), ["offres" => $offres, "type" => $type]);
+        self::afficherVue("Offres de Stage/Alternance", "Etudiant/vueCatalogueOffres.php", ["offres" => $offres, "type" => $type]);
     }
 
     /**
@@ -104,7 +71,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
         self::$titrePageActuelleEtu = "Mon Compte";
-        self::afficherVue("Mon Compte", "Etudiant/vueCompteEtudiant.php", self::getMenu(), ["etudiant" => $etudiant]);
+        self::afficherVue("Mon Compte", "Etudiant/vueCompteEtudiant.php", ["etudiant" => $etudiant]);
     }
 
     /**
@@ -114,7 +81,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $listOffre = (new FormationRepository())->listeOffresEtu(self::getCleEtudiant());
         self::$titrePageActuelleEtu = "Mes Offres";
-        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", self::getMenu(), ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
+        self::afficherVue("Mes Offres", "Etudiant/vueMesOffresEtu.php", ["listOffre" => $listOffre, "numEtu" => self::getCleEtudiant()]);
     }
 
     /**
@@ -124,52 +91,66 @@ class ControleurEtuMain extends ControleurMain
     {
         $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
 
-        if ($offre != false && $offre->getDateCreationConvention() != null) {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" && $offre != null && $offre != false && $offre->getDateCreationConvention() != null) {
 
             $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $entreprise = (new EntrepriseRepository())->trouverEntrepriseDepuisForm(self::getCleEtudiant());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-          //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
-            self::afficherVue("Ma convention", "Etudiant/vueAfficherConvention.php", self::getMenu(),
-                ["etudiant" => $etudiant, "entreprise" => $entreprise, "villeEntr" => $villeEntr,
-                    "offre" => $offre]);
+            //$convention = (new FormationRepository())->trouverConventionDepuisForm(self::getCleEtudiant());
+            self::afficherVue("Ma convention", "Etudiant/vueConvention.php", [
+                "etudiant" => $etudiant,
+                "entreprise" => $entreprise,
+                "villeEntr" => $villeEntr,
+                "offre" => $offre,
+                "etat" => ConventionEtat::VisuEtudiant
+            ]);
         } else {
             self::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne possèdez pas de convention");
         }
     }
 
     /**
-     * @return void affiche le formulaire de convention de stage
+     * @return void affiche le formulaire de convention (alternance / stage)
      */
-    public static function afficherFormulaireConventionStage(): void
+    public static function afficherFormulaireConvention(): void
     {
-        $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Stage");
+        $offre = (new FormationRepository())->trouverFormationValidee(self::getCleEtudiant());
         if (is_null($offre)) {
-            self::afficherErreur("offre non valide");
-        } else {
-            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
-            $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
-            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Stage", "Etudiant/vueFormulaireConventionStage.php", self::getMenu(), ["etudiant" => $etudiant,  "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::redirectionFlash("afficherAccueilEtu", "danger", "Vous n'avez pas d'offre de stage");
+            return;
         }
+        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+        $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
+        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        self::afficherVue("Remplir ma convention", "Etudiant/vueConvention.php", [
+            "etudiant" => $etudiant,
+            "offre" => $offre,
+            "entreprise" => $entreprise,
+            "villeEntr" => $villeEntr,
+            "etat" => ConventionEtat::Creation
+        ]);
     }
 
     /**
-     * @return void affiche le formulaire de convention d'alternance
+     * @return void affiche le formulaire pour modifier la convention de l'étudiant
      */
-    public static function afficherFormulaireConventionAlternance(): void
+    public static function afficherFormulaireModifierConvention(): void
     {
-//        $offreVerif = (new PostulerRepository())->getOffreValider(self::self::getCleEtudiant());
-        $offre = (new FormationRepository())->trouverOffreValide(self::getCleEtudiant(), "Alternance");
-        if ($offre) {
-
-            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+        $formation = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
+        if ($formation->getDateCreationConvention() != null) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($formation->getIdEntreprise());
             $villeEntr = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVille());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
-            self::afficherVue("Convention Alternance", "Etudiant/vueFormulaireConventionAlternance.php", self::getMenu(), ["etudiant" => $etudiant, "offre" => $offre, "entreprise" => $entreprise, "villeEntr" => $villeEntr]);
+            self::afficherVue("Modifier Convention", "Etudiant/vueConvention.php", [
+                "etudiant" => $etudiant,
+                "offre" => $formation,
+                "entreprise" => $entreprise,
+                "villeEntr" => $villeEntr,
+                "etat" => ConventionEtat::Modification
+            ]);
         } else {
-            self::afficherErreur("offre non valide");
+            self::afficherErreur("Convention inexistante");
         }
     }
 
@@ -179,9 +160,107 @@ class ControleurEtuMain extends ControleurMain
     public static function afficherFormulaireModification(): void
     {
         $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
-        self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", self::getMenu(), ["etudiant" => $etudiant]);
+        self::afficherVue("Modifier vos informations", "Etudiant/vueMettreAJour.php", ["etudiant" => $etudiant]);
     }
 
+    /**
+     * @param string|null $idFormation l'id de la formation dont on affiche le detail
+     * @return void affiche le détail d'une offre
+     */
+
+    public static function afficherVueDetailOffre(string $idFormation = null): void
+    {
+        if (!isset($_REQUEST['idFormation']) && is_null($idFormation))
+            self::afficherErreur("Il faut préciser la formation");
+        $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
+        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
+        if (($anneeEtu >= $offre->getAnneeMin()) && $anneeEtu <= $offre->getAnneeMax()) {
+            if ($offre->getEstValide()) {
+                self::$titrePageActuelleEtu = "Détails de l'offre";
+                /** @var ControleurMain $menu */
+                $liste = (new FormationRepository())->getListeidFormations();
+                if ($idFormation || isset($_REQUEST["idFormation"])) {
+                    if (!$idFormation) $idFormation = $_REQUEST['idFormation'];
+                    if (in_array($idFormation, $liste)) {
+                        $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+                        $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+                        $client = "Etudiant";
+                        $chemin = ucfirst($client) . "/vueDetailOffre" . ucfirst($client) . ".php";
+                        self::afficherVue("Détails de l'offre", $chemin, ["offre" => $offre, "entreprise" => $entreprise]);
+                    } else {
+                        self::redirectionFlash("afficherCatalogue", "danger", "Cette offre n'existe pas");
+                    }
+                } else {
+                    self::redirectionFlash("afficherCatalogue", "danger", "L'offre n'est pas renseignée");
+                }
+            } else {
+                self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
+            }
+        } else {
+            self::redirectionFlash("afficherCatalogue", "danger", "Vous n'avez pas le droit de voir cette offre");
+        }
+    }
+
+    /**
+     * @return void renvoie sur le formulaire convention une entreprise n'est pas inscrite sur le site
+     */
+    public static function afficherFormulaireConventionSansEntreprise()
+    {
+        $formation = (new FormationRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+        if ($formation == null && ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
+            self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreationConventionQuandPasEntreprise.php", ['etudiant' => $etudiant]);
+        } else {
+            self::redirectionFlash("afficherAccueilEtu", "warning", "Vous avez déjà une formation");
+        }
+    }
+
+    //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function postuler(): void
+    {
+        ServicePostuler::postuler();
+    }
+
+    public static function mettreAJour(): void
+    {
+        ServiceEtudiant::mettreAJour();
+    }
+
+    public static function creerConvention(): void
+    {
+        ServiceConvention::creerConvention();
+    }
+
+    public static function modifierConvention(): void
+    {
+        ServiceConvention::modifierConvention();
+    }
+
+    public static function modifierFichiers(): void
+    {
+        ServiceFichier::modifierFichiers();
+    }
+
+    public static function faireValiderConvention(): void
+    {
+        ServiceConvention::faireValiderConvention();
+    }
+
+    public static function creerConventionSansEntreprise(): void
+    {
+        ServiceConvention::creerConventionSansEntreprise();
+    }
+
+    public static function annulerOffre(): void
+    {
+        ServicePostuler::annulerOffre();
+    }
+
+    public static function validerOffre(): void
+    {
+        ServicePostuler::validerOffre();
+    }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -192,7 +271,7 @@ class ControleurEtuMain extends ControleurMain
     {
         //si un fichier a été passé en paramètre
         if (!empty($_FILES['pdp']['name'])) {
-            //TODO vérif de doublons d'image
+
             $etudiant = ((new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant()));
             $nom = "";
             $nomEtudiant = $etudiant->getLogin();
@@ -212,19 +291,14 @@ class ControleurEtuMain extends ControleurMain
             $etu = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $etu->setImg($ai_id);
             (new EtudiantRepository())->modifierObjet($etu);
-
             if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
 
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
-            } else {
-                self::redirectionFlash("afficherProfil", "success", "Image modifiée");
             }
         } else {
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
-            } else {
-                self::redirectionFlash("afficherProfil", "warning", "Aucune image selectionnée");
             }
         }
     }
@@ -247,7 +321,7 @@ class ControleurEtuMain extends ControleurMain
     public static function redirectionFlash(string $action, string $type, string $message): void
     {
         MessageFlash::ajouter($type, $message);
-        header("Location : ?controleur=EtuMain&action=$action");
+        self::$action();
     }
 
 }

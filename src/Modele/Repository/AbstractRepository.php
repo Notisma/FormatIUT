@@ -4,6 +4,7 @@ namespace App\FormatIUT\Modele\Repository;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 
 abstract class AbstractRepository
@@ -25,21 +26,14 @@ abstract class AbstractRepository
     {
         $sql = 'SELECT * FROM ' . $this->getNomTable();
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $listeObjet = array();
         foreach ($pdoStatement as $item) {
             $listeObjet[] = $this->construireDepuisTableau($item);
         }
         return $listeObjet;
     }
 
-    public function getListeID()
-    {
-        $sql = 'SELECT * FROM ' . $this->getNomTable();
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        foreach ($pdoStatement as $item) {
-            $listeObjet[] = $item[$this->getClePrimaire()];
-        }
-        return $listeObjet;
-    }
+
 
     /***
      * @param $clePrimaire
@@ -62,33 +56,13 @@ abstract class AbstractRepository
     }
 
 
-    /*public function getObjectParClesPrimaires($clesPrimaires):?AbstractDataObject{
-        $placeholders = implode(',', array_fill(0, count($clesPrimaires), '?'));
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . " IN ({$placeholders})";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        foreach ($clesPrimaires as $index => $valeur) {
-            $pdoStatement->bindValue($index + 1, $valeur, PDO::PARAM_INT);
-        }
-        $pdoStatement->execute();
-        $objets = $pdoStatement->fetchAll();
-        if (!$objets){
-            return null;
-        }
-        $result = array();
-        foreach ($objets as $objet) {
-            $result[] = $this->construireDepuisTableau($objet);
-        }
-        return $this->construireDepuisTableau($result);
-    }*/
-
-    // ----- CRUD -----
 
     /***
      * @param AbstractDataObject $object
-     * @return void
+     * @return string|false last insert ID (for auto-increment)
      * créer un object dans la Base de Donnée avec les informations de l'objet donné en paramètre
      */
-    public function creerObjet(AbstractDataObject $object): void
+    public function creerObjet(AbstractDataObject $object): string|false
     {
         $fields = "";
         $values = "";
@@ -103,9 +77,11 @@ abstract class AbstractRepository
             $tags[$nomColonne . "Tag"] = $object->formatTableau()[$nomColonne];
         }
         $sql = "INSERT IGNORE INTO " . $this->getNomTable() . " ($fields) VALUES ($values);";
-
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $pdo = ConnexionBaseDeDonnee::getPdo();
+        $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute($tags);
+
+        return $pdo->lastInsertId();
     }
 
 
@@ -146,91 +122,71 @@ abstract class AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $colonne
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée
+     */
+    public function nbElementsDistincts($colonne): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $colonne . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." IS NOT NULL;";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet) {
+            return null;
+        }
+        return $objet;
+    }
+
+    /**
+     * @param $colonne
+     * @param $valeur
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée lorsque la valeur donnée est contenue dedans
+     */
+    public function nbElementsDistinctsQuandContient($colonne, $valeur): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." LIKE '%" . $valeur . "%';";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet) {
+            return null;
+        }
+        return $objet;
+    }
+
+    /**
+     * @param $colonne
+     * @param $valeur
+     * @return int|null
+     * Permet de récupérer le nombre d'éléments distincts dans une table pour une colonne donnée lorsque sa valeur est égale à celle donnée
+     */
+    public function nbElementsDistinctsQuandEgal($colonne, $valeur): ?int {
+        $sql = "SELECT COUNT(DISTINCT(" . $this->getClePrimaire() . ")) FROM " . $this->getNomTable() . " WHERE ". $colonne ." = " . $valeur . ";";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet) {
+            return null;
+        }
+        return $objet;
+    }
+
     //-------------AUTRES------------
 
-    public static function getResultatRechercheTrie($motsclefs): ?array
-    {
-        if (Configuration::controleurIs("EtuMain"))
-            $anneeEtu = (new EtudiantRepository())->getAnneeEtudiant((new EtudiantRepository())->getObjectParClePrimaire(ControleurEtuMain::getCleEtudiant()));
 
-        $pdo = ConnexionBaseDeDonnee::getPdo();
-        $res = [
-            'offres' => array(),
-            'entreprises' => array(),
-        ];
 
-        $sqlFormations = "";
-        $sqlEntreprises = "";
 
-        $tags = [];
-
-        for ($i = 0; $i < count($motsclefs); $i++) {
-            $mot = $motsclefs[$i];
-            $motsclefs[$i] = strtolower($mot);
-
-            $sqlFormations .= "
-            SELECT *
-            FROM Formations
-            WHERE (LOWER(sujet) LIKE :tag$i
-                OR LOWER(nomOffre) LIKE :tag$i
-                OR LOWER(typeOffre) LIKE :tag$i
-                OR LOWER(detailProjet) LIKE :tag$i
-                OR 'offre' LIKE :tag$i
-                OR 'formation' LIKE :tag$i
-            )";
-            if (Configuration::controleurIs("EtuMain"))
-                $sqlFormations .= "AND  $anneeEtu >= anneeMin
-                         AND  $anneeEtu <= anneeMax";
-            $sqlFormations .= "\nINTERSECT";
-
-            $sqlEntreprises .= "
-            SELECT *
-            FROM Entreprises
-            WHERE LOWER(nomEntreprise) LIKE :tag$i
-            INTERSECT";
-
-            $tags["tag$i"] = "%$mot%";
-        }
-
-        $sqlFormations = substr($sqlFormations, 0, -9);
-        $sqlEntreprises = substr($sqlEntreprises, 0, -9);
-
-    //    echo "<pre>";var_dump($sqlEntreprises);echo "</pre>";
-        try {
-            $pdoStatement = $pdo->prepare($sqlFormations);
-            $pdoStatement->execute($tags);
-        } catch (\PDOException $e) {
-            return null;
-        }
-        foreach ($pdoStatement as $row)
-            $res['offres'][] = (new FormationRepository())->construireDepuisTableau($row);
-
-        try {
-            $pdoStatement = $pdo->prepare($sqlEntreprises);
-            $pdoStatement->execute($tags);
-        } catch (\PDOException $e) {
-            return null;
-        }
-        foreach ($pdoStatement as $row)
-            $res['entreprises'][] = (new EntrepriseRepository())->construireDepuisTableau($row);
-
-        return $res;
-    }
-
-    /***
-     * @param $clePrimaire
-     * @return true si l'objet existe dans la base de donnée, false sinon
+    /**
+     * @param $nom
+     * @return int|null
+     * Permet de récupérer le résultat d'une des fonctions pl/sql en passant son nom en paramètre
      */
-    public function estExistant($clePrimaire): bool
-    {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $clePrimaire);
-        $pdoStatement->execute($values);
-        $objet = $pdoStatement->fetch();
-        if (!$objet) {
+    public static function lancerFonctionHistorique($nom) : ?float {
+        $sql = "SELECT " . $nom . "();";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetchColumn();
+        if (!$objet){
             return false;
         }
-        return true;
+        return $objet;
     }
+
 }

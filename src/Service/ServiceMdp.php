@@ -58,6 +58,8 @@ class ServiceMdp
             } else {
                 ControleurMain::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
             }
+        } else {
+            ControleurMain::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
         }
     }
 
@@ -69,14 +71,13 @@ class ServiceMdp
         if (!isset($_REQUEST["login"], $_REQUEST["nonce"]))
             ControleurMain::afficherErreur("Lien corrompu (à transformer en flash, pb de \$_GET)");
         else
-            //TODO créer fonction afficherMdpOublie
-            ControleurMain::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php", self::getMenu());
+            ControleurMain::afficherMdpOublie();
     }
 
     /**
      * @return void met à jour le mot de passe pour une entreprise
      */
-    public static function mettreAJourMdp() : void
+    public static function mettreAJourMdp(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
             if (isset($_POST['ancienMdp'], $_POST['nouveauMdp'], $_POST['confirmerMdp'])) {

@@ -1,0 +1,64 @@
+.boutonStats {
+    padding: 20px;
+    position: absolute;
+    left: 46%;
+    width: 300px;
+}
+
+.boutonStats button {
+    background-color: indianred;
+    color: white;
+    border: 2px solid lightcoral;
+    border-radius: 10px;
+    width: 180px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.boutonStats button:hover {
+    cursor: grab;
+}
+
+
+.titreStats {
+    color: white;
+    background-color: indianred;
+    border-radius: 20px;
+    padding: 10px;
+    width: 440px;
+}
+
+.stats {
+    background-color: lightblue;
+    border-radius: 20px;
+    width: 770px;
+    height: 550px;
+    overflow: auto;
+    padding: 30px;
+}
+
+.stats::-webkit-scrollbar{
+    border-radius: 10px;
+    background-color: #ffd0d4;
+    width: 10px;
+}
+
+.stats::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ff5660;
+}
+
+
+.elem {
+    padding: 5px 10px 5px 10px;
+    margin: 20px;
+    background-color: #e6e8e6;
+    border-radius: 20px;
+}
+
+.historiqueMain {
+    padding: 10px 0 10px 0;
+}
+p{
+    font-weight: bold;
+}

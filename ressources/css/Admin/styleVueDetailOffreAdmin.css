@@ -5,13 +5,8 @@ body {
 }
 
 .wrapCentreOffre {
-    position: absolute;
-    top: 56%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 95%;
+    height: 95%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -27,7 +22,7 @@ body {
     color: black;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
@@ -148,13 +143,13 @@ body {
     width: 15%;
 }
 
-#attente {
+.attente {
     background-color: #ffcf32;
     color: #814900;
     border: 2px solid #fa7506;
 }
 
-#valide {
+.valide {
     background-color: #329438;
     color: #0d4e00;
     border: 2px solid #0d4e00;
@@ -248,6 +243,32 @@ body {
 
 .erreur > img {
     width: 50%;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 200vh;
+    }
+
+    .wrapCentreOffre {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .wrapGauche {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    .wrapDroite {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
 }
 
 

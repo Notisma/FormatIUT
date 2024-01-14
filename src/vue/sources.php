@@ -1,5 +1,6 @@
 <div class="main">
-    <h1 class="titre" id="rouge">PAGE DE CITATION DES SOURCES - FORMAT'IUT</h1>
+    <h1 class="titre rouge">PAGE DE CITATION DES SOURCES - FORMAT'IUT</h1>
+    <h2>Code source : https://gitlabinfo.iutmontp.univ-montp2.fr/saedev/devapplicationformatiut</h2>
     <h3 class="titre">Toutes les images sont issues des sites Flaticon et Freepik</h3>
     <div class="grid">
         <a href="https://fr.freepik.com/vecteurs-libre/illustration-concept-parametres-personnels_9148063.htm#&position=0&from_view=search&track=ais&uuid=05f9f2c7-25a1-458c-8ead-d0eceec56b72">Image

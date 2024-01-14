@@ -1,6 +1,7 @@
 <?php
 
 namespace App\FormatIUT\Modele\Repository;
+
 use App\FormatIUT\Configuration\Configuration;
 use PDO;
 
@@ -17,12 +18,11 @@ class ConnexionBaseDeDonnee
 
     public function __construct()
     {
-        //require_once "ConfIUT.php";
-        $hostname = Configuration::getHostName();
+        $hostname = Configuration::getHostname();
         $port = Configuration::getPort();
-        $databaseName = Configuration::getDataBase();
+        $databaseName = Configuration::getDatabase();
         $login = Configuration::getLogin();
-        $password = Configuration::getPassWord();
+        $password = Configuration::getPassword();
         // Connexion à la base de données
 // Le dernier argument sert à ce que toutes les chaines de caractères
 // en entrée et sortie de MySql soit dans le codage UTF-8

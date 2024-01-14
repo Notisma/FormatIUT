@@ -11,18 +11,13 @@ body {
     margin: 0;
 }
 
-#rouge {
+.rouge {
     color: #ff5660;
 }
 
 .wrapCentreEtu {
-    position: absolute;
-    top: 56%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 95%;
+    height: 95%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -77,20 +72,21 @@ body {
     margin: 0;
 }
 
+
 .wrapBoutons {
-    width: 90%;
-    height: 9%;
+    width: 98%;
+    height: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     padding-bottom: 1%;
 }
 
 .wrapBoutons > a {
-    width: 40%;
-    height: 90%;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,4 +200,30 @@ body {
     justify-content: space-around;
     align-items: flex-start;
     align-content: center;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 200vh;
+    }
+
+    .wrapCentreEtu {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .gaucheEtu {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    .droiteEtu {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
 }

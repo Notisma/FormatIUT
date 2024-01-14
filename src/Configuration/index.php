@@ -36,22 +36,6 @@ class ControleurConnexionLdap
         return self::$cleIndex;
     }
 
-    public static function trouverUser(string $login, string $password)
-    {
-        echo "test";
-        self::connexion();
-        if (self::userExist($login)) {
-            if (self::verifLDap($login, $password)) {
-                $infos = self::getInfoPersonne($login);
-                echo "Valider";
-                echo json_encode($infos);
-            } else {
-                echo json_encode("Mot de passe incorrect");
-            }
-        } else {
-            echo json_encode("Utilisateur inconnu");
-        }
-    }
 
     public static function connexion()
     {
@@ -96,17 +80,16 @@ class ControleurConnexionLdap
         return $passwd_ok;
     }
 
-    public static function listePersonnes()
+    public static function listePersonnes(): void
     {
         self::connexion();
         //On recherche toutes les entres du LDAP qui sont des personnes
         $search = ldap_search(self::getConn(), self::getBasedn(), "(objectClass=person)");
-//On recupere toutes les entres de la recherche effectuees auparavant
+        //On recupere toutes les entres de la recherche effectuees auparavant
         $resultats = ldap_get_entries(self::getConn(), $search);
-        var_dump($resultats);
-//Pour chaque utilisateur, on recupere les informations utiles
+        //Pour chaque utilisateur, on recupere les informations utiles
         for ($i = 0; $i < count($resultats) - 1; $i++) {
-//On stocke le login, nom/prnom, la classe et la promotion de l’utilisateur courant
+        //On stocke le login, nom/prnom, la classe et la promotion de l’utilisateur courant
             $promotion[$i] = explode("=", explode(",", $resultats[$i]["dn"])[1])[1];
             if ($promotion[$i] != "Personnel" && $promotion[$i] != "people") {
 

@@ -3,18 +3,32 @@ function afficherPopupDepotCV_LM() {
     document.getElementById("aGriser").style.opacity = "0.3";
 }
 
+
+
+function toggleExpand() {
+    let element = document.getElementsByClassName("annotations")[0];
+    let fleche = document.getElementsByClassName("interaction")[0];
+    if (element.style.width !== "350px") {
+        element.style.width = "350px";
+        fleche.style.position="relative";
+        fleche.style.right="40px";
+        fleche.style.transform="rotate(180deg)";
+        fleche.style.top="0";
+        fleche.style.borderRadius="0 50px 50px 0";
+        let divs = element.getElementsByTagName("div");
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = "flex";
+        }
+    }
+    else {
+        fleche.style.transform="rotate(180deg)";
+        element.style.width = "0px";
+
+    }
+}
+
 function fermerPopupDepotCV_LM() {
     document.getElementById("popup").style.display = "none";
-    document.getElementById("aGriser").style.opacity = "1";
-}
-
-function afficherPopupInfosEtu() {
-    document.getElementById("infosEtuCandidat").style.display = "flex";
-    document.getElementById("aGriser").style.opacity = "0.3";
-}
-
-function fermerPopupInfosEtu() {
-    document.getElementById("infosEtuCandidat").style.display = "none";
     document.getElementById("aGriser").style.opacity = "1";
 }
 
@@ -53,6 +67,11 @@ function fermerPopupMdp() {
 }
 
 
+function fermerPopupCGU(){
+    document.getElementById("cgu").style.display="none";
+    document.getElementById("center").style.opacity="1";
+}
+
 function afficherPopupPremiereCo(indice) {
     let enfants = document.getElementById("popupPremiereCo").children;
     if (indice < 0 || indice >= enfants.length) {
@@ -60,7 +79,7 @@ function afficherPopupPremiereCo(indice) {
     }
 
     document.getElementById("popupPremiereCo").style.display = "flex";
-    document.getElementById("conteneurPrincipal").style.opacity = "0.3";
+    document.getElementsByClassName("mainAcc")[0].style.opacity = "0.3";
 
     for (var i = 0; i < enfants.length; i++) {
         enfants[i].style.display = "none";
@@ -159,3 +178,4 @@ function afficherPageCompteEntr(page) {
         }
     }
 }
+

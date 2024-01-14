@@ -8,6 +8,12 @@ class ConnexionLdap
 {
     private static array $infosUser;
 
+    /**
+     * @param string $login
+     * @param string $mdp
+     * @param string $action
+     * @return bool retourne true si la connexion est réussie, false sinon
+     */
     public static function connexion(string $login, string $mdp, string $action): bool
     {
         //on essaie de se connecter, et si ça crash on affiche une erreur
@@ -34,6 +40,11 @@ class ConnexionLdap
         return false;
     }
 
+    /**
+     * @param string $login
+     * @param string $password
+     * @return bool retourne true si le mot de passe ldap est correct, false sinon
+     */
     public static function verifLDap(string $login, string $password): bool
     {
         $ldap_searchfilter = "(uid=$login)";
@@ -61,6 +72,9 @@ class ConnexionLdap
         return $passwd_ok;
     }
 
+    /**
+     * @return array retourne un tableau contenant les informations de l'utilisateur depuis ldap
+     */
     public static function getInfoPersonne(): array
     {
         if ($_SERVER["HTTP_HOST"] == "webinfo.iutmontp.univ-montp2.fr") {
@@ -91,6 +105,10 @@ class ConnexionLdap
 
     }
 
+    /**
+     * @param string $login
+     * @return array retourne un tableau contenant les informations de l'utilisateur depuis ldap
+     */
     public static function getInfoLdap(string $login): array
     {
         //self::connexion($login,);
@@ -107,7 +125,9 @@ class ConnexionLdap
         return $infos;
     }
 
-
+    /**
+     * @return void permet de se déconnecter de ldap
+     */
     public static function deconnexion(): void
     {
         if (strstr("webinfo", $_SERVER['HTTP_HOST'])) {

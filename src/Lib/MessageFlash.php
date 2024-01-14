@@ -7,13 +7,15 @@ use App\FormatIUT\Modele\HTTP\Session;
 class MessageFlash
 {
 
-    // Les messages sont enregistrés en session associée à la clé suivante
     private static string $cleFlash = "_messagesFlash";
 
-    // $type parmi "success", "info", "warning" ou "danger"
+    /**
+     * @param string $type
+     * @param string $message
+     * @return void ajoute un message flash dans la session
+     */
     public static function ajouter(string $type, string $message): void
     {
-        // À compléter
         $array = array(
             $type => $message
         );
@@ -25,21 +27,13 @@ class MessageFlash
         $session->enregistrer(self::$cleFlash, $array);
     }
 
-    public static function contientMessage(string $type): bool
-    {
-        // À compléter
-        $session = Session::getInstance();
-        if ($session->contient(self::$cleFlash)) {
-            $array = $session->lire(self::$cleFlash);
-            return isset($array[$type]);
-        }
-        return false;
-    }
 
-    // Attention : la lecture doit détruire le message
+    /**
+     * @param string $type
+     * @return array retourne un tableau contenant les messages flash du type $type
+     */
     public static function lireMessages(string $type): array
     {
-        // À compléter
         $session = Session::getInstance();
         $array = array();
         if ($session->contient(self::$cleFlash)) {
@@ -52,9 +46,11 @@ class MessageFlash
         return $array;
     }
 
+    /**
+     * @return array retourne un tableau contenant tous les messages flash
+     */
     public static function lireTousMessages(): array
     {
-        // À compléter
         $session = Session::getInstance();
         if ($session->contient(self::$cleFlash)) {
             $array = $session->lire(self::$cleFlash);
@@ -64,13 +60,10 @@ class MessageFlash
         return array();
     }
 
-    public static function supprimerTousMessages(): void
-    {
-        $session = Session::getInstance();
-        $session->supprimer(self::$cleFlash);
 
-    }
-
+    /**
+     * @return bool permet de savoir si un message flash est présent dans la session
+     */
     public static function verifDeconnexion() : bool{
         $message=self::lireMessages("info");
         if (!str_contains($message["info"],"Vous avez été déconnecté")){

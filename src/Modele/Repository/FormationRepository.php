@@ -2,11 +2,11 @@
 
 namespace App\FormatIUT\Modele\Repository;
 
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\AbstractDataObject;
 use App\FormatIUT\Modele\DataObject\Formation;
-use DateTime;
 
-class FormationRepository extends AbstractRepository
+class FormationRepository extends RechercheRepository
 {
 
     protected function getNomTable(): string
@@ -16,7 +16,13 @@ class FormationRepository extends AbstractRepository
 
     protected function getNomsColonnes(): array
     {
-        return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet","detailProjet","dureeHeure","joursParSemaine","gratification","uniteGratification","uniteDureeGratification","nbHeuresHebdo","offreValidee","objectifOffre","dateCreationOffre","typeOffre","anneeMax","anneeMin","estValide","validationPedagogique","convention","conventionValidee","dateCreationConvention","dateTransmissionConvention","dateRetourSigne","assurance","avenant","idEtudiant","idTuteurPro","idEntreprise","loginTuteurUM");
+
+        return array("idFormation", "nomOffre", "dateDebut", "dateFin", "sujet", "detailProjet", "dureeHeure", "joursParSemaine", "gratification", "uniteGratification", "uniteDureeGratification", "nbHeuresHebdo", "offreValidee", "objectifOffre", "dateCreationOffre", "typeOffre", "anneeMax", "anneeMin", "estValide", "validationPedagogique", "convention", "conventionValidee", "dateCreationConvention", "dateTransmissionConvention", "dateRetourSigne", "assurance", "avenant", "idEtudiant", "idTuteurPro", "idEntreprise", "loginTuteurUM", "tuteurUMvalide");
+    }
+
+    protected function getColonnesRecherche(): array
+    {
+        return array("nomOffre", "sujet", "typeOffre", "detailProjet");
     }
 
     protected function getClePrimaire(): string
@@ -26,22 +32,13 @@ class FormationRepository extends AbstractRepository
 
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
-        return new Formation( $dataObjectTableau["idFormation"],$dataObjectTableau["nomOffre"],$dataObjectTableau["dateDebut"],$dataObjectTableau["dateFin"], $dataObjectTableau["sujet"],$dataObjectTableau["detailProjet"],$dataObjectTableau["dureeHeure"],$dataObjectTableau["joursParSemaine"],$dataObjectTableau["gratification"],$dataObjectTableau["uniteGratification"],$dataObjectTableau["uniteDureeGratification"],$dataObjectTableau["nbHeuresHebdo"],$dataObjectTableau["offreValidee"],$dataObjectTableau["objectifOffre"],$dataObjectTableau["dateCreationOffre"],$dataObjectTableau["typeOffre"],$dataObjectTableau["anneeMax"],$dataObjectTableau["anneeMin"],$dataObjectTableau["estValide"],$dataObjectTableau["validationPedagogique"],$dataObjectTableau["convention"],$dataObjectTableau["conventionValidee"],$dataObjectTableau["dateCreationConvention"],$dataObjectTableau["dateTransmissionConvention"],$dataObjectTableau["dateRetourSigne"],$dataObjectTableau["assurance"],$dataObjectTableau["avenant"],$dataObjectTableau["idEtudiant"],$dataObjectTableau["idTuteurPro"],$dataObjectTableau["idEntreprise"],$dataObjectTableau["loginTuteurUM"]);
+        return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"], $dataObjectTableau["tuteurUMvalide"]);
     }
 
-    public function listeIdTypeFormation(): array
-    {
-        $sql = "SELECT idFormation FROM Formations";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $listeID = array();
-        foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idFormation"];
-        }
-        return $listeID;
-    }
-
-    //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idFormation)
-
+    /**
+     * @param string $offre
+     * @return AbstractDataObject|null permet de trouver une offre depuis son nom
+     */
     public function estFormation(string $offre): ?AbstractDataObject
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idFormation=:Tag AND idEtudiant IS NOT NULL";
@@ -56,22 +53,23 @@ class FormationRepository extends AbstractRepository
 
     }
 
-    public function ajouterConvention($idEtu, $convention): void
-    {
-        $sql = "UPDATE Formations SET convention =:tagConvention WHERE idEtudiant=:tagEtu";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagConvention" => $convention, "tagEtu" => $idEtu);
-        $pdoStatement->execute($values);
-    }
+    /**
+     * @param $type
+     * @return array retourne la liste des offres disponibles pour un étudiant, en respectant l'année de l'étudiant
+     */
     public function getListeOffresDispoParType($type): array
     {
+        $etu=(new EtudiantRepository())->getObjectParClePrimaire((new EtudiantRepository())->getNumEtudiantParLogin(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+        $anneeEtudiant = (new EtudiantRepository())->getAnneeEtudiant($etu);
         $values = array();
         $sql = "SELECT * FROM " . $this->getNomTable() . " o ";
         $sql .= " WHERE idEtudiant is null AND estValide=1";
         if ($type == "Stage" || $type == "Alternance") {
-            $sql .= " AND typeOffre=:TypeTag";
+            $sql .= " AND (typeOffre=:TypeTag  OR typeOffre=\"Stage/Alternance\")";
             $values["TypeTag"] = $type;
         }
+        $sql .= " AND anneeMin <= :TagAnnee AND anneeMax >= :TagAnnee AND estValide=1";
+        $values["TagAnnee"]=$anneeEtudiant;
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $pdoStatement->execute($values);
         $listeOffre = array();
@@ -80,34 +78,14 @@ class FormationRepository extends AbstractRepository
         }
         return $listeOffre;
     }
-    /**
-     * @param $idEntreprise
-     * @return array
-     * retourne la liste des offres disponibles pour une entreprise
-     */
-    public function offresParEntrepriseDispo($idEntreprise): array
-    {
-        $sql = "SELECT * 
-                FROM " . $this->getNomTable() . " o
-                WHERE idEntreprise=:Tag 
-                AND NOT EXISTS (
-                SELECT idFormation FROM Formations f
-                WHERE f.idFormation=o.idFormation)";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $idEntreprise);
-        $pdoStatement->execute($values);
-        $listeOffre = array();
-        foreach ($pdoStatement as $item) {
-            $listeOffre[] = $this->construireDepuisTableau($item);
-        }
-        return $listeOffre;
-    }
+
+
     /**
      * @param $idEntreprise
      * @param $type
      * @param $etat
      * @return array
-     * retourne la liste des offres pour une entreprise avec différents filtres
+     * retourne la liste des id offres pour une entreprise avec différents filtres
      */
     public function getListeOffreParEntreprise($idEntreprise, $type, $etat): array
     {
@@ -124,16 +102,18 @@ class FormationRepository extends AbstractRepository
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
         $values["Tag"] = $idEntreprise;
         $pdoStatement->execute($values);
+
         $listeOffre = array();
         foreach ($pdoStatement as $offre) {
             $listeOffre[] = $this->construireDepuisTableau($offre);
         }
         return $listeOffre;
     }
+
     /**
      * @param $numEtudiant
      * @return array
-     * retourne la liste des offres auquel à déjà postuler un étudiant
+     * retourne la liste des offres auxquelles a déjà postulé un étudiant
      */
 
     public function listeOffresEtu($numEtudiant): array
@@ -151,11 +131,41 @@ class FormationRepository extends AbstractRepository
         return $listOffre;
 
     }
+
+
+    /**
+     * @param $type
+     * @return array
+     * Retourne la liste des id des offres disponibles pour un étudiant, en respectant l'année de l'étudiant
+     */
+    public function getListeIDFormationsPourEtudiant($type, $etudiant): array
+    {
+        $anneeEtudiant = (new EtudiantRepository())->getAnneeEtudiant($etudiant);
+        $sql = "";
+        if ($type == "all" || $type == "Tous") {
+            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL";
+        } else {
+            $sql = "SELECT idFormation FROM Formations WHERE idEtudiant IS NULL AND typeOffre=:Tag OR typeOffre='Stage/Alternance'";
+        }
+        $sql .= " AND anneeMin <= :TagAnnee AND anneeMax >= :TagAnnee AND estValide=1";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("TagAnnee" => $anneeEtudiant);
+        if ($type != "all" || $type != "Tous") {
+            $values["Tag"] = $type;
+        }
+        $pdoStatement->execute($values);
+        $listeId = array();
+        foreach ($pdoStatement as $item => $value) {
+            $listeId[] = $value["idFormation"];
+        }
+        return $listeId;
+    }
+
+
     /**
      * @return array
      * retourne la liste des id des offres
      */
-
     public function getListeidFormations(): array
     {
         $sql = "SELECT idFormation FROM Formations";
@@ -166,23 +176,13 @@ class FormationRepository extends AbstractRepository
         }
         return $listeId;
     }
+
+
     /**
-     * @param string $type
-     * @return array
-     * retourne la liste des ids pour un type donné
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet de mettre à jour la table Postuler
      */
-    public function listeIdTypeOffre(string $type): array
-    {
-        $sql = "SELECT idFormation FROM Formations WHERE typeOffre=:Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $type);
-        $pdoStatement->execute($values);
-        $listeID = array();
-        foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idFormation"];
-        }
-        return $listeID;
-    }
     public function mettreAChoisir($numEtudiant, $idFormation): void
     {
         $sql = "UPDATE Postuler SET etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
@@ -196,7 +196,6 @@ class FormationRepository extends AbstractRepository
      * @return array
      * retourne la liste des id des offres pour une entreprise
      */
-
     public function listeidFormationEntreprise($idEntreprise): array
     {
         $sql = "SELECT idFormation FROM Formations WHERE idEntreprise=:Tag";
@@ -209,6 +208,10 @@ class FormationRepository extends AbstractRepository
         }
         return $listeID;
     }
+
+    /**
+     * @return array retourne la liste des offres validées
+     */
     public function offresNonValides(): array
     {
         $listeOffres = array();
@@ -219,6 +222,11 @@ class FormationRepository extends AbstractRepository
         }
         return $listeOffres;
     }
+
+    /**
+     * @param $numEtudiant
+     * @return array retourne la liste des offres pour un étudiant
+     */
     public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
@@ -232,6 +240,11 @@ class FormationRepository extends AbstractRepository
         }
         return $listeOffres;
     }
+
+    /**
+     * @param $idEntreprise
+     * @return array retourne la liste des offres pour une entreprise
+     */
     public function offresPourEntreprise($idEntreprise): array
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idEntreprise=:Tag";
@@ -244,6 +257,11 @@ class FormationRepository extends AbstractRepository
         }
         return $listeOffres;
     }
+
+    /**
+     * @param $numEtu
+     * @return Formation|null retourne l'offre validée pour un étudiant
+     */
     public function trouverOffreDepuisForm($numEtu): ?Formation
     {
         $sql = "SELECT * FROM Formations WHERE idEtudiant = :tagEtu";
@@ -251,19 +269,62 @@ class FormationRepository extends AbstractRepository
         $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
         $offre = $pdoStatement->fetch();
-        if ($offre == false){
+        if ($offre == false) {
             return null;
-        }
-        else{
+        } else {
             return $this->construireDepuisTableau($offre);
         }
     }
-    public function trouverOffreValide($numEtu, $typeOffre): ?Formation
+
+
+    /**
+     * @param $numEtu
+     * @return Formation|null retourne l'offre validée pour un étudiant
+     */
+    public function trouverFormationValidee($numEtu): ?Formation
     {
-        $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND etat='Validée'";
+        $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant = :tagEtu AND etat = 'Validée'";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
+        $values = array("tagEtu" => $numEtu);
         $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
+        $test = $pdoStatement->fetch();
+        if (!$test)
+            return null;
+        else
+            return $this->construireDepuisTableau($test);
+    }
+
+    /**
+     * @return array retourne la liste des offres validées
+     */
+    public function etudiantsSansConventionsValides(): array
+    {
+        $listFormations = array();
+        $sql = "SELECT *
+        FROM Formations
+        WHERE dateCreationConvention IS NOT NULL AND conventionValidee = 0 AND idEtudiant IS NOT NULL";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $pdoStatement->execute();
+        foreach ($pdoStatement as $formation) {
+            $listFormations[] = $this->construireDepuisTableau($formation);
+        }
+        return $listFormations;
+    }
+
+    /**
+     * @return float|null retourne le nombre moyen d'offres par entreprise
+     */
+    public static function nbMoyenOffresParEntreprise(): ?float {
+        $sql = "SELECT AVG(COALESCE(subquery.nbFormations, 0)) AS MoyenneFormations
+                FROM Entreprises e
+                LEFT JOIN (SELECT idEntreprise, COUNT(*) AS nbFormations
+                FROM Formations
+                GROUP BY idEntreprise) AS subquery ON e.numSiret = subquery.idEntreprise;";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
+        $objet = $pdoStatement->fetch();
+        if (!$objet) {
+            return null;
+        }
+        return $objet[0];
     }
 }
