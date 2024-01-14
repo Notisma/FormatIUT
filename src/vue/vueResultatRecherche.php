@@ -5,7 +5,10 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-
+if (!isset($_REQUEST["recherche"])) {
+    $_REQUEST["recherche"] = "e";
+}
+$url = htmlspecialchars($_REQUEST["recherche"]);
 ?>
 
 <div class="mainRecherche">

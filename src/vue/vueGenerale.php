@@ -54,7 +54,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
                         $liaison = "?controleur=" . $user->getControleur() . "&action=afficherProfil";
                         $controleur = $user->getControleur();
                         $codeRecherche = "
-                        <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche='><img src='../ressources/images/rechercher.png' alt='img'></a>
+                        <a class='rechercheResp' href='?controleur=$controleur&action=rechercher&recherche=e'><img src='../ressources/images/rechercher.png' alt='img'></a>
                         <form action='?controleur=Main&action=rechercher' method='get'>
                             <input class='searchField' name='recherche' placeholder='Rechercher dans $type...' required";
                         if (isset($recherche)) $codeRecherche .= " value='" . htmlspecialchars($recherche) . "'";
