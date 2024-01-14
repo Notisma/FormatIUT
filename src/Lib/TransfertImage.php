@@ -78,7 +78,21 @@ class TransfertImage
                     }
                     return null;
                 }
+                imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
+            } else {
+
+                //convert image to png
+                //imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
+                $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
+                imagesavealpha($tempImage, true);
+                imagepng($tempImage, $_FILES['pdp']['tmp_name']);
+                imagedestroy($tempImage);
             }
+
+            $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
+            //echo $_FILES['pdp']['name']; die();
+            $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
+            return $ai_id;
         }
         return null;
     }
@@ -88,8 +102,7 @@ class TransfertImage
      * @return false|string, l'image en format texte
      * <br><br>Arrondit l'image. Méthode privée car utilisée dans transfert().
      */
-    public
-    static function getImageArrondieData(string $image): false|string
+    public static function getImageArrondieData(string $image): false|string
     {
         $image = imagecreatefromstring($image);
         $largeur = imagesx($image);
@@ -121,4 +134,5 @@ class TransfertImage
 
 
     }
+
 }

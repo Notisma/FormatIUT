@@ -412,6 +412,12 @@ class ControleurAdminMain extends ControleurMain
         ServiceFichier::exporterCSV();
     }
 
+    public static function ajouterAnnotation(): void
+    {
+        ServicePersonnel::ajouterAnnotation();
+    }
+
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**

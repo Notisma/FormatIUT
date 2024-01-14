@@ -6,7 +6,7 @@
     ?>
 
     <div class="wrapGauche">
-        <a href="?action=afficherDetailEntreprise&controleur=adminMain&idEntreprise=<?php echo rawurlencode($entreprise->getSiret()) ?>"
+        <a href="?action=afficherDetailEntreprise&controleur=adminMain&siret=<?php echo rawurlencode($entreprise->getSiret()) ?>"
            class="presentationPrincipale">
             <?php
 

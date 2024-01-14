@@ -309,6 +309,8 @@ class EtudiantRepository extends RechercheRepository
                 return "Refusé par l'entreprise";
             } else if ($resultat["etat"] == "A Choisir") {
                 return "Accepté par l'entreprise";
+            } else if ($resultat["etat"] == "Annulé") {
+                return "Annulé";
             } else {
                 $sql = "SELECT * FROM Formations WHERE idEtudiant=:TagEtu AND idFormation=:TagOffre";
                 $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);

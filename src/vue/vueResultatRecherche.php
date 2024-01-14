@@ -40,6 +40,8 @@ if (!isset($_REQUEST['triPar'])) {
                     <input type="hidden" name="action" value="rechercher">
                     <input type="hidden" name="recherche" value="<?php echo $url ?>">
                 </form>
+
+                <a href="#filters" class="goFiltres">Filtres</a>
             </div>
 
         </div>
@@ -74,7 +76,7 @@ if (!isset($_REQUEST['triPar'])) {
 
     </div>
 
-    <div class="parametresRecherche">
+    <div id="filters" class="parametresRecherche">
 
         <div class="vitrine">
             <img src="../ressources/images/recherchez.png" alt="">

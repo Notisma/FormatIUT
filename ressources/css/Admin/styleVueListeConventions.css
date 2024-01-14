@@ -51,7 +51,7 @@ body {
     width: 90%;
     height: 90%;
     display:flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -67,8 +67,8 @@ body {
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    -webkit-border-bottom-left-radius: 10px;
-    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
     background-color: #ff9095;
     padding: 1%;
 }
@@ -180,6 +180,11 @@ body {
 
 .wrapErreur {
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .wrapErreur > img {
@@ -200,11 +205,46 @@ body {
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    -webkit-border-bottom-right-radius: 10px;
-    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
     background-color: white;
 }
 
 .droite > img {
     width: 80%;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 200vh;
+    }
+
+    .wrapCentreListEntr {
+        width: 100%;
+        height: 100%;
+        flex-direction: column-reverse;
+    }
+
+    .gauche {
+        width: 98%;
+        height: 60%;
+        border-radius: 10px;
+    }
+
+    .droite {
+        width: 98%;
+        height: 40%;
+        border-radius: 10px;
+    }
+
+    .entreprise {
+        height: 150px;
+        width: 100%;
+    }
+
+    .statutEtu {
+        width: 90%;
+        height: 40px;
+    }
 }

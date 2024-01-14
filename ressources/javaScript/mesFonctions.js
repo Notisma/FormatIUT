@@ -3,6 +3,30 @@ function afficherPopupDepotCV_LM() {
     document.getElementById("aGriser").style.opacity = "0.3";
 }
 
+
+
+function toggleExpand() {
+    let element = document.getElementsByClassName("annotations")[0];
+    let fleche = document.getElementsByClassName("interaction")[0];
+    if (element.style.width !== "350px") {
+        element.style.width = "350px";
+        fleche.style.position="relative";
+        fleche.style.right="40px";
+        fleche.style.transform="rotate(180deg)";
+        fleche.style.top="0";
+        fleche.style.borderRadius="0 50px 50px 0";
+        let divs = element.getElementsByTagName("div");
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = "flex";
+        }
+    }
+    else {
+        fleche.style.transform="rotate(180deg)";
+        element.style.width = "0px";
+
+    }
+}
+
 function fermerPopupDepotCV_LM() {
     document.getElementById("popup").style.display = "none";
     document.getElementById("aGriser").style.opacity = "1";

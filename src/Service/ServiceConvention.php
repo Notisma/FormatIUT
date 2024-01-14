@@ -131,7 +131,7 @@ class ServiceConvention
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
             $formation = (new FormationRepository())->trouverOffreDepuisForm($_REQUEST['numEtudiant']);
-            if ($formation->getConventionValidee() == false) {
+            if (!$formation->getConventionValidee()) {
                 $formation->setDateTransmissionConvention($_REQUEST['dateTransmission']);
                 (new FormationRepository())->modifierObjet($formation);
                 ControleurAdminMain::redirectionFlash("afficherConventionAValider", "success", "Convention rejetée");
@@ -193,7 +193,7 @@ class ServiceConvention
                 $etu = (new EtudiantRepository())->getObjectParClePrimaire($login);
                 if ((new EtudiantRepository())->getAnneeEtudiant($etu) == $_REQUEST['etudiantAnneeEtu']) {
                     if ($_REQUEST['offreDureeHeure'] > 0 && $_REQUEST['offreGratification'] > 0 && ['codePostalEntr'] > 0 && $_REQUEST['siret'] > 0) {
-                        if($_REQUEST['offreDateDebut'] < $_REQUEST['offreDateFin']) {
+                        if ($_REQUEST['offreDateDebut'] < $_REQUEST['offreDateFin']) {
                             $formation = (new FormationRepository())->trouverOffreDepuisForm($login);
                             if (!$formation) {
                                 $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['siret']);
@@ -239,7 +239,7 @@ class ServiceConvention
                             } else {
                                 ControleurEtuMain::redirectionFlash("afficherAccueilEtu", "danger", "Vous ne pouvez pas créer une convention alors que vous avez déjà une formation");
                             }
-                        }else{
+                        } else {
                             ControleurEtuMain::redirectionFlash("afficherFormulaireConventionSansEntreprise", "warning", "La date de fin est plus petite que celle du début");
                         }
                     } else {

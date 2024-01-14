@@ -396,3 +396,78 @@ body {
 #etu {
     display: none;
 }
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 200vh;
+    }
+
+    .centreCompte {
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    .menuAdmin {
+        width: 100%;
+        height: 30%;
+    }
+
+    .mainAdmins {
+        width: 100%;
+        height: 70%;
+    }
+
+    .mainAdmins form {
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    .avatar {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+    }
+
+    .avatar div input {
+        width: 100%;
+    }
+
+    .wrapPerms > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        overflow-y: auto;
+    }
+
+    .prof {
+        width: 98%;
+        min-height: 120px;
+    }
+
+    .permImg {
+        width: 20%;
+    }
+
+    .permImg > img {
+        width: 90%;
+    }
+
+    .perms {
+        width: 78%;
+    }
+
+}

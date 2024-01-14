@@ -38,6 +38,14 @@ class Entreprise extends Utilisateur
 
         );
 
+        if (ControleurEntrMain::getPage() == "Détails de l'offre") {
+            $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
+        }
+
+        if (ControleurEntrMain::getPage() == "Détails d'un Étudiant") {
+            $menu[] = array("image" => "../ressources/images/etudiant.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
+        }
+
         if (ControleurEntrMain::getPage() == "Compte Entreprise") {
             $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Compte Entreprise", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
         }

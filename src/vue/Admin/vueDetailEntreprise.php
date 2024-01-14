@@ -35,8 +35,8 @@
             <?php
             if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 if ($entreprise->isEstValide()) {
-                    echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">SUPPRIMER</a>';
-                    echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret='. $entreprise->getSiret().'">MODIFIER</a>';
+                    echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">SUPPRIMER</a>';
+                    echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">MODIFIER</a>';
                 } else {
                     echo '<a href="?action=refuserEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">REFUSER</a>';
                     echo '<a id="vert" href="?action=validerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">ACCEPTER</a>';
@@ -88,5 +88,93 @@
             }
             ?>
         </div>
+    </div>
+</div>
+
+<div class="annotations">
+    <div class="interaction" onclick="toggleExpand()">
+        <img src="../ressources/images/gauche.png" alt="">
+    </div>
+    <div class="wrapAnnotations">
+        <h3 class="titre rouge">Annotations des Enseignants</h3>
+        <?php
+        $listeAnnotations = (new \App\FormatIUT\Modele\Repository\AnnotationRepository())->annotationsParEntreprise($entreprise->getSiret());
+        ?>
+
+        <div class="moyenne">
+            <h4 class="titre">Moyenne des Commentaires</h4>
+            <div>
+                <?php
+                if (!empty($listeAnnotations)) {
+                    foreach ($listeAnnotations as $annotation) {
+                        $moyenne = $annotation->getNoteAnnotation();
+                    }
+                    $moyenne = $moyenne / count($listeAnnotations);
+
+                    if ($moyenne - floor($moyenne) >= 0.5) {
+                        $moyenne = ceil($moyenne);
+                    } else {
+                        $moyenne = floor($moyenne);
+                    }
+                    echo "<div>";
+                    for ($i = 0; $i < $moyenne; $i++) {
+                        echo "<img src='../ressources/images/etoile.png' alt='etoile'>";
+                    }
+                    echo "</div>";
+                    echo "<h4 class='titre'>" . $moyenne . "/5</h4>";
+                }
+                ?>
+            </div>
+
+        </div>
+
+        <div class="autresComm">
+            <h4 class="titre">Autres Commentaires</h4>
+            <?php
+            if (!empty($listeAnnotations)) {
+                foreach ($listeAnnotations as $annotation) {
+                    $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
+                    echo "<div class='commentaire'>";
+                    echo "<img src='../ressources/images/admin.png' alt='etoile'>";
+                    echo "<div>";
+                    echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
+                    echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";
+                    echo "<h5 class='titre'>Posté le " . $annotation->getDateAnnotation() . "</h5>";
+                    echo "</div>";
+                    echo "</div>";
+
+                }
+            } else {
+                echo "<h5 class='titre'>Aucun commentaire pour le moment</h5>";
+            }
+            ?>
+        </div>
+
+        <?php
+
+        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($entreprise->getSiret(), \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+            echo '     
+
+        <div class="rediger">
+            <h4 class="titre">Rédiger Mon Commentaire</h4>
+            <form action="?action=ajouterAnnotation&controleur=AdminMain" method="post">
+                <input type="hidden" name="idEntreprise" value="' . $entreprise->getSiret() . '">
+                <input type="hidden" name="loginProf"
+                       value="' . \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte() . '">
+                <input type="hidden" name="dateAnnotation" value="' . date("d/m/Y") . '">
+
+                <h5 class="titre">Note /5 :</h5>
+                <label for="stars"></label>
+                <input type="number" id="stars" max="5" min="0" name="noteAnnotation" required>
+
+                <h5 class="titre">Commentaire :</h5>
+                <label for="comm"></label><textarea name="messageAnnotation" id="comm" maxlength="255" required></textarea>
+
+                <input type="submit" value="Envoyer">
+        </div>
+            ';
+        }
+        ?>
+
     </div>
 </div>

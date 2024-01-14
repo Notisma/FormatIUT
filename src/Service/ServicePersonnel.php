@@ -2,10 +2,13 @@
 
 namespace App\FormatIUT\Service;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\DataObject\Annotation;
 use App\FormatIUT\Modele\DataObject\Formation;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\AnnotationRepository;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
@@ -184,6 +187,30 @@ class ServicePersonnel
             ControleurAdminMain::redirectionFlash('afficherProfil', "success", "Informations modifiées");
         } else {
             ControleurAdminMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+        }
+    }
+
+    public static function ajouterAnnotation()
+    {
+        if (isset($_REQUEST['idEntreprise']) && isset($_REQUEST['messageAnnotation']) && isset($_REQUEST['dateAnnotation']) && isset($_REQUEST['noteAnnotation'])) {
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($_REQUEST['idEntreprise']);
+            if ($entreprise) {
+                if (Configuration::getControleurName() == "AdminMain") {
+                    if (!(new AnnotationRepository())->aDeposeAnnotation($_REQUEST["idEntreprise"], ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+                        $annotation = (new Annotation($_REQUEST["loginProf"], $_REQUEST['idEntreprise'], $_REQUEST['messageAnnotation'], $_REQUEST['dateAnnotation'], $_REQUEST['noteAnnotation']));
+                        (new AnnotationRepository())->creerAnnotationDepuisForm($annotation);
+                        ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "success", "L'annotation a été ajoutée avec succès.");
+                    } else {
+                        ControleurAdminMain::redirectionFlash("afficherAccueilAdmin", "warning", "Vous avez déjà déposé une annotation pour cette entreprise.");
+                    }
+                } else {
+                    ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Vous n'avez pas les droits requis.");
+                }
+            } else {
+                ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "L'entreprise n'existe pas.");
+            }
+        } else {
+            ControleurAdminMain::redirectionFlash("afficherVueDetailOffre", "danger", "Des données sont manquantes.");
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\FormatIUT\Lib\Users;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurEtuMain;
+use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
@@ -51,6 +52,10 @@ class Etudiants extends Utilisateur
 
         if (ControleurEtuMain::getTitrePageActuelleEtu() == "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $_REQUEST['idFormation']);
+        }
+
+        if (ControleurMain::getPageActuelle() == "Résultats de la recherche") {
+            $menu[] = array("image" => "../ressources/images/rechercher.png", "label" => "Résultats de la recherche", "lien" => "?action=afficherAccueilEtu&controleur=EtuMain");
         }
 
         $offre = (new FormationRepository())->trouverOffreDepuisForm($etu->getNumEtudiant());
