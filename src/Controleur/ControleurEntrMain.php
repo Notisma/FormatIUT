@@ -16,6 +16,7 @@ use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServiceFormation;
 use App\FormatIUT\Service\ServiceMdp;
+use App\FormatIUT\Service\ServicePostuler;
 use DateTime;
 use DateTimeZone;
 
@@ -215,6 +216,11 @@ class ControleurEntrMain extends ControleurMain
     public static function modifierFonctionTuteur()
     {
         ServiceEntreprise::modifierFonctionTuteur();
+    }
+
+    public static function assignerEtudiantFormation()
+    {
+        ServicePostuler::assignerEtudiantFormation();
     }
 
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------

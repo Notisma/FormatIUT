@@ -106,7 +106,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
                 $idFormationURl = rawurlencode($offre->getidFormation());
                 $idURL = rawurlencode($etudiant->getNumEtudiant());
                 echo '</h4>
-                <form method="get" action="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">
+                    <form method="get" action="?controleur=Entreprise&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">
                 <input type="submit"';
                 echo 'class="boutonAssigner';
                 if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
