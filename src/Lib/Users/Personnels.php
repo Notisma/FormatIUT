@@ -41,12 +41,14 @@ class Personnels extends Utilisateur
             array("image" => "../ressources/images/liste.png", "label" => "Liste des Offres", "lien" => "?action=afficherListeOffres&controleur=AdminMain"),
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
         );
-        if (ControleurMain::getPageActuelle() == "Détails de l'offre") {
+
+
+        if (ControleurAdminMain::getPageActuelleAdmin() == "Détails de l'offre") {
             $menu[] = array("image" => "../ressources/images/emploi.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
         }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Mon Compte") {
-            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfilAdmin");
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Mon Compte", "lien" => "?action=afficherProfil&controleur=AdminMain");
         }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Détails d'un Étudiant") {
@@ -56,6 +58,11 @@ class Personnels extends Utilisateur
         if (ControleurAdminMain::getPageActuelleAdmin() == "Détails d'une Entreprise") {
             $menu[] = array("image" => "../ressources/images/equipe.png", "label" => "Détails d'une Entreprise", "lien" => "?action=afficherDetailEntreprise&siret=$_GET[siret]");
         }
+
+        if (ControleurMain::getPageActuelle() == "Résultats de la recherche") {
+            $menu[] = array("image" => "../ressources/images/rechercher.png", "label" => "Résultats de la recherche", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
+        }
+
         return $menu;
     }
     protected function getFinMenu()
