@@ -8,6 +8,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\FiltresSQL;
 use App\FormatIUT\Lib\MessageFlash;
 use App\FormatIUT\Lib\PrivilegesUtilisateursRecherche;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\DefaultRecherche;
 use App\FormatIUT\Modele\Repository\AbstractRepository;
 use DOMDocument;
 use newrelic\DistributedTracePayload;
@@ -37,14 +38,21 @@ class ServiceRecherche
                 if (isset($_REQUEST[$repository . 's']) || $sansfiltres) {
                     $nomDeClasseRepository = "App\FormatIUT\Modele\Repository\\" . $repository . "Repository";
                     $re = "recherche";
-                    $nomAffichageRecherche = "App\FormatIUT\Lib\Recherche\AffichagesRecherche\\" . $repository . "Recherche";
-                    $element = (new $nomDeClasseRepository)->$re($morceaux, $listeFiltres);
-                    $arrayRecherche = array();
-                    foreach ($element as $objet) {
-                        $arrayRecherche[] = new $nomAffichageRecherche($objet);
+                    if (class_exists($nomDeClasseRepository)) {
+                        $element = (new $nomDeClasseRepository)->$re($morceaux, $listeFiltres);
+
+                        $arrayRecherche = array();
+                        $nomAffichageRecherche = "App\FormatIUT\Lib\Recherche\AffichagesRecherche\\" . $repository . "Recherche";
+                        foreach ($element as $objet) {
+                            if (class_exists($nomAffichageRecherche)) {
+                                $arrayRecherche[] = new $nomAffichageRecherche($objet);
+                            }else {
+                                $arrayRecherche[]=new DefaultRecherche($objet);
+                            }
+                        }
+                        $liste[$repository] = $arrayRecherche;
+                        $count += sizeof($liste[$repository]);
                     }
-                    $liste[$repository] = $arrayRecherche;
-                    $count += sizeof($liste[$repository]);
                 }
             }
 
@@ -63,14 +71,16 @@ class ServiceRecherche
      * @param array $filtres la liste des filtres
      * @return array regroupe les filtres actif et exécute leurs fonctions dans les classes FiltresSQL
      */
-    private static function filtresFunction(string $repository, array $filtres):array
+    private static function filtresFunction(string $repository, array $filtres): array
     {
         $listeFiltres = array();
         foreach ($filtres as $filtre) {
             if (in_array("obligatoire", $filtre) || isset($_REQUEST[$filtre["value"]])) {
                 $fonction = $filtre["value"];
                 $nomDeClasseFiltre = "App\FormatIUT\Lib\Recherche\FiltresSQL\Filtres" . $repository;
-                $listeFiltres[] = $nomDeClasseFiltre::$fonction();
+                if (class_exists($nomDeClasseFiltre)) {
+                    $listeFiltres[] = $nomDeClasseFiltre::$fonction();
+                }
             }
         }
         return $listeFiltres;
