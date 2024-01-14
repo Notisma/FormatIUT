@@ -43,7 +43,7 @@ $listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionU
                 <div class="inputCentre">
                     <select name="typeOffre" id="type_id">
                         <option value="Stage/Alternance"> Stage et alternance</option>
-                        <option value="Stage">Seuelement stage</option>
+                        <option value="Stage">Seulement stage</option>
                         <option value="Alternance">Seulement alternance</option>
                     </select>
                 </div>
