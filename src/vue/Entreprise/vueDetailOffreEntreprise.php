@@ -97,37 +97,39 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
         if (sizeof($listeEtu) > 0) {
             foreach ($listeEtu as $etudiant) {
                 echo '<a class="etudiantPostulant" href="?action=afficherVueDetailEtudiant&controleur=EntrMain&idEtudiant='. $etudiant->getNumEtudiant() .'">
-                        <div class="illuPostulant">';
+            <div class="illuPostulant">';
                 echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                 echo '</div>
-                        <div class="nomEtuPostulant">
-                            <h4 class="titre rouge">';
+            <div class="nomEtuPostulant">
+                <h4 class="titre rouge">';
                 echo htmlspecialchars($etudiant->getPrenomEtudiant()) . " " . htmlspecialchars($etudiant->getNomEtudiant());
                 $idFormationURl = rawurlencode($offre->getidFormation());
                 $idURL = rawurlencode($etudiant->getNumEtudiant());
                 echo '</h4>
-                            <a href="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '"';
+                <form method="get" action="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">
+                <input type="submit"';
                 echo 'class="boutonAssigner';
                 if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
                     echo ' disabled"';
                 }
                 if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
-                    echo ' disabled">Envoyée';
+                    echo ' disabled" value="Envoyée"';
                 } else {
                     $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
                     if (!is_null($formation)) {
                         echo ' disabled"';
                         if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
-                            echo "\">Assigné";
+                            echo "\" value='Assigné'>";
                         } else {
-                            echo "\">Assigner";
+                            echo "\" value='Assigner'>";
                         }
                     } else {
-                        echo "\">Assigner";
+                        echo "\" value='Assigner'>";
                     }
                 }
-                echo '</div></a>
-                </div>';
+                echo '</form></div>
+    
+    </a>';
             }
         } else {
             echo "
