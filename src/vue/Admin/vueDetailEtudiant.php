@@ -43,6 +43,9 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
             echo "<p>Téléphone : " . $telHTML . "</p>";
             echo "<p>Groupe : " . $groupeHTML . "</p>";
             ?>
+            <div class="wrapBoutons">
+                <a href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=<?php echo $etudiant->getNumEtudiant() ?>">CONVENTION</a>
+            </div>
         </div>
 
         <?php
@@ -104,15 +107,15 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
             $tuteur = $formationValidee ? $formationValidee->getloginTuteurUM() : false;
 
             echo "<div class='wrapTuteurUM'>
-                    <p>";
+                    <h4 class='titre rouge'>";
             if (!$tuteur) echo "Cet élève n'a pas encore de tuteur UM.";
             else {
                 echo "Tuteur UM : ";
-                echo $tuteur;
+                echo $tuteur.".";
                 if (!$formationValidee->isTuteurUMvalide()) {
                     $eleveId = $_GET['numEtudiant'];
                     echo "
-                            Acceptez-vous ce tuteur ?
+                             Acceptez-vous ce tuteur ?
                             <div class='wrapBoutons'>
                                 <a href='?action=validerTuteurUM&eleveId=$eleveId'>Valider</a>
                                 <a href='?action=refuserTuteurUM&eleveId=$eleveId'>Refuser</a>
@@ -120,7 +123,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
                         ";
                 }
             }
-            echo "</p>
+            echo "</h4>
                 </div>";
         }
         ?>
