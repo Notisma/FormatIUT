@@ -10,7 +10,6 @@ use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
@@ -464,11 +463,7 @@ class ControleurAdminMain extends ControleurMain
                 (new ProfRepository())->modifierObjet($adm);
 
                 if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
-
-                self::redirectionFlash('afficherProfil', 'success', "Photo de profil modifiée");
             }
-
-
         }
     }
 }

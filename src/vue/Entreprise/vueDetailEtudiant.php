@@ -1,10 +1,12 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 
-$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire($_REQUEST['idEtudiant']);
-$formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+$etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['idEtudiant']);
+$formation = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
 ?>
 
 <div class="mainDetails">
@@ -33,7 +35,7 @@ $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getOb
                 <h3 class="titre rouge">En rapport avec votre offre : <?= $formation->getNomOffre() ?></h3>
                 <ul>
                     <li><h4 class="titre">Statut de l'Étudiant
-                            : <?= (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($formation->getIdFormation(), $etudiant->getNumEtudiant()) ?></h4>
+                            : <?= (new EtudiantRepository())->getAssociationPourOffre($formation->getIdFormation(), $etudiant->getNumEtudiant()) ?></h4>
                     </li>
                 </ul>
                 <div class="wrapBoutonsDoc">
@@ -68,7 +70,7 @@ $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getOb
                         
                         <div>
                            <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
-                            <h5 class="titre">Statut : ' . (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant()) . '</h5>
+                            <h5 class="titre">Statut : ' . (new EtudiantRepository())->getAssociationPourOffre($offre->getidFormation(), $etudiant->getNumEtudiant()) . '</h5>
                             <a href="?action=afficherVueDetailEtudiant&controleur=EntrMain&idFormation=' . $offre->getidFormation() . '&idEtudiant=' . $etudiant->getNumEtudiant() . '">Voir plus</a>
                         </div>
                         
@@ -86,7 +88,8 @@ $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getOb
         <div>
             <img src="../ressources/images/etudiantsMesOffres.png" alt="etudiants">
             <h3 class="titre rouge">Détails d'un Candidat</h3>
-            <h4 class="titre">Visualisez toutes les données d'un candidat, téléchargez ses fichiers et retrouver vos offres dans lesquelles il a candidaté.</h4>
+            <h4 class="titre">Visualisez toutes les données d'un candidat, téléchargez ses fichiers et retrouver vos
+                offres dans lesquelles il a candidaté.</h4>
         </div>
     </div>
 

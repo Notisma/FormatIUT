@@ -4,20 +4,17 @@ namespace App\FormatIUT\Controleur;
 
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Lib\DevUtils;
 use App\FormatIUT\Lib\MessageFlash;
-use App\FormatIUT\Lib\MotDePasse;
 use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
-use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServiceFormation;
 use App\FormatIUT\Service\ServiceMdp;
-use DateTime;
-use DateTimeZone;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -45,7 +42,9 @@ class ControleurEntrMain extends ControleurMain
         for ($i = 0; $i < sizeof($listeidFormation); $i++) {
             $listeOffre[] = (new FormationRepository())->getObjectParClePrimaire($listeidFormation[$i]);
         }
-        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", ["listeOffre" => $listeOffre]);
+        self::afficherVue("Accueil Entreprise", "Entreprise/vueAccueilEntreprise.php", [
+            "listeOffre" => $listeOffre
+        ]);
     }
 
     /**
@@ -104,7 +103,7 @@ class ControleurEntrMain extends ControleurMain
             self::$page = "Détails d'un Étudiant";
             self::afficherVue("Détails d'un Étudiant", "Entreprise/vueDetailEtudiant.php", ["etudiant" => $etudiant]);
         } else {
-            self::redirectionFlash("afficherAccueilEntr","danger", "Un étudiant devrait être renseigné");
+            self::redirectionFlash("afficherAccueilEntr", "danger", "Un étudiant devrait être renseigné");
         }
     }
 
@@ -128,7 +127,7 @@ class ControleurEntrMain extends ControleurMain
             self::afficherErreur("Il faut préciser la formation");
 
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
-        
+
         //if offre existe
         if ($offre->getIdEntreprise() == ConnexionUtilisateur::getNumEntrepriseConnectee()) {
             self::$page = "Détails de l'offre";
@@ -155,7 +154,7 @@ class ControleurEntrMain extends ControleurMain
     }
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
     public static function mettreAJour(): void
     {
         ServiceEntreprise::mettreAJourEntreprise();
@@ -236,9 +235,7 @@ class ControleurEntrMain extends ControleurMain
                     $nom .= $nomEntr[$i];
                 }
             }
-            $nom .= "_logo";
-
-            $ancienneImage = (new UploadsRepository())->imageParEtudiant(ConnexionUtilisateur::getNumEntrepriseConnectee());
+            $ancienneImage = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
 
             $ai_id = TransfertImage::transfert();
 
@@ -247,8 +244,6 @@ class ControleurEntrMain extends ControleurMain
             (new EntrepriseRepository())->modifierObjet($entr);
 
             if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
-
-            self::redirectionFlash('afficherProfil', 'success', "Photo de profil modifiée");
         }
     }
 

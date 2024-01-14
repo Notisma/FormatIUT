@@ -1,3 +1,11 @@
+<?php
+
+/** @var Entreprise $entreprise */
+
+use App\FormatIUT\Modele\DataObject\Entreprise;
+
+?>
+
 <div id="center" class="antiPadding">
     <div class="wrapDroite">
         <form method="POST">
@@ -42,7 +50,8 @@
 
                 <label for="adresse_id">Adresse</label> :
                 <div class="inputCentre">
-                    <input type="text" value=<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?> name="adresse"
+                    <input type="text"
+                           value=<?= htmlspecialchars($entreprise->getAdresseEntreprise()); ?> name="adresse"
                            id="adresse_id" required maxlength="255">
                 </div class="inputCentre">
 

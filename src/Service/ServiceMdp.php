@@ -58,6 +58,8 @@ class ServiceMdp
             } else {
                 ControleurMain::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
             }
+        } else {
+            ControleurMain::redirectionFlash("motDePasseARemplir", "danger", "Lien invalide. Veuillez réessayer");
         }
     }
 
@@ -75,7 +77,7 @@ class ServiceMdp
     /**
      * @return void met à jour le mot de passe pour une entreprise
      */
-    public static function mettreAJourMdp() : void
+    public static function mettreAJourMdp(): void
     {
         if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
             if (isset($_POST['ancienMdp'], $_POST['nouveauMdp'], $_POST['confirmerMdp'])) {
