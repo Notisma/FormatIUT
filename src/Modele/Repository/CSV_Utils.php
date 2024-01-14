@@ -8,7 +8,7 @@ class CSV_Utils
 {
     public function exportCSV(): array
     {
-        $sql = "SELECT etu.numEtudiant, prenomEtudiant, nomEtudiant, etu.mailUniversitaire, groupe, parcours,offr.validationPedagogique, typeOffre, dateCreationConvention ,dateDebut, dateFin, nomEntreprise, mailTuteurPro, nomProf 
+        $sql = "SELECT etu.numEtudiant, nomEtudiant, prenomEtudiant, etu.mailUniversitaire, groupe, parcours,offr.conventionValidee , typeOffre, dateCreationConvention , 	dateTransmissionConvention ,dateDebut, dateFin, nomEntreprise, mailTuteurPro, presenceForumIUT,nomProf 
                 FROM Etudiants etu LEFT JOIN Postuler r ON r.numEtudiant = etu.numEtudiant 
                 LEFT JOIN Formations offr ON offr.idFormation = r.idFormation 
                 LEFT JOIN Entreprises entr ON entr.numSiret = offr.idEntreprise 
