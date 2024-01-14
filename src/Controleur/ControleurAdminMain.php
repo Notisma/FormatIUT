@@ -9,6 +9,7 @@ use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEntreprise;
@@ -263,6 +264,37 @@ class ControleurAdminMain extends ControleurMain
             self::afficherVue("Détails de l'enseignant", "Admin/vueDetailProf.php");
         }
         else {
+            self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
+        }
+    }
+
+    /**
+     * @return void
+     * Affiche la vue présentant les statistiques
+     */
+    public static function afficherVueStatistiques(): void
+    {
+        if(ConnexionUtilisateur::getTypeConnecte()== "Administrateurs") {
+            self::$pageActuelleAdmin = "Statistiques";
+            $stats = ServicePersonnel::recupererStats();
+            self::afficherVue("Statistiques", "Admin/vueStatistiques.php", $stats);
+        } else {
+            self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
+        }
+    }
+
+    /**
+     * @return void
+     * Affiche la vue présentant quelques historiques
+     */
+    public static function afficherVueHistorique(): void
+    {
+        if(ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
+            self::$pageActuelleAdmin="Historique";
+            $histo = ServicePersonnel::recupererHisto();
+            self::afficherVue("Historique", "Admin/vueHistorique.php", $histo);
+        }
+        else{
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
     }

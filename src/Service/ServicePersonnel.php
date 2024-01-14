@@ -5,8 +5,11 @@ namespace App\FormatIUT\Service;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\AbstractRepository;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 
 class ServicePersonnel
 {
@@ -124,5 +127,46 @@ class ServicePersonnel
         (new FormationRepository())->modifierObjet($offreValide);
 
         ControleurAdminMain::redirectionFlash("afficherListeEtudiant", "success", "Le tuteur a été refusé avec succès.");
+    }
+
+    /**
+     * @return array
+     * Retourne un array contenant toutes les valeurs nécessaires pour la vue statistiques d'admin
+     */
+    public static function recupererStats() : array {
+        $nbEtudiants = (new EtudiantRepository())->nbElementsDistincts("numEtudiant");
+        $nbEtudiantsPostulant = (new PostulerRepository())->nbElementsDistincts("numEtudiant");
+        $nbEtudiantsAvecFormation = (new FormationRepository())->nbElementsDistincts("idEtudiant");
+        $nbEntreprises = (new EntrepriseRepository())->nbElementsDistincts("numSiret");
+        $nbEntreprisesSansOffre = $nbEntreprises - (new FormationRepository())->nbElementsDistincts("idEntreprise");
+        $nbOffresMoyen = (new FormationRepository())->nbMoyenOffresParEntreprise();
+        $nbFormations = (new FormationRepository())->nbElementsDistincts("idFormation");
+        $nbStages = (new FormationRepository())->nbElementsDistinctsQuandContient("typeOffre", "Stage");
+        $nbAlternances = (new FormationRepository())->nbElementsDistinctsQuandContient("typeOffre", "Alternance");
+        $nbOffresNonValidees = (new FormationRepository())->nbElementsDistinctsQuandEgal("offreValidee", 0);
+        $nbOffresAvecEtudiant = (new FormationRepository())->nbElementsDistincts("idEtudiant");
+        $nbOffresConventionNonValidee = (new FormationRepository())->nbElementsDistinctsQuandEgal("conventionValidee", 0);
+        return ["nbEtudiants" => $nbEtudiants, "nbEtudiantsPostulant" => $nbEtudiantsPostulant, "nbEtudiantsAvecFormation" => $nbEtudiantsAvecFormation,
+            "nbEntreprises" => $nbEntreprises, "nbEntreprisesSansOffre" => $nbEntreprisesSansOffre, "nbOffresMoyen" => $nbOffresMoyen,
+            "nbFormations" => $nbFormations, "nbStages" => $nbStages, "nbAlternances" => $nbAlternances, "nbOffresNonValidees" => $nbOffresNonValidees,
+            "nbOffresAvecEtudiant" => $nbOffresAvecEtudiant, "nbOffresConventionNonValidee" => $nbOffresConventionNonValidee];
+    }
+
+    /**
+     * @return array
+     * Retourne un array contenant toutes les valeurs nécessaires pour la vue historique d'admin
+     */
+    public static function recupererHisto(): array {
+        $nbEtuAvecFormAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbEtuAvecFormAnneeDerniere");
+        $nbMoyenEtuAvecForm = AbstractRepository::lancerFonctionHistorique("nbMoyenEtuAvecForm");
+        $nbEntreAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbEntreAnneeDerniere");
+        $nbMoyenEntrQuiPosteOffre = AbstractRepository::lancerFonctionHistorique("nbMoyenEntrQuiPosteOffre");
+        $nbEntrSansOffreAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbEntrSansOffreAnneeDerniere");
+        $nbMoyenOffresChaqueAnnee = AbstractRepository::lancerFonctionHistorique("nbMoyenOffresChaqueAnnee");
+        $nbOffresAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbOffresAnneeDerniere");
+        $nbOffresSansConvValideeAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbOffresSansConvValideeAnneeDerniere");
+        return ["nbEtuAvecFormAnneeDerniere" => $nbEtuAvecFormAnneeDerniere, "nbMoyenEtuAvecForm" => $nbMoyenEtuAvecForm,
+            "nbEntreAnneeDerniere" => $nbEntreAnneeDerniere, "nbMoyenEntrQuiPosteOffre" => $nbMoyenEntrQuiPosteOffre, "nbEntrSansOffreAnneeDerniere" => $nbEntrSansOffreAnneeDerniere,
+            "nbMoyenOffresChaqueAnnee" => $nbMoyenOffresChaqueAnnee, "nbOffresAnneeDerniere" => $nbOffresAnneeDerniere, "nbOffresSansConvValideeAnneeDerniere" => $nbOffresSansConvValideeAnneeDerniere];
     }
 }
