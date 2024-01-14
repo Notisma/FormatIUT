@@ -95,6 +95,19 @@ class ControleurEntrMain extends ControleurMain
     }
 
     /**
+     * @return void affiche une vue dédiée aux détails d'un étudiant pour les entreprises
+     */
+    public static function afficherVueDetailEtudiant(): void
+    {
+        if (isset($_REQUEST['idEtudiant'])) {
+            $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['idEtudiant']);
+            self::afficherVue("Détail de l'étudiant", "Entreprise/vueDetailEtudiant.php", ["etudiant" => $etudiant]);
+        } else {
+            self::redirectionFlash("afficherAccueilEntr","danger", "Un étudiant devrait être renseigné");
+        }
+    }
+
+    /**
      * @return void affiche le formulaire de modification de l'entreprise connecté
      */
     public static function afficherFormulaireModification(): void
