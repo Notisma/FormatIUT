@@ -88,6 +88,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST['idFormation'])) {
             $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+            self::$page = "Modifier l'offre";
             self::afficherVue("Modifier l'offre", "Entreprise/vueFormulaireModificationOffre.php", ["offre" => $offre]);
         } else {
             self::afficherErreur("Une offre devrait être renseignée");

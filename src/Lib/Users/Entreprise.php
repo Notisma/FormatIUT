@@ -42,6 +42,10 @@ class Entreprise extends Utilisateur
             $menu[] = array("image" => "../ressources/images/mallette.png", "label" => "Détails de l'offre", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
         }
 
+        if (ControleurEntrMain::getPage() == "Modifier l'offre") {
+            $menu[] = array("image" => "../ressources/images/parametres.png", "label" => "Modifier l'offre", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
+        }
+
         if (ControleurEntrMain::getPage() == "Détails d'un Étudiant") {
             $menu[] = array("image" => "../ressources/images/etudiant.png", "label" => "Détails d'un Étudiant", "lien" => "?action=afficherAccueilEntr&controleur=EntrMain");
         }

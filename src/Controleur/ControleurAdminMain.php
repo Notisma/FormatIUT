@@ -189,6 +189,7 @@ class ControleurAdminMain extends ControleurMain
             return;
         }
         $offre = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idFormation']);
+        self::$pageActuelleAdmin = "Modifier une Offre";
         self::afficherVue("Modifier une Offre", "Entreprise/vueFormulaireModificationOffre.php", [
             'offre' => $offre
         ]);
