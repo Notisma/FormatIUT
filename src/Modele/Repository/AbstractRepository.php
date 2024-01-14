@@ -33,15 +33,7 @@ abstract class AbstractRepository
         return $listeObjet;
     }
 
-    public function getListeID()
-    {
-        $sql = 'SELECT * FROM ' . $this->getNomTable();
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        foreach ($pdoStatement as $item) {
-            $listeObjet[] = $item[$this->getClePrimaire()];
-        }
-        return $listeObjet;
-    }
+
 
     /***
      * @param $clePrimaire
@@ -200,22 +192,7 @@ abstract class AbstractRepository
     //-------------AUTRES------------
 
 
-    /***
-     * @param $clePrimaire
-     * @return true si l'objet existe dans la base de donnée, false sinon
-     */
-    public function estExistant($clePrimaire): bool
-    {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $clePrimaire);
-        $pdoStatement->execute($values);
-        $objet = $pdoStatement->fetch();
-        if (!$objet) {
-            return false;
-        }
-        return true;
-    }
+
 
     /**
      * @param $nom

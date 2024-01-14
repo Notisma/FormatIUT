@@ -35,18 +35,6 @@ class FormationRepository extends RechercheRepository
         return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"], $dataObjectTableau["tuteurUMvalide"]);
     }
 
-    public function listeIdTypeFormation(): array
-    {
-        $sql = "SELECT idFormation FROM Formations";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $listeID = array();
-        foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idFormation"];
-        }
-        return $listeID;
-    }
-
-    //(idFormation,dateDebut,dateFin,idEtudiant,idEntreprise,idFormation)
 
     public function estFormation(string $offre): ?AbstractDataObject
     {
@@ -62,13 +50,6 @@ class FormationRepository extends RechercheRepository
 
     }
 
-    public function ajouterConvention($idEtu, $convention): void
-    {
-        $sql = "UPDATE Formations SET convention =:tagConvention WHERE idEtudiant=:tagEtu";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagConvention" => $convention, "tagEtu" => $idEtu);
-        $pdoStatement->execute($values);
-    }
 
     public function getListeOffresDispoParType($type): array
     {
@@ -92,28 +73,6 @@ class FormationRepository extends RechercheRepository
         return $listeOffre;
     }
 
-    /**
-     * @param $idEntreprise
-     * @return array
-     * retourne la liste des offres disponibles pour une entreprise
-     */
-    public function offresParEntrepriseDispo($idEntreprise): array
-    {
-        $sql = "SELECT * 
-                FROM " . $this->getNomTable() . " o
-                WHERE idEntreprise=:Tag 
-                AND NOT EXISTS (
-                SELECT idFormation FROM Formations f
-                WHERE f.idFormation=o.idFormation)";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $idEntreprise);
-        $pdoStatement->execute($values);
-        $listeOffre = array();
-        foreach ($pdoStatement as $item) {
-            $listeOffre[] = $this->construireDepuisTableau($item);
-        }
-        return $listeOffre;
-    }
 
     /**
      * @param $idEntreprise
@@ -212,23 +171,7 @@ class FormationRepository extends RechercheRepository
         return $listeId;
     }
 
-    /**
-     * @param string $type
-     * @return array
-     * retourne la liste des ids pour un type donné
-     */
-    public function listeIdTypeOffre(string $type): array
-    {
-        $sql = "SELECT idFormation FROM Formations WHERE typeOffre=:Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $type);
-        $pdoStatement->execute($values);
-        $listeID = array();
-        foreach ($pdoStatement as $item => $value) {
-            $listeID[] = $value["idFormation"];
-        }
-        return $listeID;
-    }
+
 
     public function mettreAChoisir($numEtudiant, $idFormation): void
     {
@@ -310,18 +253,7 @@ class FormationRepository extends RechercheRepository
         }
     }
 
-    public function trouverOffreValide($numEtu, $typeOffre): ?Formation
-    {
-        $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant=:tagEtu AND typeOffre=:tagType AND etat='Validée'";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagEtu" => $numEtu, "tagType" => $typeOffre);
-        $pdoStatement->execute($values);
-        $test = $pdoStatement->fetch();
-        if (!$test) {
-            return null;
-        }
-        return $this->construireDepuisTableau($test);
-    }
+
 
     /** Comme au dessus, mais de n'importe quel type */
     public function trouverFormationValidee($numEtu): ?Formation

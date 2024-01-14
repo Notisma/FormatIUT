@@ -23,15 +23,6 @@ class MessageFlash
         $session->enregistrer(self::$cleFlash, $array);
     }
 
-    public static function contientMessage(string $type): bool
-    {
-        $session = Session::getInstance();
-        if ($session->contient(self::$cleFlash)) {
-            $array = $session->lire(self::$cleFlash);
-            return isset($array[$type]);
-        }
-        return false;
-    }
 
     public static function lireMessages(string $type): array
     {
@@ -58,12 +49,6 @@ class MessageFlash
         return array();
     }
 
-    public static function supprimerTousMessages(): void
-    {
-        $session = Session::getInstance();
-        $session->supprimer(self::$cleFlash);
-
-    }
 
     public static function verifDeconnexion() : bool{
         $message=self::lireMessages("info");

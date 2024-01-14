@@ -56,19 +56,6 @@ class ProfRepository extends RechercheRepository
         else return false;
     }
 
-    public function getParNom(string $nomProf): ?Prof
-    {
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomProf=:Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $nomProf);
-        $pdoStatement->execute($values);
-        $prof = $pdoStatement->fetch();
-        if (!$prof) {
-            return null;
-        } else {
-            return $prof;
-        }
-    }
 
     /**
      * @return Prof[]

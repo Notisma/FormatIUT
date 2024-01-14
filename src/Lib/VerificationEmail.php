@@ -101,23 +101,7 @@ class VerificationEmail
         MessageFlash::ajouter("info", "Un email vous a bien été envoyé");
     }
 
-    /**
-     * @param $login
-     * @param $nonce
-     * @return bool
-     */
-    public static function traiterEmailMdpOublie($login, $nonce): bool
-    {
-        $user = (new EntrepriseRepository())->getObjectParClePrimaire($login);
-        if (!is_null($user)) {
-            if ($user->formatTableau()["nonce"] == $nonce) {
 
-                (new EntrepriseRepository())->modifierObjet($user);
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * @param Entreprise $entreprise
