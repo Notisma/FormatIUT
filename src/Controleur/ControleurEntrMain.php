@@ -15,6 +15,7 @@ use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServiceFormation;
 use App\FormatIUT\Service\ServiceMdp;
+use App\FormatIUT\Service\ServicePostuler;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -155,6 +156,11 @@ class ControleurEntrMain extends ControleurMain
     }
 
     //APPELS AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function assignerEtudiantFormation(): void
+    {
+        ServicePostuler::assignerEtudiantFormation();
+    }
 
     public static function mettreAJour(): void
     {

@@ -139,7 +139,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 <div id="popup" class="popup">
     <div class="mainPopup">
         <h2>ENVOYEZ VOS DOCUMENTS POUR POSTULER !</h2>
-        <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
               action="?action=postuler&controleur=EtuMain&idFormation=<?= $offre->getIdFormation() ?>"
@@ -158,7 +157,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             </div>
             <div>
                 <div class="contenuDepot">
-                    <label>Déposez votre lettre de Motivation :</label>
+                    <label>Déposez votre LM :</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
                     <input type="file" id="fd2" name="lm" onchange="updateImage(2)" accept=".pdf, .txt" size=500>
                 </div>
@@ -188,7 +187,6 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
 <div id="popupModif" class="popup">
     <div class="mainPopup">
         <h2>MODIFIEZ VOS DOCUMENTS !</h2>
-        <p>Les documents doivent être au format PDF</p>
 
         <form enctype="multipart/form-data"
               action="?action=modifierFichiers&controleur=EtuMain&idFormation=<?php echo $offre->getIdFormation() ?>"

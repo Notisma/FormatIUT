@@ -570,4 +570,42 @@ body {
         height: 45%;
     }
 
+    .popup {
+        width: 90%;
+        height: 80%;
+        overflow: hidden;
+        flex-direction: column-reverse;
+        top: 45%;
+    }
+
+    .popup > div {
+        border-radius: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+    }
+
+    .descPopup {
+        height: 30%;
+    }
+
+    .mainPopup {
+        height: 70%;
+    }
+
+    .popup > div > img {
+        display: none;
+    }
+
+    .contenuDepot {
+        width: 60%;
+    }
+
+    .contenuDepot > input {
+        width: 98%;
+    }
+
 }

@@ -111,6 +111,7 @@ body {
     transition: background-color 0.5s ease;
     flex-shrink: 0;
     margin-bottom: 2%;
+    text-decoration: none;
 }
 
 .offre > a {
