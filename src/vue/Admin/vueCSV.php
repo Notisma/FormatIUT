@@ -5,10 +5,12 @@
             <img src="../ressources/images/attention.png" alt="csv">
             <div>
                 <h3 class="titre">Attention !</h3>
-                <p>Le fichier CSV permet d'ajouter des étudiants dans la base de données du site. Le fichier CSV n'écrase pas les données du site !</p>
+                <p>Le fichier CSV permet d'ajouter des étudiants dans la base de données du site. Le fichier CSV
+                    n'écrase pas les données du site !</p>
             </div>
         </div>
-        <form class="formulaire" enctype="multipart/form-data" action="?action=ajouterCSV&controleur=AdminMain" method="post" >
+        <form class="formulaire" enctype="multipart/form-data" action="?action=ajouterCSV&controleur=AdminMain"
+              method="post">
             <img src="../ressources/images/upload.png" alt="csv">
             <h5 class="titre">Glissez - Déposez ici votre fichier</h5>
             <h5 class="titre">ou :</h5>

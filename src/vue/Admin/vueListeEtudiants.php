@@ -1,3 +1,11 @@
+<?php
+
+/** @var Etudiant[] $listeEtudiants */
+
+use App\FormatIUT\Modele\DataObject\Etudiant;
+
+?>
+
 <div id="center">
     <div class="gauche">
         <h3 class="titre">Étudiants Enregistrés :</h3>

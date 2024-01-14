@@ -1,14 +1,23 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
+/** @var array{ Entreprise: EntrepriseRecherche[], Formation: FormationRecherche[] } $liste */
+
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\EntrepriseRecherche;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\FormationRecherche;
+
 if (!isset($_REQUEST["recherche"])) {
     $_REQUEST["recherche"] = "e";
 }
 $url = htmlspecialchars($_REQUEST["recherche"]);
+
+if (!isset($_REQUEST['triPar'])) {
+    $_REQUEST['triPar'] = "type";
+}
+
 ?>
 
 <div class="mainRecherche">
@@ -17,16 +26,13 @@ $url = htmlspecialchars($_REQUEST["recherche"]);
 
         <div class="controleRech">
             <h2 class="titre rouge">Effectuez une recherche sur Format'IUT</h2>
-            <?php
-            echo $codeRecherche;
-            ?>
-
+            <?= $codeRecherche; ?>
         </div>
 
         <div class="resultatsRecherche">
             <?php
             if (!empty($liste)) {
-                $i=0;
+                $i = 0;
                 foreach ($liste as $type => $elements) {
                     foreach ($elements as $objet) {
                         $red = "";
@@ -90,7 +96,7 @@ $url = htmlspecialchars($_REQUEST["recherche"]);
                         if (isset($_REQUEST[$recherchables . "s"])) {
                             ;
                             foreach ($filtres as $filtre) {
-                                if (!in_array("obligatoire",$filtre)) {
+                                if (!in_array("obligatoire", $filtre)) {
                                     echo '
                                 <span class="filtre">
                                     <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>

@@ -25,9 +25,10 @@ class EtudiantRecherche extends AbstractAffichage
     function getTitres():string
     {
         $etudiant = parent::getObjet();
-        $titres = '<h4 class="titre">' . htmlspecialchars($etudiant->getParcours()) . '</h4>
-                                <h4 class="titre">' . htmlspecialchars($etudiant->getGroupe()) . '</h4>
-                                <h5 class="titre">' . htmlspecialchars($etudiant->getMailUniersitaire()) . '</h5>';
+        $titres = '';
+        if (!empty($etudiant->getParcours())) $titres .= '<h4 class="titre">' . htmlspecialchars($etudiant->getParcours()) . '</h4>';
+        if (!empty($etudiant->getGroupe())) $titres .= '<h4 class="titre">' . htmlspecialchars($etudiant->getGroupe()) . '</h4>';
+        if (!empty($etudiant->getMailUniersitaire())) $titres .= '<h5 class="titre">' . htmlspecialchars($etudiant->getMailUniersitaire()) . '</h5>';
         if (Configuration::getControleurName() == 'AdminMain') {
             if ((new EtudiantRepository)->aUneFormation($etudiant->getNumEtudiant())) {
                 $titres.= "<div class='statutEtu valide'><img src='../ressources/images/success.png' alt='valide'><p>A une formation validée</p></div>";

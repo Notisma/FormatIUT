@@ -1,10 +1,13 @@
 <?php
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
+use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Modele\Repository\PostulerRepository;
 
-$offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_GET['idFormation']);
+$offre = (new FormationRepository())->getObjectParClePrimaire($_GET['idFormation']);
 $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
-$listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
+$listeEtu = ((new EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
 ?>
 
 <div class="detailOffreEtu">
@@ -65,8 +68,8 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
             <div class="candidature">
                 <img src="../ressources/images/equipe.png" alt="equipe">
                 <?php
-                $nbCandidats = (new \App\FormatIUT\Modele\Repository\PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
-                if ((new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getIdFormation())) {
+                $nbCandidats = (new PostulerRepository())->getNbCandidatsPourOffre($offre->getIdFormation());
+                if ((new FormationRepository())->estFormation($offre->getIdFormation())) {
                     echo "<h4 class='titre rouge'>Assignée</h4>";
                 } else {
                     echo "<h4 class='titre rouge'>$nbCandidats Candidat(s)</h4>";
@@ -75,10 +78,10 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
             </div>
 
             <div class="boutonCandidater">
-                <a id='my-button' class='boutonAssigner'
+                <a class='boutonAssigner'
                    href="?action=afficherFormulaireModificationOffre&controleur=EntrMain&idFormation=<?= $offre->getIdFormation() ?>">Modifier
                     l'Offre</a>
-                <a id='my-button' class='boutonAssigner' href="?action=supprimerFormation&idFormation=<?= $offre->getIdFormation() ?>">Supprimer l'Offre</a>
+                <a class='boutonAssigner' href="?action=supprimerFormation&idFormation=<?= $offre->getIdFormation() ?>">Supprimer l'Offre</a>
             </div>
 
         </div>
@@ -93,12 +96,12 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
 
     <div class="candidatsOverflow">
         <?php
-        $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
+        $listeEtu = ((new EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
         if (sizeof($listeEtu) > 0) {
             foreach ($listeEtu as $etudiant) {
                 echo '<a class="etudiantPostulant" href="?action=afficherVueDetailEtudiant&controleur=EntrMain&idFormation='. $offre->getidFormation() .'&idEtudiant='. $etudiant->getNumEtudiant() .'">
             <div class="illuPostulant">';
-                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="">';
                 echo '</div>
             <div class="nomEtuPostulant">
                 <h4 class="titre rouge">';
@@ -108,23 +111,20 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
                 echo '</h4>
                 <form method="get" action="?service=Postuler&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">
                 <input type="submit"';
-                echo 'class="boutonAssigner';
-                if ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->aUneFormation($etudiant->getNumEtudiant())) {
-                    echo ' disabled"';
-                }
-                if ((new \App\FormatIUT\Modele\Repository\PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
+                echo ' class="boutonAssigner';
+                if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
                     echo ' disabled" value="Envoyée"';
                 } else {
-                    $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->estFormation($offre->getidFormation());
+                    $formation = (new FormationRepository())->estFormation($offre->getidFormation());
                     if (!is_null($formation)) {
                         echo ' disabled"';
                         if ($formation->getIdEtudiant() == $etudiant->getNumEtudiant()) {
-                            echo "\" value='Assigné'>";
+                            echo " value='Assigné'>";
                         } else {
-                            echo "\" value='Assigner'>";
+                            echo " value='Assigner'>";
                         }
                     } else {
-                        echo "\" value='Assigner'>";
+                        echo " value='Assigner'>";
                     }
                 }
                 echo '</form></div>

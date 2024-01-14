@@ -1,6 +1,5 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
@@ -13,7 +12,7 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
     <script src="../ressources/javaScript/mesFonctions.js"></script>
     <title>Format'IUT - <?= $titrePage ?></title>
     <link rel="icon" type="image/png" href="../ressources/images/UM.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body
     <?php
@@ -152,6 +151,5 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
             </div>
         </div>
     </footer>
-</div>
 </body>
 </html>

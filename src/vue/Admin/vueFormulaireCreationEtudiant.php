@@ -7,7 +7,7 @@
                 <label for="numEtudiant_id">Numéro étudiant</label> :
                 <div class="inputCentre">
                     <input type="text" placeholder="22207651" name="numEtudiant"
-                    id="numEtudiant_id" required>
+                           id="numEtudiant_id" required>
                 </div>
 
                 <label for="nomEtudiant_id">Nom</label> :

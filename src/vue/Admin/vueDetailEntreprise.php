@@ -2,6 +2,7 @@
     <?php
     /** @var Entreprise $entreprise */
 
+    use App\FormatIUT\Lib\ConnexionUtilisateur;
     use App\FormatIUT\Modele\DataObject\Entreprise;
 
     $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
@@ -33,7 +34,7 @@
 
         <div class="wrapBoutons">
             <?php
-            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 if ($entreprise->isEstValide()) {
                     echo '<a href="?action=supprimerEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">SUPPRIMER</a>';
                     echo '<a href="?action=afficherFormulaireModifEntreprise&controleur=AdminMain&siret=' . $entreprise->getSiret() . '">MODIFIER</a>';
@@ -152,7 +153,7 @@
 
         <?php
 
-        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($entreprise->getSiret(), \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
+        if (!(new \App\FormatIUT\Modele\Repository\AnnotationRepository())->aDeposeAnnotation($entreprise->getSiret(), ConnexionUtilisateur::getLoginUtilisateurConnecte())) {
             echo '     
 
         <div class="rediger">
@@ -160,7 +161,7 @@
             <form action="?action=ajouterAnnotation&controleur=AdminMain" method="post">
                 <input type="hidden" name="idEntreprise" value="' . $entreprise->getSiret() . '">
                 <input type="hidden" name="loginProf"
-                       value="' . \App\FormatIUT\Lib\ConnexionUtilisateur::getLoginUtilisateurConnecte() . '">
+                       value="' . ConnexionUtilisateur::getLoginUtilisateurConnecte() . '">
                 <input type="hidden" name="dateAnnotation" value="' . date("d/m/Y") . '">
 
                 <h5 class="titre">Note /5 :</h5>
@@ -171,6 +172,7 @@
                 <label for="comm"></label><textarea name="messageAnnotation" id="comm" maxlength="255" required></textarea>
 
                 <input type="submit" value="Envoyer">
+            </form>
         </div>
             ';
         }

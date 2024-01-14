@@ -66,17 +66,19 @@ body {
 
 .boutonHistorique {
     padding: 20px;
+    position: absolute;
+    text-align: center;
     left: 42%;
-    width: 100%;
+    width: 300px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     align-content: center;
 }
 
-.boutonHistorique a {
-    background-color: #ff5660;
+.boutonHistorique > a {
+    background-color: indianred;
     color: white;
     border-radius: 50px;
     padding: 2%;
