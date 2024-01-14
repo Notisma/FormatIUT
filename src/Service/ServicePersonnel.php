@@ -10,6 +10,7 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class ServicePersonnel
 {
@@ -133,7 +134,8 @@ class ServicePersonnel
      * @return array
      * Retourne un array contenant toutes les valeurs nécessaires pour la vue statistiques d'admin
      */
-    public static function recupererStats() : array {
+    public static function recupererStats(): array
+    {
         $nbEtudiants = (new EtudiantRepository())->nbElementsDistincts("numEtudiant");
         $nbEtudiantsPostulant = (new PostulerRepository())->nbElementsDistincts("numEtudiant");
         $nbEtudiantsAvecFormation = (new FormationRepository())->nbElementsDistincts("idEtudiant");
@@ -156,7 +158,8 @@ class ServicePersonnel
      * @return array
      * Retourne un array contenant toutes les valeurs nécessaires pour la vue historique d'admin
      */
-    public static function recupererHisto(): array {
+    public static function recupererHisto(): array
+    {
         $nbEtuAvecFormAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbEtuAvecFormAnneeDerniere");
         $nbMoyenEtuAvecForm = AbstractRepository::lancerFonctionHistorique("nbMoyenEtuAvecForm");
         $nbEntreAnneeDerniere = AbstractRepository::lancerFonctionHistorique("nbEntreAnneeDerniere");
@@ -168,5 +171,19 @@ class ServicePersonnel
         return ["nbEtuAvecFormAnneeDerniere" => $nbEtuAvecFormAnneeDerniere, "nbMoyenEtuAvecForm" => $nbMoyenEtuAvecForm,
             "nbEntreAnneeDerniere" => $nbEntreAnneeDerniere, "nbMoyenEntrQuiPosteOffre" => $nbMoyenEntrQuiPosteOffre, "nbEntrSansOffreAnneeDerniere" => $nbEntrSansOffreAnneeDerniere,
             "nbMoyenOffresChaqueAnnee" => $nbMoyenOffresChaqueAnnee, "nbOffresAnneeDerniere" => $nbOffresAnneeDerniere, "nbOffresSansConvValideeAnneeDerniere" => $nbOffresSansConvValideeAnneeDerniere];
+    }
+
+    /**
+     * @return void met à jour les informations de l'admin connecté
+     */
+    public static function mettreAJour(): void
+    {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs" || ConnexionUtilisateur::getTypeConnecte() == "Personnels" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
+            ControleurAdminMain::updateImage();
+            (new ProfRepository())->mettreAJourInfos($_REQUEST['nom'], $_REQUEST['prenom'], ConnexionUtilisateur::getLoginUtilisateurConnecte());
+            ControleurAdminMain::redirectionFlash('afficherProfil', "success", "Informations modifiées");
+        } else {
+            ControleurAdminMain::redirectionFlash("afficherProfil", "danger", "Vous n'avez pas les droits requis");
+        }
     }
 }

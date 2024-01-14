@@ -214,30 +214,33 @@ class ControleurEntrMain extends ControleurMain
      */
     public static function updateImage(): void
     {
-        $entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee()));
-        $nom = "";
-        $nomEntreprise = $entreprise->getNomEntreprise();
-        for ($i = 0; $i < strlen($entreprise->getNomEntreprise()); $i++) {
-            if ($nomEntreprise[$i] == ' ') {
-                $nom .= "_";
-            } else {
-                $nom .= $nomEntreprise[$i];
+        //si un fichier a été passé en paramètre
+        if (!empty($_FILES['pdp']['name'])) {
+
+            $admin = ((new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee()));
+            $nom = "";
+            $nomEntr = $admin->getNomEntreprise();
+            for ($i = 0; $i < strlen($admin->getNomEntreprise()); $i++) {
+                if ($nomEntr[$i] == ' ') {
+                    $nom .= "_";
+                } else {
+                    $nom .= $nomEntr[$i];
+                }
             }
+            $nom .= "_logo";
+
+            $ancienneImage = (new UploadsRepository())->imageParEtudiant(ConnexionUtilisateur::getNumEntrepriseConnectee());
+
+            $ai_id = TransfertImage::transfert();
+
+            $entr = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
+            $entr->setImg($ai_id);
+            (new EntrepriseRepository())->modifierObjet($entr);
+
+            if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
+
+            self::redirectionFlash('afficherProfil', 'success', "Photo de profil modifiée");
         }
-
-        $ancienId = (new UploadsRepository())->imageParEntreprise(ConnexionUtilisateur::getNumEntrepriseConnectee());
-
-        $ai_id = TransfertImage::transfert();
-
-        $entreprise->setImg($ai_id);
-        (new EntrepriseRepository())->modifierObjet($entreprise);
-
-        if ($ancienId["img_id"] != 0) {
-            (new UploadsRepository())->supprimer($ancienId["img_id"]);
-        }
-        $_REQUEST["action"] = "afficherProfil()";
-        MessageFlash::ajouter("success", "Image modifiée avec succès.");
-        self::afficherProfil();
     }
 
     /**

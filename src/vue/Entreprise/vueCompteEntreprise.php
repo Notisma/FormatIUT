@@ -55,7 +55,7 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
                 <?php
-                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='etudiant'>";
+                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($entreprise->getImg()) . "' alt='entreprise'>";
                 ?>
                 <div>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
