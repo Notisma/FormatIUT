@@ -109,7 +109,11 @@ $listeEtu = ((new EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormati
                 $idFormationURl = rawurlencode($offre->getidFormation());
                 $idURL = rawurlencode($etudiant->getNumEtudiant());
                 echo '</h4>
-                    <form method="get" action="?controleur=EntrMain&action=assignerEtudiantFormation&idFormation=' . $idFormationURl . '&idEtudiant=' . $idURL . '">
+                    <form method="get">
+                    <input type="hidden" name="controleur" value="EntrMain">
+                    <input type="hidden" name="action" value="assignerEtudiantFormation">
+                    <input type="hidden" name="idFormation" value="'.$idFormationURl.'">
+                    <input type="hidden" name="idEtudiant" value="'.$idURL.'">
                 <input type="submit"';
                 echo ' class="boutonAssigner';
                 if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offre->getidFormation()) == "A Choisir") {
