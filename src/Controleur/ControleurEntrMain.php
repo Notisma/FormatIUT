@@ -16,6 +16,8 @@ use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServiceFormation;
 use App\FormatIUT\Service\ServiceMdp;
 use App\FormatIUT\Service\ServicePostuler;
+use DateTime;
+use DateTimeZone;
 
 class ControleurEntrMain extends ControleurMain
 {
@@ -212,12 +214,12 @@ class ControleurEntrMain extends ControleurMain
         ServiceEntreprise::creerTuteur();
     }
 
-    public static function supprimerTuteur()
+    public static function supprimerTuteur():void
     {
         ServiceEntreprise::supprimerTuteur();
     }
 
-    public static function modifierFonctionTuteur()
+    public static function modifierFonctionTuteur():void
     {
         ServiceEntreprise::modifierFonctionTuteur();
     }
