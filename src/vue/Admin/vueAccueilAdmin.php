@@ -40,7 +40,7 @@
                 echo $nb . " Création" . $s . " compte" . $s;
                 ?></h4>
             <div class="wrapBoutons boutonsGO">
-                <a href="">VOIR</a>
+                <a href="?action=afficherListeEntreprises&controleur=AdminMain">VOIR</a>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
                 echo $nb . " Création" . $s . " offre" . $s;
                 ?></h4>
             <div class="wrapBoutons boutonsGO">
-                <a href="">VOIR</a>
+                <a href="?action=afficherListeEntreprises&controleur=AdminMain">VOIR</a>
             </div>
         </div>
     </div>
@@ -71,15 +71,15 @@
                 echo $nb . " Anomalie" . $s . " Étudiant" . $s;
                 ?></h4>
             <div class="wrapBoutons boutonsGO">
-                <a href="">VOIR</a>
+                <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR</a>
             </div>
         </div>
 
         <div>
             <img src="../ressources/images/modifications.png" alt="image">
-            <h4 class="titre">100 Modifications</h4>
+            <h4 class="titre">2 Modifications</h4>
             <div class="wrapBoutons boutonsGO">
-                <a href="">VOIR</a>
+                <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR</a>
             </div>
         </div>
     </div>
@@ -113,7 +113,7 @@
                                 - Demande de création de compte</h3>
                             <div class="sujetAlerte">
                                 <img src="../ressources/images/attention.png" alt="image">
-                                <p>Demande de création de compte le 11/11/2023</p>
+                                <p>Demande de création de compte le <?= $entreprise->getDateCreationCompte() ?></p>
                             </div>
                         </div>
                     </a>
@@ -143,7 +143,7 @@
                                 ?> - Offre en attente</h3>
                             <div class="sujetAlerte">
                                 <img src="../ressources/images/attention.png" alt="image">
-                                <p>Demande d'envoi d'une offre le 13/11/2023</p>
+                                <p>Demande d'envoi d'une offre le <?= $offre->getDateCreationOffre() ?></p>
                             </div>
                         </div>
                     </a>
@@ -168,65 +168,50 @@
                 echo '<div class="erreur"><img src="../ressources/images/erreur.png" alt="erreur"><h3 class="titre">Aucune anomalie à afficher ici</h3> </div>';
             } else {
 
-            foreach ($listeEtudiants
+                foreach ($listeEtudiants
 
-            as $etudiant) { ?>
+                         as $etudiant) { ?>
 
-            <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=<?= $etudiant->getNumEtudiant() ?>"
-               class="alerteEntr hoverRose">
-                <div class="imageAlerte">
-                    <?php
-                    echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
-                    ?>
-                </div>
+                    <a href="?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=<?= $etudiant->getNumEtudiant() ?>"
+                       class="alerteEntr hoverRose">
+                        <div class="imageAlerte">
+                            <?php
+                            echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">';
+                            ?>
+                        </div>
 
-                <div class="contenuAlerte">
-                    <h3 class="titre rouge">
-                        <?php
-                        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
-                        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
-                        echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
-                        ?></h3>
-                    <p>
-                        <?php
-                        if ($etudiant->getParcours() == "") {
-                            echo "Données non renseignées";
-                        } else {
+                        <div class="contenuAlerte">
+                            <h3 class="titre rouge">
+                                <?php
+                                $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                                $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                                echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                                ?></h3>
+                            <p>
+                                <?php
+                                if ($etudiant->getParcours() == "") {
+                                    echo "Données non renseignées";
+                                } else {
 
-                            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
-                            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
-                            echo $parcoursHTML . " - " . $groupeHTML;
-                        }
-                        ?></p>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>Aucun Stage/Alternance</p>
-                    </div>
-                </div>
-            </a>
-<?php }
-}
+                                    $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                                    $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                                    echo $parcoursHTML . " - " . $groupeHTML;
+                                }
+                                ?></p>
+                            <div class="sujetAlerte">
+                                <img src="../ressources/images/attention.png" alt="image">
+                                <p>Aucun Stage/Alternance</p>
+                            </div>
+                        </div>
+                    </a>
+                <?php }
+            }
 
-echo '
-            <!-- un exemple différent -->
-            <a href="tt" class="alerteEntr hoverRose">
-                <div class="imageAlerte">
-                    <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
-                </div>
-                <div class="contenuAlerte">
-                    <h3 class="titre rouge">Thomas LOYE</h3>
-                    <p>2e année - RACDV - Q2</p>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>A modifié sa convention le 13/11/2023</p>
-                    </div>
-                </div>
-            </a>';
 
-if (isset($listeFormations)) {
-    foreach ($listeFormations as $convention) {
-        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
-        echo '<a
+            if (isset($listeFormations)) {
+                foreach ($listeFormations as $convention) {
+                    $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
+                    echo '<a
                     href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
                     class="alerteEntr" id="hoverRose">
                 <div class="imageAlerte">
@@ -234,19 +219,19 @@ if (isset($listeFormations)) {
                 </div>
                 <div class="contenuAlerte">
                     <h3 class="titre" id="rouge">';
-        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
-        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
-        echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
-        echo '</h3>
+                    $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                    $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                    echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                    echo '</h3>
                     <p>';
-        if ($etudiant->getParcours() == "") {
-            echo "Données non renseignées";
-        } else {
-            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
-            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
-            echo $parcoursHTML . " - " . $groupeHTML;
-        }
-        echo '</p>
+                    if ($etudiant->getParcours() == "") {
+                        echo "Données non renseignées";
+                    } else {
+                        $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                        $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                        echo $parcoursHTML . " - " . $groupeHTML;
+                    }
+                    echo '</p>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
                         <p>Convention modifiée le ' . $convention->getDateCreationConvention() . '</p>
@@ -254,29 +239,13 @@ if (isset($listeFormations)) {
                 </div>
             </a>';
 
-    }
-}
+                }
+            }
 
-// un exemple différent
-echo '<a href="tt" class="alerteEntr" id="hoverRose">
-                <div class="imageAlerte">
-                    <img src="../ressources/images/profil.png" alt="image">
-                </div>
-                <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">Thomas LOYE</h3>
-                    <p>2e année - RACDV - Q2</p>
-                    <div class="sujetAlerte">
-                        <img src="../ressources/images/attention.png" alt="image">
-                        <p>A modifié sa convention le 13/11/2023</p>
-                    </div>
-                </div>
-            </a>
 
+            ?>
         </div>
         <div class="wrapBoutons">
             <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
     </div>
-    ';
-
-?>

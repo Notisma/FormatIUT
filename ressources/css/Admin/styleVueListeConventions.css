@@ -51,7 +51,7 @@ body {
     width: 90%;
     height: 90%;
     display:flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -67,8 +67,8 @@ body {
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    -webkit-border-bottom-left-radius: 10px;
-    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
     background-color: #ff9095;
     padding: 1%;
 }
@@ -180,6 +180,11 @@ body {
 
 .wrapErreur {
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .wrapErreur > img {
@@ -200,8 +205,8 @@ body {
     justify-content: space-around;
     align-items: center;
     align-content: center;
-    -webkit-border-bottom-right-radius: 10px;
-    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
     background-color: white;
 }
 

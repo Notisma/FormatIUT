@@ -11,12 +11,14 @@
                     $erreur++;
                     echo "
                         <a href='?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=" . $convention->getIdEtudiant() . "' class='entreprise'>
-                        
+                        <div class='entrepriseGauche'>
+                        <img src='" . \App\FormatIUT\Configuration\Configuration::getUploadPathFromId($convention->getIdEtudiant()) . "' alt='logo'>
+                        </div>
                         
                         <div class='entrepriseDroite'>
-                            <h3 class='titre rouge'>Etudiant : " . htmlspecialchars($convention->getIdEtudiant()) . "</h3>
-                            <p>Convention ". $convention->getTypeOffre() ." à valider.</p>";
-
+                            <h3 class='titre rouge'>Convention à valider</h3>
+                            <h3 class='titre'>Etudiant : " . htmlspecialchars($convention->getIdEtudiant()) . "</h3>
+                            <h5 class='titre'>Convention " . $convention->getTypeOffre() . " à valider.</h5>";
 
                     echo "
                         
@@ -40,9 +42,9 @@
     </div>
 
     <div class="droite">
-        <img src="../ressources/images/entrepriseAdmins.png" alt="admin">
+        <img src="../ressources/images/conv.jpg" alt="admin">
         <h3 class="titre rouge">Toutes les conventions de la base de données</h3>
-        <h4 class="titre">Consultez le statut de chaque convention en un coup d'oeil</h4>
+        <h4 class="titre">Consultez le statut de chaque convention en anomalie</h4>
         <p>Cliquez sur une convention pour voir ses détails</p>
     </div>
 
