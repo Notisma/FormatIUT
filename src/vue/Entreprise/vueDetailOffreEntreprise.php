@@ -96,7 +96,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
         $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->EtudiantsEnAttente($offre->getIdFormation()));
         if (sizeof($listeEtu) > 0) {
             foreach ($listeEtu as $etudiant) {
-                echo '<div class="etudiantPostulant" onclick="afficherPopupInfosEtu()">
+                echo '<a class="etudiantPostulant" href="?action=afficherVueDetailEtudiant&controleur=EntrMain&idEtudiant='. $etudiant->getNumEtudiant() .'">
                         <div class="illuPostulant">';
                 echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
                 echo '</div>
