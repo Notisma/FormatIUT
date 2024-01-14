@@ -56,13 +56,8 @@ body {
 }
 
 .wrapCentreDetailEntr {
-    position: absolute;
-    top: 56%;
-    left: 54%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
+    width: 95%;
+    height: 95%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -464,4 +459,43 @@ body {
     color: black;
     cursor: pointer;
     border: 1px solid black;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 200vh;
+    }
+
+    .wrapCentreDetailEntr {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .gaucheEntr {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    .droiteEntr {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    .statut {
+        width: 100%;
+        height: 30px;
+    }
+
+    .offre {
+        min-height: 25%;
+    }
+
+    .wrapImgEntr > img {
+        height: 50%;
+    }
 }
