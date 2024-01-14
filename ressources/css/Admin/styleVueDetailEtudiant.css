@@ -74,19 +74,19 @@ body {
 
 
 .wrapBoutons {
-    width: 90%;
+    width: 98%;
     height: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     padding-bottom: 1%;
 }
 
 .wrapBoutons > a {
-    width: 40%;
-    height: 90%;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

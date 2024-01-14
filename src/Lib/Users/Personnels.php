@@ -45,6 +45,9 @@ class Personnels extends Utilisateur
             array("image" => "../ressources/images/entreprise.png", "label" => "Liste Entreprises", "lien" => "?action=afficherListeEntreprises&controleur=AdminMain"),
         );
 
+        if (ControleurAdminMain::getPageActuelleAdmin() == "Détails de l'enseignant") {
+            $menu[] = array("image" => "../ressources/images/profil.png", "label" => "Détails de l'enseignant", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
+        }
 
         if (ControleurAdminMain::getPageActuelleAdmin() == "Modifier un étudiant") {
             $menu[] = array("image" => "../ressources/images/parametres.png", "label" => "Modifier un étudiant", "lien" => "?action=afficherAccueilAdmin&controleur=AdminMain");
