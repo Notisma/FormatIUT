@@ -154,7 +154,7 @@
                 <label>
                     <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
                 </label>
-                <div>
+                <div class="cgu">
                     <label for="cgu-id"></label><input type="checkbox" name="cgu" required id="cgu-id">
                     <h4 class="titre">Veuillez accepter les <a target="_blank" class="lien"
                                                                href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
