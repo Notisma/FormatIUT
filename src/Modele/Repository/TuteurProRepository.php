@@ -60,6 +60,10 @@ class TuteurProRepository extends AbstractRepository
         return $id;
     }
 
+    /**
+     * @param array $dataObjectTableau
+     * @return AbstractDataObject permet de construire un tuteur pro depuis un tableau
+     */
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new TuteurPro(

@@ -6,6 +6,10 @@ use PDO;
 
 class CSV_Utils
 {
+    /**
+     * @return array
+     * Permet d'exporter les données de la base de données dans un fichier CSV
+     */
     public function exportCSV(): array
     {
         $sql = "SELECT etu.numEtudiant, nomEtudiant, prenomEtudiant, etu.mailUniversitaire, groupe, parcours,offr.conventionValidee , typeOffre, dateCreationConvention , 	dateTransmissionConvention ,dateDebut, dateFin, nomEntreprise, mailTuteurPro, presenceForumIUT,nomProf 

@@ -27,6 +27,11 @@ class PostulerRepository extends AbstractRepository
         return ("(numEtudiant, idFormation)");
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return mixed permet de savoir si un étudiant a postulé à une offre
+     */
     public function getEtatEtudiantOffre($numEtudiant, $idFormation)
     {
         $sql = "SELECT * FROM Postuler WHERE numEtudiant =:etuTag AND idFormation =:offreTag";
@@ -38,6 +43,11 @@ class PostulerRepository extends AbstractRepository
     }
 
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet de supprimer une offre d'un étudiant
+     */
     public function supprimerOffreEtudiant($numEtudiant, $idFormation): void
     {
         $sql = "DELETE FROM Postuler WHERE $numEtudiant=:TagEtu AND idFormation=:TagOffre";
@@ -46,6 +56,11 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet de valider une offre d'un étudiant
+     */
     public function validerOffreEtudiant($numEtudiant, $idFormation): void
     {
         $this->annulerAutresOffre($numEtudiant, $idFormation);
@@ -54,6 +69,11 @@ class PostulerRepository extends AbstractRepository
 
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet d'annuler une offre d'un étudiant
+     */
     public function annulerAutresOffre($numEtudiant, $idFormation): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant=:tagEtu AND idFormation!=:tagOffre ";
@@ -65,6 +85,11 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet d'annuler les autres offres d'un étudiant
+     */
     public function annulerAutresEtudiant($numEtudiant, $idFormation): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET etat='Annulé' WHERE numEtudiant!=:tagEtu AND idFormation=:tagOffre ";
@@ -76,6 +101,11 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet de valider une offre d'un étudiant
+     */
     public function validerOffre($numEtudiant, $idFormation): void
     {
         $sql = "UPDATE " . $this->getNomTable() . " SET etat='Validée' WHERE numEtudiant=:tagEtu AND idFormation=:tagOffre ";
@@ -87,6 +117,10 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtudiant
+     * @return Postuler|null permet de récupérer les offres d'un étudiant
+     */
     public function getOffreValider($numEtudiant): ?Postuler
     {
         $sql = "SELECT * FROM Postuler WHERE etat='Validée' AND numEtudiant=:tagEtudiant";
@@ -103,6 +137,11 @@ class PostulerRepository extends AbstractRepository
         }
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return mixed permet de récupérer le cv d'un étudiant
+     */
     public function recupererCV($numEtudiant, $idFormation)
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idFormation =:offreTag";
@@ -115,6 +154,10 @@ class PostulerRepository extends AbstractRepository
         return $pdoStatement->fetch()["cv"];
     }
 
+    /**
+     * @param $idFormation
+     * @return mixed permet de récupérer le nombre de candidats pour une offre
+     */
     public function getNbCandidatsPourOffre($idFormation)
     {
         $sql = "SELECT COUNT(*) FROM Postuler WHERE idFormation=:offreTag AND etat!='Annulé'";
@@ -126,6 +169,11 @@ class PostulerRepository extends AbstractRepository
         return $pdoStatement->fetch()["COUNT(*)"];
     }
 
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return mixed permet de récupérer la lettre d'un étudiant
+     */
     public function recupererLettre($numEtudiant, $idFormation)
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE numEtudiant =:etudiantTag AND idFormation =:offreTag";

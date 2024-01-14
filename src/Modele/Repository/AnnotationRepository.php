@@ -53,8 +53,10 @@ class AnnotationRepository extends AbstractRepository
     }
 
 
-
-
+    /**
+     * @param Annotation $annotation
+     * @return void permet de créer une annotation depuis un formulaire
+     */
     public function creerAnnotationDepuisForm(Annotation $annotation): void {
         $sql = "INSERT INTO " . $this->getNomTable() . " VALUES(:loginTag, :siretTag, :messageTag, :dateTag, :noteTag);";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);

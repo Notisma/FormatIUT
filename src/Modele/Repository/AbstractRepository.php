@@ -56,26 +56,6 @@ abstract class AbstractRepository
     }
 
 
-    /*public function getObjectParClesPrimaires($clesPrimaires):?AbstractDataObject{
-        $placeholders = implode(',', array_fill(0, count($clesPrimaires), '?'));
-        $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . " IN ({$placeholders})";
-        $pdoStatement=ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        foreach ($clesPrimaires as $index => $valeur) {
-            $pdoStatement->bindValue($index + 1, $valeur, PDO::PARAM_INT);
-        }
-        $pdoStatement->execute();
-        $objets = $pdoStatement->fetchAll();
-        if (!$objets){
-            return null;
-        }
-        $result = array();
-        foreach ($objets as $objet) {
-            $result[] = $this->construireDepuisTableau($objet);
-        }
-        return $this->construireDepuisTableau($result);
-    }*/
-
-    // ----- CRUD -----
 
     /***
      * @param AbstractDataObject $object

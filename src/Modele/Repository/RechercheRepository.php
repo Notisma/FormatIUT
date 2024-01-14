@@ -6,6 +6,11 @@ abstract class RechercheRepository extends AbstractRepository
 {
     protected abstract function getColonnesRecherche(): array;
 
+    /**
+     * @param array $motsclefs
+     * @param array $filtres
+     * @return array permet de rechercher des objets dans la base de données
+     */
     public function recherche(array $motsclefs, array $filtres): array
     {
         foreach ($motsclefs as $mot) {

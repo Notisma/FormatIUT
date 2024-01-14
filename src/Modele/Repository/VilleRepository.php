@@ -22,6 +22,10 @@ class VilleRepository extends AbstractRepository
         return "idVille";
     }
 
+    /**
+     * @param array $dataObjectTableau
+     * @return AbstractDataObject permet de construire une ville depuis un tableau
+     */
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new Ville(
@@ -31,6 +35,10 @@ class VilleRepository extends AbstractRepository
         );
     }
 
+    /**
+     * @param string|null $nomVille
+     * @return int|null permet de récupérer l'id d'une ville depuis son nom
+     */
     public function getVilleParNom(?string $nomVille): ?int
     {
         $sql = "SELECT idVille FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
@@ -43,6 +51,10 @@ class VilleRepository extends AbstractRepository
         else return ($result)["idVille"];
     }
 
+    /**
+     * @param string|null $nomVille
+     * @return Ville|null permet de récupérer une ville depuis son nom
+     */
     public function getVilleParNom2(?string $nomVille): ?Ville
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE nomVille=:Tag";
@@ -56,6 +68,10 @@ class VilleRepository extends AbstractRepository
     }
 
 
+    /**
+     * @param $siret
+     * @return Ville permet de récupérer la ville d'une entreprise depuis son siret
+     */
     public function getVilleParIdVilleEntr($siret): Ville
     {
         $sql = "Select v.idVille, nomVille, codePostal From Villes v JOIN Entreprises e ON v.idVille = e.idVille WHERE numSiret =:Tag";

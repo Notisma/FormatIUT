@@ -25,12 +25,21 @@ class UploadsRepository extends AbstractRepository
         return "idUpload";
     }
 
+    /**
+     * @param array $dataObjectTableau
+     * @return AbstractDataObject permet de construire une ville depuis un tableau
+     */
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         return new Ville("", "", "");
     }
 
 
+    /**
+     * @param $id
+     * @return string|null
+     * retourne le nom du fichier depuis son id
+     */
     public function getFileNameFromId($id): ?string
     {
         $sql = "SELECT fileName FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
@@ -44,6 +53,10 @@ class UploadsRepository extends AbstractRepository
         return $objet['fileName'];
     }
 
+    /**
+     * @param $img_if
+     * @return mixed permet de récupérer une image depuis son id
+     */
     public function getImage($img_if): mixed
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE " . $this->getClePrimaire() . "=:Tag ";
@@ -91,7 +104,6 @@ class UploadsRepository extends AbstractRepository
      * @return mixed
      * retourne l'image de photo de profil pour un étudiant
      */
-
     public function imageParEtudiant($numEtudiant): mixed
     {
         $sql = "SELECT img_id FROM Etudiants WHERE numEtudiant=:Tag";

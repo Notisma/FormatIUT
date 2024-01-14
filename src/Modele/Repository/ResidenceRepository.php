@@ -22,6 +22,10 @@ class ResidenceRepository extends AbstractRepository
         return ["idResidence", "voie", "libCedex", "idVille"];
     }
 
+    /**
+     * @param array $residence
+     * @return AbstractDataObject permet de construire une résidence depuis un tableau
+     */
     public function construireDepuisTableau(array $residence): AbstractDataObject
     {
         return new Residence($residence['idResidence'], $residence['voie'], $residence['libCedex'], $residence['idVille']);

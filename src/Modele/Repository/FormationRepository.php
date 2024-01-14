@@ -35,7 +35,10 @@ class FormationRepository extends RechercheRepository
         return new Formation($dataObjectTableau["idFormation"], $dataObjectTableau["nomOffre"], $dataObjectTableau["dateDebut"], $dataObjectTableau["dateFin"], $dataObjectTableau["sujet"], $dataObjectTableau["detailProjet"], $dataObjectTableau["dureeHeure"], $dataObjectTableau["joursParSemaine"], $dataObjectTableau["gratification"], $dataObjectTableau["uniteGratification"], $dataObjectTableau["uniteDureeGratification"], $dataObjectTableau["nbHeuresHebdo"], $dataObjectTableau["offreValidee"], $dataObjectTableau["objectifOffre"], $dataObjectTableau["dateCreationOffre"], $dataObjectTableau["typeOffre"], $dataObjectTableau["anneeMax"], $dataObjectTableau["anneeMin"], $dataObjectTableau["estValide"], $dataObjectTableau["validationPedagogique"], $dataObjectTableau["convention"], $dataObjectTableau["conventionValidee"], $dataObjectTableau["dateCreationConvention"], $dataObjectTableau["dateTransmissionConvention"], $dataObjectTableau["dateRetourSigne"], $dataObjectTableau["assurance"], $dataObjectTableau["avenant"], $dataObjectTableau["idEtudiant"], $dataObjectTableau["idTuteurPro"], $dataObjectTableau["idEntreprise"], $dataObjectTableau["loginTuteurUM"], $dataObjectTableau["tuteurUMvalide"]);
     }
 
-
+    /**
+     * @param string $offre
+     * @return AbstractDataObject|null permet de trouver une offre depuis son nom
+     */
     public function estFormation(string $offre): ?AbstractDataObject
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idFormation=:Tag AND idEtudiant IS NOT NULL";
@@ -50,7 +53,10 @@ class FormationRepository extends RechercheRepository
 
     }
 
-
+    /**
+     * @param $type
+     * @return array retourne la liste des offres disponibles pour un étudiant, en respectant l'année de l'étudiant
+     */
     public function getListeOffresDispoParType($type): array
     {
         $etu=(new EtudiantRepository())->getObjectParClePrimaire((new EtudiantRepository())->getNumEtudiantParLogin(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
@@ -172,7 +178,11 @@ class FormationRepository extends RechercheRepository
     }
 
 
-
+    /**
+     * @param $numEtudiant
+     * @param $idFormation
+     * @return void permet de mettre à jour la table Postuler
+     */
     public function mettreAChoisir($numEtudiant, $idFormation): void
     {
         $sql = "UPDATE Postuler SET etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
@@ -186,7 +196,6 @@ class FormationRepository extends RechercheRepository
      * @return array
      * retourne la liste des id des offres pour une entreprise
      */
-
     public function listeidFormationEntreprise($idEntreprise): array
     {
         $sql = "SELECT idFormation FROM Formations WHERE idEntreprise=:Tag";
@@ -200,6 +209,9 @@ class FormationRepository extends RechercheRepository
         return $listeID;
     }
 
+    /**
+     * @return array retourne la liste des offres validées
+     */
     public function offresNonValides(): array
     {
         $listeOffres = array();
@@ -211,7 +223,10 @@ class FormationRepository extends RechercheRepository
         return $listeOffres;
     }
 
-    /** @return Formation[] */
+    /**
+     * @param $numEtudiant
+     * @return array retourne la liste des offres pour un étudiant
+     */
     public function offresPourEtudiant($numEtudiant): array
     {
         //retourne l'offre à laquelle l'étudiant est assigné. Si il n'est assigné à aucune offre, retourne la liste des offres auxquelles il a postulé
@@ -226,6 +241,10 @@ class FormationRepository extends RechercheRepository
         return $listeOffres;
     }
 
+    /**
+     * @param $idEntreprise
+     * @return array retourne la liste des offres pour une entreprise
+     */
     public function offresPourEntreprise($idEntreprise): array
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE idEntreprise=:Tag";
@@ -239,6 +258,10 @@ class FormationRepository extends RechercheRepository
         return $listeOffres;
     }
 
+    /**
+     * @param $numEtu
+     * @return Formation|null retourne l'offre validée pour un étudiant
+     */
     public function trouverOffreDepuisForm($numEtu): ?Formation
     {
         $sql = "SELECT * FROM Formations WHERE idEtudiant = :tagEtu";
@@ -254,8 +277,10 @@ class FormationRepository extends RechercheRepository
     }
 
 
-
-    /** Comme au dessus, mais de n'importe quel type */
+    /**
+     * @param $numEtu
+     * @return Formation|null retourne l'offre validée pour un étudiant
+     */
     public function trouverFormationValidee($numEtu): ?Formation
     {
         $sql = "SELECT * FROM Formations f JOIN Postuler r ON r.idFormation = f.idFormation WHERE numEtudiant = :tagEtu AND etat = 'Validée'";
@@ -269,6 +294,9 @@ class FormationRepository extends RechercheRepository
             return $this->construireDepuisTableau($test);
     }
 
+    /**
+     * @return array retourne la liste des offres validées
+     */
     public function etudiantsSansConventionsValides(): array
     {
         $listFormations = array();
@@ -283,6 +311,9 @@ class FormationRepository extends RechercheRepository
         return $listFormations;
     }
 
+    /**
+     * @return float|null retourne le nombre moyen d'offres par entreprise
+     */
     public static function nbMoyenOffresParEntreprise(): ?float {
         $sql = "SELECT AVG(COALESCE(subquery.nbFormations, 0)) AS MoyenneFormations
                 FROM Entreprises e

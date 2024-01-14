@@ -22,6 +22,11 @@ class ConventionRepository extends AbstractRepository
         return array("idConvention", "conventionValidee", "dateCreation", "dateTransmission", "retourSigne", "assurance", "objectifOffre", "typeConvention");
     }
 
+    /**
+     * @param array $convention
+     * @return AbstractDataObject
+     * @throws \Exception permet de construire une convention depuis un tableau
+     */
     public function construireDepuisTableau(array $convention): AbstractDataObject
     {
         $dateCreation = new \DateTime($convention['dateCreation']);

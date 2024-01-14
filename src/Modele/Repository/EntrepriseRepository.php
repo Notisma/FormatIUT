@@ -21,6 +21,10 @@ class  EntrepriseRepository extends RechercheRepository
         return array("nomEntreprise");
     }
 
+    /**
+     * @param array $entrepriseFormatTableau
+     * @return Entreprise permet de construire une entreprise depuis un tableau
+     */
     public function construireDepuisTableau(array $entrepriseFormatTableau): Entreprise
     {
         $valide = 0;
@@ -50,6 +54,10 @@ class  EntrepriseRepository extends RechercheRepository
         return "numSiret";
     }
 
+    /**
+     * @param string $mail
+     * @return Entreprise|null permet de trouver une entreprise depuis son mail
+     */
     public function getEntrepriseParMail(string $mail): ?Entreprise
     {
         $sql = "SELECT * FROM " . $this->getNomTable() . " WHERE  email=:Tag ";
@@ -74,6 +82,16 @@ class  EntrepriseRepository extends RechercheRepository
         return $listeEntreprises;
     }
 
+    /**
+     * @param int $siret
+     * @param string $nom
+     * @param string $statut
+     * @param int $effectif
+     * @param string $codeNAF
+     * @param string $tel
+     * @param string $adresse
+     * @return void permet de mettre à jour les informations d'une entreprise
+     */
     public function mettreAJourInfos(int $siret, string $nom, string $statut, int $effectif, string $codeNAF, string $tel, string $adresse)
     {
         $sql = "UPDATE Entreprises SET nomEntreprise = :nomTag, statutJuridique = :statutTag, effectif = :effTag, codeNAF = :codeTag, tel = :telTag, adresseEntreprise = :adTag WHERE numSiret = :siretTag";
@@ -88,6 +106,10 @@ class  EntrepriseRepository extends RechercheRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param $numEtu
+     * @return Entreprise permet de trouver l'entreprise d'un étudiant
+     */
     public function trouverEntrepriseDepuisForm($numEtu): Entreprise
     {
         $sql = "SELECT numSiret,nomEntreprise,statutJuridique,effectif,codeNAF,tel,adresseEntreprise,idVille,img_id, mdpHache, email, emailAValider,nonce ,e.estValide, dateCreationCompte
@@ -99,6 +121,10 @@ class  EntrepriseRepository extends RechercheRepository
 
     }
 
+    /**
+     * @param int $idEntreprise
+     * @return array permet de trouver les offres valides d'une entreprise
+     */
     public function getOffresNonValidesDeEntreprise(int $idEntreprise): array
     {
         $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 0";
@@ -112,6 +138,10 @@ class  EntrepriseRepository extends RechercheRepository
         return $listeOffres;
     }
 
+    /**
+     * @param int $idEntreprise
+     * @return array permet de trouver les offres non valides d'une entreprise
+     */
     public function getOffresValidesDeEntreprise(int $idEntreprise): array
     {
         $sql = "SELECT * FROM Formations WHERE idEntreprise = :tagId AND estValide = 1";

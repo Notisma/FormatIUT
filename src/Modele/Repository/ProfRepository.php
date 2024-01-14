@@ -28,6 +28,10 @@ class ProfRepository extends RechercheRepository
         return "loginProf";
     }
 
+    /**
+     * @param array $dataObjectTableau
+     * @return AbstractDataObject permet de construire un prof depuis un tableau
+     */
     public function construireDepuisTableau(array $dataObjectTableau): AbstractDataObject
     {
         $estAdmin = 0;
@@ -45,6 +49,10 @@ class ProfRepository extends RechercheRepository
         );
     }
 
+    /**
+     * @param string $login
+     * @return bool permet de savoir si un prof est admin
+     */
     public function estProf(string $login): bool
     {
         $sql = "SELECT COUNT(*) FROM " . $this->getNomTable() . " WHERE loginProf=:Tag";
@@ -58,7 +66,7 @@ class ProfRepository extends RechercheRepository
 
 
     /**
-     * @return Prof[]
+     * @return Prof[] permet de récupérer tous les admins
      */
     public function getAdmins(): array
     {
@@ -69,6 +77,10 @@ class ProfRepository extends RechercheRepository
         return $arr;
     }
 
+    /**
+     * @param string $login
+     * @return array permet de récupérer tous les étudiants tuteurs
+     */
     public function getEtudiantsTutores(string $login): array
     {
         $sql = "SELECT idEtudiant FROM Formations WHERE loginTuteurUM =:loginTag";
@@ -83,6 +95,12 @@ class ProfRepository extends RechercheRepository
         return $arr;
     }
 
+    /**
+     * @param string $nom
+     * @param string $prenom
+     * @param string $login
+     * @return void permet de mettre à jour les infos d'un prof
+     */
     public function mettreAJourInfos(string $nom, string $prenom, string $login): void
     {
         $sql = "UPDATE Profs SET nomProf = :nomTag, prenomProf = :prenomTag WHERE loginProf = :loginTag";
@@ -91,6 +109,10 @@ class ProfRepository extends RechercheRepository
         $pdoStatement->execute($values);
     }
 
+    /**
+     * @param string $login
+     * @return Prof permet de récupérer un prof depuis son login
+     */
     public function getParLogin(string $login):Prof
     {
         $sql="SELECT * FROM ".$this->getNomTable()." WHERE loginProf=:Tag";
