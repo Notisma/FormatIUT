@@ -67,7 +67,7 @@ class Etudiants extends Utilisateur
                 }
             } else $menu[] = array("image" => "../ressources/images/document.png", "label" => "Ma convention", "lien" => "?controleur=EtuMain&action=afficherMaConvention");
         } else {
-            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Créer une convention", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionSansEntreprise");
+            $menu[] = array("image" => "../ressources/images/document.png", "label" => "Remplir convention", "lien" => "?controleur=EtuMain&action=afficherFormulaireConventionSansEntreprise");
         }
 
         $menu[] = array("image" => "../ressources/images/se-deconnecter.png", "label" => "Se déconnecter", "lien" => "?action=seDeconnecter&controleur=Main");

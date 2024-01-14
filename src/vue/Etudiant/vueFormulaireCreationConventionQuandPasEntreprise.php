@@ -12,8 +12,6 @@ if (date("m") >= 9) {
 }
 
 ?>
-<h3>Uniquement utiliser cette création manuelle si vous avez déjà un stage mais que l'entreprise n'est pas sur le site
-    !</h3>
 <form method="post" class="formulaireConv" action='?action=creerConventionSansEntreprise&controleur=EtuMain'>
     <div class="pageConvention">
         <div class="entete">
@@ -171,25 +169,27 @@ if (date("m") >= 9) {
                 <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
                 <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
             </div>
-        </div>
 
-        <div>
-            <h5 class="titre">Encadrement de l'étudiant par l'organisme d'accueil</h5>
-            <h6 class="titre">
-                <strong><label for="nom_tuteur_id">Nom du tuteur de l'entreprise : </label></strong>
-                <input type="text" id="nom_tuteur_id" name="nomTuteurPro">
-                <strong><label for="prenom_tuteur_id">Prénom du tuteur de l'entreprise : </label></strong>
-                <input type="text" id="prenom_tuteur_id" name="prenomTuteurPro">
-            </h6>
-            <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
-            <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
-        </div>
+            <div>
+                <h5 class="titre">Encadrement de l'étudiant par l'organisme d'accueil</h5>
+                <h6 class="titre">
+                    <strong><label for="nom_tuteur_id">Nom du tuteur de l'entreprise : </label></strong>
+                    <input type="text" id="nom_tuteur_id" name="nomTuteurPro">
+                    <strong><label for="prenom_tuteur_id">Prénom du tuteur de l'entreprise : </label></strong>
+                    <input type="text" id="prenom_tuteur_id" name="prenomTuteurPro">
+                </h6>
+                <h6 class="titre"><strong>Mél :</strong> remi.coletta@umontpellier.fr</h6>
+                <h6 class="titre"><strong>Tél :</strong> +33 4 67 41 85 41</h6>
+            </div>
 
+        </div>
     </div>
 
     <input type="hidden" value="<?= $etudiant->getNumEtudiant() ?>" name="numEtu">
     <input type="hidden" value="<?= date('d-m-Y'); ?>" name="dateCreation">
 
-    <input type='submit' value='Créer convention'>
+    <div class="wrapBoutons">
+        <input type='submit' value='Créer convention'>
+    </div>
 
 </form>
