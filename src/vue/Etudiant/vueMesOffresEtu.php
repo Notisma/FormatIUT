@@ -1,5 +1,6 @@
 <?php
 
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
 use App\FormatIUT\Configuration\Configuration;
@@ -33,7 +34,7 @@ foreach ($listeOffres as $offre) {
         <div class="front">
             <h2 class="titre">Mes offres postulées</h2>
             <div class="circle">
-                <span class="number"><?php echo count($listeOffresEnAttente) ?></span>
+                <span class="number"><?= count($listeOffresEnAttente) ?></span>
             </div>
         </div>
 
@@ -43,7 +44,7 @@ foreach ($listeOffres as $offre) {
                 echo "<div class='wrapError'><img src='../ressources/images/erreur.png' alt=''> <h4 class='titre'>Aucune offre à afficher.</h4> </div>";
             } else {
                 foreach ($listeOffresEnAttente as $offreAttente) {
-                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offreAttente->getIdEntreprise());
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offreAttente->getIdEntreprise());
                     echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreAttente->getIdFormation() . "' class='offre'>";
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
                     echo '
@@ -70,7 +71,7 @@ foreach ($listeOffres as $offre) {
         <div class="front">
             <h2 class="titre">Mes offres validées</h2>
             <div class="circle">
-                <span class="number"><?php echo count($listeOffresAChoisirEtValidees) ?></span>
+                <span class="number"><?= count($listeOffresAChoisirEtValidees) ?></span>
             </div>
         </div>
 
@@ -81,7 +82,7 @@ foreach ($listeOffres as $offre) {
             } else {
                 foreach ($listeOffresAChoisirEtValidees as $offreValider) {
 
-                    $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offreValider->getIdEntreprise());
+                    $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offreValider->getIdEntreprise());
                     echo "<a href='?action=afficherVueDetailOffre&controleur=EtuMain&idFormation=" . $offreValider->getIdFormation() . "' class='offre'>";
                     echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="test">';
                     echo '
@@ -93,10 +94,22 @@ foreach ($listeOffres as $offre) {
                                 <div class="wrapBoutons">';
 
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreValider->getIdFormation()) == "A Choisir") {
-                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="REJETER"></form>';
-                        echo '<form action="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres accept" value="ACCEPTER"></form></div></div></a>';
+                        echo '  <form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post">
+                                    <input type="submit" class="boutonOffres undo" value="REJETER">
+                                </form>';
+                        echo '  <form action="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post">
+                                    <input type="submit" class="boutonOffres accept" value="ACCEPTER">
+                                </form>
+                            </div>
+                        </div>
+                    </a>';
                     } else {
-                        echo '<form action="?action=afficherMesOffres&controleur=EtuMain" method="post"><input type="submit" class="disabled boutonOffres acceptee" value="Acceptée"></form></div></div></a>';
+                        echo '  <form action="?action=afficherMesOffres&controleur=EtuMain" method="post">
+                                    <input type="submit" class="disabled boutonOffres acceptee" value="Acceptée">
+                                </form>
+                            </div>
+                        </div>
+                    </a>';
                     }
                 }
 

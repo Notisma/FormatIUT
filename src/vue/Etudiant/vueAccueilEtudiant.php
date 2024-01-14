@@ -34,7 +34,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ConnexionUtilisa
             echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
            <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
            <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
            <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>

@@ -28,6 +28,7 @@ if (date("m") >= 9) {
             <h2 class="titre"><label for="type_id">Convention de type : </label></h2>
             <div class="inputCentre">
                 <select name="typeOffre" id="type_id" required>
+                    <option value="">-----</option>
                     <option value="Stage"> Stage</option>
                     <option value="Alternance">Alternance</option>
                 </select>
@@ -131,7 +132,7 @@ if (date("m") >= 9) {
                     <label for="debutdate_id"></label><input type="date" required id="debutdate_id"
                                                              name="offreDateDebut">
                     au
-                    <label for="findate_id"></label><input type="date" required id="findate_id" name="offreDateFin"
+                    <label for="findate_id"></label><input type="date" required id="findate_id" name="offreDateFin">
                 </h6>
                 <h6 class="titre"><strong>Intitulé de la formation :</strong>
                     BUT INFORMATIQUE,

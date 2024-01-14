@@ -218,7 +218,7 @@
                     <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
                 </div>
                 <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">';
+                    <h3 class="titre rouge">';
                     $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
                     $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
                     echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);

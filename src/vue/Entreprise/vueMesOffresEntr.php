@@ -84,7 +84,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             $data = $listeOffres;
 
             if ($data == null) {
-                echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre" id="rouge">Aucune offre ne correspond à vos critères</h3></div>';
+                echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre rouge">Aucune offre ne correspond à vos critères</h3></div>';
             } else {
 
                 for ($i = 0; $i < count($data); $i++) {
