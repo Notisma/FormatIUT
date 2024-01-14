@@ -135,7 +135,7 @@
                 foreach ($listeAnnotations as $annotation) {
                     $prof = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParClePrimaire($annotation->getLoginProf());
                     echo "<div class='commentaire'>";
-                    echo "<img src='../ressources/images/admin.png' alt='etoile'>";
+                    echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($prof->getImg()) . "' alt='admin'>";
                     echo "<div>";
                     echo "<h4 class='titre rouge'>" . $prof->getPrenomProf() . " " . $prof->getNomProf() . " - " . $annotation->getNoteAnnotation() . "/5 </h4>";
                     echo "<h5 class='titre'>" . $annotation->getMessageAnnotation() . "</h5>";

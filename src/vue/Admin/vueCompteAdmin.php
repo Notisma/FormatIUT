@@ -107,7 +107,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
                             echo '
                     <div class="prof">
                         <div class="permImg">
-                            <img src="../ressources/images/admin.png" alt="avatar">
+                            <img src="' . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($prof->getImg()) . '" alt="admin">
                         </div>
                         <div class="perms">';
                                 if ($prof->getPrenomProf() == null)
