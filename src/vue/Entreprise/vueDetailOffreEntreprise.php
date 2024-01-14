@@ -98,7 +98,7 @@ $listeEtu = ((new \App\FormatIUT\Modele\Repository\EtudiantRepository())->Etudia
             foreach ($listeEtu as $etudiant) {
                 echo '<a class="etudiantPostulant" href="?action=afficherVueDetailEtudiant&controleur=EntrMain&idFormation='. $offre->getidFormation() .'&idEtudiant='. $etudiant->getNumEtudiant() .'">
             <div class="illuPostulant">';
-                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '"/>';
+                echo '<img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '">';
                 echo '</div>
             <div class="nomEtuPostulant">
                 <h4 class="titre rouge">';

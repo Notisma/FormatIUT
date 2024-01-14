@@ -54,7 +54,7 @@ $ville = (new VilleRepository())->getObjectParClePrimaire($entreprise->getIdVill
                 </div>
                 <div class="boutonsForm">
                     <input type="submit" value="Envoyer"
-                           formaction="?action=modifierEntreprise&controleur=AdminMain&siret=<?php echo $entreprise->getSiret(); ?>"/>
+                           formaction="?action=modifierEntreprise&controleur=AdminMain&siret=<?php echo $entreprise->getSiret(); ?>">
                 </div>
         </form>
     </div>

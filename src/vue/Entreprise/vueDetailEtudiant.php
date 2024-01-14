@@ -12,7 +12,7 @@ $formation = (new \App\FormatIUT\Modele\Repository\FormationRepository())->getOb
     <div class="mainEtudiant">
         <div class="partieGauche">
             <div>
-                <img src="<?= Configuration::getUploadPathFromId($etudiant->getImg()) ?>" alt=""/>
+                <img src="<?= Configuration::getUploadPathFromId($etudiant->getImg()) ?>" alt="">
                 <h2 class="titre rouge">Détails de
                     l'étudiant <?= htmlspecialchars($etudiant->getPrenomEtudiant()) ?> <?= htmlspecialchars($etudiant->getNomEtudiant()) ?> </h2>
             </div>

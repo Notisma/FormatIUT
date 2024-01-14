@@ -200,8 +200,8 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         </div>
         <div class="contenuPremiereCo">
             <form enctype="multipart/form-data" action="?action=mettreAJour&controleur=EtuMain" method="post">
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                <input type="file" name="pdp" size=500/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                <input type="file" name="pdp" size=500>
 
                 <h4>Cliquez sur "Terminer" pour enregistrer vos informations et commencer l'aventure Format'IUT !</h4>
 
@@ -209,7 +209,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
                     <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
                     <input type="hidden" name="estPremiereCo" value="true">
-                    <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()"/>
+                    <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()">
                 </div>
             </form>
         </div>
