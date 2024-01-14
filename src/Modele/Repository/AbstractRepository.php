@@ -289,7 +289,7 @@ abstract class AbstractRepository
      * @return int|null
      * Permet de récupérer le résultat d'une des fonctions pl/sql en passant son nom en paramètre
      */
-    public static function lancerFonctionHistorique($nom) : ?int {
+    public static function lancerFonctionHistorique($nom) : ?float {
         $sql = "SELECT " . $nom . "();";
         $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
         $objet = $pdoStatement->fetchColumn();
