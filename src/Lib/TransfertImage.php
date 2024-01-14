@@ -42,37 +42,20 @@ class TransfertImage
                     $img = file_get_contents($tmp_filename);
                     $img_arrondie = self::getImageArrondieData($img);
                     file_put_contents($tmp_filename, $img_arrondie);
-                    $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
-                    imagesavealpha($tempImage, true);
-                    imagepng($tempImage, $_FILES['pdp']['tmp_name']);
-                    imagedestroy($tempImage);
                 }
+                imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
             } else {
-                //convert image to png
-                $allowedExtensions = ['jpg', 'jpeg', 'png'];
-                $fileExtension = strtolower(pathinfo($_FILES['pdp']['name'], PATHINFO_EXTENSION));
-                if (in_array($fileExtension, $allowedExtensions)) {
-                    $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
-                    imagesavealpha($tempImage, true);
-                    imagepng($tempImage, $_FILES['pdp']['tmp_name']);
-                    imagedestroy($tempImage);
 
-                    $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
-                    $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
-                    return $ai_id;
-                } else {
-                    if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
-                        ControleurEtuMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    } else if (ConnexionUtilisateur::getTypeConnecte() == "Entreprise") {
-                        ControleurEntrMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    } else if (ConnexionUtilisateur::getTypeConnecte() == "Administateurs" || ConnexionUtilisateur::getTypeConnecte() == "Personnels" || ConnexionUtilisateur::getTypeConnecte() == "Secretariat") {
-                        ControleurAdminMain::redirectionFlash('afficherProfil', "danger", "Seuls les fichiers png, jpeg ou jpg sont acceptés");
-                    }
-                    die();
-                }
+                //convert image to png
+                //imagepng(imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name'])), $_FILES['pdp']['tmp_name']);
+                $tempImage = imagecreatefromstring(file_get_contents($_FILES['pdp']['tmp_name']));
+                imagesavealpha($tempImage, true);
+                imagepng($tempImage, $_FILES['pdp']['tmp_name']);
+                imagedestroy($tempImage);
             }
 
             $_FILES['pdp']['name'] = "pp_" . ConnexionUtilisateur::getTypeConnecte() . "_" . ConnexionUtilisateur::getLoginUtilisateurConnecte() . ".png";
+            //echo $_FILES['pdp']['name']; die();
             $ai_id = ControleurMain::uploadFichiers(['pdp'], "afficherProfil")['pdp'];
             return $ai_id;
         }
