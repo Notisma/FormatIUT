@@ -2,7 +2,9 @@
     <?php
     $offre = (new App\FormatIUT\Modele\Repository\FormationRepository())->getObjectParClePrimaire($_REQUEST["idFormation"]);
     $entreprise = (new App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+
     use App\FormatIUT\Configuration\Configuration;
+
     ?>
 
     <div class="wrapGauche">
@@ -11,12 +13,12 @@
             <?php
 
 
-            $nomEntrHTML=htmlspecialchars($entreprise->getNomEntreprise());
-            $sujetHTML=htmlspecialchars($offre->getSujet());
-            $nomOffreHTML=htmlspecialchars($offre->getNomOffre());
-            $detailHTML=htmlspecialchars($offre->getDetailProjet());
+            $nomEntrHTML = htmlspecialchars($entreprise->getNomEntreprise());
+            $sujetHTML = htmlspecialchars($offre->getSujet());
+            $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
+            $detailHTML = htmlspecialchars($offre->getDetailProjet());
 
-            echo '<img src="' .Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
+            echo '<img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">';
             echo "<h2 class='titre rouge'>" . $nomEntrHTML . "</h2>";
             echo "<h3 class='titre'>" . $sujetHTML . " - " . $offre->getTypeOffre() . "</h3>";
             ?>
@@ -35,15 +37,15 @@
 
         <div class="wrapBoutons">
             <?php
-            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte()=="Administrateurs") {
+            if (\App\FormatIUT\Lib\ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
                 if (!$offre->getEstValide()) {
                     echo "
-                <a href='?action=rejeterFormation&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>REJETER</a>";
+                <a href='?action=rejeterFormation&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>REJETER</a>";
 
                     if ($entreprise->isEstValide()) {
-                        echo "<a id='vert' href='?action=accepterFormation&controleur=AdminMain&idFormation=".$offre->getIdFormation()."'>ACCEPTER</a>";
+                        echo "<a id='vert' href='?action=accepterFormation&controleur=AdminMain&idFormation=" . $offre->getIdFormation() . "'>ACCEPTER</a>";
                     } else {
-                        echo "<a id='vert' href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=".$entreprise->getSiret()."'>ACCEPTER</a>";
+                        echo "<a id='vert' href='?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=" . $entreprise->getSiret() . "'>ACCEPTER</a>";
                         \App\FormatIUT\Lib\MessageFlash::ajouter("warning", "Validez l'entreprise avant de valider l'offre");
                     }
 
@@ -88,24 +90,24 @@
                 echo "<h5 class='titre'>Étudiants Candidats :</h5>";
                 $listeEtudiants = (new App\FormatIUT\Modele\Repository\EtudiantRepository())->etudiantsCandidats($offre->getIdFormation());
 
-                if (sizeof($listeEtudiants) == 0  ) {
+                if (sizeof($listeEtudiants) == 0) {
                     echo "<div class='erreur'>";
                     echo "<img src='../ressources/images/erreur.png' alt='entreprise'>";
                     echo "<h4 class='titre'>Aucun étudiant candidat n'a été trouvé pour cette offre</h4>";
                     echo "</div>";
                 } else {
                     foreach ($listeEtudiants as $etudiant) {
-                        $parcoursHTML=htmlspecialchars($etudiant->getParcours());
-                        $groupeHTML=htmlspecialchars($etudiant->getGroupe());
-                        $prenomEtuHTML=htmlspecialchars($etudiant->getPrenomEtudiant());
-                        $nomEtuHTML=htmlspecialchars($etudiant->getNomEtudiant());
+                        $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                        $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
                         echo "<a class='etudiantCandidat' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=" . $etudiant->getNumEtudiant() . "'>" .
                             "<div class='imgEtudiant'>" .
                             "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etudiant->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtudiant'>" .
                             "<h3 class='titre rouge'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
-                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdFormation(), $etudiant->getNumEtudiant()) ."</p>" .
+                            "<p>" . $groupeHTML . " - " . $parcoursHTML . " - " . (new App\FormatIUT\Modele\Repository\EtudiantRepository())->getAssociationPourOffre($offre->getIdFormation(), $etudiant->getNumEtudiant()) . "</p>" .
                             "</div>" .
                             "</a>";
                     }

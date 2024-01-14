@@ -213,12 +213,12 @@
                     $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
                     echo '<a
                     href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
-                    class="alerteEntr" id="hoverRose">
+                    class="alerteEntr hoverRose">
                 <div class="imageAlerte">
                     <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
                 </div>
                 <div class="contenuAlerte">
-                    <h3 class="titre" id="rouge">';
+                    <h3 class="titre rouge">';
                     $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
                     $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
                     echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
@@ -249,3 +249,4 @@
             <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
     </div>
+</div>

@@ -1,3 +1,11 @@
+<?php
+
+/** @var Formation[] $listeFormations */
+
+use App\FormatIUT\Modele\DataObject\Formation;
+
+?>
+
 <div class="wrapCentreListEntr">
     <div class="gauche">
         <h2 class="titre">Liste des Conventions :</h2>

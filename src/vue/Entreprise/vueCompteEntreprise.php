@@ -200,6 +200,7 @@ $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUti
                 <input type="hidden" name="siret" value="<?= htmlspecialchars($entreprise->getSiret()); ?>">
                 <input type="submit" value="Ajouter" formaction="?action=ajouterTuteur&controleur=EntrMain">
             </div>
+        </form>
     </div>
 
     <div class="mainEntr" id="myTuteurs">

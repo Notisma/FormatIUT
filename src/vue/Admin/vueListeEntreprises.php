@@ -4,7 +4,9 @@
 
         <div class="wrapEntreprises">
             <?php
+
             use App\FormatIUT\Configuration\Configuration;
+
             if (sizeof($listeEntreprises) > 0) {
 
                 foreach ($listeEntreprises as $entreprise) {
@@ -18,15 +20,15 @@
                         
                         <div class='entrepriseDroite'>
                             <h3 class='titre rouge'>" . htmlspecialchars($entreprise->getNomEntreprise()) . "</h3>
-                            <p>Possède ". $countNonValide ." offres non validées et ". $countValide ." offres validées.</p>";
+                            <p>Possède " . $countNonValide . " offres non validées et " . $countValide . " offres validées.</p>";
 
-                        if ($entreprise->isEstValide()) {
-                            echo "<div class='statutEntr valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
-                        } else {
-                            echo"<div class='statutEntr nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
-                        }
+                    if ($entreprise->isEstValide()) {
+                        echo "<div class='statutEntr valide'><img src='../ressources/images/success.png' alt='valide'><p>Compte validé</p></div>";
+                    } else {
+                        echo "<div class='statutEntr nonValide'><img src='../ressources/images/warning.png' alt='valide'><p>Compte non validé</p></div>";
+                    }
 
-                        echo "
+                    echo "
                         
                         </div>                        
                         </a>

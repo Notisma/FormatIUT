@@ -1,3 +1,12 @@
+<?php
+
+/** @var Formation[] $listeOffres */
+
+use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Modele\DataObject\Formation;
+
+?>
+
 <div class="wrapCentreOffres">
     <div class="gauche">
         <img src="../ressources/images/listeOffreAdmin.png" alt="admin">
@@ -11,8 +20,6 @@
 
         <div class="wrapOffres">
             <?php
-
-            use App\FormatIUT\Configuration\Configuration;
 
             if (sizeof($listeOffres) > 0) {
 

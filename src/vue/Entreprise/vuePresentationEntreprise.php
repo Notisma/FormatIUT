@@ -74,45 +74,90 @@
             <form action="controleurFrontal.php?controleur=Main&action=creerCompteEntreprise" method="post">
                 <h1>CREEZ VOTRE COMPTE ENTREPRISE</h1>
                 <?php if (isset($_REQUEST["siret"])) { ?>
-                    <input type="number" name="siret" placeholder="SIRET de l'entreprise"
-                           <?php echo "value='" . $_REQUEST["siret"] . "'" ?>required>
-                    <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise"
-                           <?php echo "value='" . $_REQUEST["nomEntreprise"] . "'" ?>required>
-                    <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise"
-                           <?php echo "value='" . $_REQUEST["adresseEntreprise"] . "'" ?>required>
-                    <input type="email" name="email" placeholder="Email de l'entreprise"
-                           <?php echo "value='" . $_REQUEST["email"] . "'" ?>required>
-                    <input type="number" name="codePostal" placeholder="Code Postal"
-                           <?php echo "value='" . $_REQUEST["codePostal"] . "'" ?>required>
-                    <input type="text" name="ville" placeholder="Ville"
-                           <?php echo "value='" . $_REQUEST["ville"] . "'" ?>required>
-                    <input type="number" name="tel" placeholder="Téléphone"
-                           <?php echo "value='" . $_REQUEST["tel"] . "'" ?>required>
-                    <input type="text" name="statutJuridique" placeholder="Statut Juridique"
-                           <?php echo "value='" . $_REQUEST["statutJuridique"] . "'" ?>required>
-                    <input type="number" name="effectif" placeholder="Effectif"
-                           <?php echo "value='" . $_REQUEST["effectif"] . "'" ?>required>
-                    <input type="text" name="codeNAF" placeholder="Code NAF"
-                           <?php echo "value='" . $_REQUEST["codeNAF"] . "'" ?>required>
+                    <label>
+                        <input type="number" name="siret" placeholder="SIRET de l'entreprise"
+                               <?php echo "value='" . $_REQUEST["siret"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise"
+                               <?php echo "value='" . $_REQUEST["nomEntreprise"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise"
+                               <?php echo "value='" . $_REQUEST["adresseEntreprise"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="email" name="email" placeholder="Email de l'entreprise"
+                               <?php echo "value='" . $_REQUEST["email"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="number" name="codePostal" placeholder="Code Postal"
+                               <?php echo "value='" . $_REQUEST["codePostal"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="text" name="ville" placeholder="Ville"
+                               <?php echo "value='" . $_REQUEST["ville"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="number" name="tel" placeholder="Téléphone"
+                               <?php echo "value='" . $_REQUEST["tel"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="text" name="statutJuridique" placeholder="Statut Juridique"
+                               <?php echo "value='" . $_REQUEST["statutJuridique"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="number" name="effectif" placeholder="Effectif"
+                               <?php echo "value='" . $_REQUEST["effectif"] . "'" ?>required>
+                    </label>
+                    <label>
+                        <input type="text" name="codeNAF" placeholder="Code NAF"
+                               <?php echo "value='" . $_REQUEST["codeNAF"] . "'" ?>required>
+                    </label>
 
                 <?php } else { ?>
-                    <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
-                    <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
-                    <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise" required>
-                    <input type="email" name="email" placeholder="Email de l'entreprise" required>
-                    <input type="number" name="codePostal" placeholder="Code Postal" required>
-                    <input type="text" name="ville" placeholder="Ville" required>
-                    <input type="number" name="tel" placeholder="Téléphone" required>
-                    <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
-                    <input type="number" name="effectif" placeholder="Effectif" required>
-                    <input type="text" name="codeNAF" placeholder="Code NAF" required>
+                    <label>
+                        <input type="number" name="siret" placeholder="SIRET de l'entreprise" required>
+                    </label>
+                    <label>
+                        <input type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" required>
+                    </label>
+                    <label>
+                        <input type="text" name="adresseEntreprise" placeholder="Adresse de l'entreprise" required>
+                    </label>
+                    <label>
+                        <input type="email" name="email" placeholder="Email de l'entreprise" required>
+                    </label>
+                    <label>
+                        <input type="number" name="codePostal" placeholder="Code Postal" required>
+                    </label>
+                    <label>
+                        <input type="text" name="ville" placeholder="Ville" required>
+                    </label>
+                    <label>
+                        <input type="number" name="tel" placeholder="Téléphone" required>
+                    </label>
+                    <label>
+                        <input type="text" name="statutJuridique" placeholder="Statut Juridique" required>
+                    </label>
+                    <label>
+                        <input type="number" name="effectif" placeholder="Effectif" required>
+                    </label>
+                    <label>
+                        <input type="text" name="codeNAF" placeholder="Code NAF" required>
+                    </label>
 
                 <?php } ?>
-                <input type="password" name="mdp" placeholder="Mot de passe" required>
-                <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
+                <label>
+                    <input type="password" name="mdp" placeholder="Mot de passe" required>
+                </label>
+                <label>
+                    <input type="password" name="mdpConf" placeholder="Confirmer le mot de passe" required>
+                </label>
                 <div>
                     <label for="cgu-id"></label><input type="checkbox" name="cgu" required id="cgu-id">
-                    <h4 class="titre">Veuillez accepter les <a target="_blank" class="lien" href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
+                    <h4 class="titre">Veuillez accepter les <a target="_blank" class="lien"
+                                                               href="../ressources/CGU/CGU-Format'IUT.pdf">CGU</a>
                     </h4>
                 </div>
                 <input type="submit" class="valider" value="NOUS REJOINDRE">
@@ -127,4 +172,3 @@
     </div>
 </div>
 <?php require __DIR__ . "/../CGU.php"; ?>
-

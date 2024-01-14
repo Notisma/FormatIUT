@@ -19,11 +19,11 @@
                 ?>
 
                 <label class="labelFormulaire" for="mdp">Nouveau mot de passe :
-                    <input type="password" name="mdp" required>
+                    <input type="password" id="mdp" name="mdp" required>
                 </label>
 
-                <label class="labelFormulaire" for="mdp">Confirmer le nouveau mot de passe :
-                    <input type="password" name="confirmerMdp" required>
+                <label class="labelFormulaire" for="mdpre">Confirmer le nouveau mot de passe :
+                    <input type="password" id="mdpre" name="confirmerMdp" required>
                 </label>
 
                 <input type="submit" value="Enregistrer"

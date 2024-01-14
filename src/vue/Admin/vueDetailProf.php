@@ -1,12 +1,11 @@
 <?php
 
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 
+/** @var Prof $prof */
 $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
 
-/** @var Prof $prof */
 ?>
 
 <div class="wrapCentreEtu">
@@ -52,17 +51,17 @@ $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
                 echo "</div>";
             } else {
                 foreach ($listeEtus as $etu) {
-                    if($etu != null){
+                    if ($etu != null) {
                         $prenomEtuHTML = htmlspecialchars($etu->getPrenomEtudiant());
                         $nomEtuHTML = htmlspecialchars($etu->getNomEtudiant());
                         $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->trouverOffreDepuisForm($etu->getNumEtudiant());
                         $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
-                        echo "<a class='etu' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=". $etu->getNumEtudiant()."'>".
-                            "<div class='imgEtu'>". "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etu->getImg()) . "' alt='etudiant'>" .
+                        echo "<a class='etu' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=" . $etu->getNumEtudiant() . "'>" .
+                            "<div class='imgEtu'>" . "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etu->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtu'>" .
-                            "<h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>".
-                            "<h4 class='titre'>". $nomOffreHTML . " - ". $offre->getTypeOffre() . "</h4>";
+                            "<h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
+                            "<h4 class='titre'>" . $nomOffreHTML . " - " . $offre->getTypeOffre() . "</h4>";
                         echo
                             "</div>" .
                             "</a>";
