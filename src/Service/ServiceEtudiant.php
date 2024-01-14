@@ -78,8 +78,7 @@ class ServiceEtudiant
     /**
      * @return void met à jour les informations de l'étudiant connecté
      */
-    public
-    static function mettreAJour(): void
+    public static function mettreAJour(): void
     {
         if (isset($_REQUEST['numEtu'])) {
             if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {

@@ -5,11 +5,14 @@ namespace App\FormatIUT\Controleur;
 use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\MessageFlash;
+use App\FormatIUT\Lib\TransfertImage;
 use App\FormatIUT\Modele\Repository\ConventionEtat;
 use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 use App\FormatIUT\Modele\Repository\PostulerRepository;
+use App\FormatIUT\Modele\Repository\ProfRepository;
+use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Modele\Repository\VilleRepository;
 use App\FormatIUT\Service\ServiceConvention;
 use App\FormatIUT\Service\ServiceEntreprise;
@@ -259,11 +262,10 @@ class ControleurAdminMain extends ControleurMain
 
     public static function afficherVueProf(): void
     {
-        if(ConnexionUtilisateur::getTypeConnecte() == "Administrateurs"){
-            self::$pageActuelleAdmin="Détails de l'enseignant";
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            self::$pageActuelleAdmin = "Détails de l'enseignant";
             self::afficherVue("Détails de l'enseignant", "Admin/vueDetailProf.php");
-        }
-        else {
+        } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
     }
@@ -274,7 +276,7 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherVueStatistiques(): void
     {
-        if(ConnexionUtilisateur::getTypeConnecte()== "Administrateurs") {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
             self::$pageActuelleAdmin = "Statistiques";
             $stats = ServicePersonnel::recupererStats();
             self::afficherVue("Statistiques", "Admin/vueStatistiques.php", $stats);
@@ -289,17 +291,21 @@ class ControleurAdminMain extends ControleurMain
      */
     public static function afficherVueHistorique(): void
     {
-        if(ConnexionUtilisateur::getTypeConnecte()=="Administrateurs"){
-            self::$pageActuelleAdmin="Historique";
+        if (ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
+            self::$pageActuelleAdmin = "Historique";
             $histo = ServicePersonnel::recupererHisto();
             self::afficherVue("Historique", "Admin/vueHistorique.php", $histo);
-        }
-        else{
+        } else {
             self::redirectionFlash("afficherAccueilAdmin", "danger", "Vous ne pouvez pas accéder à cette page");
         }
     }
 
     //APPEL AUX SERVICES -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static function mettreAJour(): void
+    {
+        ServicePersonnel::mettreAJour();
+    }
 
     public static function modifierOffre(): void
     {
@@ -401,7 +407,8 @@ class ControleurAdminMain extends ControleurMain
         ServicePersonnel::refuserTuteurUM();
     }
 
-    public static function exporterCSV() : void {
+    public static function exporterCSV(): void
+    {
         ServiceFichier::exporterCSV();
     }
 
@@ -417,5 +424,45 @@ class ControleurAdminMain extends ControleurMain
     {
         MessageFlash::ajouter($type, $message);
         self::$action();
+    }
+
+    /**
+     * @return void met à jour l'image de profil d'un admin
+     */
+    public static function updateImage(): void
+    {
+        //si un fichier a été passé en paramètre
+        if (!empty($_FILES['pdp']['name'])) {
+
+            if (!in_array(strtolower(pathinfo($_FILES['pdp']['name'], PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png'])) {
+                ControleurAdminMain::redirectionFlash('afficherProfil', 'danger', 'Seuls les fichiers png,jpeg et jpg sont acceptés');
+            } else {
+                $admin = ((new ProfRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte()));
+                $nom = "";
+                $nomAdmin = $admin->getLoginProf();
+                for ($i = 0; $i < strlen($admin->getLoginProf()); $i++) {
+                    if ($nomAdmin[$i] == ' ') {
+                        $nom .= "_";
+                    } else {
+                        $nom .= $nomAdmin[$i];
+                    }
+                }
+                $nom .= "_logo";
+
+                $ancienneImage = (new UploadsRepository())->imageParEtudiant(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+
+                $ai_id = TransfertImage::transfert();
+
+                $adm = (new ProfRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getLoginUtilisateurConnecte());
+                $adm->setImg($ai_id);
+                (new ProfRepository())->modifierObjet($adm);
+
+                if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
+
+                self::redirectionFlash('afficherProfil', 'success', "Photo de profil modifiée");
+            }
+
+
+        }
     }
 }

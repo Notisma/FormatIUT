@@ -56,9 +56,12 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
         <form method="POST" enctype="multipart/form-data">
             <h3 class="titre">Mon Avatar</h3>
             <div class="avatar">
-                <img src="../ressources/images/admin.png" alt="avatar">
+                <?php
+                echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($admin->getImg()) . "' alt='admin'>";
+                ?>
                 <div>
-                    <input disabled type="file" name="avatar" id="avatar_id" accept="image/png, image/jpeg">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                    <input type="file" name="pdp" size="500">
                     <p>Glissez-déposez un fichier ou parcourez vos fichiers. JPEG et PNG uniquement</p>
                 </div>
             </div>
@@ -76,7 +79,7 @@ $admin = (new \App\FormatIUT\Modele\Repository\ProfRepository())->getObjectParCl
             </div>
 
             <div class="inputCentre">
-                <input type="submit" value="Enregistrer" name="modifier" id="modifier_id">
+                <input type="submit" value="Enregistrer" formaction="?action=mettreAJour&controleur=AdminMain">
             </div>
 
 

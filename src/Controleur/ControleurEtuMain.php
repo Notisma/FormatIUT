@@ -292,8 +292,6 @@ class ControleurEtuMain extends ControleurMain
         } else {
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
-            } else {
-                self::redirectionFlash("afficherProfil", "warning", "Aucune image selectionnée");
             }
         }
     }

@@ -95,4 +95,12 @@ class ProfRepository extends RechercheRepository
         }
         return $arr;
     }
+
+    public function mettreAJourInfos(string $nom, string $prenom, string $login): void
+    {
+        $sql = "UPDATE Profs SET nomProf = :nomTag, prenomProf = :prenomTag WHERE loginProf = :loginTag";
+        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
+        $values = array("nomTag" => $nom, "prenomTag" => $prenom, "loginTag" => $login);
+        $pdoStatement->execute($values);
+    }
 }
