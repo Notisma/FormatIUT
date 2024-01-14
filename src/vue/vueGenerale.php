@@ -1,6 +1,5 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 
 ?>
@@ -152,6 +151,5 @@ use App\FormatIUT\Lib\ConnexionUtilisateur;
             </div>
         </div>
     </footer>
-</div>
 </body>
 </html>

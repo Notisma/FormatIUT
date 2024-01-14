@@ -28,8 +28,8 @@ class ProfRecherche extends AbstractAffichage
         {
             $titres.= 'Professeur';
         }
-        $titres.= '</h4>
-        <h5 class="titre">' . htmlspecialchars(parent::getObjet()->getMailUniversitaire()) . '</h5>';
+        $titres.= '</h4>';
+        if (!empty(parent::getObjet()->getMailUniversitaire())) $titres .= '<h5 class="titre">' . htmlspecialchars(parent::getObjet()->getMailUniversitaire()) . '</h5>';
         return $titres;
     }
 

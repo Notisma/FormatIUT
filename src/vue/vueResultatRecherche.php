@@ -1,14 +1,14 @@
 <?php
 
-use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
-use App\FormatIUT\Modele\Repository\EntrepriseRepository;
-use App\FormatIUT\Modele\Repository\EtudiantRepository;
-use App\FormatIUT\Modele\Repository\FormationRepository;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\EntrepriseRecherche;
+use App\FormatIUT\Lib\Recherche\AffichagesRecherche\FormationRecherche;
 
 if (!isset($_REQUEST['triPar'])) {
     $_REQUEST['triPar'] = "type";
 }
+
+/** @var array{ Entreprise: EntrepriseRecherche[], Formation: FormationRecherche[] } $liste */
 
 ?>
 
@@ -31,11 +31,13 @@ if (!isset($_REQUEST['triPar'])) {
                 ?>
 
                 <form method="get" id="formTrierPar">
-                    <select name="triPar" onchange="this.form.submit()">
-                        <option value="type">Type</option>
-                        <option value="date">Date</option>
-                        <option value="asc">Ordre Alphabétique</option>
-                    </select>
+                    <label>
+                        <select name="triPar" onchange="this.form.submit()">
+                            <option value="type">Type</option>
+                            <option value="date">Date</option>
+                            <option value="asc">Ordre Alphabétique</option>
+                        </select>
+                    </label>
                     <input type="hidden" name="controleur" value="AdminMain">
                     <input type="hidden" name="action" value="rechercher">
                     <input type="hidden" name="recherche" value="<?php echo $url ?>">
@@ -49,7 +51,7 @@ if (!isset($_REQUEST['triPar'])) {
         <div class="resultatsRecherche">
             <?php
             if (!empty($liste)) {
-                $i=0;
+                $i = 0;
                 foreach ($liste as $type => $elements) {
                     foreach ($elements as $objet) {
                         $red = "";
@@ -113,7 +115,7 @@ if (!isset($_REQUEST['triPar'])) {
                         if (isset($_REQUEST[$recherchables . "s"])) {
                             ;
                             foreach ($filtres as $filtre) {
-                                if (!in_array("obligatoire",$filtre)) {
+                                if (!in_array("obligatoire", $filtre)) {
                                     echo '
                                 <span class="filtre">
                                     <label for="' . $filtre['value'] . '">' . ucfirst($filtre["label"]) . '</label>
