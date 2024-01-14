@@ -12,11 +12,17 @@ use App\FormatIUT\Modele\Repository\PostulerRepository;
 class Etudiants extends Utilisateur
 {
 
+    /**
+     * @return string le controleur de l'utilisateur connecté
+     */
     public function getControleur(): string
     {
         return "EtuMain";
     }
 
+    /**
+     * @return string l'image de profil de l'utilisateur connecté
+     */
     public function getImageProfil():string
     {
         $etu = (new EtudiantRepository())->getObjectParClePrimaire((new EtudiantRepository())->getNumEtudiantParLogin($this->getLogin()));
@@ -24,6 +30,9 @@ class Etudiants extends Utilisateur
         return Configuration::getUploadPathFromId($etu->getImg());
     }
 
+    /**
+     * @return string le type de connexion de l'utilisateur connecté
+     */
     public function getTypeConnecte(): string
     {
         return "Etudiants";

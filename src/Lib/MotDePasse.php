@@ -7,6 +7,10 @@ class MotDePasse
 
     private static string $poivre = "HU0ulztu0lR22QQWa7E4LX";
 
+    /**
+     * @param string $mdpClair
+     * @return string le mot de passe haché
+     */
     public static function hacher(string $mdpClair): string
     {
         $mdpPoivre = hash_hmac("sha256", $mdpClair, MotDePasse::$poivre);
@@ -14,6 +18,11 @@ class MotDePasse
         return $mdpHache;
     }
 
+    /**
+     * @param string $mdpClair
+     * @param string $mdpHache
+     * @return bool true si le mot de passe haché correspond au mot de passe clair
+     */
     public static function verifier(string $mdpClair, string $mdpHache): bool
     {
         $mdpPoivre = hash_hmac("sha256", $mdpClair, MotDePasse::$poivre);
@@ -21,6 +30,10 @@ class MotDePasse
     }
 
 
+    /**
+     * @param int $nbCaracteres
+     * @return string une chaine aléatoire de $nbCaracteres caractères
+     */
     public static function genererChaineAleatoire(int $nbCaracteres = 22): string
     {
         $octetsAleatoires = random_bytes(ceil($nbCaracteres * 6 / 8));

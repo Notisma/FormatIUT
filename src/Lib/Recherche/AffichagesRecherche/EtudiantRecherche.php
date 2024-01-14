@@ -12,16 +12,25 @@ class EtudiantRecherche extends AbstractAffichage
 {
 
 
+    /**
+     * @return string le titre de l'objet à afficher en rouge
+     */
     function getTitreRouge():string
     {
         return htmlspecialchars(parent::getObjet()->getPrenomEtudiant()) ." ". htmlspecialchars(parent::getObjet()->getNomEtudiant());
     }
 
+    /**
+     * @return string le titre de l'objet à afficher en noir
+     */
     public function getLienAction():string
     {
         return '?action=afficherDetailEtudiant&controleur=' .  ConnexionUtilisateur::getUtilisateurConnecte()->getControleur() . '&numEtudiant=' . parent::getObjet()->getNumEtudiant();
     }
 
+    /**
+     * @return string le texte de l'objet à afficher en noir
+     */
     function getTitres():string
     {
         $etudiant = parent::getObjet();
@@ -39,6 +48,9 @@ class EtudiantRecherche extends AbstractAffichage
         return $titres;
     }
 
+    /**
+     * @return string l'image de l'objet
+     */
     function getImage():string
     {
         return Configuration::getUploadPathFromId(parent::getObjet()->getImg());

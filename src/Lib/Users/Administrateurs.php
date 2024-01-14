@@ -13,6 +13,9 @@ class Administrateurs extends Personnels
         return "Administrateurs";
     }
 
+    /**
+     * @return array le menu présent dans le bandeau latéral du site.
+     */
     public function getMenu(): array
     {
         $menu = parent::getDebutMenu();

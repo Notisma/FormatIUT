@@ -10,16 +10,25 @@ use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 class EntrepriseRecherche extends AbstractAffichage
 {
 
+    /**
+     * @return string le titre de l'objet à afficher
+     */
     function getTitreRouge(): string
     {
         return htmlspecialchars(parent::getObjet()->getNomEntreprise());
     }
 
+    /**
+     * @return string le lien de l'objet à afficher
+     */
     function getLienAction(): string
     {
         return '?action=afficherDetailEntreprise&controleur=' . ConnexionUtilisateur::getUtilisateurConnecte()->getControleur() . '&siret=' . parent::getObjet()->getSiret();
     }
 
+    /**
+     * @return string le titre de l'objet à afficher
+     */
     function getTitres(): string
     {
         /** @var Entreprise $entreprise */
@@ -42,6 +51,9 @@ class EntrepriseRecherche extends AbstractAffichage
         return $titres;
     }
 
+    /**
+     * @return string l'image' l'objet à afficher
+     */
     function getImage(): string
     {
         return Configuration::getUploadPathFromId(parent::getObjet()->getImg());

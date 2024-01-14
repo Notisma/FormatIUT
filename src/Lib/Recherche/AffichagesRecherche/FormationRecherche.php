@@ -12,17 +12,26 @@ class FormationRecherche extends AbstractAffichage
 {
     private Entreprise $entreprise;
 
+    /**
+     * @return string le titre de l'offre en rouge
+     */
     function getTitreRouge(): string
     {
         return htmlspecialchars(parent::getObjet()->getNomOffre());
     }
 
+    /**
+     * @return string le lien de l'offre
+     */
     function getLienAction(): string
     {
         $this->entreprise = ((new EntrepriseRepository())->getObjectParClePrimaire(parent::getObjet()->getIdEntreprise()));
         return '?action=afficherVueDetailOffre&controleur=' . ConnexionUtilisateur::getUtilisateurConnecte()->getControleur() . '&idFormation=' . parent::getObjet()->getIdFormation();
     }
 
+    /**
+     * @return string le texte de l'offre en noir
+     */
     function getTitres(): string
     {
         $formation = parent::getObjet();
@@ -60,6 +69,9 @@ class FormationRecherche extends AbstractAffichage
 
     }
 
+    /**
+     * @return string l'image de l'offre en noir
+     */
     function getImage(): string
     {
         return Configuration::getUploadPathFromId($this->entreprise->getImg());

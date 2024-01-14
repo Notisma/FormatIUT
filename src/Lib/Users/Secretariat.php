@@ -7,11 +7,17 @@ use App\FormatIUT\Lib\Users\Personnels;
 class Secretariat extends Personnels
 {
 
+    /**
+     * @return string le type de connexion de l'utilisateur connecté
+     */
     public function getTypeConnecte(): string
     {
         return "Secretariat";
     }
 
+    /**
+     * @return array le menu présent dans le bandeau latéral du site.
+     */
     public function getMenu(): array
     {
         $menu = parent::getDebutMenu();

@@ -9,7 +9,11 @@ class MessageFlash
 
     private static string $cleFlash = "_messagesFlash";
 
-
+    /**
+     * @param string $type
+     * @param string $message
+     * @return void ajoute un message flash dans la session
+     */
     public static function ajouter(string $type, string $message): void
     {
         $array = array(
@@ -24,6 +28,10 @@ class MessageFlash
     }
 
 
+    /**
+     * @param string $type
+     * @return array retourne un tableau contenant les messages flash du type $type
+     */
     public static function lireMessages(string $type): array
     {
         $session = Session::getInstance();
@@ -38,6 +46,9 @@ class MessageFlash
         return $array;
     }
 
+    /**
+     * @return array retourne un tableau contenant tous les messages flash
+     */
     public static function lireTousMessages(): array
     {
         $session = Session::getInstance();
@@ -50,6 +61,9 @@ class MessageFlash
     }
 
 
+    /**
+     * @return bool permet de savoir si un message flash est présent dans la session
+     */
     public static function verifDeconnexion() : bool{
         $message=self::lireMessages("info");
         if (!str_contains($message["info"],"Vous avez été déconnecté")){

@@ -18,17 +18,26 @@ class Entreprise extends Utilisateur
        return "EntrMain";
     }
 
+    /**
+     * @return string l'image de profil de l'utilisateur connecté
+     */
     public function getImageProfil():string
     {
         $entreprise=(new EntrepriseRepository())->getEntrepriseParMail($this->getLogin());
         return Configuration::getUploadPathFromId($entreprise->getImg());
     }
 
+    /**
+     * @return string le type de connexion de l'utilisateur connecté
+     */
     public function getTypeConnecte(): string
     {
         return "Entreprise";
     }
 
+    /**
+     * @return array le menu présent dans le bandeau latéral du site.
+     */
     public function getMenu(): array
     {
         $menu =  array(
@@ -59,6 +68,9 @@ class Entreprise extends Utilisateur
         return $menu;
     }
 
+    /**
+     * @return array les filtres de recherches
+     */
     public function getFiltresRecherche(): array
     {
         return array(

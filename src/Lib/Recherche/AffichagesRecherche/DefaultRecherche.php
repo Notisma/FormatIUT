@@ -15,6 +15,7 @@ class DefaultRecherche extends AbstractAffichage
 
     /**
      * @inheritDoc
+     * @return string L'information principale de l'objet à afficher pendant la recherche
      */
     function getTitreRouge(): string
     {
@@ -24,6 +25,7 @@ class DefaultRecherche extends AbstractAffichage
 
     /**
      * @inheritDoc
+     * @return string le lien pour rediriger vers la page de description de l'objet depuis la recherche
      */
     function getLienAction(): string
     {
@@ -32,6 +34,7 @@ class DefaultRecherche extends AbstractAffichage
 
     /**
      * @inheritDoc
+     * @return string les informations complémentaires de l'objet à afficher pendant la recherche
      */
     function getTitres(): string
     {
@@ -40,6 +43,7 @@ class DefaultRecherche extends AbstractAffichage
 
     /**
      * @inheritDoc
+     * @return string le lien de l'image à afficher pour représenter l'objet pendant la recherche
      */
     function getImage(): string
     {

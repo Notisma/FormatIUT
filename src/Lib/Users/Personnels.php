@@ -12,22 +12,34 @@ use App\FormatIUT\Modele\Repository\ProfRepository;
 class Personnels extends Utilisateur
 {
 
+    /**
+     * @return string le controleur de l'utilisateur connecté
+     */
     public function getControleur(): string
     {
         return "AdminMain";
     }
 
+    /**
+     * @return string l'image de profil de l'utilisateur connecté
+     */
     public function getImageProfil():string
     {
         $prof=(new ProfRepository())->getParLogin($this->getLogin());
         return Configuration::getUploadPathFromId($prof->getImg());
     }
 
+    /**
+     * @return string le type de connexion de l'utilisateur connecté
+     */
     public function getTypeConnecte(): string
     {
         return "Personnels";
     }
 
+    /**
+     * @return array le menu présent dans le bandeau latéral du site.
+     */
         public function getMenu(): array
     {
         $menu=$this->getDebutMenu();
@@ -35,6 +47,9 @@ class Personnels extends Utilisateur
         return $menu;
     }
 
+    /**
+     * @return array le menu présent dans le bandeau latéral du site.
+     */
     protected function getDebutMenu()
     {
         $accueil = ConnexionUtilisateur::getTypeConnecte();
