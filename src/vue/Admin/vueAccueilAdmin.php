@@ -210,8 +210,9 @@
 
             if (isset($listeFormations)) {
                 foreach ($listeFormations as $convention) {
-                    $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
-                    echo '<a
+                    if($convention->getDateTransmissionConvention() == null) {
+                        $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
+                        echo '<a
                     href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
                     class="alerteEntr" id="hoverRose">
                 <div class="imageAlerte">
@@ -219,26 +220,26 @@
                 </div>
                 <div class="contenuAlerte">
                     <h3 class="titre" id="rouge">';
-                    $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
-                    $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
-                    echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
-                    echo '</h3>
+                        $prenomEtuHTML = htmlspecialchars($etudiant->getPrenomEtudiant());
+                        $nomEtuHTML = htmlspecialchars($etudiant->getNomEtudiant());
+                        echo $prenomEtuHTML . " " . strtoupper($nomEtuHTML);
+                        echo '</h3>
                     <p>';
-                    if ($etudiant->getParcours() == "") {
-                        echo "Données non renseignées";
-                    } else {
-                        $parcoursHTML = htmlspecialchars($etudiant->getParcours());
-                        $groupeHTML = htmlspecialchars($etudiant->getGroupe());
-                        echo $parcoursHTML . " - " . $groupeHTML;
-                    }
-                    echo '</p>
+                        if ($etudiant->getParcours() == "") {
+                            echo "Données non renseignées";
+                        } else {
+                            $parcoursHTML = htmlspecialchars($etudiant->getParcours());
+                            $groupeHTML = htmlspecialchars($etudiant->getGroupe());
+                            echo $parcoursHTML . " - " . $groupeHTML;
+                        }
+                        echo '</p>
                     <div class="sujetAlerte">
                         <img src="../ressources/images/attention.png" alt="image">
                         <p>Convention modifiée le ' . $convention->getDateCreationConvention() . '</p>
                     </div>
                 </div>
             </a>';
-
+                    }
                 }
             }
 
