@@ -111,7 +111,7 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
             if (!$tuteur) echo "Cet élève n'a pas encore de tuteur UM.";
             else {
                 echo "Tuteur UM : ";
-                echo $tuteur.".";
+                echo $tuteur . ".";
                 if (!$formationValidee->isTuteurUMvalide()) {
                     $eleveId = $_GET['numEtudiant'];
                     echo "

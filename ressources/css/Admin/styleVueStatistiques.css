@@ -55,11 +55,17 @@
 .boutonHistorique {
     padding: 20px;
     position: absolute;
+    text-align: center;
     left: 42%;
     width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
 }
 
-.boutonHistorique button {
+.boutonHistorique > a {
     background-color: indianred;
     color: white;
     border: 2px solid lightcoral;
@@ -69,6 +75,9 @@
     font-size: 16px;
 }
 
-.boutonHistorique button:hover{
+.boutonHistorique button:hover {
     cursor: grab;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
 }

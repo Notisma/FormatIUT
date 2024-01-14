@@ -213,7 +213,7 @@
                     $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($convention->getIdEtudiant());
                     echo '<a
                     href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=' . $etudiant->getNumEtudiant() . '"
-                    class="alerteEntr" id="hoverRose">
+                    class="alerteEntr hoverRose">
                 <div class="imageAlerte">
                     <img src="' . Configuration::getUploadPathFromId($etudiant->getImg()) . '" alt="pp entreprise">
                 </div>
@@ -249,3 +249,4 @@
             <a href="?action=afficherListeEtudiant&controleur=AdminMain">VOIR PLUS</a>
         </div>
     </div>
+</div>

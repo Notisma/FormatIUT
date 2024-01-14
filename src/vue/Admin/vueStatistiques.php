@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="boutonHistorique">
-        <a href="?action=afficherVueHistorique"><button>Voir historique</button></a>
+    <div class="boutonHistorique wrapBoutons">
+        <a href="?action=afficherVueHistorique">Voir historique</a>
     </div>
 </div>
