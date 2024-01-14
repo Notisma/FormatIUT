@@ -114,19 +114,24 @@ body {
     margin-bottom: 2%;
 }
 
+.offre > a {
+    display: flex;
+    flex-direction: row;
+}
+
 .offre:hover {
     background-color: #dcdcdc;
     cursor: pointer;
 }
 
-.offre > img {
+.offre > a > img {
     width: 25%;
     max-height: 90%;
     padding: 2%;
     border-radius: 10px;
 }
 
-.offre > div {
+.offre div {
     width: 70%;
     height: 100%;
     display: flex;
