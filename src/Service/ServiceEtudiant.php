@@ -82,7 +82,9 @@ class ServiceEtudiant
     {
         if (isset($_REQUEST['numEtu'])) {
             if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" || ConnexionUtilisateur::getTypeConnecte() == "Administrateurs") {
-                ControleurEtuMain::updateImage();
+                if (isset($_FILES['pdp']) && $_FILES['pdp']['error'] == 0) {
+                    ControleurEtuMain::updateImage();
+                }
                 (new EtudiantRepository())->mettreAJourInfos($_REQUEST['mailPerso'], $_REQUEST['numTel'], $_REQUEST['numEtu']);
                 ControleurEtuMain::redirectionFlash("afficherProfil", "success", "Informations enregistrées");
             } else {
