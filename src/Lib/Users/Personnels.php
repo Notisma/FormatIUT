@@ -2,10 +2,12 @@
 
 namespace App\FormatIUT\Lib\Users;
 
+use App\FormatIUT\Configuration\Configuration;
 use App\FormatIUT\Controleur\ControleurAdminMain;
 use App\FormatIUT\Controleur\ControleurMain;
 use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Lib\Users\Utilisateur;
+use App\FormatIUT\Modele\Repository\ProfRepository;
 
 class Personnels extends Utilisateur
 {
@@ -17,7 +19,8 @@ class Personnels extends Utilisateur
 
     public function getImageProfil():string
     {
-        return "../ressources/images/admin.png";
+        $prof=(new ProfRepository())->getParLogin($this->getLogin());
+        return Configuration::getUploadPathFromId($prof->getImg());
     }
 
     public function getTypeConnecte(): string
