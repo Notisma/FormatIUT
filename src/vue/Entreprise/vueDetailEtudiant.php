@@ -42,11 +42,11 @@ $formation = (new FormationRepository())->getObjectParClePrimaire($_REQUEST['idF
                     <?php
                     $cv = (new PostulerRepository())->recupererCV($etudiant->getNumEtudiant(), $formation->getIdFormation());
                     if (!empty($cv)) {
-                        echo '<a class="bouton standard" href=?action=telechargerCV&service=Fichier&etudiant=' . $etudiant->getNumEtudiant() . '&idFormation=' . $_REQUEST['idFormation'] . '>Télécharger son CV</a>';
+                        echo '<a class="bouton standard" href=?action=telechargerCV&etudiant=' . $etudiant->getNumEtudiant() . '&idFormation=' . $_REQUEST['idFormation'] . '>Télécharger son CV</a>';
                     }
                     $lm = (new PostulerRepository())->recupererLettre($etudiant->getNumEtudiant(), $formation->getIdFormation());
                     if (!empty($lm)) {
-                        echo '<a class="bouton standard" href=?action=telechargerLM&service=Fichier&etudiant=' . $etudiant->getNumEtudiant() . '&idFormation=' . $_REQUEST['idFormation'] . '>Télécharger sa LM</a>';
+                        echo '<a class="bouton standard" href=?action=telechargerLM&etudiant=' . $etudiant->getNumEtudiant() . '&idFormation=' . $_REQUEST['idFormation'] . '>Télécharger sa LM</a>';
                     }
                     echo '<a class="bouton special" href="?action=afficherVueDetailOffre&controleur=EntrMain&idFormation=' . $_REQUEST['idFormation'] . '">Retour à l\'offre</a>';
                     ?>

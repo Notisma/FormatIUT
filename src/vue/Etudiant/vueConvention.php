@@ -4,7 +4,6 @@
 /** @var Entreprise $entreprise */
 /** @var Ville $villeEntr */
 /** @var Etudiant $etudiant */
-
 /** @var ConventionEtat $etat */
 
 use App\FormatIUT\Lib\Users\Entreprise;

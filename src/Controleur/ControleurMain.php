@@ -10,6 +10,7 @@ use App\FormatIUT\Modele\Repository\UploadsRepository;
 use App\FormatIUT\Service\ServiceConnexion;
 use App\FormatIUT\Service\ServiceEntreprise;
 use App\FormatIUT\Service\ServiceEtudiant;
+use App\FormatIUT\Service\ServiceFichier;
 use App\FormatIUT\Service\ServiceMdp;
 use App\FormatIUT\Service\ServiceRecherche;
 
@@ -117,7 +118,7 @@ class ControleurMain
 
         ControleurMain::afficherVue("Résultats de la recherche", "vueResultatRecherche.php", [
             "recherche" => $_REQUEST["recherche"],
-            "liste"=>$_REQUEST["liste"],
+            "liste" => $_REQUEST["liste"],
             "nbResults" => $_REQUEST["count"]
         ]);
     }
@@ -125,12 +126,12 @@ class ControleurMain
     /**
      * @return void afficher les mentions légales du site
      */
-    public static function afficherMentionsLegales() :void
+    public static function afficherMentionsLegales(): void
     {
-        self::afficherVue("Mentions Légales", "vueMentionsLegales.php",Configuration::getCheminControleur()::getMenu());
+        self::afficherVue("Mentions Légales", "vueMentionsLegales.php", Configuration::getCheminControleur()::getMenu());
     }
 
-    public static function afficherMdpOublie():void
+    public static function afficherMdpOublie(): void
     {
         self::afficherVue("Mot de Passe oublié", "Entreprise/vueResetMdp.php");
     }
@@ -167,18 +168,21 @@ class ControleurMain
         ServiceRecherche::rechercher();
     }
 
-    public static function setNumEtuSexe():void
+    public static function setNumEtuSexe(): void
     {
         ServiceEtudiant::setNumEtuSexe();
     }
-    public static function setTelMailPerso():void
+
+    public static function setTelMailPerso(): void
     {
         ServiceEtudiant::setTelMailPerso();
     }
-    public static function setGroupeParcours():void
+
+    public static function setGroupeParcours(): void
     {
         ServiceEtudiant::setGroupeParcours();
     }
+
     public static function creerCompteEntreprise(): void
     {
         ServiceEntreprise::creerCompteEntreprise();
@@ -272,4 +276,5 @@ class ControleurMain
 
         return $ids;
     }
+
 }

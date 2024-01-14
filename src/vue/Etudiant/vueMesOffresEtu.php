@@ -56,7 +56,7 @@ foreach ($listeOffres as $offre) {
                                 <div class="wrapBoutons">';
 
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreAttente->getIdFormation()) == "En attente") {
-                        echo '<form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
+                        echo '<form action="?action=annulerOffre&idFormation=' . $offreAttente->getIdFormation() . '" method="post"><input type="submit" class="boutonOffres undo" value="ANNULER"></form>';
                     }
                     echo '</div></div></a>';
                 }
@@ -96,10 +96,10 @@ foreach ($listeOffres as $offre) {
                     ";
 
                     if ((new PostulerRepository())->getEtatEtudiantOffre($etudiant->getNumEtudiant(), $offreValider->getIdFormation()) == "A Choisir") {
-                        echo '  <form action="?action=annulerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post">
+                        echo '  <form action="?action=annulerOffre&idFormation=' . $offreValider->getIdFormation() . '" method="post">
                                     <input type="submit" class="boutonOffres undo" value="REJETER">
                                 </form>
-                                <form action="?action=validerOffre&service=Postuler&idFormation=' . $offreValider->getIdFormation() . '" method="post">
+                                <form action="?action=validerOffre&idFormation=' . $offreValider->getIdFormation() . '" method="post">
                                     <input type="submit" class="boutonOffres accept" value="ACCEPTER">
                                 </form>
                             </div>

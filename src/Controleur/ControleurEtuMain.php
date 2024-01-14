@@ -252,6 +252,16 @@ class ControleurEtuMain extends ControleurMain
         ServiceConvention::creerConventionSansEntreprise();
     }
 
+    public static function annulerOffre(): void
+    {
+        ServicePostuler::annulerOffre();
+    }
+
+    public static function validerOffre(): void
+    {
+        ServicePostuler::validerOffre();
+    }
+
     //FONCTIONS AUTRES ---------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
