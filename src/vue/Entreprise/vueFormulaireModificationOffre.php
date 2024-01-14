@@ -1,7 +1,7 @@
-<div id="center">
+<div class="mainForm">
     <div class="wrapDroite">
         <form method="post" action="../web/controleurFrontal.php">
-            <h1>MODIFIEZ VOTRE OFFRE ICI</h1>
+            <h1 class="titre rouge">Modifiez votre Offre</h1>
 
             <label class="labelFormulaire" for="typeOffre">Type d'Offre</label>
             <div class="inputCentre">

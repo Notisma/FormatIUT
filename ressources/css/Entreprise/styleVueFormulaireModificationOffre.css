@@ -4,33 +4,30 @@ body {
     height: 100vh;
 }
 
-#center {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    width: 80%;
-    height: 80%;
-    min-width: 300px;
-    border-radius: 10px;
-    text-align: left;
-    line-height: 2em;
-    box-shadow: 0 0 10px 0 #2c3e50;
-    padding: 5px;
-    background-color: #ff9095;
+.mainForm {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.rouge {
+    color: #ff5660;
+
 }
 
 .wrapDroite {
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 98%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 5px;
     overflow-y: scroll;
-    background-color: #ff9095;
+    padding: 2%;
 }
 
 .wrapDroite::-webkit-scrollbar {
@@ -43,6 +40,7 @@ body {
     background-color: #ff5660;
     border-radius: 10px;
 }
+
 
 
 .wrapDroite > form > label {
@@ -62,6 +60,7 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
 }
+
 
 .wrapDroite > form > select {
     display: flex;
@@ -86,19 +85,19 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3%;
-    padding-top: 1%;
     width: 100%;
-    height: 8%;
+    height: 30px;
+    margin-bottom: 3%;
+    margin-top: 1%;
 }
 
 .inputCentre > * {
     width: 90%;
     height: 100%;
     border-radius: 10px;
-    border: none;
-    padding-left: 3%;
-    background-color: #aadcda;
+    padding-left: 1%;
+    background-color: #ff9095;
+    border: 1px solid black;
 }
 
 .grandInputCentre {
@@ -133,20 +132,25 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
-    height: 10%;
+    width: 98%;
+    height: 30px;
 }
 
 .boutonsForm > input , .boutonsForm > a {
     border-radius: 50px;
     background-color: #ff5660;
     color: #ffffff;
-    padding: 2%;
-    width: 40%;
-    height: 50%;
+    width: 230px;
+    height: 100%;
     border: none;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-decoration: none;
 }
 
 .boutonsForm > a > * {
@@ -162,5 +166,8 @@ body {
 
 
 .boutonsForm > *:hover {
-    background-color: #ff797f;
+    background-color: white;
+    color: black;
+    transition: 0.5s;
+    border: 1px solid black;
 }
