@@ -29,6 +29,6 @@
         </div>
     </div>
     <div class="boutonHistorique">
-        <a href="?action=afficherVueHistorique"><button>Voir historique</button></a>
+        <a href="?action=afficherVueHistorique">Voir historique</a>
     </div>
 </div>

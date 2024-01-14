@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+body {
+    height: 120vh;
+}
+
+.statistiques {
+    width: 100%;
+    height: 100%;
+}
+
+
 .grille {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -24,19 +36,18 @@
 }
 
 .titreStats {
+    font-family: "Oswald", sans-serif;
     color: white;
-    background-color: indianred;
+    background-color: #ff5660;
     border-radius: 20px;
     padding: 10px;
     margin: 30px 200px 30px 200px;
+    text-align: center;
 }
 
-.gridElem {
-    background-color: lightblue;
-}
 
 .listeStats {
-    background-color: #e6e8e6;
+    background-color: white;
     border-radius: 20px;
     margin: 15px 10px 20px 10px;
     padding: 10px 10px 10px 10px;
@@ -45,6 +56,7 @@
 .pStat {
     margin: 20px 20px;
     font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 
 #listeForm {
@@ -54,21 +66,84 @@
 
 .boutonHistorique {
     padding: 20px;
-    position: absolute;
     left: 42%;
-    width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
-.boutonHistorique button {
-    background-color: indianred;
+.boutonHistorique a {
+    background-color: #ff5660;
     color: white;
-    border: 2px solid lightcoral;
-    border-radius: 10px;
-    width: 180px;
-    font-weight: bold;
-    font-size: 16px;
+    border-radius: 50px;
+    padding: 2%;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    transition: background-color 0.5s ease;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
-.boutonHistorique button:hover{
-    cursor: grab;
+.boutonHistorique a:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+@media (max-width: 1050px) {
+
+    body {
+        height: 170vh;
+    }
+
+    .statistiques {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    .grille {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        min-height: 70%;
+        width: 98%;
+    }
+
+    .gridElem {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .listeStats {
+        width: 100%;
+    }
+
+    .titreStats {
+        margin: 0;
+    }
+
+    .boutonHistorique {
+        width: 100%;
+    }
 }

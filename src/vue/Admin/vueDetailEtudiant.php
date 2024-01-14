@@ -43,9 +43,6 @@ $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST["numEt
             echo "<p>Téléphone : " . $telHTML . "</p>";
             echo "<p>Groupe : " . $groupeHTML . "</p>";
             ?>
-            <div class="wrapBoutons">
-                <a href="?action=afficherDetailConvention&controleur=AdminMain&numEtudiant=<?php echo $etudiant->getNumEtudiant() ?>">CONVENTION</a>
-            </div>
         </div>
 
         <?php
