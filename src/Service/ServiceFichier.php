@@ -69,11 +69,21 @@ class ServiceFichier
             $filename = "sae-data_" . date('Y-m-d') . ".csv";
             $f = fopen('php://memory', 'w');
 
-            $champs = array('prenomEtudiant', 'nomEtudiant', 'numEtudiant', 'EmailEtu', 'groupe', 'parcours', 'validationPedagogique', 'Type de formation', 'Date creation de la convention', 'Date de transmission de la convention',
-                'Date début de stage', 'Date fin de stage', 'Structure accueil', 'Tuteur email', 'Avenant/Remarque', 'Présence au forum de l IUT', 'Tuteur univ');
+            $champs = array('numEtudiant', 'nomEtudiant', 'prenomEtudiant', 'EmailEtu', 'groupe', 'parcours', 'validationPedagogique', 'Type de formation', 'Date creation de la convention', 'Date de transmission de la convention',
+                'Date début formation', 'Date fin formation', 'Structure accueil', 'Tuteur email', 'Présence au forum de l IUT', 'Tuteur univ');
             fputcsv($f, $champs, $delimiter);
 
             foreach ($tab as $ligne) {
+                if($ligne[6] == 1){
+                    $ligne[6] = "oui";
+                }else{
+                    $ligne[6] = "non";
+                }
+                if($ligne[14] == 1){
+                    $ligne[14] = "oui";
+                }else {
+                    $ligne[14] = "non";
+                }
 
                 fputcsv($f, $ligne, $delimiter);
             }
