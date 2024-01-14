@@ -101,7 +101,7 @@ class ControleurEntrMain extends ControleurMain
     {
         if (isset($_REQUEST['idEtudiant'])) {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire($_REQUEST['idEtudiant']);
-            self::afficherVue("Détail de l'étudiant", "Entreprise/vueDetailEtudiant.php", ["etudiant" => $etudiant]);
+            self::afficherVue("Détails d'un Étudiant", "Entreprise/vueDetailEtudiant.php", ["etudiant" => $etudiant]);
         } else {
             self::redirectionFlash("afficherAccueilEntr","danger", "Un étudiant devrait être renseigné");
         }
