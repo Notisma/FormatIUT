@@ -1,12 +1,11 @@
 <?php
 
-use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Prof;
 use App\FormatIUT\Modele\Repository\ProfRepository;
 
+/** @var Prof $prof */
 $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
 
-/** @var Prof $prof */
 ?>
 
 <div class="wrapCentreEtu">
@@ -19,9 +18,9 @@ $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
             echo "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($prof->getImg()) . "' alt='prof'>";
             echo "<h1 class='titre rouge'>" . $prenomHTML . " " . $nomHTML . "</h1>";
             if ($prof->isEstAdmin()) {
-                echo "Cet enseignant est administrateur de Format'IUT";
+                echo "<h3 class='titre'>Cet enseignant est administrateur de Format'IUT</h3>";
             } else {
-                echo "Cet enseignant n'est pas administrateur de Format'IUT";
+                echo "<h3 class='titre'>Cet enseignant n'est pas administrateur de Format'IUT</h3>";
             }
             ?>
         </div>
@@ -30,15 +29,15 @@ $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
             <?php
             $mailHTML = htmlspecialchars($prof->getMailUniversitaire());
             echo "<h3 class='titre'>Informations :</h3>";
-            echo "<p>Login : " . $_REQUEST['loginProf'] . "</p>";
-            echo "<p>Mail Universitaire : " . $mailHTML . "</p>";
+            echo "<h4 class='titre'>Login : " . $_REQUEST['loginProf'] . "</h4>";
+            echo "<h4 class='titre'>Mail Universitaire : " . $mailHTML . "</h4>";
             ?>
         </div>
 
     </div>
 
     <div class="droiteEtu">
-        <h3 class="titre">Etudiants tutorés par cet enseignant :</h3>
+        <h3 class="titre rouge">Etudiants tutorés par cet enseignant :</h3>
 
         <div class="wrapAllEtu">
             <?php
@@ -52,17 +51,17 @@ $prof = (new ProfRepository())->getObjectParClePrimaire($_REQUEST["loginProf"]);
                 echo "</div>";
             } else {
                 foreach ($listeEtus as $etu) {
-                    if($etu != null){
+                    if ($etu != null) {
                         $prenomEtuHTML = htmlspecialchars($etu->getPrenomEtudiant());
                         $nomEtuHTML = htmlspecialchars($etu->getNomEtudiant());
                         $offre = (new \App\FormatIUT\Modele\Repository\FormationRepository())->trouverOffreDepuisForm($etu->getNumEtudiant());
                         $nomOffreHTML = htmlspecialchars($offre->getNomOffre());
-                        echo "<a class='etu' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=". $etu->getNumEtudiant()."'>".
-                            "<div class='imgEtu'>". "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etu->getImg()) . "' alt='etudiant'>" .
+                        echo "<a class='etu' href='?action=afficherDetailEtudiant&controleur=AdminMain&numEtudiant=" . $etu->getNumEtudiant() . "'>" .
+                            "<div class='imgEtu'>" . "<img src='" . App\FormatIUT\Configuration\Configuration::getUploadPathFromId($etu->getImg()) . "' alt='etudiant'>" .
                             "</div>" .
                             "<div class='infosEtu'>" .
-                            "<h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>".
-                            "<h4 class='titre'>". $nomOffreHTML . " - ". $offre->getTypeOffre() . "</h4>";
+                            "<h3 class='titre'>" . $prenomEtuHTML . " " . $nomEtuHTML . "</h3>" .
+                            "<h4 class='titre'>" . $nomOffreHTML . " - " . $offre->getTypeOffre() . "</h4>";
                         echo
                             "</div>" .
                             "</a>";

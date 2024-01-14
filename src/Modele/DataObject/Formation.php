@@ -3,6 +3,7 @@
 namespace App\FormatIUT\Modele\DataObject;
 
 use App\FormatIUT\Lib\ConnexionUtilisateur;
+use Cassandra\Date;
 
 class Formation extends AbstractDataObject
 {
@@ -663,6 +664,7 @@ class Formation extends AbstractDataObject
 
     public static function creerFormation(array $formation): Formation
     {
+        $dateAujourdhuiYmd = (new \DateTime())->format("Y-m-d");
         return new Formation(
             null,
             $formation["nomOffre"],
@@ -678,7 +680,7 @@ class Formation extends AbstractDataObject
             $formation["nbHeuresHebdo"],
             0,
             $formation["objectifOffre"],
-            null,
+            $dateAujourdhuiYmd,
             $formation["typeOffre"],
             $formation["anneeMax"],
             $formation["anneeMin"],

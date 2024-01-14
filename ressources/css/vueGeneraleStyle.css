@@ -386,6 +386,7 @@ form {
 /* FOOTER */
 .footerContent {
     position: relative;
+    padding: 1%;
     bottom: 0;
     width: 100%;
     height: 30%;
@@ -396,8 +397,6 @@ form {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 2%;
-    padding-right: 2%;
 
 }
 

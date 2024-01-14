@@ -108,10 +108,16 @@ body {
     align-items: center;
     align-content: center;
     padding: 2%;
-    text-decoration: none;
     transition: background-color 0.5s ease;
     flex-shrink: 0;
     margin-bottom: 2%;
+    text-decoration: none;
+}
+
+.offre > a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
 }
 
 .offre:hover {
@@ -119,14 +125,14 @@ body {
     cursor: pointer;
 }
 
-.offre > img {
+.offre > a > img {
     width: 25%;
     max-height: 90%;
     padding: 2%;
     border-radius: 10px;
 }
 
-.offre > div {
+.offre div {
     width: 70%;
     height: 100%;
     display: flex;

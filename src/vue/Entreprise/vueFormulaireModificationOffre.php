@@ -84,7 +84,7 @@
             <div class="inputCentre">
                 <input class="inputFormulaire" type="number" name="uniteDureeGratification"
                        id="uniteDureeGratification_id"
-                       value="<?= $offre->getUniteDureeGratification() ?>" required maxlength="4">
+                       value="<?= $offre->getUniteDureeGratification() ?>" required max="9999">
             </div>
 
             <label class="labelFormulaire" for="dureeHeure_id">Durée en heure</label>

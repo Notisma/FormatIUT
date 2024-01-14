@@ -3,9 +3,12 @@
 /** @var Formation|null $convention */
 
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
 use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
+use App\FormatIUT\Modele\Repository\EtudiantRepository;
 
-$etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEtudiantConnecte());
+$etudiant = (new EtudiantRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEtudiantConnecte());
 
 ?>
 
@@ -21,7 +24,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         for ($i = 0; $i < count($data); $i++) {
             $offre = $data[$i];
             $red = "";
-            $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
+            $entreprise = (new EntrepriseRepository())->getObjectParClePrimaire($offre->getIdEntreprise());
             $n = 2;
             $row = intdiv($i, $n);
             $col = $i % $n;
@@ -31,7 +34,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
             echo '<a href="?controleur=EtuMain&action=afficherVueDetailOffre&idFormation=' . $offre->getIdFormation() . '" class="offre ' . $red . '">
             <img src="' . Configuration::getUploadPathFromId($entreprise->getImg()) . '" alt="pp entreprise">
            <div>
-           <h3 class="titre" id="rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
+           <h3 class="titre rouge">' . htmlspecialchars($entreprise->getNomEntreprise()) . '</h3>
            <h4 class="titre">' . htmlspecialchars($offre->getNomOffre()) . '</h4>
            <h4 class="titre">' . htmlspecialchars($offre->getTypeOffre()) . '</h4>
            <h5 class="titre">' . htmlspecialchars($offre->getSujet()) . '</h5>
@@ -114,12 +117,13 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         <div class="contenuPremiereCo">
             <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(2)">
                 <label for="numEtu">Numéro étudiant :
-                    <input type="number" name="numEtu" placeholder="11102117" required>
+                    <input type="number" id="numEtu" name="numEtu" placeholder="11102117" required>
                 </label>
 
 
                 <label for="sexe">Sexe :
-                    <select name="sexe" required>
+                    <select name="sexe" id="sexe" required>
+                        <option value="">-----</option>
                         <option value="M">Homme</option>
                         <option value="F">Femme</option>
                         <option value="X">Je préfère ne pas répondre</option>
@@ -147,11 +151,11 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         <div class="contenuPremiereCo">
             <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(3)">
                 <label for="telephone">Téléphone :
-                    <input type="number" name="telephone" placeholder="0670809010">
+                    <input type="number" id="telephone" name="telephone" placeholder="0670809010">
                 </label>
 
-                <label for="telephone">Mail personnel :
-                    <input type="email" name="mailPerso" placeholder="exemple@exemple.ex">
+                <label for="email_id">Mail personnel :
+                    <input type="email" id="email_id" name="mailPerso" placeholder="exemple@exemple.ex">
                 </label>
 
                 <?php
@@ -176,11 +180,11 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         <div class="contenuPremiereCo">
             <form method="post" action="../web/controleurEtuMain.php" onsubmit="afficherPopupPremiereCo(4)">
                 <label for="groupe">Groupe de TD :
-                    <input type="text" name="groupe" placeholder="Q1" required>
+                    <input type="text" id="groupe" name="groupe" placeholder="Q1" required>
                 </label>
 
                 <label for="parcours">Parcours :
-                    <input type="text" name="parcours" placeholder="RACDV" required>
+                    <input type="text" id="parcours" name="parcours" placeholder="RACDV" required>
                 </label>
 
                 <div class="wrapBoutons">
@@ -200,8 +204,8 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
         </div>
         <div class="contenuPremiereCo">
             <form enctype="multipart/form-data" action="?action=mettreAJour&controleur=EtuMain" method="post">
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
-                <input type="file" name="pdp" size=500/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                <input type="file" name="pdp" size=500>
 
                 <h4>Cliquez sur "Terminer" pour enregistrer vos informations et commencer l'aventure Format'IUT !</h4>
 
@@ -209,7 +213,7 @@ $etudiant = (new \App\FormatIUT\Modele\Repository\EtudiantRepository())->getObje
                     <a onclick="afficherPopupPremiereCo(3)">RETOUR</a>
                     <input type="hidden" name="numEtu" value="<?php echo $numEtu ?>">
                     <input type="hidden" name="estPremiereCo" value="true">
-                    <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()"/>
+                    <input type="submit" value="TERMINER" onclick="fermerPopupPremiereCo()">
                 </div>
             </form>
         </div>

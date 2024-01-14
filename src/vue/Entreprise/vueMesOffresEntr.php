@@ -1,10 +1,15 @@
 <?php
 
+/** @var Formation[] $listeOffres */
+
 use App\FormatIUT\Configuration\Configuration;
+use App\FormatIUT\Lib\ConnexionUtilisateur;
+use App\FormatIUT\Modele\DataObject\Formation;
+use App\FormatIUT\Modele\Repository\EntrepriseRepository;
 use App\FormatIUT\Modele\Repository\EtudiantRepository;
 use App\FormatIUT\Modele\Repository\FormationRepository;
 
-$entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->getObjectParClePrimaire(\App\FormatIUT\Lib\ConnexionUtilisateur::getNumEntrepriseConnectee());
+$entreprise = (new EntrepriseRepository())->getObjectParClePrimaire(ConnexionUtilisateur::getNumEntrepriseConnectee());
 
 ?>
 
@@ -84,7 +89,7 @@ $entreprise = (new \App\FormatIUT\Modele\Repository\EntrepriseRepository())->get
             $data = $listeOffres;
 
             if ($data == null) {
-                echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre" id="rouge">Aucune offre ne correspond à vos critères</h3></div>';
+                echo '<div class="erreurGrid"> <img src="../ressources/images/erreur.png" alt="erreur"> <h3 class="titre rouge">Aucune offre ne correspond à vos critères</h3></div>';
             } else {
 
                 for ($i = 0; $i < count($data); $i++) {

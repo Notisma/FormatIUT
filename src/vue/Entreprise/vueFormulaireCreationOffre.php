@@ -43,7 +43,7 @@ $listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionU
                 <div class="inputCentre">
                     <select name="typeOffre" id="type_id">
                         <option value="Stage/Alternance"> Stage et alternance</option>
-                        <option value="Stage">Seuelement stage</option>
+                        <option value="Stage">Seulement stage</option>
                         <option value="Alternance">Seulement alternance</option>
                     </select>
                 </div>
@@ -134,7 +134,7 @@ $listeTuteurs = (new TuteurProRepository())->getTuteursDuneEntreprise(ConnexionU
                         <?php
                         if (!empty($listeTuteurs)) {
                             foreach ($listeTuteurs as $tuteur) {
-                                echo "<option name='idTuteur' value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
+                                echo "<option id='idTuteur' value='" . $tuteur->getIdTuteurPro() . "'>" . $tuteur->getNomTuteurPro() . " " . $tuteur->getPrenomTuteurPro() . "</option>";
                             }
                         } else {
                             echo "<option value='0'>Aucun tuteur disponible</option>";

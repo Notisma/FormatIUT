@@ -55,15 +55,6 @@ class VilleRepository extends AbstractRepository
         else return $this->construireDepuisTableau($result);
     }
 
-    public function getVilleParIdResidence($idResidence): Ville
-    {
-        $sql = "SELECT v.idVille, nomVille,codePostal FROM Ville v JOIN Residence r ON r.idVille = v.idVille WHERE idResidence =:tagResidence";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagResidence" => $idResidence);
-        $pdoStatement->execute($values);
-        return $this->construireDepuisTableau($pdoStatement->fetch());
-
-    }
 
     public function getVilleParIdVilleEntr($siret): Ville
     {

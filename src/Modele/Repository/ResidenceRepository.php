@@ -27,15 +27,4 @@ class ResidenceRepository extends AbstractRepository
         return new Residence($residence['idResidence'], $residence['voie'], $residence['libCedex'], $residence['idVille']);
     }
 
-    public function getResidenceParEtu($numEtu): AbstractDataObject|bool
-    {
-        $sql = "SELECT r.idResidence, voie, libCedex, idVille FROM Residence r JOIN Etudiants e ON e.idResidence = r.idResidence WHERE numEtudiant =:tagEtu";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("tagEtu" => $numEtu);
-        $pdoStatement->execute($values);
-        if (!$pdoStatement->fetch()) {
-            return false;
-        }
-        return $this->construireDepuisTableau($pdoStatement->fetch());
-    }
 }

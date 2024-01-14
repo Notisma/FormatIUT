@@ -70,20 +70,6 @@ class UploadsRepository extends AbstractRepository
         return $pdo->lastInsertId();
     }
 
-    /**
-     * @return array
-     * retourne la liste des id des différentes images
-     */
-    public function listeID(): array
-    {
-        $sql = "SELECT idUpload FROM Uploads";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->query($sql);
-        $listeID = array();
-        foreach ($pdoStatement as $value) {
-            $listeID[] = $value["idUpload"];
-        }
-        return $listeID;
-    }
 
     /**
      * @param $Siret

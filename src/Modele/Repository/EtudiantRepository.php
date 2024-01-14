@@ -47,20 +47,7 @@ class EtudiantRepository extends RechercheRepository
         );
     }
 
-    /**
-     * @return void
-     * rajoute dans la BD un étudiant qui postule à une offre
-     */
-    public function etudiantPostuler($numEtu, $numOffre): void
-    {
-        $sql = "INSERT INTO Postuler VALUES (:TagEtu,:TagOffre,'En Attente', NULL, NULL)";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array(
-            "TagEtu" => $numEtu,
-            "TagOffre" => $numOffre
-        );
-        $pdoStatement->execute($values);
-    }
+
 
     /**
      * @param $numEtu
@@ -157,21 +144,6 @@ class EtudiantRepository extends RechercheRepository
         return $listeEtu;
     }
 
-    /**
-     * @param $numEtudiant
-     * @param $etat
-     * @return mixed
-     * retourne le nombre de fois où l'étudiant est dans un certain état
-     */
-
-    public function nbEnEtat($numEtudiant, $etat): mixed
-    {
-        $sql = "SELECT COUNT(idFormation) as nb FROM Postuler WHERE numEtudiant=:Tag AND etat=:TagEtat";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $numEtudiant, "TagEtat" => $etat);
-        $pdoStatement->execute($values);
-        return $pdoStatement->fetch()["nb"];
-    }
 
     public function estEtudiant(string $login): bool
     {

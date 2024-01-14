@@ -66,10 +66,7 @@ function fermerPopupMdp() {
     document.getElementById("center").style.opacity = "1";
 }
 
-function afficherPopupCGU() {
-    document.getElementById("cgu").style.display="flex";
-    document.getElementById("center").style.opacity="0.3";
-}
+
 function fermerPopupCGU(){
     document.getElementById("cgu").style.display="none";
     document.getElementById("center").style.opacity="1";
@@ -182,9 +179,3 @@ function afficherPageCompteEntr(page) {
     }
 }
 
-function decoAuto() {
-    let element = document.getElementById("decoAuto");
-    if (element.style.display !== "flex") {
-        element.style.display = "flex";
-    }
-}

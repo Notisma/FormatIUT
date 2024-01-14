@@ -36,22 +36,6 @@ class ControleurConnexionLdap
         return self::$cleIndex;
     }
 
-    public static function trouverUser(string $login, string $password)
-    {
-        echo "test";
-        self::connexion();
-        if (self::userExist($login)) {
-            if (self::verifLDap($login, $password)) {
-                $infos = self::getInfoPersonne($login);
-                echo "Valider";
-                echo json_encode($infos);
-            } else {
-                echo json_encode("Mot de passe incorrect");
-            }
-        } else {
-            echo json_encode("Utilisateur inconnu");
-        }
-    }
 
     public static function connexion()
     {

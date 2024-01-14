@@ -91,7 +91,7 @@ class ControleurEtuMain extends ControleurMain
     {
         $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
 
-        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" && $offre != null &&  $offre != false && $offre->getDateCreationConvention() != null) {
+        if (ConnexionUtilisateur::getTypeConnecte() == "Etudiants" && $offre != null && $offre != false && $offre->getDateCreationConvention() != null) {
 
             $offre = (new FormationRepository())->trouverOffreDepuisForm(self::getCleEtudiant());
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
@@ -210,8 +210,7 @@ class ControleurEtuMain extends ControleurMain
         if ($formation == null && ConnexionUtilisateur::getTypeConnecte() == "Etudiants") {
             $etudiant = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             self::afficherVue("Remplir convention", "Etudiant/vueFormulaireCreationConventionQuandPasEntreprise.php", ['etudiant' => $etudiant]);
-        }
-        else{
+        } else {
             self::redirectionFlash("afficherAccueilEtu", "warning", "Vous avez déjà une formation");
         }
     }
@@ -248,7 +247,8 @@ class ControleurEtuMain extends ControleurMain
         ServiceConvention::faireValiderConvention();
     }
 
-    public static function creerConventionSansEntreprise(): void{
+    public static function creerConventionSansEntreprise(): void
+    {
         ServiceConvention::creerConventionSansEntreprise();
     }
 
@@ -281,13 +281,10 @@ class ControleurEtuMain extends ControleurMain
             $etu = (new EtudiantRepository())->getObjectParClePrimaire(self::getCleEtudiant());
             $etu->setImg($ai_id);
             (new EtudiantRepository())->modifierObjet($etu);
-
             if ($ancienneImage["img_id"] != 1 && $ancienneImage["img_id"] != 0) (new UploadsRepository())->supprimer($ancienneImage["img_id"]);
 
             if (isset($_REQUEST['estPremiereCo'])) {
                 self::redirectionFlash("afficherAccueilEtu", "success", "Informations enregistrées");
-            } else {
-                self::redirectionFlash("afficherProfil", "success", "Image modifiée");
             }
         } else {
             if (isset($_REQUEST['estPremiereCo'])) {

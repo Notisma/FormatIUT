@@ -37,13 +37,6 @@ class PostulerRepository extends AbstractRepository
 
     }
 
-    public function supprimerOffreDansPostuler($idFormation): void
-    {
-        $sql = "DELETE FROM Postuler WHERE idFormation=:Tag";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("Tag" => $idFormation);
-        $pdoStatement->execute($values);
-    }
 
     public function supprimerOffreEtudiant($numEtudiant, $idFormation): void
     {
@@ -144,11 +137,5 @@ class PostulerRepository extends AbstractRepository
         $pdoStatement->execute($values);
         return $pdoStatement->fetch()["lettre"];
     }
-    public function mettreAChoisir($numEtudiant, $idFormation): void
-    {
-        $sql = "UPDATE Postuler SET etat='A Choisir' WHERE numEtudiant=:TagEtu AND idFormation=:TagOffre";
-        $pdoStatement = ConnexionBaseDeDonnee::getPdo()->prepare($sql);
-        $values = array("TagEtu" => $numEtudiant, "TagOffre" => $idFormation);
-        $pdoStatement->execute($values);
-    }
+
 }
