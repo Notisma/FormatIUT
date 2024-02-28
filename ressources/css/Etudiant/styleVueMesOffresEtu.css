@@ -125,12 +125,21 @@ body {
     cursor: pointer;
 }
 
+.offre > img {
+    width: 25%;
+    max-height: 90%;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+
 .offre > a > img {
     width: 25%;
     max-height: 90%;
     padding: 2%;
     border-radius: 10px;
 }
+
 
 .offre div {
     width: 70%;

@@ -155,18 +155,17 @@ class ConnexionUtilisateur
      */
     public static function premiereConnexionTest(string $login):void
     {
-        if (!(new ProfRepository())->estProf($login)) {
+        if(str_contains($login,"Etu")) {
+            if (!(new EtudiantRepository())->estEtudiant($login)) {
+                $etudiant = array("numEtudiant" => "0", "prenomEtudiant" => "etudiant", "nomEtudiant" => "test", "loginEtudiant" => $login, "mailUniversitaire" => "etudiant.test@etu.umontpellier.fr", "groupe" => "Q2", "parcours" => "RACDV");
+                $etu = Etudiant::creerEtudiant($etudiant);
+                (new EtudiantRepository())->creerObjet($etu);
+            }
+        }else if (!(new ProfRepository())->estProf($login)) {
             $prof = new Prof($_REQUEST["login"], "secretariat", "secretariat", "mail", 0, 1);
             (new ProfRepository())->creerObjet($prof);
         }
-        if (!(new EtudiantRepository())->estEtudiant($login)){
-            $etudiant=array("numEtudiant"=>"0","prenomEtudiant"=>"etudiant","nomEtudiant"=>"test","loginEtudiant"=>$login,"mailUniversitaire"=>"etudiant.test@etu.umontpellier.fr","groupe"=>"Q2","parcours"=>"RACDV");
-            $etu=Etudiant::creerEtudiant($etudiant);
-            (new EtudiantRepository())->creerObjet($etu);
-        }
-    }
-
-    /**
+    }    /**
      * @param string $controleur le controleur sur lequel l'utilisateur se rend
      * @return bool vérifie si l'utilisateur connecté à les droits pour se rendre sur les pages
      */

@@ -31,9 +31,4 @@
             </div>
         </div>
     </div>
-    <div class="boutonStats">
-        <a href="?action=afficherVueStatistiques">
-            <button>Voir statistiques principales</button>
-        </a>
-    </div>
 </div>

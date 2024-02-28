@@ -95,7 +95,7 @@
                 foreach ($listeEntreprises as $entreprise) {
 
                     ?>
-                    <a href="?action=afficherDetailEntreprise&controleur=AdminMain&idEntreprise=<?php echo $entreprise->getSiret() ?>"
+                    <a href="?action=afficherDetailEntreprise&controleur=AdminMain&siret=<?php echo $entreprise->getSiret() ?>"
                        class="alerteEntr">
                         <div class="imageAlerte">
                             <?php
